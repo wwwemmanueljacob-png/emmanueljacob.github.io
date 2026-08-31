@@ -120,13 +120,12 @@ section h2 {
     font-weight: bold;
 }
 
-.calculator-box select {
+.calculator-box input {
     width: 100%;
     padding: 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
-    background: white;
 }
 
 .results {
@@ -236,34 +235,22 @@ footer {
 
 <section id="calculator">
 
+<h2>🧮 Loan Calculator</h2>
 
-<h2>🧮 Monthly Loan Calculator</h2>
-
-<p>
-    All loans are calculated using a flat monthly interest rate
-    and monthly repayments.
-</p>
 <p>Calculate your estimated loan repayment.</p>
 
 <div class="calculator-box">
 
-    <label for="loanType">Loan Type</label>
-
-<select id="loanType">
-    <option value="personal">Personal Loan</option>
-    <option value="business">Business Loan</option>
-</select>
-
-    <label for="loanAmount">Original Principal (MWK)</label>
+    <label for="loanAmount">Loan Amount (MWK)</label>
 
     <input
         type="number"
         id="loanAmount"
-        placehollder"Example: 100000"
+        placeholder="Example: 100000"
     >
 
     <label for="interestRate">
-    Monthly Interest Rate (%)
+        Annual Interest Rate (%)
     </label>
 
     <input
@@ -273,7 +260,7 @@ footer {
     >
 
     <label for="loanMonths">
-    Repayment Period (Months)
+        Loan Period (Months)
     </label>
 
     <input
@@ -365,55 +352,101 @@ FAQ | Contact | Customer Support
 
 function calculateLoan() {
 
-    const loanType =
-        document.getElementById("loanType").value;
-
-    const principal =
+    let loanAmount =
         parseFloat(
             document.getElementById("loanAmount").value
         );
 
-    const monthlyRate =
+    let interestRate =
         parseFloat(
             document.getElementById("interestRate").value
         );
 
-    const months =
+    let loanMonths =
         parseInt(
             document.getElementById("loanMonths").value
         );
 
+
     if (
-        isNaN(principal) ||
-        isNaN(monthlyRate) ||
-        isNaN(months) ||
-        principal <= 0 ||
-        monthlyRate < 0 ||
-        months <= 0
+        isNaN(loanAmount) ||
+        isNaN(interestRate) ||
+        isNaN(loanMonths) ||
+        loanAmount <= 0 ||
+        loanMonths <= 0
     ) {
-        alert("Please enter valid loan details.");
+
+        alert(
+            "Please enter valid loan details."
+        );
+
         return;
+
     }
 
-    // Monthly flat interest
-    const monthlyInterest =
-        principal * (monthlyRate / 100);
 
-    // Total interest over the loan period
-    const totalInterest =
-        monthlyInterest * months;
+    let monthlyInterestRate =
+        interestRate / 100 / 12;
 
-    // Principal + total interest
-    const totalRepayment =
-        principal + totalInterest;
 
-    // Equal monthly payments
-    const monthlyPayment =
-        totalRepayment / months;
+    let monthlyPayment;
 
-    document.getElementById("monthlyPayment").innerText =
+
+    if (monthlyInterestRate === 0) {
+
+        monthlyPayment =
+            loanAmount / loanMonths;
+
+    }
+
+    else {
+
+        monthlyPayment =
+            loanAmount *
+
+            (
+                monthlyInterestRate *
+
+                Math.pow(
+                    1 + monthlyInterestRate,
+                    loanMonths
+                )
+            )
+
+            /
+
+            (
+
+                Math.pow(
+                    1 + monthlyInterestRate,
+                    loanMonths
+                )
+
+                - 1
+
+            );
+
+    }
+
+
+    let totalPayment =
+        monthlyPayment *
+        loanMonths;
+
+
+    let totalInterest =
+        totalPayment -
+        loanAmount;
+
+
+    document
+        .getElementById("monthlyPayment")
+        .innerText =
+
         "MWK " +
-        monthlyPayment.toLocaleString(
+
+        monthlyPayment
+        .toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
@@ -421,9 +454,15 @@ function calculateLoan() {
             }
         );
 
-    document.getElementById("totalInterest").innerText =
+
+    document
+        .getElementById("totalInterest")
+        .innerText =
+
         "MWK " +
-        totalInterest.toLocaleString(
+
+        totalInterest
+        .toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
@@ -431,14 +470,25 @@ function calculateLoan() {
             }
         );
 
-    document.getElementById("totalPayment").innerText =
+
+    document
+        .getElementById("totalPayment")
+        .innerText =
+
         "MWK " +
-        totalRepayment.toLocaleString(
+
+        totalPayment
+        .toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }
         );
+
 }
-                
+
+</script>
+
+</body>
+</html>
