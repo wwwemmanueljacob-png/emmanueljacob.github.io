@@ -492,3 +492,449 @@ function calculateLoan() {
 
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Personal Loan Application | Emmanuel Jacob</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f4f6f9;
+    color: #222;
+}
+
+header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+.container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.form-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.12);
+}
+
+h2 {
+    color: #1d4ed8;
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+    color: #666;
+    line-height: 1.5;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 25px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.success {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border-radius: 8px;
+
+    line-height: 1.5;
+}
+
+.back {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>EMMANUEL JACOB</h1>
+
+<p>Personal Loan Services</p>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="form-box">
+
+
+<h2>👤 Personal Loan Application</h2>
+
+
+<p class="description">
+
+Complete the form below to provide your
+personal loan application information.
+
+</p>
+
+
+<form id="personalLoanForm">
+
+
+<label for="fullName">
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="fullName"
+name="fullName"
+placeholder="Enter your full name"
+required
+>
+
+
+<label for="phone">
+
+Phone Number
+
+</label>
+
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="Example: 0999 123 456"
+required
+>
+
+
+<label for="email">
+
+Email Address
+
+</label>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Enter your email"
+required
+>
+
+
+<label for="address">
+
+Residential Address
+
+</label>
+
+<textarea
+id="address"
+name="address"
+placeholder="Enter your residential address"
+required>
+</textarea>
+
+
+<label for="employment">
+
+Employment Status
+
+</label>
+
+<select
+id="employment"
+name="employment"
+required
+>
+
+<option value="">
+Select employment status
+</option>
+
+<option value="employed">
+Employed
+</option>
+
+<option value="self-employed">
+Self-employed
+</option>
+
+<option value="business-owner">
+Business Owner
+</option>
+
+<option value="other">
+Other
+</option>
+
+</select>
+
+
+<label for="income">
+
+Monthly Income (MWK)
+
+</label>
+
+<input
+type="number"
+id="income"
+name="income"
+placeholder="Example: 250000"
+min="0"
+required
+>
+
+
+<label for="loanAmount">
+
+Requested Loan Amount (MWK)
+
+</label>
+
+<input
+type="number"
+id="loanAmount"
+name="loanAmount"
+placeholder="Example: 500000"
+min="1"
+required
+>
+
+
+<label for="loanTerm">
+
+Preferred Repayment Period (Months)
+
+</label>
+
+<select
+id="loanTerm"
+name="loanTerm"
+required
+>
+
+<option value="">
+Select repayment period
+</option>
+
+<option value="3">3 Months</option>
+
+<option value="6">6 Months</option>
+
+<option value="9">9 Months</option>
+
+<option value="12">12 Months</option>
+
+<option value="18">18 Months</option>
+
+<option value="24">24 Months</option>
+
+</select>
+
+
+<label for="purpose">
+
+Purpose of Loan
+
+</label>
+
+<textarea
+id="purpose"
+name="purpose"
+placeholder="Explain what you need the loan for"
+required>
+</textarea>
+
+
+<label for="employmentLength">
+
+Length of Employment / Business Activity
+
+</label>
+
+<input
+type="text"
+id="employmentLength"
+name="employmentLength"
+placeholder="Example: 2 years"
+required
+>
+
+
+<button type="submit">
+
+Submit Application
+
+</button>
+
+
+</form>
+
+
+<div
+class="success"
+id="successMessage"
+>
+
+<strong>
+Application Form Test Successful!
+</strong>
+
+<br><br>
+
+Your application has been captured by
+the test interface.
+
+<br><br>
+
+⚠️ This version does not send or store
+your information yet.
+
+</div>
+
+
+<a
+href="index.html"
+class="back"
+>
+
+← Back to Main Website
+
+</a>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+document
+.getElementById("personalLoanForm")
+.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+        document
+        .getElementById("successMessage")
+        .style.display = "block";
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
