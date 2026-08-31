@@ -1,373 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<title>Emmanuel Jacob | Multifunctional Platform</title>
 
-    <title>Emmanuel Jacob | Multifunctional Platform</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-    <style>
+body {
+    background: #f4f6f9;
+    color: #222;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+header {
+    background: #111827;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 
-        body {
-            background: #f4f6f9;
-            color: #222;
-        }
+header h1 {
+    margin-bottom: 8px;
+}
 
-        header {
-            background: #111827;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
+nav {
+    background: #1f2937;
+    padding: 15px;
+    text-align: center;
+}
 
-        header h1 {
-            margin-bottom: 8px;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+    font-weight: bold;
+}
 
-        nav {
-            background: #1f2937;
-            padding: 15px;
-            text-align: center;
-        }
+nav a:hover {
+    color: #38bdf8;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 10px;
-            font-weight: bold;
-        }
+.hero {
+    background: linear-gradient(135deg, #111827, #2563eb);
+    color: white;
+    padding: 70px 20px;
+    text-align: center;
+}
 
-        nav a:hover {
-            color: #38bdf8;
-        }
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
 
-        .hero {
-            background: linear-gradient(
-                135deg,
-                #111827,
-                #2563eb
-            );
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: auto;
+}
 
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
+.button {
+    display: inline-block;
+    background: #38bdf8;
+    color: #111;
+    padding: 14px 25px;
+    margin-top: 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
 
-        .hero h2 {
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
 
-        .hero p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: auto;
-        }
+section h2 {
+    margin-bottom: 20px;
+    color: #1d4ed8;
+}
 
-        .button {
-            display: inline-block;
-            background: #38bdf8;
-            color: #111;
-            padding: 15px 25px;
-            margin-top: 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
 
-        section {
-            padding: 60px 20px;
-            text-align: center;
-        }
+.card {
+    background: white;
+    width: 280px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
-        section h2 {
-            margin-bottom: 20px;
-            color: #1d4ed8;
-        }
+.calculator-box {
+    background: white;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    text-align: left;
+}
 
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
+.calculator-box label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
 
-        .card {
-            background: white;
-            width: 280px;
-            padding: 25px;
-            border-radius: 10px;
+.calculator-box input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
 
-            box-shadow:
-                0 4px 10px rgba(0,0,0,0.1);
-        }
+.results {
+    margin-top: 25px;
+    background: #eef6ff;
+    padding: 20px;
+    border-radius: 10px;
+}
 
-        .card h3 {
-            margin-bottom: 15px;
-        }
+.results p {
+    margin: 12px 0;
+    font-size: 17px;
+}
 
-        .card p {
-            line-height: 1.6;
-        }
+.result-number {
+    font-weight: bold;
+    color: #1d4ed8;
+}
 
-        footer {
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-    </style>
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
     <h1>EMMANUEL JACOB</h1>
-
     <p>Multifunctional Digital Platform</p>
-
 </header>
 
-
 <nav>
-
     <a href="#home">Home</a>
-
     <a href="#services">Services</a>
-
     <a href="#loans">Loans</a>
-
     <a href="#calculator">Calculator</a>
-
     <a href="#about">About</a>
-
     <a href="#support">Support</a>
-
 </nav>
 
-
 <section class="hero" id="home">
-
     <h2>Welcome to Emmanuel Jacob Platform</h2>
-
     <p>
-
-        A multifunctional digital platform providing
-        technology, business services, loan information,
-        calculators and digital solutions.
-
+        Digital solutions, business services and innovative technology.
     </p>
 
-    <a href="#services"
-       class="button">
-
-       Explore Services
-
-    </a>
-
+    <a href="#calculator" class="button">Calculate a Loan</a>
 </section>
-
 
 <section id="services">
 
     <h2>Our Services</h2>
 
-
     <div class="services">
 
-
         <div class="card">
-
             <h3>💰 Loan Services</h3>
-
-            <p>
-
-                Explore personal and business loan
-                services and application information.
-
-            </p>
-
+            <p>Explore personal and business loan services.</p>
         </div>
 
-
         <div class="card">
-
             <h3>🧮 Loan Calculator</h3>
-
-            <p>
-
-                Calculate estimated repayments,
-                interest and loan periods.
-
-            </p>
-
+            <p>Calculate estimated loan repayments and interest.</p>
         </div>
 
-
         <div class="card">
-
             <h3>💻 Digital Technology</h3>
-
-            <p>
-
-                Technology projects and digital
-                innovations.
-
-            </p>
-
+            <p>Technology projects and digital innovation.</p>
         </div>
-
 
         <div class="card">
-
             <h3>🤖 AI Assistance</h3>
-
-            <p>
-
-                Get automated assistance and answers
-                to common questions.
-
-            </p>
-
+            <p>Automated assistance and answers.</p>
         </div>
-
 
     </div>
 
 </section>
-
 
 <section id="loans">
 
     <h2>Loan Services</h2>
 
-    <p>
-
-        Our platform will provide information and
-        application services for:
-
-    </p>
-
-    <br>
-
     <div class="services">
 
-
         <div class="card">
-
             <h3>👤 Personal Loan</h3>
-
-            <p>
-
-                Apply for personal financial services.
-
-            </p>
-
-            <a href="#"
-               class="button">
-
-               Apply
-
-            </a>
-
+            <p>Personal financial services.</p>
+            <a href="#calculator" class="button">Calculate</a>
         </div>
-
 
         <div class="card">
-
             <h3>🏢 Business Loan</h3>
-
-            <p>
-
-                Apply for business financial services.
-
-            </p>
-
-            <a href="#"
-               class="button">
-
-               Apply
-
-            </a>
-
+            <p>Business financial services.</p>
+            <a href="#calculator" class="button">Calculate</a>
         </div>
-
 
     </div>
 
 </section>
 
+<!-- LOAN CALCULATOR -->
 
 <section id="calculator">
 
-    <h2>Loan Calculator</h2>
+<h2>🧮 Loan Calculator</h2>
 
-    <p>
+<p>Calculate your estimated loan repayment.</p>
 
-        The working loan calculator will be added
-        in the next step.
+<div class="calculator-box">
 
-    </p>
+    <label for="loanAmount">Loan Amount (MWK)</label>
+
+    <input
+        type="number"
+        id="loanAmount"
+        placeholder="Example: 100000"
+    >
+
+    <label for="interestRate">
+        Annual Interest Rate (%)
+    </label>
+
+    <input
+        type="number"
+        id="interestRate"
+        placeholder="Example: 20"
+    >
+
+    <label for="loanMonths">
+        Loan Period (Months)
+    </label>
+
+    <input
+        type="number"
+        id="loanMonths"
+        placeholder="Example: 12"
+    >
+
+    <button
+        class="button"
+        onclick="calculateLoan()"
+    >
+        Calculate Loan
+    </button>
+
+
+    <div class="results" id="results">
+
+        <p>
+            Monthly Payment:
+            <span
+                class="result-number"
+                id="monthlyPayment"
+            >
+                MWK 0
+            </span>
+        </p>
+
+        <p>
+            Total Interest:
+            <span
+                class="result-number"
+                id="totalInterest"
+            >
+                MWK 0
+            </span>
+        </p>
+
+        <p>
+            Total Repayment:
+            <span
+                class="result-number"
+                id="totalPayment"
+            >
+                MWK 0
+            </span>
+        </p>
+
+    </div>
+
+</div>
 
 </section>
 
 
 <section id="about">
 
-    <h2>About Us</h2>
+<h2>About Us</h2>
 
-    <p>
-
-        Emmanuel Jacob Multifunctional Platform
-        aims to develop digital solutions and
-        innovative online services.
-
-    </p>
+<p>
+Emmanuel Jacob Multifunctional Platform develops
+digital solutions and innovative online services.
+</p>
 
 </section>
 
 
 <section id="support">
 
-    <h2>Support</h2>
+<h2>Support</h2>
 
-    <p>
-
-        FAQ | Contact | Customer Support
-
-    </p>
+<p>
+FAQ | Contact | Customer Support
+</p>
 
 </section>
 
 
 <footer>
 
-    <p>
+<p>© 2026 Emmanuel Jacob</p>
 
-        © 2026 Emmanuel Jacob
-
-    </p>
-
-    <p>
-
-        emmanueljacob.github.io
-
-    </p>
+<p>emmanueljacob.github.io</p>
 
 </footer>
 
 
-</body>
+<script>
 
+function calculateLoan() {
+
+    let loanAmount =
+        parseFloat(
+            document.getElementById("loanAmount").value
+        );
+
+    let interestRate =
+        parseFloat(
+            document.getElementById("interestRate").value
+        );
+
+    let loanMonths =
+        parseInt(
+            document.getElementById("loanMonths").value
+        );
+
+
+    if (
+        isNaN(loanAmount) ||
+        isNaN(interestRate) ||
+        isNaN(loanMonths) ||
+        loanAmount <= 0 ||
+        loanMonths <= 0
+    ) {
+
+        alert(
+            "Please enter valid loan details."
+        );
+
+        return;
+
+    }
+
+
+    let monthlyInterestRate =
+        interestRate / 100 / 12;
+
+
+    let monthlyPayment;
+
+
+    if (monthlyInterestRate === 0) {
+
+        monthlyPayment =
+            loanAmount / loanMonths;
+
+    }
+
+    else {
+
+        monthlyPayment =
+            loanAmount *
+
+            (
+                monthlyInterestRate *
+
+                Math.pow(
+                    1 + monthlyInterestRate,
+                    loanMonths
+                )
+            )
+
+            /
+
+            (
+
+                Math.pow(
+                    1 + monthlyInterestRate,
+                    loanMonths
+                )
+
+                - 1
+
+            );
+
+    }
+
+
+    let totalPayment =
+        monthlyPayment *
+        loanMonths;
+
+
+    let totalInterest =
+        totalPayment -
+        loanAmount;
+
+
+    document
+        .getElementById("monthlyPayment")
+        .innerText =
+
+        "MWK " +
+
+        monthlyPayment
+        .toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+
+    document
+        .getElementById("totalInterest")
+        .innerText =
+
+        "MWK " +
+
+        totalInterest
+        .toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+
+    document
+        .getElementById("totalPayment")
+        .innerText =
+
+        "MWK " +
+
+        totalPayment
+        .toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+</script>
+
+</body>
 </html>
