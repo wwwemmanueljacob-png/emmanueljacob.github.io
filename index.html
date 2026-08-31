@@ -120,12 +120,13 @@ section h2 {
     font-weight: bold;
 }
 
-.calculator-box input {
+.calculator-box select {
     width: 100%;
     padding: 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
+    background: white;
 }
 
 .results {
@@ -235,22 +236,34 @@ footer {
 
 <section id="calculator">
 
-<h2>🧮 Loan Calculator</h2>
 
+<h2>🧮 Monthly Loan Calculator</h2>
+
+<p>
+    All loans are calculated using a flat monthly interest rate
+    and monthly repayments.
+</p>
 <p>Calculate your estimated loan repayment.</p>
 
 <div class="calculator-box">
 
-    <label for="loanAmount">Loan Amount (MWK)</label>
+    <label for="loanType">Loan Type</label>
+
+<select id="loanType">
+    <option value="personal">Personal Loan</option>
+    <option value="business">Business Loan</option>
+</select>
+
+    <label for="loanAmount">Original Principal (MWK)</label>
 
     <input
         type="number"
         id="loanAmount"
-        placeholder="Example: 100000"
+        placehollder"Example: 100000"
     >
 
     <label for="interestRate">
-        Annual Interest Rate (%)
+    Monthly Interest Rate (%)
     </label>
 
     <input
@@ -260,7 +273,7 @@ footer {
     >
 
     <label for="loanMonths">
-        Loan Period (Months)
+    Repayment Period (Months)
     </label>
 
     <input
@@ -352,50 +365,52 @@ FAQ | Contact | Customer Support
 
 function calculateLoan() {
 
-    const loanAmount = parseFloat(
-        document.getElementById("loanAmount").value
-    );
+    const loanType =
+        document.getElementById("loanType").value;
 
-    const monthlyInterestRate = parseFloat(
-        document.getElementById("interestRate").value
-    );
+    const principal =
+        parseFloat(
+            document.getElementById("loanAmount").value
+        );
 
-    const loanMonths = parseInt(
-        document.getElementById("loanMonths").value
-    );
+    const monthlyRate =
+        parseFloat(
+            document.getElementById("interestRate").value
+        );
 
-    // Validate inputs
+    const months =
+        parseInt(
+            document.getElementById("loanMonths").value
+        );
+
     if (
-        isNaN(loanAmount) ||
-        isNaN(monthlyInterestRate) ||
-        isNaN(loanMonths) ||
-        loanAmount <= 0 ||
-        monthlyInterestRate < 0 ||
-        loanMonths <= 0
+        isNaN(principal) ||
+        isNaN(monthlyRate) ||
+        isNaN(months) ||
+        principal <= 0 ||
+        monthlyRate < 0 ||
+        months <= 0
     ) {
-
         alert("Please enter valid loan details.");
-
         return;
     }
 
-    // FLAT MONTHLY INTEREST
+    // Monthly flat interest
     const monthlyInterest =
-        loanAmount * (monthlyInterestRate / 100);
+        principal * (monthlyRate / 100);
 
-    // Total interest for entire loan period
+    // Total interest over the loan period
     const totalInterest =
-        monthlyInterest * loanMonths;
+        monthlyInterest * months;
 
-    // Total amount customer pays
-    const totalPayment =
-        loanAmount + totalInterest;
+    // Principal + total interest
+    const totalRepayment =
+        principal + totalInterest;
 
-    // Monthly installment
+    // Equal monthly payments
     const monthlyPayment =
-        totalPayment / loanMonths;
+        totalRepayment / months;
 
-    // Display monthly payment
     document.getElementById("monthlyPayment").innerText =
         "MWK " +
         monthlyPayment.toLocaleString(
@@ -406,7 +421,6 @@ function calculateLoan() {
             }
         );
 
-    // Display total interest
     document.getElementById("totalInterest").innerText =
         "MWK " +
         totalInterest.toLocaleString(
@@ -417,10 +431,9 @@ function calculateLoan() {
             }
         );
 
-    // Display total repayment
     document.getElementById("totalPayment").innerText =
         "MWK " +
-        totalPayment.toLocaleString(
+        totalRepayment.toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
@@ -428,3 +441,4 @@ function calculateLoan() {
             }
         );
 }
+                
