@@ -352,101 +352,53 @@ FAQ | Contact | Customer Support
 
 function calculateLoan() {
 
-    let loanAmount =
-        parseFloat(
-            document.getElementById("loanAmount").value
-        );
+    const loanAmount = parseFloat(
+        document.getElementById("loanAmount").value
+    );
 
-    let interestRate =
-        parseFloat(
-            document.getElementById("interestRate").value
-        );
+    const monthlyInterestRate = parseFloat(
+        document.getElementById("interestRate").value
+    );
 
-    let loanMonths =
-        parseInt(
-            document.getElementById("loanMonths").value
-        );
+    const loanMonths = parseInt(
+        document.getElementById("loanMonths").value
+    );
 
-
+    // Validate inputs
     if (
         isNaN(loanAmount) ||
-        isNaN(interestRate) ||
+        isNaN(monthlyInterestRate) ||
         isNaN(loanMonths) ||
         loanAmount <= 0 ||
+        monthlyInterestRate < 0 ||
         loanMonths <= 0
     ) {
 
-        alert(
-            "Please enter valid loan details."
-        );
+        alert("Please enter valid loan details.");
 
         return;
-
     }
 
+    // FLAT MONTHLY INTEREST
+    const monthlyInterest =
+        loanAmount * (monthlyInterestRate / 100);
 
-    let monthlyInterestRate =
-        interestRate / 100 / 12;
+    // Total interest for entire loan period
+    const totalInterest =
+        monthlyInterest * loanMonths;
 
+    // Total amount customer pays
+    const totalPayment =
+        loanAmount + totalInterest;
 
-    let monthlyPayment;
+    // Monthly installment
+    const monthlyPayment =
+        totalPayment / loanMonths;
 
-
-    if (monthlyInterestRate === 0) {
-
-        monthlyPayment =
-            loanAmount / loanMonths;
-
-    }
-
-    else {
-
-        monthlyPayment =
-            loanAmount *
-
-            (
-                monthlyInterestRate *
-
-                Math.pow(
-                    1 + monthlyInterestRate,
-                    loanMonths
-                )
-            )
-
-            /
-
-            (
-
-                Math.pow(
-                    1 + monthlyInterestRate,
-                    loanMonths
-                )
-
-                - 1
-
-            );
-
-    }
-
-
-    let totalPayment =
-        monthlyPayment *
-        loanMonths;
-
-
-    let totalInterest =
-        totalPayment -
-        loanAmount;
-
-
-    document
-        .getElementById("monthlyPayment")
-        .innerText =
-
+    // Display monthly payment
+    document.getElementById("monthlyPayment").innerText =
         "MWK " +
-
-        monthlyPayment
-        .toLocaleString(
+        monthlyPayment.toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
@@ -454,15 +406,10 @@ function calculateLoan() {
             }
         );
 
-
-    document
-        .getElementById("totalInterest")
-        .innerText =
-
+    // Display total interest
+    document.getElementById("totalInterest").innerText =
         "MWK " +
-
-        totalInterest
-        .toLocaleString(
+        totalInterest.toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
@@ -470,25 +417,14 @@ function calculateLoan() {
             }
         );
 
-
-    document
-        .getElementById("totalPayment")
-        .innerText =
-
+    // Display total repayment
+    document.getElementById("totalPayment").innerText =
         "MWK " +
-
-        totalPayment
-        .toLocaleString(
+        totalPayment.toLocaleString(
             undefined,
             {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }
         );
-
 }
-
-</script>
-
-</body>
-</html>
