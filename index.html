@@ -488,12 +488,6 @@ function calculateLoan() {
 
 }
 
-</script>
-
-</body>
-</html>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -503,9 +497,13 @@ function calculateLoan() {
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Personal Loan Application | Emmanuel Jacob</title>
+<title>Personal Loan | Emmanuel Jacob</title>
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 * {
     box-sizing: border-box;
@@ -518,6 +516,11 @@ body {
     color: #222;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
 header {
     background: #111827;
     color: white;
@@ -529,70 +532,65 @@ header h1 {
     margin: 0 0 8px;
 }
 
+header p {
+    margin: 0;
+    color: #d1d5db;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
 .container {
     max-width: 700px;
     margin: 30px auto;
     padding: 20px;
 }
 
-.form-box {
+
+/* =========================
+   APPLICATION CARD
+========================= */
+
+.application-card {
     background: white;
     padding: 25px;
+
     border-radius: 15px;
 
     box-shadow:
-    0 5px 20px rgba(0,0,0,0.12);
+        0 5px 20px rgba(0,0,0,0.12);
+
+    text-align: center;
 }
 
-h2 {
+.application-card h2 {
     color: #1d4ed8;
-    text-align: center;
+    margin-bottom: 10px;
 }
 
-.description {
-    text-align: center;
+.application-card p {
     color: #666;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-label {
-    display: block;
-    margin-top: 18px;
-    margin-bottom: 7px;
-    font-weight: bold;
-}
 
-input,
-select,
-textarea {
+/* =========================
+   OPEN FORM BUTTON
+========================= */
+
+.open-button {
 
     width: 100%;
 
-    padding: 13px;
+    padding: 16px;
 
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
-
-    font-size: 16px;
-}
-
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-button {
-
-    width: 100%;
-
-    padding: 15px;
-
-    margin-top: 25px;
+    margin-top: 20px;
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 10px;
 
     background: #2563eb;
 
@@ -605,9 +603,150 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.open-button:hover {
     background: #1d4ed8;
 }
+
+
+/* =========================
+   FORM
+========================= */
+
+#loanFormContainer {
+
+    display: none;
+
+    margin-top: 25px;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.12);
+}
+
+#loanFormContainer h2 {
+
+    text-align: center;
+
+    color: #1d4ed8;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   FORM FIELDS
+========================= */
+
+label {
+
+    display: block;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    background: white;
+}
+
+textarea {
+
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 25px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #16a34a;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #15803d;
+}
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.close-button {
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 12px;
+
+    border: 1px solid #dc2626;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #dc2626;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.close-button:hover {
+
+    background: #fee2e2;
+
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
 
 .success {
 
@@ -626,6 +765,11 @@ button:hover {
     line-height: 1.5;
 }
 
+
+/* =========================
+   BACK LINK
+========================= */
+
 .back {
 
     display: block;
@@ -640,6 +784,28 @@ button:hover {
 
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 12px;
+    }
+
+    .application-card,
+    #loanFormContainer {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+}
+
 </style>
 
 </head>
@@ -647,6 +813,10 @@ button:hover {
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -657,25 +827,59 @@ button:hover {
 </header>
 
 
+
 <div class="container">
 
 
-<div class="form-box">
+<!-- =========================
+     APPLICATION CARD
+========================= -->
 
+<div class="application-card">
 
 <h2>👤 Personal Loan Application</h2>
 
+<p>
 
-<p class="description">
+Ready to apply for a personal loan?
 
-Complete the form below to provide your
-personal loan application information.
+Click the button below to open the
+application form.
 
 </p>
 
 
-<form id="personalLoanForm">
+<button
+class="open-button"
+onclick="openLoanForm()">
 
+Open Personal Loan Application
+
+</button>
+
+</div>
+
+
+
+<!-- =========================
+     HIDDEN FORM
+========================= -->
+
+<div
+id="loanFormContainer"
+>
+
+<h2>
+👤 Personal Loan Application Form
+</h2>
+
+
+<form
+id="personalLoanForm"
+>
+
+
+<!-- FULL NAME -->
 
 <label for="fullName">
 
@@ -692,6 +896,9 @@ required
 >
 
 
+
+<!-- PHONE -->
+
 <label for="phone">
 
 Phone Number
@@ -706,6 +913,9 @@ placeholder="Example: 0999 123 456"
 required
 >
 
+
+
+<!-- EMAIL -->
 
 <label for="email">
 
@@ -722,6 +932,9 @@ required
 >
 
 
+
+<!-- ADDRESS -->
+
 <label for="address">
 
 Residential Address
@@ -732,9 +945,11 @@ Residential Address
 id="address"
 name="address"
 placeholder="Enter your residential address"
-required>
-</textarea>
+required></textarea>
 
+
+
+<!-- EMPLOYMENT -->
 
 <label for="employment">
 
@@ -749,27 +964,40 @@ required
 >
 
 <option value="">
+
 Select employment status
+
 </option>
 
 <option value="employed">
+
 Employed
+
 </option>
 
 <option value="self-employed">
+
 Self-employed
+
 </option>
 
 <option value="business-owner">
+
 Business Owner
+
 </option>
 
 <option value="other">
+
 Other
+
 </option>
 
 </select>
 
+
+
+<!-- MONTHLY INCOME -->
 
 <label for="income">
 
@@ -787,6 +1015,9 @@ required
 >
 
 
+
+<!-- LOAN AMOUNT -->
+
 <label for="loanAmount">
 
 Requested Loan Amount (MWK)
@@ -803,9 +1034,12 @@ required
 >
 
 
+
+<!-- LOAN PERIOD -->
+
 <label for="loanTerm">
 
-Preferred Repayment Period (Months)
+Preferred Repayment Period
 
 </label>
 
@@ -816,23 +1050,40 @@ required
 >
 
 <option value="">
+
 Select repayment period
+
 </option>
 
-<option value="3">3 Months</option>
+<option value="3">
+3 Months
+</option>
 
-<option value="6">6 Months</option>
+<option value="6">
+6 Months
+</option>
 
-<option value="9">9 Months</option>
+<option value="9">
+9 Months
+</option>
 
-<option value="12">12 Months</option>
+<option value="12">
+12 Months
+</option>
 
-<option value="18">18 Months</option>
+<option value="18">
+18 Months
+</option>
 
-<option value="24">24 Months</option>
+<option value="24">
+24 Months
+</option>
 
 </select>
 
+
+
+<!-- PURPOSE -->
 
 <label for="purpose">
 
@@ -844,9 +1095,11 @@ Purpose of Loan
 id="purpose"
 name="purpose"
 placeholder="Explain what you need the loan for"
-required>
-</textarea>
+required></textarea>
 
+
+
+<!-- EMPLOYMENT LENGTH -->
 
 <label for="employmentLength">
 
@@ -863,15 +1116,35 @@ required
 >
 
 
-<button type="submit">
+
+<!-- SUBMIT -->
+
+<button
+type="submit"
+class="submit-button">
 
 Submit Application
 
 </button>
 
 
+<!-- CLOSE -->
+
+<button
+type="button"
+class="close-button"
+onclick="closeLoanForm()">
+
+✕ Close Application Form
+
+</button>
+
+
 </form>
 
+
+
+<!-- SUCCESS -->
 
 <div
 class="success"
@@ -889,16 +1162,19 @@ the test interface.
 
 <br><br>
 
-⚠️ This version does not send or store
-your information yet.
+⚠️ This is currently a test form.
+Your information is not being stored
+or transmitted.
+
+</div>
+
 
 </div>
 
 
 <a
 href="index.html"
-class="back"
->
+class="back">
 
 ← Back to Main Website
 
@@ -907,10 +1183,64 @@ class="back"
 
 </div>
 
-</div>
 
 
 <script>
+
+
+/* =========================
+   OPEN FORM
+========================= */
+
+function openLoanForm() {
+
+    const form =
+        document.getElementById(
+            "loanFormContainer"
+        );
+
+    form.style.display = "block";
+
+
+    form.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+/* =========================
+   CLOSE FORM
+========================= */
+
+function closeLoanForm() {
+
+    const form =
+        document.getElementById(
+            "loanFormContainer"
+        );
+
+    form.style.display = "none";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================
+   TEST SUBMISSION
+========================= */
 
 document
 .getElementById("personalLoanForm")
@@ -920,13 +1250,20 @@ document
 
         event.preventDefault();
 
+
         document
         .getElementById("successMessage")
         .style.display = "block";
 
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth"
+
+        document
+        .getElementById("successMessage")
+        .scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
         });
 
     }
