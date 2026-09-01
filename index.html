@@ -1230,7 +1230,7 @@ function registerCustomer(){
 /* ==========================================
    SUPPORT
 ========================================== */
-
+   
 function openSupport(){
 
     document.getElementById("supportModal")
@@ -1331,3 +1331,763 @@ window.onclick=function(event){
 
 </script></body>
 </html>
+
+<a href="admin.html">🔐 Admin</a>
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Dashboard | JAY C O B FINANCIAL SERVICES</title><style>
+
+/* ============================================
+   JAY C O B FINANCIAL SERVICES
+   ADMIN DASHBOARD
+============================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#1e293b;
+}
+
+/* ============================================
+   TOP HEADER
+============================================ */
+
+.topbar{
+    height:70px;
+    background:#071f3b;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+}
+
+.brand{
+    font-size:18px;
+    font-weight:bold;
+    color:#ffd000;
+}
+
+.brand small{
+    display:block;
+    color:white;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.admin-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.admin-badge{
+    background:#ffd000;
+    color:#111;
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.menu-toggle{
+    display:none;
+    background:#ffd000;
+    border:none;
+    padding:10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* ============================================
+   SIDEBAR
+============================================ */
+
+.sidebar{
+    position:fixed;
+    top:70px;
+    left:0;
+    width:250px;
+    height:calc(100vh - 70px);
+    background:#071f3b;
+    overflow-y:auto;
+    padding:20px 12px;
+    z-index:900;
+}
+
+.sidebar-title{
+    color:#94a3b8;
+    font-size:11px;
+    letter-spacing:1px;
+    margin:15px 10px 8px;
+}
+
+.nav-button{
+    width:100%;
+    text-align:left;
+    border:none;
+    background:transparent;
+    color:#dce6f0;
+    padding:13px 15px;
+    margin-bottom:5px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.nav-button:hover,
+.nav-button.active{
+    background:#12385f;
+    color:#ffd000;
+}
+
+.logout-btn{
+    background:#a61b1b;
+    color:white;
+    width:100%;
+    border:none;
+    padding:13px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+/* ============================================
+   MAIN CONTENT
+============================================ */
+
+.main{
+    margin-left:250px;
+    padding:100px 30px 40px;
+    min-height:100vh;
+}
+
+.page-header{
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#071f3b;
+    font-size:30px;
+}
+
+.page-header p{
+    color:#64748b;
+    margin-top:5px;
+}
+
+/* ============================================
+   STATISTICS
+============================================ */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:white;
+    padding:22px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.07);
+}
+
+.stat-card h3{
+    font-size:13px;
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+.stat-card .number{
+    font-size:27px;
+    font-weight:bold;
+    color:#071f3b;
+}
+
+/* ============================================
+   CARDS
+============================================ */
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#071f3b;
+    font-size:21px;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#64748b;
+}
+
+/* ============================================
+   TABLES
+============================================ */
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#edf2f7;
+    color:#071f3b;
+    padding:13px;
+    text-align:left;
+    font-size:13px;
+}
+
+td{
+    padding:13px;
+    border-bottom:1px solid #e2e8f0;
+    font-size:13px;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:15px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.approved{
+    background:#d1fae5;
+    color:#065f46;
+}
+
+.rejected{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.active-loan{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+/* ============================================
+   BUTTONS
+============================================ */
+
+.btn{
+    border:none;
+    padding:9px 13px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:12px;
+    margin:2px;
+}
+
+.btn-primary{
+    background:#071f3b;
+    color:white;
+}
+
+.btn-success{
+    background:#15803d;
+    color:white;
+}
+
+.btn-danger{
+    background:#c62828;
+    color:white;
+}
+
+.btn-warning{
+    background:#f59e0b;
+    color:#111;
+}
+
+/* ============================================
+   DASHBOARD GRID
+============================================ */
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+/* ============================================
+   PAGE SECTIONS
+============================================ */
+
+.page-section{
+    display:none;
+}
+
+.page-section.active{
+    display:block;
+}
+
+/* ============================================
+   CUSTOMER CARD
+============================================ */
+
+.customer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
+
+.customer-card{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:20px;
+}
+
+.customer-card h3{
+    color:#071f3b;
+    margin-bottom:8px;
+}
+
+/* ============================================
+   FORM
+============================================ */
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:12px;
+    margin-bottom:6px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid #cbd5e1;
+    border-radius:6px;
+}
+
+textarea{
+    min-height:110px;
+}
+
+/* ============================================
+   NOTIFICATION
+============================================ */
+
+.notification{
+    display:none;
+    position:fixed;
+    top:85px;
+    right:20px;
+    background:#15803d;
+    color:white;
+    padding:15px 20px;
+    border-radius:8px;
+    z-index:5000;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+/* ============================================
+   SECURITY
+============================================ */
+
+.security-item{
+    padding:18px;
+    background:#f8fafc;
+    border-left:4px solid #071f3b;
+    margin-bottom:12px;
+}
+
+.security-item h3{
+    color:#071f3b;
+    font-size:16px;
+}
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media(max-width:900px){
+
+    .sidebar{
+        left:-260px;
+        transition:.3s;
+    }
+
+    .sidebar.show{
+        left:0;
+    }
+
+    .main{
+        margin-left:0;
+        padding:95px 15px 30px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .two-column{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .admin-badge{
+        display:none;
+    }
+
+    .page-header h1{
+        font-size:24px;
+    }
+
+}
+
+</style></head><body><!-- NOTIFICATION --><div id="notification" class="notification"></div><!-- TOP BAR --><header class="topbar"><div class="brand">JAY C O B
+
+<small>FINANCIAL SERVICES • ADMIN</small>
+
+</div><div class="admin-info"><div class="admin-badge">🔐 ADMINISTRATOR
+
+</div><button class="menu-toggle" onclick="toggleSidebar()">☰
+
+</button></div></header><!-- SIDEBAR --><aside id="sidebar" class="sidebar"><div class="sidebar-title">MAIN DASHBOARD
+
+</div><button class="nav-button active"
+onclick="showPage('dashboard',this)">
+
+📊 Dashboard
+
+</button><div class="sidebar-title">LOAN MANAGEMENT
+
+</div><button class="nav-button"
+onclick="showPage('applications',this)">
+
+📝 Loan Applications
+
+</button><button class="nav-button"
+onclick="showPage('loans',this)">
+
+💰 Active Loans
+
+</button><button class="nav-button"
+onclick="showPage('payments',this)">
+
+💳 Payments
+
+</button><div class="sidebar-title">CUSTOMERS
+
+</div><button class="nav-button"
+onclick="showPage('customers',this)">
+
+👥 Customers
+
+</button><button class="nav-button"
+onclick="showPage('followup',this)">
+
+📞 Customer Follow-up
+
+</button><div class="sidebar-title">COMMUNICATION
+
+</div><button class="nav-button"
+onclick="showPage('messages',this)">
+
+🤖 AI Messages
+
+</button><button class="nav-button"
+onclick="showPage('notificationsPage',this)">
+
+🔔 Notifications
+
+</button><div class="sidebar-title">SECURITY
+
+</div><button class="nav-button"
+onclick="showPage('security',this)">
+
+🔐 Security & OTP
+
+</button><button class="nav-button"
+onclick="showPage('activity',this)">
+
+📋 Activity Logs
+
+</button><div class="sidebar-title">SYSTEM
+
+</div><button class="nav-button"
+onclick="showPage('statistics',this)">
+
+📈 Statistics
+
+</button><button class="nav-button"
+onclick="showPage('settings',this)">
+
+⚙️ Settings
+
+</button><button class="logout-btn"
+onclick="logout()">
+
+🚪 LOGOUT
+
+</button></aside><!-- MAIN --><main class="main"><!-- ============================================
+     DASHBOARD
+============================================ --><section id="dashboard" class="page-section active"><div class="page-header"><h1>Admin Dashboard</h1><p>Welcome to the JAY C O B FINANCIAL SERVICES administration system.
+
+</p></div><div class="stats-grid"><div class="stat-card"><h3>Total Customers</h3><div class="number">0</div></div><div class="stat-card"><h3>Pending Applications</h3><div class="number">0</div></div><div class="stat-card"><h3>Active Loans</h3><div class="number">0</div></div><div class="stat-card"><h3>Total Loan Portfolio</h3><div class="number">MWK 0</div></div></div><div class="two-column"><div class="card"><h2>📋 Recent Applications</h2><p>New loan applications will appear here when connected to the backend database.
+
+</p><br><button class="btn btn-primary"
+onclick="showPageDirect('applications')">
+
+VIEW APPLICATIONS
+
+</button></div><div class="card"><h2>🔔 System Status</h2><p>Website Interface: Active</p><p>Admin Dashboard: Active</p><p>Backend Database: Not Connected</p><p>OTP System: Awaiting Backend</p><p>AI Messaging: Demo Mode</p></div></div></section><!-- ============================================
+     APPLICATIONS
+============================================ --><section id="applications" class="page-section"><div class="page-header"><h1>Loan Applications</h1><p>Review and manage customer loan applications.</p></div><div class="card"><h2>Pending Applications</h2><div class="table-container"><table><thead><tr><th>Application ID</th><th>Customer</th><th>Loan Type</th><th>Amount</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="applicationsTable"><tr><td colspan="7"
+style="text-align:center;">No applications available yet.
+
+</td></tr></tbody></table></div></div></section><!-- ============================================
+     ACTIVE LOANS
+============================================ --><section id="loans" class="page-section"><div class="page-header"><h1>Active Loans</h1><p>Manage approved customer loans.</p></div><div class="card"><h2>Loan Portfolio</h2><div class="table-container"><table><thead><tr><th>Loan ID</th><th>Customer</th><th>Loan Amount</th><th>Interest Rate</th><th>Balance</th><th>Due Date</th><th>Status</th></tr></thead><tbody><tr><td colspan="7"
+style="text-align:center;">No active loans yet.
+
+</td></tr></tbody></table></div></div></section><!-- ============================================
+     PAYMENTS
+============================================ --><section id="payments" class="page-section"><div class="page-header"><h1>Payment Management</h1><p>Monitor loan repayments and payment schedules.</p></div><div class="card"><h2>Record Payment</h2><label>Customer</label>
+
+<select><option>Select Customer</option></select><label>Payment Amount (MWK)</label>
+
+<input type="number"><label>Payment Date</label>
+
+<input type="date"><button class="btn btn-success"
+onclick="showNotification('Payment recording requires backend database connection.')">
+
+RECORD PAYMENT
+
+</button></div><div class="card"><h2>Payment History</h2><p>Payment records will appear here.
+
+</p></div></section><!-- ============================================
+     CUSTOMERS
+============================================ --><section id="customers" class="page-section"><div class="page-header"><h1>Customer Management</h1><p>View and manage registered customers.</p></div><div class="customer-grid"><div class="customer-card"><h3>👤 Customer Database</h3><p>Registered customers will appear here after backend connection.
+
+</p></div></div></section><!-- ============================================
+     FOLLOW UP
+============================================ --><section id="followup" class="page-section"><div class="page-header"><h1>Customer Follow-up</h1><p>Track communication and customer follow-up activities.</p></div><div class="card"><h2>📞 Create Follow-up</h2><label>Customer</label>
+
+<select><option>Select Customer</option></select><label>Follow-up Type</label>
+
+<select><option>Phone Call</option><option>SMS</option><option>Email</option><option>Loan Reminder</option><option>Payment Reminder</option></select><label>Follow-up Notes</label>
+
+<textarea
+placeholder="Write follow-up notes..."></textarea><button class="btn btn-primary"
+onclick="showNotification('Follow-up system will save records after backend connection.')">
+
+SAVE FOLLOW-UP
+
+</button></div></section><!-- ============================================
+     AI MESSAGES
+============================================ --><section id="messages" class="page-section"><div class="page-header"><h1>AI Message System</h1><p>Generate transaction and customer communication messages.</p></div><div class="card"><h2>🤖 AI Message Generator</h2><label>Message Type</label>
+
+<select id="messageType"><option>Loan Application Received</option><option>Loan Approved</option><option>Loan Rejected</option><option>Payment Received</option><option>Payment Reminder</option><option>Loan Due Reminder</option><option>Welcome Message</option></select><label>Customer Name</label>
+
+<input id="messageCustomer"
+placeholder="Customer Name">
+
+<button class="btn btn-primary"
+onclick="generateAIMessage()">
+
+GENERATE MESSAGE
+
+</button><div id="aiMessage"
+style="
+margin-top:20px;
+padding:20px;
+background:#f1f5f9;
+border-radius:8px;
+">Your generated message will appear here.
+
+</div><button class="btn btn-success"
+onclick="showNotification('Real message sending requires SMS, Email or WhatsApp API connection.')">
+
+SEND MESSAGE
+
+</button></div></section><!-- ============================================
+     NOTIFICATIONS
+============================================ --><section id="notificationsPage"
+class="page-section"><div class="page-header"><h1>Notifications</h1><p>System and customer notifications.</p></div><div class="card"><h2>🔔 Notification Center</h2><p>No notifications currently available.
+
+</p></div></section><!-- ============================================
+     SECURITY
+============================================ --><section id="security" class="page-section"><div class="page-header"><h1>Security & OTP System</h1><p>Security controls for customer and administrator accounts.</p></div><div class="security-item"><h3>🔐 Password Security</h3><p>Real system should use secure password hashing.
+
+</p></div><div class="security-item"><h3>📱 OTP Verification</h3><p>One-Time Password verification will require an SMS or email provider.
+
+</p><button class="btn btn-primary"
+onclick="showNotification('OTP engine will be connected to the backend.')">
+
+CONFIGURE OTP
+
+</button></div><div class="security-item"><h3>🛡️ Login Protection</h3><p>Recommended features include login attempt limits and administrator authentication.
+
+</p></div><div class="security-item"><h3>🔑 Admin Permissions</h3><p>Future system can support multiple administrators with different permissions.
+
+</p></div></section><!-- ============================================
+     ACTIVITY LOGS
+============================================ --><section id="activity" class="page-section"><div class="page-header"><h1>Activity Logs</h1><p>Track important system activities.</p></div><div class="card"><h2>📋 Security Activity</h2><p>Backend activity logs will record important actions such as:
+
+</p><br><ul><li>Administrator logins</li><li>Loan approvals</li><li>Loan rejections</li><li>Payment records</li><li>Customer account changes</li><li>Security events</li></ul></div></section><!-- ============================================
+     STATISTICS
+============================================ --><section id="statistics" class="page-section"><div class="page-header"><h1>Financial Statistics</h1><p>Monitor loan and customer performance.</p></div><div class="stats-grid"><div class="stat-card"><h3>Total Applications</h3><div class="number">0</div></div><div class="stat-card"><h3>Approved Loans</h3><div class="number">0</div></div><div class="stat-card"><h3>Rejected Loans</h3><div class="number">0</div></div><div class="stat-card"><h3>Total Payments</h3><div class="number">MWK 0</div></div></div><div class="card"><h2>📈 Future Statistics Engine</h2><p>When the backend is connected, this page can calculate real-time financial statistics from the database.
+
+</p></div></section><!-- ============================================
+     SETTINGS
+============================================ --><section id="settings" class="page-section"><div class="page-header"><h1>System Settings</h1><p>Configure financial service system settings.</p></div><div class="card"><h2>Loan Settings</h2><label>Default Interest Rate (%)</label>
+
+<input type="number"
+placeholder="Example: 15">
+
+<label>Default Loan Period</label>
+
+<select><option>3 Months</option><option>6 Months</option><option>12 Months</option><option>24 Months</option></select><button class="btn btn-primary"
+onclick="showNotification('Settings require backend storage.')">
+
+SAVE SETTINGS
+
+</button></div><div class="card"><h2>Administrator Settings</h2><label>Administrator Name</label>
+
+<input placeholder="Administrator Name"><label>Administrator Email</label>
+
+<input type="email"><button class="btn btn-primary"
+onclick="showNotification('Administrator settings require secure backend connection.')">
+
+UPDATE ADMIN
+
+</button></div></section></main><!-- ============================================
+     JAVASCRIPT ENGINE
+============================================ --><script>
+
+
+/* ============================================
+   SIDEBAR
+============================================ */
+
+function toggleSidebar(){
+
+    document.getElementById("sidebar")
+    .classList.toggle("show");
+
+}
+
+
+/* ============================================
+   PAGE NAVIGATION
+============================================ */
+
+function showPage(pageId,button){
+
+    const pages=
+    document.querySelectorAll(".page-section");
+
+    pages.forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+
+    document.getElementById(pageId)
+    .classList.add("active");
+
+
+    const buttons=
+    document.querySelectorAll(".nav-button");
+
+    buttons.forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+
+    document.getElementById("sidebar")
+    .classList.remove("show");
+
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* ============================================
+   DIRECT PAGE OPENING
+============================================ */
+
+function showPageDirect(pageId){
+
+    const pages=
+    document.querySelectorAll(".page-section");
+
+    pages.forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+
+    document.getElementById(pageId)
+    .classList.add("active");
+
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* ============================================
+   NOTIFICATION ENGINE
+============================================ */
+
+function showNotification(message){
+
+    const notification=
+    docu
