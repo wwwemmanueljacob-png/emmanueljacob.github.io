@@ -1,0 +1,2980 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+JAY C O B FINANCIAL SERVICES | Admin Dashboard
+</title><style>
+
+/* =====================================
+GENERAL
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f1f4f8;
+    color:#222;
+}
+
+
+/* =====================================
+LOGIN SCREEN
+===================================== */
+
+#loginScreen{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #071a33,
+        #123b69
+    );
+
+}
+
+
+.login-box{
+
+    width:90%;
+    max-width:420px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.35);
+
+}
+
+
+.login-box h1{
+
+    text-align:center;
+
+    color:#0b1f3a;
+
+    margin-bottom:10px;
+
+}
+
+
+.login-box p{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:25px;
+
+}
+
+
+/* =====================================
+INPUTS
+===================================== */
+
+label{
+
+    display:block;
+
+    margin-top:15px;
+
+    margin-bottom:7px;
+
+    font-weight:bold;
+
+}
+
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:13px;
+
+    border:1px solid #ccd3dc;
+
+    border-radius:7px;
+
+    outline:none;
+
+}
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#0b1f3a;
+
+}
+
+
+textarea{
+
+    min-height:100px;
+
+}
+
+
+/* =====================================
+BUTTONS
+===================================== */
+
+.btn{
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+    font-weight:bold;
+
+}
+
+
+.btn-primary{
+
+    background:#ffd000;
+
+    color:#111;
+
+}
+
+
+.btn-blue{
+
+    background:#0b1f3a;
+
+    color:white;
+
+}
+
+
+.btn-green{
+
+    background:#16803c;
+
+    color:white;
+
+}
+
+
+.btn-red{
+
+    background:#c62828;
+
+    color:white;
+
+}
+
+
+.btn-orange{
+
+    background:#e87900;
+
+    color:white;
+
+}
+
+
+.btn-gray{
+
+    background:#65727f;
+
+    color:white;
+
+}
+
+
+/* =====================================
+DASHBOARD
+===================================== */
+
+#dashboard{
+
+    display:none;
+
+}
+
+
+.topbar{
+
+    height:70px;
+
+    background:#0b1f3a;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:1000;
+
+}
+
+
+.topbar h2{
+
+    font-size:18px;
+
+}
+
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.notification-badge{
+
+    background:#ffd000;
+
+    color:#111;
+
+    padding:7px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+}
+
+
+/* =====================================
+SIDEBAR
+===================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:70px;
+
+    left:0;
+
+    width:250px;
+
+    height:calc(100vh - 70px);
+
+    background:#081629;
+
+    overflow-y:auto;
+
+    padding:20px 0;
+
+}
+
+
+.sidebar a{
+
+    display:block;
+
+    padding:14px 25px;
+
+    color:#d6dce4;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+}
+
+
+.sidebar a:hover{
+
+    background:#132b4a;
+
+    color:#ffd000;
+
+}
+
+
+.sidebar-title{
+
+    color:#ffd000;
+
+    padding:15px 25px 5px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================
+MAIN CONTENT
+===================================== */
+
+.main{
+
+    margin-left:250px;
+
+    padding:100px 30px 40px;
+
+}
+
+
+.page{
+
+    display:none;
+
+}
+
+
+.page.active{
+
+    display:block;
+
+}
+
+
+/* =====================================
+STATISTICS
+===================================== */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+
+.stat-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.08);
+
+}
+
+
+.stat-card h3{
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+
+.stat-number{
+
+    font-size:30px;
+
+    color:#0b1f3a;
+
+    font-weight:bold;
+
+    margin-top:12px;
+
+}
+
+
+/* =====================================
+PANELS
+===================================== */
+
+.panel{
+
+    background:white;
+
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.06);
+
+}
+
+
+.panel h2{
+
+    color:#0b1f3a;
+
+    margin-bottom:20px;
+
+}
+
+
+/* =====================================
+TABLES
+===================================== */
+
+.table-container{
+
+    overflow-x:auto;
+
+}
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+th{
+
+    background:#0b1f3a;
+
+    color:white;
+
+}
+
+
+th,
+td{
+
+    padding:13px;
+
+    text-align:left;
+
+    border-bottom:
+    1px solid #ddd;
+
+}
+
+
+.status{
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.pending{
+
+    background:#fff0b3;
+
+    color:#8a6500;
+
+}
+
+
+.review{
+
+    background:#d8ecff;
+
+    color:#07569e;
+
+}
+
+
+.approved{
+
+    background:#d8f5df;
+
+    color:#146b30;
+
+}
+
+
+.rejected{
+
+    background:#ffdcdc;
+
+    color:#a61b1b;
+
+}
+
+
+/* =====================================
+SEARCH
+===================================== */
+
+.search-box{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+}
+
+
+.search-box input{
+
+    flex:1;
+
+}
+
+
+/* =====================================
+MODAL
+===================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    z-index:3000;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    overflow:auto;
+
+    background:
+    rgba(0,0,0,.65);
+
+    padding:25px;
+
+}
+
+
+.modal-content{
+
+    max-width:700px;
+
+    margin:40px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    position:relative;
+
+}
+
+
+.close{
+
+    position:absolute;
+
+    right:20px;
+
+    top:10px;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================
+ALERT
+===================================== */
+
+.alert{
+
+    display:none;
+
+    position:fixed;
+
+    right:20px;
+
+    top:85px;
+
+    z-index:5000;
+
+    background:#16803c;
+
+    color:white;
+
+    padding:15px 20px;
+
+    border-radius:8px;
+
+}
+
+
+/* =====================================
+MOBILE
+===================================== */
+
+@media(max-width:768px){
+
+    .sidebar{
+
+        width:70px;
+
+    }
+
+    .sidebar a{
+
+        padding:15px 8px;
+
+        font-size:10px;
+
+        text-align:center;
+
+    }
+
+    .sidebar-title{
+
+        display:none;
+
+    }
+
+    .main{
+
+        margin-left:70px;
+
+        padding:95px 15px 30px;
+
+    }
+
+    .topbar h2{
+
+        font-size:13px;
+
+    }
+
+    .topbar-right{
+
+        font-size:11px;
+
+    }
+
+}
+
+</style></head><body><!-- =====================================
+ALERT
+===================================== --><div
+id="alertBox"
+class="alert">Action completed successfully.
+
+</div><!-- =====================================
+LOGIN
+===================================== --><div id="loginScreen"><div class="login-box"><h1>
+JAY C O B
+</h1><p>
+FINANCIAL SERVICES
+<br>
+ADMINISTRATION PORTAL
+</p><label>
+Admin Email
+</label><input
+type="email"
+id="adminEmail"
+placeholder="Enter admin email"
+
+«»
+
+<label>
+Password
+</label><input
+type="password"
+id="adminPassword"
+placeholder="Enter password"
+
+«»
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="adminLogin()">
+
+SECURE ADMIN LOGIN
+
+</button><p
+style="
+font-size:11px;
+margin-top:20px;
+color:#777;
+">Production login must be verified
+by the secure backend.
+
+</p></div></div><!-- =====================================
+DASHBOARD
+===================================== --><div id="dashboard"><!-- TOPBAR --><div class="topbar"><h2>
+JAY C O B FINANCIAL SERVICES
+</h2><div class="topbar-right"><div
+class="notification-badge"
+onclick="showPage('notifications')"
+style="cursor:pointer">🔔 5
+
+</div><span id="adminName">
+Administrator
+</span><button
+class="btn btn-red"
+onclick="logout()">
+
+LOGOUT
+
+</button></div></div><!-- SIDEBAR --><div class="sidebar"><div class="sidebar-title">
+MAIN MENU
+</div><a onclick="showPage('overview')">📊 Dashboard
+
+</a><a onclick="showPage('customers')">👥 Customers
+
+</a><a onclick="showPage('applications')">📋 Loan Applications
+
+</a><a onclick="showPage('followups')">📞 Follow-ups
+
+</a><a onclick="showPage('statistics')">📈 Statistics
+
+</a><div class="sidebar-title">
+COMMUNICATION
+</div><a onclick="showPage('messages')">🤖 AI Messages
+
+</a><a onclick="showPage('notifications')">🔔 Notifications
+
+</a><div class="sidebar-title">
+SECURITY
+</div><a onclick="showPage('otp')">🔑 OTP System
+
+</a><a onclick="showPage('security')">🛡 Security
+
+</a><a onclick="showPage('audit')">📜 Audit Logs
+
+</a><div class="sidebar-title">
+MANAGEMENT
+</div><a onclick="showPage('staff')">👨‍💼 Staff
+
+</a><a onclick="showPage('settings')">⚙ Settings
+
+</a></div><!-- MAIN --><div class="main"><!-- =====================================
+OVERVIEW
+===================================== --><div
+id="overview"
+class="page active"><h1>
+ADMIN DASHBOARD
+</h1><p>
+Welcome to JAY C O B FINANCIAL SERVICES.
+</p><div class="stats-grid"
+style="margin-top:25px"><div class="stat-card"><h3>
+TOTAL CUSTOMERS
+</h3><div
+class="stat-number"
+id="totalCustomers">0
+
+</div></div><div class="stat-card"><h3>
+PENDING APPLICATIONS
+</h3><div
+class="stat-number"
+id="pendingApplications">0
+
+</div></div><div class="stat-card"><h3>
+APPROVED LOANS
+</h3><div
+class="stat-number"
+id="approvedLoans">0
+
+</div></div><div class="stat-card"><h3>
+TOTAL REQUESTED
+</h3><div
+class="stat-number"
+id="totalRequested">MWK 0
+
+</div></div></div><div class="panel"><h2>
+RECENT ACTIVITY
+</h2><div id="recentActivity">No recent activity.
+
+</div></div></div><!-- =====================================
+CUSTOMERS
+===================================== --><div
+id="customers"
+class="page"><h1>
+CUSTOMER MANAGEMENT
+</h1><div class="panel"><div class="search-box"><input
+type="text"
+id="customerSearch"
+placeholder="Search customer name, email or phone"
+
+«»
+
+<button
+class="btn btn-blue"
+onclick="searchCustomers()">
+
+SEARCH
+
+</button></div><div class="table-container"><table><thead><tr><th>
+Customer
+</th><th>
+Phone
+</th><th>
+Email
+</th><th>
+Status
+</th><th>
+Action
+</th></tr></thead><tbody id="customersTable"><tr><td>
+No customers loaded
+</td><td>
+-
+</td><td>
+-
+</td><td>
+-
+</td><td>
+-
+</td></tr></tbody></table></div></div></div><!-- =====================================
+APPLICATIONS
+===================================== --><div
+id="applications"
+class="page"><h1>
+LOAN APPLICATIONS
+</h1><div class="panel"><div class="search-box"><input
+type="text"
+id="applicationSearch"
+placeholder="Search application ID or customer"
+
+«»
+
+<button
+class="btn btn-blue"
+onclick="searchApplications()">
+
+SEARCH
+
+</button></div><div class="table-container"><table><thead><tr><th>
+Application ID
+</th><th>
+Customer
+</th><th>
+Loan Type
+</th><th>
+Amount
+</th><th>
+Status
+</th><th>
+Action
+</th></tr></thead><tbody id="applicationsTable"></tbody></table></div></div></div><!-- =====================================
+FOLLOW UPS
+===================================== --><div
+id="followups"
+class="page"><h1>
+CUSTOMER FOLLOW-UP
+</h1><div class="panel"><h2>
+CREATE FOLLOW-UP
+</h2><label>
+Customer / Application ID
+</label><input
+type="text"
+id="followupCustomer"
+placeholder="Customer or Application ID"
+
+«»
+
+<label>
+Follow-up Date
+</label><input
+type="date"
+id="followupDate"
+
+«»
+
+<label>
+Priority
+</label><select id="followupPriority"><option>
+Normal
+</option><option>
+High
+</option><option>
+Urgent
+</option></select><label>
+Follow-up Notes
+</label><textarea
+id="followupNotes"
+placeholder="Enter follow-up notes"
+></textarea><button
+class="btn btn-primary"
+onclick="createFollowup()">
+
+SAVE FOLLOW-UP
+
+</button></div><div class="panel"><h2>
+FOLLOW-UP HISTORY
+</h2><div id="followupList">No follow-ups created.
+
+</div></div></div><!-- =====================================
+STATISTICS
+===================================== --><div
+id="statistics"
+class="page"><h1>
+STATISTICS
+</h1><div class="stats-grid"><div class="stat-card"><h3>
+PERSONAL LOANS
+</h3><div class="stat-number">
+0
+</div></div><div class="stat-card"><h3>
+BUSINESS LOANS
+</h3><div class="stat-number">
+0
+</div></div><div class="stat-card"><h3>
+UNDER REVIEW
+</h3><div class="stat-number">
+0
+</div></div><div class="stat-card"><h3>
+REJECTED
+</h3><div class="stat-number">
+0
+</div></div></div><div class="panel"><h2>
+LOAN ANALYTICS</h2><p>When connected to the backend,
+this section will display real-time:
+
+</p><br><ul><li>Application trends</li><li>Approval rate</li><li>Loan amounts</li><li>Customer growth</li><li>Personal versus Business loans</li><li>Monthly application statistics</li></ul></div></div><!-- =====================================
+AI MESSAGES
+===================================== --><div
+id="messages"
+class="page"><h1>
+AI MESSAGE SYSTEM
+</h1><div class="panel"><h2>
+GENERATE CUSTOMER MESSAGE
+</h2><label>
+Transaction / Event
+</label><select id="messageEvent"><option>
+Application Received
+</option><option>
+Application Under Review
+</option><option>
+Additional Information Required
+</option><option>
+Application Approved
+</option><option>
+Application Rejected
+</option><option>
+Follow-up Reminder
+</option><option>
+Security Alert
+</option></select><label>
+Customer Name
+</label><input
+type="text"
+id="messageCustomer"
+placeholder="Customer name"
+
+«»
+
+<button
+class="btn btn-primary"
+onclick="generateAIMessage()">
+
+GENERATE MESSAGE
+
+</button><label>
+Generated Message
+</label><textarea
+id="generatedMessage"
+placeholder="AI generated message will appear here"
+></textarea><button
+class="btn btn-blue"
+onclick="sendAIMessage()">
+
+SEND MESSAGE
+
+</button></div></div><!-- =====================================
+NOTIFICATIONS
+===================================== --><div
+id="notifications"
+class="page"><h1>
+NOTIFICATIONS
+</h1><div class="panel"><h2>
+SYSTEM NOTIFICATIONS
+</h2><div id="notificationList"><p>
+🔔 New applications will appear here.
+</p></div></div></div><!-- =====================================
+OTP SYSTEM
+===================================== --><div
+id="otp"
+class="page"><h1>
+OTP SECURITY SYSTEM
+</h1><div class="panel"><h2>
+SEND OTP</h2><label>
+Customer Phone or Email
+</label><input
+type="text"
+id="otpDestination"
+placeholder="Phone number or email"
+
+«»
+
+<label>
+Verification Purpose
+</label><select id="otpPurpose"><option>
+Account Verification
+</option><option>
+Login Verification
+</option><option>
+Password Reset
+</option><option>
+Transaction Verification
+</option></select><button
+class="btn btn-primary"
+onclick="generateOTP()">
+
+GENERATE OTP
+
+</button><div
+class="result"
+id="otpResult"
+style="margin-top:20px">OTP actions require backend integration.
+
+</div></div></div><!-- =====================================
+SECURITY
+===================================== --><div
+id="security"
+class="page"><h1>
+SECURITY CENTER
+</h1><div class="stats-grid"><div class="stat-card"><h3>
+FAILED LOGINS
+</h3><div class="stat-number">
+0
+</div></div><div class="stat-card"><h3>
+LOCKED ACCOUNTS
+</h3><div class="stat-number">
+0
+</div></div><div class="stat-card"><h3>
+ACTIVE SESSIONS
+</h3><div class="stat-number">
+0
+</div></div><div class="stat-card"><h3>
+SECURITY ALERTS
+</h3><div class="stat-number">
+0
+</div></div></div><div class="panel"><h2>
+SECURITY FEATURES
+</h2><ul><li>
+Password hashing
+</li><li>
+JWT authentication
+</li><li>
+Role-based access
+</li><li>
+OTP verification
+</li><li>
+Rate limiting
+</li><li>
+Account lockouts
+</li><li>
+Audit logging
+</li><li>
+HTTPS in production
+</li><li>
+Secure database access
+</li><li>
+Session monitoring
+</li></ul></div></div><!-- =====================================
+AUDIT LOG
+===================================== --><div
+id="audit"
+class="page"><h1>
+AUDIT LOGS
+</h1><div class="panel"><div class="table-container"><table><thead><tr><th>
+Date
+</th><th>
+User
+</th><th>
+Action
+</th><th>
+Status
+</th></tr></thead><tbody id="auditTable"><tr><td>
+-
+</td><td>
+System
+</td><td>
+No audit records loaded
+</td><td>
+-
+</td></tr></tbody></table></div></div></div><!-- =====================================
+STAFF
+===================================== --><div
+id="staff"
+class="page"><h1>
+STAFF MANAGEMENT
+</h1><div class="panel"><h2>
+ADD STAFF MEMBER
+</h2><label>
+Full Name
+</label><input
+type="text"
+placeholder="Staff name"
+
+«»
+
+<label>
+Email
+</label><input
+type="email"
+placeholder="Staff email"
+
+«»
+
+<label>
+Role
+</label><select><option>
+Loan Officer
+</option><option>
+Manager
+</option><option>
+Administrator
+</option></select><button
+class="btn btn-primary"
+onclick="showAlert('Staff creation requires secure backend approval.')">
+
+ADD STAFF
+
+</button></div></div><!-- =====================================
+SETTINGS
+===================================== --><div
+id="settings"
+class="page"><h1>
+SYSTEM SETTINGS
+</h1><div class="panel"><h2>
+JAY C O B FINANCIAL SERVICES
+</h2><label>
+Company Name
+</label><input
+value="JAY C O B FINANCIAL SERVICES"
+
+«»
+
+<label>
+Currency
+</label><select><option>
+MWK - Malawi Kwacha
+</option></select><label>
+Application Prefix
+</label><input
+value="JFS"
+
+«»
+
+<button
+class="btn btn-primary"
+onclick="showAlert('Settings should be saved through the secure backend.')">
+
+SAVE SETTINGS
+
+</button></div></div></div></div><!-- =====================================
+LOAN REVIEW MODAL
+===================================== --><div
+id="loanModal"
+class="modal"><div class="modal-content"><span
+class="close"
+onclick="closeLoanModal()">
+
+×
+
+</span><h2>
+LOAN APPLICATION REVIEW
+</h2><div id="loanReviewDetails"></div><button
+class="btn btn-green"
+onclick="updateLoanStatus('APPROVED')">
+
+APPROVE
+
+</button><button
+class="btn btn-orange"
+onclick="updateLoanStatus('UNDER REVIEW')">
+
+UNDER REVIEW
+
+</button><button
+class="btn btn-red"
+onclick="updateLoanStatus('REJECTED')">
+
+REJECT
+
+</button><button
+class="btn btn-gray"
+onclick="closeLoanModal()">
+
+CLOSE
+
+</button></div></div><!-- =====================================
+JAVASCRIPT ENGINE
+===================================== --><script>
+
+
+/* =====================================
+CONFIGURATION
+===================================== */
+
+
+/*
+CHANGE THIS WHEN YOUR BACKEND
+IS DEPLOYED.
+*/
+
+
+const API_URL =
+
+"http://localhost:3000/api";
+
+
+let adminToken =
+
+localStorage.getItem(
+"jaycobAdminToken"
+);
+
+
+let selectedApplication = null;
+
+
+
+/* =====================================
+DEMO DATA
+===================================== */
+
+
+/*
+Temporary data.
+
+This is replaced by MongoDB
+and the real backend.
+*/
+
+
+let customers = [
+
+{
+
+id:"C001",
+
+name:"Demo Customer",
+
+phone:"+265 999 000 000",
+
+email:"customer@example.com",
+
+status:"Active"
+
+}
+
+];
+
+
+let applications = [
+
+{
+
+id:"JFS-2026-000001",
+
+customer:"Demo Customer",
+
+type:"Personal Loan",
+
+amount:500000,
+
+status:"PENDING"
+
+},
+
+{
+
+id:"JFS-2026-000002",
+
+customer:"Demo Business",
+
+type:"Business Loan",
+
+amount:1500000,
+
+status:"UNDER REVIEW"
+
+}
+
+];
+
+
+let followups = [];
+
+
+
+/* =====================================
+ADMIN LOGIN
+===================================== */
+
+
+function adminLogin(){
+
+
+const email =
+
+document.getElementById(
+"adminEmail"
+).value;
+
+
+const password =
+
+document.getElementById(
+"adminPassword"
+).value;
+
+
+
+if(
+
+!email ||
+
+!password
+
+){
+
+alert(
+"Please enter your email and password."
+);
+
+return;
+
+}
+
+
+/*
+REAL BACKEND LOGIN:
+
+fetch(API_URL + "/auth/login", {
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+email,
+password
+})
+})
+
+*/
+
+
+/*
+DEMO LOGIN ONLY
+
+REMOVE THIS IN PRODUCTION
+*/
+
+
+document.getElementById(
+"loginScreen"
+).style.display = "none";
+
+
+document.getElementById(
+"dashboard"
+).style.display = "block";
+
+
+document.getElementById(
+"adminName"
+).innerText = email;
+
+
+showAlert(
+"Administrator login successful."
+);
+
+
+loadDashboard();
+
+
+}
+
+
+
+/* =====================================
+LOGOUT
+===================================== */
+
+
+function logout(){
+
+
+localStorage.removeItem(
+"jaycobAdminToken"
+);
+
+
+document.getElementById(
+"dashboard"
+).style.display = "none";
+
+
+document.getElementById(
+"loginScreen"
+).style.display = "flex";
+
+
+showAlert(
+"You have been logged out."
+);
+
+
+}
+
+
+
+/* =====================================
+PAGE NAVIGATION
+===================================== */
+
+
+function showPage(pageId){
+
+
+let pages =
+
+document.querySelectorAll(
+".page"
+);
+
+
+pages.forEach(
+
+page => {
+
+page.classList.remove(
+"active"
+);
+
+}
+
+);
+
+
+document.getElementById(
+pageId
+)
+
+.classList.add(
+"active"
+);
+
+
+if(pageId === "customers"){
+
+loadCustomers();
+
+}
+
+
+if(pageId === "applications"){
+
+loadApplications();
+
+}
+
+
+if(pageId === "overview"){
+
+loadDashboard();
+
+}
+
+
+}
+
+
+
+/* =====================================
+DASHBOARD
+===================================== */
+
+
+function loadDashboard(){
+
+
+document.getElementById(
+"totalCustomers"
+).innerText =
+
+customers.length;
+
+
+document.getElementById(
+"pendingApplications"
+).innerText =
+
+applications.filter(
+
+app =>
+
+app.status === "PENDING"
+
+).length;
+
+
+document.getElementById(
+"approvedLoans"
+).innerText =
+
+applications.filter(
+
+app =>
+
+app.status === "APPROVED"
+
+).length;
+
+
+
+let total = 0;
+
+
+applications.forEach(
+
+app => {
+
+total += Number(
+app.amount
+);
+
+}
+
+);
+
+
+document.getElementById(
+"totalRequested"
+).innerText =
+
+"MWK " +
+
+total.toLocaleString();
+
+
+
+document.getElementById(
+"recentActivity"
+).innerHTML =
+
+
+"System dashboard loaded successfully.<br>" +
+
+"Total applications: " +
+
+applications.length;
+
+
+}
+
+
+
+/* =====================================
+CUSTOMERS
+===================================== */
+
+
+function loadCustomers(){
+
+
+let html = "";
+
+
+customers.forEach(
+
+customer => {
+
+
+html +=
+
+"<tr>" +
+
+"<td>" +
+
+customer.name +
+
+"</td>" +
+
+
+"<td>" +
+
+customer.phone +
+
+"</td>" +
+
+
+"<td>" +
+
+customer.email +
+
+"</td>" +
+
+
+"<td>" +
+
+customer.status +
+
+"</td>" +
+
+
+"<td>" +
+
+"<button class='btn btn-blue' " +
+
+"onclick=\"viewCustomer('" +
+
+customer.id +
+
+"')\">" +
+
+"VIEW" +
+
+"</button>" +
+
+"</td>" +
+
+"</tr>";
+
+
+}
+
+
+);
+
+
+document.getElementById(
+"customersTable"
+).innerHTML = html;
+
+
+}
+
+
+
+function searchCustomers(){
+
+
+const search =
+
+document.getElementById(
+"customerSearch"
+).value
+
+.toLowerCase();
+
+
+let results =
+
+customers.filter(
+
+customer =>
+
+
+customer.name
+.toLowerCase()
+.includes(search)
+
+
+||
+
+customer.email
+.toLowerCase()
+.includes(search)
+
+
+||
+
+customer.phone
+.includes(search)
+
+
+);
+
+
+let html = "";
+
+
+results.forEach(
+
+customer => {
+
+
+html +=
+
+"<tr>" +
+
+"<td>" +
+customer.name +
+"</td>" +
+
+"<td>" +
+customer.phone +
+"</td>" +
+
+"<td>" +
+customer.email +
+"</td>" +
+
+"<td>" +
+customer.status +
+"</td>" +
+
+"<td>VIEW</td>" +
+
+"</tr>";
+
+
+}
+
+
+);
+
+
+document.getElementById(
+"customersTable"
+).innerHTML = html;
+
+
+}
+
+
+
+function viewCustomer(id){
+
+
+showAlert(
+
+"Customer profile: " +
+
+id +
+
+". Real customer information must load from the backend."
+
+);
+
+
+}
+
+
+
+/* =====================================
+APPLICATIONS
+===================================== */
+
+
+function loadApplications(){
+
+
+let html = "";
+
+
+applications.forEach(
+
+application => {
+
+
+let statusClass =
+
+"pending";
+
+
+if(
+
+application.status ===
+
+"APPROVED"
+
+){
+
+statusClass =
+
+"approved";
+
+}
+
+
+if(
+
+application.status ===
+
+"REJECTED"
+
+){
+
+statusClass =
+
+"rejected";
+
+}
+
+
+if(
+
+application.status ===
+
+"UNDER REVIEW"
+
+){
+
+statusClass =
+
+"review";
+
+}
+
+
+
+html +=
+
+
+"<tr>" +
+
+
+"<td>" +
+
+application.id +
+
+"</td>" +
+
+
+"<td>" +
+
+application.customer +
+
+"</td>" +
+
+
+"<td>" +
+
+application.type +
+
+"</td>" +
+
+
+"<td>MWK " +
+
+Number(
+application.amount
+)
+
+.toLocaleString() +
+
+"</td>" +
+
+
+"<td>" +
+
+"<span class='status " +
+
+statusClass +
+
+"'>" +
+
+application.status +
+
+"</span>" +
+
+"</td>" +
+
+
+"<td>" +
+
+"<button class='btn btn-blue' " +
+
+"onclick=\"reviewLoan('" +
+
+application.id +
+
+"')\">" +
+
+"REVIEW" +
+
+"</button>" +
+
+"</td>" +
+
+
+"</tr>";
+
+
+}
+
+
+);
+
+
+document.getElementById(
+"applicationsTable"
+).innerHTML = html;
+
+
+}
+
+
+
+/* =====================================
+SEARCH APPLICATIONS
+===================================== */
+
+
+function searchApplications(){
+
+
+const search =
+
+document.getElementById(
+"applicationSearch"
+).value
+
+.toLowerCase();
+
+
+let results =
+
+applications.filter(
+
+application =>
+
+
+application.id
+.toLowerCase()
+.includes(search)
+
+
+||
+
+application.customer
+.toLowerCase()
+.includes(search)
+
+
+);
+
+
+let html = "";
+
+
+results.forEach(
+
+application => {
+
+
+html +=
+
+
+"<tr>" +
+
+"<td>" +
+application.id +
+"</td>" +
+
+"<td>" +
+application.customer +
+"</td>" +
+
+"<td>" +
+application.type +
+"</td>" +
+
+"<td>MWK " +
+Number(application.amount)
+.toLocaleString() +
+"</td>" +
+
+"<td>" +
+application.status +
+"</td>" +
+
+"<td>" +
+
+"<button class='btn btn-blue' " +
+
+"onclick=\"reviewLoan('" +
+
+application.id +
+
+"')\">" +
+
+"REVIEW" +
+
+"</button>" +
+
+"</td>" +
+
+"</tr>";
+
+
+}
+
+
+);
+
+
+document.getElementById(
+"applicationsTable"
+).innerHTML = html;
+
+
+}
+
+
+
+/* =====================================
+REVIEW LOAN
+===================================== */
+
+
+function reviewLoan(id){
+
+
+selectedApplication =
+
+applications.find(
+
+application =>
+
+application.id === id
+
+);
+
+
+if(!selectedApplication){
+
+return;
+
+}
+
+
+document.getElementById(
+"loanReviewDetails"
+).innerHTML =
+
+
+"<p><strong>Application ID:</strong> " +
+
+selectedApplication.id +
+
+"</p><br>" +
+
+
+"<p><strong>Customer:</strong> " +
+
+selectedApplication.customer +
+
+"</p><br>" +
+
+
+"<p><strong>Loan Type:</strong> " +
+
+selectedApplication.type +
+
+"</p><br>" +
+
+
+"<p><strong>Amount:</strong> MWK " +
+
+Number(
+selectedApplication.amount
+)
+
+.toLocaleString() +
+
+"</p><br>" +
+
+
+"<p><strong>Current Status:</strong> " +
+
+selectedApplication.status +
+
+"</p><br>";
+
+
+document.getElementById(
+"loanModal"
+).style.display =
+
+"block";
+
+
+}
+
+
+
+/* =====================================
+CLOSE LOAN MODAL
+===================================== */
+
+
+function closeLoanModal(){
+
+
+document.getElementById(
+"loanModal"
+).style.display =
+
+"none";
+
+
+selectedApplication = null;
+
+
+}
+
+
+
+/* =====================================
+UPDATE LOAN STATUS
+===================================== */
+
+
+function updateLoanStatus(status){
+
+
+if(!selectedApplication){
+
+return;
+
+}
+
+
+/*
+REAL BACKEND:
+
+fetch(
+API_URL + "/admin/applications/" +
+selectedApplication.id + "/status",
+{
+method:"PUT",
+headers:{
+"Authorization":
+"Bearer " + adminToken,
+"Content-Type":
+"application/json"
+},
+body:JSON.stringify({
+status
+})
+}
+)
+
+*/
+
+
+selectedApplication.status =
+
+status;
+
+
+showAlert(
+
+"Application status updated to: " +
+
+status
+
+);
+
+
+addAuditLog(
+
+"Administrator",
+
+"Loan " +
+
+selectedApplication.id +
+
+" changed to " +
+
+status,
+
+"SUCCESS"
+
+);
+
+
+closeLoanModal();
+
+
+loadApplications();
+
+
+loadDashboard();
+
+
+}
+
+
+
+/* =====================================
+FOLLOW UPS
+===================================== */
+
+
+function createFollowup(){
+
+
+const customer =
+
+document.getElementById(
+"followupCustomer"
+).value;
+
+
+const date =
+
+document.getElementById(
+"followupDate"
+).value;
+
+
+const priority =
+
+document.getElementById(
+"followupPriority"
+).value;
+
+
+const notes =
+
+document.getElementById(
+"followupNotes"
+).value;
+
+
+if(
+
+!customer ||
+
+!date ||
+
+!notes
+
+){
+
+alert(
+"Please complete follow-up information."
+);
+
+return;
+
+}
+
+
+const followup = {
+
+customer,
+
+date,
+
+priority,
+
+notes
+
+};
+
+
+followups.push(
+followup
+);
+
+
+document.getElementById(
+"followupList"
+).innerHTML +=
+
+
+"<div class='panel'>" +
+
+
+"<strong>" +
+
+customer +
+
+"</strong><br><br>" +
+
+
+"Date: " +
+
+date +
+
+"<br>" +
+
+
+"Priority: " +
+
+priority +
+
+"<br><br>" +
+
+
+notes +
+
+"</div>";
+
+
+showAlert(
+"Follow-up saved."
+);
+
+
+addAuditLog(
+
+"Administrator",
+
+"Created customer follow-up",
+
+"SUCCESS"
+
+);
+
+
+}
+
+
+
+/* =====================================
+AI MESSAGE ENGINE
+===================================== */
+
+
+function generateAIMessage(){
+
+
+const event =
+
+document.getElementById(
+"messageEvent"
+).value;
+
+
+const customer =
+
+document.getElementById(
+"messageCustomer"
+).value || "Customer";
+
+
+let message = "";
+
+
+if(
+
+event ===
+
+"Application Received"
+
+){
+
+
+message =
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"Your loan application has been successfully received by JAY C O B FINANCIAL SERVICES.\n\n" +
+
+"Our team will review your application and contact you if additional information is required.\n\n" +
+
+"Thank you.";
+
+}
+
+
+else if(
+
+event ===
+
+"Application Under Review"
+
+){
+
+
+message =
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"Your loan application is currently under review.\n\n" +
+
+"We will notify you when there is an update.\n\n" +
+
+"JAY C O B FINANCIAL SERVICES.";
+
+}
+
+
+else if(
+
+event ===
+
+"Additional Information Required"
+
+){
+
+
+message =
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"Additional information is required to continue processing your loan application.\n\n" +
+
+"Please log in to your account or contact our office.\n\n" +
+
+"Thank you.";
+
+}
+
+
+else if(
+
+event ===
+
+"Application Approved"
+
+){
+
+
+message =
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"Your application status has been updated.\n\n" +
+
+"Please log in to your account for further information.\n\n" +
+
+"JAY C O B FINANCIAL SERVICES.";
+
+}
+
+
+else if(
+
+event ===
+
+"Application Rejected"
+
+){
+
+
+message =
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"We have completed the review of your application.\n\n" +
+
+"Please contact our office if you require further information.\n\n" +
+
+"JAY C O B FINANCIAL SERVICES.";
+
+}
+
+
+else if(
+
+event ===
+
+"Security Alert"
+
+){
+
+
+message =
+
+"SECURITY ALERT\n\n" +
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"A security-related activity has been detected on your account.\n\n" +
+
+"If this was not you, please contact support immediately.";
+
+
+}
+
+
+else{
+
+
+message =
+
+"Dear " +
+
+customer +
+
+",\n\n" +
+
+"This is a reminder from JAY C O B FINANCIAL SERVICES.\n\n" +
+
+"Please review your account for important information.";
+
+
+}
+
+
+document.getElementById(
+"generatedMessage"
+).value = message;
+
+
+}
+
+
+
+/* =====================================
+SEND MESSAGE
+===================================== */
+
+
+function sendAIMessage(){
+
+
+const message =
+
+document.getElementById(
+"generatedMessage"
+).value;
+
+
+if(!message){
+
+alert(
+"Generate a message first."
+);
+
+return;
+
+}
+
+
+/*
+REAL BACKEND SHOULD:
+
+1. Save message.
+2. Generate audit record.
+3. Send through SMS/email.
+4. Create notification.
+*/
+
+
+showAlert(
+
+"Message prepared for secure delivery."
+
+);
+
+
+addAuditLog(
+
+"Administrator",
+
+"Prepared customer message",
+
+"SUCCESS"
+
+);
+
+
+}
+
+
+
+/* =====================================
+OTP
+===================================== */
+
+
+function generateOTP(){
+
+
+const destination =
+
+document.getElementById(
+"otpDestination"
+).value;
+
+
+const purpose =
+
+document.getElementById(
+"otpPurpose"
+).value;
+
+
+if(!destination){
+
+alert(
+"Enter customer phone or email."
+);
+
+return;
+
+}
+
+
+/*
+DO NOT GENERATE OR DISPLAY
+REAL PRODUCTION OTPs IN THE
+ADMIN DASHBOARD.
+
+The backend should:
+
+- Generate cryptographically secure OTP.
+- Hash the OTP.
+- Store expiration.
+- Limit attempts.
+- Send via approved SMS/email provider.
+*/
+
+
+document.getElementById(
+"otpResult"
+).innerHTML =
+
+
+"<strong>OTP REQUEST CREATED</strong><br><br>" +
+
+"Destination: " +
+
+destination +
+
+"<br>" +
+
+"Purpose: " +
+
+purpose +
+
+"<br><br>" +
+
+"The secure backend must generate and send the OTP.";
+
+
+addAuditLog(
+
+"Administrator",
+
+"OTP request created",
+
+"SUCCESS"
+
+);
+
+
+}
+
+
+
+/* =====================================
+AUDIT LOG
+===================================== */
+
+
+let auditLogs = [];
+
+
+function addAuditLog(
+
+user,
+
+action,
+
+status
+
+){
+
+
+const log = {
+
+
+date:
+
+new Date()
+.toLocaleString(),
+
+
+user,
+
+action,
+
+status
+
+};
+
+
+auditLogs.unshift(
+log
+);
+
+
+renderAuditLogs();
+
+
+}
+
+
+
+function renderAuditLogs(){
+
+
+let html = "";
+
+
+auditLogs.forEach(
+
+log => {
+
+
+html +=
+
+
+"<tr>" +
+
+"<td>" +
+log.date +
+"</td>" +
+
+"<td>" +
+log.user +
+"</td>" +
+
+"<td>" +
+log.action +
+"</td>" +
+
+"<td>" +
+log.status +
+"</td>" +
+
+"</tr>";
+
+
+}
+
+
+);
+
+
+if(html === ""){
+
+
+html =
+
+"<tr>" +
+
+"<td>-</td>" +
+
+"<td>System</td>" +
+
+"<td>No audit records</td>" +
+
+"<td>-</td>" +
+
+"</tr>";
+
+
+}
+
+
+document.getElementById(
+"auditTable"
+).innerHTML = html;
+
+
+}
+
+
+
+/* =====================================
+NOTIFICATION
+===================================== */
+
+
+function showAlert(message){
+
+
+const alertBox =
+
+document.getElementById(
+"alertBox"
+);
+
+
+alertBox.innerText =
+
+message;
+
+
+alertBox.style.display =
+
+"block";
+
+
+setTimeout(
+
+function(){
+
+
+alertBox.style.display =
+
+"none";
+
+
+},
+
+3500
+
+);
+
+
+}
+
+
+
+/* =====================================
+BACKEND CONNECTION EXAMPLES
+===================================== */
+
+
+/*
+
+CUSTOMER API:
+
+GET
+
+/api/admin/customers
+
+
+LOAN APPLICATION API:
+
+GET
+
+/api/admin/applications
+
+
+LOAN APPROVAL:
+
+PUT
+
+/api/admin/applications/:id/status
+
+
+FOLLOW-UP:
+
+POST
+
+/api/admin/followups
+
+
+STATISTICS:
+
+GET
+
+/api/admin/statistics
+
+
+AUDIT LOGS:
+
+GET
+
+/api/admin/audit-logs
+
+
+OTP:
+
+POST
+
+/api/otp/send
+
+
+AI MESSAGES:
+
+POST
+
+/api/messages/generate
+
+
+NOTIFICATIONS:
+
+POST
+
+/api/notifications/send
+
+
+*/
+
+
+</script></body></html>
