@@ -4,312 +4,600 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Emmanuel Jacob | Multifunctional Platform</title>
+<title>Emmanuel Jacob | Financial Solutions Platform</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+}
+
+:root {
+    --primary-color: #0066ff;
+    --primary-dark: #0052cc;
+    --primary-light: #e6f0ff;
+    --secondary-color: #00d9ff;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --text-dark: #1a202c;
+    --text-light: #6b7280;
+    --bg-light: #f9fafb;
+    --bg-white: #ffffff;
+    --border-light: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background: #f4f6f9;
-    color: #222;
-}
-
-header {
-    background: #111827;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin-bottom: 8px;
-}
-
-nav {
-    background: #1f2937;
-    padding: 15px;
-    text-align: center;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 8px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: #38bdf8;
-}
-
-.hero {
-    background: linear-gradient(135deg, #111827, #2563eb);
-    color: white;
-    padding: 70px 20px;
-    text-align: center;
-}
-
-.hero h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 18px;
-    max-width: 700px;
-    margin: auto;
-}
-
-.button {
-    display: inline-block;
-    background: #38bdf8;
-    color: #111;
-    padding: 14px 25px;
-    margin-top: 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
-
-section {
-    padding: 60px 20px;
-    text-align: center;
-}
-
-section h2 {
-    margin-bottom: 20px;
-    color: #1d4ed8;
-}
-
-.services {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    width: 280px;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.calculator-box {
-    background: white;
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-    text-align: left;
-}
-
-.calculator-box label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 7px;
-    font-weight: bold;
-}
-
-.calculator-box input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.results {
-    margin-top: 25px;
-    background: #eef6ff;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.results p {
-    margin: 12px 0;
-    font-size: 17px;
-}
-
-.result-number {
-    font-weight: bold;
-    color: #1d4ed8;
-}
-
-/* =========================
-   APPLICATION CARD
-========================= */
-
-.application-card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.application-card h2 {
-    color: #1d4ed8;
-    margin-bottom: 10px;
-}
-
-.application-card p {
-    color: #666;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
     line-height: 1.6;
 }
 
-/* =========================
-   OPEN FORM BUTTON
-========================= */
+/* ===========================
+   HEADER & NAVIGATION
+=========================== */
 
-.open-button {
+header {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition);
+}
+
+nav a:hover::after {
     width: 100%;
-    padding: 16px;
-    margin-top: 20px;
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+
+.hero {
+    background: linear-gradient(135deg, #0f172a 0%, var(--primary-color) 100%);
+    color: var(--bg-white);
+    padding: 100px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
     border: none;
-    border-radius: 10px;
-    background: #2563eb;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
     cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
 }
 
-.open-button:hover {
-    background: #1d4ed8;
+.btn-primary {
+    background: var(--secondary-color);
+    color: #0f172a;
 }
 
-/* =========================
-   LOAN FORM
-========================= */
+.btn-primary:hover {
+    background: #00c4e8;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
 
-#loanFormContainer {
-    display: none;
-    margin-top: 25px;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-    max-width: 700px;
+.btn-secondary {
+    background: transparent;
+    color: var(--bg-white);
+    border: 2px solid var(--bg-white);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-white);
+    color: var(--primary-color);
+}
+
+/* ===========================
+   SECTIONS
+=========================== */
+
+section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-}
-
-#loanFormContainer h2 {
     text-align: center;
-    color: #1d4ed8;
-    margin-bottom: 20px;
 }
 
-/* =========================
-   FORM FIELDS
-========================= */
+/* ===========================
+   SERVICES GRID
+=========================== */
 
-label {
-    display: block;
-    margin-top: 18px;
-    margin-bottom: 7px;
-    font-weight: bold;
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
-input,
-select,
-textarea {
+.card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    text-align: center;
+    border: 1px solid var(--border-light);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.card .btn {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    background: white;
 }
 
-textarea {
+/* ===========================
+   CALCULATOR SECTION
+=========================== */
+
+.calculator-box {
+    background: var(--bg-white);
+    max-width: 550px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-white);
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-group textarea {
     min-height: 100px;
     resize: vertical;
 }
 
-/* =========================
-   SUBMIT BUTTON
-========================= */
+.results {
+    margin-top: 2rem;
+    background: var(--primary-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.results p {
+    margin: 1rem 0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-number {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* ===========================
+   APPLICATION CARD
+=========================== */
+
+.application-card {
+    background: var(--bg-white);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid var(--border-light);
+}
+
+.application-card h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.application-card p {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+/* ===========================
+   OPEN FORM BUTTON
+=========================== */
+
+.open-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: var(--bg-white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.open-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===========================
+   LOAN FORM
+=========================== */
+
+#loanFormContainer {
+    display: none;
+    margin-top: 2.5rem;
+    background: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--border-light);
+}
+
+#loanFormContainer h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.75rem;
+}
+
+/* ===========================
+   SUBMIT & CLOSE BUTTONS
+=========================== */
 
 .submit-button {
     width: 100%;
-    padding: 15px;
-    margin-top: 25px;
+    padding: 14px;
+    margin-top: 1.5rem;
     border: none;
     border-radius: 8px;
-    background: #16a34a;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
+    background: var(--success-color);
+    color: var(--bg-white);
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: var(--transition);
 }
 
 .submit-button:hover {
-    background: #15803d;
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
-
-/* =========================
-   CLOSE BUTTON
-========================= */
 
 .close-button {
     width: 100%;
-    padding: 13px;
-    margin-top: 12px;
-    border: 1px solid #dc2626;
+    padding: 12px;
+    margin-top: 1rem;
+    border: 1px solid var(--danger-color);
     border-radius: 8px;
-    background: white;
-    color: #dc2626;
-    font-size: 16px;
-    font-weight: bold;
+    background: var(--bg-white);
+    color: var(--danger-color);
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: var(--transition);
 }
 
 .close-button:hover {
     background: #fee2e2;
+    transform: translateY(-2px);
 }
 
-/* =========================
+/* ===========================
    SUCCESS MESSAGE
-========================= */
+=========================== */
 
 .success {
     display: none;
-    margin-top: 20px;
-    padding: 15px;
-    background: #dcfce7;
-    color: #166534;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #ecfdf5;
+    color: #065f46;
     border-radius: 8px;
-    line-height: 1.5;
+    line-height: 1.8;
+    border-left: 4px solid var(--success-color);
 }
+
+.success strong {
+    font-size: 1.1rem;
+}
+
+/* ===========================
+   ABOUT & SUPPORT SECTIONS
+=========================== */
+
+#about {
+    background: var(--primary-light);
+    border-radius: 12px;
+}
+
+#about p,
+#support p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
 
 footer {
-    background: #111827;
-    color: white;
+    background: #0f172a;
+    color: var(--bg-white);
     text-align: center;
-    padding: 25px;
+    padding: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 4rem;
 }
 
-@media (max-width: 600px) {
-    .application-card,
-    #loanFormContainer {
-        padding: 20px;
+footer p {
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+footer p:first-child {
+    font-weight: 600;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
     }
 
+    nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    section h2 {
+        font-size: 1.75rem;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .application-card,
+    #loanFormContainer,
+    .calculator-box {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
     header h1 {
-        font-size: 25px;
+        font-size: 1.25rem;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 40px 15px;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    nav a {
+        font-size: 0.875rem;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+
+    .results p {
+        flex-direction: column;
+        text-align: left;
+        gap: 0.5rem;
     }
 }
 </style>
@@ -318,387 +606,306 @@ footer {
 <body>
 
 <header>
-    <h1>EMMANUEL JACOB</h1>
-    <p>Multifunctional Digital Platform</p>
+    <div class="header-content">
+        <div>
+            <h1>Emmanuel Jacob</h1>
+            <p class="header-subtitle">Financial Solutions Platform</p>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#loans">Loans</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#personal-loan">Apply</a>
+            <a href="#about">About</a>
+        </nav>
+    </div>
 </header>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#loans">Loans</a>
-    <a href="#calculator">Calculator</a>
-    <a href="#personal-loan">Personal Loan</a>
-    <a href="#about">About</a>
-    <a href="#support">Support</a>
-</nav>
-
 <section class="hero" id="home">
-    <h2>Welcome to Emmanuel Jacob Platform</h2>
-    <p>
-        Digital solutions, business services and innovative technology.
-    </p>
+    <div class="hero-content">
+        <h2>Financial Solutions Made Simple</h2>
+        <p>
+            Empowering your financial journey with innovative lending solutions, transparent calculators, and dedicated support.
+        </p>
 
-    <a href="#calculator" class="button">Calculate a Loan</a>
+        <a href="#calculator" class="btn btn-primary">Calculate Your Loan</a>
+        <a href="#personal-loan" class="btn btn-secondary" style="margin-left: 1rem;">Apply Now</a>
+    </div>
 </section>
 
 <section id="services">
-
     <h2>Our Services</h2>
+    <p class="section-subtitle">Comprehensive financial services designed for your success</p>
 
     <div class="services">
-
         <div class="card">
-            <h3>💰 Loan Services</h3>
-            <p>Explore personal and business loan services.</p>
+            <h3>💰 Flexible Loans</h3>
+            <p>Personal and business loans tailored to your needs with competitive rates and flexible repayment terms.</p>
         </div>
 
         <div class="card">
-            <h3>🧮 Loan Calculator</h3>
-            <p>Calculate estimated loan repayments and interest.</p>
+            <h3>🧮 Smart Calculator</h3>
+            <p>Calculate your estimated payments instantly. See monthly costs, total interest, and repayment schedules.</p>
         </div>
 
         <div class="card">
-            <h3>💻 Digital Technology</h3>
-            <p>Technology projects and digital innovation.</p>
+            <h3>💻 Digital Platform</h3>
+            <p>Apply online in minutes with our secure, user-friendly platform. Get instant approval decisions.</p>
         </div>
 
         <div class="card">
-            <h3>🤖 AI Assistance</h3>
-            <p>Automated assistance and answers.</p>
+            <h3>🤝 Expert Support</h3>
+            <p>Our dedicated team is here to help you throughout your lending journey with personalized guidance.</p>
         </div>
-
     </div>
-
 </section>
 
-<section id="loans">
-
-    <h2>Loan Services</h2>
+<section id="loans" style="background: var(--bg-white); border-radius: 12px;">
+    <h2>Loan Products</h2>
+    <p class="section-subtitle">Choose the perfect loan for your financial goals</p>
 
     <div class="services">
-
         <div class="card">
             <h3>👤 Personal Loan</h3>
-            <p>Personal financial services.</p>
-            <a href="#personal-loan" class="button">Apply Now</a>
+            <p>Fast personal loans for any purpose. Competitive rates with simple application process.</p>
+            <a href="#personal-loan" class="btn btn-primary">Apply Now</a>
         </div>
 
         <div class="card">
             <h3>🏢 Business Loan</h3>
-            <p>Business financial services.</p>
-            <a href="#calculator" class="button">Calculate</a>
+            <p>Grow your business with our flexible business loans. Customized terms for business owners.</p>
+            <a href="#calculator" class="btn btn-primary">Calculate Now</a>
         </div>
-
     </div>
-
 </section>
-
-<!-- LOAN CALCULATOR -->
 
 <section id="calculator">
+    <h2>Loan Calculator</h2>
+    <p class="section-subtitle">Estimate your monthly payments and total costs</p>
 
-<h2>🧮 Loan Calculator</h2>
-
-<p>Calculate your estimated loan repayment.</p>
-
-<div class="calculator-box">
-
-    <label for="loanAmount">Loan Amount (MWK)</label>
-
-    <input
-        type="number"
-        id="loanAmount"
-        placeholder="Example: 100000"
-    >
-
-    <label for="interestRate">
-        Annual Interest Rate (%)
-    </label>
-
-    <input
-        type="number"
-        id="interestRate"
-        placeholder="Example: 20"
-    >
-
-    <label for="loanMonths">
-        Loan Period (Months)
-    </label>
-
-    <input
-        type="number"
-        id="loanMonths"
-        placeholder="Example: 12"
-    >
-
-    <button
-        class="button"
-        onclick="calculateLoan()"
-    >
-        Calculate Loan
-    </button>
-
-
-    <div class="results" id="results">
-
-        <p>
-            Monthly Payment:
-            <span
-                class="result-number"
-                id="monthlyPayment"
+    <div class="calculator-box">
+        <div class="form-group">
+            <label for="loanAmount">Loan Amount (MWK)</label>
+            <input
+                type="number"
+                id="loanAmount"
+                placeholder="Example: 100,000"
+                min="1000"
             >
-                MWK 0
-            </span>
-        </p>
+        </div>
 
-        <p>
-            Total Interest:
-            <span
-                class="result-number"
-                id="totalInterest"
+        <div class="form-group">
+            <label for="interestRate">Annual Interest Rate (%)</label>
+            <input
+                type="number"
+                id="interestRate"
+                placeholder="Example: 15-25%"
+                min="0"
+                step="0.1"
             >
-                MWK 0
-            </span>
-        </p>
+        </div>
 
-        <p>
-            Total Repayment:
-            <span
-                class="result-number"
-                id="totalPayment"
+        <div class="form-group">
+            <label for="loanMonths">Loan Period (Months)</label>
+            <input
+                type="number"
+                id="loanMonths"
+                placeholder="Example: 12"
+                min="1"
             >
-                MWK 0
-            </span>
-        </p>
+        </div>
 
+        <button class="btn btn-primary" style="width: 100%;" onclick="calculateLoan()">
+            Calculate Loan
+        </button>
+
+        <div class="results" id="results">
+            <p>
+                <span>Monthly Payment:</span>
+                <span class="result-number" id="monthlyPayment">MWK 0</span>
+            </p>
+            <p>
+                <span>Total Interest:</span>
+                <span class="result-number" id="totalInterest">MWK 0</span>
+            </p>
+            <p>
+                <span>Total Repayment:</span>
+                <span class="result-number" id="totalPayment">MWK 0</span>
+            </p>
+        </div>
     </div>
-
-</div>
-
 </section>
 
-<!-- PERSONAL LOAN APPLICATION -->
-
 <section id="personal-loan">
-
-<h2>👤 Personal Loan Application</h2>
-
-<div class="application-card">
-
     <h2>Personal Loan Application</h2>
+    <p class="section-subtitle">Quick and easy online application</p>
 
-    <p>
-        Ready to apply for a personal loan?
-        Click the button below to open the application form.
-    </p>
+    <div class="application-card">
+        <h3>Ready to Apply?</h3>
+        <p>
+            Get started with our simple online application. Apply for a personal loan today and take control of your financial future.
+        </p>
 
-    <button
-        class="open-button"
-        onclick="openLoanForm()">
-        Open Personal Loan Application
-    </button>
-
-</div>
-
-<!-- HIDDEN FORM -->
-
-<div id="loanFormContainer">
-
-    <h2>👤 Personal Loan Application Form</h2>
-
-    <form id="personalLoanForm">
-
-        <!-- FULL NAME -->
-        <label for="fullName">Full Name</label>
-        <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            placeholder="Enter your full name"
-            required
-        >
-
-        <!-- PHONE -->
-        <label for="phone">Phone Number</label>
-        <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Example: 0999 123 456"
-            required
-        >
-
-        <!-- EMAIL -->
-        <label for="email">Email Address</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-        >
-
-        <!-- ADDRESS -->
-        <label for="address">Residential Address</label>
-        <textarea
-            id="address"
-            name="address"
-            placeholder="Enter your residential address"
-            required></textarea>
-
-        <!-- EMPLOYMENT -->
-        <label for="employment">Employment Status</label>
-        <select
-            id="employment"
-            name="employment"
-            required
-        >
-            <option value="">Select employment status</option>
-            <option value="employed">Employed</option>
-            <option value="self-employed">Self-employed</option>
-            <option value="business-owner">Business Owner</option>
-            <option value="other">Other</option>
-        </select>
-
-        <!-- MONTHLY INCOME -->
-        <label for="income">Monthly Income (MWK)</label>
-        <input
-            type="number"
-            id="income"
-            name="income"
-            placeholder="Example: 250000"
-            min="0"
-            required
-        >
-
-        <!-- LOAN AMOUNT -->
-        <label for="loanAmount2">Requested Loan Amount (MWK)</label>
-        <input
-            type="number"
-            id="loanAmount2"
-            name="loanAmount"
-            placeholder="Example: 500000"
-            min="1"
-            required
-        >
-
-        <!-- LOAN PERIOD -->
-        <label for="loanTerm">Preferred Repayment Period</label>
-        <select
-            id="loanTerm"
-            name="loanTerm"
-            required
-        >
-            <option value="">Select repayment period</option>
-            <option value="3">3 Months</option>
-            <option value="6">6 Months</option>
-            <option value="9">9 Months</option>
-            <option value="12">12 Months</option>
-            <option value="18">18 Months</option>
-            <option value="24">24 Months</option>
-        </select>
-
-        <!-- PURPOSE -->
-        <label for="purpose">Purpose of Loan</label>
-        <textarea
-            id="purpose"
-            name="purpose"
-            placeholder="Explain what you need the loan for"
-            required></textarea>
-
-        <!-- EMPLOYMENT LENGTH -->
-        <label for="employmentLength">Length of Employment / Business Activity</label>
-        <input
-            type="text"
-            id="employmentLength"
-            name="employmentLength"
-            placeholder="Example: 2 years"
-            required
-        >
-
-        <!-- SUBMIT -->
-        <button
-            type="submit"
-            class="submit-button">
-            Submit Application
+        <button class="open-button" onclick="openLoanForm()">
+            Open Application Form
         </button>
-
-        <!-- CLOSE -->
-        <button
-            type="button"
-            class="close-button"
-            onclick="closeLoanForm()">
-            ✕ Close Application Form
-        </button>
-
-    </form>
-
-    <!-- SUCCESS -->
-    <div class="success" id="successMessage">
-        <strong>Application Form Test Successful!</strong>
-        <br><br>
-        Your application has been captured by the test interface.
-        <br><br>
-        ⚠️ This is currently a test form. Your information is not being stored or transmitted.
     </div>
 
-</div>
+    <div id="loanFormContainer">
+        <h2>Personal Loan Application</h2>
 
+        <form id="personalLoanForm">
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Example: +265 999 123 456"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="your.email@example.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="address">Residential Address *</label>
+                <textarea
+                    id="address"
+                    name="address"
+                    placeholder="Enter your residential address"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="employment">Employment Status *</label>
+                <select id="employment" name="employment" required>
+                    <option value="">Select employment status</option>
+                    <option value="employed">Employed</option>
+                    <option value="self-employed">Self-employed</option>
+                    <option value="business-owner">Business Owner</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="income">Monthly Income (MWK) *</label>
+                <input
+                    type="number"
+                    id="income"
+                    name="income"
+                    placeholder="Example: 250,000"
+                    min="0"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="loanAmount2">Requested Loan Amount (MWK) *</label>
+                <input
+                    type="number"
+                    id="loanAmount2"
+                    name="loanAmount"
+                    placeholder="Example: 500,000"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="loanTerm">Preferred Repayment Period *</label>
+                <select id="loanTerm" name="loanTerm" required>
+                    <option value="">Select repayment period</option>
+                    <option value="3">3 Months</option>
+                    <option value="6">6 Months</option>
+                    <option value="9">9 Months</option>
+                    <option value="12">12 Months</option>
+                    <option value="18">18 Months</option>
+                    <option value="24">24 Months</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="purpose">Purpose of Loan *</label>
+                <textarea
+                    id="purpose"
+                    name="purpose"
+                    placeholder="Explain what you need the loan for"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="employmentLength">Length of Employment / Business Activity *</label>
+                <input
+                    type="text"
+                    id="employmentLength"
+                    name="employmentLength"
+                    placeholder="Example: 2 years"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="submit-button">Submit Application</button>
+            <button type="button" class="close-button" onclick="closeLoanForm()">
+                ✕ Close Form
+            </button>
+        </form>
+
+        <div class="success" id="successMessage">
+            <strong>✓ Application Submitted Successfully!</strong>
+            <br><br>
+            Your application has been received. We'll review your information and contact you shortly.
+            <br><br>
+            <em>Please keep an eye on your email and phone for updates.</em>
+        </div>
+    </div>
 </section>
 
 <section id="about">
-
-<h2>About Us</h2>
-
-<p>
-Emmanuel Jacob Multifunctional Platform develops
-digital solutions and innovative online services.
-</p>
-
+    <h2>About Us</h2>
+    <p>
+        Emmanuel Jacob Financial Solutions is committed to providing accessible, transparent, and customer-centric lending services. 
+        We believe in empowering individuals and businesses with the financial tools they need to achieve their goals. 
+        Our innovative platform combines technology with personalized service to deliver the best lending experience.
+    </p>
 </section>
-
-
-<section id="support">
-
-<h2>Support</h2>
-
-<p>
-FAQ | Contact | Customer Support
-</p>
-
-</section>
-
 
 <footer>
-
-<p>© 2026 Emmanuel Jacob</p>
-
-<p>emmanueljacob.github.io</p>
-
+    <p>© 2026 Emmanuel Jacob Financial Solutions</p>
+    <p>📧 contact@emmanueljacob.mw | 🌐 emmanueljacob.github.io</p>
+    <p style="font-size: 0.875rem; margin-top: 1rem; opacity: 0.7;">All rights reserved. Secure & Transparent Financial Solutions</p>
 </footer>
 
-
 <script>
-
 // ===== LOAN CALCULATOR =====
 
 function calculateLoan() {
-
-    let loanAmount =
-        parseFloat(
-            document.getElementById("loanAmount").value
-        );
-
-    let interestRate =
-        parseFloat(
-            document.getElementById("interestRate").value
-        );
-
-    let loanMonths =
-        parseInt(
-            document.getElementById("loanMonths").value
-        );
-
+    let loanAmount = parseFloat(document.getElementById("loanAmount").value);
+    let interestRate = parseFloat(document.getElementById("interestRate").value);
+    let loanMonths = parseInt(document.getElementById("loanMonths").value);
 
     if (
         isNaN(loanAmount) ||
@@ -707,117 +914,32 @@ function calculateLoan() {
         loanAmount <= 0 ||
         loanMonths <= 0
     ) {
-
-        alert(
-            "Please enter valid loan details."
-        );
-
+        alert("Please enter valid loan details.");
         return;
-
     }
 
-
-    let monthlyInterestRate =
-        interestRate / 100 / 12;
-
-
+    let monthlyInterestRate = interestRate / 100 / 12;
     let monthlyPayment;
 
-
     if (monthlyInterestRate === 0) {
-
+        monthlyPayment = loanAmount / loanMonths;
+    } else {
         monthlyPayment =
-            loanAmount / loanMonths;
-
+            (loanAmount * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanMonths))) /
+            (Math.pow(1 + monthlyInterestRate, loanMonths) - 1);
     }
 
-    else {
+    let totalPayment = monthlyPayment * loanMonths;
+    let totalInterest = totalPayment - loanAmount;
 
-        monthlyPayment =
-            loanAmount *
+    document.getElementById("monthlyPayment").innerText =
+        "MWK " + monthlyPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            (
-                monthlyInterestRate *
+    document.getElementById("totalInterest").innerText =
+        "MWK " + totalInterest.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-                Math.pow(
-                    1 + monthlyInterestRate,
-                    loanMonths
-                )
-            )
-
-            /
-
-            (
-
-                Math.pow(
-                    1 + monthlyInterestRate,
-                    loanMonths
-                )
-
-                - 1
-
-            );
-
-    }
-
-
-    let totalPayment =
-        monthlyPayment *
-        loanMonths;
-
-
-    let totalInterest =
-        totalPayment -
-        loanAmount;
-
-
-    document
-        .getElementById("monthlyPayment")
-        .innerText =
-
-        "MWK " +
-
-        monthlyPayment
-        .toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
-
-
-    document
-        .getElementById("totalInterest")
-        .innerText =
-
-        "MWK " +
-
-        totalInterest
-        .toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
-
-
-    document
-        .getElementById("totalPayment")
-        .innerText =
-
-        "MWK " +
-
-        totalPayment
-        .toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
-
+    document.getElementById("totalPayment").innerText =
+        "MWK " + totalPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 // ===== PERSONAL LOAN FORM =====
@@ -825,40 +947,26 @@ function calculateLoan() {
 function openLoanForm() {
     const form = document.getElementById("loanFormContainer");
     form.style.display = "block";
-    form.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function closeLoanForm() {
     const form = document.getElementById("loanFormContainer");
     form.style.display = "none";
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    document.getElementById("personalLoanForm").reset();
+    document.getElementById("successMessage").style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Form submission handler
-document
-.getElementById("personalLoanForm")
-.addEventListener(
-    "submit",
-    function(event) {
-        event.preventDefault();
-        document
-        .getElementById("successMessage")
-        .style.display = "block";
-        document
-        .getElementById("successMessage")
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-    }
-);
-
+document.getElementById("personalLoanForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    document.getElementById("successMessage").style.display = "block";
+    document.getElementById("successMessage").scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+        closeLoanForm();
+    }, 3000);
+});
 </script>
 
 </body>
