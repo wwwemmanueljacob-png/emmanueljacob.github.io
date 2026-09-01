@@ -4,1000 +4,312 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Emmanuel Jacob | Financial Solutions Platform</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<title>Emmanuel Jacob | Multifunctional Platform</title>
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-:root {
-    --primary-color: #0066ff;
-    --primary-dark: #0052cc;
-    --primary-light: #e6f0ff;
-    --secondary-color: #00d9ff;
-    --success-color: #10b981;
-    --danger-color: #ef4444;
-    --warning-color: #f59e0b;
-    --text-dark: #1a202c;
-    --text-light: #6b7280;
-    --bg-light: #f9fafb;
-    --bg-white: #ffffff;
-    --border-light: #e5e7eb;
-    --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-html {
-    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-light);
-    color: var(--text-dark);
-    line-height: 1.6;
+    background: #f4f6f9;
+    color: #222;
 }
-
-/* ===========================
-   AUTH MODAL
-=========================== */
-
-.auth-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 200;
-    justify-content: center;
-    align-items: center;
-}
-
-.auth-modal.active {
-    display: flex;
-}
-
-.auth-container {
-    background: var(--bg-white);
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-xl);
-    max-width: 400px;
-    width: 90%;
-    position: relative;
-}
-
-.auth-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-light);
-}
-
-.auth-tabs {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--border-light);
-}
-
-.auth-tab {
-    background: none;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--text-light);
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-    transition: var(--transition);
-}
-
-.auth-tab.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-}
-
-.auth-form {
-    display: none;
-}
-
-.auth-form.active {
-    display: block;
-}
-
-/* ===========================
-   HEADER & NAVIGATION
-=========================== */
 
 header {
-    background: var(--bg-white);
-    border-bottom: 1px solid var(--border-light);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-sm);
-}
-
-.header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: #111827;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
 header h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.header-subtitle {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    margin-top: 0.25rem;
+    margin-bottom: 8px;
 }
 
 nav {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+    background: #1f2937;
+    padding: 15px;
+    text-align: center;
 }
 
 nav a {
-    color: var(--text-dark);
+    color: white;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: var(--transition);
-    position: relative;
+    margin: 8px;
+    font-weight: bold;
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: var(--transition);
+nav a:hover {
+    color: #38bdf8;
 }
-
-nav a:hover::after {
-    width: 100%;
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 0.75rem;
-}
-
-.auth-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.auth-btn-login {
-    background: transparent;
-    color: var(--primary-color);
-}
-
-.auth-btn-register {
-    background: var(--primary-color);
-    color: var(--bg-white);
-}
-
-.auth-btn-register:hover {
-    background: var(--primary-dark);
-}
-
-/* ===========================
-   HERO SECTION
-=========================== */
 
 .hero {
-    background: linear-gradient(135deg, #0f172a 0%, var(--primary-color) 100%);
-    color: var(--bg-white);
-    padding: 100px 20px;
+    background: linear-gradient(135deg, #111827, #2563eb);
+    color: white;
+    padding: 70px 20px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
 }
 
 .hero h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
 .hero p {
-    font-size: 1.25rem;
-    opacity: 0.95;
-    margin-bottom: 2.5rem;
-    line-height: 1.8;
+    font-size: 18px;
+    max-width: 700px;
+    margin: auto;
 }
 
-.btn {
+.button {
     display: inline-block;
-    padding: 14px 32px;
+    background: #38bdf8;
+    color: #111;
+    padding: 14px 25px;
+    margin-top: 25px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: var(--transition);
-    font-size: 1rem;
 }
-
-.btn-primary {
-    background: var(--secondary-color);
-    color: #0f172a;
-}
-
-.btn-primary:hover {
-    background: #00c4e8;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--bg-white);
-    border: 2px solid var(--bg-white);
-}
-
-.btn-secondary:hover {
-    background: var(--bg-white);
-    color: var(--primary-color);
-}
-
-/* ===========================
-   STATS SECTION
-=========================== */
-
-.stats-section {
-    background: linear-gradient(135deg, var(--primary-color), #0052cc);
-    color: var(--bg-white);
-    padding: 4rem 2rem;
-    text-align: center;
-}
-
-.stats-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-
-.stat-item {
-    padding: 2rem;
-}
-
-.stat-number {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 1rem;
-    opacity: 0.95;
-}
-
-/* ===========================
-   SECTIONS
-=========================== */
 
 section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
 }
 
 section h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
+    margin-bottom: 20px;
+    color: #1d4ed8;
 }
-
-.section-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-light);
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-/* ===========================
-   SERVICES GRID
-=========================== */
 
 .services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .card {
-    background: var(--bg-white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-    text-align: center;
-    border: 1px solid var(--border-light);
+    background: white;
+    width: 280px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
-}
-
-.card h3 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
-
-.card p {
-    color: var(--text-light);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-.card .btn {
-    width: 100%;
-}
-
-/* ===========================
-   COMPARISON TABLE
-=========================== */
-
-.comparison-table {
-    overflow-x: auto;
-    margin-top: 2rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--bg-white);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-table thead {
-    background: var(--primary-color);
-    color: var(--bg-white);
-}
-
-table th,
-table td {
-    padding: 1.25rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-light);
-}
-
-table tr:last-child td {
-    border-bottom: none;
-}
-
-table tbody tr:hover {
-    background: var(--primary-light);
-}
-
-table th {
-    font-weight: 700;
-}
-
-/* ===========================
-   CALCULATOR SECTION
-=========================== */
 
 .calculator-box {
-    background: var(--bg-white);
-    max-width: 550px;
-    margin: 3rem auto;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
+    background: white;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    text-align: left;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
+.calculator-box label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    font-size: 0.95rem;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.calculator-box input {
     width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--border-light);
+    padding: 14px;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-white);
-    color: var(--text-dark);
-    transition: var(--transition);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px var(--primary-light);
-}
-
-.form-group textarea {
-    min-height: 100px;
-    resize: vertical;
+    font-size: 16px;
 }
 
 .results {
-    margin-top: 2rem;
-    background: var(--primary-light);
-    padding: 1.5rem;
+    margin-top: 25px;
+    background: #eef6ff;
+    padding: 20px;
     border-radius: 10px;
-    border-left: 4px solid var(--primary-color);
 }
 
 .results p {
-    margin: 1rem 0;
-    font-size: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin: 12px 0;
+    font-size: 17px;
 }
 
 .result-number {
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1d4ed8;
 }
 
-/* ===========================
+/* =========================
    APPLICATION CARD
-=========================== */
+========================= */
 
 .application-card {
-    background: var(--bg-white);
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    border: 1px solid var(--border-light);
 }
 
-.application-card h3 {
-    font-family: 'Poppins', sans-serif;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.75rem;
+.application-card h2 {
+    color: #1d4ed8;
+    margin-bottom: 10px;
 }
 
 .application-card p {
-    color: var(--text-light);
-    line-height: 1.8;
-    margin-bottom: 2rem;
+    color: #666;
+    line-height: 1.6;
 }
 
-/* ===========================
+/* =========================
    OPEN FORM BUTTON
-=========================== */
+========================= */
 
 .open-button {
     width: 100%;
     padding: 16px;
+    margin-top: 20px;
     border: none;
-    border-radius: 8px;
-    background: var(--primary-color);
-    color: var(--bg-white);
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
-    transition: var(--transition);
 }
 
 .open-button:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: #1d4ed8;
 }
 
-/* ===========================
-   LOAN FORMS
-=========================== */
+/* =========================
+   LOAN FORM
+========================= */
 
-.form-container {
+#loanFormContainer {
     display: none;
-    margin-top: 2.5rem;
-    background: var(--bg-white);
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
+    margin-top: 25px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid var(--border-light);
 }
 
-.form-container.active {
-    display: block;
-}
-
-.form-container h2 {
+#loanFormContainer h2 {
     text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.75rem;
+    color: #1d4ed8;
+    margin-bottom: 20px;
 }
 
-/* ===========================
-   SUBMIT & CLOSE BUTTONS
-=========================== */
+/* =========================
+   FORM FIELDS
+========================= */
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
 
 .submit-button {
     width: 100%;
-    padding: 14px;
-    margin-top: 1.5rem;
+    padding: 15px;
+    margin-top: 25px;
     border: none;
     border-radius: 8px;
-    background: var(--success-color);
-    color: var(--bg-white);
-    font-size: 1rem;
-    font-weight: 600;
+    background: #16a34a;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
-    transition: var(--transition);
 }
 
 .submit-button:hover {
-    background: #059669;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: #15803d;
 }
+
+/* =========================
+   CLOSE BUTTON
+========================= */
 
 .close-button {
     width: 100%;
-    padding: 12px;
-    margin-top: 1rem;
-    border: 1px solid var(--danger-color);
+    padding: 13px;
+    margin-top: 12px;
+    border: 1px solid #dc2626;
     border-radius: 8px;
-    background: var(--bg-white);
-    color: var(--danger-color);
-    font-size: 0.95rem;
-    font-weight: 600;
+    background: white;
+    color: #dc2626;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: var(--transition);
 }
 
 .close-button:hover {
     background: #fee2e2;
-    transform: translateY(-2px);
 }
 
-/* ===========================
+/* =========================
    SUCCESS MESSAGE
-=========================== */
+========================= */
 
 .success {
     display: none;
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: #ecfdf5;
-    color: #065f46;
+    margin-top: 20px;
+    padding: 15px;
+    background: #dcfce7;
+    color: #166534;
     border-radius: 8px;
-    line-height: 1.8;
-    border-left: 4px solid var(--success-color);
+    line-height: 1.5;
 }
-
-.success.active {
-    display: block;
-}
-
-.success strong {
-    font-size: 1.1rem;
-}
-
-/* ===========================
-   BLOG SECTION
-=========================== */
-
-.blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.blog-card {
-    background: var(--bg-white);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-    border: 1px solid var(--border-light);
-}
-
-.blog-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
-}
-
-.blog-image {
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-}
-
-.blog-content {
-    padding: 1.5rem;
-}
-
-.blog-date {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
-}
-
-.blog-card h3 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-dark);
-}
-
-.blog-card p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-}
-
-.read-more {
-    color: var(--primary-color);
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.read-more:hover {
-    color: var(--primary-dark);
-}
-
-/* ===========================
-   LIVE CHAT
-=========================== */
-
-.chat-widget {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 150;
-}
-
-.chat-button {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    color: var(--bg-white);
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chat-button:hover {
-    transform: scale(1.1);
-    background: var(--primary-dark);
-}
-
-.chat-box {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    width: 350px;
-    height: 500px;
-    background: var(--bg-white);
-    border-radius: 12px;
-    box-shadow: var(--shadow-xl);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.chat-box.active {
-    display: flex;
-}
-
-.chat-header {
-    background: var(--primary-color);
-    color: var(--bg-white);
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.chat-close {
-    background: none;
-    border: none;
-    color: var(--bg-white);
-    cursor: pointer;
-    font-size: 1.25rem;
-}
-
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.chat-message {
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    max-width: 80%;
-    word-wrap: break-word;
-}
-
-.chat-message.bot {
-    background: var(--primary-light);
-    color: var(--text-dark);
-    align-self: flex-start;
-}
-
-.chat-message.user {
-    background: var(--primary-color);
-    color: var(--bg-white);
-    align-self: flex-end;
-}
-
-.chat-input-area {
-    padding: 1rem;
-    border-top: 1px solid var(--border-light);
-    display: flex;
-    gap: 0.5rem;
-}
-
-.chat-input {
-    flex: 1;
-    border: 1px solid var(--border-light);
-    border-radius: 6px;
-    padding: 0.75rem;
-    font-family: 'Inter', sans-serif;
-}
-
-.chat-send {
-    background: var(--primary-color);
-    color: var(--bg-white);
-    border: none;
-    border-radius: 6px;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.chat-send:hover {
-    background: var(--primary-dark);
-}
-
-/* ===========================
-   ABOUT & SUPPORT SECTIONS
-=========================== */
-
-#about {
-    background: var(--primary-light);
-    border-radius: 12px;
-}
-
-#about p,
-#support p {
-    font-size: 1.1rem;
-    color: var(--text-light);
-    line-height: 1.8;
-}
-
-/* ===========================
-   FOOTER
-=========================== */
 
 footer {
-    background: #0f172a;
-    color: var(--bg-white);
+    background: #111827;
+    color: white;
     text-align: center;
-    padding: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 4rem;
+    padding: 25px;
 }
 
-footer p {
-    margin: 0.5rem 0;
-    opacity: 0.9;
-}
-
-footer p:first-child {
-    font-weight: 600;
-}
-
-/* ===========================
-   RESPONSIVE DESIGN
-=========================== */
-
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    section h2 {
-        font-size: 1.75rem;
-    }
-
-    .services {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 600px) {
     .application-card,
-    .form-container,
-    .calculator-box {
-        padding: 1.5rem;
+    #loanFormContainer {
+        padding: 20px;
     }
 
-    .chat-box {
-        width: 90%;
-        right: 5%;
-    }
-
-    table {
-        font-size: 0.85rem;
-    }
-
-    table th,
-    table td {
-        padding: 0.75rem;
-    }
-}
-
-@media (max-width: 480px) {
     header h1 {
-        font-size: 1.25rem;
-    }
-
-    .hero {
-        padding: 60px 20px;
-    }
-
-    .hero h2 {
-        font-size: 1.5rem;
-    }
-
-    section {
-        padding: 40px 15px;
-    }
-
-    section h2 {
-        font-size: 1.5rem;
-    }
-
-    nav {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    nav a {
-        font-size: 0.875rem;
-    }
-
-    .btn {
-        padding: 12px 24px;
-        font-size: 0.95rem;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-    }
-
-    .results p {
-        flex-direction: column;
-        text-align: left;
-        gap: 0.5rem;
+        font-size: 25px;
     }
 }
 </style>
@@ -1005,684 +317,456 @@ footer p:first-child {
 
 <body>
 
-<!-- AUTH MODAL -->
-<div class="auth-modal" id="authModal">
-    <div class="auth-container">
-        <button class="auth-close" onclick="closeAuth()">✕</button>
-        
-        <div class="auth-tabs">
-            <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-            <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
-        </div>
-
-        <!-- LOGIN FORM -->
-        <form class="auth-form active" id="loginForm">
-            <div class="form-group">
-                <label for="loginEmail">Email Address</label>
-                <input type="email" id="loginEmail" placeholder="your.email@example.com" required>
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-        </form>
-
-        <!-- REGISTER FORM -->
-        <form class="auth-form" id="registerForm">
-            <div class="form-group">
-                <label for="registerName">Full Name</label>
-                <input type="text" id="registerName" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-                <label for="registerEmail">Email Address</label>
-                <input type="email" id="registerEmail" placeholder="your.email@example.com" required>
-            </div>
-            <div class="form-group">
-                <label for="registerPassword">Password</label>
-                <input type="password" id="registerPassword" placeholder="Create password" required>
-            </div>
-            <div class="form-group">
-                <label for="registerRole">Account Type</label>
-                <select id="registerRole" required>
-                    <option value="">Select account type</option>
-                    <option value="customer">Customer</option>
-                    <option value="business">Business Owner</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
-        </form>
-    </div>
-</div>
-
 <header>
-    <div class="header-content">
-        <div>
-            <h1>Emmanuel Jacob</h1>
-            <p class="header-subtitle">Financial Solutions Platform</p>
-        </div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#comparison">Compare</a>
-            <a href="#calculator">Calculator</a>
-            <a href="#blogs">News</a>
-            <a href="#about">About</a>
-            <div class="auth-buttons">
-                <button class="auth-btn auth-btn-login" onclick="openAuth('login')">Login</button>
-                <button class="auth-btn auth-btn-register" onclick="openAuth('register')">Register</button>
-            </div>
-        </nav>
-    </div>
+    <h1>EMMANUEL JACOB</h1>
+    <p>Multifunctional Digital Platform</p>
 </header>
 
+<nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#loans">Loans</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#personal-loan">Personal Loan</a>
+    <a href="#about">About</a>
+    <a href="#support">Support</a>
+</nav>
+
 <section class="hero" id="home">
-    <div class="hero-content">
-        <h2>Financial Solutions Made Simple</h2>
-        <p>
-            Empowering your financial journey with innovative lending solutions, transparent calculators, and dedicated support.
-        </p>
+    <h2>Welcome to Emmanuel Jacob Platform</h2>
+    <p>
+        Digital solutions, business services and innovative technology.
+    </p>
 
-        <a href="#calculator" class="btn btn-primary">Calculate Your Loan</a>
-        <a href="#personal-loan" class="btn btn-secondary" style="margin-left: 1rem;">Apply Now</a>
-    </div>
+    <a href="#calculator" class="button">Calculate a Loan</a>
 </section>
-
-<!-- STATISTICS SECTION -->
-<div class="stats-section">
-    <div class="stats-container">
-        <div class="stat-item">
-            <div class="stat-number" id="stat1">2,450</div>
-            <div class="stat-label">Active Customers</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" id="stat2">MWK 5.2B</div>
-            <div class="stat-label">Loans Disbursed</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" id="stat3">98%</div>
-            <div class="stat-label">Approval Rate</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" id="stat4">24/7</div>
-            <div class="stat-label">Support Available</div>
-        </div>
-    </div>
-</div>
 
 <section id="services">
+
     <h2>Our Services</h2>
-    <p class="section-subtitle">Comprehensive financial services designed for your success</p>
 
     <div class="services">
+
         <div class="card">
-            <h3>💰 Flexible Loans</h3>
-            <p>Personal and business loans tailored to your needs with competitive rates and flexible repayment terms.</p>
+            <h3>💰 Loan Services</h3>
+            <p>Explore personal and business loan services.</p>
         </div>
 
         <div class="card">
-            <h3>🧮 Smart Calculator</h3>
-            <p>Calculate your estimated payments instantly. See monthly costs, total interest, and repayment schedules.</p>
+            <h3>🧮 Loan Calculator</h3>
+            <p>Calculate estimated loan repayments and interest.</p>
         </div>
 
         <div class="card">
-            <h3>💻 Digital Platform</h3>
-            <p>Apply online in minutes with our secure, user-friendly platform. Get instant approval decisions.</p>
+            <h3>💻 Digital Technology</h3>
+            <p>Technology projects and digital innovation.</p>
         </div>
 
         <div class="card">
-            <h3>🤝 Expert Support</h3>
-            <p>Our dedicated team is here to help you throughout your lending journey with personalized guidance.</p>
+            <h3>🤖 AI Assistance</h3>
+            <p>Automated assistance and answers.</p>
         </div>
+
     </div>
+
 </section>
 
-<section id="comparison">
-    <h2>Loan Products Comparison</h2>
-    <p class="section-subtitle">Compare our personal and business loan offerings</p>
+<section id="loans">
 
-    <div class="comparison-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Personal Loan</th>
-                    <th>Business Loan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Loan Amount</strong></td>
-                    <td>MWK 50,000 - MWK 2,000,000</td>
-                    <td>MWK 500,000 - MWK 10,000,000</td>
-                </tr>
-                <tr>
-                    <td><strong>Interest Rate</strong></td>
-                    <td>18% - 25% per annum</td>
-                    <td>15% - 22% per annum</td>
-                </tr>
-                <tr>
-                    <td><strong>Repayment Period</strong></td>
-                    <td>3 - 24 months</td>
-                    <td>6 - 36 months</td>
-                </tr>
-                <tr>
-                    <td><strong>Processing Time</strong></td>
-                    <td>24 - 48 hours</td>
-                    <td>3 - 5 business days</td>
-                </tr>
-                <tr>
-                    <td><strong>Collateral Required</strong></td>
-                    <td>No</td>
-                    <td>Yes (Business asset/property)</td>
-                </tr>
-                <tr>
-                    <td><strong>Eligibility</strong></td>
-                    <td>18+ years, employed/self-employed</td>
-                    <td>Business registration required</td>
-                </tr>
-                <tr>
-                    <td><strong>Application Fee</strong></td>
-                    <td>Free</td>
-                    <td>Free</td>
-                </tr>
-                <tr>
-                    <td><strong>Early Repayment</strong></td>
-                    <td>Allowed (no penalty)</td>
-                    <td>Allowed (no penalty)</td>
-                </tr>
-            </tbody>
-        </table>
+    <h2>Loan Services</h2>
+
+    <div class="services">
+
+        <div class="card">
+            <h3>👤 Personal Loan</h3>
+            <p>Personal financial services.</p>
+            <a href="#personal-loan" class="button">Apply Now</a>
+        </div>
+
+        <div class="card">
+            <h3>🏢 Business Loan</h3>
+            <p>Business financial services.</p>
+            <a href="#calculator" class="button">Calculate</a>
+        </div>
+
     </div>
+
 </section>
+
+<!-- LOAN CALCULATOR -->
 
 <section id="calculator">
-    <h2>Loan Calculator</h2>
-    <p class="section-subtitle">Estimate your monthly payments and total costs</p>
 
-    <div class="calculator-box">
-        <div class="form-group">
-            <label for="loanAmount">Loan Amount (MWK)</label>
-            <input
-                type="number"
-                id="loanAmount"
-                placeholder="Example: 100,000"
-                min="1000"
+<h2>🧮 Loan Calculator</h2>
+
+<p>Calculate your estimated loan repayment on monthly basis.</p>
+
+<div class="calculator-box">
+
+    <label for="loanAmount">Loan Amount (MWK)</label>
+
+    <input
+        type="number"
+        id="loanAmount"
+        placeholder="Example: 100000"
+    >
+
+    <label for="interestRate">
+        Monthly Interest Rate (%)
+    </label>
+
+    <input
+        type="number"
+        id="interestRate"
+        placeholder="Example: 2 (for 2% per month)"
+        step="0.01"
+    >
+
+    <label for="loanMonths">
+        Loan Period (Months)
+    </label>
+
+    <input
+        type="number"
+        id="loanMonths"
+        placeholder="Example: 12"
+    >
+
+    <button
+        class="button"
+        onclick="calculateLoan()"
+    >
+        Calculate Loan
+    </button>
+
+
+    <div class="results" id="results">
+
+        <p>
+            Monthly Payment:
+            <span
+                class="result-number"
+                id="monthlyPayment"
             >
-        </div>
+                MWK 0
+            </span>
+        </p>
 
-        <div class="form-group">
-            <label for="interestRate">Annual Interest Rate (%)</label>
-            <input
-                type="number"
-                id="interestRate"
-                placeholder="Example: 15-25%"
-                min="0"
-                step="0.1"
+        <p>
+            Total Interest:
+            <span
+                class="result-number"
+                id="totalInterest"
             >
-        </div>
+                MWK 0
+            </span>
+        </p>
 
-        <div class="form-group">
-            <label for="loanMonths">Loan Period (Months)</label>
-            <input
-                type="number"
-                id="loanMonths"
-                placeholder="Example: 12"
-                min="1"
+        <p>
+            Total Repayment:
+            <span
+                class="result-number"
+                id="totalPayment"
             >
-        </div>
+                MWK 0
+            </span>
+        </p>
 
-        <button class="btn btn-primary" style="width: 100%;" onclick="calculateLoan()">
-            Calculate Loan
-        </button>
-
-        <div class="results" id="results">
-            <p>
-                <span>Monthly Payment:</span>
-                <span class="result-number" id="monthlyPayment">MWK 0</span>
-            </p>
-            <p>
-                <span>Total Interest:</span>
-                <span class="result-number" id="totalInterest">MWK 0</span>
-            </p>
-            <p>
-                <span>Total Repayment:</span>
-                <span class="result-number" id="totalPayment">MWK 0</span>
-            </p>
-        </div>
     </div>
+
+</div>
+
 </section>
+
+<!-- PERSONAL LOAN APPLICATION -->
 
 <section id="personal-loan">
+
+<h2>👤 Personal Loan Application</h2>
+
+<div class="application-card">
+
     <h2>Personal Loan Application</h2>
-    <p class="section-subtitle">Quick and easy online application</p>
 
-    <div class="application-card">
-        <h3>Ready to Apply?</h3>
-        <p>
-            Get started with our simple online application. Apply for a personal loan today and take control of your financial future.
-        </p>
+    <p>
+        Ready to apply for a personal loan?
+        Click the button below to open the application form.
+    </p>
 
-        <button class="open-button" onclick="openForm('personal')">
-            Open Personal Loan Application
+    <button
+        class="open-button"
+        onclick="openLoanForm()">
+        Open Personal Loan Application
+    </button>
+
+</div>
+
+<!-- HIDDEN FORM -->
+
+<div id="loanFormContainer">
+
+    <h2>👤 Personal Loan Application Form</h2>
+
+    <form id="personalLoanForm">
+
+        <!-- FULL NAME -->
+        <label for="fullName">Full Name</label>
+        <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <!-- PHONE -->
+        <label for="phone">Phone Number</label>
+        <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Example: 0999 123 456"
+            required
+        >
+
+        <!-- EMAIL -->
+        <label for="email">Email Address</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <!-- ADDRESS -->
+        <label for="address">Residential Address</label>
+        <textarea
+            id="address"
+            name="address"
+            placeholder="Enter your residential address"
+            required></textarea>
+
+        <!-- EMPLOYMENT -->
+        <label for="employment">Employment Status</label>
+        <select
+            id="employment"
+            name="employment"
+            required
+        >
+            <option value="">Select employment status</option>
+            <option value="employed">Employed</option>
+            <option value="self-employed">Self-employed</option>
+            <option value="business-owner">Business Owner</option>
+            <option value="other">Other</option>
+        </select>
+
+        <!-- MONTHLY INCOME -->
+        <label for="income">Monthly Income (MWK)</label>
+        <input
+            type="number"
+            id="income"
+            name="income"
+            placeholder="Example: 250000"
+            min="0"
+            required
+        >
+
+        <!-- LOAN AMOUNT -->
+        <label for="loanAmount2">Requested Loan Amount (MWK)</label>
+        <input
+            type="number"
+            id="loanAmount2"
+            name="loanAmount"
+            placeholder="Example: 500000"
+            min="1"
+            required
+        >
+
+        <!-- LOAN PERIOD -->
+        <label for="loanTerm">Preferred Repayment Period</label>
+        <select
+            id="loanTerm"
+            name="loanTerm"
+            required
+        >
+            <option value="">Select repayment period</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="9">9 Months</option>
+            <option value="12">12 Months</option>
+            <option value="18">18 Months</option>
+            <option value="24">24 Months</option>
+        </select>
+
+        <!-- PURPOSE -->
+        <label for="purpose">Purpose of Loan</label>
+        <textarea
+            id="purpose"
+            name="purpose"
+            placeholder="Explain what you need the loan for"
+            required></textarea>
+
+        <!-- EMPLOYMENT LENGTH -->
+        <label for="employmentLength">Length of Employment / Business Activity</label>
+        <input
+            type="text"
+            id="employmentLength"
+            name="employmentLength"
+            placeholder="Example: 2 years"
+            required
+        >
+
+        <!-- SUBMIT -->
+        <button
+            type="submit"
+            class="submit-button">
+            Submit Application
         </button>
-    </div>
 
-    <div class="form-container" id="personalLoanForm">
-        <h2>Personal Loan Application</h2>
-
-        <form id="personalForm">
-            <div class="form-group">
-                <label for="fullName">Full Name *</label>
-                <input type="text" id="fullName" placeholder="Enter your full name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" placeholder="Example: +265 999 123 456" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" placeholder="your.email@example.com" required>
-            </div>
-
-            <div class="form-group">
-                <label for="address">Residential Address *</label>
-                <textarea id="address" placeholder="Enter your residential address" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="employment">Employment Status *</label>
-                <select id="employment" required>
-                    <option value="">Select employment status</option>
-                    <option value="employed">Employed</option>
-                    <option value="self-employed">Self-employed</option>
-                    <option value="business-owner">Business Owner</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="income">Monthly Income (MWK) *</label>
-                <input type="number" id="income" placeholder="Example: 250,000" min="0" required>
-            </div>
-
-            <div class="form-group">
-                <label for="loanAmount2">Requested Loan Amount (MWK) *</label>
-                <input type="number" id="loanAmount2" placeholder="Example: 500,000" min="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="loanTerm">Preferred Repayment Period *</label>
-                <select id="loanTerm" required>
-                    <option value="">Select repayment period</option>
-                    <option value="3">3 Months</option>
-                    <option value="6">6 Months</option>
-                    <option value="12">12 Months</option>
-                    <option value="24">24 Months</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="purpose">Purpose of Loan *</label>
-                <textarea id="purpose" placeholder="Explain what you need the loan for" required></textarea>
-            </div>
-
-            <button type="submit" class="submit-button">Submit Application</button>
-            <button type="button" class="close-button" onclick="closeForm('personal')">
-                ✕ Close Form
-            </button>
-        </form>
-
-        <div class="success" id="personalSuccess">
-            <strong>✓ Application Submitted Successfully!</strong>
-            <br><br>
-            Your personal loan application has been received. We'll review your information and contact you shortly.
-        </div>
-    </div>
-</section>
-
-<section id="business-loan">
-    <h2>Business Loan Application</h2>
-    <p class="section-subtitle">Grow your business with our flexible financing</p>
-
-    <div class="application-card">
-        <h3>Business Growth Awaits</h3>
-        <p>
-            Expand your business operations with our tailored business loans. Access higher amounts with longer repayment periods.
-        </p>
-
-        <button class="open-button" onclick="openForm('business')">
-            Open Business Loan Application
+        <!-- CLOSE -->
+        <button
+            type="button"
+            class="close-button"
+            onclick="closeLoanForm()">
+            ✕ Close Application Form
         </button>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="successMessage">
+        <strong>Application Form Test Successful!</strong>
+        <br><br>
+        Your application has been captured by the test interface.
+        <br><br>
+        ⚠️ This is currently a test form. Your information is not being stored or transmitted.
     </div>
 
-    <div class="form-container" id="businessLoanForm">
-        <h2>Business Loan Application</h2>
+</div>
 
-        <form id="businessForm">
-            <div class="form-group">
-                <label for="businessName">Business Name *</label>
-                <input type="text" id="businessName" placeholder="Enter business name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="businessType">Business Type *</label>
-                <select id="businessType" required>
-                    <option value="">Select business type</option>
-                    <option value="retail">Retail</option>
-                    <option value="manufacturing">Manufacturing</option>
-                    <option value="services">Services</option>
-                    <option value="agriculture">Agriculture</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="businessRegistration">Business Registration Number *</label>
-                <input type="text" id="businessRegistration" placeholder="Enter registration number" required>
-            </div>
-
-            <div class="form-group">
-                <label for="businessEmail">Business Email *</label>
-                <input type="email" id="businessEmail" placeholder="business@example.com" required>
-            </div>
-
-            <div class="form-group">
-                <label for="businessPhone">Business Phone *</label>
-                <input type="tel" id="businessPhone" placeholder="+265 999 123 456" required>
-            </div>
-
-            <div class="form-group">
-                <label for="yearsInOperation">Years in Operation *</label>
-                <input type="number" id="yearsInOperation" placeholder="Enter number of years" min="0" required>
-            </div>
-
-            <div class="form-group">
-                <label for="annualRevenue">Annual Revenue (MWK) *</label>
-                <input type="number" id="annualRevenue" placeholder="Example: 5,000,000" min="0" required>
-            </div>
-
-            <div class="form-group">
-                <label for="businessLoanAmount">Requested Loan Amount (MWK) *</label>
-                <input type="number" id="businessLoanAmount" placeholder="Example: 2,000,000" min="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="businessLoanTerm">Preferred Repayment Period *</label>
-                <select id="businessLoanTerm" required>
-                    <option value="">Select repayment period</option>
-                    <option value="6">6 Months</option>
-                    <option value="12">12 Months</option>
-                    <option value="24">24 Months</option>
-                    <option value="36">36 Months</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="businessPurpose">Purpose of Loan *</label>
-                <textarea id="businessPurpose" placeholder="Explain how you'll use the loan" required></textarea>
-            </div>
-
-            <button type="submit" class="submit-button">Submit Application</button>
-            <button type="button" class="close-button" onclick="closeForm('business')">
-                ✕ Close Form
-            </button>
-        </form>
-
-        <div class="success" id="businessSuccess">
-            <strong>✓ Application Submitted Successfully!</strong>
-            <br><br>
-            Your business loan application has been received. Our team will review your details and contact you within 2-3 business days.
-        </div>
-    </div>
-</section>
-
-<!-- BLOGS SECTION -->
-<section id="blogs">
-    <h2>Latest News & Insights</h2>
-    <p class="section-subtitle">Stay informed with our financial tips and industry updates</p>
-
-    <div class="blog-grid">
-        <div class="blog-card">
-            <div class="blog-image">📚</div>
-            <div class="blog-content">
-                <div class="blog-date">September 15, 2026</div>
-                <h3>Smart Tips for Managing Personal Loans</h3>
-                <p>Learn how to efficiently manage your personal loan and save money on interest payments with our expert guidance.</p>
-                <a href="#" class="read-more">Read More →</a>
-            </div>
-        </div>
-
-        <div class="blog-card">
-            <div class="blog-image">💼</div>
-            <div class="blog-content">
-                <div class="blog-date">September 10, 2026</div>
-                <h3>Growing Your Business with Strategic Financing</h3>
-                <p>Discover how business owners are using loans to expand operations and increase revenue in today's economy.</p>
-                <a href="#" class="read-more">Read More →</a>
-            </div>
-        </div>
-
-        <div class="blog-card">
-            <div class="blog-image">📈</div>
-            <div class="blog-content">
-                <div class="blog-date">September 5, 2026</div>
-                <h3>Understanding Interest Rates and APR</h3>
-                <p>A comprehensive guide to understanding how interest rates work and how to calculate your true cost of borrowing.</p>
-                <a href="#" class="read-more">Read More →</a>
-            </div>
-        </div>
-
-        <div class="blog-card">
-            <div class="blog-image">💡</div>
-            <div class="blog-content">
-                <div class="blog-date">August 28, 2026</div>
-                <h3>Financial Planning for Your Future</h3>
-                <p>Explore practical financial planning strategies to achieve your long-term goals and build lasting wealth.</p>
-                <a href="#" class="read-more">Read More →</a>
-            </div>
-        </div>
-    </div>
 </section>
 
 <section id="about">
-    <h2>About Us</h2>
-    <p>
-        Emmanuel Jacob Financial Solutions is committed to providing accessible, transparent, and customer-centric lending services. 
-        We believe in empowering individuals and businesses with the financial tools they need to achieve their goals. 
-        Our innovative platform combines technology with personalized service to deliver the best lending experience.
-    </p>
+
+<h2>About Us</h2>
+
+<p>
+Emmanuel Jacob Multifunctional Platform develops
+digital solutions and innovative online services.
+</p>
+
 </section>
 
+
+<section id="support">
+
+<h2>Support</h2>
+
+<p>
+FAQ | Contact | Customer Support
+</p>
+
+</section>
+
+
 <footer>
-    <p>© 2026 Emmanuel Jacob Financial Solutions</p>
-    <p>📧 contact@emmanueljacob.mw | 🌐 emmanueljacob.github.io</p>
-    <p style="font-size: 0.875rem; margin-top: 1rem; opacity: 0.7;">All rights reserved. Secure & Transparent Financial Solutions</p>
+
+<p>© 2026 Emmanuel Jacob</p>
+
+<p>emmanueljacob.github.io</p>
+
 </footer>
 
-<!-- LIVE CHAT WIDGET -->
-<div class="chat-widget">
-    <button class="chat-button" onclick="toggleChat()">💬</button>
-    <div class="chat-box" id="chatBox">
-        <div class="chat-header">
-            <span>Customer Support</span>
-            <button class="chat-close" onclick="toggleChat()">✕</button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="chat-message bot">👋 Hello! How can we help you today?</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
-            <button class="chat-send" onclick="sendChatMessage()">Send</button>
-        </div>
-    </div>
-</div>
 
 <script>
-// ===== AUTHENTICATION =====
 
-function openAuth(tab) {
-    document.getElementById('authModal').classList.add('active');
-    switchAuthTab(tab);
-}
-
-function closeAuth() {
-    document.getElementById('authModal').classList.remove('active');
-}
-
-function switchAuthTab(tab) {
-    document.querySelectorAll('.auth-tab').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
-    
-    if (tab === 'login') {
-        document.querySelectorAll('.auth-tab')[0].classList.add('active');
-        document.getElementById('loginForm').classList.add('active');
-    } else {
-        document.querySelectorAll('.auth-tab')[1].classList.add('active');
-        document.getElementById('registerForm').classList.add('active');
-    }
-}
-
-document.getElementById('loginForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Login functionality would connect to a backend server');
-    closeAuth();
-});
-
-document.getElementById('registerForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Registration successful! You can now login.');
-    closeAuth();
-});
-
-// ===== LOAN FORMS =====
-
-function openForm(type) {
-    if (type === 'personal') {
-        document.getElementById('personalLoanForm').classList.add('active');
-    } else if (type === 'business') {
-        document.getElementById('businessLoanForm').classList.add('active');
-    }
-    document.querySelector('html').style.overflow = 'hidden';
-}
-
-function closeForm(type) {
-    if (type === 'personal') {
-        document.getElementById('personalLoanForm').classList.remove('active');
-        document.getElementById('personalForm').reset();
-        document.getElementById('personalSuccess').classList.remove('active');
-    } else if (type === 'business') {
-        document.getElementById('businessLoanForm').classList.remove('active');
-        document.getElementById('businessForm').reset();
-        document.getElementById('businessSuccess').classList.remove('active');
-    }
-    document.querySelector('html').style.overflow = 'auto';
-}
-
-document.getElementById('personalForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    document.getElementById('personalSuccess').classList.add('active');
-    setTimeout(() => closeForm('personal'), 3000);
-});
-
-document.getElementById('businessForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    document.getElementById('businessSuccess').classList.add('active');
-    setTimeout(() => closeForm('business'), 3000);
-});
-
-// ===== LOAN CALCULATOR =====
+// ===== LOAN CALCULATOR WITH MONTHLY BASIS =====
 
 function calculateLoan() {
     let loanAmount = parseFloat(document.getElementById("loanAmount").value);
-    let interestRate = parseFloat(document.getElementById("interestRate").value);
+    let monthlyInterestRate = parseFloat(document.getElementById("interestRate").value); // Monthly rate
     let loanMonths = parseInt(document.getElementById("loanMonths").value);
 
-    if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanMonths) || loanAmount <= 0 || loanMonths <= 0) {
+    if (isNaN(loanAmount) || isNaN(monthlyInterestRate) || isNaN(loanMonths) || loanAmount <= 0 || loanMonths <= 0) {
         alert("Please enter valid loan details.");
         return;
     }
 
-    let monthlyInterestRate = interestRate / 100 / 12;
-    let monthlyPayment;
+    // Convert monthly rate to decimal (e.g., 2% becomes 0.02)
+    let monthlyRate = monthlyInterestRate / 100;
+    let monthlyPayment = 0;
+    let totalInterest = 0;
+    let totalPayment = 0;
 
-    if (monthlyInterestRate === 0) {
+    if (monthlyRate === 0) {
+        // If no interest, simple division
         monthlyPayment = loanAmount / loanMonths;
+        totalPayment = loanAmount;
+        totalInterest = 0;
     } else {
-        monthlyPayment = (loanAmount * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanMonths))) / (Math.pow(1 + monthlyInterestRate, loanMonths) - 1);
+        // Using the amortization formula for monthly payments
+        // PMT = P * [r(1+r)^n] / [(1+r)^n - 1]
+        // where P = principal, r = monthly rate, n = number of months
+        
+        let numerator = monthlyRate * Math.pow(1 + monthlyRate, loanMonths);
+        let denominator = Math.pow(1 + monthlyRate, loanMonths) - 1;
+        monthlyPayment = loanAmount * (numerator / denominator);
+        
+        totalPayment = monthlyPayment * loanMonths;
+        totalInterest = totalPayment - loanAmount;
     }
 
-    let totalPayment = monthlyPayment * loanMonths;
-    let totalInterest = totalPayment - loanAmount;
-
-    document.getElementById("monthlyPayment").innerText = "MWK " + monthlyPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    document.getElementById("totalInterest").innerText = "MWK " + totalInterest.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    document.getElementById("totalPayment").innerText = "MWK " + totalPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-// ===== LIVE CHAT =====
-
-function toggleChat() {
-    document.getElementById('chatBox').classList.toggle('active');
-}
-
-function sendChatMessage() {
-    let input = document.getElementById('chatInput');
-    let message = input.value.trim();
+    // Update the display
+    document.getElementById("monthlyPayment").innerText = 
+        "MWK " + monthlyPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     
-    if (!message) return;
-
-    let chatMessages = document.getElementById('chatMessages');
+    document.getElementById("totalInterest").innerText = 
+        "MWK " + totalInterest.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     
-    // Add user message
-    let userMsg = document.createElement('div');
-    userMsg.className = 'chat-message user';
-    userMsg.textContent = message;
-    chatMessages.appendChild(userMsg);
-
-    input.value = '';
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    // Simulate bot response
-    setTimeout(() => {
-        let botMsg = document.createElement('div');
-        botMsg.className = 'chat-message bot';
-        botMsg.textContent = 'Thanks for your message! Our team will respond shortly.';
-        chatMessages.appendChild(botMsg);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 500);
+    document.getElementById("totalPayment").innerText = 
+        "MWK " + totalPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// ===== STATISTICS ANIMATION =====
+// ===== PERSONAL LOAN FORM =====
 
-function animateStats() {
-    const stats = [
-        { id: 'stat1', end: 2450, prefix: '' },
-        { id: 'stat2', end: 5.2, prefix: 'MWK ', suffix: 'B' },
-        { id: 'stat3', end: 98, prefix: '', suffix: '%' },
-        { id: 'stat4', end: 24, prefix: '', suffix: '/7' }
-    ];
-
-    stats.forEach(stat => {
-        let current = 0;
-        let element = document.getElementById(stat.id);
-        let increment = stat.end / 50;
-
-        let timer = setInterval(() => {
-            current += increment;
-            if (current >= stat.end) {
-                current = stat.end;
-                clearInterval(timer);
-            }
-            element.textContent = stat.prefix + (Number.isInteger(stat.end) ? Math.floor(current) : current.toFixed(1)) + (stat.suffix || '');
-        }, 30);
+function openLoanForm() {
+    const form = document.getElementById("loanFormContainer");
+    form.style.display = "block";
+    form.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
     });
 }
 
-// Animate stats on page load
-window.addEventListener('load', animateStats);
+function closeLoanForm() {
+    const form = document.getElementById("loanFormContainer");
+    form.style.display = "none";
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+// Form submission handler
+document
+.getElementById("personalLoanForm")
+.addEventListener(
+    "submit",
+    function(event) {
+        event.preventDefault();
+        document
+        .getElementById("successMessage")
+        .style.display = "block";
+        document
+        .getElementById("successMessage")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
+);
+
 </script>
 
 </body>
