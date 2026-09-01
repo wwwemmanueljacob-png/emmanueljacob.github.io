@@ -145,11 +145,172 @@ section h2 {
     color: #1d4ed8;
 }
 
+/* =========================
+   APPLICATION CARD
+========================= */
+
+.application-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.application-card h2 {
+    color: #1d4ed8;
+    margin-bottom: 10px;
+}
+
+.application-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* =========================
+   OPEN FORM BUTTON
+========================= */
+
+.open-button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.open-button:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   LOAN FORM
+========================= */
+
+#loanFormContainer {
+    display: none;
+    margin-top: 25px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#loanFormContainer h2 {
+    text-align: center;
+    color: #1d4ed8;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   FORM FIELDS
+========================= */
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 8px;
+    background: #16a34a;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #15803d;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.close-button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 12px;
+    border: 1px solid #dc2626;
+    border-radius: 8px;
+    background: white;
+    color: #dc2626;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background: #fee2e2;
+}
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.success {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #dcfce7;
+    color: #166534;
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
 footer {
     background: #111827;
     color: white;
     text-align: center;
     padding: 25px;
+}
+
+@media (max-width: 600px) {
+    .application-card,
+    #loanFormContainer {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
 }
 </style>
 </head>
@@ -166,6 +327,7 @@ footer {
     <a href="#services">Services</a>
     <a href="#loans">Loans</a>
     <a href="#calculator">Calculator</a>
+    <a href="#personal-loan">Personal Loan</a>
     <a href="#about">About</a>
     <a href="#support">Support</a>
 </nav>
@@ -218,7 +380,7 @@ footer {
         <div class="card">
             <h3>👤 Personal Loan</h3>
             <p>Personal financial services.</p>
-            <a href="#calculator" class="button">Calculate</a>
+            <a href="#personal-loan" class="button">Apply Now</a>
         </div>
 
         <div class="card">
@@ -315,6 +477,174 @@ footer {
 
 </section>
 
+<!-- PERSONAL LOAN APPLICATION -->
+
+<section id="personal-loan">
+
+<h2>👤 Personal Loan Application</h2>
+
+<div class="application-card">
+
+    <h2>Personal Loan Application</h2>
+
+    <p>
+        Ready to apply for a personal loan?
+        Click the button below to open the application form.
+    </p>
+
+    <button
+        class="open-button"
+        onclick="openLoanForm()">
+        Open Personal Loan Application
+    </button>
+
+</div>
+
+<!-- HIDDEN FORM -->
+
+<div id="loanFormContainer">
+
+    <h2>👤 Personal Loan Application Form</h2>
+
+    <form id="personalLoanForm">
+
+        <!-- FULL NAME -->
+        <label for="fullName">Full Name</label>
+        <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <!-- PHONE -->
+        <label for="phone">Phone Number</label>
+        <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Example: 0999 123 456"
+            required
+        >
+
+        <!-- EMAIL -->
+        <label for="email">Email Address</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <!-- ADDRESS -->
+        <label for="address">Residential Address</label>
+        <textarea
+            id="address"
+            name="address"
+            placeholder="Enter your residential address"
+            required></textarea>
+
+        <!-- EMPLOYMENT -->
+        <label for="employment">Employment Status</label>
+        <select
+            id="employment"
+            name="employment"
+            required
+        >
+            <option value="">Select employment status</option>
+            <option value="employed">Employed</option>
+            <option value="self-employed">Self-employed</option>
+            <option value="business-owner">Business Owner</option>
+            <option value="other">Other</option>
+        </select>
+
+        <!-- MONTHLY INCOME -->
+        <label for="income">Monthly Income (MWK)</label>
+        <input
+            type="number"
+            id="income"
+            name="income"
+            placeholder="Example: 250000"
+            min="0"
+            required
+        >
+
+        <!-- LOAN AMOUNT -->
+        <label for="loanAmount2">Requested Loan Amount (MWK)</label>
+        <input
+            type="number"
+            id="loanAmount2"
+            name="loanAmount"
+            placeholder="Example: 500000"
+            min="1"
+            required
+        >
+
+        <!-- LOAN PERIOD -->
+        <label for="loanTerm">Preferred Repayment Period</label>
+        <select
+            id="loanTerm"
+            name="loanTerm"
+            required
+        >
+            <option value="">Select repayment period</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="9">9 Months</option>
+            <option value="12">12 Months</option>
+            <option value="18">18 Months</option>
+            <option value="24">24 Months</option>
+        </select>
+
+        <!-- PURPOSE -->
+        <label for="purpose">Purpose of Loan</label>
+        <textarea
+            id="purpose"
+            name="purpose"
+            placeholder="Explain what you need the loan for"
+            required></textarea>
+
+        <!-- EMPLOYMENT LENGTH -->
+        <label for="employmentLength">Length of Employment / Business Activity</label>
+        <input
+            type="text"
+            id="employmentLength"
+            name="employmentLength"
+            placeholder="Example: 2 years"
+            required
+        >
+
+        <!-- SUBMIT -->
+        <button
+            type="submit"
+            class="submit-button">
+            Submit Application
+        </button>
+
+        <!-- CLOSE -->
+        <button
+            type="button"
+            class="close-button"
+            onclick="closeLoanForm()">
+            ✕ Close Application Form
+        </button>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="successMessage">
+        <strong>Application Form Test Successful!</strong>
+        <br><br>
+        Your application has been captured by the test interface.
+        <br><br>
+        ⚠️ This is currently a test form. Your information is not being stored or transmitted.
+    </div>
+
+</div>
+
+</section>
 
 <section id="about">
 
@@ -349,6 +679,8 @@ FAQ | Contact | Customer Support
 
 
 <script>
+
+// ===== LOAN CALCULATOR =====
 
 function calculateLoan() {
 
@@ -487,6 +819,45 @@ function calculateLoan() {
         );
 
 }
+
+// ===== PERSONAL LOAN FORM =====
+
+function openLoanForm() {
+    const form = document.getElementById("loanFormContainer");
+    form.style.display = "block";
+    form.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function closeLoanForm() {
+    const form = document.getElementById("loanFormContainer");
+    form.style.display = "none";
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+// Form submission handler
+document
+.getElementById("personalLoanForm")
+.addEventListener(
+    "submit",
+    function(event) {
+        event.preventDefault();
+        document
+        .getElementById("successMessage")
+        .style.display = "block";
+        document
+        .getElementById("successMessage")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
+);
 
 </script>
 
