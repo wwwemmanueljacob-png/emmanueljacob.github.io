@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import apiRoutes from "./src/routes/index.js";
 
 dotenv.config();
 
@@ -21,14 +22,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// Health check route
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    status: "OK",
-    message: "Server is healthy"
-  });
-});
+// Main API routes
+app.use("/api", apiRoutes);
 
 // 404 handler
 app.use((req, res) => {
