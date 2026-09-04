@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import authRoutes from "./auth.js";
 import loanRoutes from "./loans.js";
 import paymentRoutes from "./payments.js";
+import supportRoutes from "./support.js";
 
 const router = express.Router();
 
@@ -25,6 +26,11 @@ router.use("/loans", loanRoutes);
 // PAYMENT ROUTES
 // ==========================================
 router.use("/payments", paymentRoutes);
+
+// ==========================================
+// SUPPORT ROUTES
+// ==========================================
+router.use("/support", supportRoutes);
 
 // ==========================================
 // API HEALTH CHECK
