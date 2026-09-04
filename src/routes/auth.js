@@ -1,5 +1,6 @@
 import express from "express";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { createClient } from "@supabase/supabase-js";
 
 const router = express.Router();
@@ -8,6 +9,8 @@ const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SECRET_KEY
 );
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // ==========================================
 // CUSTOMER REGISTRATION
@@ -30,7 +33,6 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Check whether email or phone already exists
     const { data: existingCustomer, error: checkError } = await supabase
       .from("customers")
       .select("id, email, phone")
@@ -53,10 +55,8 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Hash password before storing it
     const password_hash = await bcrypt.hash(password, 12);
 
-    // Create customer
     const { data: customer, error: insertError } = await supabase
       .from("customers")
       .insert([
@@ -110,7 +110,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Find customer by email
     const { data: customer, error } = await supabase
       .from("customers")
       .select("id, full_name, email, phone, password_hash, created_at")
@@ -133,7 +132,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Verify password
     const passwordMatch = await bcrypt.compare(
       password,
       customer.password_hash
@@ -146,12 +144,32 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Never send password hash to the client
+    if (!JWT_SECRET) {
+      console.error("JWT_SECRET is not configured");
+
+      return res.status(500).json({
+        success: false,
+        message: "Authentication system is not configured"
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        customer_id: customer.id,
+        email: customer.email
+      },
+      JWT_SECRET,
+      {
+        expiresIn: "7d"
+      }
+    );
+
     const { password_hash, ...safeCustomer } = customer;
 
     res.json({
       success: true,
       message: "Login successful",
+      token,
       customer: safeCustomer
     });
 
