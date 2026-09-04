@@ -12,6 +12,7 @@ const supabase = createClient(
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+
 // ==========================================
 // CUSTOMER REGISTRATION
 // ==========================================
@@ -182,5 +183,86 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+
+// ==========================================
+// CUSTOMER PROFILE
+// ==========================================
+router.get("/profile", async (req, res) => {
+  try {
+    const authorization = req.headers.authorization;
+
+    if (!authorization || !authorization.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication token is required"
+      });
+    }
+
+    const token = authorization.split(" ")[1];
+
+    if (!JWT_SECRET) {
+      return res.status(500).json({
+        success: false,
+        message: "Authentication system is not configured"
+      });
+    }
+
+    // Verify JWT
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    // Find customer
+    const { data: customer, error } = await supabase
+      .from("customers")
+      .select("id, full_name, email, phone, created_at")
+      .eq("id", decoded.customer_id)
+      .maybeSingle();
+
+    if (error) {
+      console.error(error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve customer profile"
+      });
+    }
+
+    if (!customer) {
+      return res.status(404).json({
+        success: false,
+        message: "Customer account not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Customer profile retrieved successfully",
+      customer
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    if (error.name === "JsonWebTokenError") {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid authentication token"
+      });
+    }
+
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication token has expired"
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: "Could not retrieve customer profile"
+    });
+  }
+});
+
 
 export default router;
