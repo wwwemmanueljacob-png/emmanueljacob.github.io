@@ -2,6 +2,7 @@ import express from "express";
 import { createClient } from "@supabase/supabase-js";
 import authRoutes from "./auth.js";
 import loanRoutes from "./loans.js";
+import paymentRoutes from "./payments.js";
 
 const router = express.Router();
 
@@ -10,12 +11,20 @@ const supabase = createClient(
   process.env.SUPABASE_SECRET_KEY
 );
 
-// Customer authentication routes
+// ==========================================
+// CUSTOMER AUTHENTICATION ROUTES
+// ==========================================
 router.use("/auth", authRoutes);
 
-// Loan application routes
+// ==========================================
+// LOAN ROUTES
+// ==========================================
 router.use("/loans", loanRoutes);
 
+// ==========================================
+// PAYMENT ROUTES
+// ==========================================
+router.use("/payments", paymentRoutes);
 
 // ==========================================
 // API HEALTH CHECK
@@ -29,7 +38,6 @@ router.get("/health", (req, res) => {
   });
 });
 
-
 // ==========================================
 // API WELCOME
 // ==========================================
@@ -40,7 +48,6 @@ router.get("/", (req, res) => {
     version: "1.0.0"
   });
 });
-
 
 // ==========================================
 // TEST SUPABASE CONNECTION
@@ -68,12 +75,13 @@ router.get("/database-test", async (req, res) => {
     });
 
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: "Database connection error"
     });
   }
 });
-
 
 export default router;
