@@ -9,7 +9,9 @@ const supabase = createClient(
   process.env.SUPABASE_SECRET_KEY
 );
 
-// Customer registration
+// ==========================================
+// CUSTOMER REGISTRATION
+// ==========================================
 router.post("/register", async (req, res) => {
   try {
     const { full_name, email, phone, password } = req.body;
@@ -89,6 +91,76 @@ router.post("/register", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Registration failed"
+    });
+  }
+});
+
+
+// ==========================================
+// CUSTOMER LOGIN
+// ==========================================
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required"
+      });
+    }
+
+    // Find customer by email
+    const { data: customer, error } = await supabase
+      .from("customers")
+      .select("id, full_name, email, phone, password_hash, created_at")
+      .eq("email", email)
+      .maybeSingle();
+
+    if (error) {
+      console.error(error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not access customer account"
+      });
+    }
+
+    if (!customer) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password"
+      });
+    }
+
+    // Verify password
+    const passwordMatch = await bcrypt.compare(
+      password,
+      customer.password_hash
+    );
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password"
+      });
+    }
+
+    // Never send password hash to the client
+    const { password_hash, ...safeCustomer } = customer;
+
+    res.json({
+      success: true,
+      message: "Login successful",
+      customer: safeCustomer
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Login failed"
     });
   }
 });
