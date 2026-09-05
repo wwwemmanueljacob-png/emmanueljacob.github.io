@@ -12,17 +12,17 @@ const PORT = process.env.PORT || 8080;
 // ==========================================
 // MIDDLEWARE
 // ==========================================
+
 app.use(cors());
 
-// Accept JSON requests
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json());
 
-// Accept form-style requests
-app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 // ==========================================
-// HOME API ROUTE
+// HOME ROUTE
 // ==========================================
+
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -34,11 +34,13 @@ app.get("/", (req, res) => {
 // ==========================================
 // MAIN API ROUTES
 // ==========================================
+
 app.use("/api", apiRoutes);
 
 // ==========================================
 // 404 HANDLER
 // ==========================================
+
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -49,18 +51,20 @@ app.use((req, res) => {
 // ==========================================
 // ERROR HANDLER
 // ==========================================
-app.use((err, req, res, next) => {
-  console.error("SERVER ERROR:", err);
 
-  res.status(err.status || 500).json({
+app.use((err, req, res, next) => {
+  console.error("Server error:", err);
+
+  res.status(500).json({
     success: false,
-    message: err.message || "Internal server error"
+    message: "Internal server error"
   });
 });
 
 // ==========================================
 // START SERVER
 // ==========================================
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
