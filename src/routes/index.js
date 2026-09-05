@@ -14,7 +14,7 @@ const supabase = createClient(
 );
 
 // ==========================================
-// CUSTOMER AUTHENTICATION
+// AUTH ROUTES
 // ==========================================
 router.use("/auth", authRoutes);
 
@@ -44,14 +44,14 @@ router.use("/admin", adminRoutes);
 router.get("/health", (req, res) => {
   res.json({
     success: true,
-    message: "JAY C O B Financial Services API is running",
+    message: "JAY C O B API UPDATED SUCCESSFULLY",
     status: "online",
     timestamp: new Date().toISOString()
   });
 });
 
 // ==========================================
-// API WELCOME
+// API ROOT
 // ==========================================
 router.get("/", (req, res) => {
   res.json({
@@ -62,7 +62,7 @@ router.get("/", (req, res) => {
 });
 
 // ==========================================
-// TEST SUPABASE CONNECTION
+// DATABASE CONNECTION TEST
 // ==========================================
 router.get("/database-test", async (req, res) => {
   try {
