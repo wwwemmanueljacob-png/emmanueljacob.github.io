@@ -4,6 +4,7 @@ import authRoutes from "./auth.js";
 import loanRoutes from "./loans.js";
 import paymentRoutes from "./payments.js";
 import supportRoutes from "./support.js";
+import adminRoutes from "./admin.js";
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ const supabase = createClient(
 );
 
 // ==========================================
-// CUSTOMER AUTHENTICATION ROUTES
+// CUSTOMER AUTHENTICATION
 // ==========================================
 router.use("/auth", authRoutes);
 
@@ -31,6 +32,11 @@ router.use("/payments", paymentRoutes);
 // SUPPORT ROUTES
 // ==========================================
 router.use("/support", supportRoutes);
+
+// ==========================================
+// ADMIN ROUTES
+// ==========================================
+router.use("/admin", adminRoutes);
 
 // ==========================================
 // API HEALTH CHECK
