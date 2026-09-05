@@ -1,16 +1,13 @@
 <!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JAY C O B FINANCIAL SERVICES | Customer Dashboard</title><style>
-
-/* =========================================
-   JAY C O B FINANCIAL SERVICES
-   CUSTOMER DASHBOARD ENGINE
-========================================= */
-
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAY C O B FINANCIAL SERVICES | Customer Dashboard</title><style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
@@ -18,1071 +15,605 @@ body{
     color:#1f2933;
 }
 
-
-/* =========================================
-   TOP HEADER
-========================================= */
-
 .topbar{
-
     position:fixed;
-
     top:0;
-
     left:0;
-
     width:100%;
-
     height:70px;
-
     background:#071f3b;
-
     color:white;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     padding:0 25px;
-
     z-index:1000;
-
     box-shadow:0 3px 10px rgba(0,0,0,.2);
-
 }
 
 .company-name{
-
     font-size:18px;
-
     font-weight:bold;
-
     color:#ffd000;
-
 }
 
 .customer-area{
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
-
 }
 
 .notification{
-
     background:#ffd000;
-
     color:#111;
-
     padding:7px 11px;
-
     border-radius:20px;
-
     cursor:pointer;
-
     font-size:13px;
-
 }
 
 .customer-name{
-
     font-size:14px;
-
 }
 
-
-/* =========================================
-   SIDEBAR
-========================================= */
-
 .sidebar{
-
     position:fixed;
-
     top:70px;
-
     left:0;
-
     width:250px;
-
     height:calc(100vh - 70px);
-
     background:#08172b;
-
     overflow-y:auto;
-
     z-index:900;
-
 }
 
 .sidebar-title{
-
     padding:20px 25px 8px;
-
     color:#ffd000;
-
     font-size:11px;
-
     font-weight:bold;
-
 }
 
 .sidebar a{
-
     display:block;
-
     padding:15px 25px;
-
     color:#d7e0ea;
-
     text-decoration:none;
-
     cursor:pointer;
-
     transition:.2s;
-
 }
 
 .sidebar a:hover{
-
     background:#102d50;
-
     color:#ffd000;
-
 }
 
-
-/* =========================================
-   MAIN CONTENT
-========================================= */
-
 .main{
-
     margin-left:250px;
-
     padding:100px 30px 40px;
-
 }
 
 .page{
-
     display:none;
-
 }
 
 .page.active{
-
     display:block;
-
 }
 
-
-/* =========================================
-   HEADINGS
-========================================= */
-
 h1{
-
     color:#071f3b;
-
     margin-bottom:10px;
-
 }
 
 .subtitle{
-
     color:#65727f;
-
     margin-bottom:25px;
-
 }
 
-
-/* =========================================
-   STATISTICS CARDS
-========================================= */
-
 .stats-grid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
-
 }
 
 .stat-card{
-
     background:white;
-
     padding:22px;
-
     border-radius:12px;
-
     box-shadow:0 5px 15px rgba(0,0,0,.07);
-
     border-left:5px solid #ffd000;
-
 }
 
 .stat-card h3{
-
     color:#6b7680;
-
     font-size:13px;
-
 }
 
 .stat-number{
-
     font-size:25px;
-
     font-weight:bold;
-
     color:#071f3b;
-
     margin-top:12px;
-
 }
 
 .stat-small{
-
     color:#65727f;
-
     font-size:12px;
-
     margin-top:8px;
-
 }
 
-
-/* =========================================
-   PANELS
-========================================= */
-
 .panel{
-
     background:white;
-
     padding:25px;
-
     margin-top:25px;
-
     border-radius:12px;
-
     box-shadow:0 5px 15px rgba(0,0,0,.07);
-
 }
 
 .panel h2{
-
     color:#071f3b;
-
     margin-bottom:20px;
-
 }
 
-
-/* =========================================
-   LOAN PROGRESS
-========================================= */
-
 .progress-container{
-
     margin-top:20px;
-
 }
 
 .progress-bar-background{
-
     height:22px;
-
     width:100%;
-
     background:#e2e7eb;
-
     border-radius:20px;
-
     overflow:hidden;
-
 }
 
 .progress-bar{
-
     height:100%;
-
     width:0%;
-
     background:#16803c;
-
     border-radius:20px;
-
     transition:.5s;
-
 }
 
 .progress-text{
-
     margin-top:10px;
-
     font-size:13px;
-
     color:#555;
-
 }
 
-
-/* =========================================
-   LOAN DETAILS
-========================================= */
-
 .details-grid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:15px;
-
 }
 
 .detail-box{
-
     background:#f7f9fb;
-
     padding:17px;
-
     border-radius:8px;
-
     border:1px solid #e1e6eb;
-
 }
 
 .detail-title{
-
     font-size:12px;
-
     color:#65727f;
-
 }
 
 .detail-value{
-
     margin-top:8px;
-
     font-size:17px;
-
     font-weight:bold;
-
     color:#071f3b;
-
 }
 
-
-/* =========================================
-   TABLE
-========================================= */
-
 .table-container{
-
     overflow-x:auto;
-
 }
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
+    min-width:650px;
 }
 
 th{
-
     background:#071f3b;
-
     color:white;
-
 }
 
-th,
-td{
-
+th,td{
     padding:13px;
-
     text-align:left;
-
     border-bottom:1px solid #e2e6ea;
-
 }
-
-
-/* =========================================
-   STATUS
-========================================= */
 
 .status{
-
     display:inline-block;
-
     padding:6px 10px;
-
     border-radius:20px;
-
     font-size:11px;
-
     font-weight:bold;
-
 }
 
 .status-active{
-
     background:#d9f5df;
-
     color:#137034;
-
 }
 
 .status-pending{
-
     background:#fff0b3;
-
     color:#8a6500;
-
 }
 
 .status-completed{
-
     background:#dcecff;
-
     color:#07569e;
-
 }
 
 .status-overdue{
-
     background:#ffe0e0;
-
     color:#a61b1b;
-
 }
 
-
-/* =========================================
-   BUTTONS
-========================================= */
+.status-default{
+    background:#e8edf2;
+    color:#44515e;
+}
 
 .btn{
-
     border:none;
-
     padding:12px 18px;
-
     border-radius:7px;
-
     cursor:pointer;
-
     font-weight:bold;
-
     margin-top:10px;
-
 }
 
 .btn-primary{
-
     background:#ffd000;
-
     color:#111;
-
 }
 
 .btn-blue{
-
     background:#071f3b;
-
     color:white;
-
 }
 
 .btn-green{
-
     background:#16803c;
-
     color:white;
-
 }
 
 .btn-red{
-
     background:#c62828;
-
     color:white;
-
 }
 
 .btn-gray{
-
     background:#65727f;
-
     color:white;
-
 }
 
-
-/* =========================================
-   NOTIFICATION BOX
-========================================= */
-
 .notification-item{
-
     padding:15px;
-
     border-bottom:1px solid #e4e7ea;
-
 }
 
 .notification-date{
-
     font-size:11px;
-
     color:#777;
-
     margin-top:5px;
-
 }
-
-
-/* =========================================
-   FORMS
-========================================= */
 
 label{
-
     display:block;
-
     margin-top:15px;
-
     margin-bottom:7px;
-
     font-weight:bold;
-
 }
 
-input,
-textarea{
-
+input,textarea,select{
     width:100%;
-
     padding:13px;
-
     border:1px solid #ccd3dc;
-
     border-radius:7px;
-
     outline:none;
-
+    background:white;
 }
 
 textarea{
-
     min-height:120px;
-
+    resize:vertical;
 }
 
-
-/* =========================================
-   MODAL
-========================================= */
+input:focus,textarea:focus,select:focus{
+    border-color:#071f3b;
+}
 
 .modal{
-
     display:none;
-
     position:fixed;
-
     z-index:3000;
-
     left:0;
-
     top:0;
-
     width:100%;
-
     height:100%;
-
     background:rgba(0,0,0,.65);
-
     overflow:auto;
-
     padding:20px;
-
 }
 
 .modal-content{
-
     background:white;
-
     max-width:600px;
-
     margin:50px auto;
-
     padding:30px;
-
     border-radius:15px;
-
     position:relative;
-
 }
 
 .close{
-
     position:absolute;
-
     top:10px;
-
     right:20px;
-
     font-size:30px;
-
     cursor:pointer;
-
 }
-
-
-/* =========================================
-   ALERT
-========================================= */
 
 .alert{
-
     display:none;
-
     position:fixed;
-
     top:85px;
-
     right:20px;
-
     background:#16803c;
-
     color:white;
-
     padding:15px 20px;
-
     border-radius:8px;
-
     z-index:5000;
-
+    max-width:90%;
 }
 
+.loading{
+    padding:20px;
+    text-align:center;
+    color:#65727f;
+}
 
-/* =========================================
-   MOBILE DESIGN
-========================================= */
+.empty{
+    padding:20px;
+    text-align:center;
+    color:#65727f;
+}
+
+.message-card{
+    padding:15px;
+    border:1px solid #e1e6eb;
+    border-radius:8px;
+    margin-bottom:12px;
+    background:#f8fafc;
+}
+
+.message-status{
+    font-size:11px;
+    font-weight:bold;
+    margin-top:8px;
+}
 
 @media(max-width:768px){
-
     .sidebar{
-
         width:72px;
-
     }
 
     .sidebar a{
-
         padding:15px 5px;
-
         text-align:center;
-
         font-size:10px;
-
     }
 
     .sidebar-title{
-
         display:none;
-
     }
 
     .main{
-
         margin-left:72px;
-
         padding:95px 15px 30px;
-
     }
 
     .company-name{
-
         font-size:12px;
-
     }
 
     .customer-name{
-
         display:none;
-
     }
 
+    .topbar{
+        padding:0 10px;
+    }
+
+    .customer-area{
+        gap:7px;
+    }
+
+    .btn{
+        padding:10px 13px;
+    }
 }
-
-</style></head><body><!-- =========================================
-     ALERT
-========================================= --><div id="alertBox" class="alert">Action completed.
-
-</div><!-- =========================================
-     TOP BAR
-========================================= --><div class="topbar"><div class="company-name">JAY C O B FINANCIAL SERVICES
-
-</div><div class="customer-area"><div class="notification"
-onclick="showPage('notifications')">🔔 <span id="notificationCount">3</span>
-
-</div><div class="customer-name"
-id="customerNameTop">Customer
-
-</div><button
-class="btn btn-red"
-onclick="logout()">
-
-LOGOUT
-
-</button></div></div><!-- =========================================
-     SIDEBAR
-========================================= --><div class="sidebar"><div class="sidebar-title">MY ACCOUNT
-
-</div><a onclick="showPage('dashboard')">📊 Dashboard
-
-</a><a onclick="showPage('myloan')">💰 My Loan
-
-</a><a onclick="showPage('payments')">💳 Payments
-
-</a><a onclick="showPage('schedule')">📅 Payment Schedule
-
-</a><a onclick="showPage('applications')">📋 Applications
-
-</a><div class="sidebar-title">COMMUNICATION
-
-</div><a onclick="showPage('notifications')">🔔 Notifications
-
-</a><a onclick="showPage('messages')">💬 Messages
-
-</a><a onclick="showPage('support')">📞 Support
-
-</a><div class="sidebar-title">ACCOUNT
-
-</div><a onclick="showPage('profile')">👤 My Profile
-
-</a><a onclick="showPage('security')">🔐 Security
-
-</a></div><!-- =========================================
-     MAIN CONTENT
-========================================= --><div class="main"><!-- =========================================
-     DASHBOARD
-========================================= --><div id="dashboard" class="page active"><h1>WELCOME, <span id="customerWelcomeName">CUSTOMER</span>
-
-</h1><p class="subtitle">Manage your loans, balances and payments.
-
-</p><div class="stats-grid"><!-- TOTAL LOAN --><div class="stat-card"><h3>TOTAL LOAN OBTAINED
-
-</h3><div class="stat-number"
-id="totalLoan">MWK 0
-
-</div><div class="stat-small">Total approved loan amount
-
-</div></div><!-- LOAN BALANCE --><div class="stat-card"><h3>CURRENT LOAN BALANCE
-
-</h3><div class="stat-number"
-id="loanBalance">MWK 0
-
-</div><div class="stat-small">Remaining amount to repay
-
-</div></div><!-- INTEREST RATE --><div class="stat-card"><h3>INTEREST RATE
-
-</h3><div class="stat-number"
-id="interestRate">0%
-
-</div><div class="stat-small">According to loan agreement
-
-</div></div><!-- NEXT PAYMENT --><div class="stat-card"><h3>NEXT PAYMENT DATE
-
-</h3><div class="stat-number"
-id="nextPaymentDate">- 
-
-</div><div class="stat-small"
-id="nextPaymentAmount">Amount: MWK 0
-
-</div></div></div><!-- LOAN PROGRESS --><div class="panel"><h2>LOAN REPAYMENT PROGRESS
-
-</h2><div class="progress-container"><div class="progress-bar-background"><div
-class="progress-bar"
-id="repaymentProgress"></div></div><div
-class="progress-text"
-id="progressText">0% of loan repaid.
-
-</div></div></div><!-- QUICK LOAN DETAILS --><div class="panel"><h2>QUICK LOAN DETAILS
-
-</h2><div class="details-grid"><div class="detail-box"><div class="detail-title">Loan Type
-
-</div><div class="detail-value"
-id="quickLoanType">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Loan Start Date
-
-</div><div class="detail-value"
-id="quickStartDate">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Loan Due Date
-
-</div><div class="detail-value"
-id="quickDueDate">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Monthly Payment
-
-</div><div class="detail-value"
-id="quickMonthlyPayment">MWK 0
-
-</div></div></div></div></div><!-- =========================================
-     MY LOAN
-========================================= --><div id="myloan" class="page"><h1>MY LOAN DETAILS
-
-</h1><p class="subtitle">Complete information about your active loan.
-
-</p><div class="panel"><div class="details-grid"><div class="detail-box"><div class="detail-title">Loan Reference Number
-
-</div><div class="detail-value"
-id="loanReference">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Loan Type
-
-</div><div class="detail-value"
-id="loanType">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Original Loan Amount
-
-</div><div class="detail-value"
-id="originalLoan">MWK 0
-
-</div></div><div class="detail-box"><div class="detail-title">Current Balance
-
-</div><div class="detail-value"
-id="currentBalance">MWK 0
-
-</div></div><div class="detail-box"><div class="detail-title">Interest Rate
-
-</div><div class="detail-value"
-id="loanInterest">0%
-
-</div></div><div class="detail-box"><div class="detail-title">Loan Term
-
-</div><div class="detail-value"
-id="loanTerm">0 Months
-
-</div></div><div class="detail-box"><div class="detail-title">Loan Start Date
-
-</div><div class="detail-value"
-id="loanStartDate">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Loan Due Date
-
-</div><div class="detail-value"
-id="loanDueDate">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Monthly Installment
-
-</div><div class="detail-value"
-id="monthlyInstallment">MWK 0
-
-</div></div><div class="detail-box"><div class="detail-title">Next Payment
-
-</div><div class="detail-value"
-id="nextPayment">- 
-
-</div></div></div></div></div><!-- =========================================
-     PAYMENTS
-========================================= --><div id="payments" class="page"><h1>PAYMENT HISTORY
-
-</h1><p class="subtitle">View your completed loan repayments.
-
-</p><div class="panel"><div class="table-container"><table><thead><tr><th>Payment Date
-
-</th><th>Amount Paid
-
-</th><th>Payment Method
-
-</th><th>Reference
-
-</th><th>Status
-
-</th></tr></thead><tbody
-id="paymentsTable"></tbody></table></div></div></div><!-- =========================================
-     PAYMENT SCHEDULE
-========================================= --><div id="schedule" class="page"><h1>PAYMENT SCHEDULE
-
-</h1><p class="subtitle">Your upcoming and completed repayment schedule.
-
-</p><div class="panel"><div class="table-container"><table><thead><tr><th>Installment
-
-</th><th>Payment Date
-
-</th><th>Amount
-
-</th><th>Status
-
-</th></tr></thead><tbody
-id="scheduleTable"></tbody></table></div></div></div><!-- =========================================
-     APPLICATIONS
-========================================= --><div id="applications" class="page"><h1>MY LOAN APPLICATIONS
-
-</h1><div class="panel"><div class="table-container"><table><thead><tr><th>Application ID
-
-</th><th>Loan Type
-
-</th><th>Requested Amount
-
-</th><th>Application Date
-
-</th><th>Status
-
-</th><th>Action
-
-</th></tr></thead><tbody
-id="applicationsTable"></tbody></table></div></div></div><!-- =========================================
-     NOTIFICATIONS
-========================================= --><div id="notifications" class="page"><h1>NOTIFICATIONS
-
-</h1><div class="panel"
-id="notificationList"></div></div><!-- =========================================
-     MESSAGES
-========================================= --><div id="messages" class="page"><h1>MESSAGES
-
-</h1><div class="panel"><h2>JAY C O B FINANCIAL SERVICES
-
-</h2><div id="messagesList">No messages available.
-
-</div></div></div><!-- =========================================
-     SUPPORT
-========================================= --><div id="support" class="page"><h1>CUSTOMER SUPPORT
-
-</h1><p class="subtitle">Send a message to JAY C O B FINANCIAL SERVICES.
-
-</p><div class="panel"><label>Subject
-
+</style></head><body><div id="alertBox" class="alert"></div><div class="topbar">
+    <div class="company-name">
+        JAY C O B FINANCIAL SERVICES
+    </div><div class="customer-area">
+    <div class="notification" onclick="showPage('notifications')">
+        🔔 <span id="notificationCount">0</span>
+    </div>
+
+    <div class="customer-name" id="customerNameTop">
+        Customer
+    </div>
+
+    <button class="btn btn-red" onclick="logout()">
+        LOGOUT
+    </button>
+</div>
+
+</div><div class="sidebar"><div class="sidebar-title">MY ACCOUNT</div>
+
+<a onclick="showPage('dashboard')">📊 Dashboard</a>
+<a onclick="showPage('myloan')">💰 My Loan</a>
+<a onclick="showPage('payments')">💳 Payments</a>
+<a onclick="showPage('schedule')">📅 Payment Schedule</a>
+<a onclick="showPage('applications')">📋 Applications</a>
+
+<div class="sidebar-title">COMMUNICATION</div>
+
+<a onclick="showPage('notifications')">🔔 Notifications</a>
+<a onclick="showPage('messages')">💬 Messages</a>
+<a onclick="showPage('support')">📞 Support</a>
+
+<div class="sidebar-title">ACCOUNT</div>
+
+<a onclick="showPage('profile')">👤 My Profile</a>
+<a onclick="showPage('security')">🔐 Security</a>
+
+</div><div class="main"><!-- DASHBOARD --><div id="dashboard" class="page active"><h1>
+WELCOME, <span id="customerWelcomeName">CUSTOMER</span>
+</h1><p class="subtitle">
+Manage your loans, balances and payments.
+</p><div class="stats-grid"><div class="stat-card">
+<h3>TOTAL LOAN OBTAINED</h3>
+<div class="stat-number" id="totalLoan">MWK 0</div>
+<div class="stat-small">Total approved loan amount</div>
+</div><div class="stat-card">
+<h3>CURRENT LOAN BALANCE</h3>
+<div class="stat-number" id="loanBalance">MWK 0</div>
+<div class="stat-small">Remaining amount to repay</div>
+</div><div class="stat-card">
+<h3>INTEREST RATE</h3>
+<div class="stat-number" id="interestRate">-</div>
+<div class="stat-small">According to loan agreement</div>
+</div><div class="stat-card">
+<h3>NEXT PAYMENT DATE</h3>
+<div class="stat-number" id="nextPaymentDate">-</div>
+<div class="stat-small" id="nextPaymentAmount">
+Amount: MWK 0
+</div>
+</div></div><div class="panel"><h2>LOAN REPAYMENT PROGRESS</h2><div class="progress-container"><div class="progress-bar-background"><div class="progress-bar" id="repaymentProgress"></div></div><div class="progress-text" id="progressText">
+No active loan repayment information available.
+</div></div></div><div class="panel"><h2>QUICK LOAN DETAILS</h2><div class="details-grid"><div class="detail-box">
+<div class="detail-title">Loan Type</div>
+<div class="detail-value" id="quickLoanType">-</div>
+</div><div class="detail-box">
+<div class="detail-title">Loan Start Date</div>
+<div class="detail-value" id="quickStartDate">-</div>
+</div><div class="detail-box">
+<div class="detail-title">Loan Due Date</div>
+<div class="detail-value" id="quickDueDate">-</div>
+</div><div class="detail-box">
+<div class="detail-title">Monthly Payment</div>
+<div class="detail-value" id="quickMonthlyPayment">MWK 0</div>
+</div></div></div></div><!-- MY LOAN --><div id="myloan" class="page"><h1>MY LOAN DETAILS</h1><p class="subtitle">
+Complete information about your latest loan application.
+</p><div class="panel"><div id="loanDetailsContent"><div class="empty">
+No loan information available yet.
+</div></div></div></div><!-- PAYMENTS --><div id="payments" class="page"><h1>PAYMENT HISTORY</h1><p class="subtitle">
+View your recorded loan repayments.
+</p><div class="panel"><div class="table-container"><table><thead><tr>
+<th>Payment Date</th>
+<th>Amount Paid</th>
+<th>Payment Method</th>
+<th>Reference</th>
+<th>Status</th>
+</tr></thead><tbody id="paymentsTable"><tr>
+<td colspan="5" class="empty">
+No payment records available.
+</td>
+</tr></tbody></table></div></div></div><!-- SCHEDULE --><div id="schedule" class="page"><h1>PAYMENT SCHEDULE</h1><p class="subtitle">
+Your upcoming and completed repayment schedule.
+</p><div class="panel"><div class="empty">
+Payment schedule will appear here when repayment information is available.
+</div></div></div><!-- APPLICATIONS --><div id="applications" class="page"><h1>MY LOAN APPLICATIONS</h1><div class="panel"><div class="table-container"><table><thead><tr>
+<th>Application ID</th>
+<th>Loan Type</th>
+<th>Requested Amount</th>
+<th>Application Date</th>
+<th>Status</th>
+<th>Action</th>
+</tr></thead><tbody id="applicationsTable"><tr>
+<td colspan="6" class="empty">
+Loading applications...
+</td>
+</tr></tbody></table></div></div></div><!-- NOTIFICATIONS --><div id="notifications" class="page"><h1>NOTIFICATIONS</h1><div class="panel" id="notificationList"><div class="empty">
+Loading notifications...
+</div></div></div><!-- MESSAGES --><div id="messages" class="page"><h1>MESSAGES</h1><div class="panel"><h2>JAY C O B FINANCIAL SERVICES</h2><div id="messagesList"><div class="empty">
+Loading messages...
+</div></div></div></div><!-- SUPPORT --><div id="support" class="page"><h1>CUSTOMER SUPPORT</h1><p class="subtitle">
+Send a message to JAY C O B FINANCIAL SERVICES.
+</p><div class="panel"><label for="supportSubject">
+Subject
 </label><input
 type="text"
 id="supportSubject"
-placeholder="Enter message subject"
+placeholder="Enter message subject">
 
-«»
-
-<label>Message
-
+<label for="supportMessage">
+Message
 </label><textarea
 id="supportMessage"
-placeholder="Describe your question or problem"
-></textarea><button
+placeholder="Describe your question or problem"></textarea><button
 class="btn btn-primary"
 onclick="sendSupportMessage()">
 
 SEND MESSAGE
 
-</button></div></div><!-- =========================================
-     PROFILE
-========================================= --><div id="profile" class="page"><h1>MY PROFILE
-
-</h1><div class="panel"><div class="details-grid"><div class="detail-box"><div class="detail-title">Full Name
-
-</div><div
-class="detail-value"
-id="profileName">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Email
-
-</div><div
-class="detail-value"
-id="profileEmail">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Phone Number
-
-</div><div
-class="detail-value"
-id="profilePhone">- 
-
-</div></div><div class="detail-box"><div class="detail-title">Account Status
-
-</div><div
-class="detail-value"
-id="profileStatus">- 
-
+</button></div></div><!-- PROFILE --><div id="profile" class="page"><h1>MY PROFILE</h1><div class="panel"><div class="details-grid"><div class="detail-box"><div class="detail-title">
+Full Name
+</div><div class="detail-value" id="profileName">
+-
+</div></div><div class="detail-box"><div class="detail-title">
+Email
+</div><div class="detail-value" id="profileEmail">
+-
+</div></div><div class="detail-box"><div class="detail-title">
+Phone Number
+</div><div class="detail-value" id="profilePhone">
+-
+</div></div><div class="detail-box"><div class="detail-title">
+Account Status
+</div><div class="detail-value" id="profileStatus">
+Active
 </div></div></div><button
 class="btn btn-blue"
 onclick="openProfileModal()">
 
 EDIT PROFILE
 
-</button></div></div><!-- =========================================
-     SECURITY
-========================================= --><div id="security" class="page"><h1>ACCOUNT SECURITY
-
-</h1><div class="panel"><h2>PASSWORD AND LOGIN SECURITY
-
-</h2><p>For your protection, use a strong password
-and never share your login credentials or OTP.
-
+</button></div></div><!-- SECURITY --><div id="security" class="page"><h1>ACCOUNT SECURITY</h1><div class="panel"><h2>PASSWORD AND LOGIN SECURITY</h2><p>
+For your protection, use a strong password and never share your login credentials or OTP.
 </p><button
 class="btn btn-primary"
 onclick="openPasswordModal()">
 
 CHANGE PASSWORD
 
-</button></div><div class="panel"><h2>SECURITY FEATURES
+</button></div><div class="panel"><h2>SECURITY FEATURES</h2><ul style="line-height:2"><li>Secure customer login</li>
+<li>Password hashing on the backend</li>
+<li>Session security</li>
+<li>Authenticated API requests</li>
+<li>Protected customer loan records</li>
+<li>Protected support messages</li></ul></div></div></div><!-- PROFILE MODAL --><div id="profileModal" class="modal"><div class="modal-content"><span class="close" onclick="closeProfileModal()">×</span>
 
-</h2><ul style="line-height:2"><li>Secure customer login
-
-</li><li>Password hashing on the backend
-
-</li><li>OTP verification
-
-</li><li>Login monitoring
-
-</li><li>Session security
-
-</li><li>Transaction notifications
-
-</li></ul></div></div></div><!-- =========================================
-     PROFILE MODAL
-========================================= --><div
-id="profileModal"
-class="modal"><div class="modal-content"><span
-class="close"
-onclick="closeProfileModal()">
-
-×
-
-</span><h2>EDIT PROFILE
-
-</h2><label>Full Name
-
+<h2>EDIT PROFILE</h2><label for="editName">
+Full Name
 </label><input
 id="editName"
-type="text"
+type="text">
 
-«»
-
-<label>Phone Number
-
+<label for="editPhone">
+Phone Number
 </label><input
 id="editPhone"
-type="text"
-
-«»
+type="text">
 
 <button
 class="btn btn-primary"
@@ -1096,41 +627,25 @@ onclick="closeProfileModal()">
 
 CLOSE
 
-</button></div></div><!-- =========================================
-     PASSWORD MODAL
-========================================= --><div
-id="passwordModal"
-class="modal"><div class="modal-content"><span
-class="close"
-onclick="closePasswordModal()">
+</button></div></div><!-- PASSWORD MODAL --><div id="passwordModal" class="modal"><div class="modal-content"><span class="close" onclick="closePasswordModal()">×</span>
 
-×
-
-</span><h2>CHANGE PASSWORD
-
-</h2><label>Current Password
-
+<h2>CHANGE PASSWORD</h2><label for="currentPassword">
+Current Password
 </label><input
 type="password"
-id="currentPassword"
+id="currentPassword">
 
-«»
-
-<label>New Password
-
+<label for="newPassword">
+New Password
 </label><input
 type="password"
-id="newPassword"
+id="newPassword">
 
-«»
-
-<label>Confirm New Password
-
+<label for="confirmPassword">
+Confirm New Password
 </label><input
 type="password"
-id="confirmPassword"
-
-«»
+id="confirmPassword">
 
 <button
 class="btn btn-primary"
@@ -1144,1846 +659,1464 @@ onclick="closePasswordModal()">
 
 CLOSE
 
-</button></div></div><!-- =========================================
-     APPLICATION MODAL
-========================================= --><div
-id="applicationModal"
-class="modal"><div class="modal-content"><span
-class="close"
-onclick="closeApplicationModal()">
+</button></div></div><!-- APPLICATION MODAL --><div id="applicationModal" class="modal"><div class="modal-content"><span class="close" onclick="closeApplicationModal()">×</span>
 
-×
-
-</span><h2>APPLICATION DETAILS
-
-</h2><div
-id="applicationDetails"></div><button
+<h2>APPLICATION DETAILS</h2><div id="applicationDetails"></div><button
 class="btn btn-gray"
 onclick="closeApplicationModal()">
 
 CLOSE
 
-</button></div></div><!-- =========================================
-     JAVASCRIPT ENGINE
-========================================= --><script>
-
+</button></div></div><script>
 
 /* =========================================
-   API CONFIGURATION
+   REAL RAILWAY BACKEND
 ========================================= */
-
-
-/*
-
-CHANGE THIS TO YOUR REAL BACKEND URL
-AFTER DEPLOYMENT.
-
-Example:
-
-https://your-backend.com/api
-
-*/
-
 
 const API_URL =
+"https://emmanueljacobgithubio-production-dd23.up.railway.app/api";
 
-"http://localhost:3000/api";
 
+/* =========================================
+   CUSTOMER SESSION
+========================================= */
 
 let customerToken =
+localStorage.getItem("customer_token");
 
-localStorage.getItem(
-"jaycobCustomerToken"
-);
+let customer = null;
 
+let applications = [];
 
-
-/* =========================================
-   CUSTOMER DATA ENGINE
-
-   DEMO DATA ONLY
-
-   WILL BE REPLACED BY BACKEND
-========================================= */
-
-
-let customer = {
-
-
-id:
-
-"CUSTOMER-001",
-
-
-name:
-
-"Demo Customer",
-
-
-email:
-
-"customer@example.com",
-
-
-phone:
-
-"+265 999 000 000",
-
-
-status:
-
-"Active"
-
-
-};
-
+let payments = [];
 
 
 /* =========================================
-   LOAN DATA
+   AUTHENTICATED API REQUEST
 ========================================= */
 
+async function apiRequest(endpoint, options = {}){
 
-let loan = {
+    const config = {
+        method: options.method || "GET",
+        headers: {
+            "Content-Type":"application/json",
+            ...(options.headers || {})
+        }
+    };
 
+    if(options.body !== undefined){
+        config.body = JSON.stringify(options.body);
+    }
 
-reference:
+    if(customerToken){
+        config.headers.Authorization =
+            "Bearer " + customerToken;
+    }
 
-"JFS-LN-2026-0001",
+    let response;
 
+    try{
 
-type:
+        response = await fetch(
+            API_URL + endpoint,
+            config
+        );
 
-"Personal Loan",
+    }catch(error){
 
+        throw new Error(
+            "Unable to connect to the secure server."
+        );
 
-originalAmount:
+    }
 
-500000,
+    let data = {};
 
+    try{
 
-balance:
+        data = await response.json();
 
-350000,
+    }catch(error){
 
+        data = {};
 
-interestRate:
+    }
 
-15,
+    if(!response.ok){
 
+        if(
+            response.status === 401 &&
+            endpoint !== "/auth/login" &&
+            endpoint !== "/auth/register"
+        ){
 
-term:
+            clearSession();
 
-12,
+            throw new Error(
+                "Your login session has expired. Please log in again."
+            );
 
+        }
 
-startDate:
+        throw new Error(
+            data.message ||
+            "The server rejected the request."
+        );
 
-"01 September 2026",
+    }
 
-
-dueDate:
-
-"01 September 2027",
-
-
-monthlyPayment:
-
-50000,
-
-
-nextPaymentDate:
-
-"01 October 2026",
-
-
-nextPaymentAmount:
-
-50000
-
-
-};
-
+    return data;
+}
 
 
 /* =========================================
-   PAYMENT HISTORY
+   SESSION
 ========================================= */
 
+function clearSession(){
 
-let payments = [
+    localStorage.removeItem("customer_token");
+    localStorage.removeItem("customer_data");
 
-
-{
-
-date:
-
-"01 September 2026",
-
-
-amount:
-
-50000,
-
-
-method:
-
-"Bank Transfer",
-
-
-reference:
-
-"PAY-001",
-
-
-status:
-
-"Completed"
-
-}
-
-
-];
-
-
-
-/* =========================================
-   PAYMENT SCHEDULE
-========================================= */
-
-
-let paymentSchedule = [
-
-
-{
-
-number:1,
-
-date:"01 September 2026",
-
-amount:50000,
-
-status:"Completed"
-
-},
-
-
-{
-
-number:2,
-
-date:"01 October 2026",
-
-amount:50000,
-
-status:"Upcoming"
-
-},
-
-
-{
-
-number:3,
-
-date:"01 November 2026",
-
-amount:50000,
-
-status:"Upcoming"
-
-},
-
-
-{
-
-number:4,
-
-date:"01 December 2026",
-
-amount:50000,
-
-status:"Upcoming"
-
-}
-
-
-];
-
-
-
-/* =========================================
-   LOAN APPLICATIONS
-========================================= */
-
-
-let applications = [
-
-
-{
-
-id:
-
-"JFS-APP-2026-001",
-
-
-type:
-
-"Personal Loan",
-
-
-amount:
-
-500000,
-
-
-date:
-
-"25 August 2026",
-
-
-status:
-
-"Approved"
-
-}
-
-
-];
-
-
-
-/* =========================================
-   NOTIFICATIONS
-========================================= */
-
-
-let notifications = [
-
-
-{
-
-message:
-
-"Your loan application has been approved.",
-
-
-date:
-
-"01 September 2026"
-
-},
-
-
-{
-
-message:
-
-"Your next payment is due on 01 October 2026.",
-
-
-date:
-
-"01 September 2026"
-
-},
-
-
-{
-
-message:
-
-"Welcome to your JAY C O B FINANCIAL SERVICES customer dashboard.",
-
-
-date:
-
-"01 September 2026"
-
-}
-
-
-];
-
-
-
-/* =========================================
-   PAGE NAVIGATION
-========================================= */
-
-
-function showPage(pageId){
-
-
-const pages =
-
-document.querySelectorAll(
-".page"
-);
-
-
-pages.forEach(
-
-page => {
-
-page.classList.remove(
-"active"
-);
-
-}
-
-);
-
-
-document.getElementById(
-pageId
-)
-
-.classList.add(
-"active"
-);
-
-
-if(
-
-pageId === "payments"
-
-){
-
-renderPayments();
-
-}
-
-
-if(
-
-pageId === "schedule"
-
-){
-
-renderSchedule();
-
-}
-
-
-if(
-
-pageId === "applications"
-
-){
-
-renderApplications();
-
-}
-
-
-if(
-
-pageId === "notifications"
-
-){
-
-renderNotifications();
-
-}
-
-
-}
-
-
-
-/* =========================================
-   LOAD DASHBOARD
-========================================= */
-
-
-function loadCustomerDashboard(){
-
-
-/* CUSTOMER NAME */
-
-
-document.getElementById(
-"customerWelcomeName"
-)
-
-.innerText =
-
-customer.name;
-
-
-document.getElementById(
-"customerNameTop"
-)
-
-.innerText =
-
-customer.name;
-
-
-
-/* DASHBOARD STATISTICS */
-
-
-document.getElementById(
-"totalLoan"
-)
-
-.innerText =
-
-formatMWK(
-loan.originalAmount
-);
-
-
-document.getElementById(
-"loanBalance"
-)
-
-.innerText =
-
-formatMWK(
-loan.balance
-);
-
-
-document.getElementById(
-"interestRate"
-)
-
-.innerText =
-
-loan.interestRate + "%";
-
-
-document.getElementById(
-"nextPaymentDate"
-)
-
-.innerText =
-
-loan.nextPaymentDate;
-
-
-document.getElementById(
-"nextPaymentAmount"
-)
-
-.innerText =
-
-"Amount: " +
-
-formatMWK(
-loan.nextPaymentAmount
-);
-
-
-
-/* QUICK DETAILS */
-
-
-document.getElementById(
-"quickLoanType"
-)
-
-.innerText =
-
-loan.type;
-
-
-document.getElementById(
-"quickStartDate"
-)
-
-.innerText =
-
-loan.startDate;
-
-
-document.getElementById(
-"quickDueDate"
-)
-
-.innerText =
-
-loan.dueDate;
-
-
-document.getElementById(
-"quickMonthlyPayment"
-)
-
-.innerText =
-
-formatMWK(
-loan.monthlyPayment
-);
-
-
-
-/* FULL LOAN DETAILS */
-
-
-document.getElementById(
-"loanReference"
-)
-
-.innerText =
-
-loan.reference;
-
-
-document.getElementById(
-"loanType"
-)
-
-.innerText =
-
-loan.type;
-
-
-document.getElementById(
-"originalLoan"
-)
-
-.innerText =
-
-formatMWK(
-loan.originalAmount
-);
-
-
-document.getElementById(
-"currentBalance"
-)
-
-.innerText =
-
-formatMWK(
-loan.balance
-);
-
-
-document.getElementById(
-"loanInterest"
-)
-
-.innerText =
-
-loan.interestRate + "%";
-
-
-document.getElementById(
-"loanTerm"
-)
-
-.innerText =
-
-loan.term + " Months";
-
-
-document.getElementById(
-"loanStartDate"
-)
-
-.innerText =
-
-loan.startDate;
-
-
-document.getElementById(
-"loanDueDate"
-)
-
-.innerText =
-
-loan.dueDate;
-
-
-document.getElementById(
-"monthlyInstallment"
-)
-
-.innerText =
-
-formatMWK(
-loan.monthlyPayment
-);
-
-
-document.getElementById(
-"nextPayment"
-)
-
-.innerText =
-
-loan.nextPaymentDate;
-
-
-
-/* REPAYMENT PROGRESS */
-
-
-const paid =
-
-loan.originalAmount -
-
-loan.balance;
-
-
-const progress =
-
-(paid / loan.originalAmount)
-
-* 100;
-
-
-document.getElementById(
-"repaymentProgress"
-)
-
-.style.width =
-
-progress + "%";
-
-
-document.getElementById(
-"progressText"
-)
-
-.innerText =
-
-progress.toFixed(1) +
-
-"% of your loan has been repaid. " +
-
-formatMWK(paid) +
-
-" paid.";
+    customerToken = null;
+    customer = null;
 
 }
 
 
 /* =========================================
-   FORMAT MONEY
+   FORMAT MWK
 ========================================= */
-
 
 function formatMWK(amount){
 
+    const value = Number(amount || 0);
 
-return
-
-"MWK " +
-
-Number(amount)
-.toLocaleString();
-
+    return "MWK " + value.toLocaleString();
 
 }
-
 
 
 /* =========================================
-   PAYMENT HISTORY
+   FORMAT DATE
 ========================================= */
 
+function formatDate(date){
 
-function renderPayments(){
+    if(!date){
+        return "-";
+    }
 
+    const d = new Date(date);
 
-let html = "";
+    if(Number.isNaN(d.getTime())){
+        return date;
+    }
 
-
-payments.forEach(
-
-payment => {
-
-
-html +=
-
-"<tr>" +
-
-
-"<td>" +
-
-payment.date +
-
-"</td>" +
-
-
-"<td>" +
-
-formatMWK(
-payment.amount
-) +
-
-"</td>" +
-
-
-"<td>" +
-
-payment.method +
-
-"</td>" +
-
-
-"<td>" +
-
-payment.reference +
-
-"</td>" +
-
-
-"<td>" +
-
-"<span class='status status-completed'>" +
-
-payment.status +
-
-"</span>" +
-
-"</td>" +
-
-
-"</tr>";
-
+    return d.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
 
 }
-
-
-);
-
-
-if(
-
-html === ""
-
-){
-
-
-html =
-
-"<tr>" +
-
-"<td colspan='5'>" +
-
-"No payment records available."
-
-+
-
-"</td>" +
-
-"</tr>";
-
-
-}
-
-
-document.getElementById(
-"paymentsTable"
-)
-
-.innerHTML =
-
-html;
-
-
-}
-
 
 
 /* =========================================
-   PAYMENT SCHEDULE
+   STATUS CLASS
 ========================================= */
 
+function getStatusClass(status){
 
-function renderSchedule(){
+    const value =
+        String(status || "").toLowerCase();
 
+    if(
+        value === "approved" ||
+        value === "active"
+    ){
 
-let html = "";
+        return "status-active";
 
+    }
 
-paymentSchedule.forEach(
+    if(
+        value === "completed" ||
+        value === "paid"
+    ){
 
-payment => {
+        return "status-completed";
 
+    }
 
-let statusClass =
+    if(
+        value === "rejected" ||
+        value === "overdue"
+    ){
 
-"status-pending";
+        return "status-overdue";
 
+    }
 
-if(
-
-payment.status ===
-
-"Completed"
-
-){
-
-statusClass =
-
-"status-completed";
-
-}
-
-
-html +=
-
-"<tr>" +
-
-
-"<td>" +
-
-payment.number +
-
-"</td>" +
-
-
-"<td>" +
-
-payment.date +
-
-"</td>" +
-
-
-"<td>" +
-
-formatMWK(
-payment.amount
-) +
-
-"</td>" +
-
-
-"<td>" +
-
-"<span class='status " +
-
-statusClass +
-
-"'>" +
-
-payment.status +
-
-"</span>" +
-
-
-"</td>" +
-
-
-"</tr>";
-
+    return "status-pending";
 
 }
-
-
-);
-
-
-document.getElementById(
-"scheduleTable"
-)
-
-.innerHTML =
-
-html;
-
-
-}
-
 
 
 /* =========================================
-   APPLICATIONS
+   NAVIGATION
 ========================================= */
 
+function showPage(pageId){
+
+    document.querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+    const page =
+        document.getElementById(pageId);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    if(pageId === "applications"){
+        renderApplications();
+    }
+
+    if(pageId === "payments"){
+        renderPayments();
+    }
+
+    if(pageId === "notifications"){
+        renderNotifications();
+    }
+
+    if(pageId === "messages"){
+        loadSupportMessages();
+    }
+
+}
+
+
+/* =========================================
+   LOAD REAL CUSTOMER PROFILE
+========================================= */
+
+async function loadCustomerProfile(){
+
+    const result =
+        await apiRequest("/auth/profile");
+
+    customer =
+        result.customer ||
+        result.user ||
+        result.data ||
+        result;
+
+    localStorage.setItem(
+        "customer_data",
+        JSON.stringify(customer)
+    );
+
+    updateCustomerDisplay();
+
+}
+
+
+/* =========================================
+   UPDATE CUSTOMER DISPLAY
+========================================= */
+
+function updateCustomerDisplay(){
+
+    if(!customer){
+        return;
+    }
+
+    const name =
+        customer.full_name ||
+        customer.name ||
+        "Customer";
+
+    const email =
+        customer.email ||
+        "-";
+
+    const phone =
+        customer.phone ||
+        "-";
+
+    document.getElementById(
+        "customerWelcomeName"
+    ).innerText = name.toUpperCase();
+
+    document.getElementById(
+        "customerNameTop"
+    ).innerText = name;
+
+    document.getElementById(
+        "profileName"
+    ).innerText = name;
+
+    document.getElementById(
+        "profileEmail"
+    ).innerText = email;
+
+    document.getElementById(
+        "profilePhone"
+    ).innerText = phone;
+
+    document.getElementById(
+        "profileStatus"
+    ).innerText = "Active";
+
+}
+
+
+/* =========================================
+   LOAD REAL APPLICATIONS
+========================================= */
+
+async function loadApplications(){
+
+    const result =
+        await apiRequest(
+            "/loans/my-applications"
+        );
+
+    applications =
+        result.applications ||
+        result.data ||
+        result.loans ||
+        [];
+
+    if(!Array.isArray(applications)){
+        applications = [];
+    }
+
+    renderApplications();
+
+    updateLoanInformation();
+
+}
+
+
+/* =========================================
+   RENDER APPLICATIONS
+========================================= */
 
 function renderApplications(){
 
+    const table =
+        document.getElementById(
+            "applicationsTable"
+        );
 
-let html = "";
+    if(!applications.length){
 
+        table.innerHTML =
+            `<tr>
+                <td colspan="6" class="empty">
+                    No loan applications found.
+                </td>
+            </tr>`;
 
-applications.forEach(
+        return;
 
-application => {
+    }
 
+    let html = "";
 
-let statusClass =
+    applications.forEach(application => {
 
-"status-pending";
+        const id =
+            application.id ||
+            application.application_id ||
+            "-";
 
+        const type =
+            application.loan_type ||
+            application.type ||
+            "-";
 
-if(
+        const amount =
+            application.amount ||
+            0;
 
-application.status ===
+        const date =
+            application.created_at ||
+            application.application_date ||
+            application.date;
 
-"Approved"
+        const status =
+            application.status ||
+            "pending";
 
-){
+        html += `
+        <tr>
 
-statusClass =
+            <td>${escapeHTML(String(id))}</td>
 
-"status-active";
+            <td>${escapeHTML(formatLoanType(type))}</td>
+
+            <td>${formatMWK(amount)}</td>
+
+            <td>${formatDate(date)}</td>
+
+            <td>
+                <span class="status ${getStatusClass(status)}">
+                    ${escapeHTML(capitalize(status))}
+                </span>
+            </td>
+
+            <td>
+                <button
+                    class="btn btn-blue"
+                    onclick="viewApplication('${escapeAttribute(String(id))}')">
+                    VIEW
+                </button>
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    table.innerHTML = html;
 
 }
 
 
-if(
+/* =========================================
+   LOAN INFORMATION
+========================================= */
 
-application.status ===
+function updateLoanInformation(){
 
-"Rejected"
+    if(!applications.length){
 
-){
+        document.getElementById(
+            "totalLoan"
+        ).innerText = "MWK 0";
 
-statusClass =
+        document.getElementById(
+            "loanBalance"
+        ).innerText = "MWK 0";
 
-"status-overdue";
+        document.getElementById(
+            "interestRate"
+        ).innerText = "-";
+
+        document.getElementById(
+            "nextPaymentDate"
+        ).innerText = "-";
+
+        document.getElementById(
+            "nextPaymentAmount"
+        ).innerText = "Amount: MWK 0";
+
+        document.getElementById(
+            "quickLoanType"
+        ).innerText = "-";
+
+        document.getElementById(
+            "quickStartDate"
+        ).innerText = "-";
+
+        document.getElementById(
+            "quickDueDate"
+        ).innerText = "-";
+
+        document.getElementById(
+            "quickMonthlyPayment"
+        ).innerText = "MWK 0";
+
+        document.getElementById(
+            "progressText"
+        ).innerText =
+            "No active loan repayment information available.";
+
+        document.getElementById(
+            "repaymentProgress"
+        ).style.width = "0%";
+
+        document.getElementById(
+            "loanDetailsContent"
+        ).innerHTML =
+            `<div class="empty">
+                No loan information available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    const approved =
+        applications.filter(app => {
+
+            const status =
+                String(app.status || "")
+                .toLowerCase();
+
+            return status === "approved" ||
+                   status === "active";
+
+        });
+
+
+    const source =
+        approved.length ?
+        approved[0] :
+        applications[0];
+
+
+    const amount =
+        Number(source.amount || 0);
+
+
+    const duration =
+        Number(
+            source.duration_months ||
+            source.term ||
+            0
+        );
+
+
+    const interest =
+        Number(
+            source.interest_rate ||
+            source.interest ||
+            0
+        );
+
+
+    document.getElementById(
+        "totalLoan"
+    ).innerText =
+        formatMWK(
+            approved.reduce(
+                (sum, app) =>
+                    sum + Number(app.amount || 0),
+                0
+            )
+        );
+
+
+    document.getElementById(
+        "loanBalance"
+    ).innerText =
+        formatMWK(amount);
+
+
+    document.getElementById(
+        "interestRate"
+    ).innerText =
+        interest ?
+        interest + "%" :
+        "-";
+
+
+    document.getElementById(
+        "quickLoanType"
+    ).innerText =
+        formatLoanType(
+            source.loan_type ||
+            source.type
+        );
+
+
+    document.getElementById(
+        "quickStartDate"
+    ).innerText =
+        formatDate(
+            source.created_at
+        );
+
+
+    document.getElementById(
+        "quickDueDate"
+    ).innerText =
+        duration ?
+        "Term: " + duration + " Months" :
+        "-";
+
+
+    document.getElementById(
+        "quickMonthlyPayment"
+    ).innerText =
+        "Not yet calculated";
+
+
+    document.getElementById(
+        "loanDetailsContent"
+    ).innerHTML = `
+
+        <div class="details-grid">
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Application ID
+                </div>
+                <div class="detail-value">
+                    ${escapeHTML(
+                        String(
+                            source.id ||
+                            source.application_id ||
+                            "-"
+                        )
+                    )}
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Loan Type
+                </div>
+                <div class="detail-value">
+                    ${escapeHTML(
+                        formatLoanType(
+                            source.loan_type ||
+                            source.type
+                        )
+                    )}
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Requested Amount
+                </div>
+                <div class="detail-value">
+                    ${formatMWK(amount)}
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Loan Term
+                </div>
+                <div class="detail-value">
+                    ${duration ?
+                        duration + " Months" :
+                        "-"
+                    }
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Application Date
+                </div>
+                <div class="detail-value">
+                    ${formatDate(source.created_at)}
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Status
+                </div>
+                <div class="detail-value">
+                    ${escapeHTML(
+                        capitalize(
+                            source.status ||
+                            "Pending"
+                        )
+                    )}
+                </div>
+            </div>
+
+        </div>
+
+    `;
+
+
+    const status =
+        String(source.status || "")
+        .toLowerCase();
+
+
+    if(status === "approved" ||
+       status === "active"){
+
+        document.getElementById(
+            "progressText"
+        ).innerText =
+            "Your loan has been approved. Repayment information will appear when payments are recorded.";
+
+    }else{
+
+        document.getElementById(
+            "progressText"
+        ).innerText =
+            "Your application is currently " +
+            capitalize(status || "pending") +
+            ".";
+
+    }
 
 }
-
-
-html +=
-
-"<tr>" +
-
-
-"<td>" +
-
-application.id +
-
-"</td>" +
-
-
-"<td>" +
-
-application.type +
-
-"</td>" +
-
-
-"<td>" +
-
-formatMWK(
-application.amount
-) +
-
-"</td>" +
-
-
-"<td>" +
-
-application.date +
-
-"</td>" +
-
-
-"<td>" +
-
-"<span class='status " +
-
-statusClass +
-
-"'>" +
-
-application.status +
-
-"</span>" +
-
-"</td>" +
-
-
-"<td>" +
-
-
-"<button class='btn btn-blue' " +
-
-"onclick=\"viewApplication('" +
-
-application.id +
-
-"')\">" +
-
-"VIEW" +
-
-"</button>" +
-
-
-"</td>" +
-
-
-"</tr>";
-
-
-}
-
-
-);
-
-
-document.getElementById(
-"applicationsTable"
-)
-
-.innerHTML =
-
-html;
-
-
-}
-
 
 
 /* =========================================
    VIEW APPLICATION
 ========================================= */
 
-
 function viewApplication(id){
 
+    const application =
+        applications.find(app =>
+            String(
+                app.id ||
+                app.application_id
+            ) === String(id)
+        );
 
-const application =
+    if(!application){
+        return;
+    }
 
-applications.find(
+    const type =
+        application.loan_type ||
+        application.type ||
+        "-";
 
-app =>
+    const amount =
+        Number(application.amount || 0);
 
-app.id === id
+    const status =
+        application.status ||
+        "pending";
 
-);
+    document.getElementById(
+        "applicationDetails"
+    ).innerHTML = `
 
+        <div class="details-grid">
 
-if(
+            <div class="detail-box">
+                <div class="detail-title">
+                    Application ID
+                </div>
+                <div class="detail-value">
+                    ${escapeHTML(
+                        String(
+                            application.id ||
+                            application.application_id ||
+                            "-"
+                        )
+                    )}
+                </div>
+            </div>
 
-!application
+            <div class="detail-box">
+                <div class="detail-title">
+                    Loan Type
+                </div>
+                <div class="detail-value">
+                    ${escapeHTML(
+                        formatLoanType(type)
+                    )}
+                </div>
+            </div>
 
-){
+            <div class="detail-box">
+                <div class="detail-title">
+                    Requested Amount
+                </div>
+                <div class="detail-value">
+                    ${formatMWK(amount)}
+                </div>
+            </div>
 
-return;
+            <div class="detail-box">
+                <div class="detail-title">
+                    Application Date
+                </div>
+                <div class="detail-value">
+                    ${formatDate(
+                        application.created_at
+                    )}
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Duration
+                </div>
+                <div class="detail-value">
+                    ${
+                        application.duration_months
+                        ?
+                        application.duration_months +
+                        " Months"
+                        :
+                        "-"
+                    }
+                </div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-title">
+                    Status
+                </div>
+                <div class="detail-value">
+                    ${escapeHTML(
+                        capitalize(status)
+                    )}
+                </div>
+            </div>
+
+        </div>
+
+    `;
+
+    document.getElementById(
+        "applicationModal"
+    ).style.display = "block";
 
 }
-
-
-document.getElementById(
-"applicationDetails"
-)
-
-.innerHTML =
-
-
-"<p><strong>Application ID:</strong> " +
-
-application.id +
-
-"</p><br>" +
-
-
-"<p><strong>Loan Type:</strong> " +
-
-application.type +
-
-"</p><br>" +
-
-
-"<p><strong>Requested Amount:</strong> " +
-
-formatMWK(
-application.amount
-) +
-
-"</p><br>" +
-
-
-"<p><strong>Application Date:</strong> " +
-
-application.date +
-
-"</p><br>" +
-
-
-"<p><strong>Status:</strong> " +
-
-application.status +
-
-"</p>";
-
-
-document.getElementById(
-"applicationModal"
-)
-
-.style.display =
-
-"block";
-
-
-}
-
 
 
 function closeApplicationModal(){
 
-
-document.getElementById(
-"applicationModal"
-)
-
-.style.display =
-
-"none";
-
+    document.getElementById(
+        "applicationModal"
+    ).style.display = "none";
 
 }
 
+
+/* =========================================
+   PAYMENTS
+========================================= */
+
+async function loadPayments(){
+
+    try{
+
+        const result =
+            await apiRequest(
+                "/payments/my-payments"
+            );
+
+        payments =
+            result.payments ||
+            result.data ||
+            [];
+
+        if(!Array.isArray(payments)){
+            payments = [];
+        }
+
+        renderPayments();
+
+    }catch(error){
+
+        payments = [];
+
+        renderPayments();
+
+    }
+
+}
+
+
+function renderPayments(){
+
+    const table =
+        document.getElementById(
+            "paymentsTable"
+        );
+
+    if(!payments.length){
+
+        table.innerHTML =
+            `<tr>
+                <td colspan="5" class="empty">
+                    No payment records available.
+                </td>
+            </tr>`;
+
+        return;
+
+    }
+
+    let html = "";
+
+    payments.forEach(payment => {
+
+        html += `
+
+        <tr>
+
+            <td>
+                ${formatDate(
+                    payment.created_at ||
+                    payment.payment_date
+                )}
+            </td>
+
+            <td>
+                ${formatMWK(
+                    payment.amount
+                )}
+            </td>
+
+            <td>
+                ${escapeHTML(
+                    payment.payment_method ||
+                    "-"
+                )}
+            </td>
+
+            <td>
+                ${escapeHTML(
+                    payment.reference ||
+                    payment.id ||
+                    "-"
+                )}
+            </td>
+
+            <td>
+                <span class="status ${
+                    getStatusClass(
+                        payment.payment_status ||
+                        payment.status
+                    )
+                }">
+                    ${escapeHTML(
+                        capitalize(
+                            payment.payment_status ||
+                            payment.status ||
+                            "Pending"
+                        )
+                    )}
+                </span>
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    table.innerHTML = html;
+
+}
+
+
+/* =========================================
+   SUPPORT
+========================================= */
+
+async function sendSupportMessage(){
+
+    const subject =
+        document.getElementById(
+            "supportSubject"
+        ).value.trim();
+
+    const message =
+        document.getElementById(
+            "supportMessage"
+        ).value.trim();
+
+
+    if(!message){
+
+        showAlert(
+            "Please enter your message."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await apiRequest(
+            "/support/send",
+            {
+                method:"POST",
+
+                body:{
+                    name:
+                        customer?.full_name ||
+                        customer?.name ||
+                        "Customer",
+
+                    email:
+                        customer?.email ||
+                        "",
+
+                    subject:subject,
+
+                    message:message
+                }
+            }
+        );
+
+
+        document.getElementById(
+            "supportSubject"
+        ).value = "";
+
+        document.getElementById(
+            "supportMessage"
+        ).value = "";
+
+
+        showAlert(
+            "Support message sent successfully."
+        );
+
+
+        await loadSupportMessages();
+
+
+    }catch(error){
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SUPPORT MESSAGES
+========================================= */
+
+async function loadSupportMessages(){
+
+    const container =
+        document.getElementById(
+            "messagesList"
+        );
+
+    try{
+
+        const result =
+            await apiRequest(
+                "/support/my-messages"
+            );
+
+        const messages =
+            result.messages ||
+            result.data ||
+            [];
+
+        if(!Array.isArray(messages) ||
+           !messages.length){
+
+            container.innerHTML =
+                `<div class="empty">
+                    No messages available.
+                </div>`;
+
+            return;
+
+        }
+
+
+        let html = "";
+
+        messages.forEach(message => {
+
+            html += `
+
+            <div class="message-card">
+
+                <strong>
+                    ${escapeHTML(
+                        message.subject ||
+                        "Support Message"
+                    )}
+                </strong>
+
+                <p style="margin-top:10px;">
+                    ${escapeHTML(
+                        message.message || ""
+                    )}
+                </p>
+
+                <div class="notification-date">
+                    ${formatDate(
+                        message.created_at
+                    )}
+                </div>
+
+                <div class="message-status">
+                    Status:
+                    ${escapeHTML(
+                        capitalize(
+                            message.status ||
+                            "new"
+                        )
+                    )}
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+        container.innerHTML = html;
+
+    }catch(error){
+
+        container.innerHTML =
+            `<div class="empty">
+                Unable to load messages.
+            </div>`;
+
+    }
+
+}
 
 
 /* =========================================
    NOTIFICATIONS
 ========================================= */
 
-
 function renderNotifications(){
 
+    const list =
+        document.getElementById(
+            "notificationList"
+        );
 
-let html = "";
-
-
-notifications.forEach(
-
-notification => {
-
-
-html +=
+    let items = [];
 
 
-"<div class='notification-item'>" +
+    applications.forEach(application => {
+
+        const status =
+            String(
+                application.status ||
+                "pending"
+            ).toLowerCase();
 
 
-"<strong>" +
+        items.push({
 
-notification.message +
+            message:
+                "Loan application " +
+                String(
+                    application.id ||
+                    application.application_id ||
+                    ""
+                ) +
+                " is " +
+                status + ".",
 
-"</strong>" +
+            date:
+                application.created_at
+
+        });
+
+    });
 
 
-"<div class='notification-date'>" +
+    if(!items.length){
 
-notification.date +
+        list.innerHTML =
+            `<div class="empty">
+                No notifications available.
+            </div>`;
 
-"</div>" +
+        document.getElementById(
+            "notificationCount"
+        ).innerText = "0";
+
+        return;
+
+    }
 
 
-"</div>";
+    document.getElementById(
+        "notificationCount"
+    ).innerText =
+        String(items.length);
 
+
+    let html = "";
+
+    items.forEach(item => {
+
+        html += `
+
+        <div class="notification-item">
+
+            <strong>
+                ${escapeHTML(
+                    item.message
+                )}
+            </strong>
+
+            <div class="notification-date">
+                ${formatDate(item.date)}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    list.innerHTML = html;
 
 }
-
-
-);
-
-
-document.getElementById(
-"notificationList"
-)
-
-.innerHTML =
-
-html;
-
-
-}
-
 
 
 /* =========================================
-   SUPPORT MESSAGE
+   PROFILE EDIT
 ========================================= */
-
-
-function sendSupportMessage(){
-
-
-const subject =
-
-document.getElementById(
-"supportSubject"
-).value;
-
-
-const message =
-
-document.getElementById(
-"supportMessage"
-).value;
-
-
-if(
-
-!subject ||
-
-!message
-
-){
-
-
-alert(
-
-"Please enter a subject and message."
-
-);
-
-
-return;
-
-}
-
-
-/*
-REAL BACKEND CONNECTION:
-
-POST
-
-/api/customer/support
-
-*/
-
-
-showAlert(
-
-"Your message has been prepared for secure delivery."
-
-);
-
-
-document.getElementById(
-"supportSubject"
-).value = "";
-
-
-document.getElementById(
-"supportMessage"
-).value = "";
-
-
-}
-
-
-
-/* =========================================
-   PROFILE
-========================================= */
-
-
-function loadProfile(){
-
-
-document.getElementById(
-"profileName"
-)
-
-.innerText =
-
-customer.name;
-
-
-document.getElementById(
-"profileEmail"
-)
-
-.innerText =
-
-customer.email;
-
-
-document.getElementById(
-"profilePhone"
-)
-
-.innerText =
-
-customer.phone;
-
-
-document.getElementById(
-"profileStatus"
-)
-
-.innerText =
-
-customer.status;
-
-
-}
-
-
 
 function openProfileModal(){
 
+    if(!customer){
+        return;
+    }
 
-document.getElementById(
-"editName"
-).value =
+    document.getElementById(
+        "editName"
+    ).value =
+        customer.full_name ||
+        customer.name ||
+        "";
 
-customer.name;
+    document.getElementById(
+        "editPhone"
+    ).value =
+        customer.phone ||
+        "";
 
-
-document.getElementById(
-"editPhone"
-).value =
-
-customer.phone;
-
-
-document.getElementById(
-"profileModal"
-)
-
-.style.display =
-
-"block";
-
+    document.getElementById(
+        "profileModal"
+    ).style.display = "block";
 
 }
-
 
 
 function closeProfileModal(){
 
-
-document.getElementById(
-"profileModal"
-)
-
-.style.display =
-
-"none";
-
+    document.getElementById(
+        "profileModal"
+    ).style.display = "none";
 
 }
-
-
-
-function saveProfile(){
-
-
-const name =
-
-document.getElementById(
-"editName"
-).value;
-
-
-const phone =
-
-document.getElementById(
-"editPhone"
-).value;
-
-
-if(
-
-!name ||
-
-!phone
-
-){
-
-alert(
-
-"Please complete all fields."
-
-);
-
-return;
-
-}
-
-
-customer.name = name;
-
-customer.phone = phone;
 
 
 /*
-REAL BACKEND:
+The current backend routes supplied for this project
+do not include a verified profile-update endpoint.
 
-PUT
-
-/api/customer/profile
-
+Therefore this dashboard does NOT pretend to save
+profile changes to the server.
 */
 
+function saveProfile(){
 
-loadProfile();
-
-loadCustomerDashboard();
-
-
-closeProfileModal();
-
-
-showAlert(
-
-"Profile updated successfully."
-
-);
-
+    showAlert(
+        "Profile editing will be enabled when the secure profile-update API is added."
+    );
 
 }
-
 
 
 /* =========================================
    PASSWORD
 ========================================= */
 
-
 function openPasswordModal(){
 
-
-document.getElementById(
-"passwordModal"
-)
-
-.style.display =
-
-"block";
-
+    document.getElementById(
+        "passwordModal"
+    ).style.display = "block";
 
 }
-
 
 
 function closePasswordModal(){
 
-
-document.getElementById(
-"passwordModal"
-)
-
-.style.display =
-
-"none";
-
+    document.getElementById(
+        "passwordModal"
+    ).style.display = "none";
 
 }
-
 
 
 function changePassword(){
 
-
-const currentPassword =
-
-document.getElementById(
-"currentPassword"
-).value;
-
-
-const newPassword =
-
-document.getElementById(
-"newPassword"
-).value;
-
-
-const confirmPassword =
-
-document.getElementById(
-"confirmPassword"
-).value;
-
-
-if(
-
-!currentPassword ||
-
-!newPassword ||
-
-!confirmPassword
-
-){
-
-alert(
-
-"Please complete all password fields."
-
-);
-
-return;
+    showAlert(
+        "Password changing will be enabled when the secure password-change API is added."
+    );
 
 }
-
-
-if(
-
-newPassword !== confirmPassword
-
-){
-
-alert(
-
-"New passwords do not match."
-
-);
-
-return;
-
-}
-
-
-if(
-
-newPassword.length < 8
-
-){
-
-alert(
-
-"Password must contain at least 8 characters."
-
-);
-
-return;
-
-}
-
-
-/*
-REAL BACKEND:
-
-PUT
-
-/api/auth/change-password
-
-The backend must:
-
-1. Verify old password.
-2. Hash new password.
-3. Save new password.
-4. Record audit log.
-5. Optionally invalidate old sessions.
-
-*/
-
-
-showAlert(
-
-"Password update request prepared."
-
-);
-
-
-closePasswordModal();
-
-
-}
-
 
 
 /* =========================================
    LOGOUT
 ========================================= */
 
-
 function logout(){
 
+    clearSession();
 
-localStorage.removeItem(
+    showAlert(
+        "You have been logged out."
+    );
 
-"jaycobCustomerToken"
+    setTimeout(() => {
 
-);
+        window.location.href =
+            "Index.html";
 
-
-/*
-IN REAL SYSTEM:
-
-Redirect to login page.
-
-*/
-
-
-showAlert(
-
-"You have been logged out."
-
-);
-
-
-setTimeout(
-
-function(){
-
-location.reload();
-
-},
-
-1000
-
-);
-
+    },1000);
 
 }
 
 
-
 /* =========================================
-   ALERT ENGINE
+   HELPERS
 ========================================= */
 
+function capitalize(value){
 
-function showAlert(message){
+    const text =
+        String(value || "");
 
+    if(!text){
+        return "";
+    }
 
-const alertBox =
-
-document.getElementById(
-"alertBox"
-);
-
-
-alertBox.innerText =
-
-message;
-
-
-alertBox.style.display =
-
-"block";
-
-
-setTimeout(
-
-function(){
-
-
-alertBox.style.display =
-
-"none";
-
-
-},
-
-3500
-
-);
-
+    return text.charAt(0).toUpperCase() +
+           text.slice(1);
 
 }
 
 
+function formatLoanType(type){
 
-/* =========================================
-   REAL BACKEND API STRUCTURE
+    if(!type){
+        return "-";
+    }
 
-   FUTURE CONNECTION
-========================================= */
+    const value =
+        String(type).toLowerCase();
 
+    if(value === "personal"){
+        return "Personal Loan";
+    }
 
-/*
+    if(value === "business"){
+        return "Business Loan";
+    }
 
-CUSTOMER PROFILE
+    return String(type);
 
-GET
-
-/api/customer/profile
-
-
-
-CUSTOMER LOAN
-
-GET
-
-/api/customer/loan
+}
 
 
+function escapeHTML(value){
 
-CUSTOMER PAYMENTS
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
-GET
-
-/api/customer/payments
-
-
-
-PAYMENT SCHEDULE
-
-GET
-
-/api/customer/payment-schedule
+}
 
 
+function escapeAttribute(value){
 
-CUSTOMER APPLICATIONS
-
-GET
-
-/api/customer/applications
-
-
-
-CUSTOMER NOTIFICATIONS
-
-GET
-
-/api/customer/notifications
-
-
-
-CUSTOMER MESSAGES
-
-GET
-
-/api/customer/messages
-
-
-
-UPDATE PROFILE
-
-PUT
-
-/api/customer/profile
-
-
-
-CHANGE PASSWORD
-
-PUT
-
-/api/auth/change-password
-
-
-
-SEND SUPPORT MESSAGE
-
-POST
-
-/api/customer/support
-
-
-
-*/
+    return String(value)
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+}
 
 
 /* =========================================
-   INITIALIZE DASHBOARD
+   INITIALIZE
 ========================================= */
 
+async function initializeDashboard(){
 
-loadCustomerDashboard();
+    if(!customerToken){
 
-loadProfile();
+        alert(
+            "Please log in to access your customer dashboard."
+        );
 
-renderPayments();
+        window.location.href =
+            "Index.html";
 
-renderSchedule();
+        return;
 
-renderApplications();
-
-renderNotifications();
+    }
 
 
-</script></body></html>
+    try{
+
+        await loadCustomerProfile();
+
+        await loadApplications();
+
+        await loadPayments();
+
+        await loadSupportMessages();
+
+        renderNotifications();
+
+        showPage("dashboard");
+
+
+    }catch(error){
+
+        console.error(
+            "Dashboard initialization error:",
+            error
+        );
+
+        showAlert(
+            error.message
+        );
+
+
+        if(!customerToken){
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "Index.html";
+
+            },1500);
+
+        }
+
+    }
+
+}
+
+
+initializeDashboard();
+
+</script></body>
+</html>
