@@ -28,7 +28,9 @@ router.post("/login", async (req, res) => {
 
     const { data: admin, error } = await supabase
       .from("admins")
-      .select("id, full_name, email, password_hash, role, created_at")
+      .select(
+        "id, full_name, email, password_hash, role, created_at"
+      )
       .eq("email", email)
       .maybeSingle();
 
@@ -105,7 +107,10 @@ function authenticateAdmin(req, res, next) {
   try {
     const authorization = req.headers.authorization;
 
-    if (!authorization || !authorization.startsWith("Bearer ")) {
+    if (
+      !authorization ||
+      !authorization.startsWith("Bearer ")
+    ) {
       return res.status(401).json({
         success: false,
         message: "Admin authentication token is required"
@@ -159,199 +164,742 @@ function authenticateAdmin(req, res, next) {
 // ==========================================
 // ADMIN PROFILE
 // ==========================================
-router.get("/profile", authenticateAdmin, async (req, res) => {
-  try {
-    const { data: admin, error } = await supabase
-      .from("admins")
-      .select("id, full_name, email, role, created_at")
-      .eq("id", req.admin.admin_id)
-      .maybeSingle();
+router.get(
+  "/profile",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const { data: admin, error } = await supabase
+        .from("admins")
+        .select(
+          "id, full_name, email, role, created_at"
+        )
+        .eq("id", req.admin.admin_id)
+        .maybeSingle();
 
-    if (error) {
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve admin profile"
+        });
+      }
+
+      if (!admin) {
+        return res.status(404).json({
+          success: false,
+          message: "Admin account not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Admin profile retrieved successfully",
+        admin
+      });
+
+    } catch (error) {
       console.error(error);
 
-      return res.status(500).json({
+      res.status(500).json({
         success: false,
         message: "Could not retrieve admin profile"
       });
     }
-
-    if (!admin) {
-      return res.status(404).json({
-        success: false,
-        message: "Admin account not found"
-      });
-    }
-
-    res.json({
-      success: true,
-      message: "Admin profile retrieved successfully",
-      admin
-    });
-
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Could not retrieve admin profile"
-    });
   }
-});
+);
 
 // ==========================================
 // ADMIN DASHBOARD
 // ==========================================
-router.get("/dashboard", authenticateAdmin, async (req, res) => {
-  try {
+router.get(
+  "/dashboard",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const { count: customersCount, error: customersError } =
+        await supabase
+          .from("customers")
+          .select("id", {
+            count: "exact",
+            head: true
+          });
 
-    // ------------------------------------------
-    // COUNT CUSTOMERS
-    // ------------------------------------------
-    const { count: customersCount, error: customersError } =
-      await supabase
-        .from("customers")
-        .select("id", { count: "exact", head: true });
+      if (customersError) {
+        console.error(customersError);
 
-    if (customersError) {
-      console.error(customersError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve customer statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // COUNT LOAN APPLICATIONS
-    // ------------------------------------------
-    const { count: loansCount, error: loansError } =
-      await supabase
-        .from("loan_applications")
-        .select("id", { count: "exact", head: true });
-
-    if (loansError) {
-      console.error(loansError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve loan statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // COUNT PENDING LOANS
-    // ------------------------------------------
-    const { count: pendingLoansCount, error: pendingLoansError } =
-      await supabase
-        .from("loan_applications")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "pending");
-
-    if (pendingLoansError) {
-      console.error(pendingLoansError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve pending loan statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // COUNT APPROVED LOANS
-    // ------------------------------------------
-    const { count: approvedLoansCount, error: approvedLoansError } =
-      await supabase
-        .from("loan_applications")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "approved");
-
-    if (approvedLoansError) {
-      console.error(approvedLoansError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve approved loan statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // COUNT PAYMENTS
-    // ------------------------------------------
-    const { count: paymentsCount, error: paymentsError } =
-      await supabase
-        .from("payments")
-        .select("id", { count: "exact", head: true });
-
-    if (paymentsError) {
-      console.error(paymentsError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve payment statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // COUNT SUPPORT MESSAGES
-    // ------------------------------------------
-    const { count: supportCount, error: supportError } =
-      await supabase
-        .from("support_messages")
-        .select("id", { count: "exact", head: true });
-
-    if (supportError) {
-      console.error(supportError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve support statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // COUNT NEW SUPPORT MESSAGES
-    // ------------------------------------------
-    const { count: newSupportCount, error: newSupportError } =
-      await supabase
-        .from("support_messages")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "new");
-
-    if (newSupportError) {
-      console.error(newSupportError);
-
-      return res.status(500).json({
-        success: false,
-        message: "Could not retrieve new support statistics"
-      });
-    }
-
-    // ------------------------------------------
-    // RETURN DASHBOARD
-    // ------------------------------------------
-    res.json({
-      success: true,
-      message: "Admin dashboard retrieved successfully",
-      dashboard: {
-        customers: customersCount || 0,
-        loan_applications: loansCount || 0,
-        pending_loans: pendingLoansCount || 0,
-        approved_loans: approvedLoansCount || 0,
-        payments: paymentsCount || 0,
-        support_messages: supportCount || 0,
-        new_support_messages: newSupportCount || 0
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve customer statistics"
+        });
       }
-    });
 
-  } catch (error) {
-    console.error(error);
+      const { count: loansCount, error: loansError } =
+        await supabase
+          .from("loan_applications")
+          .select("id", {
+            count: "exact",
+            head: true
+          });
 
-    res.status(500).json({
-      success: false,
-      message: "Could not retrieve admin dashboard"
-    });
+      if (loansError) {
+        console.error(loansError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve loan statistics"
+        });
+      }
+
+      const { count: pendingLoansCount, error: pendingLoansError } =
+        await supabase
+          .from("loan_applications")
+          .select("id", {
+            count: "exact",
+            head: true
+          })
+          .eq("status", "pending");
+
+      if (pendingLoansError) {
+        console.error(pendingLoansError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve pending loan statistics"
+        });
+      }
+
+      const { count: approvedLoansCount, error: approvedLoansError } =
+        await supabase
+          .from("loan_applications")
+          .select("id", {
+            count: "exact",
+            head: true
+          })
+          .eq("status", "approved");
+
+      if (approvedLoansError) {
+        console.error(approvedLoansError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve approved loan statistics"
+        });
+      }
+
+      const { count: rejectedLoansCount, error: rejectedLoansError } =
+        await supabase
+          .from("loan_applications")
+          .select("id", {
+            count: "exact",
+            head: true
+          })
+          .eq("status", "rejected");
+
+      if (rejectedLoansError) {
+        console.error(rejectedLoansError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve rejected loan statistics"
+        });
+      }
+
+      const { count: paymentsCount, error: paymentsError } =
+        await supabase
+          .from("payments")
+          .select("id", {
+            count: "exact",
+            head: true
+          });
+
+      if (paymentsError) {
+        console.error(paymentsError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve payment statistics"
+        });
+      }
+
+      const { count: supportCount, error: supportError } =
+        await supabase
+          .from("support_messages")
+          .select("id", {
+            count: "exact",
+            head: true
+          });
+
+      if (supportError) {
+        console.error(supportError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve support statistics"
+        });
+      }
+
+      const { count: newSupportCount, error: newSupportError } =
+        await supabase
+          .from("support_messages")
+          .select("id", {
+            count: "exact",
+            head: true
+          })
+          .eq("status", "new");
+
+      if (newSupportError) {
+        console.error(newSupportError);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve new support statistics"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Admin dashboard retrieved successfully",
+        dashboard: {
+          customers: customersCount || 0,
+          loan_applications: loansCount || 0,
+          pending_loans: pendingLoansCount || 0,
+          approved_loans: approvedLoansCount || 0,
+          rejected_loans: rejectedLoansCount || 0,
+          payments: paymentsCount || 0,
+          support_messages: supportCount || 0,
+          new_support_messages: newSupportCount || 0
+        }
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve admin dashboard"
+      });
+    }
   }
-});
+);
 
-export default router;
+// ==========================================
+// GET ALL CUSTOMERS
+// ==========================================
+router.get(
+  "/customers",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const { data, error } = await supabase
+        .from("customers")
+        .select(
+          "id, full_name, email, phone, created_at"
+        )
+        .order("created_at", {
+          ascending: false
+        });
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve customers"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Customers retrieved successfully",
+        customers: data || [],
+        total: data ? data.length : 0
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve customers"
+      });
+    }
+  }
+);
+
+// ==========================================
+// GET ONE CUSTOMER
+// ==========================================
+router.get(
+  "/customers/:id",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const customerId = req.params.id;
+
+      const { data: customer, error } = await supabase
+        .from("customers")
+        .select(
+          "id, full_name, email, phone, created_at"
+        )
+        .eq("id", customerId)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve customer"
+        });
+      }
+
+      if (!customer) {
+        return res.status(404).json({
+          success: false,
+          message: "Customer not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Customer retrieved successfully",
+        customer
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve customer"
+      });
+    }
+  }
+);
+
+// ==========================================
+// GET ALL LOAN APPLICATIONS
+// ==========================================
+router.get(
+  "/loans",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const { data, error } = await supabase
+        .from("loan_applications")
+        .select(`
+          id,
+          customer_id,
+          loan_type,
+          amount,
+          duration_months,
+          purpose,
+          status,
+          created_at
+        `)
+        .order("created_at", {
+          ascending: false
+        });
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve loan applications"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Loan applications retrieved successfully",
+        loans: data || [],
+        total: data ? data.length : 0
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve loan applications"
+      });
+    }
+  }
+);
+
+// ==========================================
+// GET ONE LOAN APPLICATION
+// ==========================================
+router.get(
+  "/loans/:id",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const loanId = req.params.id;
+
+      const { data: loan, error } = await supabase
+        .from("loan_applications")
+        .select(`
+          id,
+          customer_id,
+          loan_type,
+          amount,
+          duration_months,
+          purpose,
+          status,
+          created_at
+        `)
+        .eq("id", loanId)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve loan application"
+        });
+      }
+
+      if (!loan) {
+        return res.status(404).json({
+          success: false,
+          message: "Loan application not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Loan application retrieved successfully",
+        loan
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve loan application"
+      });
+    }
+  }
+);
+
+// ==========================================
+// UPDATE LOAN STATUS
+// ==========================================
+router.patch(
+  "/loans/:id/status",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const loanId = req.params.id;
+      const { status } = req.body;
+
+      const allowedStatuses = [
+        "pending",
+        "approved",
+        "rejected"
+      ];
+
+      if (!status || !allowedStatuses.includes(status)) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Invalid status. Use pending, approved, or rejected"
+        });
+      }
+
+      const { data: loan, error } = await supabase
+        .from("loan_applications")
+        .update({
+          status
+        })
+        .eq("id", loanId)
+        .select(`
+          id,
+          customer_id,
+          loan_type,
+          amount,
+          duration_months,
+          purpose,
+          status,
+          created_at
+        `)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not update loan status"
+        });
+      }
+
+      if (!loan) {
+        return res.status(404).json({
+          success: false,
+          message: "Loan application not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: `Loan application ${status} successfully`,
+        loan
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not update loan status"
+      });
+    }
+  }
+);
+
+// ==========================================
+// APPROVE LOAN
+// ==========================================
+router.patch(
+  "/loans/:id/approve",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const loanId = req.params.id;
+
+      const { data: loan, error } = await supabase
+        .from("loan_applications")
+        .update({
+          status: "approved"
+        })
+        .eq("id", loanId)
+        .select(`
+          id,
+          customer_id,
+          loan_type,
+          amount,
+          duration_months,
+          purpose,
+          status,
+          created_at
+        `)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not approve loan"
+        });
+      }
+
+      if (!loan) {
+        return res.status(404).json({
+          success: false,
+          message: "Loan application not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Loan approved successfully",
+        loan
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not approve loan"
+      });
+    }
+  }
+);
+
+// ==========================================
+// REJECT LOAN
+// ==========================================
+router.patch(
+  "/loans/:id/reject",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const loanId = req.params.id;
+
+      const { data: loan, error } = await supabase
+        .from("loan_applications")
+        .update({
+          status: "rejected"
+        })
+        .eq("id", loanId)
+        .select(`
+          id,
+          customer_id,
+          loan_type,
+          amount,
+          duration_months,
+          purpose,
+          status,
+          created_at
+        `)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not reject loan"
+        });
+      }
+
+      if (!loan) {
+        return res.status(404).json({
+          success: false,
+          message: "Loan application not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Loan rejected successfully",
+        loan
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not reject loan"
+      });
+    }
+  }
+);
+
+// ==========================================
+// GET ALL PAYMENTS
+// ==========================================
+router.get(
+  "/payments",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const { data, error } = await supabase
+        .from("payments")
+        .select(`
+          id,
+          customer_id,
+          loan_application_id,
+          amount,
+          payment_method,
+          payment_status,
+          created_at
+        `)
+        .order("created_at", {
+          ascending: false
+        });
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not retrieve payments"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Payments retrieved successfully",
+        payments: data || [],
+        total: data ? data.length : 0
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve payments"
+      });
+    }
+  }
+);
+
+// ==========================================
+// UPDATE PAYMENT STATUS
+// ==========================================
+router.patch(
+  "/payments/:id/status",
+  authenticateAdmin,
+  async (req, res) => {
+    try {
+      const paymentId = req.params.id;
+      const { payment_status } = req.body;
+
+      const allowedStatuses = [
+        "pending",
+        "approved",
+        "completed",
+        "rejected",
+        "failed"
+      ];
+
+      if (
+        !payment_status ||
+        !allowedStatuses.includes(payment_status)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Invalid payment status"
+        });
+      }
+
+      const { data: payment, error } = await supabase
+        .from("payments")
+        .update({
+          payment_status
+        })
+        .eq("id", paymentId)
+        .select(`
+          id,
+          customer_id,
+          loan_application_id,
+          amount,
+          payment_method,
+          payment_status,
+          created_at
+        `)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not update payment status"
+        });
+      }
+
+      if (!payment) {
+        return res.status(404).json({
+          success: false,
+          message: "Payment not found"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Payment status updated successfully",
+        
