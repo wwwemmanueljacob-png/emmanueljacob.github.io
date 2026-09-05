@@ -114,6 +114,13 @@ function authenticateAdmin(req, res, next) {
 
     const token = authorization.split(" ")[1];
 
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Admin authentication token is missing"
+      });
+    }
+
     if (!JWT_SECRET) {
       return res.status(500).json({
         success: false,
@@ -188,6 +195,161 @@ router.get("/profile", authenticateAdmin, async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Could not retrieve admin profile"
+    });
+  }
+});
+
+// ==========================================
+// ADMIN DASHBOARD
+// ==========================================
+router.get("/dashboard", authenticateAdmin, async (req, res) => {
+  try {
+
+    // ------------------------------------------
+    // COUNT CUSTOMERS
+    // ------------------------------------------
+    const { count: customersCount, error: customersError } =
+      await supabase
+        .from("customers")
+        .select("id", { count: "exact", head: true });
+
+    if (customersError) {
+      console.error(customersError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve customer statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // COUNT LOAN APPLICATIONS
+    // ------------------------------------------
+    const { count: loansCount, error: loansError } =
+      await supabase
+        .from("loan_applications")
+        .select("id", { count: "exact", head: true });
+
+    if (loansError) {
+      console.error(loansError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve loan statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // COUNT PENDING LOANS
+    // ------------------------------------------
+    const { count: pendingLoansCount, error: pendingLoansError } =
+      await supabase
+        .from("loan_applications")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "pending");
+
+    if (pendingLoansError) {
+      console.error(pendingLoansError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve pending loan statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // COUNT APPROVED LOANS
+    // ------------------------------------------
+    const { count: approvedLoansCount, error: approvedLoansError } =
+      await supabase
+        .from("loan_applications")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "approved");
+
+    if (approvedLoansError) {
+      console.error(approvedLoansError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve approved loan statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // COUNT PAYMENTS
+    // ------------------------------------------
+    const { count: paymentsCount, error: paymentsError } =
+      await supabase
+        .from("payments")
+        .select("id", { count: "exact", head: true });
+
+    if (paymentsError) {
+      console.error(paymentsError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve payment statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // COUNT SUPPORT MESSAGES
+    // ------------------------------------------
+    const { count: supportCount, error: supportError } =
+      await supabase
+        .from("support_messages")
+        .select("id", { count: "exact", head: true });
+
+    if (supportError) {
+      console.error(supportError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve support statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // COUNT NEW SUPPORT MESSAGES
+    // ------------------------------------------
+    const { count: newSupportCount, error: newSupportError } =
+      await supabase
+        .from("support_messages")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "new");
+
+    if (newSupportError) {
+      console.error(newSupportError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not retrieve new support statistics"
+      });
+    }
+
+    // ------------------------------------------
+    // RETURN DASHBOARD
+    // ------------------------------------------
+    res.json({
+      success: true,
+      message: "Admin dashboard retrieved successfully",
+      dashboard: {
+        customers: customersCount || 0,
+        loan_applications: loansCount || 0,
+        pending_loans: pendingLoansCount || 0,
+        approved_loans: approvedLoansCount || 0,
+        payments: paymentsCount || 0,
+        support_messages: supportCount || 0,
+        new_support_messages: newSupportCount || 0
+      }
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Could not retrieve admin dashboard"
     });
   }
 });
