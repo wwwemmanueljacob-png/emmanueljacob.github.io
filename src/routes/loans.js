@@ -11,7 +11,6 @@ const supabase = createClient(
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-
 // ==========================================
 // AUTHENTICATION MIDDLEWARE
 // ==========================================
@@ -28,6 +27,13 @@ function authenticateCustomer(req, res, next) {
 
     const token = authorization.split(" ")[1];
 
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication token is missing"
+      });
+    }
+
     if (!JWT_SECRET) {
       return res.status(500).json({
         success: false,
@@ -37,11 +43,19 @@ function authenticateCustomer(req, res, next) {
 
     const decoded = jwt.verify(token, JWT_SECRET);
 
+    if (!decoded.customer_id) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid customer authentication"
+      });
+    }
+
     req.customer = decoded;
 
     next();
-
   } catch (error) {
+    console.error(error);
+
     if (error.name === "TokenExpiredError") {
       return res.status(401).json({
         success: false,
@@ -56,7 +70,6 @@ function authenticateCustomer(req, res, next) {
   }
 }
 
-
 // ==========================================
 // SUBMIT LOAN APPLICATION
 // ==========================================
@@ -64,15 +77,35 @@ router.post("/apply", authenticateCustomer, async (req, res) => {
   try {
     const {
       loan_type,
+      applicant_name,
+      phone,
+      email,
+      residential_address,
+      employment_status,
+      monthly_income,
+      business_name,
+      business_address,
+      business_type,
+      monthly_business_income,
       amount,
       duration_months,
       purpose
     } = req.body;
 
-    if (!loan_type || !amount || !duration_months) {
+    // ==========================================
+    // BASIC VALIDATION
+    // ==========================================
+    if (!loan_type) {
       return res.status(400).json({
         success: false,
-        message: "Loan type, amount and repayment period are required"
+        message: "Loan type is required"
+      });
+    }
+
+    if (!amount || !duration_months) {
+      return res.status(400).json({
+        success: false,
+        message: "Loan amount and repayment period are required"
       });
     }
 
@@ -93,10 +126,75 @@ router.post("/apply", authenticateCustomer, async (req, res) => {
       });
     }
 
-    // Make sure the logged-in customer still exists
+    // ==========================================
+    // PERSONAL LOAN VALIDATION
+    // ==========================================
+    if (loan_type === "personal") {
+      if (
+        !applicant_name ||
+        !phone ||
+        !email ||
+        !residential_address ||
+        !employment_status ||
+        !monthly_income
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Personal loan requires applicant name, phone, email, address, employment status and monthly income"
+        });
+      }
+
+      const monthlyIncome = Number(monthly_income);
+
+      if (!Number.isFinite(monthlyIncome) || monthlyIncome <= 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Monthly income must be a valid amount greater than zero"
+        });
+      }
+    }
+
+    // ==========================================
+    // BUSINESS LOAN VALIDATION
+    // ==========================================
+    if (loan_type === "business") {
+      if (
+        !applicant_name ||
+        !business_name ||
+        !phone ||
+        !email ||
+        !business_address ||
+        !business_type ||
+        !monthly_business_income
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Business loan requires applicant name, business name, phone, email, business address, business type and monthly business income"
+        });
+      }
+
+      const monthlyBusinessIncome = Number(monthly_business_income);
+
+      if (
+        !Number.isFinite(monthlyBusinessIncome) ||
+        monthlyBusinessIncome <= 0
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Monthly business income must be a valid amount greater than zero"
+        });
+      }
+    }
+
+    // ==========================================
+    // VERIFY CUSTOMER
+    // ==========================================
     const { data: customer, error: customerError } = await supabase
       .from("customers")
-      .select("id")
+      .select("id, full_name, email, phone")
       .eq("id", req.customer.customer_id)
       .maybeSingle();
 
@@ -116,21 +214,62 @@ router.post("/apply", authenticateCustomer, async (req, res) => {
       });
     }
 
-    // Create loan application
+    // ==========================================
+    // PREPARE APPLICATION DATA
+    // ==========================================
+    const applicationData = {
+      customer_id: customer.id,
+      loan_type,
+      applicant_name: applicant_name || customer.full_name,
+      phone: phone || customer.phone,
+      email: email || customer.email,
+      residential_address: residential_address || null,
+      employment_status: employment_status || null,
+      monthly_income:
+        monthly_income !== undefined && monthly_income !== ""
+          ? Number(monthly_income)
+          : null,
+      business_name: business_name || null,
+      business_address: business_address || null,
+      business_type: business_type || null,
+      monthly_business_income:
+        monthly_business_income !== undefined &&
+        monthly_business_income !== ""
+          ? Number(monthly_business_income)
+          : null,
+      amount: loanAmount,
+      duration_months: duration,
+      purpose: purpose || null,
+      status: "pending"
+    };
+
+    // ==========================================
+    // SAVE APPLICATION
+    // ==========================================
     const { data: application, error: insertError } = await supabase
       .from("loan_applications")
-      .insert([
-        {
-          customer_id: customer.id,
-          loan_type,
-          amount: loanAmount,
-          duration_months: duration,
-          purpose: purpose || null,
-          status: "pending"
-        }
-      ])
+      .insert([applicationData])
       .select(
-        "id, customer_id, loan_type, amount, duration_months, purpose, status, created_at"
+        `
+        id,
+        customer_id,
+        loan_type,
+        applicant_name,
+        phone,
+        email,
+        residential_address,
+        employment_status,
+        monthly_income,
+        business_name,
+        business_address,
+        business_type,
+        monthly_business_income,
+        amount,
+        duration_months,
+        purpose,
+        status,
+        created_at
+        `
       )
       .single();
 
@@ -139,26 +278,28 @@ router.post("/apply", authenticateCustomer, async (req, res) => {
 
       return res.status(500).json({
         success: false,
-        message: "Could not submit loan application"
+        message: "Could not submit loan application",
+        error: insertError.message
       });
     }
 
-    res.status(201).json({
+    // ==========================================
+    // SUCCESS
+    // ==========================================
+    return res.status(201).json({
       success: true,
       message: "Loan application submitted successfully",
       application
     });
-
   } catch (error) {
     console.error(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Loan application failed"
     });
   }
 });
-
 
 // ==========================================
 // GET MY LOAN APPLICATIONS
@@ -168,7 +309,25 @@ router.get("/my-applications", authenticateCustomer, async (req, res) => {
     const { data: applications, error } = await supabase
       .from("loan_applications")
       .select(
-        "id, loan_type, amount, duration_months, purpose, status, created_at"
+        `
+        id,
+        loan_type,
+        applicant_name,
+        phone,
+        email,
+        residential_address,
+        employment_status,
+        monthly_income,
+        business_name,
+        business_address,
+        business_type,
+        monthly_business_income,
+        amount,
+        duration_months,
+        purpose,
+        status,
+        created_at
+        `
       )
       .eq("customer_id", req.customer.customer_id)
       .order("created_at", { ascending: false });
@@ -182,21 +341,19 @@ router.get("/my-applications", authenticateCustomer, async (req, res) => {
       });
     }
 
-    res.json({
+    return res.json({
       success: true,
       message: "Loan applications retrieved successfully",
-      applications
+      applications: applications || []
     });
-
   } catch (error) {
     console.error(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Could not retrieve loan applications"
     });
   }
 });
-
 
 export default router;
