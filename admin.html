@@ -1,6569 +1,4116 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8"><meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
-«»
-
-<title>
-JAY C O B FINANCIAL SERVICES — Admin Dashboard
-</title><style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  background:
-    #f3f6fb;
-
-  color:
-    #1f2937;
-
-  min-height:
-    100vh;
-}
-
-button,
-input,
-select,
-textarea {
-  font:
-    inherit;
-}
-
-button {
-  cursor:
-    pointer;
-}
-
-a {
-  text-decoration:
-    none;
-}
-
-
-/* =========================================================
-   LOGIN SCREEN
-========================================================= */
-
-.login-screen {
-  position:
-    fixed;
-
-  inset:
-    0;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  padding:
-    20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #071a35,
-      #123b73,
-      #0d6efd
-    );
-
-  z-index:
-    5000;
-}
-
-.login-screen.hidden {
-  display:
-    none;
-}
-
-.login-card {
-  width:
-    100%;
-
-  max-width:
-    430px;
-
-  background:
-    #ffffff;
-
-  border-radius:
-    22px;
-
-  padding:
-    35px;
-
-  box-shadow:
-    0 25px 80px
-    rgba(0,0,0,.35);
-}
-
-.logo-box {
-  text-align:
-    center;
-
-  margin-bottom:
-    30px;
-}
-
-.logo {
-  width:
-    75px;
-
-  height:
-    75px;
-
-  margin:
-    0 auto 15px;
-
-  border-radius:
-    20px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0d6efd,
-      #073b83
-    );
-
-  color:
-    white;
-
-  font-size:
-    25px;
-
-  font-weight:
-    bold;
-
-  box-shadow:
-    0 10px 25px
-    rgba(13,110,253,.3);
-}
-
-.logo-box h1 {
-  font-size:
-    25px;
-
-  color:
-    #102a43;
-
-  margin-bottom:
-    7px;
-}
-
-.logo-box p {
-  font-size:
-    12px;
-
-  color:
-    #6b7280;
-}
-
-.login-footer {
-  margin-top:
-    25px;
-
-  text-align:
-    center;
-
-  color:
-    #9ca3af;
-
-  font-size:
-    12px;
-}
-
-.login-error {
-  display:
-    none;
-
-  margin-top:
-    15px;
-
-  padding:
-    12px;
-
-  border-radius:
-    10px;
-
-  background:
-    #fee2e2;
-
-  color:
-    #b91c1c;
-
-  font-size:
-    14px;
-}
-
-.login-error.show {
-  display:
-    block;
-}
-
-.password-wrapper {
-  position:
-    relative;
-}
-
-.password-wrapper input {
-  padding-right:
-    80px;
-}
-
-.password-toggle {
-  position:
-    absolute;
-
-  right:
-    10px;
-
-  top:
-    50%;
-
-  transform:
-    translateY(-50%);
-
-  border:
-    none;
-
-  background:
-    transparent;
-
-  color:
-    #0d6efd;
-
-  font-size:
-    12px;
-
-  font-weight:
-    bold;
-}
-
-
-/* =========================================================
-   APP LAYOUT
-========================================================= */
-
-.app {
-  display:
-    none;
-
-  min-height:
-    100vh;
-}
-
-.app.show {
-  display:
-    flex;
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.sidebar {
-  width:
-    270px;
-
-  background:
-    #0b1f3a;
-
-  color:
-    white;
-
-  min-height:
-    100vh;
-
-  position:
-    fixed;
-
-  left:
-    0;
-
-  top:
-    0;
-
-  bottom:
-    0;
-
-  overflow-y:
-    auto;
-
-  z-index:
-    1000;
-
-  transition:
-    transform .3s ease;
-}
-
-.sidebar-header {
-  padding:
-    25px 20px;
-
-  border-bottom:
-    1px solid
-    rgba(255,255,255,.08);
-}
-
-.sidebar-brand {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    12px;
-}
-
-.sidebar-logo {
-  width:
-    45px;
-
-  height:
-    45px;
-
-  border-radius:
-    12px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  background:
-    #0d6efd;
-
-  font-weight:
-    bold;
-}
-
-.sidebar-brand strong {
-  display:
-    block;
-
-  font-size:
-    14px;
-}
-
-.sidebar-brand span {
-  display:
-    block;
-
-  margin-top:
-    4px;
-
-  color:
-    #9db2ce;
-
-  font-size:
-    11px;
-}
-
-.nav-section {
-  padding:
-    22px 20px 8px;
-
-  color:
-    #7e98b9;
-
-  font-size:
-    11px;
-
-  text-transform:
-    uppercase;
-
-  letter-spacing:
-    1px;
-}
-
-.nav-item {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    13px;
-
-  padding:
-    13px 20px;
-
-  color:
-    #c5d3e6;
-
-  transition:
-    .2s;
-}
-
-.nav-item:hover {
-  background:
-    rgba(255,255,255,.06);
-
-  color:
-    white;
-}
-
-.nav-item.active {
-  background:
-    #0d6efd;
-
-  color:
-    white;
-
-  border-left:
-    4px solid
-    #ffffff;
-}
-
-.nav-icon {
-  width:
-    20px;
-
-  text-align:
-    center;
-}
-
-.sidebar-footer {
-  padding:
-    20px;
-
-  margin-top:
-    20px;
-
-  border-top:
-    1px solid
-    rgba(255,255,255,.08);
-}
-
-.backend-status {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    9px;
-
-  color:
-    #b7c8dc;
-
-  font-size:
-    12px;
-}
-
-.backend-dot {
-  width:
-    10px;
-
-  height:
-    10px;
-
-  border-radius:
-    50%;
-
-  background:
-    #f59e0b;
-}
-
-.backend-dot.online {
-  background:
-    #22c55e;
-}
-
-.backend-dot.offline {
-  background:
-    #ef4444;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main {
-  width:
-    calc(100% - 270px);
-
-  margin-left:
-    270px;
-
-  min-height:
-    100vh;
-}
-
-.topbar {
-  height:
-    80px;
-
-  background:
-    white;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  padding:
-    0 30px;
-
-  border-bottom:
-    1px solid
-    #e5e7eb;
-
-  position:
-    sticky;
-
-  top:
-    0;
-
-  z-index:
-    500;
-}
-
-.topbar-left {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    15px;
-}
-
-.page-title {
-  font-size:
-    22px;
-
-  font-weight:
-    bold;
-
-  color:
-    #102a43;
-}
-
-.page-subtitle {
-  margin-top:
-    3px;
-
-  font-size:
-    11px;
-
-  color:
-    #6b7280;
-}
-
-.mobile-menu {
-  display:
-    none;
-
-  border:
-    none;
-
-  background:
-    transparent;
-
-  font-size:
-    24px;
-}
-
-.admin-profile {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    10px;
-}
-
-.admin-avatar {
-  width:
-    42px;
-
-  height:
-    42px;
-
-  border-radius:
-    50%;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  background:
-    #0d6efd;
-
-  color:
-    white;
-
-  font-weight:
-    bold;
-}
-
-.admin-profile-text strong {
-  display:
-    block;
-
-  font-size:
-    13px;
-}
-
-.admin-profile-text span {
-  display:
-    block;
-
-  margin-top:
-    4px;
-
-  color:
-    #6b7280;
-
-  font-size:
-    11px;
-}
-
-.content {
-  padding:
-    30px;
-}
-
-
-/* =========================================================
-   PAGES
-========================================================= */
-
-.page {
-  display:
-    none;
-}
-
-.page.active {
-  display:
-    block;
-}
-
-.section-heading {
-  margin-bottom:
-    25px;
-}
-
-.section-heading h2 {
-  color:
-    #102a43;
-
-  margin-bottom:
-    7px;
-}
-
-.section-heading p {
-  color:
-    #6b7280;
-
-  font-size:
-    14px;
-}
-
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-.stats-grid {
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:
-    18px;
-
-  margin-bottom:
-    25px;
-}
-
-.stat-card {
-  background:
-    white;
-
-  border-radius:
-    15px;
-
-  padding:
-    20px;
-
-  box-shadow:
-    0 5px 18px
-    rgba(0,0,0,.05);
-}
-
-.stat-top {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-}
-
-.stat-label {
-  color:
-    #6b7280;
-
-  font-size:
-    13px;
-}
-
-.stat-value {
-  margin-top:
-    10px;
-
-  color:
-    #102a43;
-
-  font-size:
-    28px;
-
-  font-weight:
-    bold;
-}
-
-.stat-icon {
-  width:
-    48px;
-
-  height:
-    48px;
-
-  border-radius:
-    12px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  font-size:
-    21px;
-}
-
-.icon-blue {
-  background:
-    #dbeafe;
-
-  color:
-    #2563eb;
-}
-
-.icon-purple {
-  background:
-    #ede9fe;
-
-  color:
-    #7c3aed;
-}
-
-.icon-orange {
-  background:
-    #ffedd5;
-
-  color:
-    #ea580c;
-}
-
-.icon-green {
-  background:
-    #dcfce7;
-
-  color:
-    #16a34a;
-}
-
-
-/* =========================================================
-   PANELS
-========================================================= */
-
-.panel {
-  background:
-    white;
-
-  border-radius:
-    16px;
-
-  overflow:
-    hidden;
-
-  box-shadow:
-    0 5px 20px
-    rgba(0,0,0,.05);
-
-  margin-bottom:
-    25px;
-}
-
-.panel-header {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  gap:
-    15px;
-
-  padding:
-    18px 20px;
-
-  border-bottom:
-    1px solid
-    #e5e7eb;
-}
-
-.panel-header h3 {
-  color:
-    #102a43;
-
-  font-size:
-    16px;
-}
-
-.panel-body {
-  padding:
-    20px;
-}
-
-.two-column {
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:
-    25px;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn {
-  border:
-    none;
-
-  padding:
-    10px 15px;
-
-  border-radius:
-    9px;
-
-  font-size:
-    13px;
-
-  font-weight:
-    600;
-
-  transition:
-    .2s;
-}
-
-.btn:hover {
-  transform:
-    translateY(-1px);
-}
-
-.btn-primary {
-  background:
-    #0d6efd;
-
-  color:
-    white;
-}
-
-.btn-success {
-  background:
-    #16a34a;
-
-  color:
-    white;
-}
-
-.btn-danger {
-  background:
-    #dc2626;
-
-  color:
-    white;
-}
-
-.btn-warning {
-  background:
-    #f59e0b;
-
-  color:
-    white;
-}
-
-.btn-purple {
-  background:
-    #7c3aed;
-
-  color:
-    white;
-}
-
-.btn-light {
-  background:
-    #eef2f7;
-
-  color:
-    #374151;
-}
-
-
-/* =========================================================
-   FORMS
-========================================================= */
-
-.form-group {
-  margin-bottom:
-    18px;
-}
-
-.form-group label {
-  display:
-    block;
-
-  margin-bottom:
-    7px;
-
-  color:
-    #374151;
-
-  font-size:
-    13px;
-
-  font-weight:
-    600;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea,
-.search-box {
-  width:
-    100%;
-
-  padding:
-    12px;
-
-  border:
-    1px solid
-    #d1d5db;
-
-  border-radius:
-    9px;
-
-  outline:
-    none;
-
-  background:
-    white;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus,
-.search-box:focus {
-  border-color:
-    #0d6efd;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(13,110,253,.1);
-}
-
-.generated-message {
-  min-height:
-    240px;
-
-  resize:
-    vertical;
-}
-
-.toolbar {
-  display:
-    flex;
-
-  gap:
-    10px;
-
-  align-items:
-    center;
-}
-
-.search-box {
-  width:
-    220px;
-}
-
-
-/* =========================================================
-   TABLES
-========================================================= */
-
-.table-wrapper {
-  overflow-x:
-    auto;
-}
-
-table {
-  width:
-    100%;
-
-  border-collapse:
-    collapse;
-}
-
-th,
-td {
-  padding:
-    14px 18px;
-
-  text-align:
-    left;
-
-  border-bottom:
-    1px solid
-    #eef2f7;
-
-  font-size:
-    13px;
-}
-
-th {
-  background:
-    #f8fafc;
-
-  color:
-    #64748b;
-
-  font-size:
-    11px;
-
-  text-transform:
-    uppercase;
-}
-
-td {
-  color:
-    #374151;
-}
-
-.empty {
-  text-align:
-    center;
-
-  padding:
-    35px;
-
-  color:
-    #9ca3af;
-}
-
-
-/* =========================================================
-   STATUS BADGES
-========================================================= */
-
-.status {
-  display:
-    inline-block;
-
-  padding:
-    6px 10px;
-
-  border-radius:
-    20px;
-
-  font-size:
-    11px;
-
-  font-weight:
-    bold;
-}
-
-.status-pending {
-  background:
-    #fef3c7;
-
-  color:
-    #92400e;
-}
-
-.status-review {
-  background:
-    #dbeafe;
-
-  color:
-    #1d4ed8;
-}
-
-.status-approved {
-  background:
-    #dcfce7;
-
-  color:
-    #15803d;
-}
-
-.status-rejected {
-  background:
-    #fee2e2;
-
-  color:
-    #b91c1c;
-}
-
-
-/* =========================================================
-   INFO
-========================================================= */
-
-.info-box {
-  padding:
-    15px;
-
-  border:
-    1px solid
-    #e5e7eb;
-
-  border-radius:
-    10px;
-
-  margin-bottom:
-    12px;
-
-  background:
-    #fafcff;
-}
-
-.info-box strong {
-  display:
-    block;
-
-  margin-bottom:
-    7px;
-
-  color:
-    #102a43;
-}
-
-.info-box span {
-  color:
-    #6b7280;
-
-  font-size:
-    13px;
-}
-
-.notice {
-  padding:
-    16px;
-
-  border-radius:
-    10px;
-
-  margin-bottom:
-    18px;
-
-  font-size:
-    13px;
-
-  line-height:
-    1.6;
-}
-
-.notice-info {
-  background:
-    #eff6ff;
-
-  color:
-    #1e40af;
-}
-
-.notice-warning {
-  background:
-    #fffbeb;
-
-  color:
-    #92400e;
-}
-
-.notice-success {
-  background:
-    #f0fdf4;
-
-  color:
-    #166534;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal {
-  display:
-    none;
-
-  position:
-    fixed;
-
-  inset:
-    0;
-
-  background:
-    rgba(0,0,0,.55);
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  padding:
-    20px;
-
-  z-index:
-    4000;
-}
-
-.modal.show {
-  display:
-    flex;
-}
-
-.modal-card {
-  width:
-    100%;
-
-  max-width:
-    800px;
-
-  max-height:
-    90vh;
-
-  overflow-y:
-    auto;
-
-  background:
-    white;
-
-  border-radius:
-    18px;
-
-  box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.25);
-}
-
-.modal-header {
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  padding:
-    20px;
-
-  border-bottom:
-    1px solid
-    #e5e7eb;
-}
-
-.modal-close {
-  border:
-    none;
-
-  background:
-    transparent;
-
-  font-size:
-    28px;
-}
-
-.modal-body {
-  padding:
-    22px;
-}
-
-.modal-actions {
-  display:
-    flex;
-
-  flex-wrap:
-    wrap;
-
-  gap:
-    10px;
-
-  padding:
-    20px;
-
-  border-top:
-    1px solid
-    #e5e7eb;
-}
-
-.loan-detail-grid {
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:
-    15px;
-}
-
-.detail-item {
-  padding:
-    15px;
-
-  background:
-    #f8fafc;
-
-  border-radius:
-    10px;
-}
-
-.detail-item small {
-  display:
-    block;
-
-  color:
-    #6b7280;
-
-  margin-bottom:
-    7px;
-}
-
-.detail-item strong {
-  color:
-    #102a43;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading {
-  display:
-    none;
-
-  position:
-    fixed;
-
-  inset:
-    0;
-
-  background:
-    rgba(255,255,255,.8);
-
-  z-index:
-    6000;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-}
-
-.loading.show {
-  display:
-    flex;
-}
-
-.loading-box {
-  background:
-    white;
-
-  padding:
-    25px 35px;
-
-  border-radius:
-    16px;
-
-  box-shadow:
-    0 15px 50px
-    rgba(0,0,0,.15);
-
-  text-align:
-    center;
-}
-
-.spinner {
-  width:
-    40px;
-
-  height:
-    40px;
-
-  border:
-    4px solid
-    #dbeafe;
-
-  border-top-color:
-    #0d6efd;
-
-  border-radius:
-    50%;
-
-  margin:
-    0 auto 15px;
-
-  animation:
-    spin 1s linear infinite;
-}
-
-@keyframes spin {
-
-  to {
-    transform:
-      rotate(360deg);
-  }
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast-container {
-  position:
-    fixed;
-
-  right:
-    20px;
-
-  bottom:
-    20px;
-
-  z-index:
-    7000;
-}
-
-.toast {
-  min-width:
-    260px;
-
-  max-width:
-    380px;
-
-  padding:
-    15px;
-
-  margin-top:
-    10px;
-
-  border-radius:
-    10px;
-
-  background:
-    #102a43;
-
-  color:
-    white;
-
-  box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.2);
-
-  animation:
-    slideIn .3s ease;
-}
-
-.toast.error {
-  background:
-    #dc2626;
-}
-
-.toast.warning {
-  background:
-    #d97706;
-}
-
-@keyframes slideIn {
-
-  from {
-    transform:
-      translateX(120%);
-  }
-
-  to {
-    transform:
-      translateX(0);
-  }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 1100px) {
-
-  .stats-grid {
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-}
-
-@media (max-width: 850px) {
-
-  .sidebar {
-    transform:
-      translateX(-100%);
-  }
-
-  .sidebar.show {
-    transform:
-      translateX(0);
-  }
-
-  .main {
-    width:
-      100%;
-
-    margin-left:
-      0;
-  }
-
-  .mobile-menu {
-    display:
-      block;
-  }
-
-  .two-column {
-    grid-template-columns:
-      1fr;
-  }
-
-}
-
-@media (max-width: 600px) {
-
-  .content {
-    padding:
-      18px;
-  }
-
-  .topbar {
-    padding:
-      0 18px;
-  }
-
-  .stats-grid {
-    grid-template-columns:
-      1fr;
-  }
-
-  .admin-profile-text {
-    display:
-      none;
-  }
-
-  .toolbar {
-    width:
-      100%;
-
-    flex-direction:
-      column;
-
-    align-items:
-      stretch;
-  }
-
-  .search-box {
-    width:
-      100%;
-  }
-
-  .panel-header {
-    flex-direction:
-      column;
-
-    align-items:
-      flex-start;
-  }
-
-  .loan-detail-grid {
-    grid-template-columns:
-      1fr;
-  }
-
-}
-
-</style></head><body><!-- =====================================================
-     LOGIN
-===================================================== --><div
-  class="login-screen"
-  id="loginScreen"
->  <div class="login-card"><div class="logo-box">
-
-  <div class="logo">
-    JCB
-  </div>
-
-  <h1>
-    JAY C O B
-  </h1>
-
-  <p>
-    FINANCIAL SERVICES — Administrator
-  </p>
-
-</div>
-
-
-<form id="loginForm">
-
-  <div class="form-group">
-
-    <label for="adminEmail">
-      Administrator Email
-    </label>
-
-    <input
-      type="email"
-      id="adminEmail"
-      placeholder="Enter administrator email"
-      autocomplete="username"
-      required
-    >
-
-  </div>
-
-
-  <div class="form-group">
-
-    <label for="adminPassword">
-      Password
-    </label>
-
-    <div class="password-wrapper">
-
-      <input
-        type="password"
-        id="adminPassword"
-        placeholder="Enter administrator password"
-        autocomplete="current-password"
-        required
-      >
-
-      <button
-        type="button"
-        class="password-toggle"
-        onclick="togglePassword()"
-      >
-        SHOW
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Customer Dashboard | JAY C O B Financial Services</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #7c3aed;
+      --dark: #0f172a;
+      --dark-2: #1e293b;
+      --light: #f8fafc;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f1f5f9;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       AUTHENTICATION
+    ========================== */
+
+    #authScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.25);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .brand-logo {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .brand p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .auth-panel h2 {
+      margin-bottom: 18px;
+      font-size: 21px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 11px;
+      outline: none;
+      background: white;
+      color: #0f172a;
+      font-size: 16px;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    select.form-control {
+      color: #0f172a;
+      font-weight: 600;
+      background-color: #fff;
+    }
+
+    select.form-control option {
+      color: #0f172a;
+      background: #fff;
+      font-weight: 600;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 50px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      border: 0;
+      background: transparent;
+      padding: 8px;
+      font-size: 18px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 11px;
+      padding: 13px 18px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .auth-switch button {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .auth-message {
+      padding: 11px;
+      border-radius: 9px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .auth-message.error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .auth-message.success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    /* =========================
+       APP LAYOUT
+    ========================== */
+
+    #appShell {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #0f172a;
+      color: white;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      padding: 22px 15px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .sidebar-brand {
+      padding: 8px 10px 25px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 15px;
+    }
+
+    .sidebar-brand h2 {
+      font-size: 18px;
+    }
+
+    .sidebar-brand p {
+      color: #94a3b8;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 0;
+      background: transparent;
+      color: #cbd5e1;
+      padding: 13px 12px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: #1e293b;
+      color: white;
+    }
+
+    .logout-btn {
+      margin-top: 15px;
+      color: #fca5a5;
+    }
+
+    .main {
+      width: calc(100% - 260px);
+      margin-left: 260px;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 72px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .mobile-menu {
+      display: none;
+      border: 0;
+      background: #e2e8f0;
+      padding: 9px 12px;
+      border-radius: 9px;
+      font-size: 20px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .user-info {
+      text-align: right;
+    }
+
+    .user-info strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .user-info span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .backend-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+
+    .status-dot.online {
+      background: #22c55e;
+    }
+
+    .status-dot.offline {
+      background: #ef4444;
+    }
+
+    .content {
+      padding: 25px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* =========================
+       CARDS
+    ========================== */
+
+    .welcome-card {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 22px;
+    }
+
+    .welcome-card h2 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .welcome-card p {
+      opacity: .9;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 900;
+      margin-top: 8px;
+    }
+
+    .section-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .section-header h3 {
+      font-size: 18px;
+    }
+
+    .section-header button {
+      border: 0;
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 9px 13px;
+      border-radius: 9px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       LOAN FORM
+    ========================== */
+
+    .loan-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .loan-form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .loan-submit {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: 0;
+      border-radius: 11px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .loan-submit:hover {
+      background: var(--primary-dark);
+    }
+
+    .form-result {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      font-weight: 700;
+    }
+
+    .form-result.success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .form-result.error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* =========================
+       APPLICATIONS
+    ========================== */
+
+    .application-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .application-card {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 17px;
+      background: #fff;
+    }
+
+    .application-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .application-id {
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .application-details {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .detail-label {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-review {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .status-approved {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-rejected {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .status-default {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .view-btn {
+      margin-top: 14px;
+      border: 0;
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 9px 13px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       TABLE / EMPTY
+    ========================== */
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th,
+    td {
+      padding: 13px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 35px 15px;
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    /* =========================
+       PROFILE
+    ========================== */
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .profile-item {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 11px;
+    }
+
+    .profile-item label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .profile-item strong {
+      font-size: 15px;
+      word-break: break-word;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 3000;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      border-radius: 17px;
+      padding: 22px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .close-modal {
+      border: 0;
+      background: #e2e8f0;
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 18px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row span:first-child {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .detail-row span:last-child {
+      font-weight: 800;
+      text-align: right;
+    }
+
+    /* =========================
+       LOADING / TOAST
+    ========================== */
+
+    #loadingOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 5000;
+    }
+
+    #loadingOverlay.show {
+      display: flex;
+    }
+
+    .loading-box {
+      background: white;
+      border-radius: 14px;
+      padding: 25px 35px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .spinner {
+      width: 35px;
+      height: 35px;
+      border: 4px solid #e2e8f0;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 12px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #toastContainer {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 6000;
+      display: grid;
+      gap: 10px;
+      width: min(360px, calc(100% - 36px));
+    }
+
+    .toast {
+      background: #0f172a;
+      color: white;
+      padding: 13px 15px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .toast.success {
+      background: #166534;
+    }
+
+    .toast.error {
+      background: #991b1b;
+    }
+
+    .notice {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 13px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .application-details {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform .25s;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .topbar {
+        padding: 0 15px;
+      }
+
+      .user-info {
+        display: none;
+      }
+
+      .backend-status {
+        font-size: 11px;
+      }
+
+      .content {
+        padding: 15px;
+      }
+
+      .loan-form-grid,
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .loan-form-grid .full {
+        grid-column: auto;
+      }
+
+      .application-details {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .auth-card {
+        padding: 22px;
+      }
+
+      .stats-grid {
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 23px;
+      }
+
+      .application-details {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-card h2 {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       AUTH SCREEN
+  ====================================================== -->
+
+  <section id="authScreen">
+
+    <div class="auth-card">
+
+      <div class="brand">
+        <div class="brand-logo">JC</div>
+        <h1>JAY C O B FINANCIAL SERVICES</h1>
+        <p>Customer Portal</p>
+      </div>
+
+      <!-- LOGIN -->
+
+      <div id="loginPanel" class="auth-panel">
+
+        <h2>Customer Login</h2>
+
+        <div id="loginMessage" class="auth-message"></div>
+
+        <form id="loginForm">
+
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input
+              id="loginEmail"
+              class="form-control"
+              type="email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+
+            <div class="password-wrap">
+              <input
+                id="loginPassword"
+                class="form-control"
+                type="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="loginPassword"
+              >👁️</button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+            Login
+          </button>
+
+        </form>
+
+        <div class="auth-switch">
+          Don't have an account?
+          <button type="button" id="showRegisterBtn">
+            Create Account
+          </button>
+        </div>
+
+      </div>
+
+      <!-- REGISTER -->
+
+      <div id="registerPanel" class="auth-panel hidden">
+
+        <h2>Create Customer Account</h2>
+
+        <div id="registerMessage" class="auth-message"></div>
+
+        <form id="registerForm">
+
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input
+              id="registerName"
+              class="form-control"
+              type="text"
+              placeholder="Enter your full name"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">Email Address</label>
+            <input
+              id="registerEmail"
+              class="form-control"
+              type="email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="registerPhone">Phone Number</label>
+            <input
+              id="registerPhone"
+              class="form-control"
+              type="tel"
+              placeholder="+265..."
+              autocomplete="tel"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+
+            <div class="password-wrap">
+              <input
+                id="registerPassword"
+                class="form-control"
+                type="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="registerPassword"
+              >👁️</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="registerConfirm">Confirm Password</label>
+
+            <div class="password-wrap">
+              <input
+                id="registerConfirm"
+                class="form-control"
+                type="password"
+                placeholder="Repeat your password"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="registerConfirm"
+              >👁️</button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+            Create Account
+          </button>
+
+        </form>
+
+        <div class="auth-switch">
+          Already have an account?
+          <button type="button" id="showLoginBtn">
+            Back to Login
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CUSTOMER APPLICATION
+  ====================================================== -->
+
+  <section id="appShell" class="hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside id="sidebar" class="sidebar">
+
+      <div class="sidebar-brand">
+        <h2>JAY C O B</h2>
+        <p>Customer Financial Portal</p>
+      </div>
+
+      <button class="nav-item active" data-page="overview">
+        📊 Dashboard
       </button>
 
-    </div>
+      <button class="nav-item" data-page="apply">
+        💰 Apply for Loan
+      </button>
 
-  </div>
+      <button class="nav-item" data-page="applications">
+        📋 My Applications
+      </button>
 
+      <button class="nav-item" data-page="payments">
+        💳 My Payments
+      </button>
 
-  <button
-    type="submit"
-    class="btn btn-primary"
-    style="width:100%;padding:14px"
-    id="loginButton"
-  >
-    LOGIN TO ADMIN PANEL
-  </button>
+      <button class="nav-item" data-page="support">
+        💬 Support
+      </button>
 
-  <div
-    id="loginError"
-    class="login-error"
-  ></div>
+      <button class="nav-item" data-page="profile">
+        👤 My Profile
+      </button>
 
-</form>
+      <button id="logoutBtn" class="nav-item logout-btn">
+        🚪 Logout
+      </button>
 
+    </aside>
 
-<div class="login-footer">
-  JAY C O B FINANCIAL SERVICES © 2026
-</div>
 
-  </div></div><!-- =====================================================
-     APPLICATION
-===================================================== --><div
-  class="app"
-  id="app"
-><!-- =====================================================
-     SIDEBAR
-===================================================== --><aside
-  class="sidebar"
-  id="sidebar"
->  <div class="sidebar-header"><div class="sidebar-brand">
+    <!-- MAIN -->
 
-  <div class="sidebar-logo">
-    JCB
-  </div>
+    <main class="main">
 
-  <div>
+      <header class="topbar">
 
-    <strong>
-      JAY C O B
-    </strong>
+        <div class="topbar-left">
 
-    <span>
-      Financial Services
-    </span>
+          <button id="mobileMenuBtn" class="mobile-menu">
+            ☰
+          </button>
 
-  </div>
+          <div id="pageTitle" class="page-title">
+            Customer Dashboard
+          </div>
 
-</div>
+        </div>
 
-  </div>  <div class="nav-section">
-    Main
-  </div><a
-href="#"
-class="nav-item active"
-data-page="overview"
+        <div class="topbar-left">
 
-«»
+          <div class="backend-status">
+            <span id="backendDot" class="status-dot"></span>
+            <span id="backendStatusText">Checking backend...</span>
+          </div>
 
-<span class="nav-icon">▣</span>
-Overview
+          <div class="user-info">
+            <strong id="topCustomerName">Customer</strong>
+            <span id="topCustomerEmail">-</span>
+          </div>
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="customers"
+        </div>
 
-«»
+      </header>
 
-<span class="nav-icon">♙</span>
-Customers
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="applications"
+      <div class="content">
 
-«»
+        <!-- =================================================
+             OVERVIEW
+        ================================================== -->
 
-<span class="nav-icon">▤</span>
-Loan Applications
+        <section id="page-overview" class="page active">
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="activeLoans"
+          <div class="welcome-card">
+            <h2>
+              Welcome, <span id="welcomeName">Customer</span> 👋
+            </h2>
 
-«»
+            <p>
+              Manage your loans, applications, payments and support requests.
+            </p>
+          </div>
 
-<span class="nav-icon">◆</span>
-Active Loans
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="payments"
+          <div class="stats-grid">
 
-«»
+            <div class="stat-card">
+              <div class="stat-label">Total Applications</div>
+              <div id="statTotal" class="stat-value">0</div>
+            </div>
 
-<span class="nav-icon">₵</span>
-Payments
+            <div class="stat-card">
+              <div class="stat-label">Pending</div>
+              <div id="statPending" class="stat-value">0</div>
+            </div>
 
-  </a>  <div class="nav-section">
-    Communication
-  </div><a
-href="#"
-class="nav-item"
-data-page="followups"
+            <div class="stat-card">
+              <div class="stat-label">Approved</div>
+              <div id="statApproved" class="stat-value">0</div>
+            </div>
 
-«»
+            <div class="stat-card">
+              <div class="stat-label">Rejected</div>
+              <div id="statRejected" class="stat-value">0</div>
+            </div>
 
-<span class="nav-icon">☎</span>
-Customer Follow-up
+          </div>
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="aiMessages"
 
-«»
+          <div class="section-card">
 
-<span class="nav-icon">✦</span>
-AI Messages
+            <div class="section-header">
+              <h3>Latest Application</h3>
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="notifications"
+              <button id="refreshOverviewBtn">
+                🔄 Refresh
+              </button>
+            </div>
 
-«»
+            <div id="latestApplication">
+              <div class="empty-state">
+                No applications yet.
+              </div>
+            </div>
 
-<span class="nav-icon">♢</span>
-Notifications
+          </div>
 
-  </a>  <div class="nav-section">
-    Administration
-  </div><a
-href="#"
-class="nav-item"
-data-page="security"
 
-«»
+          <div class="section-card">
 
-<span class="nav-icon">▣</span>
-Security & OTP
+            <div class="section-header">
+              <h3>System Connection</h3>
+            </div>
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="audit"
+            <div class="notice">
+              Customer applications are sent directly to the Railway backend.
+              When an administrator reviews an application, the customer
+              dashboard retrieves the updated status from the same backend.
+            </div>
 
-«»
+            <p>
+              <strong>Backend:</strong>
+              <span id="systemBackend">Checking...</span>
+            </p>
 
-<span class="nav-icon">☷</span>
-Activity Logs
+            <p style="margin-top:8px;">
+              <strong>Last refresh:</strong>
+              <span id="lastRefresh">-</span>
+            </p>
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="statistics"
+          </div>
 
-«»
+        </section>
 
-<span class="nav-icon">▥</span>
-Statistics
 
-  </a><a
-href="#"
-class="nav-item"
-data-page="settings"
+        <!-- =================================================
+             APPLY
+        ================================================== -->
 
-«»
+        <section id="page-apply" class="page">
 
-<span class="nav-icon">⚙</span>
-Settings
+          <div class="section-card">
 
-  </a>  <div class="sidebar-footer"><div class="backend-status">
+            <div class="section-header">
+              <h3>Apply for a Loan</h3>
+            </div>
 
-  <span
-    id="backendDot"
-    class="backend-dot"
-  ></span>
+            <div class="notice">
+              Please enter the requested loan information accurately.
+              Your application will be sent to the JAY C O B Financial Services
+              backend for administrator review.
+            </div>
 
-  <span id="backendStatusText">
-    Checking backend...
-  </span>
+            <form id="loanForm">
 
-</div>
+              <div class="loan-form-grid">
 
-  </div></aside><!-- =====================================================
-     MAIN
-===================================================== --><main class="main"><!-- =====================================================
-     TOPBAR
-===================================================== --><header class="topbar">  <div class="topbar-left"><button
-  class="mobile-menu"
-  onclick="toggleSidebar()"
-  aria-label="Menu"
->
-  ☰
-</button>
+                <!-- IMPORTANT:
+                     These IDs and names match the backend fields.
+                -->
 
-<div>
+                <div class="form-group">
 
-  <div
-    class="page-title"
-    id="pageTitle"
-  >
-    Overview
-  </div>
+                  <label for="loanType">
+                    Loan Type
+                  </label>
 
-  <div class="page-subtitle">
-    JAY C O B FINANCIAL SERVICES
-  </div>
+                  <select
+                    id="loanType"
+                    name="loan_type"
+                    class="form-control"
+                    required
+                  >
 
-</div>
+                    <option value="">
+                      -- Select Loan Type --
+                    </option>
 
-  </div>  <div class="admin-profile"><div class="admin-avatar">
-  A
-</div>
+                    <option value="Personal Loan">
+                      Personal Loan
+                    </option>
 
-<div class="admin-profile-text">
+                    <option value="Business Loan">
+                      Business Loan
+                    </option>
 
-  <strong id="adminEmailDisplay">
-    Administrator
-  </strong>
+                    <option value="Emergency Loan">
+                      Emergency Loan
+                    </option>
 
-  <span>
-    Secure Admin Session
-  </span>
+                    <option value="Education Loan">
+                      Education Loan
+                    </option>
 
-</div>
+                    <option value="Agricultural Loan">
+                      Agricultural Loan
+                    </option>
 
-  </div></header><!-- =====================================================
-     CONTENT
-===================================================== --><div class="content"><!-- =====================================================
-     OVERVIEW
-===================================================== --><section
-  class="page active"
-  id="page-overview"
->  <div class="section-heading"><h2>
-  Administrator Overview
-</h2>
+                  </select>
 
-<p>
-  Monitor customers, loan applications and business activity.
-</p>
+                </div>
 
-  </div>  <div class="stats-grid"><div class="stat-card">
 
-  <div class="stat-top">
+                <div class="form-group">
 
-    <div>
+                  <label for="loanAmount">
+                    Loan Amount (MWK)
+                  </label>
 
-      <div class="stat-label">
-        Total Customers
-      </div>
+                  <input
+                    id="loanAmount"
+                    name="amount"
+                    class="form-control"
+                    type="number"
+                    min="1"
+                    step="1"
+                    placeholder="Example: 100000"
+                    required
+                  >
 
-      <div
-        class="stat-value"
-        id="statCustomers"
-      >
-        0
-      </div>
+                </div>
 
-    </div>
 
-    <div class="stat-icon icon-blue">
-      ♙
-    </div>
+                <div class="form-group">
 
-  </div>
+                  <label for="loanDuration">
+                    Duration
+                  </label>
 
-</div>
+                  <select
+                    id="loanDuration"
+                    name="duration_months"
+                    class="form-control"
+                    required
+                  >
 
+                    <option value="">
+                      -- Select Duration --
+                    </option>
 
-<div class="stat-card">
+                    <option value="1">
+                      1 Month
+                    </option>
 
-  <div class="stat-top">
+                    <option value="2">
+                      2 Months
+                    </option>
 
-    <div>
+                    <option value="3">
+                      3 Months
+                    </option>
 
-      <div class="stat-label">
-        Loan Applications
-      </div>
+                    <option value="6">
+                      6 Months
+                    </option>
 
-      <div
-        class="stat-value"
-        id="statApplications"
-      >
-        0
-      </div>
+                    <option value="9">
+                      9 Months
+                    </option>
 
-    </div>
+                    <option value="12">
+                      12 Months
+                    </option>
 
-    <div class="stat-icon icon-purple">
-      ▤
-    </div>
+                    <option value="18">
+                      18 Months
+                    </option>
 
-  </div>
+                    <option value="24">
+                      24 Months
+                    </option>
 
-</div>
+                  </select>
 
+                </div>
 
-<div class="stat-card">
 
-  <div class="stat-top">
+                <div class="form-group full">
 
-    <div>
+                  <button
+                    id="loanSubmitBtn"
+                    class="loan-submit"
+                    type="submit"
+                  >
+                    Submit Loan Application
+                  </button>
 
-      <div class="stat-label">
-        Pending Applications
-      </div>
+                </div>
 
-      <div
-        class="stat-value"
-        id="statPending"
-      >
-        0
-      </div>
+              </div>
 
-    </div>
+            </form>
 
-    <div class="stat-icon icon-orange">
-      ◷
-    </div>
+            <div id="loanFormMessage" class="form-result"></div>
 
-  </div>
+          </div>
 
-</div>
+        </section>
 
 
-<div class="stat-card">
+        <!-- =================================================
+             APPLICATIONS
+        ================================================== -->
 
-  <div class="stat-top">
+        <section id="page-applications" class="page">
 
-    <div>
+          <div class="section-card">
 
-      <div class="stat-label">
-        Approved Applications
-      </div>
+            <div class="section-header">
 
-      <div
-        class="stat-value"
-        id="statApproved"
-      >
-        0
-      </div>
+              <h3>My Loan Applications</h3>
 
-    </div>
-
-    <div class="stat-icon icon-green">
-      ✓
-    </div>
-
-  </div>
-
-</div>
-
-  </div>  <div class="two-column"><div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      Recent Loan Applications
-    </h3>
-
-    <button
-      class="btn btn-light"
-      onclick="showPage('applications')"
-    >
-      View All
-    </button>
-
-  </div>
-
-  <div class="table-wrapper">
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>ID</th>
-          <th>Customer</th>
-          <th>Amount</th>
-          <th>Status</th>
-        </tr>
-
-      </thead>
-
-      <tbody id="recentApplicationsBody">
-
-        <tr>
-
-          <td
-            colspan="4"
-            class="empty"
-          >
-            Loading...
-          </td>
-
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-</div>
-
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      System Status
-    </h3>
-
-    <button
-      class="btn btn-primary"
-      onclick="refreshAll()"
-    >
-      Refresh
-    </button>
-
-  </div>
-
-
-  <div class="panel-body">
-
-    <div class="info-box">
-
-      <strong>
-        Railway Backend
-      </strong>
-
-      <span id="systemBackend">
-        Checking...
-      </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-      <strong>
-        Administrator Authentication
-      </strong>
-
-      <span>
-        Active while your administrator session token is valid.
-      </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-      <strong>
-        Data Storage
-      </strong>
-
-      <span>
-        Current backend data is stored in memory.
-      </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-      <strong>
-        Last Refresh
-      </strong>
-
-      <span id="lastRefresh">
-        Not refreshed yet
-      </span>
-
-    </div>
-
-  </div>
-
-</div>
-
-  </div></section><!-- =====================================================
-     CUSTOMERS
-===================================================== --><section
-  class="page"
-  id="page-customers"
->  <div class="section-heading"><h2>
-  Customers
-</h2>
-
-<p>
-  View customers registered through the customer system.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Customer Directory
-  </h3>
-
-  <div class="toolbar">
-
-    <input
-      type="search"
-      class="search-box"
-      id="customerSearch"
-      placeholder="Search customers..."
-      oninput="renderCustomers()"
-    >
-
-    <button
-      class="btn btn-primary"
-      onclick="loadCustomers()"
-    >
-      Refresh
-    </button>
-
-  </div>
-
-</div>
-
-
-<div class="table-wrapper">
-
-  <table>
-
-    <thead>
-
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Customer ID</th>
-        <th>Registered</th>
-      </tr>
-
-    </thead>
-
-    <tbody id="customersBody">
-
-      <tr>
-
-        <td
-          colspan="5"
-          class="empty"
-        >
-          Loading...
-        </td>
-
-      </tr>
-
-    </tbody>
-
-  </table>
-
-</div>
-
-  </div></section><!-- =====================================================
-     APPLICATIONS
-===================================================== --><section
-  class="page"
-  id="page-applications"
->  <div class="section-heading"><h2>
-  Loan Applications
-</h2>
-
-<p>
-  Review applications and update their status.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Applications
-  </h3>
-
-  <div class="toolbar">
-
-    <input
-      type="search"
-      class="search-box"
-      id="applicationSearch"
-      placeholder="Search applications..."
-      oninput="renderApplications()"
-    >
-
-    <button
-      class="btn btn-primary"
-      onclick="loadApplications()"
-    >
-      Refresh
-    </button>
-
-  </div>
-
-</div>
-
-
-<div class="table-wrapper">
-
-  <table>
-
-    <thead>
-
-      <tr>
-        <th>Application</th>
-        <th>Customer</th>
-        <th>Loan Type</th>
-        <th>Amount</th>
-        <th>Duration</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-
-    </thead>
-
-    <tbody id="applicationsBody">
-
-      <tr>
-
-        <td
-          colspan="7"
-          class="empty"
-        >
-          Loading...
-        </td>
-
-      </tr>
-
-    </tbody>
-
-  </table>
-
-</div>
-
-  </div></section><!-- =====================================================
-     ACTIVE LOANS
-===================================================== --><section
-  class="page"
-  id="page-activeLoans"
->  <div class="section-heading"><h2>
-  Active / Approved Loans
-</h2>
-
-<p>
-  Approved applications from the current loan portfolio.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Approved Loan Portfolio
-  </h3>
-
-  <button
-    class="btn btn-primary"
-    onclick="loadApplications()"
-  >
-    Refresh
-  </button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-  <table>
-
-    <thead>
-
-      <tr>
-        <th>Application</th>
-        <th>Customer</th>
-        <th>Loan Type</th>
-        <th>Principal</th>
-        <th>Duration</th>
-        <th>Approved</th>
-        <th>Review</th>
-      </tr>
-
-    </thead>
-
-    <tbody id="activeLoansBody">
-
-      <tr>
-
-        <td
-          colspan="7"
-          class="empty"
-        >
-          Loading...
-        </td>
-
-      </tr>
-
-    </tbody>
-
-  </table>
-
-</div>
-
-  </div></section><!-- =====================================================
-     PAYMENTS
-===================================================== --><section
-  class="page"
-  id="page-payments"
->  <div class="section-heading"><h2>
-  Payments
-</h2>
-
-<p>
-  Payment management information.
-</p>
-
-  </div>  <div class="notice notice-warning"><strong>
-  Payment backend status:
-</strong>
-
-The current Railway backend does not yet provide
-an administrator payment-management endpoint.
-
-  </div>  <div class="two-column"><div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      Payment System
-    </h3>
-
-  </div>
-
-  <div class="panel-body">
-
-    <div class="info-box">
-
-      <strong>
-        Customer Payment API
-      </strong>
-
-      <span>
-        Customer payment history is available through the customer system.
-      </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-      <strong>
-        Admin Payment API
-      </strong>
-
-      <span>
-        Not yet implemented in the current backend.
-      </span>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      Future Upgrade
-    </h3>
-
-  </div>
-
-  <div class="panel-body">
-
-    <div class="notice notice-info">
-
-      Future payment features can include:
-
-      <br><br>
-
-      • Record payment<br>
-      • Payment reference<br>
-      • Amount paid<br>
-      • Payment method<br>
-      • Loan balance<br>
-      • Receipt generation<br>
-      • Payment audit trail
-
-    </div>
-
-  </div>
-
-</div>
-
-  </div></section><!-- =====================================================
-     FOLLOWUPS
-===================================================== --><section
-  class="page"
-  id="page-followups"
->  <div class="section-heading"><h2>
-  Customer Follow-up
-</h2>
-
-<p>
-  Monitor follow-up records stored by the backend.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Follow-up Records
-  </h3>
-
-  <button
-    class="btn btn-primary"
-    onclick="loadFollowups()"
-  >
-    Refresh
-  </button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-  <table>
-
-    <thead>
-
-      <tr>
-        <th>ID</th>
-        <th>Customer</th>
-        <th>Date</th>
-        <th>Priority</th>
-        <th>Notes</th>
-      </tr>
-
-    </thead>
-
-    <tbody id="followupsBody">
-
-      <tr>
-
-        <td
-          colspan="5"
-          class="empty"
-        >
-          Loading...
-        </td>
-
-      </tr>
-
-    </tbody>
-
-  </table>
-
-</div>
-
-  </div></section><!-- =====================================================
-     AI MESSAGES
-===================================================== --><section
-  class="page"
-  id="page-aiMessages"
->  <div class="section-heading"><h2>
-  Message Generator
-</h2>
-
-<p>
-  Generate professional customer communication messages.
-</p>
-
-  </div>  <div class="two-column"><div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      Message Details
-    </h3>
-
-  </div>
-
-
-  <div class="panel-body">
-
-    <div class="form-group">
-
-      <label>
-        Customer Name
-      </label>
-
-      <input
-        type="text"
-        id="messageCustomer"
-        placeholder="Customer name"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Message Type
-      </label>
-
-      <select id="messageType">
-
-        <option value="approval">
-          Loan Approval
-        </option>
-
-        <option value="pending">
-          Application Pending
-        </option>
-
-        <option value="review">
-          Under Review
-        </option>
-
-        <option value="rejection">
-          Loan Rejection
-        </option>
-
-        <option value="payment">
-          Payment Reminder
-        </option>
-
-        <option value="welcome">
-          Welcome Message
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <button
-      class="btn btn-purple"
-      onclick="generateMessage()"
-    >
-      Generate Message
-    </button>
-
-  </div>
-
-</div>
-
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      Generated Message
-    </h3>
-
-    <button
-      class="btn btn-light"
-      onclick="copyGeneratedMessage()"
-    >
-      Copy
-    </button>
-
-  </div>
-
-
-  <div class="panel-body">
-
-    <textarea
-      id="generatedMessage"
-      class="generated-message"
-      placeholder="Generated message will appear here..."
-    ></textarea>
-
-  </div>
-
-</div>
-
-  </div></section><!-- =====================================================
-     NOTIFICATIONS
-===================================================== --><section
-  class="page"
-  id="page-notifications"
->  <div class="section-heading"><h2>
-  Notifications
-</h2>
-
-<p>
-  Dashboard notifications generated from current system data.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    System Notifications
-  </h3>
-
-  <button
-    class="btn btn-primary"
-    onclick="renderNotifications()"
-  >
-    Refresh
-  </button>
-
-</div>
-
-
-<div
-  class="panel-body"
-  id="notificationsBody"
-></div>
-
-  </div></section><!-- =====================================================
-     SECURITY
-===================================================== --><section
-  class="page"
-  id="page-security"
->  <div class="section-heading"><h2>
-  Security & OTP
-</h2>
-
-<p>
-  Review the current administrator security configuration.
-</p>
-
-  </div>  <div class="stats-grid"><div class="stat-card">
-
-  <div class="stat-label">
-    Admin Session
-  </div>
-
-  <div
-    class="stat-value"
-    style="font-size:18px"
-  >
-    ACTIVE
-  </div>
-
-</div>
-
-
-<div class="stat-card">
-
-  <div class="stat-label">
-    Backend Authentication
-  </div>
-
-  <div
-    class="stat-value"
-    style="font-size:18px"
-  >
-    ENABLED
-  </div>
-
-</div>
-
-
-<div class="stat-card">
-
-  <div class="stat-label">
-    OTP Provider
-  </div>
-
-  <div
-    class="stat-value"
-    style="font-size:18px"
-  >
-    NOT CONNECTED
-  </div>
-
-</div>
-
-
-<div class="stat-card">
-
-  <div class="stat-label">
-    Database
-  </div>
-
-  <div
-    class="stat-value"
-    style="font-size:18px"
-  >
-    IN-MEMORY
-  </div>
-
-</div>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Security Configuration
-  </h3>
-
-</div>
-
-
-<div class="panel-body">
-
-  <div class="notice notice-warning">
-
-    <strong>
-      Production security upgrade required:
-    </strong>
-
-    Before handling real customer financial information,
-    the backend should use password hashing,
-    persistent database storage,
-    secure sessions,
-    HTTPS and rate limiting.
-
-  </div>
-
-</div>
-
-  </div></section><!-- =====================================================
-     AUDIT
-===================================================== --><section
-  class="page"
-  id="page-audit"
->  <div class="section-heading"><h2>
-  Activity Logs
-</h2>
-
-<p>
-  Administrator and customer activity recorded by the backend.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Audit Trail
-  </h3>
-
-  <button
-    class="btn btn-primary"
-    onclick="loadAuditLogs()"
-  >
-    Refresh
-  </button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-  <table>
-
-    <thead>
-
-      <tr>
-        <th>ID</th>
-        <th>User</th>
-        <th>Action</th>
-        <th>Status Change</th>
-        <th>Date</th>
-      </tr>
-
-    </thead>
-
-    <tbody id="auditBody">
-
-      <tr>
-
-        <td
-          colspan="5"
-          class="empty"
-        >
-          Loading...
-        </td>
-
-      </tr>
-
-    </tbody>
-
-  </table>
-
-</div>
-
-  </div></section><!-- =====================================================
-     STATISTICS
-===================================================== --><section
-  class="page"
-  id="page-statistics"
->  <div class="section-heading"><h2>
-  Statistics
-</h2>
-
-<p>
-  Loan portfolio statistics calculated from backend data.
-</p>
-
-  </div>  <div class="stats-grid"><div class="stat-card">
-
-  <div class="stat-label">
-    Pending
-  </div>
-
-  <div
-    class="stat-value"
-    id="statisticsPending"
-  >
-    0
-  </div>
-
-</div>
-
-
-<div class="stat-card">
-
-  <div class="stat-label">
-    Under Review
-  </div>
-
-  <div
-    class="stat-value"
-    id="statisticsReview"
-  >
-    0
-  </div>
-
-</div>
-
-
-<div class="stat-card">
-
-  <div class="stat-label">
-    Approved
-  </div>
-
-  <div
-    class="stat-value"
-    id="statisticsApproved"
-  >
-    0
-  </div>
-
-</div>
-
-
-<div class="stat-card">
-
-  <div class="stat-label">
-    Rejected
-  </div>
-
-  <div
-    class="stat-value"
-    id="statisticsRejected"
-  >
-    0
-  </div>
-
-</div>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Portfolio Summary
-  </h3>
-
-  <button
-    class="btn btn-primary"
-    onclick="loadDashboard()"
-  >
-    Refresh
-  </button>
-
-</div>
-
-
-<div class="panel-body">
-
-  <div class="two-column">
-
-    <div class="info-box">
-
-      <strong>
-        Total Requested Amount
-      </strong>
-
-      <span
-        id="approvedPrincipal"
-      >
-        MWK 0
-      </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-      <strong>
-        Average Approved Loan
-      </strong>
-
-      <span
-        id="averageApprovedLoan"
-      >
-        MWK 0
-      </span>
-
-    </div>
-
-  </div>
-
-</div>
-
-  </div></section><!-- =====================================================
-     SETTINGS
-===================================================== --><section
-  class="page"
-  id="page-settings"
->  <div class="section-heading"><h2>
-  Settings
-</h2>
-
-<p>
-  Local administrator dashboard preferences.
-</p>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Business Settings
-  </h3>
-
-</div>
-
-
-<div class="panel-body">
-
-  <div class="notice notice-info">
-
-    These settings are saved only in this browser.
-
-  </div>
-
-
-  <div class="two-column">
-
-    <div class="form-group">
-
-      <label>
-        Default Loan Duration (Months)
-      </label>
-
-      <input
-        type="number"
-        id="settingDuration"
-        min="1"
-        max="120"
-        value="12"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Default Interest Rate (%)
-      </label>
-
-      <input
-        type="number"
-        id="settingInterest"
-        min="0"
-        step="0.01"
-        value="10"
-      >
-
-    </div>
-
-  </div>
-
-
-  <button
-    class="btn btn-success"
-    onclick="saveSettings()"
-  >
-    Save Local Settings
-  </button>
-
-</div>
-
-  </div>  <div class="panel"><div class="panel-header">
-
-  <h3>
-    Administrator Session
-  </h3>
-
-</div>
-
-
-<div class="panel-body">
-
-  <button
-    class="btn btn-danger"
-    onclick="adminLogout()"
-  >
-    Logout Administrator
-  </button>
-
-</div>
-
-  </div></section></div></main></div><!-- =====================================================
-     LOAN MODAL
-===================================================== --><div
-  class="modal"
-  id="loanModal"
->  <div class="modal-card"><div class="modal-header">
-
-  <h3>
-    Loan Application Review
-  </h3>
-
-  <button
-    class="modal-close"
-    onclick="closeLoanModal()"
-  >
-    ×
-  </button>
-
-</div>
-
-
-<div
-  class="modal-body"
-  id="loanModalBody"
->
-  Loading...
-</div>
-
-
-<div class="modal-actions">
-
-  <button
-    class="btn btn-success"
-    onclick="updateLoanStatus('APPROVED')"
-  >
-    ✓ Approve
-  </button>
-
-
-  <button
-    class="btn btn-warning"
-    onclick="updateLoanStatus('UNDER REVIEW')"
-  >
-    ◷ Under Review
-  </button>
-
-
-  <button
-    class="btn btn-danger"
-    onclick="updateLoanStatus('REJECTED')"
-  >
-    ✕ Reject
-  </button>
-
-
-  <button
-    class="btn btn-light"
-    onclick="closeLoanModal()"
-  >
-    Close
-  </button>
-
-</div>
-
-  </div></div><!-- =====================================================
-     LOADING
-===================================================== --><div
-  class="loading"
-  id="loading"
->  <div class="loading-box"><div class="spinner"></div>
-
-<strong>
-  Connecting to JAY C O B backend...
-</strong>
-
-  </div></div><!-- =====================================================
-     TOAST
-===================================================== --><div
-  class="toast-container"
-  id="toastContainer"
-></div><script>
-
-/* =========================================================
-   API CONFIGURATION
-========================================================= */
-
-const API_URL =
-  "https://emmanueljacobgithubio-production.up.railway.app/api";
-
-
-/* =========================================================
-   APPLICATION STATE
-========================================================= */
-
-let adminToken =
-  localStorage.getItem(
-    "jaycobAdminToken"
-  ) || "";
-
-let customers = [];
-
-let applications = [];
-
-let followups = [];
-
-let auditLogs = [];
-
-let supportMessages = [];
-
-let selectedLoanId =
-  null;
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function escapeHTML(value) {
-
-  return String(
-    value ?? ""
-  )
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-function formatMoney(value) {
-
-  const amount =
-    Number(value || 0);
-
-  return (
-    "MWK " +
-    amount.toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits:
-          2
-      }
-    )
-  );
-
-}
-
-
-function formatDate(value) {
-
-  if (!value) {
-
-    return "—";
-
-  }
-
-  const date =
-    new Date(value);
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-
-    return "—";
-
-  }
-
-  return date.toLocaleString();
-
-}
-
-
-function normalizeStatus(status) {
-
-  return String(
-    status || "PENDING"
-  )
-
-    .trim()
-
-    .toUpperCase();
-
-}
-
-
-function getApplicationId(application) {
-
-  return (
-    application.id ||
-    application.application_id ||
-    "—"
-  );
-
-}
-
-
-function getCustomerName(application) {
-
-  return (
-    application.customer_name ||
-    application.customer ||
-    application.full_name ||
-    "Unknown Customer"
-  );
-
-}
-
-
-function getCustomerEmail(application) {
-
-  return (
-    application.customer_email ||
-    application.email ||
-    "—"
-  );
-
-}
-
-
-function getLoanType(application) {
-
-  return (
-    application.loan_type ||
-    application.type ||
-    "—"
-  );
-
-}
-
-
-function getAmount(application) {
-
-  return Number(
-    application.amount ||
-    application.loan_amount ||
-    0
-  );
-
-}
-
-
-function getDuration(application) {
-
-  const duration =
-    application.duration_months ||
-    application.duration ||
-    application.months;
-
-  if (!duration) {
-
-    return "—";
-
-  }
-
-  return (
-    duration +
-    " month(s)"
-  );
-
-}
-
-
-/* =========================================================
-   STATUS HTML
-========================================================= */
-
-function statusHTML(status) {
-
-  const normalized =
-    normalizeStatus(status);
-
-  let className =
-    "status-pending";
-
-  if (
-    normalized === "APPROVED"
-  ) {
-
-    className =
-      "status-approved";
-
-  }
-
-  else if (
-    normalized === "REJECTED"
-  ) {
-
-    className =
-      "status-rejected";
-
-  }
-
-  else if (
-    normalized === "UNDER REVIEW"
-  ) {
-
-    className =
-      "status-review";
-
-  }
-
-  return `
-    <span class="status ${className}">
-      ${escapeHTML(normalized)}
-    </span>
-  `;
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(
-  message,
-  type = "success"
-) {
-
-  const container =
-    document.getElementById(
-      "toastContainer"
-    );
-
-  const toast =
-    document.createElement(
-      "div"
-    );
-
-  toast.className =
-    "toast";
-
-  if (
-    type === "error"
-  ) {
-
-    toast.classList.add(
-      "error"
-    );
-
-  }
-
-  if (
-    type === "warning"
-  ) {
-
-    toast.classList.add(
-      "warning"
-    );
-
-  }
-
-  toast.textContent =
-    message;
-
-  container.appendChild(
-    toast
-  );
-
-  setTimeout(
-    () => {
-
-      toast.remove();
-
-    },
-    4000
-  );
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-function showLoading(show) {
-
-  document
-    .getElementById("loading")
-    .classList.toggle(
-      "show",
-      Boolean(show)
-    );
-
-}
-
-
-/* =========================================================
-   API REQUEST
-========================================================= */
-
-async function apiRequest(
-  endpoint,
-  options = {}
-) {
-
-  const headers = {
-
-    "Content-Type":
-      "application/json",
-
-    ...(options.headers || {})
-
-  };
-
-
-  if (
-    adminToken
-  ) {
-
-    headers.Authorization =
-      "Bearer " +
-      adminToken;
-
-  }
-
-
-  const response =
-    await fetch(
-      API_URL + endpoint,
-      {
-
-        ...options,
-
-        headers
-
-      }
-    );
-
-
-  let data;
-
-
-  try {
-
-    data =
-      await response.json();
-
-  }
-
-  catch {
-
-    data = {};
-
-  }
-
-
-  if (
-    !response.ok
-  ) {
-
-    throw new Error(
-
-      data.message ||
-
-      "Backend request failed."
-
-    );
-
-  }
-
-
-  return data;
-
-}
-
-
-/* =========================================================
-   LOGIN SCREEN
-========================================================= */
-
-function showLogin() {
-
-  document
-    .getElementById("loginScreen")
-    .classList.remove(
-      "hidden"
-    );
-
-  document
-    .getElementById("app")
-    .classList.remove(
-      "show"
-    );
-
-}
-
-
-function showApp() {
-
-  document
-    .getElementById("loginScreen")
-    .classList.add(
-      "hidden"
-    );
-
-  document
-    .getElementById("app")
-    .classList.add(
-      "show"
-    );
-
-}
-
-
-/* =========================================================
-   PASSWORD
-========================================================= */
-
-function togglePassword() {
-
-  const input =
-    document.getElementById(
-      "adminPassword"
-    );
-
-  const button =
-    document.querySelector(
-      ".password-toggle"
-    );
-
-
-  if (
-    input.type === "password"
-  ) {
-
-    input.type =
-      "text";
-
-    button.textContent =
-      "HIDE";
-
-  }
-
-  else {
-
-    input.type =
-      "password";
-
-    button.textContent =
-      "SHOW";
-
-  }
-
-}
-
-
-/* =========================================================
-   ADMIN LOGIN
-========================================================= */
-
-async function adminLogin() {
-
-  const email =
-    document
-      .getElementById(
-        "adminEmail"
-      )
-      .value
-      .trim();
-
-
-  const password =
-    document
-      .getElementById(
-        "adminPassword"
-      )
-      .value;
-
-
-  const errorBox =
-    document.getElementById(
-      "loginError"
-    );
-
-
-  const button =
-    document.getElementById(
-      "loginButton"
-    );
-
-
-  errorBox.classList.remove(
-    "show"
-  );
-
-
-  if (
-    !email ||
-    !password
-  ) {
-
-    errorBox.textContent =
-      "Enter your administrator email and password.";
-
-    errorBox.classList.add(
-      "show"
-    );
-
-    return;
-
-  }
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "LOGGING IN...";
-
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        "/admin/login",
-        {
-
-          method:
-            "POST",
-
-          headers: {
-
-            "Content-Type":
-              "application/json"
-
-          },
-
-          body:
-            JSON.stringify({
-
-              email,
-
-              password
-
-            })
-
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (
-      !response.ok
-    ) {
-
-      throw new Error(
-
-        result.message ||
-
-        "Login failed."
-
-      );
-
-    }
-
-
-    adminToken =
-      result.token;
-
-
-    localStorage.setItem(
-      "jaycobAdminToken",
-      adminToken
-    );
-
-
-    localStorage.setItem(
-      "jaycobAdminEmail",
-
-      result.admin?.email ||
-      email
-    );
-
-
-    document
-      .getElementById(
-        "adminEmailDisplay"
-      )
-      .textContent =
-
-      result.admin?.email ||
-      email;
-
-
-    showApp();
-
-
-    showToast(
-      "Administrator login successful."
-    );
-
-
-    await loadAll();
-
-  }
-
-  catch (error) {
-
-    errorBox.textContent =
-      error.message;
-
-    errorBox.classList.add(
-      "show"
-    );
-
-  }
-
-  finally {
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "LOGIN TO ADMIN PANEL";
-
-  }
-
-}
-
-
-/* =========================================================
-   ADMIN LOGOUT
-========================================================= */
-
-async function adminLogout() {
-
-  const confirmed =
-    confirm(
-      "Do you want to logout?"
-    );
-
-
-  if (
-    !confirmed
-  ) {
-
-    return;
-
-  }
-
-
-  try {
-
-    if (
-      adminToken
-    ) {
-
-      await apiRequest(
-        "/admin/logout",
-        {
-          method:
-            "POST"
-        }
-      );
-
-    }
-
-  }
-
-  catch (error) {
-
-    console.warn(
-      error.message
-    );
-
-  }
-
-
-  adminToken =
-    "";
-
-
-  localStorage.removeItem(
-    "jaycobAdminToken"
-  );
-
-
-  localStorage.removeItem(
-    "jaycobAdminEmail"
-  );
-
-
-  customers = [];
-
-  applications = [];
-
-  showLogin();
-
-
-  showToast(
-    "Administrator logged out."
-  );
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showPage(page) {
-
-  document
-    .querySelectorAll(".page")
-    .forEach(
-      item => {
-
-        item.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-
-  const target =
-    document.getElementById(
-      "page-" + page
-    );
-
-
-  if (
-    target
-  ) {
-
-    target.classList.add(
-      "active"
-    );
-
-  }
-
-
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(
-      item => {
-
-        item.classList.toggle(
-
-          "active",
-
-          item.dataset.page ===
-          page
-
-        );
-
-      }
-    );
-
-
-  const activeNav =
-    document.querySelector(
-
-      `.nav-item[data-page="${page}"]`
-
-    );
-
-
-  if (
-    activeNav
-  ) {
-
-    document
-      .getElementById("pageTitle")
-      .textContent =
-
-      activeNav.textContent.trim();
-
-  }
-
-
-  document
-    .getElementById("sidebar")
-    .classList.remove(
-      "show"
-    );
-
-
-  if (
-    page === "statistics"
-  ) {
-
-    loadDashboard();
-
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE SIDEBAR
-========================================================= */
-
-function toggleSidebar() {
-
-  document
-    .getElementById("sidebar")
-    .classList.toggle(
-      "show"
-    );
-
-}
-
-
-/* =========================================================
-   CUSTOMERS
-========================================================= */
-
-async function loadCustomers() {
-
-  try {
-
-    const result =
-      await apiRequest(
-        "/admin/customers"
-      );
-
-
-    customers =
-      result.customers ||
-      result.data ||
-      [];
-
-
-    renderCustomers();
-
-  }
-
-  catch (error) {
-
-    customers = [];
-
-    renderCustomers();
-
-    showToast(
-      "Could not load customers: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-}
-
-
-function renderCustomers() {
-
-  const body =
-    document.getElementById(
-      "customersBody"
-    );
-
-
-  const search =
-    document
-      .getElementById(
-        "customerSearch"
-      )
-      ?.value
-      ?.toLowerCase()
-      .trim() || "";
-
-
-  const filtered =
-    customers.filter(
-      customer => {
-
-        const text =
-          [
-
-            customer.id,
-
-            customer.full_name,
-
-            customer.email,
-
-            customer.phone
-
-          ]
-
-            .join(" ")
-
-            .toLowerCase();
-
-
-        return text.includes(
-          search
-        );
-
-      }
-    );
-
-
-  if (
-    !filtered.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty">
-          No customers found.
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    filtered
-      .map(
-        customer => `
-          <tr>
-
-            <td>
-              <strong>
-                ${escapeHTML(
-                  customer.full_name
-                )}
-              </strong>
-            </td>
-
-            <td>
-              ${escapeHTML(
-                customer.email
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                customer.phone || "—"
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                customer.id
-              )}
-            </td>
-
-            <td>
-              ${formatDate(
-                customer.created_at
-              )}
-            </td>
-
-          </tr>
-        `
-      )
-
-      .join("");
-
-}
-
-
-/* =========================================================
-   LOAD APPLICATIONS
-========================================================= */
-
-async function loadApplications() {
-
-  try {
-
-    const result =
-      await apiRequest(
-        "/admin/applications"
-      );
-
-
-    applications =
-      result.applications ||
-      result.data ||
-      [];
-
-
-    renderApplications();
-
-    renderRecentApplications();
-
-    renderActiveLoans();
-
-    renderNotifications();
-
-  }
-
-  catch (error) {
-
-    applications = [];
-
-    renderApplications();
-
-    renderRecentApplications();
-
-    renderActiveLoans();
-
-
-    showToast(
-
-      "Could not load applications: " +
-      error.message,
-
-      "error"
-
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   RENDER APPLICATIONS
-========================================================= */
-
-function renderApplications() {
-
-  const body =
-    document.getElementById(
-      "applicationsBody"
-    );
-
-
-  const search =
-    document
-      .getElementById(
-        "applicationSearch"
-      )
-      ?.value
-      ?.toLowerCase()
-      .trim() || "";
-
-
-  const filtered =
-    applications.filter(
-      application => {
-
-        const text =
-          [
-
-            getApplicationId(
-              application
-            ),
-
-            getCustomerName(
-              application
-            ),
-
-            getCustomerEmail(
-              application
-            ),
-
-            getLoanType(
-              application
-            ),
-
-            getAmount(
-              application
-            ),
-
-            getDuration(
-              application
-            ),
-
-            application.status
-
-          ]
-
-            .join(" ")
-
-            .toLowerCase();
-
-
-        return text.includes(
-          search
-        );
-
-      }
-    );
-
-
-  if (
-    !filtered.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="7" class="empty">
-          No loan applications found.
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    filtered
-      .map(
-        application => {
-
-          const id =
-            getApplicationId(
-              application
-            );
-
-
-          return `
-            <tr>
-
-              <td>
-                <strong>
-                  ${escapeHTML(id)}
-                </strong>
-              </td>
-
-
-              <td>
-
-                <strong>
-                  ${escapeHTML(
-                    getCustomerName(
-                      application
-                    )
-                  )}
-                </strong>
-
-                <br>
-
-                <small style="color:#6b7280">
-
-                  ${escapeHTML(
-                    getCustomerEmail(
-                      application
-                    )
-                  )}
-
-                </small>
-
-              </td>
-
-
-              <td>
-
-                ${escapeHTML(
-                  getLoanType(
-                    application
-                  )
-                )}
-
-              </td>
-
-
-              <td>
-
-                ${formatMoney(
-                  getAmount(
-                    application
-                  )
-                )}
-
-              </td>
-
-
-              <td>
-
-                ${escapeHTML(
-                  getDuration(
-                    application
-                  )
-                )}
-
-              </td>
-
-
-              <td>
-
-                ${statusHTML(
-                  application.status
-                )}
-
-              </td>
-
-
-              <td>
-
-                <button
-                  class="btn btn-primary"
-                  onclick="reviewLoan('${escapeHTML(id)}')"
-                >
-                  Review
-                </button>
-
-              </td>
-
-            </tr>
-          `;
-
-        }
-      )
-
-      .join("");
-
-}
-
-
-/* =========================================================
-   RECENT APPLICATIONS
-========================================================= */
-
-function renderRecentApplications() {
-
-  const body =
-    document.getElementById(
-      "recentApplicationsBody"
-    );
-
-
-  const recent =
-    [...applications]
-
-      .sort(
-        (a,b) =>
-
-          new Date(
-            b.created_at ||
-            0
-          )
-
-          -
-
-          new Date(
-            a.created_at ||
-            0
-          )
-      )
-
-      .slice(
-        0,
-        8
-      );
-
-
-  if (
-    !recent.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="4" class="empty">
-          No applications found.
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    recent
-      .map(
-        application => `
-          <tr>
-
-            <td>
-              ${escapeHTML(
-                getApplicationId(
-                  application
-                )
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                getCustomerName(
-                  application
-                )
-              )}
-            </td>
-
-            <td>
-              ${formatMoney(
-                getAmount(
-                  application
-                )
-              )}
-            </td>
-
-            <td>
-              ${statusHTML(
-                application.status
-              )}
-            </td>
-
-          </tr>
-        `
-      )
-
-      .join("");
-
-}
-
-
-/* =========================================================
-   ACTIVE LOANS
-========================================================= */
-
-function renderActiveLoans() {
-
-  const body =
-    document.getElementById(
-      "activeLoansBody"
-    );
-
-
-  const active =
-    applications.filter(
-
-      application =>
-
-        normalizeStatus(
-          application.status
-        ) === "APPROVED"
-
-    );
-
-
-  if (
-    !active.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="7" class="empty">
-          No approved loans found.
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    active
-      .map(
-        application => {
-
-          const id =
-            getApplicationId(
-              application
-            );
-
-
-          return `
-            <tr>
-
-              <td>
-                ${escapeHTML(id)}
-              </td>
-
-              <td>
-                ${escapeHTML(
-                  getCustomerName(
-                    application
-                  )
-                )}
-              </td>
-
-              <td>
-                ${escapeHTML(
-                  getLoanType(
-                    application
-                  )
-                )}
-              </td>
-
-              <td>
-                ${formatMoney(
-                  getAmount(
-                    application
-                  )
-                )}
-              </td>
-
-              <td>
-                ${escapeHTML(
-                  getDuration(
-                    application
-                  )
-                )}
-              </td>
-
-              <td>
-                ${formatDate(
-                  application.reviewed_at
-                )}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-primary"
-                  onclick="reviewLoan('${escapeHTML(id)}')"
-                >
-                  View
-                </button>
-
-              </td>
-
-            </tr>
-          `;
-
-        }
-      )
-
-      .join("");
-
-}
-
-
-/* =========================================================
-   REVIEW LOAN
-========================================================= */
-
-async function reviewLoan(id) {
-
-  selectedLoanId =
-    id;
-
-
-  const modal =
-    document.getElementById(
-      "loanModal"
-    );
-
-
-  const body =
-    document.getElementById(
-      "loanModalBody"
-    );
-
-
-  modal.classList.add(
-    "show"
-  );
-
-
-  body.innerHTML =
-    "Loading application...";
-
-
-  try {
-
-    let application =
-      applications.find(
-
-        item =>
-
-          String(
-            getApplicationId(item)
-          ) === String(id)
-
-      );
-
-
-    try {
-
-      const result =
-        await apiRequest(
-
-          "/admin/applications/" +
-
-          encodeURIComponent(id)
-
-        );
-
-
-      application =
-        result.application ||
-        application;
-
-    }
-
-    catch (error) {
-
-      console.warn(
-        error.message
-      );
-
-    }
-
-
-    if (
-      !application
-    ) {
-
-      throw new Error(
-        "Loan application not found."
-      );
-
-    }
-
-
-    body.innerHTML =
-      buildLoanDetails(
-        application
-      );
-
-  }
-
-  catch (error) {
-
-    body.innerHTML = `
-      <div class="notice notice-warning">
-        ${escapeHTML(
-          error.message
-        )}
-      </div>
-    `;
-
-
-    showToast(
-      error.message,
-      "error"
-    );
-
-  }
-
-}
-
-
-function buildLoanDetails(
-  application
-) {
-
-  return `
-
-    <div class="loan-detail-grid">
-
-      <div class="detail-item">
-
-        <small>
-          Application ID
-        </small>
-
-        <strong>
-          ${escapeHTML(
-            getApplicationId(
-              application
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Current Status
-        </small>
-
-        <strong>
-          ${statusHTML(
-            application.status
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Customer
-        </small>
-
-        <strong>
-          ${escapeHTML(
-            getCustomerName(
-              application
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Email
-        </small>
-
-        <strong>
-          ${escapeHTML(
-            getCustomerEmail(
-              application
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Loan Type
-        </small>
-
-        <strong>
-          ${escapeHTML(
-            getLoanType(
-              application
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Requested Amount
-        </small>
-
-        <strong>
-          ${formatMoney(
-            getAmount(
-              application
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Duration
-        </small>
-
-        <strong>
-          ${escapeHTML(
-            getDuration(
-              application
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Applied
-        </small>
-
-        <strong>
-          ${formatDate(
-            application.created_at
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Reviewed By
-        </small>
-
-        <strong>
-          ${escapeHTML(
-            application.reviewed_by ||
-            "Not reviewed"
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="detail-item">
-
-        <small>
-          Reviewed At
-        </small>
-
-        <strong>
-          ${formatDate(
-            application.reviewed_at
-          )}
-        </strong>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   UPDATE LOAN STATUS
-========================================================= */
-
-async function updateLoanStatus(
-  newStatus
-) {
-
-  if (
-    !selectedLoanId
-  ) {
-
-    showToast(
-      "No loan application selected.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const status =
-    normalizeStatus(
-      newStatus
-    );
-
-
-  const confirmed =
-    confirm(
-
-      "Change loan application " +
-
-      selectedLoanId +
-
-      " to " +
-
-      status +
-
-      "?"
-
-    );
-
-
-  if (
-    !confirmed
-  ) {
-
-    return;
-
-  }
-
-
-  try {
-
-    showLoading(true);
-
-
-    const result =
-      await apiRequest(
-
-        "/admin/applications/" +
-
-        encodeURIComponent(
-          selectedLoanId
-        ) +
-
-        "/status",
-
-        {
-
-          method:
-            "PUT",
-
-          body:
-            JSON.stringify({
-
-              status
-
-            })
-
-        }
-
-      );
-
-
-    const updated =
-      result.application;
-
-
-    const index =
-      applications.findIndex(
-
-        application =>
-
-          String(
-            getApplicationId(
-              application
-            )
-          )
-
-          ===
-
-          String(
-            selectedLoanId
-          )
-
-      );
-
-
-    if (
-      index !== -1 &&
-      updated
-    ) {
-
-      applications[index] =
-        updated;
-
-    }
-
-
-    closeLoanModal();
-
-
-    renderApplications();
-
-    renderRecentApplications();
-
-    renderActiveLoans();
-
-    renderNotifications();
-
-
-    await loadDashboard();
-
-    await loadAuditLogs();
-
-
-    showToast(
-
-      "Loan application status changed to " +
-
-      status +
-
-      "."
-
-    );
-
-  }
-
-  catch (error) {
-
-    showToast(
-
-      "Status update failed: " +
-
-      error.message,
-
-      "error"
-
-    );
-
-  }
-
-  finally {
-
-    showLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeLoanModal() {
-
-  document
-    .getElementById(
-      "loanModal"
-    )
-
-    .classList.remove(
-      "show"
-    );
-
-
-  selectedLoanId =
-    null;
-
-}
-
-
-/* =========================================================
-   FOLLOWUPS
-========================================================= */
-
-async function loadFollowups() {
-
-  try {
-
-    const result =
-      await apiRequest(
-        "/admin/followups"
-      );
-
-
-    followups =
-      result.followups ||
-      result.data ||
-      [];
-
-
-    renderFollowups();
-
-  }
-
-  catch (error) {
-
-    followups = [];
-
-    renderFollowups();
-
-  }
-
-}
-
-
-function renderFollowups() {
-
-  const body =
-    document.getElementById(
-      "followupsBody"
-    );
-
-
-  if (
-    !followups.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty">
-          No follow-up records found.
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    followups
-      .map(
-        item => `
-          <tr>
-
-            <td>
-              ${escapeHTML(
-                item.id
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                item.customer
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                item.date
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                item.priority ||
-                "Normal"
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                item.notes
-              )}
-            </td>
-
-          </tr>
-        `
-      )
-
-      .join("");
-
-}
-
-
-/* =========================================================
-   AUDIT LOGS
-========================================================= */
-
-async function loadAuditLogs() {
-
-  try {
-
-    const result =
-      await apiRequest(
-        "/admin/audit-logs"
-      );
-
-
-    auditLogs =
-      result.auditLogs ||
-      result.logs ||
-      result.data ||
-      [];
-
-
-    renderAuditLogs();
-
-  }
-
-  catch (error) {
-
-    auditLogs = [];
-
-    renderAuditLogs();
-
-  }
-
-}
-
-
-function extractStatusChange(
-  action
-) {
-
-  const text =
-    String(
-      action || ""
-    );
-
-
-  const match =
-    text.match(
-
-      /changed from (.+?) to (.+?)(?:\.|$)/i
-
-    );
-
-
-  if (
-    !match
-  ) {
-
-    return "—";
-
-  }
-
-
-  return (
-
-    escapeHTML(
-      match[1].trim()
-    )
-
-    +
-
-    " → "
-
-    +
-
-    escapeHTML(
-      match[2].trim()
-    )
-
-  );
-
-}
-
-
-function renderAuditLogs() {
-
-  const body =
-    document.getElementById(
-      "auditBody"
-    );
-
-
-  if (
-    !auditLogs.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty">
-          No audit logs found.
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    auditLogs
-      .map(
-        log => {
-
-          const action =
-            log.action ||
-            log.event ||
-            "—";
-
-
-          return `
-            <tr>
-
-              <td>
-                ${escapeHTML(
-                  log.id || "—"
-                )}
-              </td>
-
-              <td>
-                ${escapeHTML(
-                  log.user ||
-                  log.admin ||
-                  "—"
-                )}
-              </td>
-
-              <td>
-                ${escapeHTML(
-                  action
-                )}
-              </td>
-
-              <td>
-                ${extractStatusChange(
-                  action
-                )}
-              </td>
-
-              <td>
-                ${formatDate(
-                  log.date ||
-                  log.created_at ||
-                  log.timestamp
-                )}
-              </td>
-
-            </tr>
-          `;
-
-        }
-      )
-
-      .join("");
-
-}
-
-
-/* =========================================================
-   SUPPORT MESSAGES
-========================================================= */
-
-async function loadSupportMessages() {
-
-  try {
-
-    const result =
-      await apiRequest(
-        "/admin/support-messages"
-      );
-
-
-    supportMessages =
-      result.messages ||
-      result.supportMessages ||
-      result.data ||
-      [];
-
-  }
-
-  catch (error) {
-
-    supportMessages = [];
-
-  }
-
-}
-
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-function renderNotifications() {
-
-  const body =
-    document.getElementById(
-      "notificationsBody"
-    );
-
-
-  if (
-    !body
-  ) {
-
-    return;
-
-  }
-
-
-  const pending =
-    applications.filter(
-
-      application =>
-
-        normalizeStatus(
-          application.status
-        ) === "PENDING"
-
-    ).length;
-
-
-  const underReview =
-    applications.filter(
-
-      application =>
-
-        normalizeStatus(
-          application.status
-        ) === "UNDER REVIEW"
-
-    ).length;
-
-
-  const approved =
-    applications.filter(
-
-      application =>
-
-        normalizeStatus(
-          application.status
-        ) === "APPROVED"
-
-    ).length;
-
-
-  const rejected =
-    applications.filter(
-
-      application =>
-
-        normalizeStatus(
-          application.status
-        ) === "REJECTED"
-
-    ).length;
-
-
-  const notifications =
-    [];
-
-
-  if (
-    pending > 0
-  ) {
-
-    notifications.push({
-
-      title:
-        "Pending loan applications",
-
-      message:
-
-        pending +
-
-        " application(s) are waiting for administrator review.",
-
-      type:
-        "warning"
-
-    });
-
-  }
-
-
-  if (
-    underReview > 0
-  ) {
-
-    notifications.push({
-
-      title:
-        "Applications under review",
-
-      message:
-
-        underReview +
-
-        " application(s) are currently under review.",
-
-      type:
-        "info"
-
-    });
-
-  }
-
-
-  if (
-    approved > 0
-  ) {
-
-    notifications.push({
-
-      title:
-        "Approved applications",
-
-      message:
-
-        approved +
-
-        " loan application(s) have been approved.",
-
-      type:
-        "success"
-
-    });
-
-  }
-
-
-  if (
-    rejected > 0
-  ) {
-
-    notifications.push({
-
-      title:
-        "Rejected applications",
-
-      message:
-
-        rejected +
-
-        " application(s) are rejected.",
-
-      type:
-        "info"
-
-    });
-
-  }
-
-
-  notifications.push({
-
-    title:
-      "Backend storage",
-
-    message:
-      "Current backend data is stored in memory and may reset after Railway redeployment.",
-
-    type:
-      "warning"
-
-  });
-
-
-  body.innerHTML =
-    notifications
-      .map(
-        item => {
-
-          let className =
-            "notice-info";
-
-
-          if (
-            item.type ===
-            "warning"
-          ) {
-
-            className =
-              "notice-warning";
-
-          }
-
-
-          if (
-            item.type ===
-            "success"
-          ) {
-
-            className =
-              "notice-success";
-
-          }
-
-
-          return `
-            <div class="notice ${className}">
-
-              <strong>
-                ${escapeHTML(
-                  item.title
-                )}
-              </strong>
-
-              <br>
-
-              ${escapeHTML(
-                item.message
-              )}
+              <button id="refreshApplicationsBtn">
+                🔄 Refresh
+              </button>
 
             </div>
-          `;
 
-        }
-      )
+            <div id="applicationsList" class="application-list">
 
-      .join("");
+              <div class="empty-state">
+                Loading applications...
+              </div>
 
-}
+            </div>
 
+          </div>
 
-/* =========================================================
-   AI MESSAGE GENERATOR
-========================================================= */
+        </section>
 
-function generateMessage() {
 
-  const name =
-    document
-      .getElementById(
-        "messageCustomer"
-      )
-      .value
-      .trim()
+        <!-- =================================================
+             PAYMENTS
+        ================================================== -->
 
-    ||
+        <section id="page-payments" class="page">
 
-    "Dear Customer";
+          <div class="section-card">
 
+            <div class="section-header">
 
-  const type =
-    document
-      .getElementById(
-        "messageType"
-      )
-      .value;
+              <h3>My Payments</h3>
 
+              <button id="refreshPaymentsBtn">
+                🔄 Refresh
+              </button>
 
-  const messages = {
+            </div>
 
-    approval:
+            <div class="notice">
+              Payment records shown here come directly from your Railway
+              backend.
+            </div>
 
-`Dear ${name},
+            <div id="paymentsBody">
+              <div class="empty-state">
+                Loading payments...
+              </div>
+            </div>
 
-We are pleased to inform you that your loan application with JAY C O B FINANCIAL SERVICES has been approved.
+          </div>
 
-Please contact our office or check your customer dashboard for the next steps.
+        </section>
 
-Thank you for choosing JAY C O B FINANCIAL SERVICES.`,
 
+        <!-- =================================================
+             SUPPORT
+        ================================================== -->
 
-    pending:
+        <section id="page-support" class="page">
 
-`Dear ${name},
+          <div class="section-card">
 
-Your loan application with JAY C O B FINANCIAL SERVICES is currently pending.
+            <div class="section-header">
+              <h3>Contact Support</h3>
+            </div>
 
-Our team will review your application and update you as soon as possible.
+            <form id="supportForm">
 
-Thank you for your patience.`,
+              <div class="form-group">
 
+                <label for="supportSubject">
+                  Subject
+                </label>
 
-    review:
+                <input
+                  id="supportSubject"
+                  class="form-control"
+                  type="text"
+                  placeholder="What do you need help with?"
+                  required
+                >
 
-`Dear ${name},
+              </div>
 
-Your loan application with JAY C O B FINANCIAL SERVICES is currently under review.
 
-Our team is checking the information provided and will communicate the outcome with you.
+              <div class="form-group">
 
-Thank you.`,
+                <label for="supportMessage">
+                  Message
+                </label>
 
+                <textarea
+                  id="supportMessage"
+                  class="form-control"
+                  rows="6"
+                  placeholder="Write your message..."
+                  required
+                ></textarea>
 
-    rejection:
+              </div>
 
-`Dear ${name},
 
-We regret to inform you that your loan application with JAY C O B FINANCIAL SERVICES has not been approved at this time.
+              <button class="btn btn-primary" type="submit">
+                Send Message
+              </button>
 
-Please contact our office if you require further information.`,
+            </form>
 
+            <div id="supportFormMessage" class="form-result"></div>
 
-    payment:
+          </div>
 
-`Dear ${name},
 
-This is a friendly reminder from JAY C O B FINANCIAL SERVICES regarding your loan payment.
+          <div class="section-card">
 
-Please ensure your payment is made according to the agreed schedule.
+            <div class="section-header">
 
-Thank you.`,
+              <h3>My Support Messages</h3>
 
+              <button id="refreshSupportBtn">
+                🔄 Refresh
+              </button>
 
-    welcome:
+            </div>
 
-`Dear ${name},
+            <div id="supportMessagesBody">
+              <div class="empty-state">
+                Loading messages...
+              </div>
+            </div>
 
-Welcome to JAY C O B FINANCIAL SERVICES.
+          </div>
 
-We are pleased to have you with us. You can use your customer dashboard to manage your account and loan applications.
+        </section>
 
-Thank you for choosing JAY C O B FINANCIAL SERVICES.`
 
-  };
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
 
+        <section id="page-profile" class="page">
 
-  document
-    .getElementById(
-      "generatedMessage"
-    )
-    .value =
+          <div class="section-card">
 
-    messages[type] ||
-    messages.welcome;
+            <div class="section-header">
 
-}
+              <h3>My Profile</h3>
 
+              <button id="refreshProfileBtn">
+                🔄 Refresh
+              </button>
 
-async function copyGeneratedMessage() {
+            </div>
 
-  const textarea =
-    document.getElementById(
-      "generatedMessage"
-    );
+            <div class="profile-grid">
 
+              <div class="profile-item">
+                <label>Customer ID</label>
+                <strong id="profileId">-</strong>
+              </div>
 
-  if (
-    !textarea.value.trim()
-  ) {
+              <div class="profile-item">
+                <label>Full Name</label>
+                <strong id="profileName">-</strong>
+              </div>
 
-    showToast(
-      "Generate a message first.",
-      "warning"
-    );
+              <div class="profile-item">
+                <label>Email</label>
+                <strong id="profileEmail">-</strong>
+              </div>
 
-    return;
+              <div class="profile-item">
+                <label>Phone</label>
+                <strong id="profilePhone">-</strong>
+              </div>
 
-  }
+              <div class="profile-item">
+                <label>Account Status</label>
+                <strong id="profileStatus">-</strong>
+              </div>
 
+              <div class="profile-item">
+                <label>Account Created</label>
+                <strong id="profileCreated">-</strong>
+              </div>
 
-  try {
+            </div>
 
-    await navigator.clipboard.writeText(
-      textarea.value
-    );
+          </div>
 
+        </section>
 
-    showToast(
-      "Message copied to clipboard."
-    );
+      </div>
 
-  }
+    </main>
 
-  catch {
+  </section>
 
-    textarea.select();
 
-    document.execCommand(
-      "copy"
-    );
+  <!-- =====================================================
+       APPLICATION DETAIL MODAL
+  ====================================================== -->
 
+  <div id="loanModal" class="modal">
 
-    showToast(
-      "Message copied."
-    );
+    <div class="modal-box">
 
-  }
+      <div class="modal-header">
 
-}
+        <h3>Loan Application Details</h3>
 
+        <button id="closeLoanModal" class="close-modal">
+          ✕
+        </button>
 
-/* =========================================================
-   SETTINGS
-========================================================= */
+      </div>
 
-function loadSettings() {
+      <div id="loanModalBody">
+        Loading...
+      </div>
 
-  const duration =
-    localStorage.getItem(
-      "jaycobSettingDuration"
-    );
+    </div>
 
+  </div>
 
-  const interest =
-    localStorage.getItem(
-      "jaycobSettingInterest"
-    );
 
+  <!-- =====================================================
+       LOADING
+  ====================================================== -->
 
-  if (
-    duration
-  ) {
+  <div id="loadingOverlay">
 
-    document
-      .getElementById(
-        "settingDuration"
-      )
-      .value =
-      duration;
+    <div class="loading-box">
 
-  }
+      <div class="spinner"></div>
 
+      <div id="loadingText">
+        Please wait...
+      </div>
 
-  if (
-    interest
-  ) {
+    </div>
 
-    document
-      .getElementById(
-        "settingInterest"
-      )
-      .value =
-      interest;
+  </div>
 
-  }
 
-}
+  <div id="toastContainer"></div>
 
 
-function saveSettings() {
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
 
-  const duration =
-    document
-      .getElementById(
-        "settingDuration"
-      )
-      .value;
+  <script>
 
+    /* =====================================================
+       RAILWAY BACKEND
+    ====================================================== */
 
-  const interest =
-    document
-      .getElementById(
-        "settingInterest"
-      )
-      .value;
+    const API_URL =
+      "https://emmanueljacobgithubio-production.up.railway.app/api";
 
 
-  localStorage.setItem(
+    /* =====================================================
+       STATE
+    ====================================================== */
 
-    "jaycobSettingDuration",
+    let customerToken =
+      localStorage.getItem("jaycobCustomerToken") || "";
 
-    duration
+    let currentCustomer = null;
 
-  );
+    try {
+      currentCustomer =
+        JSON.parse(
+          localStorage.getItem("jaycobCustomer") || "null"
+        );
+    } catch (error) {
+      currentCustomer = null;
+    }
 
+    let applications = [];
+    let payments = [];
+    let supportMessages = [];
 
-  localStorage.setItem(
+    let autoRefreshTimer = null;
 
-    "jaycobSettingInterest",
 
-    interest
+    /* =====================================================
+       DOM HELPERS
+    ====================================================== */
 
-  );
+    const $ = (id) => document.getElementById(id);
 
 
-  showToast(
-    "Dashboard settings saved locally."
-  );
+    /* =====================================================
+       HTML ESCAPE
+    ====================================================== */
 
-}
+    function escapeHTML(value) {
 
+      if (value === null || value === undefined) {
+        return "";
+      }
 
-/* =========================================================
-   BACKEND HEALTH
-========================================================= */
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
 
-async function checkBackendHealth() {
 
-  const dot =
-    document.getElementById(
-      "backendDot"
-    );
+    /* =====================================================
+       MONEY FORMAT
+    ====================================================== */
 
+    function formatMoney(value) {
 
-  const text =
-    document.getElementById(
-      "backendStatusText"
-    );
+      const number = Number(value);
 
+      if (!Number.isFinite(number)) {
+        return "MWK 0";
+      }
 
-  const system =
-    document.getElementById(
-      "systemBackend"
-    );
-
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        "/health"
+      return (
+        "MWK " +
+        number.toLocaleString("en-MW", {
+          maximumFractionDigits: 2
+        })
       );
+    }
 
 
-    const data =
-      await response.json();
+    /* =====================================================
+       DATE FORMAT
+    ====================================================== */
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "-";
+      }
+
+      const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) {
+        return escapeHTML(value);
+      }
+
+      return date.toLocaleString("en-MW", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
 
 
-    if (
-      !response.ok
+    /* =====================================================
+       STATUS
+    ====================================================== */
+
+    function normalizeStatus(status) {
+
+      return String(status || "UNKNOWN")
+        .toUpperCase()
+        .replace(/[_-]/g, " ")
+        .trim();
+    }
+
+
+    function statusClass(status) {
+
+      const value = normalizeStatus(status);
+
+      if (value === "PENDING") {
+        return "status-pending";
+      }
+
+      if (value === "UNDER REVIEW") {
+        return "status-review";
+      }
+
+      if (value === "APPROVED") {
+        return "status-approved";
+      }
+
+      if (value === "REJECTED") {
+        return "status-rejected";
+      }
+
+      return "status-default";
+    }
+
+
+    function statusBadge(status) {
+
+      const normalized = normalizeStatus(status);
+
+      return `
+        <span class="status-badge ${statusClass(normalized)}">
+          ${escapeHTML(normalized)}
+        </span>
+      `;
+    }
+
+
+    /* =====================================================
+       LOADING
+    ====================================================== */
+
+    function showLoading(text = "Please wait...") {
+
+      $("loadingText").textContent = text;
+
+      $("loadingOverlay").classList.add("show");
+    }
+
+
+    function hideLoading() {
+
+      $("loadingOverlay").classList.remove("show");
+    }
+
+
+    /* =====================================================
+       TOAST
+    ====================================================== */
+
+    function showToast(message, type = "") {
+
+      const toast =
+        document.createElement("div");
+
+      toast.className =
+        "toast " + type;
+
+      toast.textContent = message;
+
+      $("toastContainer").appendChild(toast);
+
+      setTimeout(() => {
+
+        toast.remove();
+
+      }, 4000);
+    }
+
+
+    /* =====================================================
+       AUTH MESSAGE
+    ====================================================== */
+
+    function showAuthMessage(
+      elementId,
+      message,
+      type = "error"
     ) {
 
-      throw new Error(
+      const element = $(elementId);
 
-        data.message ||
+      element.textContent = message;
 
-        "Backend health check failed."
+      element.className =
+        "auth-message " + type;
 
+    }
+
+
+    function clearAuthMessage(elementId) {
+
+      const element = $(elementId);
+
+      element.textContent = "";
+
+      element.className = "auth-message";
+
+    }
+
+
+    /* =====================================================
+       FORM RESULT
+    ====================================================== */
+
+    function showFormResult(
+      elementId,
+      message,
+      type
+    ) {
+
+      const element = $(elementId);
+
+      element.textContent = message;
+
+      element.className =
+        "form-result " + type;
+
+    }
+
+
+    /* =====================================================
+       API REQUEST
+    ====================================================== */
+
+    async function apiRequest(
+      endpoint,
+      options = {}
+    ) {
+
+      const headers = {
+        ...(options.headers || {})
+      };
+
+      if (!(options.body instanceof FormData)) {
+
+        headers["Content-Type"] =
+          "application/json";
+
+      }
+
+      if (customerToken) {
+
+        headers["Authorization"] =
+          "Bearer " + customerToken;
+
+      }
+
+      let response;
+
+      try {
+
+        response = await fetch(
+          API_URL + endpoint,
+          {
+            ...options,
+            headers
+          }
+        );
+
+      } catch (networkError) {
+
+        throw new Error(
+          "Unable to connect to the Railway backend. Please check your internet connection."
+        );
+
+      }
+
+      const text =
+        await response.text();
+
+      let data = {};
+
+      try {
+
+        data =
+          text ? JSON.parse(text) : {};
+
+      } catch (parseError) {
+
+        data = {
+          success: false,
+          message: text || "Server returned an invalid response."
+        };
+
+      }
+
+
+      if (response.status === 401) {
+
+        customerToken = "";
+
+        currentCustomer = null;
+
+        localStorage.removeItem(
+          "jaycobCustomerToken"
+        );
+
+        localStorage.removeItem(
+          "jaycobCustomer"
+        );
+
+        stopAutoRefresh();
+
+        showLogin();
+
+        throw new Error(
+          data.message ||
+          "Your customer session has expired. Please log in again."
+        );
+
+      }
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.message ||
+          "Request failed. Please try again."
+        );
+
+      }
+
+      return data;
+
+    }
+
+
+    /* =====================================================
+       SAVE CUSTOMER
+    ====================================================== */
+
+    function saveCustomer(customer, token) {
+
+      currentCustomer = customer;
+
+      customerToken = token;
+
+      localStorage.setItem(
+        "jaycobCustomerToken",
+        token
+      );
+
+      localStorage.setItem(
+        "jaycobCustomer",
+        JSON.stringify(customer)
       );
 
     }
 
 
-    dot.classList.add(
-      "online"
-    );
+    /* =====================================================
+       SHOW LOGIN
+    ====================================================== */
 
-    dot.classList.remove(
-      "offline"
-    );
+    function showLogin() {
 
+      $("authScreen").classList.remove("hidden");
 
-    text.textContent =
-      "Railway backend online";
+      $("appShell").classList.add("hidden");
 
+      $("loginPanel").classList.remove("hidden");
 
-    system.textContent =
-      "ONLINE — Railway API is responding.";
+      $("registerPanel").classList.add("hidden");
 
-  }
+    }
 
-  catch (error) {
 
-    dot.classList.remove(
-      "online"
-    );
+    /* =====================================================
+       SHOW REGISTER
+    ====================================================== */
 
-    dot.classList.add(
-      "offline"
-    );
+    function showRegister() {
 
+      $("loginPanel").classList.add("hidden");
 
-    text.textContent =
-      "Backend unavailable";
+      $("registerPanel").classList.remove("hidden");
 
+      clearAuthMessage("loginMessage");
 
-    system.textContent =
-      "OFFLINE — " +
-      error.message;
+      clearAuthMessage("registerMessage");
 
+    }
 
-    console.error(
-      error
-    );
 
-  }
+    /* =====================================================
+       SHOW APPLICATION
+    ====================================================== */
 
-}
+    function showApp() {
 
+      $("authScreen").classList.add("hidden");
 
-/* =========================================================
-   DASHBOARD STATISTICS
-========================================================= */
+      $("appShell").classList.remove("hidden");
 
-async function loadDashboard() {
+      updateCustomerHeader();
 
-  try {
+      startAutoRefresh();
 
-    const result =
-      await apiRequest(
-        "/admin/statistics"
-      );
+    }
 
 
-    const statistics =
-      result.statistics ||
-      {};
+    /* =====================================================
+       CUSTOMER HEADER
+    ====================================================== */
 
+    function updateCustomerHeader() {
 
-    document
-      .getElementById(
-        "statCustomers"
-      )
-      .textContent =
+      const name =
+        currentCustomer?.full_name ||
+        "Customer";
 
-      statistics.totalCustomers ||
-      0;
+      const email =
+        currentCustomer?.email ||
+        "-";
 
+      $("welcomeName").textContent = name;
 
-    document
-      .getElementById(
-        "statApplications"
-      )
-      .textContent =
+      $("topCustomerName").textContent = name;
 
-      statistics.totalApplications ||
-      0;
+      $("topCustomerEmail").textContent = email;
 
+    }
 
-    document
-      .getElementById(
-        "statPending"
-      )
-      .textContent =
 
-      statistics.pendingApplications ||
-      0;
+    /* =====================================================
+       LOGIN
+    ====================================================== */
 
+    async function loginCustomer(event) {
 
-    document
-      .getElementById(
-        "statApproved"
-      )
-      .textContent =
+      event.preventDefault();
 
-      statistics.approvedLoans ||
-      0;
+      clearAuthMessage("loginMessage");
 
+      const email =
+        $("loginEmail").value.trim();
 
-    document
-      .getElementById(
-        "statisticsPending"
-      )
-      .textContent =
+      const password =
+        $("loginPassword").value;
 
-      statistics.pendingApplications ||
-      0;
 
+      if (!email || !password) {
 
-    document
-      .getElementById(
-        "statisticsReview"
-      )
-      .textContent =
+        showAuthMessage(
+          "loginMessage",
+          "Email and password are required."
+        );
 
-      statistics.underReviewApplications ||
-      0;
+        return;
+      }
 
 
-    document
-      .getElementById(
-        "statisticsApproved"
-      )
-      .textContent =
+      showLoading("Logging in...");
 
-      statistics.approvedLoans ||
-      0;
 
+      try {
 
-    document
-      .getElementById(
-        "statisticsRejected"
-      )
-      .textContent =
+        const result =
+          await apiRequest(
+            "/auth/login",
+            {
+              method: "POST",
 
-      statistics.rejectedApplications ||
-      0;
+              body: JSON.stringify({
+                email,
+                password
+              })
+            }
+          );
 
 
-    const approvedApplications =
-      applications.filter(
+        if (
+          !result.success ||
+          !result.token ||
+          !result.customer
+        ) {
 
-        application =>
-
-          normalizeStatus(
-            application.status
-          ) === "APPROVED"
-
-      );
-
-
-    const approvedTotal =
-      approvedApplications.reduce(
-
-        (
-          total,
-          application
-        ) =>
-
-          total +
-
-          getAmount(
-            application
-          ),
-
-        0
-
-      );
-
-
-    const average =
-      approvedApplications.length
-
-        ?
-
-        approvedTotal /
-        approvedApplications.length
-
-        :
-
-        0;
-
-
-    document
-      .getElementById(
-        "approvedPrincipal"
-      )
-      .textContent =
-
-      formatMoney(
-        approvedTotal
-      );
-
-
-    document
-      .getElementById(
-        "averageApprovedLoan"
-      )
-      .textContent =
-
-      formatMoney(
-        average
-      );
-
-  }
-
-  catch (error) {
-
-    console.warn(
-      "Statistics:",
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   REFRESH ALL
-========================================================= */
-
-async function refreshAll() {
-
-  if (
-    !adminToken
-  ) {
-
-    showLogin();
-
-    return;
-
-  }
-
-
-  showLoading(true);
-
-
-  try {
-
-    await checkBackendHealth();
-
-    await loadCustomers();
-
-    await loadApplications();
-
-    await loadFollowups();
-
-    await loadAuditLogs();
-
-    await loadSupportMessages();
-
-    await loadDashboard();
-
-
-    renderNotifications();
-
-
-    document
-      .getElementById(
-        "lastRefresh"
-      )
-      .textContent =
-
-      formatDate(
-        new Date().toISOString()
-      );
-
-
-    showToast(
-      "Administrator dashboard refreshed."
-    );
-
-  }
-
-  catch (error) {
-
-    showToast(
-      "Refresh completed with some errors.",
-      "warning"
-    );
-
-  }
-
-  finally {
-
-    showLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   LOAD EVERYTHING
-========================================================= */
-
-async function loadAll() {
-
-  showLoading(true);
-
-
-  try {
-
-    await checkBackendHealth();
-
-    await loadCustomers();
-
-    await loadApplications();
-
-    await loadFollowups();
-
-    await loadAuditLogs();
-
-    await loadSupportMessages();
-
-    await loadDashboard();
-
-
-    renderNotifications();
-
-    loadSettings();
-
-
-    document
-      .getElementById(
-        "lastRefresh"
-      )
-      .textContent =
-
-      formatDate(
-        new Date().toISOString()
-      );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      error
-    );
-
-  }
-
-  finally {
-
-    showLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   NAVIGATION EVENTS
-========================================================= */
-
-document
-  .querySelectorAll(
-    ".nav-item"
-  )
-
-  .forEach(
-    item => {
-
-      item.addEventListener(
-
-        "click",
-
-        event => {
-
-          event.preventDefault();
-
-          showPage(
-            item.dataset.page
+          throw new Error(
+            result.message ||
+            "Login failed."
           );
 
         }
 
-      );
 
-    }
-  );
-
-
-/* =========================================================
-   LOGIN FORM
-========================================================= */
-
-document
-  .getElementById(
-    "loginForm"
-  )
-
-  .addEventListener(
-
-    "submit",
-
-    event => {
-
-      event.preventDefault();
-
-      adminLogin();
-
-    }
-
-  );
+        saveCustomer(
+          result.customer,
+          result.token
+        );
 
 
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
+        $("loginForm").reset();
 
-document
-  .getElementById(
-    "loanModal"
-  )
+        showApp();
 
-  .addEventListener(
+        showPage("overview");
 
-    "click",
+        await loadDashboardData();
 
-    event => {
+        showToast(
+          "Login successful.",
+          "success"
+        );
 
-      if (
-        event.target.id ===
-        "loanModal"
-      ) {
 
-        closeLoanModal();
+      } catch (error) {
+
+        showAuthMessage(
+          "loginMessage",
+          error.message ||
+          "Login failed."
+        );
+
+      } finally {
+
+        hideLoading();
 
       }
 
     }
 
-  );
+
+    /* =====================================================
+       REGISTER
+    ====================================================== */
+
+    async function registerCustomer(event) {
+
+      event.preventDefault();
+
+      clearAuthMessage("registerMessage");
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+      const full_name =
+        $("registerName").value.trim();
 
-async function initialize() {
+      const email =
+        $("registerEmail").value.trim();
 
-  loadSettings();
+      const phone =
+        $("registerPhone").value.trim();
 
-  checkBackendHealth();
+      const password =
+        $("registerPassword").value;
 
-
-  if (
-    adminToken
-  ) {
-
-    showApp();
+      const confirm =
+        $("registerConfirm").value;
 
 
-    const email =
-      localStorage.getItem(
-        "jaycobAdminEmail"
+      if (
+        !full_name ||
+        !email ||
+        !phone ||
+        !password
+      ) {
+
+        showAuthMessage(
+          "registerMessage",
+          "Please complete all required fields."
+        );
+
+        return;
+      }
+
+
+      if (password !== confirm) {
+
+        showAuthMessage(
+          "registerMessage",
+          "Passwords do not match."
+        );
+
+        return;
+      }
+
+
+      if (password.length < 6) {
+
+        showAuthMessage(
+          "registerMessage",
+          "Password must be at least 6 characters."
+        );
+
+        return;
+      }
+
+
+      showLoading("Creating account...");
+
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/auth/register",
+            {
+              method: "POST",
+
+              body: JSON.stringify({
+                full_name,
+                email,
+                phone,
+                password
+              })
+            }
+          );
+
+
+        if (
+          !result.success ||
+          !result.token ||
+          !result.customer
+        ) {
+
+          throw new Error(
+            result.message ||
+            "Registration failed."
+          );
+
+        }
+
+
+        saveCustomer(
+          result.customer,
+          result.token
+        );
+
+
+        $("registerForm").reset();
+
+        showApp();
+
+        showPage("overview");
+
+        await loadDashboardData();
+
+        showToast(
+          "Account created successfully.",
+          "success"
+        );
+
+
+      } catch (error) {
+
+        showAuthMessage(
+          "registerMessage",
+          error.message ||
+          "Registration failed."
+        );
+
+      } finally {
+
+        hideLoading();
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ====================================================== */
+
+    async function logoutCustomer() {
+
+      try {
+
+        if (customerToken) {
+
+          await apiRequest(
+            "/auth/logout",
+            {
+              method: "POST"
+            }
+          );
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "Logout request failed:",
+          error
+        );
+
+      } finally {
+
+        customerToken = "";
+
+        currentCustomer = null;
+
+        applications = [];
+
+        payments = [];
+
+        supportMessages = [];
+
+        localStorage.removeItem(
+          "jaycobCustomerToken"
+        );
+
+        localStorage.removeItem(
+          "jaycobCustomer"
+        );
+
+        stopAutoRefresh();
+
+        showLogin();
+
+        showToast(
+          "You have been logged out.",
+          "success"
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD PROFILE
+    ====================================================== */
+
+    async function loadProfile() {
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/auth/profile"
+          );
+
+
+        if (
+          result.success &&
+          result.customer
+        ) {
+
+          currentCustomer =
+            result.customer;
+
+          localStorage.setItem(
+            "jaycobCustomer",
+            JSON.stringify(
+              currentCustomer
+            )
+          );
+
+          updateCustomerHeader();
+
+          renderProfile();
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Profile error:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RENDER PROFILE
+    ====================================================== */
+
+    function renderProfile() {
+
+      const customer =
+        currentCustomer || {};
+
+      $("profileId").textContent =
+        customer.id || "-";
+
+      $("profileName").textContent =
+        customer.full_name || "-";
+
+      $("profileEmail").textContent =
+        customer.email || "-";
+
+      $("profilePhone").textContent =
+        customer.phone || "-";
+
+      $("profileStatus").textContent =
+        customer.status || "-";
+
+      $("profileCreated").textContent =
+        formatDate(customer.created_at);
+
+    }
+
+
+    /* =====================================================
+       LOAD APPLICATIONS
+    ====================================================== */
+
+    async function loadApplications() {
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/loans/my-applications"
+          );
+
+
+        applications =
+          Array.isArray(result.applications)
+            ? result.applications
+            : [];
+
+
+        renderApplications();
+
+        renderOverviewStats();
+
+        renderLatestApplication();
+
+
+        $("lastRefresh").textContent =
+          new Date().toLocaleString(
+            "en-MW"
+          );
+
+
+      } catch (error) {
+
+        console.error(
+          "Applications error:",
+          error
+        );
+
+        $("applicationsList").innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">⚠️</div>
+            <strong>Unable to load applications</strong>
+            <p style="margin-top:7px;">
+              ${escapeHTML(error.message)}
+            </p>
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RENDER APPLICATIONS
+    ====================================================== */
+
+    function renderApplications() {
+
+      const container =
+        $("applicationsList");
+
+
+      if (!applications.length) {
+
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <strong>No loan applications yet</strong>
+            <p style="margin-top:7px;">
+              Go to "Apply for Loan" to submit your first application.
+            </p>
+          </div>
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML =
+        applications.map(app => {
+
+          const loanType =
+            app.loan_type ||
+            "Loan";
+
+          const amount =
+            formatMoney(app.amount);
+
+          const duration =
+            app.duration_months ??
+            "-";
+
+          const status =
+            normalizeStatus(app.status);
+
+
+          return `
+
+            <div class="application-card">
+
+              <div class="application-top">
+
+                <div class="application-id">
+                  ${escapeHTML(app.id)}
+                </div>
+
+                ${statusBadge(status)}
+
+              </div>
+
+
+              <div class="application-details">
+
+                <div>
+                  <span class="detail-label">
+                    Loan Type
+                  </span>
+
+                  <span class="detail-value">
+                    ${escapeHTML(loanType)}
+                  </span>
+                </div>
+
+
+                <div>
+                  <span class="detail-label">
+                    Amount
+                  </span>
+
+                  <span class="detail-value">
+                    ${escapeHTML(amount)}
+                  </span>
+                </div>
+
+
+                <div>
+                  <span class="detail-label">
+                    Duration
+                  </span>
+
+                  <span class="detail-value">
+                    ${escapeHTML(duration)} months
+                  </span>
+                </div>
+
+
+                <div>
+                  <span class="detail-label">
+                    Applied
+                  </span>
+
+                  <span class="detail-value">
+                    ${escapeHTML(
+                      formatDate(app.created_at)
+                    )}
+                  </span>
+                </div>
+
+              </div>
+
+
+              <button
+                class="view-btn"
+                type="button"
+                onclick="viewApplication('${encodeURIComponent(app.id)}')"
+              >
+                View Details
+              </button>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    /* =====================================================
+       OVERVIEW STATS
+    ====================================================== */
+
+    function renderOverviewStats() {
+
+      const total =
+        applications.length;
+
+      const pending =
+        applications.filter(
+          app =>
+            normalizeStatus(app.status) ===
+            "PENDING"
+        ).length;
+
+      const approved =
+        applications.filter(
+          app =>
+            normalizeStatus(app.status) ===
+            "APPROVED"
+        ).length;
+
+      const rejected =
+        applications.filter(
+          app =>
+            normalizeStatus(app.status) ===
+            "REJECTED"
+        ).length;
+
+
+      $("statTotal").textContent =
+        total;
+
+      $("statPending").textContent =
+        pending;
+
+      $("statApproved").textContent =
+        approved;
+
+      $("statRejected").textContent =
+        rejected;
+
+    }
+
+
+    /* =====================================================
+       LATEST APPLICATION
+    ====================================================== */
+
+    function renderLatestApplication() {
+
+      const container =
+        $("latestApplication");
+
+
+      if (!applications.length) {
+
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            No loan applications yet.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      const sorted =
+        [...applications].sort(
+          (a, b) =>
+            new Date(
+              b.created_at || 0
+            ) -
+            new Date(
+              a.created_at || 0
+            )
+        );
+
+
+      const app =
+        sorted[0];
+
+
+      container.innerHTML = `
+
+        <div class="application-card">
+
+          <div class="application-top">
+
+            <div class="application-id">
+              ${escapeHTML(app.id)}
+            </div>
+
+            ${statusBadge(app.status)}
+
+          </div>
+
+
+          <div class="application-details">
+
+            <div>
+              <span class="detail-label">
+                Loan Type
+              </span>
+
+              <span class="detail-value">
+                ${escapeHTML(
+                  app.loan_type || "-"
+                )}
+              </span>
+            </div>
+
+
+            <div>
+              <span class="detail-label">
+                Amount
+              </span>
+
+              <span class="detail-value">
+                ${escapeHTML(
+                  formatMoney(app.amount)
+                )}
+              </span>
+            </div>
+
+
+            <div>
+              <span class="detail-label">
+                Duration
+              </span>
+
+              <span class="detail-value">
+                ${escapeHTML(
+                  app.duration_months ?? "-"
+                )} months
+              </span>
+            </div>
+
+
+            <div>
+              <span class="detail-label">
+                Date
+              </span>
+
+              <span class="detail-value">
+                ${escapeHTML(
+                  formatDate(app.created_at)
+                )}
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =====================================================
+       VIEW APPLICATION
+    ====================================================== */
+
+    async function viewApplication(encodedId) {
+
+      const id =
+        decodeURIComponent(encodedId);
+
+
+      $("loanModal").classList.add("show");
+
+      $("loanModalBody").innerHTML =
+        "Loading application details...";
+
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/loans/" +
+            encodeURIComponent(id)
+          );
+
+
+        if (
+          !result.success ||
+          !result.application
+        ) {
+
+          throw new Error(
+            result.message ||
+            "Application not found."
+          );
+
+        }
+
+
+        const app =
+          result.application;
+
+
+        $("loanModalBody").innerHTML = `
+
+          <div class="detail-row">
+            <span>Application ID</span>
+            <span>${escapeHTML(app.id)}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Loan Type</span>
+            <span>${escapeHTML(app.loan_type || "-")}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Amount</span>
+            <span>${escapeHTML(formatMoney(app.amount))}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Duration</span>
+            <span>${escapeHTML(app.duration_months ?? "-")} months</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Interest Rate</span>
+            <span>${escapeHTML(app.interest_rate ?? 0)}%</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Status</span>
+            <span>${statusBadge(app.status)}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Created</span>
+            <span>${escapeHTML(formatDate(app.created_at))}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Updated</span>
+            <span>${escapeHTML(formatDate(app.updated_at))}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Reviewed At</span>
+            <span>${escapeHTML(formatDate(app.reviewed_at))}</span>
+          </div>
+
+          <div class="detail-row">
+            <span>Reviewed By</span>
+            <span>${escapeHTML(app.reviewed_by || "-")}</span>
+          </div>
+
+        `;
+
+
+      } catch (error) {
+
+        $("loanModalBody").innerHTML = `
+
+          <div class="empty-state">
+
+            <div class="empty-icon">⚠️</div>
+
+            <strong>
+              Unable to load application
+            </strong>
+
+            <p style="margin-top:8px;">
+              ${escapeHTML(error.message)}
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       SUBMIT LOAN APPLICATION
+       IMPORTANT FIX
+    ====================================================== */
+
+    async function submitLoanApplication(event) {
+
+      event.preventDefault();
+
+
+      const loanTypeElement =
+        $("loanType");
+
+      const amountElement =
+        $("loanAmount");
+
+      const durationElement =
+        $("loanDuration");
+
+
+      /*
+        Read the SELECT values directly.
+
+        This fixes the problem where a selected option
+        was visually selected but JavaScript was checking
+        the wrong field/value.
+      */
+
+      const loan_type =
+        String(
+          loanTypeElement.value || ""
+        ).trim();
+
+
+      const amount =
+        Number(
+          amountElement.value
+        );
+
+
+      const duration_months =
+        Number(
+          durationElement.value
+        );
+
+
+      /* =========================
+         VALIDATION
+      ========================== */
+
+      if (!loan_type) {
+
+        showFormResult(
+          "loanFormMessage",
+          "Please select a loan type.",
+          "error"
+        );
+
+        loanTypeElement.focus();
+
+        return;
+      }
+
+
+      if (
+        !Number.isFinite(amount) ||
+        amount <= 0
+      ) {
+
+        showFormResult(
+          "loanFormMessage",
+          "Please enter a valid loan amount.",
+          "error"
+        );
+
+        amountElement.focus();
+
+        return;
+      }
+
+
+      if (
+        !Number.isInteger(duration_months) ||
+        duration_months <= 0
+      ) {
+
+        showFormResult(
+          "loanFormMessage",
+          "Please select a valid loan duration.",
+          "error"
+        );
+
+        durationElement.focus();
+
+        return;
+      }
+
+
+      /*
+        THIS IS EXACTLY WHAT YOUR RAILWAY BACKEND EXPECTS:
+
+        {
+          loan_type,
+          amount,
+          duration_months
+        }
+      */
+
+      const payload = {
+        loan_type: loan_type,
+        amount: amount,
+        duration_months: duration_months
+      };
+
+
+      console.log(
+        "Sending loan application:",
+        payload
       );
 
 
-    if (
-      email
-    ) {
+      const submitButton =
+        $("loanSubmitBtn");
+
+
+      submitButton.disabled = true;
+
+      submitButton.textContent =
+        "Submitting...";
+
+
+      showFormResult(
+        "loanFormMessage",
+        "Sending your application to the backend...",
+        "success"
+      );
+
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/loans/apply",
+            {
+              method: "POST",
+
+              body: JSON.stringify(
+                payload
+              )
+            }
+          );
+
+
+        if (!result.success) {
+
+          throw new Error(
+            result.message ||
+            "Loan application failed."
+          );
+
+        }
+
+
+        $("loanForm").reset();
+
+
+        showFormResult(
+          "loanFormMessage",
+          "Loan application submitted successfully. Your application is now pending administrator review.",
+          "success"
+        );
+
+
+        showToast(
+          "Loan application submitted successfully.",
+          "success"
+        );
+
+
+        /*
+          Immediately retrieve the application
+          from Railway so the customer can see it.
+        */
+
+        await loadApplications();
+
+
+        /*
+          Go to My Applications automatically.
+        */
+
+        showPage("applications");
+
+
+      } catch (error) {
+
+        console.error(
+          "Loan submission error:",
+          error
+        );
+
+
+        showFormResult(
+          "loanFormMessage",
+          error.message ||
+          "Unable to submit loan application.",
+          "error"
+        );
+
+
+        showToast(
+          error.message ||
+          "Loan submission failed.",
+          "error"
+        );
+
+
+      } finally {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Submit Loan Application";
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD PAYMENTS
+    ====================================================== */
+
+    async function loadPayments() {
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/payments/my-payments"
+          );
+
+
+        payments =
+          Array.isArray(result.payments)
+            ? result.payments
+            : [];
+
+
+        renderPayments();
+
+
+      } catch (error) {
+
+        $("paymentsBody").innerHTML = `
+
+          <div class="empty-state">
+
+            <div class="empty-icon">⚠️</div>
+
+            <strong>
+              Unable to load payments
+            </strong>
+
+            <p style="margin-top:7px;">
+              ${escapeHTML(error.message)}
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RENDER PAYMENTS
+    ====================================================== */
+
+    function renderPayments() {
+
+      const container =
+        $("paymentsBody");
+
+
+      if (!payments.length) {
+
+        container.innerHTML = `
+
+          <div class="empty-state">
+
+            <div class="empty-icon">💳</div>
+
+            <strong>
+              No payment records found
+            </strong>
+
+            <p style="margin-top:8px;">
+              There are currently no payment records
+              available for your account.
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML = `
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Method</th>
+                <th>Date</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              ${
+                payments.map(payment => {
+
+                  return `
+
+                    <tr>
+
+                      <td>
+                        ${escapeHTML(
+                          payment.id || "-"
+                        )}
+                      </td>
+
+                      <td>
+                        ${escapeHTML(
+                          formatMoney(
+                            payment.amount
+                          )
+                        )}
+                      </td>
+
+                      <td>
+                        ${statusBadge(
+                          payment.status ||
+                          "RECORDED"
+                        )}
+                      </td>
+
+                      <td>
+                        ${escapeHTML(
+                          payment.method ||
+                          payment.payment_method ||
+                          "-"
+                        )}
+                      </td>
+
+                      <td>
+                        ${escapeHTML(
+                          formatDate(
+                            payment.created_at ||
+                            payment.date
+                          )
+                        )}
+                      </td>
+
+                    </tr>
+
+                  `;
+
+                }).join("")
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =====================================================
+       SUBMIT SUPPORT
+    ====================================================== */
+
+    async function submitSupport(event) {
+
+      event.preventDefault();
+
+
+      const subject =
+        $("supportSubject")
+          .value
+          .trim();
+
+
+      const message =
+        $("supportMessage")
+          .value
+          .trim();
+
+
+      if (!subject || !message) {
+
+        showFormResult(
+          "supportFormMessage",
+          "Subject and message are required.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/support/send",
+            {
+              method: "POST",
+
+              body: JSON.stringify({
+                subject,
+                message
+              })
+            }
+          );
+
+
+        if (!result.success) {
+
+          throw new Error(
+            result.message ||
+            "Unable to send support message."
+          );
+
+        }
+
+
+        $("supportForm").reset();
+
+
+        showFormResult(
+          "supportFormMessage",
+          "Your support message has been sent successfully.",
+          "success"
+        );
+
+
+        showToast(
+          "Support message sent.",
+          "success"
+        );
+
+
+        await loadSupportMessages();
+
+
+      } catch (error) {
+
+        showFormResult(
+          "supportFormMessage",
+          error.message,
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD SUPPORT
+    ====================================================== */
+
+    async function loadSupportMessages() {
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/support/my-messages"
+          );
+
+
+        supportMessages =
+          Array.isArray(result.messages)
+            ? result.messages
+            : [];
+
+
+        renderSupportMessages();
+
+
+      } catch (error) {
+
+        $("supportMessagesBody").innerHTML = `
+
+          <div class="empty-state">
+
+            <div class="empty-icon">⚠️</div>
+
+            <strong>
+              Unable to load support messages
+            </strong>
+
+            <p style="margin-top:7px;">
+              ${escapeHTML(error.message)}
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RENDER SUPPORT
+    ====================================================== */
+
+    function renderSupportMessages() {
+
+      const container =
+        $("supportMessagesBody");
+
+
+      if (!supportMessages.length) {
+
+        container.innerHTML = `
+
+          <div class="empty-state">
+
+            <div class="empty-icon">💬</div>
+
+            <strong>
+              No support messages
+            </strong>
+
+            <p style="margin-top:7px;">
+              Your support conversations will appear here.
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML = `
+
+        <div class="application-list">
+
+          ${
+            supportMessages.map(item => {
+
+              return `
+
+                <div class="application-card">
+
+                  <div class="application-top">
+
+                    <strong>
+                      ${escapeHTML(
+                        item.subject ||
+                        "Support Message"
+                      )}
+                    </strong>
+
+                    ${statusBadge(
+                      item.status ||
+                      "SENT"
+                    )}
+
+                  </div>
+
+                  <p style="line-height:1.6;">
+                    ${escapeHTML(
+                      item.message || ""
+                    )}
+                  </p>
+
+                  <div style="
+                    margin-top:10px;
+                    color:#64748b;
+                    font-size:12px;
+                  ">
+                    ${escapeHTML(
+                      formatDate(
+                        item.created_at
+                      )
+                    )}
+                  </div>
+
+                </div>
+
+              `;
+
+            }).join("")
+          }
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =====================================================
+       BACKEND HEALTH
+    ====================================================== */
+
+    async function checkBackendHealth() {
+
+      try {
+
+        const response =
+          await fetch(
+            API_URL + "/health"
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          response.ok &&
+          data.success
+        ) {
+
+          $("backendDot")
+            .className =
+            "status-dot online";
+
+          $("backendStatusText")
+            .textContent =
+            "Backend Online";
+
+          $("systemBackend")
+            .textContent =
+            "Railway backend is online.";
+
+          return true;
+
+        }
+
+        throw new Error(
+          "Backend health check failed."
+        );
+
+
+      } catch (error) {
+
+        $("backendDot")
+          .className =
+          "status-dot offline";
+
+        $("backendStatusText")
+          .textContent =
+          "Backend Offline";
+
+        $("systemBackend")
+          .textContent =
+          "Unable to connect to Railway.";
+
+        return false;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD DASHBOARD DATA
+    ====================================================== */
+
+    async function loadDashboardData() {
+
+      await Promise.allSettled([
+
+        loadProfile(),
+
+        loadApplications(),
+
+        loadPayments(),
+
+        loadSupportMessages(),
+
+        checkBackendHealth()
+
+      ]);
+
+    }
+
+
+    /* =====================================================
+       PAGE NAVIGATION
+    ====================================================== */
+
+    function showPage(pageName) {
+
+      const pages =
+        document.querySelectorAll(".page");
+
+
+      pages.forEach(page => {
+
+        page.classList.remove("active");
+
+      });
+
+
+      const selected =
+        $("page-" + pageName);
+
+
+      if (selected) {
+
+        selected.classList.add("active");
+
+      }
+
+
+      const navItems =
+        document.querySelectorAll(
+          ".nav-item[data-page]"
+        );
+
+
+      navItems.forEach(item => {
+
+        item.classList.toggle(
+          "active",
+          item.dataset.page === pageName
+        );
+
+      });
+
+
+      const titles = {
+
+        overview:
+          "Customer Dashboard",
+
+        apply:
+          "Apply for Loan",
+
+        applications:
+          "My Applications",
+
+        payments:
+          "My Payments",
+
+        support:
+          "Customer Support",
+
+        profile:
+          "My Profile"
+
+      };
+
+
+      $("pageTitle").textContent =
+        titles[pageName] ||
+        "Customer Dashboard";
+
+
+      if (pageName === "applications") {
+
+        loadApplications();
+
+      }
+
+      if (pageName === "payments") {
+
+        loadPayments();
+
+      }
+
+      if (pageName === "support") {
+
+        loadSupportMessages();
+
+      }
+
+      if (pageName === "profile") {
+
+        loadProfile();
+
+      }
+
+
+      $("sidebar").classList.remove("open");
+
+    }
+
+
+    /* =====================================================
+       AUTO REFRESH
+    ====================================================== */
+
+    function startAutoRefresh() {
+
+      stopAutoRefresh();
+
+
+      autoRefreshTimer =
+        setInterval(
+          async () => {
+
+            if (!customerToken) {
+              return;
+            }
+
+            await loadApplications();
+
+            await checkBackendHealth();
+
+          },
+          30000
+        );
+
+    }
+
+
+    function stopAutoRefresh() {
+
+      if (autoRefreshTimer) {
+
+        clearInterval(
+          autoRefreshTimer
+        );
+
+        autoRefreshTimer = null;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       PASSWORD TOGGLE
+    ====================================================== */
+
+    function setupPasswordToggles() {
 
       document
-        .getElementById(
-          "adminEmailDisplay"
+        .querySelectorAll(
+          ".password-toggle"
         )
-        .textContent =
-        email;
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              const target =
+                $(button.dataset.target);
+
+              if (
+                target.type === "password"
+              ) {
+
+                target.type = "text";
+
+                button.textContent =
+                  "🙈";
+
+              } else {
+
+                target.type = "password";
+
+                button.textContent =
+                  "👁️";
+
+              }
+
+            }
+          );
+
+        });
 
     }
 
 
-    try {
+    /* =====================================================
+       INITIALIZE
+    ====================================================== */
 
-      await loadAll();
+    async function initialize() {
+
+      setupPasswordToggles();
+
+
+      if (customerToken) {
+
+        showApp();
+
+        showPage("overview");
+
+        await loadDashboardData();
+
+      } else {
+
+        showLogin();
+
+      }
 
     }
 
-    catch (error) {
 
-      console.warn(
-        error.message
+    /* =====================================================
+       EVENT LISTENERS
+    ====================================================== */
+
+    $("loginForm")
+      .addEventListener(
+        "submit",
+        loginCustomer
       );
 
 
-      adminToken =
-        "";
-
-
-      localStorage.removeItem(
-        "jaycobAdminToken"
+    $("registerForm")
+      .addEventListener(
+        "submit",
+        registerCustomer
       );
 
 
-      showLogin();
-
-    }
-
-  }
-
-  else {
-
-    showLogin();
-
-  }
-
-}
+    $("loanForm")
+      .addEventListener(
+        "submit",
+        submitLoanApplication
+      );
 
 
-initialize();
+    $("supportForm")
+      .addEventListener(
+        "submit",
+        submitSupport
+      );
 
-</script></body>
+
+    $("showRegisterBtn")
+      .addEventListener(
+        "click",
+        showRegister
+      );
+
+
+    $("showLoginBtn")
+      .addEventListener(
+        "click",
+        showLogin
+      );
+
+
+    $("logoutBtn")
+      .addEventListener(
+        "click",
+        logoutCustomer
+      );
+
+
+    $("mobileMenuBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          $("sidebar")
+            .classList.toggle("open");
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        ".nav-item[data-page]"
+      )
+      .forEach(item => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            showPage(
+              item.dataset.page
+            );
+
+          }
+        );
+
+      });
+
+
+    $("refreshOverviewBtn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          showLoading(
+            "Refreshing dashboard..."
+          );
+
+          await loadDashboardData();
+
+          hideLoading();
+
+          showToast(
+            "Dashboard refreshed.",
+            "success"
+          );
+
+        }
+      );
+
+
+    $("refreshApplicationsBtn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          showLoading(
+            "Refreshing applications..."
+          );
+
+          await loadApplications();
+
+          hideLoading();
+
+        }
+      );
+
+
+    $("refreshPaymentsBtn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          showLoading(
+            "Refreshing payments..."
+          );
+
+          await loadPayments();
+
+          hideLoading();
+
+        }
+      );
+
+
+    $("refreshSupportBtn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          showLoading(
+            "Refreshing support messages..."
+          );
+
+          await loadSupportMessages();
+
+          hideLoading();
+
+        }
+      );
+
+
+    $("refreshProfileBtn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          showLoading(
+            "Refreshing profile..."
+          );
+
+          await loadProfile();
+
+          hideLoading();
+
+        }
+      );
+
+
+    $("closeLoanModal")
+      .addEventListener(
+        "click",
+        () => {
+
+          $("loanModal")
+            .classList.remove("show");
+
+        }
+      );
+
+
+    $("loanModal")
+      .addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target ===
+            $("loanModal")
+          ) {
+
+            $("loanModal")
+              .classList.remove("show");
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       START CUSTOMER SESSION CHECK
+    ====================================================== */
+
+    initialize();
+
+  </script>
+
+</body>
 </html>
