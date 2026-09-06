@@ -1,1124 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Customer Dashboard | JAY C O B Financial Services</title>
+<title>JAY C O B Financial Services - Customer Dashboard</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<meta name="description" content="JAY C O B Financial Services Customer Dashboard">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fb;
+    color: #172033;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #071a3d, #0b4f9c);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo h1 {
+    color: #0b4f9c;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.logo p {
+    color: #777;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.auth-card h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccd4df;
+    border-radius: 9px;
+    outline: none;
+    font-size: 15px;
+    background: white;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: #0b4f9c;
+}
+
+.primary-btn {
+    width: 100%;
+    border: none;
+    padding: 14px;
+    border-radius: 9px;
+    background: #0b4f9c;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: #073b75;
+}
+
+.secondary-btn {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #e7edf6;
+    color: #172033;
+    font-weight: bold;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.auth-switch button {
+    background: none;
+    border: none;
+    color: #0b4f9c;
+    font-weight: bold;
+}
+
+.message {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.message.success {
+    background: #dff6e7;
+    color: #176b35;
+}
+
+.message.error {
+    background: #fde4e4;
+    color: #a51f1f;
+}
+
+.message.info {
+    background: #e4efff;
+    color: #174d91;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background: #071a3d;
+    color: white;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    padding: 22px 15px;
+    z-index: 100;
+}
+
+.sidebar-logo {
+    text-align: center;
+    padding: 10px 5px 25px;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+.sidebar-logo h2 {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.sidebar-logo p {
+    font-size: 11px;
+    opacity: .7;
+    margin-top: 5px;
+}
+
+.nav {
+    margin-top: 20px;
+}
+
+.nav button {
+    width: 100%;
+    text-align: left;
+    padding: 13px 14px;
+    margin-bottom: 7px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+.nav button:hover,
+.nav button.active {
+    background: #0b4f9c;
+}
+
+.logout-nav {
+    margin-top: 20px !important;
+    background: #9d2020 !important;
+}
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+}
+
+.topbar {
+    height: 70px;
+    background: white;
+    border-bottom: 1px solid #e2e7ee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 25px;
+}
+
+.customer-name {
+    font-weight: bold;
+}
+
+.content {
+    padding: 25px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-title {
+    margin-bottom: 20px;
+}
+
+.page-title h2 {
+    font-size: 25px;
+}
+
+.page-title p {
+    color: #6c7480;
+    margin-top: 5px;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e4e8ee;
+}
+
+.stat-card small {
+    color: #737d8b;
+}
+
+.stat-card h3 {
+    margin-top: 8px;
+    font-size: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e3e7ed;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* =========================================================
+   LOAN APPLICATION
+========================================================= */
+
+.loan-form {
+    max-width: 700px;
+}
+
+.loan-field {
+    margin-bottom: 18px;
+}
+
+.loan-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.loan-field select,
+.loan-field input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ccd5e1;
+    border-radius: 9px;
+    font-size: 16px;
+    background: white;
+    outline: none;
+}
+
+.loan-field select:focus,
+.loan-field input:focus {
+    border-color: #0b4f9c;
+}
+
+.loan-help {
+    color: #6f7885;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* Diagnostic box */
+
+.validation-box {
+    background: #f4f7fb;
+    border: 1px solid #d9e0ea;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.validation-box h4 {
+    margin-bottom: 10px;
+}
+
+.validation-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #e3e8ef;
+    font-size: 13px;
+}
+
+.validation-row:last-child {
+    border-bottom: none;
+}
+
+.validation-value {
+    font-weight: bold;
+    word-break: break-word;
+}
+
+.submit-loan-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 9px;
+    background: #0b4f9c;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.submit-loan-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 13px;
+    border-bottom: 1px solid #e5e8ed;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+th {
+    background: #f5f7fa;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.badge.pending {
+    background: #fff1cc;
+    color: #866100;
+}
+
+.badge.approved {
+    background: #dff6e7;
+    color: #176b35;
+}
+
+.badge.rejected {
+    background: #fde2e2;
+    color: #a51f1f;
+}
+
+.badge.review {
+    background: #e0ecff;
+    color: #1b4e94;
+}
+
+/* =========================================================
+   APPLICATION CARDS
+========================================================= */
+
+.application-item {
+    border: 1px solid #e0e5eb;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+}
+
+.application-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.application-grid div {
+    background: #f6f8fb;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.application-grid small {
+    display: block;
+    color: #737c88;
+    margin-bottom: 4px;
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #e5e8ed;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+.profile-row span:first-child {
+    color: #707986;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+    text-align: center;
+    padding: 40px 15px;
+    color: #737d89;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+    text-align: center;
+    padding: 25px;
+    color: #6f7885;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --secondary: #7c3aed;
-      --dark: #0f172a;
-      --dark-2: #1e293b;
-      --light: #f8fafc;
-      --border: #e2e8f0;
-      --text: #0f172a;
-      --muted: #64748b;
-      --success: #16a34a;
-      --warning: #d97706;
-      --danger: #dc2626;
-      --white: #ffffff;
+    .grid-2 {
+        grid-template-columns: 1fr;
     }
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f1f5f9;
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* =========================
-       AUTHENTICATION
-    ========================== */
-
-    #authScreen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
-    }
-
-    .auth-card {
-      width: 100%;
-      max-width: 430px;
-      background: white;
-      border-radius: 22px;
-      padding: 30px;
-      box-shadow: 0 25px 60px rgba(0,0,0,.25);
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .brand-logo {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 12px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-size: 27px;
-      font-weight: 900;
-    }
-
-    .brand h1 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .brand p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .auth-panel h2 {
-      margin-bottom: 18px;
-      font-size: 21px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 11px;
-      outline: none;
-      background: white;
-      color: #0f172a;
-      font-size: 16px;
-    }
-
-    .form-control:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
-    }
-
-    select.form-control {
-      color: #0f172a;
-      font-weight: 600;
-      background-color: #fff;
-    }
-
-    select.form-control option {
-      color: #0f172a;
-      background: #fff;
-      font-weight: 600;
-    }
-
-    .password-wrap {
-      position: relative;
-    }
-
-    .password-wrap input {
-      padding-right: 50px;
-    }
-
-    .password-toggle {
-      position: absolute;
-      right: 8px;
-      top: 7px;
-      border: 0;
-      background: transparent;
-      padding: 8px;
-      font-size: 18px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 11px;
-      padding: 13px 18px;
-      font-weight: 800;
-      transition: .2s;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      width: 100%;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-secondary {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    .auth-switch {
-      text-align: center;
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .auth-switch button {
-      border: 0;
-      background: transparent;
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    .auth-message {
-      padding: 11px;
-      border-radius: 9px;
-      margin-bottom: 15px;
-      font-size: 14px;
-      display: none;
-    }
-
-    .auth-message.error {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .auth-message.success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    /* =========================
-       APP LAYOUT
-    ========================== */
-
-    #appShell {
-      min-height: 100vh;
-      display: flex;
-    }
+@media (max-width: 700px) {
 
     .sidebar {
-      width: 260px;
-      background: #0f172a;
-      color: white;
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      padding: 22px 15px;
-      overflow-y: auto;
-      z-index: 1000;
+        transform: translateX(-100%);
+        transition: .25s;
     }
 
-    .sidebar-brand {
-      padding: 8px 10px 25px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      margin-bottom: 15px;
-    }
-
-    .sidebar-brand h2 {
-      font-size: 18px;
-    }
-
-    .sidebar-brand p {
-      color: #94a3b8;
-      font-size: 12px;
-      margin-top: 5px;
-    }
-
-    .nav-item {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      border: 0;
-      background: transparent;
-      color: #cbd5e1;
-      padding: 13px 12px;
-      border-radius: 10px;
-      margin-bottom: 5px;
-      text-align: left;
-      font-weight: 700;
-    }
-
-    .nav-item:hover,
-    .nav-item.active {
-      background: #1e293b;
-      color: white;
-    }
-
-    .logout-btn {
-      margin-top: 15px;
-      color: #fca5a5;
+    .sidebar.open {
+        transform: translateX(0);
     }
 
     .main {
-      width: calc(100% - 260px);
-      margin-left: 260px;
-      min-height: 100vh;
+        margin-left: 0;
+        width: 100%;
     }
 
-    .topbar {
-      height: 72px;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 25px;
-      position: sticky;
-      top: 0;
-      z-index: 900;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .mobile-menu {
-      display: none;
-      border: 0;
-      background: #e2e8f0;
-      padding: 9px 12px;
-      border-radius: 9px;
-      font-size: 20px;
-    }
-
-    .page-title {
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .user-info {
-      text-align: right;
-    }
-
-    .user-info strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .user-info span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .backend-status {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #94a3b8;
-    }
-
-    .status-dot.online {
-      background: #22c55e;
-    }
-
-    .status-dot.offline {
-      background: #ef4444;
+    .menu-btn {
+        display: block;
     }
 
     .content {
-      padding: 25px;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    /* =========================
-       CARDS
-    ========================== */
-
-    .welcome-card {
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      color: white;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 22px;
-    }
-
-    .welcome-card h2 {
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .welcome-card p {
-      opacity: .9;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 900;
-      margin-top: 8px;
-    }
-
-    .section-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .section-header h3 {
-      font-size: 18px;
-    }
-
-    .section-header button {
-      border: 0;
-      background: #eff6ff;
-      color: var(--primary);
-      padding: 9px 13px;
-      border-radius: 9px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       LOAN FORM
-    ========================== */
-
-    .loan-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 17px;
-    }
-
-    .loan-form-grid .full {
-      grid-column: 1 / -1;
-    }
-
-    .loan-submit {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      border: 0;
-      border-radius: 11px;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 900;
-    }
-
-    .loan-submit:hover {
-      background: var(--primary-dark);
-    }
-
-    .form-result {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      display: none;
-      font-weight: 700;
-    }
-
-    .form-result.success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .form-result.error {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    /* =========================
-       APPLICATIONS
-    ========================== */
-
-    .application-list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .application-card {
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 17px;
-      background: #fff;
-    }
-
-    .application-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 13px;
-    }
-
-    .application-id {
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    .application-details {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .detail-label {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .detail-value {
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .status-badge {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .status-pending {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .status-review {
-      background: #dbeafe;
-      color: #1e40af;
-    }
-
-    .status-approved {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .status-rejected {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .status-default {
-      background: #e2e8f0;
-      color: #334155;
-    }
-
-    .view-btn {
-      margin-top: 14px;
-      border: 0;
-      background: #eff6ff;
-      color: var(--primary);
-      padding: 9px 13px;
-      border-radius: 8px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       TABLE / EMPTY
-    ========================== */
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
-
-    th,
-    td {
-      padding: 13px;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-      font-size: 13px;
-    }
-
-    th {
-      background: #f8fafc;
-      color: #475569;
-      font-size: 12px;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 35px 15px;
-      color: var(--muted);
-    }
-
-    .empty-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    /* =========================
-       PROFILE
-    ========================== */
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .profile-item {
-      background: #f8fafc;
-      padding: 16px;
-      border-radius: 11px;
-    }
-
-    .profile-item label {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 5px;
-      font-weight: 700;
-    }
-
-    .profile-item strong {
-      font-size: 15px;
-      word-break: break-word;
-    }
-
-    /* =========================
-       MODAL
-    ========================== */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 3000;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-box {
-      width: 100%;
-      max-width: 600px;
-      background: white;
-      border-radius: 17px;
-      padding: 22px;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .close-modal {
-      border: 0;
-      background: #e2e8f0;
-      border-radius: 8px;
-      padding: 7px 11px;
-      font-size: 18px;
-    }
-
-    .detail-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .detail-row span:first-child {
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .detail-row span:last-child {
-      font-weight: 800;
-      text-align: right;
-    }
-
-    /* =========================
-       LOADING / TOAST
-    ========================== */
-
-    #loadingOverlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 5000;
-    }
-
-    #loadingOverlay.show {
-      display: flex;
-    }
-
-    .loading-box {
-      background: white;
-      border-radius: 14px;
-      padding: 25px 35px;
-      text-align: center;
-      font-weight: 800;
-    }
-
-    .spinner {
-      width: 35px;
-      height: 35px;
-      border: 4px solid #e2e8f0;
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 12px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    #toastContainer {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 6000;
-      display: grid;
-      gap: 10px;
-      width: min(360px, calc(100% - 36px));
-    }
-
-    .toast {
-      background: #0f172a;
-      color: white;
-      padding: 13px 15px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.2);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .toast.success {
-      background: #166534;
-    }
-
-    .toast.error {
-      background: #991b1b;
-    }
-
-    .notice {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-      padding: 13px;
-      border-radius: 10px;
-      margin-bottom: 18px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-
-    @media (max-width: 900px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .application-details {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 700px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform .25s;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .main {
-        width: 100%;
-        margin-left: 0;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-
-      .topbar {
-        padding: 0 15px;
-      }
-
-      .user-info {
-        display: none;
-      }
-
-      .backend-status {
-        font-size: 11px;
-      }
-
-      .content {
         padding: 15px;
-      }
+    }
 
-      .loan-form-grid,
-      .profile-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .loan-form-grid .full {
-        grid-column: auto;
-      }
-
-      .application-details {
+    .stats {
         grid-template-columns: 1fr 1fr;
-      }
     }
 
-    @media (max-width: 450px) {
-      .auth-card {
-        padding: 22px;
-      }
-
-      .stats-grid {
-        gap: 10px;
-      }
-
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-value {
-        font-size: 23px;
-      }
-
-      .application-details {
+    .application-grid {
         grid-template-columns: 1fr;
-      }
-
-      .welcome-card h2 {
-        font-size: 21px;
-      }
     }
-  </style>
+}
+
+@media (max-width: 450px) {
+    .auth-card {
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =====================================================
-       AUTH SCREEN
-  ====================================================== -->
+<!-- =========================================================
+     AUTHENTICATION
+========================================================= -->
 
-  <section id="authScreen">
+<div id="authContainer" class="auth-container">
 
-    <div class="auth-card">
+    <!-- LOGIN -->
 
-      <div class="brand">
-        <div class="brand-logo">JC</div>
-        <h1>JAY C O B FINANCIAL SERVICES</h1>
-        <p>Customer Portal</p>
-      </div>
+    <div id="loginCard" class="auth-card">
 
-      <!-- LOGIN -->
-
-      <div id="loginPanel" class="auth-panel">
+        <div class="logo">
+            <h1>JAY C O B</h1>
+            <p>FINANCIAL SERVICES</p>
+        </div>
 
         <h2>Customer Login</h2>
 
-        <div id="loginMessage" class="auth-message"></div>
+        <div id="loginMessage"></div>
 
-        <form id="loginForm">
-
-          <div class="form-group">
-            <label for="loginEmail">Email Address</label>
+        <div class="input-group">
+            <label>Email Address</label>
             <input
-              id="loginEmail"
-              class="form-control"
-              type="email"
-              placeholder="Enter your email"
-              autocomplete="email"
-              required
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                autocomplete="email"
             >
-          </div>
+        </div>
 
-          <div class="form-group">
-            <label for="loginPassword">Password</label>
-
-            <div class="password-wrap">
-              <input
-                id="loginPassword"
-                class="form-control"
+        <div class="input-group">
+            <label>Password</label>
+            <input
                 type="password"
+                id="loginPassword"
                 placeholder="Enter your password"
                 autocomplete="current-password"
-                required
-              >
+            >
+        </div>
 
-              <button
-                type="button"
-                class="password-toggle"
-                data-target="loginPassword"
-              >👁️</button>
-            </div>
-          </div>
-
-          <button class="btn btn-primary" type="submit">
+        <button
+            type="button"
+            class="primary-btn"
+            id="loginButton"
+        >
             Login
-          </button>
-
-        </form>
+        </button>
 
         <div class="auth-switch">
-          Don't have an account?
-          <button type="button" id="showRegisterBtn">
-            Create Account
-          </button>
+            Don't have an account?
+            <button type="button" id="showRegisterButton">
+                Create Account
+            </button>
         </div>
-
-      </div>
-
-      <!-- REGISTER -->
-
-      <div id="registerPanel" class="auth-panel hidden">
-
-        <h2>Create Customer Account</h2>
-
-        <div id="registerMessage" class="auth-message"></div>
-
-        <form id="registerForm">
-
-          <div class="form-group">
-            <label for="registerName">Full Name</label>
-            <input
-              id="registerName"
-              class="form-control"
-              type="text"
-              placeholder="Enter your full name"
-              autocomplete="name"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="registerEmail">Email Address</label>
-            <input
-              id="registerEmail"
-              class="form-control"
-              type="email"
-              placeholder="Enter your email"
-              autocomplete="email"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="registerPhone">Phone Number</label>
-            <input
-              id="registerPhone"
-              class="form-control"
-              type="tel"
-              placeholder="+265..."
-              autocomplete="tel"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="registerPassword">Password</label>
-
-            <div class="password-wrap">
-              <input
-                id="registerPassword"
-                class="form-control"
-                type="password"
-                placeholder="Create a password"
-                autocomplete="new-password"
-                required
-              >
-
-              <button
-                type="button"
-                class="password-toggle"
-                data-target="registerPassword"
-              >👁️</button>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="registerConfirm">Confirm Password</label>
-
-            <div class="password-wrap">
-              <input
-                id="registerConfirm"
-                class="form-control"
-                type="password"
-                placeholder="Repeat your password"
-                autocomplete="new-password"
-                required
-              >
-
-              <button
-                type="button"
-                class="password-toggle"
-                data-target="registerConfirm"
-              >👁️</button>
-            </div>
-          </div>
-
-          <button class="btn btn-primary" type="submit">
-            Create Account
-          </button>
-
-        </form>
-
-        <div class="auth-switch">
-          Already have an account?
-          <button type="button" id="showLoginBtn">
-            Back to Login
-          </button>
-        </div>
-
-      </div>
 
     </div>
 
-  </section>
+
+    <!-- REGISTER -->
+
+    <div id="registerCard" class="auth-card hidden">
+
+        <div class="logo">
+            <h1>JAY C O B</h1>
+            <p>FINANCIAL SERVICES</p>
+        </div>
+
+        <h2>Create Customer Account</h2>
+
+        <div id="registerMessage"></div>
+
+        <div class="input-group">
+            <label>Full Name</label>
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Enter your full name"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Email Address</label>
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Enter your email"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Phone Number</label>
+            <input
+                type="tel"
+                id="registerPhone"
+                placeholder="+265..."
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create password"
+            >
+        </div>
+
+        <button
+            type="button"
+            class="primary-btn"
+            id="registerButton"
+        >
+            Create Account
+        </button>
+
+        <div class="auth-switch">
+            Already have an account?
+            <button type="button" id="showLoginButton">
+                Login
+            </button>
+        </div>
+
+    </div>
+
+</div>
 
 
-  <!-- =====================================================
-       CUSTOMER APPLICATION
-  ====================================================== -->
+<!-- =========================================================
+     CUSTOMER APPLICATION
+========================================================= -->
 
-  <section id="appShell" class="hidden">
+<div id="customerApp" class="app hidden">
 
     <!-- SIDEBAR -->
 
     <aside id="sidebar" class="sidebar">
 
-      <div class="sidebar-brand">
-        <h2>JAY C O B</h2>
-        <p>Customer Financial Portal</p>
-      </div>
+        <div class="sidebar-logo">
+            <h2>JAY C O B</h2>
+            <p>FINANCIAL SERVICES</p>
+        </div>
 
-      <button class="nav-item active" data-page="overview">
-        📊 Dashboard
-      </button>
+        <nav class="nav">
 
-      <button class="nav-item" data-page="apply">
-        💰 Apply for Loan
-      </button>
+            <button
+                type="button"
+                class="nav-btn active"
+                data-page="dashboardPage"
+            >
+                🏠 Dashboard
+            </button>
 
-      <button class="nav-item" data-page="applications">
-        📋 My Applications
-      </button>
+            <button
+                type="button"
+                class="nav-btn"
+                data-page="applyPage"
+            >
+                💰 Apply for Loan
+            </button>
 
-      <button class="nav-item" data-page="payments">
-        💳 My Payments
-      </button>
+            <button
+                type="button"
+                class="nav-btn"
+                data-page="applicationsPage"
+            >
+                📋 My Applications
+            </button>
 
-      <button class="nav-item" data-page="support">
-        💬 Support
-      </button>
+            <button
+                type="button"
+                class="nav-btn"
+                data-page="paymentsPage"
+            >
+                💳 My Payments
+            </button>
 
-      <button class="nav-item" data-page="profile">
-        👤 My Profile
-      </button>
+            <button
+                type="button"
+                class="nav-btn"
+                data-page="supportPage"
+            >
+                💬 Support
+            </button>
 
-      <button id="logoutBtn" class="nav-item logout-btn">
-        🚪 Logout
-      </button>
+            <button
+                type="button"
+                class="nav-btn"
+                data-page="profilePage"
+            >
+                👤 My Profile
+            </button>
+
+            <button
+                type="button"
+                class="nav-btn logout-nav"
+                id="logoutButton"
+            >
+                🚪 Logout
+            </button>
+
+        </nav>
 
     </aside>
 
@@ -1127,2990 +824,2222 @@
 
     <main class="main">
 
-      <header class="topbar">
+        <header class="topbar">
 
-        <div class="topbar-left">
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuButton"
+            >
+                ☰
+            </button>
 
-          <button id="mobileMenuBtn" class="mobile-menu">
-            ☰
-          </button>
-
-          <div id="pageTitle" class="page-title">
-            Customer Dashboard
-          </div>
-
-        </div>
-
-        <div class="topbar-left">
-
-          <div class="backend-status">
-            <span id="backendDot" class="status-dot"></span>
-            <span id="backendStatusText">Checking backend...</span>
-          </div>
-
-          <div class="user-info">
-            <strong id="topCustomerName">Customer</strong>
-            <span id="topCustomerEmail">-</span>
-          </div>
-
-        </div>
-
-      </header>
-
-
-      <div class="content">
-
-        <!-- =================================================
-             OVERVIEW
-        ================================================== -->
-
-        <section id="page-overview" class="page active">
-
-          <div class="welcome-card">
-            <h2>
-              Welcome, <span id="welcomeName">Customer</span> 👋
-            </h2>
-
-            <p>
-              Manage your loans, applications, payments and support requests.
-            </p>
-          </div>
-
-
-          <div class="stats-grid">
-
-            <div class="stat-card">
-              <div class="stat-label">Total Applications</div>
-              <div id="statTotal" class="stat-value">0</div>
+            <div>
+                Welcome,
+                <span id="topCustomerName" class="customer-name">
+                    Customer
+                </span>
             </div>
 
-            <div class="stat-card">
-              <div class="stat-label">Pending</div>
-              <div id="statPending" class="stat-value">0</div>
+            <div>
+                <span id="connectionStatus">Checking...</span>
             </div>
 
-            <div class="stat-card">
-              <div class="stat-label">Approved</div>
-              <div id="statApproved" class="stat-value">0</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-label">Rejected</div>
-              <div id="statRejected" class="stat-value">0</div>
-            </div>
-
-          </div>
+        </header>
 
 
-          <div class="section-card">
-
-            <div class="section-header">
-              <h3>Latest Application</h3>
-
-              <button id="refreshOverviewBtn">
-                🔄 Refresh
-              </button>
-            </div>
-
-            <div id="latestApplication">
-              <div class="empty-state">
-                No applications yet.
-              </div>
-            </div>
-
-          </div>
+        <section class="content">
 
 
-          <div class="section-card">
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
 
-            <div class="section-header">
-              <h3>System Connection</h3>
-            </div>
+            <div
+                id="dashboardPage"
+                class="page active"
+            >
 
-            <div class="notice">
-              Customer applications are sent directly to the Railway backend.
-              When an administrator reviews an application, the customer
-              dashboard retrieves the updated status from the same backend.
-            </div>
+                <div class="page-title">
+                    <h2>Customer Dashboard</h2>
+                    <p>Manage your JAY C O B Financial Services account.</p>
+                </div>
 
-            <p>
-              <strong>Backend:</strong>
-              <span id="systemBackend">Checking...</span>
-            </p>
+                <div class="stats">
 
-            <p style="margin-top:8px;">
-              <strong>Last refresh:</strong>
-              <span id="lastRefresh">-</span>
-            </p>
+                    <div class="stat-card">
+                        <small>Total Applications</small>
+                        <h3 id="statApplications">0</h3>
+                    </div>
 
-          </div>
+                    <div class="stat-card">
+                        <small>Pending</small>
+                        <h3 id="statPending">0</h3>
+                    </div>
 
-        </section>
+                    <div class="stat-card">
+                        <small>Approved</small>
+                        <h3 id="statApproved">0</h3>
+                    </div>
 
-
-        <!-- =================================================
-             APPLY
-        ================================================== -->
-
-        <section id="page-apply" class="page">
-
-          <div class="section-card">
-
-            <div class="section-header">
-              <h3>Apply for a Loan</h3>
-            </div>
-
-            <div class="notice">
-              Please enter the requested loan information accurately.
-              Your application will be sent to the JAY C O B Financial Services
-              backend for administrator review.
-            </div>
-
-            <form id="loanForm">
-
-              <div class="loan-form-grid">
-
-                <!-- IMPORTANT:
-                     These IDs and names match the backend fields.
-                -->
-
-                <div class="form-group">
-
-                  <label for="loanType">
-                    Loan Type
-                  </label>
-
-                  <select
-                    id="loanType"
-                    name="loan_type"
-                    class="form-control"
-                    required
-                  >
-
-                    <option value="">
-                      -- Select Loan Type --
-                    </option>
-
-                    <option value="Personal Loan">
-                      Personal Loan
-                    </option>
-
-                    <option value="Business Loan">
-                      Business Loan
-                    </option>
-
-                    <option value="Emergency Loan">
-                      Emergency Loan
-                    </option>
-
-                    <option value="Education Loan">
-                      Education Loan
-                    </option>
-
-                    <option value="Agricultural Loan">
-                      Agricultural Loan
-                    </option>
-
-                  </select>
+                    <div class="stat-card">
+                        <small>Total Payments</small>
+                        <h3 id="statPayments">0</h3>
+                    </div>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="card">
 
-                  <label for="loanAmount">
-                    Loan Amount (MWK)
-                  </label>
+                    <h3>Welcome to your account</h3>
 
-                  <input
-                    id="loanAmount"
-                    name="amount"
-                    class="form-control"
-                    type="number"
-                    min="1"
-                    step="1"
-                    placeholder="Example: 100000"
-                    required
-                  >
+                    <p style="line-height:1.7;color:#626b78;">
+                        From this dashboard you can apply for loans,
+                        monitor your applications, view payments and
+                        contact JAY C O B Financial Services support.
+                    </p>
 
                 </div>
 
+            </div>
 
-                <div class="form-group">
 
-                  <label for="loanDuration">
-                    Duration
-                  </label>
+            <!-- =================================================
+                 APPLY FOR LOAN
+            ================================================== -->
 
-                  <select
-                    id="loanDuration"
-                    name="duration_months"
-                    class="form-control"
-                    required
-                  >
+            <div
+                id="applyPage"
+                class="page"
+            >
 
-                    <option value="">
-                      -- Select Duration --
-                    </option>
+                <div class="page-title">
+                    <h2>Apply for a Loan</h2>
+                    <p>Complete the application below.</p>
+                </div>
 
-                    <option value="1">
-                      1 Month
-                    </option>
+                <div class="card loan-form">
 
-                    <option value="2">
-                      2 Months
-                    </option>
+                    <div id="loanApplicationMessage"></div>
 
-                    <option value="3">
-                      3 Months
-                    </option>
 
-                    <option value="6">
-                      6 Months
-                    </option>
+                    <!-- IMPORTANT:
+                         There is deliberately NO form submit here.
+                         The button below uses JavaScript click handling.
+                    -->
 
-                    <option value="9">
-                      9 Months
-                    </option>
+                    <div class="loan-field">
 
-                    <option value="12">
-                      12 Months
-                    </option>
+                        <label for="cdLoanType">
+                            Loan Type
+                        </label>
 
-                    <option value="18">
-                      18 Months
-                    </option>
+                        <select id="cdLoanType">
 
-                    <option value="24">
-                      24 Months
-                    </option>
+                            <option value="">
+                                -- Select Loan Type --
+                            </option>
 
-                  </select>
+                            <option value="Personal Loan">
+                                Personal Loan
+                            </option>
+
+                            <option value="Business Loan">
+                                Business Loan
+                            </option>
+
+                            <option value="Emergency Loan">
+                                Emergency Loan
+                            </option>
+
+                            <option value="Education Loan">
+                                Education Loan
+                            </option>
+
+                            <option value="Agriculture Loan">
+                                Agriculture Loan
+                            </option>
+
+                            <option value="Salary Loan">
+                                Salary Loan
+                            </option>
+
+                        </select>
+
+                        <div class="loan-help">
+                            Select the type of loan you want.
+                        </div>
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="cdLoanAmount">
+                            Loan Amount (MWK)
+                        </label>
+
+                        <input
+                            id="cdLoanAmount"
+                            type="number"
+                            inputmode="numeric"
+                            min="1"
+                            step="1"
+                            placeholder="Example: 100000"
+                        >
+
+                        <div class="loan-help">
+                            Enter the amount you want to borrow.
+                        </div>
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="cdLoanDuration">
+                            Loan Duration
+                        </label>
+
+                        <select id="cdLoanDuration">
+
+                            <option value="">
+                                -- Select Duration --
+                            </option>
+
+                            <option value="1">
+                                1 Month
+                            </option>
+
+                            <option value="2">
+                                2 Months
+                            </option>
+
+                            <option value="3">
+                                3 Months
+                            </option>
+
+                            <option value="6">
+                                6 Months
+                            </option>
+
+                            <option value="9">
+                                9 Months
+                            </option>
+
+                            <option value="12">
+                                12 Months
+                            </option>
+
+                            <option value="18">
+                                18 Months
+                            </option>
+
+                            <option value="24">
+                                24 Months
+                            </option>
+
+                        </select>
+
+                        <div class="loan-help">
+                            Select how long you want to repay the loan.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         LIVE VALIDATION DISPLAY
+                    ================================================== -->
+
+                    <div class="validation-box">
+
+                        <h4>Application Information</h4>
+
+                        <div class="validation-row">
+                            <span>Loan Type:</span>
+                            <span
+                                id="debugLoanType"
+                                class="validation-value"
+                            >
+                                Not selected
+                            </span>
+                        </div>
+
+                        <div class="validation-row">
+                            <span>Amount:</span>
+                            <span
+                                id="debugLoanAmount"
+                                class="validation-value"
+                            >
+                                Not entered
+                            </span>
+                        </div>
+
+                        <div class="validation-row">
+                            <span>Duration:</span>
+                            <span
+                                id="debugLoanDuration"
+                                class="validation-value"
+                            >
+                                Not selected
+                            </span>
+                        </div>
+
+                        <div class="validation-row">
+                            <span>Ready to Submit:</span>
+                            <span
+                                id="debugLoanReady"
+                                class="validation-value"
+                            >
+                                No
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="submitLoanButton"
+                        class="submit-loan-btn"
+                    >
+                        Submit Loan Application
+                    </button>
+
+
+                    <div
+                        id="loanPayloadBox"
+                        class="validation-box hidden"
+                        style="margin-top:15px;"
+                    >
+
+                        <h4>Request Sent to Railway</h4>
+
+                        <div
+                            id="loanPayloadText"
+                            style="
+                                background:#172033;
+                                color:white;
+                                padding:12px;
+                                border-radius:7px;
+                                font-size:12px;
+                                overflow-wrap:anywhere;
+                            "
+                        ></div>
+
+                    </div>
 
                 </div>
 
+            </div>
 
-                <div class="form-group full">
 
-                  <button
-                    id="loanSubmitBtn"
-                    class="loan-submit"
-                    type="submit"
-                  >
-                    Submit Loan Application
-                  </button>
+            <!-- =================================================
+                 APPLICATIONS
+            ================================================== -->
+
+            <div
+                id="applicationsPage"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h2>My Applications</h2>
+                    <p>View the status of your loan applications.</p>
+                </div>
+
+                <div class="card">
+
+                    <div id="applicationsContainer">
+                        <div class="loading">
+                            Loading applications...
+                        </div>
+                    </div>
 
                 </div>
 
-              </div>
+            </div>
 
-            </form>
 
-            <div id="loanFormMessage" class="form-result"></div>
+            <!-- =================================================
+                 PAYMENTS
+            ================================================== -->
 
-          </div>
+            <div
+                id="paymentsPage"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h2>My Payments</h2>
+                    <p>View your payment history.</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Reference</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="paymentsTable">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUPPORT
+            ================================================== -->
+
+            <div
+                id="supportPage"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h2>Customer Support</h2>
+                    <p>Send a message to JAY C O B Financial Services.</p>
+                </div>
+
+                <div class="grid-2">
+
+                    <div class="card">
+
+                        <h3>Send Message</h3>
+
+                        <div id="supportMessage"></div>
+
+                        <div class="input-group">
+
+                            <label>Subject</label>
+
+                            <input
+                                type="text"
+                                id="supportSubject"
+                                placeholder="Subject"
+                            >
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>Message</label>
+
+                            <textarea
+                                id="supportText"
+                                rows="6"
+                                placeholder="Write your message..."
+                            ></textarea>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="sendSupportButton"
+                        >
+                            Send Message
+                        </button>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>My Support Messages</h3>
+
+                        <div id="supportMessagesContainer">
+                            <div class="loading">
+                                Loading...
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================== -->
+
+            <div
+                id="profilePage"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h2>My Profile</h2>
+                    <p>Your customer account information.</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="profile-row">
+                        <span>Customer ID</span>
+                        <strong id="profileId">-</strong>
+                    </div>
+
+                    <div class="profile-row">
+                        <span>Full Name</span>
+                        <strong id="profileName">-</strong>
+                    </div>
+
+                    <div class="profile-row">
+                        <span>Email</span>
+                        <strong id="profileEmail">-</strong>
+                    </div>
+
+                    <div class="profile-row">
+                        <span>Phone</span>
+                        <strong id="profilePhone">-</strong>
+                    </div>
+
+                    <div class="profile-row">
+                        <span>Status</span>
+                        <strong id="profileStatus">-</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
 
         </section>
-
-
-        <!-- =================================================
-             APPLICATIONS
-        ================================================== -->
-
-        <section id="page-applications" class="page">
-
-          <div class="section-card">
-
-            <div class="section-header">
-
-              <h3>My Loan Applications</h3>
-
-              <button id="refreshApplicationsBtn">
-                🔄 Refresh
-              </button>
-
-            </div>
-
-            <div id="applicationsList" class="application-list">
-
-              <div class="empty-state">
-                Loading applications...
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             PAYMENTS
-        ================================================== -->
-
-        <section id="page-payments" class="page">
-
-          <div class="section-card">
-
-            <div class="section-header">
-
-              <h3>My Payments</h3>
-
-              <button id="refreshPaymentsBtn">
-                🔄 Refresh
-              </button>
-
-            </div>
-
-            <div class="notice">
-              Payment records shown here come directly from your Railway
-              backend.
-            </div>
-
-            <div id="paymentsBody">
-              <div class="empty-state">
-                Loading payments...
-              </div>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             SUPPORT
-        ================================================== -->
-
-        <section id="page-support" class="page">
-
-          <div class="section-card">
-
-            <div class="section-header">
-              <h3>Contact Support</h3>
-            </div>
-
-            <form id="supportForm">
-
-              <div class="form-group">
-
-                <label for="supportSubject">
-                  Subject
-                </label>
-
-                <input
-                  id="supportSubject"
-                  class="form-control"
-                  type="text"
-                  placeholder="What do you need help with?"
-                  required
-                >
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="supportMessage">
-                  Message
-                </label>
-
-                <textarea
-                  id="supportMessage"
-                  class="form-control"
-                  rows="6"
-                  placeholder="Write your message..."
-                  required
-                ></textarea>
-
-              </div>
-
-
-              <button class="btn btn-primary" type="submit">
-                Send Message
-              </button>
-
-            </form>
-
-            <div id="supportFormMessage" class="form-result"></div>
-
-          </div>
-
-
-          <div class="section-card">
-
-            <div class="section-header">
-
-              <h3>My Support Messages</h3>
-
-              <button id="refreshSupportBtn">
-                🔄 Refresh
-              </button>
-
-            </div>
-
-            <div id="supportMessagesBody">
-              <div class="empty-state">
-                Loading messages...
-              </div>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             PROFILE
-        ================================================== -->
-
-        <section id="page-profile" class="page">
-
-          <div class="section-card">
-
-            <div class="section-header">
-
-              <h3>My Profile</h3>
-
-              <button id="refreshProfileBtn">
-                🔄 Refresh
-              </button>
-
-            </div>
-
-            <div class="profile-grid">
-
-              <div class="profile-item">
-                <label>Customer ID</label>
-                <strong id="profileId">-</strong>
-              </div>
-
-              <div class="profile-item">
-                <label>Full Name</label>
-                <strong id="profileName">-</strong>
-              </div>
-
-              <div class="profile-item">
-                <label>Email</label>
-                <strong id="profileEmail">-</strong>
-              </div>
-
-              <div class="profile-item">
-                <label>Phone</label>
-                <strong id="profilePhone">-</strong>
-              </div>
-
-              <div class="profile-item">
-                <label>Account Status</label>
-                <strong id="profileStatus">-</strong>
-              </div>
-
-              <div class="profile-item">
-                <label>Account Created</label>
-                <strong id="profileCreated">-</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      </div>
 
     </main>
 
-  </section>
+</div>
 
 
-  <!-- =====================================================
-       APPLICATION DETAIL MODAL
-  ====================================================== -->
+<script>
 
-  <div id="loanModal" class="modal">
+/* =========================================================
+   JAY C O B CUSTOMER DASHBOARD
+   VERSION 3.0 - COMPLETE VALIDATION REBUILD
+========================================================= */
 
-    <div class="modal-box">
+const API_BASE =
+    "https://emmanueljacobgithubio-production.up.railway.app/api";
 
-      <div class="modal-header">
+const TOKEN_KEY =
+    "jaycobCustomerToken";
 
-        <h3>Loan Application Details</h3>
-
-        <button id="closeLoanModal" class="close-modal">
-          ✕
-        </button>
-
-      </div>
-
-      <div id="loanModalBody">
-        Loading...
-      </div>
-
-    </div>
-
-  </div>
+const CUSTOMER_KEY =
+    "jaycobCustomer";
 
 
-  <!-- =====================================================
-       LOADING
-  ====================================================== -->
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
 
-  <div id="loadingOverlay">
+let customerToken =
+    localStorage.getItem(TOKEN_KEY) || "";
 
-    <div class="loading-box">
+let customer =
+    JSON.parse(
+        localStorage.getItem(CUSTOMER_KEY) || "null"
+    );
 
-      <div class="spinner"></div>
+let applications = [];
 
-      <div id="loadingText">
-        Please wait...
-      </div>
-
-    </div>
-
-  </div>
+let payments = [];
 
 
-  <div id="toastContainer"></div>
+/* =========================================================
+   DOM HELPER
+========================================================= */
+
+function $(id) {
+    return document.getElementById(id);
+}
 
 
-  <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
+/* =========================================================
+   MESSAGE HELPER
+========================================================= */
 
-  <script>
+function showMessage(elementId, text, type = "info") {
 
-    /* =====================================================
-       RAILWAY BACKEND
-    ====================================================== */
+    const element = $(elementId);
 
-    const API_URL =
-      "https://emmanueljacobgithubio-production.up.railway.app/api";
+    if (!element) return;
 
-
-    /* =====================================================
-       STATE
-    ====================================================== */
-
-    let customerToken =
-      localStorage.getItem("jaycobCustomerToken") || "";
-
-    let currentCustomer = null;
-
-    try {
-      currentCustomer =
-        JSON.parse(
-          localStorage.getItem("jaycobCustomer") || "null"
-        );
-    } catch (error) {
-      currentCustomer = null;
-    }
-
-    let applications = [];
-    let payments = [];
-    let supportMessages = [];
-
-    let autoRefreshTimer = null;
+    element.innerHTML =
+        `<div class="message ${type}">${escapeHtml(text)}</div>`;
+}
 
 
-    /* =====================================================
-       DOM HELPERS
-    ====================================================== */
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
 
-    const $ = (id) => document.getElementById(id);
+function escapeHtml(value) {
 
-
-    /* =====================================================
-       HTML ESCAPE
-    ====================================================== */
-
-    function escapeHTML(value) {
-
-      if (value === null || value === undefined) {
-        return "";
-      }
-
-      return String(value)
+    return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-    }
+}
 
 
-    /* =====================================================
-       MONEY FORMAT
-    ====================================================== */
+/* =========================================================
+   API REQUEST
+========================================================= */
 
-    function formatMoney(value) {
+async function apiRequest(
+    endpoint,
+    options = {}
+) {
 
-      const number = Number(value);
-
-      if (!Number.isFinite(number)) {
-        return "MWK 0";
-      }
-
-      return (
-        "MWK " +
-        number.toLocaleString("en-MW", {
-          maximumFractionDigits: 2
-        })
-      );
-    }
-
-
-    /* =====================================================
-       DATE FORMAT
-    ====================================================== */
-
-    function formatDate(value) {
-
-      if (!value) {
-        return "-";
-      }
-
-      const date = new Date(value);
-
-      if (Number.isNaN(date.getTime())) {
-        return escapeHTML(value);
-      }
-
-      return date.toLocaleString("en-MW", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-    }
-
-
-    /* =====================================================
-       STATUS
-    ====================================================== */
-
-    function normalizeStatus(status) {
-
-      return String(status || "UNKNOWN")
-        .toUpperCase()
-        .replace(/[_-]/g, " ")
-        .trim();
-    }
-
-
-    function statusClass(status) {
-
-      const value = normalizeStatus(status);
-
-      if (value === "PENDING") {
-        return "status-pending";
-      }
-
-      if (value === "UNDER REVIEW") {
-        return "status-review";
-      }
-
-      if (value === "APPROVED") {
-        return "status-approved";
-      }
-
-      if (value === "REJECTED") {
-        return "status-rejected";
-      }
-
-      return "status-default";
-    }
-
-
-    function statusBadge(status) {
-
-      const normalized = normalizeStatus(status);
-
-      return `
-        <span class="status-badge ${statusClass(normalized)}">
-          ${escapeHTML(normalized)}
-        </span>
-      `;
-    }
-
-
-    /* =====================================================
-       LOADING
-    ====================================================== */
-
-    function showLoading(text = "Please wait...") {
-
-      $("loadingText").textContent = text;
-
-      $("loadingOverlay").classList.add("show");
-    }
-
-
-    function hideLoading() {
-
-      $("loadingOverlay").classList.remove("show");
-    }
-
-
-    /* =====================================================
-       TOAST
-    ====================================================== */
-
-    function showToast(message, type = "") {
-
-      const toast =
-        document.createElement("div");
-
-      toast.className =
-        "toast " + type;
-
-      toast.textContent = message;
-
-      $("toastContainer").appendChild(toast);
-
-      setTimeout(() => {
-
-        toast.remove();
-
-      }, 4000);
-    }
-
-
-    /* =====================================================
-       AUTH MESSAGE
-    ====================================================== */
-
-    function showAuthMessage(
-      elementId,
-      message,
-      type = "error"
-    ) {
-
-      const element = $(elementId);
-
-      element.textContent = message;
-
-      element.className =
-        "auth-message " + type;
-
-    }
-
-
-    function clearAuthMessage(elementId) {
-
-      const element = $(elementId);
-
-      element.textContent = "";
-
-      element.className = "auth-message";
-
-    }
-
-
-    /* =====================================================
-       FORM RESULT
-    ====================================================== */
-
-    function showFormResult(
-      elementId,
-      message,
-      type
-    ) {
-
-      const element = $(elementId);
-
-      element.textContent = message;
-
-      element.className =
-        "form-result " + type;
-
-    }
-
-
-    /* =====================================================
-       API REQUEST
-    ====================================================== */
-
-    async function apiRequest(
-      endpoint,
-      options = {}
-    ) {
-
-      const headers = {
+    const headers = {
+        "Content-Type": "application/json",
         ...(options.headers || {})
-      };
+    };
 
-      if (!(options.body instanceof FormData)) {
-
-        headers["Content-Type"] =
-          "application/json";
-
-      }
-
-      if (customerToken) {
+    if (customerToken) {
 
         headers["Authorization"] =
-          "Bearer " + customerToken;
+            "Bearer " + customerToken;
 
-      }
+    }
 
-      let response;
-
-      try {
-
-        response = await fetch(
-          API_URL + endpoint,
-          {
+    const response = await fetch(
+        API_BASE + endpoint,
+        {
             ...options,
             headers
-          }
-        );
+        }
+    );
 
-      } catch (networkError) {
+    let data = null;
 
-        throw new Error(
-          "Unable to connect to the Railway backend. Please check your internet connection."
-        );
+    try {
 
-      }
+        data = await response.json();
 
-      const text =
-        await response.text();
-
-      let data = {};
-
-      try {
-
-        data =
-          text ? JSON.parse(text) : {};
-
-      } catch (parseError) {
+    } catch {
 
         data = {
-          success: false,
-          message: text || "Server returned an invalid response."
+            success: false,
+            message: "Server returned an invalid response."
         };
 
-      }
+    }
 
+    if (
+        response.status === 401 ||
+        response.status === 403
+    ) {
 
-      if (response.status === 401) {
-
-        customerToken = "";
-
-        currentCustomer = null;
-
-        localStorage.removeItem(
-          "jaycobCustomerToken"
-        );
-
-        localStorage.removeItem(
-          "jaycobCustomer"
-        );
-
-        stopAutoRefresh();
-
-        showLogin();
+        logout(false);
 
         throw new Error(
-          data.message ||
-          "Your customer session has expired. Please log in again."
+            data.message || "Your session has expired."
         );
 
-      }
+    }
 
-
-      if (!response.ok) {
+    if (!response.ok || data.success === false) {
 
         throw new Error(
-          data.message ||
-          "Request failed. Please try again."
+            data.message ||
+            `Request failed (${response.status})`
         );
 
-      }
-
-      return data;
-
     }
 
-
-    /* =====================================================
-       SAVE CUSTOMER
-    ====================================================== */
-
-    function saveCustomer(customer, token) {
-
-      currentCustomer = customer;
-
-      customerToken = token;
-
-      localStorage.setItem(
-        "jaycobCustomerToken",
-        token
-      );
-
-      localStorage.setItem(
-        "jaycobCustomer",
-        JSON.stringify(customer)
-      );
-
-    }
+    return data;
+}
 
 
-    /* =====================================================
-       SHOW LOGIN
-    ====================================================== */
+/* =========================================================
+   AUTH SCREEN
+========================================================= */
 
-    function showLogin() {
+function showLogin() {
 
-      $("authScreen").classList.remove("hidden");
+    $("loginCard").classList.remove("hidden");
 
-      $("appShell").classList.add("hidden");
+    $("registerCard").classList.add("hidden");
 
-      $("loginPanel").classList.remove("hidden");
+}
 
-      $("registerPanel").classList.add("hidden");
+function showRegister() {
 
-    }
+    $("loginCard").classList.add("hidden");
 
+    $("registerCard").classList.remove("hidden");
 
-    /* =====================================================
-       SHOW REGISTER
-    ====================================================== */
-
-    function showRegister() {
-
-      $("loginPanel").classList.add("hidden");
-
-      $("registerPanel").classList.remove("hidden");
-
-      clearAuthMessage("loginMessage");
-
-      clearAuthMessage("registerMessage");
-
-    }
+}
 
 
-    /* =====================================================
-       SHOW APPLICATION
-    ====================================================== */
+/* =========================================================
+   LOGIN
+========================================================= */
 
-    function showApp() {
+async function loginCustomer() {
 
-      $("authScreen").classList.add("hidden");
-
-      $("appShell").classList.remove("hidden");
-
-      updateCustomerHeader();
-
-      startAutoRefresh();
-
-    }
-
-
-    /* =====================================================
-       CUSTOMER HEADER
-    ====================================================== */
-
-    function updateCustomerHeader() {
-
-      const name =
-        currentCustomer?.full_name ||
-        "Customer";
-
-      const email =
-        currentCustomer?.email ||
-        "-";
-
-      $("welcomeName").textContent = name;
-
-      $("topCustomerName").textContent = name;
-
-      $("topCustomerEmail").textContent = email;
-
-    }
-
-
-    /* =====================================================
-       LOGIN
-    ====================================================== */
-
-    async function loginCustomer(event) {
-
-      event.preventDefault();
-
-      clearAuthMessage("loginMessage");
-
-      const email =
+    const email =
         $("loginEmail").value.trim();
 
-      const password =
+    const password =
         $("loginPassword").value;
 
+    if (!email) {
 
-      if (!email || !password) {
-
-        showAuthMessage(
-          "loginMessage",
-          "Email and password are required."
+        showMessage(
+            "loginMessage",
+            "Please enter your email address.",
+            "error"
         );
 
         return;
-      }
-
-
-      showLoading("Logging in...");
-
-
-      try {
-
-        const result =
-          await apiRequest(
-            "/auth/login",
-            {
-              method: "POST",
-
-              body: JSON.stringify({
-                email,
-                password
-              })
-            }
-          );
-
-
-        if (
-          !result.success ||
-          !result.token ||
-          !result.customer
-        ) {
-
-          throw new Error(
-            result.message ||
-            "Login failed."
-          );
-
-        }
-
-
-        saveCustomer(
-          result.customer,
-          result.token
-        );
-
-
-        $("loginForm").reset();
-
-        showApp();
-
-        showPage("overview");
-
-        await loadDashboardData();
-
-        showToast(
-          "Login successful.",
-          "success"
-        );
-
-
-      } catch (error) {
-
-        showAuthMessage(
-          "loginMessage",
-          error.message ||
-          "Login failed."
-        );
-
-      } finally {
-
-        hideLoading();
-
-      }
 
     }
 
+    if (!password) {
 
-    /* =====================================================
-       REGISTER
-    ====================================================== */
+        showMessage(
+            "loginMessage",
+            "Please enter your password.",
+            "error"
+        );
 
-    async function registerCustomer(event) {
+        return;
 
-      event.preventDefault();
+    }
 
-      clearAuthMessage("registerMessage");
+    $("loginButton").disabled = true;
+
+    $("loginButton").textContent =
+        "Logging in...";
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/auth/login",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
+            );
+
+        customerToken =
+            data.token;
+
+        customer =
+            data.customer;
+
+        localStorage.setItem(
+            TOKEN_KEY,
+            customerToken
+        );
+
+        localStorage.setItem(
+            CUSTOMER_KEY,
+            JSON.stringify(customer)
+        );
+
+        showApplication();
+
+    } catch (error) {
+
+        showMessage(
+            "loginMessage",
+            error.message,
+            "error"
+        );
+
+    } finally {
+
+        $("loginButton").disabled = false;
+
+        $("loginButton").textContent =
+            "Login";
+
+    }
+
+}
 
 
-      const full_name =
+/* =========================================================
+   REGISTER
+========================================================= */
+
+async function registerCustomer() {
+
+    const full_name =
         $("registerName").value.trim();
 
-      const email =
+    const email =
         $("registerEmail").value.trim();
 
-      const phone =
+    const phone =
         $("registerPhone").value.trim();
 
-      const password =
+    const password =
         $("registerPassword").value;
 
-      const confirm =
-        $("registerConfirm").value;
+    if (!full_name) {
 
-
-      if (
-        !full_name ||
-        !email ||
-        !phone ||
-        !password
-      ) {
-
-        showAuthMessage(
-          "registerMessage",
-          "Please complete all required fields."
+        showMessage(
+            "registerMessage",
+            "Please enter your full name.",
+            "error"
         );
 
         return;
-      }
 
+    }
 
-      if (password !== confirm) {
+    if (!email) {
 
-        showAuthMessage(
-          "registerMessage",
-          "Passwords do not match."
+        showMessage(
+            "registerMessage",
+            "Please enter your email.",
+            "error"
         );
 
         return;
-      }
 
+    }
 
-      if (password.length < 6) {
+    if (!phone) {
 
-        showAuthMessage(
-          "registerMessage",
-          "Password must be at least 6 characters."
+        showMessage(
+            "registerMessage",
+            "Please enter your phone number.",
+            "error"
         );
 
         return;
-      }
-
-
-      showLoading("Creating account...");
-
-
-      try {
-
-        const result =
-          await apiRequest(
-            "/auth/register",
-            {
-              method: "POST",
-
-              body: JSON.stringify({
-                full_name,
-                email,
-                phone,
-                password
-              })
-            }
-          );
-
-
-        if (
-          !result.success ||
-          !result.token ||
-          !result.customer
-        ) {
-
-          throw new Error(
-            result.message ||
-            "Registration failed."
-          );
-
-        }
-
-
-        saveCustomer(
-          result.customer,
-          result.token
-        );
-
-
-        $("registerForm").reset();
-
-        showApp();
-
-        showPage("overview");
-
-        await loadDashboardData();
-
-        showToast(
-          "Account created successfully.",
-          "success"
-        );
-
-
-      } catch (error) {
-
-        showAuthMessage(
-          "registerMessage",
-          error.message ||
-          "Registration failed."
-        );
-
-      } finally {
-
-        hideLoading();
-
-      }
 
     }
 
+    if (!password || password.length < 6) {
 
-    /* =====================================================
-       LOGOUT
-    ====================================================== */
-
-    async function logoutCustomer() {
-
-      try {
-
-        if (customerToken) {
-
-          await apiRequest(
-            "/auth/logout",
-            {
-              method: "POST"
-            }
-          );
-
-        }
-
-      } catch (error) {
-
-        console.warn(
-          "Logout request failed:",
-          error
+        showMessage(
+            "registerMessage",
+            "Password must contain at least 6 characters.",
+            "error"
         );
 
-      } finally {
-
-        customerToken = "";
-
-        currentCustomer = null;
-
-        applications = [];
-
-        payments = [];
-
-        supportMessages = [];
-
-        localStorage.removeItem(
-          "jaycobCustomerToken"
-        );
-
-        localStorage.removeItem(
-          "jaycobCustomer"
-        );
-
-        stopAutoRefresh();
-
-        showLogin();
-
-        showToast(
-          "You have been logged out.",
-          "success"
-        );
-
-      }
+        return;
 
     }
 
+    $("registerButton").disabled = true;
 
-    /* =====================================================
-       LOAD PROFILE
-    ====================================================== */
+    $("registerButton").textContent =
+        "Creating Account...";
 
-    async function loadProfile() {
+    try {
 
-      try {
+        const data =
+            await apiRequest(
+                "/auth/register",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        full_name,
+                        email,
+                        phone,
+                        password
+                    })
+                }
+            );
 
-        const result =
-          await apiRequest(
-            "/auth/profile"
-          );
+        customerToken =
+            data.token;
 
+        customer =
+            data.customer;
 
-        if (
-          result.success &&
-          result.customer
-        ) {
-
-          currentCustomer =
-            result.customer;
-
-          localStorage.setItem(
-            "jaycobCustomer",
-            JSON.stringify(
-              currentCustomer
-            )
-          );
-
-          updateCustomerHeader();
-
-          renderProfile();
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Profile error:",
-          error
+        localStorage.setItem(
+            TOKEN_KEY,
+            customerToken
         );
 
-      }
+        localStorage.setItem(
+            CUSTOMER_KEY,
+            JSON.stringify(customer)
+        );
+
+        showApplication();
+
+    } catch (error) {
+
+        showMessage(
+            "registerMessage",
+            error.message,
+            "error"
+        );
+
+    } finally {
+
+        $("registerButton").disabled = false;
+
+        $("registerButton").textContent =
+            "Create Account";
 
     }
 
+}
 
-    /* =====================================================
-       RENDER PROFILE
-    ====================================================== */
 
-    function renderProfile() {
+/* =========================================================
+   SHOW APPLICATION
+========================================================= */
 
-      const customer =
-        currentCustomer || {};
+function showApplication() {
 
-      $("profileId").textContent =
+    $("authContainer")
+        .classList
+        .add("hidden");
+
+    $("customerApp")
+        .classList
+        .remove("hidden");
+
+    updateCustomerUI();
+
+    checkHealth();
+
+    loadAllData();
+
+}
+
+
+/* =========================================================
+   UPDATE CUSTOMER UI
+========================================================= */
+
+function updateCustomerUI() {
+
+    if (!customer) return;
+
+    $("topCustomerName").textContent =
+        customer.full_name || "Customer";
+
+    $("profileId").textContent =
         customer.id || "-";
 
-      $("profileName").textContent =
+    $("profileName").textContent =
         customer.full_name || "-";
 
-      $("profileEmail").textContent =
+    $("profileEmail").textContent =
         customer.email || "-";
 
-      $("profilePhone").textContent =
+    $("profilePhone").textContent =
         customer.phone || "-";
 
-      $("profileStatus").textContent =
+    $("profileStatus").textContent =
         customer.status || "-";
 
-      $("profileCreated").textContent =
-        formatDate(customer.created_at);
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(callServer = true) {
+
+    if (callServer && customerToken) {
+
+        try {
+
+            await apiRequest(
+                "/auth/logout",
+                {
+                    method: "POST"
+                }
+            );
+
+        } catch {
+
+            // Continue logout locally.
+        }
 
     }
 
+    customerToken = "";
 
-    /* =====================================================
-       LOAD APPLICATIONS
-    ====================================================== */
+    customer = null;
 
-    async function loadApplications() {
+    applications = [];
 
-      try {
+    payments = [];
 
-        const result =
-          await apiRequest(
-            "/loans/my-applications"
-          );
+    localStorage.removeItem(TOKEN_KEY);
 
+    localStorage.removeItem(CUSTOMER_KEY);
+
+    $("customerApp")
+        .classList
+        .add("hidden");
+
+    $("authContainer")
+        .classList
+        .remove("hidden");
+
+    showLogin();
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function openPage(pageId, button) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+    const page =
+        $(pageId);
+
+    if (page) {
+
+        page.classList.add("active");
+
+    }
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+    $("sidebar")
+        .classList
+        .remove("open");
+
+    if (pageId === "applicationsPage") {
+
+        loadApplications();
+
+    }
+
+    if (pageId === "paymentsPage") {
+
+        loadPayments();
+
+    }
+
+    if (pageId === "supportPage") {
+
+        loadSupportMessages();
+
+    }
+
+}
+
+
+/* =========================================================
+   HEALTH CHECK
+========================================================= */
+
+async function checkHealth() {
+
+    try {
+
+        const response =
+            await fetch(
+                API_BASE + "/health"
+            );
+
+        if (response.ok) {
+
+            $("connectionStatus").textContent =
+                "● Online";
+
+        } else {
+
+            $("connectionStatus").textContent =
+                "● Offline";
+
+        }
+
+    } catch {
+
+        $("connectionStatus").textContent =
+            "● Offline";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD ALL DATA
+========================================================= */
+
+async function loadAllData() {
+
+    await Promise.allSettled([
+        loadApplications(),
+        loadPayments(),
+        loadSupportMessages()
+    ]);
+
+    updateStatistics();
+
+}
+
+
+/* =========================================================
+   APPLICATION DATA
+========================================================= */
+
+async function loadApplications() {
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/loans/my-applications"
+            );
 
         applications =
-          Array.isArray(result.applications)
-            ? result.applications
-            : [];
-
+            data.applications || [];
 
         renderApplications();
 
-        renderOverviewStats();
+        updateStatistics();
 
-        renderLatestApplication();
+    } catch (error) {
 
-
-        $("lastRefresh").textContent =
-          new Date().toLocaleString(
-            "en-MW"
-          );
-
-
-      } catch (error) {
-
-        console.error(
-          "Applications error:",
-          error
-        );
-
-        $("applicationsList").innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">⚠️</div>
-            <strong>Unable to load applications</strong>
-            <p style="margin-top:7px;">
-              ${escapeHTML(error.message)}
-            </p>
-          </div>
-        `;
-
-      }
+        $("applicationsContainer").innerHTML =
+            `<div class="message error">
+                ${escapeHtml(error.message)}
+            </div>`;
 
     }
 
-
-    /* =====================================================
-       RENDER APPLICATIONS
-    ====================================================== */
-
-    function renderApplications() {
-
-      const container =
-        $("applicationsList");
+}
 
 
-      if (!applications.length) {
+/* =========================================================
+   RENDER APPLICATIONS
+========================================================= */
 
-        container.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">📋</div>
-            <strong>No loan applications yet</strong>
-            <p style="margin-top:7px;">
-              Go to "Apply for Loan" to submit your first application.
-            </p>
-          </div>
-        `;
+function renderApplications() {
+
+    const container =
+        $("applicationsContainer");
+
+    if (!applications.length) {
+
+        container.innerHTML =
+            `<div class="empty">
+                You have not submitted any loan applications yet.
+            </div>`;
 
         return;
-      }
-
-
-      container.innerHTML =
-        applications.map(app => {
-
-          const loanType =
-            app.loan_type ||
-            "Loan";
-
-          const amount =
-            formatMoney(app.amount);
-
-          const duration =
-            app.duration_months ??
-            "-";
-
-          const status =
-            normalizeStatus(app.status);
-
-
-          return `
-
-            <div class="application-card">
-
-              <div class="application-top">
-
-                <div class="application-id">
-                  ${escapeHTML(app.id)}
-                </div>
-
-                ${statusBadge(status)}
-
-              </div>
-
-
-              <div class="application-details">
-
-                <div>
-                  <span class="detail-label">
-                    Loan Type
-                  </span>
-
-                  <span class="detail-value">
-                    ${escapeHTML(loanType)}
-                  </span>
-                </div>
-
-
-                <div>
-                  <span class="detail-label">
-                    Amount
-                  </span>
-
-                  <span class="detail-value">
-                    ${escapeHTML(amount)}
-                  </span>
-                </div>
-
-
-                <div>
-                  <span class="detail-label">
-                    Duration
-                  </span>
-
-                  <span class="detail-value">
-                    ${escapeHTML(duration)} months
-                  </span>
-                </div>
-
-
-                <div>
-                  <span class="detail-label">
-                    Applied
-                  </span>
-
-                  <span class="detail-value">
-                    ${escapeHTML(
-                      formatDate(app.created_at)
-                    )}
-                  </span>
-                </div>
-
-              </div>
-
-
-              <button
-                class="view-btn"
-                type="button"
-                onclick="viewApplication('${encodeURIComponent(app.id)}')"
-              >
-                View Details
-              </button>
-
-            </div>
-
-          `;
-
-        }).join("");
 
     }
 
+    container.innerHTML =
+        applications
+            .map(application => {
 
-    /* =====================================================
-       OVERVIEW STATS
-    ====================================================== */
+                const status =
+                    String(
+                        application.status || "PENDING"
+                    ).toUpperCase();
 
-    function renderOverviewStats() {
+                let badgeClass =
+                    "pending";
 
-      const total =
+                if (status === "APPROVED") {
+
+                    badgeClass =
+                        "approved";
+
+                } else if (status === "REJECTED") {
+
+                    badgeClass =
+                        "rejected";
+
+                } else if (
+                    status === "UNDER REVIEW"
+                ) {
+
+                    badgeClass =
+                        "review";
+
+                }
+
+                return `
+                <div class="application-item">
+
+                    <div class="application-header">
+
+                        <strong>
+                            ${escapeHtml(
+                                application.loan_type
+                            )}
+                        </strong>
+
+                        <span class="badge ${badgeClass}">
+                            ${escapeHtml(status)}
+                        </span>
+
+                    </div>
+
+                    <div class="application-grid">
+
+                        <div>
+                            <small>Application ID</small>
+                            <strong>
+                                ${escapeHtml(application.id)}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Amount</small>
+                            <strong>
+                                MWK ${formatMoney(application.amount)}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Duration</small>
+                            <strong>
+                                ${escapeHtml(
+                                    application.duration_months
+                                )} months
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Interest Rate</small>
+                            <strong>
+                                ${escapeHtml(
+                                    application.interest_rate ?? 0
+                                )}%
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Submitted</small>
+                            <strong>
+                                ${formatDate(
+                                    application.created_at
+                                )}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+                `;
+
+            })
+            .join("");
+
+}
+
+
+/* =========================================================
+   UPDATE STATISTICS
+========================================================= */
+
+function updateStatistics() {
+
+    const pending =
+        applications.filter(
+            a =>
+                String(a.status)
+                    .toUpperCase() === "PENDING"
+        ).length;
+
+    const approved =
+        applications.filter(
+            a =>
+                String(a.status)
+                    .toUpperCase() === "APPROVED"
+        ).length;
+
+    $("statApplications").textContent =
         applications.length;
 
-      const pending =
-        applications.filter(
-          app =>
-            normalizeStatus(app.status) ===
-            "PENDING"
-        ).length;
-
-      const approved =
-        applications.filter(
-          app =>
-            normalizeStatus(app.status) ===
-            "APPROVED"
-        ).length;
-
-      const rejected =
-        applications.filter(
-          app =>
-            normalizeStatus(app.status) ===
-            "REJECTED"
-        ).length;
-
-
-      $("statTotal").textContent =
-        total;
-
-      $("statPending").textContent =
+    $("statPending").textContent =
         pending;
 
-      $("statApproved").textContent =
+    $("statApproved").textContent =
         approved;
 
-      $("statRejected").textContent =
-        rejected;
+    $("statPayments").textContent =
+        payments.length;
+
+}
+
+
+/* =========================================================
+   =========================================================
+   CRITICAL NEW LOAN VALIDATION SYSTEM
+   =========================================================
+========================================================= */
+
+
+/*
+    This function reads the actual controls directly.
+
+    IMPORTANT:
+    There is no HTML form submission.
+    There is no "required" browser validation.
+    There is no event.preventDefault().
+*/
+
+function readLoanApplicationValues() {
+
+    const loanTypeElement =
+        $("cdLoanType");
+
+    const amountElement =
+        $("cdLoanAmount");
+
+    const durationElement =
+        $("cdLoanDuration");
+
+
+    /* -----------------------------------------
+       READ LOAN TYPE
+    ----------------------------------------- */
+
+    let loan_type =
+        "";
+
+    if (loanTypeElement) {
+
+        loan_type =
+            String(
+                loanTypeElement.value || ""
+            ).trim();
 
     }
 
 
-    /* =====================================================
-       LATEST APPLICATION
-    ====================================================== */
+    /*
+       Extra fallback:
+       If a browser somehow returns an empty
+       value, read the selected option text.
+    */
 
-    function renderLatestApplication() {
+    if (
+        !loan_type &&
+        loanTypeElement &&
+        loanTypeElement.selectedIndex > 0
+    ) {
 
-      const container =
-        $("latestApplication");
+        const selectedOption =
+            loanTypeElement.options[
+                loanTypeElement.selectedIndex
+            ];
 
+        if (selectedOption) {
 
-      if (!applications.length) {
-
-        container.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">📋</div>
-            No loan applications yet.
-          </div>
-        `;
-
-        return;
-      }
-
-
-      const sorted =
-        [...applications].sort(
-          (a, b) =>
-            new Date(
-              b.created_at || 0
-            ) -
-            new Date(
-              a.created_at || 0
-            )
-        );
-
-
-      const app =
-        sorted[0];
-
-
-      container.innerHTML = `
-
-        <div class="application-card">
-
-          <div class="application-top">
-
-            <div class="application-id">
-              ${escapeHTML(app.id)}
-            </div>
-
-            ${statusBadge(app.status)}
-
-          </div>
-
-
-          <div class="application-details">
-
-            <div>
-              <span class="detail-label">
-                Loan Type
-              </span>
-
-              <span class="detail-value">
-                ${escapeHTML(
-                  app.loan_type || "-"
-                )}
-              </span>
-            </div>
-
-
-            <div>
-              <span class="detail-label">
-                Amount
-              </span>
-
-              <span class="detail-value">
-                ${escapeHTML(
-                  formatMoney(app.amount)
-                )}
-              </span>
-            </div>
-
-
-            <div>
-              <span class="detail-label">
-                Duration
-              </span>
-
-              <span class="detail-value">
-                ${escapeHTML(
-                  app.duration_months ?? "-"
-                )} months
-              </span>
-            </div>
-
-
-            <div>
-              <span class="detail-label">
-                Date
-              </span>
-
-              <span class="detail-value">
-                ${escapeHTML(
-                  formatDate(app.created_at)
-                )}
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* =====================================================
-       VIEW APPLICATION
-    ====================================================== */
-
-    async function viewApplication(encodedId) {
-
-      const id =
-        decodeURIComponent(encodedId);
-
-
-      $("loanModal").classList.add("show");
-
-      $("loanModalBody").innerHTML =
-        "Loading application details...";
-
-
-      try {
-
-        const result =
-          await apiRequest(
-            "/loans/" +
-            encodeURIComponent(id)
-          );
-
-
-        if (
-          !result.success ||
-          !result.application
-        ) {
-
-          throw new Error(
-            result.message ||
-            "Application not found."
-          );
+            loan_type =
+                String(
+                    selectedOption.value ||
+                    selectedOption.textContent ||
+                    ""
+                ).trim();
 
         }
 
-
-        const app =
-          result.application;
+    }
 
 
-        $("loanModalBody").innerHTML = `
+    /* -----------------------------------------
+       READ AMOUNT
+    ----------------------------------------- */
 
-          <div class="detail-row">
-            <span>Application ID</span>
-            <span>${escapeHTML(app.id)}</span>
-          </div>
+    let rawAmount =
+        amountElement
+            ? String(amountElement.value || "")
+            : "";
 
-          <div class="detail-row">
-            <span>Loan Type</span>
-            <span>${escapeHTML(app.loan_type || "-")}</span>
-          </div>
+    /*
+       Remove commas and accidental currency
+       symbols if the user enters them.
+    */
 
-          <div class="detail-row">
-            <span>Amount</span>
-            <span>${escapeHTML(formatMoney(app.amount))}</span>
-          </div>
+    rawAmount =
+        rawAmount.replace(
+            /[^0-9.]/g,
+            ""
+        );
 
-          <div class="detail-row">
-            <span>Duration</span>
-            <span>${escapeHTML(app.duration_months ?? "-")} months</span>
-          </div>
-
-          <div class="detail-row">
-            <span>Interest Rate</span>
-            <span>${escapeHTML(app.interest_rate ?? 0)}%</span>
-          </div>
-
-          <div class="detail-row">
-            <span>Status</span>
-            <span>${statusBadge(app.status)}</span>
-          </div>
-
-          <div class="detail-row">
-            <span>Created</span>
-            <span>${escapeHTML(formatDate(app.created_at))}</span>
-          </div>
-
-          <div class="detail-row">
-            <span>Updated</span>
-            <span>${escapeHTML(formatDate(app.updated_at))}</span>
-          </div>
-
-          <div class="detail-row">
-            <span>Reviewed At</span>
-            <span>${escapeHTML(formatDate(app.reviewed_at))}</span>
-          </div>
-
-          <div class="detail-row">
-            <span>Reviewed By</span>
-            <span>${escapeHTML(app.reviewed_by || "-")}</span>
-          </div>
-
-        `;
+    const amount =
+        Number(rawAmount);
 
 
-      } catch (error) {
+    /* -----------------------------------------
+       READ DURATION
+    ----------------------------------------- */
 
-        $("loanModalBody").innerHTML = `
+    let rawDuration =
+        durationElement
+            ? String(durationElement.value || "")
+            : "";
 
-          <div class="empty-state">
+    const duration_months =
+        parseInt(
+            rawDuration,
+            10
+        );
 
-            <div class="empty-icon">⚠️</div>
 
-            <strong>
-              Unable to load application
-            </strong>
+    return {
+        loan_type,
+        amount,
+        duration_months,
+        rawAmount,
+        rawDuration
+    };
 
-            <p style="margin-top:8px;">
-              ${escapeHTML(error.message)}
-            </p>
+}
 
-          </div>
 
-        `;
+/* =========================================================
+   UPDATE LIVE LOAN DEBUG DISPLAY
+========================================================= */
 
-      }
+function updateLoanValidationDisplay() {
+
+    const values =
+        readLoanApplicationValues();
+
+
+    $("debugLoanType").textContent =
+        values.loan_type ||
+        "Not selected";
+
+
+    $("debugLoanAmount").textContent =
+        values.amount > 0
+            ? "MWK " + formatMoney(values.amount)
+            : "Not entered";
+
+
+    $("debugLoanDuration").textContent =
+        Number.isFinite(values.duration_months) &&
+        values.duration_months > 0
+            ? values.duration_months + " month(s)"
+            : "Not selected";
+
+
+    const ready =
+        Boolean(values.loan_type) &&
+        Number.isFinite(values.amount) &&
+        values.amount > 0 &&
+        Number.isFinite(values.duration_months) &&
+        values.duration_months > 0;
+
+
+    $("debugLoanReady").textContent =
+        ready
+            ? "YES — Ready"
+            : "NO — Complete fields";
+
+
+    return ready;
+
+}
+
+
+/* =========================================================
+   SUBMIT LOAN APPLICATION
+========================================================= */
+
+async function submitLoanApplication() {
+
+    /*
+       STEP 1:
+       Read the values directly from the three
+       controls.
+    */
+
+    const values =
+        readLoanApplicationValues();
+
+
+    /*
+       STEP 2:
+       Update visible diagnostic information.
+    */
+
+    updateLoanValidationDisplay();
+
+
+    /*
+       STEP 3:
+       Validate manually.
+    */
+
+    if (!values.loan_type) {
+
+        showMessage(
+            "loanApplicationMessage",
+            "Please select a loan type.",
+            "error"
+        );
+
+        $("cdLoanType").focus();
+
+        return;
 
     }
 
 
-    /* =====================================================
-       SUBMIT LOAN APPLICATION
-       IMPORTANT FIX
-    ====================================================== */
+    if (
+        !Number.isFinite(values.amount) ||
+        values.amount <= 0
+    ) {
 
-    async function submitLoanApplication(event) {
-
-      event.preventDefault();
-
-
-      const loanTypeElement =
-        $("loanType");
-
-      const amountElement =
-        $("loanAmount");
-
-      const durationElement =
-        $("loanDuration");
-
-
-      /*
-        Read the SELECT values directly.
-
-        This fixes the problem where a selected option
-        was visually selected but JavaScript was checking
-        the wrong field/value.
-      */
-
-      const loan_type =
-        String(
-          loanTypeElement.value || ""
-        ).trim();
-
-
-      const amount =
-        Number(
-          amountElement.value
+        showMessage(
+            "loanApplicationMessage",
+            "Please enter a valid loan amount.",
+            "error"
         );
 
-
-      const duration_months =
-        Number(
-          durationElement.value
-        );
-
-
-      /* =========================
-         VALIDATION
-      ========================== */
-
-      if (!loan_type) {
-
-        showFormResult(
-          "loanFormMessage",
-          "Please select a loan type.",
-          "error"
-        );
-
-        loanTypeElement.focus();
+        $("cdLoanAmount").focus();
 
         return;
-      }
+
+    }
 
 
-      if (
-        !Number.isFinite(amount) ||
-        amount <= 0
-      ) {
+    if (
+        !Number.isFinite(values.duration_months) ||
+        values.duration_months <= 0
+    ) {
 
-        showFormResult(
-          "loanFormMessage",
-          "Please enter a valid loan amount.",
-          "error"
+        showMessage(
+            "loanApplicationMessage",
+            "Please select a loan duration.",
+            "error"
         );
 
-        amountElement.focus();
+        $("cdLoanDuration").focus();
 
         return;
-      }
+
+    }
 
 
-      if (
-        !Number.isInteger(duration_months) ||
-        duration_months <= 0
-      ) {
+    /*
+       STEP 4:
+       Build EXACTLY the field names expected
+       by the Railway backend.
+    */
 
-        showFormResult(
-          "loanFormMessage",
-          "Please select a valid loan duration.",
-          "error"
+    const payload = {
+
+        loan_type:
+            values.loan_type,
+
+        amount:
+            values.amount,
+
+        duration_months:
+            values.duration_months
+
+    };
+
+
+    /*
+       STEP 5:
+       Display exactly what is being sent.
+    */
+
+    $("loanPayloadBox")
+        .classList
+        .remove("hidden");
+
+    $("loanPayloadText").textContent =
+        JSON.stringify(
+            payload,
+            null,
+            2
         );
 
-        durationElement.focus();
 
-        return;
-      }
+    /*
+       STEP 6:
+       Send to Railway.
+    */
 
+    const button =
+        $("submitLoanButton");
 
-      /*
-        THIS IS EXACTLY WHAT YOUR RAILWAY BACKEND EXPECTS:
+    button.disabled = true;
 
-        {
-          loan_type,
-          amount,
-          duration_months
-        }
-      */
-
-      const payload = {
-        loan_type: loan_type,
-        amount: amount,
-        duration_months: duration_months
-      };
-
-
-      console.log(
-        "Sending loan application:",
-        payload
-      );
-
-
-      const submitButton =
-        $("loanSubmitBtn");
-
-
-      submitButton.disabled = true;
-
-      submitButton.textContent =
+    button.textContent =
         "Submitting...";
 
 
-      showFormResult(
-        "loanFormMessage",
-        "Sending your application to the backend...",
-        "success"
-      );
+    showMessage(
+        "loanApplicationMessage",
+        "Sending your application to JAY C O B Financial Services...",
+        "info"
+    );
 
 
-      try {
+    try {
 
-        const result =
-          await apiRequest(
-            "/loans/apply",
-            {
-              method: "POST",
-
-              body: JSON.stringify(
-                payload
-              )
-            }
-          );
+        const data =
+            await apiRequest(
+                "/loans/apply",
+                {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                }
+            );
 
 
-        if (!result.success) {
+        /*
+           SUCCESS
+        */
 
-          throw new Error(
-            result.message ||
-            "Loan application failed."
-          );
-
-        }
-
-
-        $("loanForm").reset();
-
-
-        showFormResult(
-          "loanFormMessage",
-          "Loan application submitted successfully. Your application is now pending administrator review.",
-          "success"
-        );
-
-
-        showToast(
-          "Loan application submitted successfully.",
-          "success"
+        showMessage(
+            "loanApplicationMessage",
+            data.message ||
+            "Loan application submitted successfully.",
+            "success"
         );
 
 
         /*
-          Immediately retrieve the application
-          from Railway so the customer can see it.
+           Clear fields.
+        */
+
+        $("cdLoanType").value = "";
+
+        $("cdLoanAmount").value = "";
+
+        $("cdLoanDuration").value = "";
+
+
+        updateLoanValidationDisplay();
+
+
+        /*
+           Refresh applications.
         */
 
         await loadApplications();
 
 
         /*
-          Go to My Applications automatically.
+           Keep the user on the application page
+           so they can see the success message.
         */
 
-        showPage("applications");
+    } catch (error) {
 
-
-      } catch (error) {
-
-        console.error(
-          "Loan submission error:",
-          error
+        showMessage(
+            "loanApplicationMessage",
+            error.message ||
+            "Unable to submit loan application.",
+            "error"
         );
 
+    } finally {
 
-        showFormResult(
-          "loanFormMessage",
-          error.message ||
-          "Unable to submit loan application.",
-          "error"
-        );
+        button.disabled = false;
 
-
-        showToast(
-          error.message ||
-          "Loan submission failed.",
-          "error"
-        );
-
-
-      } finally {
-
-        submitButton.disabled = false;
-
-        submitButton.textContent =
-          "Submit Loan Application";
-
-      }
+        button.textContent =
+            "Submit Loan Application";
 
     }
 
+}
 
-    /* =====================================================
-       LOAD PAYMENTS
-    ====================================================== */
 
-    async function loadPayments() {
+/* =========================================================
+   PAYMENTS
+========================================================= */
 
-      try {
+async function loadPayments() {
 
-        const result =
-          await apiRequest(
-            "/payments/my-payments"
-          );
+    try {
 
+        const data =
+            await apiRequest(
+                "/payments/my-payments"
+            );
 
         payments =
-          Array.isArray(result.payments)
-            ? result.payments
-            : [];
-
+            data.payments || [];
 
         renderPayments();
 
+        updateStatistics();
 
-      } catch (error) {
+    } catch (error) {
 
-        $("paymentsBody").innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">⚠️</div>
-
-            <strong>
-              Unable to load payments
-            </strong>
-
-            <p style="margin-top:7px;">
-              ${escapeHTML(error.message)}
-            </p>
-
-          </div>
-
-        `;
-
-      }
+        $("paymentsTable").innerHTML =
+            `<tr>
+                <td colspan="4">
+                    ${escapeHtml(error.message)}
+                </td>
+            </tr>`;
 
     }
 
-
-    /* =====================================================
-       RENDER PAYMENTS
-    ====================================================== */
-
-    function renderPayments() {
-
-      const container =
-        $("paymentsBody");
+}
 
 
-      if (!payments.length) {
+/* =========================================================
+   RENDER PAYMENTS
+========================================================= */
 
-        container.innerHTML = `
+function renderPayments() {
 
-          <div class="empty-state">
+    const table =
+        $("paymentsTable");
 
-            <div class="empty-icon">💳</div>
+    if (!payments.length) {
 
-            <strong>
-              No payment records found
-            </strong>
-
-            <p style="margin-top:8px;">
-              There are currently no payment records
-              available for your account.
-            </p>
-
-          </div>
-
-        `;
+        table.innerHTML =
+            `<tr>
+                <td colspan="4">
+                    No payment records available.
+                </td>
+            </tr>`;
 
         return;
-      }
-
-
-      container.innerHTML = `
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>ID</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Method</th>
-                <th>Date</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              ${
-                payments.map(payment => {
-
-                  return `
-
-                    <tr>
-
-                      <td>
-                        ${escapeHTML(
-                          payment.id || "-"
-                        )}
-                      </td>
-
-                      <td>
-                        ${escapeHTML(
-                          formatMoney(
-                            payment.amount
-                          )
-                        )}
-                      </td>
-
-                      <td>
-                        ${statusBadge(
-                          payment.status ||
-                          "RECORDED"
-                        )}
-                      </td>
-
-                      <td>
-                        ${escapeHTML(
-                          payment.method ||
-                          payment.payment_method ||
-                          "-"
-                        )}
-                      </td>
-
-                      <td>
-                        ${escapeHTML(
-                          formatDate(
-                            payment.created_at ||
-                            payment.date
-                          )
-                        )}
-                      </td>
-
-                    </tr>
-
-                  `;
-
-                }).join("")
-              }
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      `;
 
     }
 
+    table.innerHTML =
+        payments
+            .map(payment => {
 
-    /* =====================================================
-       SUBMIT SUPPORT
-    ====================================================== */
+                return `
+                <tr>
 
-    async function submitSupport(event) {
+                    <td>
+                        ${formatDate(payment.created_at)}
+                    </td>
 
-      event.preventDefault();
+                    <td>
+                        MWK ${formatMoney(payment.amount)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(payment.status || "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            payment.reference || "-"
+                        )}
+                    </td>
+
+                </tr>
+                `;
+
+            })
+            .join("");
+
+}
 
 
-      const subject =
+/* =========================================================
+   SUPPORT
+========================================================= */
+
+async function sendSupportMessage() {
+
+    const subject =
         $("supportSubject")
-          .value
-          .trim();
+            .value
+            .trim();
 
+    const message =
+        $("supportText")
+            .value
+            .trim();
 
-      const message =
-        $("supportMessage")
-          .value
-          .trim();
+    if (!subject) {
 
-
-      if (!subject || !message) {
-
-        showFormResult(
-          "supportFormMessage",
-          "Subject and message are required.",
-          "error"
+        showMessage(
+            "supportMessage",
+            "Please enter a subject.",
+            "error"
         );
 
         return;
-      }
-
-
-      try {
-
-        const result =
-          await apiRequest(
-            "/support/send",
-            {
-              method: "POST",
-
-              body: JSON.stringify({
-                subject,
-                message
-              })
-            }
-          );
-
-
-        if (!result.success) {
-
-          throw new Error(
-            result.message ||
-            "Unable to send support message."
-          );
-
-        }
-
-
-        $("supportForm").reset();
-
-
-        showFormResult(
-          "supportFormMessage",
-          "Your support message has been sent successfully.",
-          "success"
-        );
-
-
-        showToast(
-          "Support message sent.",
-          "success"
-        );
-
-
-        await loadSupportMessages();
-
-
-      } catch (error) {
-
-        showFormResult(
-          "supportFormMessage",
-          error.message,
-          "error"
-        );
-
-      }
 
     }
 
+    if (!message) {
 
-    /* =====================================================
-       LOAD SUPPORT
-    ====================================================== */
-
-    async function loadSupportMessages() {
-
-      try {
-
-        const result =
-          await apiRequest(
-            "/support/my-messages"
-          );
-
-
-        supportMessages =
-          Array.isArray(result.messages)
-            ? result.messages
-            : [];
-
-
-        renderSupportMessages();
-
-
-      } catch (error) {
-
-        $("supportMessagesBody").innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">⚠️</div>
-
-            <strong>
-              Unable to load support messages
-            </strong>
-
-            <p style="margin-top:7px;">
-              ${escapeHTML(error.message)}
-            </p>
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       RENDER SUPPORT
-    ====================================================== */
-
-    function renderSupportMessages() {
-
-      const container =
-        $("supportMessagesBody");
-
-
-      if (!supportMessages.length) {
-
-        container.innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">💬</div>
-
-            <strong>
-              No support messages
-            </strong>
-
-            <p style="margin-top:7px;">
-              Your support conversations will appear here.
-            </p>
-
-          </div>
-
-        `;
+        showMessage(
+            "supportMessage",
+            "Please enter your message.",
+            "error"
+        );
 
         return;
-      }
-
-
-      container.innerHTML = `
-
-        <div class="application-list">
-
-          ${
-            supportMessages.map(item => {
-
-              return `
-
-                <div class="application-card">
-
-                  <div class="application-top">
-
-                    <strong>
-                      ${escapeHTML(
-                        item.subject ||
-                        "Support Message"
-                      )}
-                    </strong>
-
-                    ${statusBadge(
-                      item.status ||
-                      "SENT"
-                    )}
-
-                  </div>
-
-                  <p style="line-height:1.6;">
-                    ${escapeHTML(
-                      item.message || ""
-                    )}
-                  </p>
-
-                  <div style="
-                    margin-top:10px;
-                    color:#64748b;
-                    font-size:12px;
-                  ">
-                    ${escapeHTML(
-                      formatDate(
-                        item.created_at
-                      )
-                    )}
-                  </div>
-
-                </div>
-
-              `;
-
-            }).join("")
-          }
-
-        </div>
-
-      `;
 
     }
 
+    $("sendSupportButton").disabled =
+        true;
 
-    /* =====================================================
-       BACKEND HEALTH
-    ====================================================== */
+    $("sendSupportButton").textContent =
+        "Sending...";
 
-    async function checkBackendHealth() {
 
-      try {
-
-        const response =
-          await fetch(
-            API_URL + "/health"
-          );
-
+    try {
 
         const data =
-          await response.json();
+            await apiRequest(
+                "/support/send",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        subject,
+                        message
+                    })
+                }
+            );
 
 
-        if (
-          response.ok &&
-          data.success
-        ) {
-
-          $("backendDot")
-            .className =
-            "status-dot online";
-
-          $("backendStatusText")
-            .textContent =
-            "Backend Online";
-
-          $("systemBackend")
-            .textContent =
-            "Railway backend is online.";
-
-          return true;
-
-        }
-
-        throw new Error(
-          "Backend health check failed."
+        showMessage(
+            "supportMessage",
+            data.message ||
+            "Message sent successfully.",
+            "success"
         );
 
 
-      } catch (error) {
+        $("supportSubject").value =
+            "";
 
-        $("backendDot")
-          .className =
-          "status-dot offline";
+        $("supportText").value =
+            "";
 
-        $("backendStatusText")
-          .textContent =
-          "Backend Offline";
-
-        $("systemBackend")
-          .textContent =
-          "Unable to connect to Railway.";
-
-        return false;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       LOAD DASHBOARD DATA
-    ====================================================== */
-
-    async function loadDashboardData() {
-
-      await Promise.allSettled([
-
-        loadProfile(),
-
-        loadApplications(),
-
-        loadPayments(),
-
-        loadSupportMessages(),
-
-        checkBackendHealth()
-
-      ]);
-
-    }
-
-
-    /* =====================================================
-       PAGE NAVIGATION
-    ====================================================== */
-
-    function showPage(pageName) {
-
-      const pages =
-        document.querySelectorAll(".page");
-
-
-      pages.forEach(page => {
-
-        page.classList.remove("active");
-
-      });
-
-
-      const selected =
-        $("page-" + pageName);
-
-
-      if (selected) {
-
-        selected.classList.add("active");
-
-      }
-
-
-      const navItems =
-        document.querySelectorAll(
-          ".nav-item[data-page]"
-        );
-
-
-      navItems.forEach(item => {
-
-        item.classList.toggle(
-          "active",
-          item.dataset.page === pageName
-        );
-
-      });
-
-
-      const titles = {
-
-        overview:
-          "Customer Dashboard",
-
-        apply:
-          "Apply for Loan",
-
-        applications:
-          "My Applications",
-
-        payments:
-          "My Payments",
-
-        support:
-          "Customer Support",
-
-        profile:
-          "My Profile"
-
-      };
-
-
-      $("pageTitle").textContent =
-        titles[pageName] ||
-        "Customer Dashboard";
-
-
-      if (pageName === "applications") {
-
-        loadApplications();
-
-      }
-
-      if (pageName === "payments") {
-
-        loadPayments();
-
-      }
-
-      if (pageName === "support") {
 
         loadSupportMessages();
 
-      }
+    } catch (error) {
 
-      if (pageName === "profile") {
+        showMessage(
+            "supportMessage",
+            error.message,
+            "error"
+        );
 
-        loadProfile();
+    } finally {
 
-      }
+        $("sendSupportButton").disabled =
+            false;
 
-
-      $("sidebar").classList.remove("open");
+        $("sendSupportButton").textContent =
+            "Send Message";
 
     }
 
-
-    /* =====================================================
-       AUTO REFRESH
-    ====================================================== */
-
-    function startAutoRefresh() {
-
-      stopAutoRefresh();
+}
 
 
-      autoRefreshTimer =
-        setInterval(
-          async () => {
+/* =========================================================
+   LOAD SUPPORT MESSAGES
+========================================================= */
 
-            if (!customerToken) {
-              return;
+async function loadSupportMessages() {
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/support/my-messages"
+            );
+
+        const messages =
+            data.messages || [];
+
+        const container =
+            $("supportMessagesContainer");
+
+
+        if (!messages.length) {
+
+            container.innerHTML =
+                `<div class="empty">
+                    No support messages yet.
+                </div>`;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            messages
+                .map(item => {
+
+                    return `
+                    <div
+                        style="
+                            border-bottom:1px solid #e5e8ed;
+                            padding:12px 0;
+                        "
+                    >
+
+                        <strong>
+                            ${escapeHtml(item.subject)}
+                        </strong>
+
+                        <p
+                            style="
+                                margin-top:7px;
+                                line-height:1.5;
+                            "
+                        >
+                            ${escapeHtml(item.message)}
+                        </p>
+
+                        <small
+                            style="color:#777;"
+                        >
+                            ${formatDate(item.created_at)}
+                        </small>
+
+                    </div>
+                    `;
+
+                })
+                .join("");
+
+    } catch (error) {
+
+        $("supportMessagesContainer").innerHTML =
+            `<div class="message error">
+                ${escapeHtml(error.message)}
+            </div>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
+
+function formatMoney(value) {
+
+    const number =
+        Number(value);
+
+    if (!Number.isFinite(number)) {
+
+        return "0";
+
+    }
+
+    return number.toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+
+        return "-";
+
+    }
+
+    try {
+
+        return new Date(value)
+            .toLocaleString();
+
+    } catch {
+
+        return String(value);
+
+    }
+
+}
+
+
+/* =========================================================
+   EVENT LISTENERS
+========================================================= */
+
+
+/*
+   Authentication
+*/
+
+$("showRegisterButton")
+    .addEventListener(
+        "click",
+        showRegister
+    );
+
+
+$("showLoginButton")
+    .addEventListener(
+        "click",
+        showLogin
+    );
+
+
+$("loginButton")
+    .addEventListener(
+        "click",
+        loginCustomer
+    );
+
+
+$("registerButton")
+    .addEventListener(
+        "click",
+        registerCustomer
+    );
+
+
+/*
+   Login with Enter key.
+*/
+
+$("loginPassword")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                loginCustomer();
+
             }
 
-            await loadApplications();
-
-            await checkBackendHealth();
-
-          },
-          30000
-        );
-
-    }
+        }
+    );
 
 
-    function stopAutoRefresh() {
+/*
+   Navigation
+*/
 
-      if (autoRefreshTimer) {
+document
+    .querySelectorAll(".nav-btn[data-page]")
+    .forEach(button => {
 
-        clearInterval(
-          autoRefreshTimer
-        );
-
-        autoRefreshTimer = null;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       PASSWORD TOGGLE
-    ====================================================== */
-
-    function setupPasswordToggles() {
-
-      document
-        .querySelectorAll(
-          ".password-toggle"
-        )
-        .forEach(button => {
-
-          button.addEventListener(
+        button.addEventListener(
             "click",
             () => {
 
-              const target =
-                $(button.dataset.target);
-
-              if (
-                target.type === "password"
-              ) {
-
-                target.type = "text";
-
-                button.textContent =
-                  "🙈";
-
-              } else {
-
-                target.type = "password";
-
-                button.textContent =
-                  "👁️";
-
-              }
+                openPage(
+                    button.dataset.page,
+                    button
+                );
 
             }
-          );
-
-        });
-
-    }
-
-
-    /* =====================================================
-       INITIALIZE
-    ====================================================== */
-
-    async function initialize() {
-
-      setupPasswordToggles();
-
-
-      if (customerToken) {
-
-        showApp();
-
-        showPage("overview");
-
-        await loadDashboardData();
-
-      } else {
-
-        showLogin();
-
-      }
-
-    }
-
-
-    /* =====================================================
-       EVENT LISTENERS
-    ====================================================== */
-
-    $("loginForm")
-      .addEventListener(
-        "submit",
-        loginCustomer
-      );
-
-
-    $("registerForm")
-      .addEventListener(
-        "submit",
-        registerCustomer
-      );
-
-
-    $("loanForm")
-      .addEventListener(
-        "submit",
-        submitLoanApplication
-      );
-
-
-    $("supportForm")
-      .addEventListener(
-        "submit",
-        submitSupport
-      );
-
-
-    $("showRegisterBtn")
-      .addEventListener(
-        "click",
-        showRegister
-      );
-
-
-    $("showLoginBtn")
-      .addEventListener(
-        "click",
-        showLogin
-      );
-
-
-    $("logoutBtn")
-      .addEventListener(
-        "click",
-        logoutCustomer
-      );
-
-
-    $("mobileMenuBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          $("sidebar")
-            .classList.toggle("open");
-
-        }
-      );
-
-
-    document
-      .querySelectorAll(
-        ".nav-item[data-page]"
-      )
-      .forEach(item => {
-
-        item.addEventListener(
-          "click",
-          () => {
-
-            showPage(
-              item.dataset.page
-            );
-
-          }
         );
 
-      });
+    });
 
 
-    $("refreshOverviewBtn")
-      .addEventListener(
+/*
+   Logout
+*/
+
+$("logoutButton")
+    .addEventListener(
         "click",
-        async () => {
-
-          showLoading(
-            "Refreshing dashboard..."
-          );
-
-          await loadDashboardData();
-
-          hideLoading();
-
-          showToast(
-            "Dashboard refreshed.",
-            "success"
-          );
-
-        }
-      );
+        () => logout(true)
+    );
 
 
-    $("refreshApplicationsBtn")
-      .addEventListener(
-        "click",
-        async () => {
+/*
+   Mobile menu
+*/
 
-          showLoading(
-            "Refreshing applications..."
-          );
-
-          await loadApplications();
-
-          hideLoading();
-
-        }
-      );
-
-
-    $("refreshPaymentsBtn")
-      .addEventListener(
-        "click",
-        async () => {
-
-          showLoading(
-            "Refreshing payments..."
-          );
-
-          await loadPayments();
-
-          hideLoading();
-
-        }
-      );
-
-
-    $("refreshSupportBtn")
-      .addEventListener(
-        "click",
-        async () => {
-
-          showLoading(
-            "Refreshing support messages..."
-          );
-
-          await loadSupportMessages();
-
-          hideLoading();
-
-        }
-      );
-
-
-    $("refreshProfileBtn")
-      .addEventListener(
-        "click",
-        async () => {
-
-          showLoading(
-            "Refreshing profile..."
-          );
-
-          await loadProfile();
-
-          hideLoading();
-
-        }
-      );
-
-
-    $("closeLoanModal")
-      .addEventListener(
+$("menuButton")
+    .addEventListener(
         "click",
         () => {
 
-          $("loanModal")
-            .classList.remove("show");
+            $("sidebar")
+                .classList
+                .toggle("open");
 
         }
-      );
+    );
 
 
-    $("loanModal")
-      .addEventListener(
+/*
+   ========================================================
+   CRITICAL:
+   Loan controls update validation display
+   whenever the user changes them.
+   ========================================================
+*/
+
+$("cdLoanType")
+    .addEventListener(
+        "change",
+        updateLoanValidationDisplay
+    );
+
+
+$("cdLoanAmount")
+    .addEventListener(
+        "input",
+        updateLoanValidationDisplay
+    );
+
+
+$("cdLoanDuration")
+    .addEventListener(
+        "change",
+        updateLoanValidationDisplay
+    );
+
+
+/*
+   CRITICAL:
+   There is ONLY ONE loan submission handler.
+*/
+
+$("submitLoanButton")
+    .addEventListener(
         "click",
-        event => {
-
-          if (
-            event.target ===
-            $("loanModal")
-          ) {
-
-            $("loanModal")
-              .classList.remove("show");
-
-          }
-
-        }
-      );
+        submitLoanApplication
+    );
 
 
-    /* =====================================================
-       START CUSTOMER SESSION CHECK
-    ====================================================== */
+/*
+   Support
+*/
 
-    initialize();
+$("sendSupportButton")
+    .addEventListener(
+        "click",
+        sendSupportMessage
+    );
 
-  </script>
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+updateLoanValidationDisplay();
+
+
+/*
+   If a valid customer session already exists,
+   open dashboard automatically.
+*/
+
+if (customerToken && customer) {
+
+    showApplication();
+
+} else {
+
+    showLogin();
+
+}
+
+
+/*
+   Periodically check backend.
+*/
+
+setInterval(
+    checkHealth,
+    30000
+);
+
+
+/*
+   Version marker.
+*/
+
+console.log(
+    "JAY C O B Customer Dashboard v3.0 loaded."
+);
+
+</script>
+
+
+<footer
+    style="
+        position:fixed;
+        bottom:0;
+        right:0;
+        background:rgba(7,26,61,.9);
+        color:white;
+        padding:5px 10px;
+        font-size:10px;
+        z-index:9999;
+    "
+>
+    Customer Dashboard v3.0
+</footer>
 
 </body>
 </html>
