@@ -2833,105 +2833,367 @@
        ========================================================= */
 
     document
-      .getElementById(
-        "personalLoanForm"
-      )
-      .addEventListener(
-        "submit",
-        async event => {
+  .getElementById("personalLoanForm")
+  .addEventListener(
+    "submit",
+    async event => {
 
-          event.preventDefault();
+      event.preventDefault();
 
-          const token =
-            getCustomerToken();
+      const token =
+        getCustomerToken();
 
-          const customer =
-            getCustomerData();
+      const customer =
+        getCustomerData();
 
+      if (!token || !customer) {
 
-          if (
-            !token ||
-            !customer
-          ) {
+        alert(
+          "Please login to your customer account before applying for a loan."
+        );
 
-            alert(
-              "Please login to your customer account before applying for a loan."
-            );
+        closeModal("personalLoanModal");
+        openModal("loginModal");
 
-            closeModal(
-              "personalLoanModal"
-            );
+        return;
+      }
 
-            openModal(
-              "loginModal"
-            );
+      const amount =
+        document
+          .getElementById("personalLoanAmount")
+          .value;
 
-            return;
-          }
+      const purpose =
+        document
+          .getElementById("personalLoanPurpose")
+          .value
+          .trim();
 
+      const duration =
+        document
+          .getElementById("personalLoanTerm")
+          .value;
 
-          /*
-            Backend endpoint will be connected
-            when the loan applications API is
-            activated.
-          */
+      if (
+        !amount ||
+        Number(amount) <= 0
+      ) {
 
-          alert(
-            "Your customer account is ready. The loan application backend is the next module being activated."
+        alert(
+          "Please enter a valid loan amount."
+        );
+
+        return;
+      }
+
+      if (!purpose) {
+
+        alert(
+          "Please enter the purpose of the loan."
+        );
+
+        return;
+      }
+
+      if (!duration) {
+
+        alert(
+          "Please select a repayment period."
+        );
+
+        return;
+      }
+
+      showLoading(
+        "Submitting your personal loan application..."
+      );
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/loans/apply",
+            {
+              method: "POST",
+
+              body:
+                JSON.stringify({
+
+                  customer_id:
+                    customer.id,
+
+                  loan_type:
+                    "personal",
+
+                  amount:
+                    Number(amount),
+
+                  duration_months:
+                    Number(duration),
+
+                  purpose,
+
+                  applicant_name:
+                    customer.full_name,
+
+                  phone:
+                    customer.phone,
+
+                  email:
+                    customer.email,
+
+                  residential_address:
+                    customer.residential_address ||
+                    customer.address ||
+                    "",
+
+                  employment_status:
+                    customer.employment_status ||
+                    "",
+
+                  monthly_income:
+                    customer.monthly_income ||
+                    null,
+
+                  interest_rate:
+                    null
+
+                })
+            }
+          );
+
+        if (!result.success) {
+
+          throw new Error(
+            result.message ||
+            "Loan application failed."
           );
 
         }
-      );
+
+        alert(
+          "Personal loan application submitted successfully."
+        );
+
+        document
+          .getElementById(
+            "personalLoanForm"
+          )
+          .reset();
+
+        closeModal(
+          "personalLoanModal"
+        );
+
+      } catch (error) {
+
+        alert(
+          error.message ||
+          "Unable to submit loan application."
+        );
+
+      } finally {
+
+        hideLoading();
+
+      }
+
+    }
+  );
+            
 
 
     /* =========================================================
        BUSINESS LOAN APPLICATION
        ========================================================= */
 
-    document
-      .getElementById(
-        "businessLoanForm"
-      )
-      .addEventListener(
-        "submit",
-        async event => {
+  document
+  .getElementById("businessLoanForm")
+  .addEventListener(
+    "submit",
+    async event => {
 
-          event.preventDefault();
+      event.preventDefault();
 
-          const token =
-            getCustomerToken();
+      const token =
+        getCustomerToken();
 
-          const customer =
-            getCustomerData();
+      const customer =
+        getCustomerData();
 
+      if (!token || !customer) {
 
-          if (
-            !token ||
-            !customer
-          ) {
+        alert(
+          "Please login to your customer account before applying for a loan."
+        );
 
-            alert(
-              "Please login to your customer account before applying for a loan."
-            );
+        closeModal("businessLoanModal");
+        openModal("loginModal");
 
-            closeModal(
-              "businessLoanModal"
-            );
+        return;
+      }
 
-            openModal(
-              "loginModal"
-            );
+      const businessName =
+        document
+          .getElementById("businessName")
+          .value
+          .trim();
 
-            return;
-          }
+      const amount =
+        document
+          .getElementById("businessLoanAmount")
+          .value;
 
+      const purpose =
+        document
+          .getElementById("businessLoanPurpose")
+          .value
+          .trim();
 
-          alert(
-            "Your customer account is ready. The business loan application backend is the next module being activated."
+      const duration =
+        document
+          .getElementById("businessLoanTerm")
+          .value;
+
+      if (!businessName) {
+
+        alert(
+          "Please enter your business name."
+        );
+
+        return;
+      }
+
+      if (
+        !amount ||
+        Number(amount) <= 0
+      ) {
+
+        alert(
+          "Please enter a valid loan amount."
+        );
+
+        return;
+      }
+
+      if (!purpose) {
+
+        alert(
+          "Please enter the business loan purpose."
+        );
+
+        return;
+      }
+
+      if (!duration) {
+
+        alert(
+          "Please select a repayment period."
+        );
+
+        return;
+      }
+
+      showLoading(
+        "Submitting your business loan application..."
+      );
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/loans/apply",
+            {
+              method: "POST",
+
+              body:
+                JSON.stringify({
+
+                  customer_id:
+                    customer.id,
+
+                  loan_type:
+                    "business",
+
+                  amount:
+                    Number(amount),
+
+                  duration_months:
+                    Number(duration),
+
+                  purpose,
+
+                  applicant_name:
+                    customer.full_name,
+
+                  phone:
+                    customer.phone,
+
+                  email:
+                    customer.email,
+
+                  residential_address:
+                    customer.residential_address ||
+                    customer.address ||
+                    "",
+
+                  business_name:
+                    businessName,
+
+                  business_address:
+                    "",
+
+                  business_type:
+                    "",
+
+                  monthly_business_income:
+                    null,
+
+                  interest_rate:
+                    null
+
+                })
+            }
+          );
+
+        if (!result.success) {
+
+          throw new Error(
+            result.message ||
+            "Business loan application failed."
           );
 
         }
-      );
+
+        alert(
+          "Business loan application submitted successfully."
+        );
+
+        document
+          .getElementById(
+            "businessLoanForm"
+          )
+          .reset();
+
+        closeModal(
+          "businessLoanModal"
+        );
+
+      } catch (error) {
+
+        alert(
+          error.message ||
+          "Unable to submit business loan application."
+        );
+
+      } finally {
+
+        hideLoading();
+
+      }
+
+    }
+  );
 
 
     /* =========================================================
