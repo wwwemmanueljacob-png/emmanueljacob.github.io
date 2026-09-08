@@ -21,10 +21,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
     body {
       min-height: 100vh;
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background:
         radial-gradient(
           circle at top,
@@ -32,7 +29,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
           #0f172a 40%,
           #020617 100%
         );
-      color: #ffffff;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -91,8 +88,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
     }
 
     .login-card {
-      background:
-        rgba(15, 23, 42, 0.94);
+      background: rgba(15, 23, 42, 0.94);
 
       border: 1px solid
         rgba(250, 204, 21, 0.25);
@@ -162,7 +158,8 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
       position: relative;
     }
 
-    input {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
 
       padding: 14px 15px;
@@ -173,7 +170,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
       background: #020617;
 
-      color: #ffffff;
+      color: #fff;
 
       outline: none;
 
@@ -184,7 +181,8 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
         box-shadow 0.2s;
     }
 
-    input:focus {
+    input[type="text"]:focus,
+    input[type="password"]:focus {
       border-color: #facc15;
 
       box-shadow:
@@ -397,6 +395,8 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
       color: #64748b;
 
       font-size: 11px;
+
+      line-height: 1.6;
     }
 
     @media (max-width: 480px) {
@@ -528,6 +528,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
       🔐 Sign In
     </button>
 
+
     <div
       id="loginMessage"
       class="message"
@@ -537,10 +538,9 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
 
   <div class="security-info">
-    🛡️ Your administrator session will be
-    protected by authentication, login-attempt
-    monitoring, security events and session
-    controls.
+    🛡️ Administrator access is protected by
+    authentication, login-attempt monitoring,
+    security events and session controls.
   </div>
 
 </section>
@@ -564,7 +564,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
   /* =====================================================
      JAY C O B ADMIN PORTAL
-     FRONTEND CONFIGURATION
+     API CONFIGURATION
   ====================================================== */
 
   const API_BASE_URL =
@@ -598,7 +598,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
 
   /* =====================================================
-     PASSWORD VISIBILITY
+     PASSWORD SHOW / HIDE
   ====================================================== */
 
   passwordToggle.addEventListener(
@@ -629,7 +629,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
 
   /* =====================================================
-     MESSAGE HELPER
+     MESSAGE FUNCTIONS
   ====================================================== */
 
   function showMessage(
@@ -657,9 +657,6 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
   /* =====================================================
      ADMIN LOGIN
-     
-     The backend endpoint will be connected
-     in the next security step.
   ====================================================== */
 
   form.addEventListener(
@@ -669,6 +666,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
       event.preventDefault();
 
       clearMessage();
+
 
       const identifier =
         identifierInput.value.trim();
@@ -708,15 +706,6 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
 
       try {
-
-        /*
-          ADMIN AUTHENTICATION ENDPOINT
-
-          This endpoint will be created in:
-          Railway Backend
-
-          /api/admin/login
-        */
 
         const response =
           await fetch(
@@ -774,9 +763,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
         }
 
 
-        /*
-          SAVE ADMIN SESSION
-        */
+        /* SAVE ADMIN SESSION */
 
         localStorage.setItem(
           "jaycob_admin_token",
@@ -799,10 +786,6 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
           "success"
         );
 
-
-        /*
-          REDIRECT TO ADMIN DASHBOARD
-        */
 
         setTimeout(
           () => {
@@ -844,7 +827,7 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
 
   /* =====================================================
-     FORGOT ADMIN PASSWORD
+     FORGOT PASSWORD
   ====================================================== */
 
   forgotPassword.addEventListener(
@@ -857,37 +840,6 @@ content="JAY C O B FINANCIAL SERVICES secure administration portal"
 
     }
   );
-
-
-  /* =====================================================
-     EXISTING ADMIN SESSION
-     
-     If an admin is already logged in,
-     prevent unnecessary login.
-  ====================================================== */
-
-  const existingAdminToken =
-    localStorage.getItem(
-      "jaycob_admin_token"
-    );
-
-
-  if (existingAdminToken) {
-
-    const goToDashboard =
-      confirm(
-        "An administrator session already exists. Open the Admin Dashboard?"
-      );
-
-
-    if (goToDashboard) {
-
-      window.location.href =
-        "admin-dashboard.html";
-
-    }
-
-  }
 
 </script></body>
 </html>
