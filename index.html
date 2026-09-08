@@ -1,1992 +1,4226 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>JAY C O B FINANCIAL SERVICES</title>
-<meta name="description" content="JAY C O B FINANCIAL SERVICES - Loans, savings, transfers and customer financial services.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#111827;line-height:1.6}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-.container{width:min(1180px,92%);margin:auto}
+  <title>JAY C O B FINANCIAL SERVICES</title>
 
-header{position:sticky;top:0;z-index:1000;background:#07111f;color:white;box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.navbar{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:1px}
-.brand-logo{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#facc15,#f59e0b);color:#07111f;font-weight:900}
-.brand-text{line-height:1.1}
-.brand-text strong{display:block;color:#facc15;font-size:15px}
-.brand-text span{display:block;font-size:11px;color:#d1d5db;margin-top:3px}
-.nav-links{display:flex;align-items:center;gap:22px}
-.nav-links a{color:#e5e7eb;font-size:14px;font-weight:600}
-.nav-links a:hover{color:#facc15}
-.nav-actions{display:flex;align-items:center;gap:8px}
-.btn{border:none;border-radius:10px;padding:11px 17px;font-weight:700;transition:.2s}
-.btn:hover{transform:translateY(-1px)}
-.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.btn-primary{background:#facc15;color:#111827}
-.btn-dark{background:#111827;color:white}
-.btn-outline{background:transparent;color:white;border:1px solid #4b5563}
-.btn-danger{background:#dc2626;color:white}
-.btn-success{background:#16a34a;color:white}
-.admin-btn{border:1px solid #facc15!important;color:#facc15!important;background:#111827!important}
-.menu-btn{display:none;background:transparent;border:none;color:white;font-size:26px}
+  <meta
+    name="description"
+    content="JAY C O B FINANCIAL SERVICES - Loans, savings, transfers and customer financial services."
+  >
 
-.hero{
-background:radial-gradient(circle at top right,rgba(250,204,21,.15),transparent 30%),linear-gradient(135deg,#07111f,#0f2745);
-color:white;padding:90px 0 85px
-}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:50px;align-items:center}
-.hero h1{font-size:clamp(38px,6vw,68px);line-height:1.02;margin-bottom:22px}
-.hero h1 span{color:#facc15}
-.hero p{color:#d1d5db;max-width:680px;font-size:18px;margin-bottom:30px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
-.hero-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:30px;backdrop-filter:blur(12px)}
-.hero-card h3{color:#facc15;margin-bottom:15px}
-.hero-card-item{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1)}
-.hero-card-item:last-child{border-bottom:none}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-section{padding:75px 0}
-.section-title{text-align:center;margin-bottom:45px}
-.section-title h2{font-size:clamp(28px,4vw,42px);margin-bottom:10px}
-.section-title p{color:#6b7280;max-width:700px;margin:auto}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.card{background:white;border-radius:18px;padding:25px;border:1px solid #e5e7eb;box-shadow:0 8px 30px rgba(15,23,42,.05)}
-.card-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:12px;background:#fef3c7;margin-bottom:17px;font-size:23px}
-.card h3{margin-bottom:8px}
-.card p{color:#6b7280;font-size:14px}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      line-height: 1.6;
+    }
 
-.loan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
-.loan-card{background:white;border-radius:22px;padding:32px;border:1px solid #e5e7eb;box-shadow:0 10px 35px rgba(15,23,42,.06)}
-.loan-card h3{font-size:25px;margin-bottom:10px}
-.loan-card p{color:#6b7280;margin-bottom:20px}
-.loan-card ul{margin:0 0 24px 20px;color:#374151}
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
 
-.calculator{background:linear-gradient(135deg,#111827,#1f2937);color:white;border-radius:25px;padding:35px;display:grid;grid-template-columns:1fr 1fr;gap:35px}
-.calculator p{color:#d1d5db}
-.calc-form{display:grid;gap:15px}
-.calc-result{margin-top:5px;padding:18px;border-radius:14px;background:rgba(255,255,255,.08)}
-.calc-result strong{color:#facc15;font-size:24px}
-.calc-result-row{display:flex;justify-content:space-between;gap:15px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.calc-result-row:last-child{border-bottom:none}
+    button {
+      cursor: pointer;
+    }
 
-.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;align-items:center}
-.feature-list{display:grid;gap:15px}
-.feature{background:white;border-radius:15px;padding:20px;border:1px solid #e5e7eb}
-.feature strong{display:block;margin-bottom:5px}
-.feature span{color:#6b7280;font-size:14px}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.support-box{background:#07111f;color:white;border-radius:25px;padding:45px;text-align:center}
-.support-box p{color:#d1d5db;margin:10px auto 25px;max-width:650px}
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
 
-footer{background:#050b14;color:white;padding:45px 0 20px}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
-footer h3,footer h4{margin-bottom:12px}
-footer p,footer a{color:#9ca3af;font-size:14px}
-footer a{display:block;margin-bottom:7px}
-footer a:hover{color:#facc15}
-.copyright{border-top:1px solid #1f2937;margin-top:30px;padding-top:20px;text-align:center;color:#6b7280;font-size:13px}
+    /* ================= HEADER ================= */
 
-.modal{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
-.modal.active{display:flex}
-.modal-box{width:min(520px,100%);background:white;border-radius:20px;padding:28px;position:relative;max-height:92vh;overflow-y:auto}
-.modal-box h2{margin-bottom:7px}
-.modal-box>p{color:#6b7280;font-size:14px;margin-bottom:20px}
-.close-btn{position:absolute;right:16px;top:14px;border:none;background:transparent;font-size:25px;color:#6b7280}
-.form-group{margin-bottom:15px}
-.form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:12px 13px;outline:none;background:white}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.12)}
-.password-wrap{position:relative}
-.password-wrap input{padding-right:48px}
-.password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:transparent;color:#6b7280;padding:5px}
-.form-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.form-note{font-size:12px;color:#6b7280;margin-top:8px}
-.switch-link{color:#b45309;font-weight:700;cursor:pointer}
-.status-message{display:none;padding:12px 14px;border-radius:10px;margin-bottom:15px;font-size:14px}
-.status-message.show{display:block}
-.status-message.error{background:#fee2e2;color:#991b1b}
-.status-message.success{background:#dcfce7;color:#166534}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #07111f;
+      color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .18);
+    }
 
-#loadingOverlay{position:fixed;inset:0;z-index:99999;display:none;place-items:center;background:rgba(3,7,18,.82);color:white}
-#loadingOverlay.active{display:grid}
-.loader-box{text-align:center}
-.spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,.2);border-top-color:#facc15;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 15px}
-@keyframes spin{to{transform:rotate(360deg)}}
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-@media(max-width:900px){
-.nav-links{display:none;position:absolute;left:0;right:0;top:72px;background:#07111f;padding:20px;flex-direction:column;align-items:stretch}
-.nav-links.active{display:flex}
-.nav-actions{display:none}
-.menu-btn{display:block}
-.hero-grid,.calculator,.two-col{grid-template-columns:1fr}
-.cards{grid-template-columns:repeat(2,1fr)}
-.footer-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-.hero{padding:65px 0}
-section{padding:55px 0}
-.cards,.loan-grid,.footer-grid,.form-row{grid-template-columns:1fr}
-.calculator,.support-box,.loan-card{padding:25px}
-.hero-actions{flex-direction:column;align-items:stretch}
-.hero-actions .btn{width:100%}
-.brand-text strong{font-size:13px}
-.brand-text span{font-size:9px}
-}
-</style>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #facc15, #f59e0b);
+      color: #07111f;
+      font-weight: 900;
+    }
+
+    .brand-text {
+      line-height: 1.1;
+    }
+
+    .brand-text strong {
+      display: block;
+      color: #facc15;
+      font-size: 15px;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 11px;
+      color: #d1d5db;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      color: #e5e7eb;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: #facc15;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 17px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: #facc15;
+      color: #111827;
+    }
+
+    .btn-dark {
+      background: #111827;
+      color: white;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid #4b5563;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-success {
+      background: #16a34a;
+      color: white;
+    }
+
+    .admin-btn {
+      border: 1px solid #facc15 !important;
+      color: #facc15 !important;
+      background: #111827 !important;
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 26px;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(250, 204, 21, .15),
+          transparent 30%
+        ),
+        linear-gradient(135deg, #07111f, #0f2745);
+
+      color: white;
+      padding: 90px 0 85px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.02;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: #facc15;
+    }
+
+    .hero p {
+      color: #d1d5db;
+      max-width: 680px;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 22px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-card h3 {
+      color: #facc15;
+      margin-bottom: 15px;
+    }
+
+    .hero-card-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .hero-card-item:last-child {
+      border-bottom: none;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #6b7280;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* ================= SERVICE CARDS ================= */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, .05);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #fef3c7;
+      margin-bottom: 17px;
+      font-size: 23px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* ================= LOANS ================= */
+
+    .loan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .loan-card {
+      background: white;
+      border-radius: 22px;
+      padding: 32px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 35px rgba(15, 23, 42, .06);
+    }
+
+    .loan-card h3 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .loan-card p {
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .loan-card ul {
+      margin: 0 0 24px 20px;
+      color: #374151;
+    }
+
+    /* ================= CALCULATOR ================= */
+
+    .calculator {
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: white;
+      border-radius: 25px;
+      padding: 35px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+    }
+
+    .calculator p {
+      color: #d1d5db;
+    }
+
+    .calc-form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .calc-result {
+      margin-top: 5px;
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .calc-result strong {
+      color: #facc15;
+      font-size: 24px;
+    }
+
+    .calc-result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .calc-result-row:last-child {
+      border-bottom: none;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .feature span {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* ================= SUPPORT ================= */
+
+    .support-box {
+      background: #07111f;
+      color: white;
+      border-radius: 25px;
+      padding: 45px;
+      text-align: center;
+    }
+
+    .support-box p {
+      color: #d1d5db;
+      margin: 10px auto 25px;
+      max-width: 650px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #050b14;
+      color: white;
+      padding: 45px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    footer h3,
+    footer h4 {
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer a {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    footer a {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    footer a:hover {
+      color: #facc15;
+    }
+
+    .copyright {
+      border-top: 1px solid #1f2937;
+      margin-top: 30px;
+      padding-top: 20px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    /* ================= MODALS ================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(0, 0, 0, .72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(520px, 100%);
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      position: relative;
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 7px;
+    }
+
+    .modal-box > p {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 16px;
+      top: 14px;
+      border: none;
+      background: transparent;
+      font-size: 25px;
+      color: #6b7280;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 12px 13px;
+      outline: none;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, .12);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 48px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: #6b7280;
+      padding: 5px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .switch-link {
+      color: #b45309;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .status-message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .status-message.success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    /* ================= LOADING ================= */
+
+    #loadingOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      place-items: center;
+      background: rgba(3, 7, 18, .82);
+      color: white;
+    }
+
+    #loadingOverlay.active {
+      display: grid;
+    }
+
+    .loader-box {
+      text-align: center;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255, 255, 255, .2);
+      border-top-color: #facc15;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:900px) {
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 72px;
+        background: #07111f;
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero-grid,
+      .calculator,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:600px) {
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+
+      .cards,
+      .loan-grid,
+      .footer-grid,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator,
+      .support-box,
+      .loan-card {
+        padding: 25px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .brand-text strong {
+        font-size: 13px;
+      }
+
+      .brand-text span {
+        font-size: 9px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header>
-<div class="container navbar">
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
-<a href="#home" class="brand">
-<div class="brand-logo">JC</div>
-<div class="brand-text">
-<strong>JAY C O B</strong>
-<span>FINANCIAL SERVICES</span>
-</div>
-</a>
+  <header>
 
-<nav class="nav-links" id="navLinks">
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#loans">Loans</a>
-<a href="#calculator">Calculator</a>
-<a href="#about">About</a>
-<a href="#support">Support</a>
+    <div class="container navbar">
 
-<!-- ADMIN MOBILE LINK -->
-<a href="admin-login.html" style="color:#facc15;font-weight:800">
-🔐 Admin Portal
-</a>
-</nav>
+      <a href="#home" class="brand">
 
-<div class="nav-actions">
+        <div class="brand-logo">
+          JC
+        </div>
 
-<a href="admin-login.html" class="btn admin-btn">
-🔐 Admin Portal
-</a>
+        <div class="brand-text">
+          <strong>JAY C O B</strong>
+          <span>FINANCIAL SERVICES</span>
+        </div>
 
-<button class="btn btn-outline" onclick="openModal('loginModal')">
-Login
-</button>
+      </a>
 
-<button class="btn btn-primary" onclick="openModal('registerModal')">
-Register
-</button>
 
-</div>
-
-<button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
-
-</div>
-</header>
-
-
-<!-- HERO -->
-<section class="hero" id="home">
-<div class="container hero-grid">
-
-<div>
-
-<p style="color:#facc15;font-weight:800;margin-bottom:12px">
-YOUR FINANCIAL PARTNER
-</p>
-
-<h1>
-Build Your
-<span>Financial Future.</span>
-</h1>
-
-<p>
-Access reliable financial services designed to help
-individuals, families and businesses achieve their
-financial goals.
-</p>
+      <nav class="nav-links" id="navLinks">
 
-<div class="hero-actions">
-
-<button class="btn btn-primary" onclick="openLoanChooser()">
-Apply for a Loan
-</button>
-
-<button class="btn btn-outline" onclick="openModal('loginModal')">
-Customer Login
-</button>
-
-<a href="admin-login.html" class="btn admin-btn"
-style="display:inline-flex;align-items:center;justify-content:center">
-🔐 Admin Portal
-</a>
-
-</div>
-</div>
-
-<div class="hero-card">
-
-<h3>JAY C O B SERVICES</h3>
-
-<div class="hero-card-item">
-<span>Personal Loans</span>
-<strong>Available</strong>
-</div>
-
-<div class="hero-card-item">
-<span>Business Loans</span>
-<strong>Available</strong>
-</div>
-
-<div class="hero-card-item">
-<span>Customer Portal</span>
-<strong>24/7</strong>
-</div>
-
-<div class="hero-card-item">
-<span>Secure Access</span>
-<strong>Protected</strong>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- SERVICES -->
-<section id="services">
-<div class="container">
-
-<div class="section-title">
-<h2>Our Services</h2>
-<p>Financial solutions designed around your needs.</p>
-</div>
-
-<div class="cards">
-
-<div class="card">
-<div class="card-icon">💰</div>
-<h3>Loans</h3>
-<p>Personal and business financing solutions.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">🏦</div>
-<h3>Savings</h3>
-<p>Manage and grow your savings through your customer account.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">💸</div>
-<h3>Transfers</h3>
-<p>Convenient account-to-account financial transfers.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">📊</div>
-<h3>Statements</h3>
-<p>Track transactions, balances and financial activity.</p>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- LOANS -->
-<section id="loans">
-<div class="container">
-
-<div class="section-title">
-<h2>Loan Solutions</h2>
-<p>Choose a financing solution that matches your needs.</p>
-</div>
-
-<div class="loan-grid">
-
-<div class="loan-card">
-<h3>Personal Loans</h3>
-<p>Flexible financing for personal needs and important expenses.</p>
-<ul>
-<li>Simple application process</li>
-<li>Flexible repayment planning</li>
-<li>Customer dashboard tracking</li>
-<li>Payment history</li>
-</ul>
-<button class="btn btn-primary" onclick="openPersonalLoan()">
-Apply Personal Loan
-</button>
-</div>
-
-<div class="loan-card">
-<h3>Business Loans</h3>
-<p>Financing support for businesses, projects and growth opportunities.</p>
-<ul>
-<li>Business financing</li>
-<li>Project support</li>
-<li>Repayment management</li>
-<li>Business account tracking</li>
-</ul>
-<button class="btn btn-primary" onclick="openBusinessLoan()">
-Apply Business Loan
-</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- CALCULATOR -->
-<section id="calculator">
-<div class="container">
-
-<div class="section-title">
-<h2>Loan Calculator</h2>
-<p>Estimate your repayment before submitting an application.</p>
-</div>
-
-<div class="calculator">
-
-<div>
-<h2 style="margin-bottom:12px">Calculate Your Loan</h2>
-
-<p>
-This calculator uses the JAY C O B monthly interest method.
-</p>
-
-<p style="margin-top:15px">
-<strong style="color:#facc15">Formula:</strong>
-Interest = Principal × Monthly Rate × Number of Months
-</p>
-
-<p style="margin-top:10px">
-Total Repayment = Principal + Interest
-</p>
-</div>
-
-<div class="calc-form">
-
-<div class="form-group">
-<label for="loanAmount">Loan Amount (MWK)</label>
-<input id="loanAmount" type="number" min="1" placeholder="e.g. 100000">
-</div>
-
-<div class="form-group">
-<label for="loanRate">Monthly Interest Rate (%)</label>
-<input id="loanRate" type="number" min="0" step=".01" placeholder="e.g. 25">
-</div>
-
-<div class="form-group">
-<label for="loanMonths">Repayment Period (Months)</label>
-<input id="loanMonths" type="number" min="1" step="1" placeholder="e.g. 1">
-</div>
-
-<button class="btn btn-primary" onclick="calculateLoan()">Calculate</button>
-
-<div id="calcResult" class="calc-result">
-<span style="color:#d1d5db">
-Enter loan details to calculate.
-</span>
-</div>
-
-</div>
-</div>
-</div>
-</section>
-
-
-<!-- WHY -->
-<section id="about">
-<div class="container">
-
-<div class="section-title">
-<h2>Why Choose JAY C O B?</h2>
-<p>
-Built around transparency, accessibility and responsible financial management.
-</p>
-</div>
-
-<div class="two-col">
-
-<div class="feature-list">
-
-<div class="feature">
-<strong>🔐 Secure Customer Access</strong>
-<span>Customers have a dedicated account and dashboard.</span>
-</div>
-
-<div class="feature">
-<strong>📱 Accessible Online</strong>
-<span>Access your financial services from your phone or computer.</span>
-</div>
-
-<div class="feature">
-<strong>📊 Transparent Records</strong>
-<span>Track balances, payments, applications and transactions.</span>
-</div>
-
-<div class="feature">
-<strong>🤝 Customer Support</strong>
-<span>Contact our support team whenever you need assistance.</span>
-</div>
-
-</div>
-
-<div>
-<h2 style="font-size:38px;margin-bottom:15px">
-Financial services built for real people.
-</h2>
-
-<p style="color:#6b7280;margin-bottom:20px">
-JAY C O B FINANCIAL SERVICES is focused on providing
-accessible financial solutions while helping customers
-manage their financial responsibilities effectively.
-</p>
-
-<button class="btn btn-dark" onclick="openDashboard()">
-Open Customer Dashboard
-</button>
-</div>
-
-</div>
-</div>
-</section>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#loans">Loans</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#about">About</a>
+        <a href="#support">Support</a>
 
+        <!-- ADMIN PORTAL -->
+        <a
+          href="admin-login.html"
+          style="color:#facc15;font-weight:800"
+        >
+          🔐 Admin Portal
+        </a>
+
+      </nav>
+
+
+      <div class="nav-actions">
+
+        <!-- ADMIN PORTAL -->
+        <a
+          href="admin-login.html"
+          class="btn admin-btn"
+        >
+          🔐 Admin Portal
+        </a>
 
-<!-- SUPPORT -->
-<section id="support">
-<div class="container">
+        <button
+          class="btn btn-outline"
+          onclick="openModal('loginModal')"
+        >
+          Login
+        </button>
 
-<div class="support-box">
+        <button
+          class="btn btn-primary"
+          onclick="openModal('registerModal')"
+        >
+          Register
+        </button>
+
+      </div>
 
-<h2>Need Help?</h2>
 
-<p>
-Our support system is designed to help customers with
-account, loan and financial service questions.
-</p>
+      <button
+        class="menu-btn"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
 
-<button class="btn btn-primary" onclick="openModal('supportModal')">
-Contact Support
-</button>
+    </div>
 
-</div>
-</div>
-</section>
+  </header>
 
 
-<!-- FOOTER -->
-<footer>
-<div class="container">
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
-<div class="footer-grid">
+  <section class="hero" id="home">
 
-<div>
-<h3>JAY C O B</h3>
-<p>
-JAY C O B FINANCIAL SERVICES.
-Your financial partner.
-</p>
-</div>
+    <div class="container hero-grid">
 
-<div>
-<h4>Services</h4>
-<a href="#loans">Loans</a>
-<a href="#services">Savings</a>
-<a href="#services">Transfers</a>
-<a href="#services">Statements</a>
-</div>
+      <div>
 
-<div>
-<h4>Account</h4>
+        <p
+          style="
+            color:#facc15;
+            font-weight:800;
+            margin-bottom:12px;
+          "
+        >
+          YOUR FINANCIAL PARTNER
+        </p>
 
-<a href="#" onclick="openModal('loginModal');return false">
-Login
-</a>
+        <h1>
+          Build Your
+          <span>Financial Future.</span>
+        </h1>
 
-<a href="#" onclick="openModal('registerModal');return false">
-Register
-</a>
+        <p>
+          Access reliable financial services designed to help
+          individuals, families and businesses achieve their
+          financial goals.
+        </p>
 
-<a href="#" onclick="openDashboard();return false">
-Dashboard
-</a>
+        <div class="hero-actions">
 
-<a href="admin-login.html" style="color:#facc15;font-weight:800">
-🔐 Admin Portal
-</a>
+          <button
+            class="btn btn-primary"
+            onclick="openLoanChooser()"
+          >
+            Apply for a Loan
+          </button>
 
-</div>
+          <button
+            class="btn btn-outline"
+            onclick="openModal('loginModal')"
+          >
+            Customer Login
+          </button>
 
-<div>
-<h4>Help</h4>
+          <!-- ADMIN PORTAL -->
+          <a
+            href="admin-login.html"
+            class="btn admin-btn"
+            style="
+              display:inline-flex;
+              align-items:center;
+              justify-content:center;
+            "
+          >
+            🔐 Admin Portal
+          </a>
 
-<a href="#support">Support</a>
+        </div>
 
-<a href="#" onclick="openModal('recoveryModal');return false">
-Account Recovery
-</a>
+      </div>
 
-</div>
 
-</div>
+      <div class="hero-card">
 
-<div class="copyright">
-© 2026 JAY C O B FINANCIAL SERVICES. All rights reserved.
-</div>
+        <h3>JAY C O B SERVICES</h3>
 
-</div>
-</footer>
+        <div class="hero-card-item">
+          <span>Personal Loans</span>
+          <strong>Available</strong>
+        </div>
 
+        <div class="hero-card-item">
+          <span>Business Loans</span>
+          <strong>Available</strong>
+        </div>
 
-<!-- LOAN CHOOSER -->
-<div class="modal" id="loanChooserModal">
-<div class="modal-box">
+        <div class="hero-card-item">
+          <span>Customer Portal</span>
+          <strong>24/7</strong>
+        </div>
 
-<button class="close-btn" onclick="closeModal('loanChooserModal')">×</button>
+        <div class="hero-card-item">
+          <span>Secure Access</span>
+          <strong>Protected</strong>
+        </div>
 
-<h2>Choose Loan Type</h2>
-<p>Select the type of financing you need.</p>
+      </div>
 
-<div class="form-actions">
+    </div>
 
-<button class="btn btn-primary" onclick="openPersonalLoan()">
-Personal Loan
-</button>
+  </section>
 
-<button class="btn btn-dark" onclick="openBusinessLoan()">
-Business Loan
-</button>
 
-</div>
-</div>
-</div>
+  <!-- =====================================================
+       SERVICES
+  ====================================================== -->
 
+  <section id="services">
 
-<!-- LOGIN -->
-<div class="modal" id="loginModal">
-<div class="modal-box">
+    <div class="container">
 
-<button class="close-btn" onclick="closeModal('loginModal')">×</button>
+      <div class="section-title">
 
-<h2>Customer Login</h2>
-<p>Login using your registered email address or phone number.</p>
+        <h2>Our Services</h2>
 
-<div id="loginStatus" class="status-message"></div>
+        <p>
+          Financial solutions designed around your needs.
+        </p>
 
-<form id="loginForm">
+      </div>
 
-<div class="form-group">
-<label for="loginIdentifier">Email or Phone Number</label>
-<input id="loginIdentifier" type="text" placeholder="Email or phone" required>
-</div>
 
-<div class="form-group">
-<label for="loginPassword">Password</label>
+      <div class="cards">
 
-<div class="password-wrap">
-<input id="loginPassword" type="password" placeholder="Your password" required>
-<button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">👁</button>
-</div>
-</div>
+        <div class="card">
 
-<button id="loginButton" type="submit" class="btn btn-primary">
-Login
-</button>
+          <div class="card-icon">💰</div>
 
-</form>
+          <h3>Loans</h3>
 
-<div style="margin-top:15px">
-<button class="btn btn-dark" onclick="switchToRegister()">
-Create Account
-</button>
-</div>
+          <p>
+            Personal and business financing solutions.
+          </p>
 
-<p style="margin-top:15px">
-Forgot your password?
-<span class="switch-link" onclick="switchToRecovery()">Recover account</span>
-</p>
+        </div>
 
-</div>
-</div>
 
+        <div class="card">
 
-<!-- REGISTER -->
-<div class="modal" id="registerModal">
-<div class="modal-box">
+          <div class="card-icon">🏦</div>
 
-<button class="close-btn" onclick="closeModal('registerModal')">×</button>
+          <h3>Savings</h3>
 
-<h2>Create Customer Account</h2>
-<p>Register for your JAY C O B customer account.</p>
+          <p>
+            Manage and grow your savings through your
+            customer account.
+          </p>
 
-<div id="registerStatus" class="status-message"></div>
+        </div>
 
-<form id="registerForm">
 
-<div class="form-group">
-<label for="registerName">Full Name</label>
-<input id="registerName" type="text" required>
-</div>
+        <div class="card">
 
-<div class="form-group">
-<label for="registerEmail">Email</label>
-<input id="registerEmail" type="email" required>
-</div>
+          <div class="card-icon">💸</div>
 
-<div class="form-group">
-<label for="registerPhone">Phone</label>
-<input id="registerPhone" type="tel" placeholder="+265..." required>
-</div>
+          <h3>Transfers</h3>
 
-<div class="form-group">
-<label for="registerPassword">Password</label>
+          <p>
+            Convenient account-to-account financial transfers.
+          </p>
 
-<div class="password-wrap">
-<input id="registerPassword" type="password" minlength="8" required>
-<button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">👁</button>
-</div>
+        </div>
 
-<div class="form-note">
-Password must contain at least 8 characters.
-</div>
-</div>
 
-<div class="form-group">
-<label for="registerConfirmPassword">Confirm Password</label>
+        <div class="card">
 
-<div class="password-wrap">
-<input id="registerConfirmPassword" type="password" minlength="8" required>
-<button type="button" class="password-toggle" onclick="togglePassword('registerConfirmPassword')">👁</button>
-</div>
-</div>
+          <div class="card-icon">📊</div>
 
-<button id="registerButton" type="submit" class="btn btn-primary">
-Create Account
-</button>
+          <h3>Statements</h3>
 
-</form>
+          <p>
+            Track transactions, balances and financial activity.
+          </p>
 
-<p style="margin-top:15px">
-Already have an account?
-<span class="switch-link" onclick="switchToLogin()">Login</span>
-</p>
+        </div>
 
-</div>
-</div>
+      </div>
 
+    </div>
 
-<!-- PERSONAL LOAN -->
-<div class="modal" id="personalLoanModal">
-<div class="modal-box">
+  </section>
 
-<button class="close-btn" onclick="closeModal('personalLoanModal')">×</button>
 
-<h2>Personal Loan Application</h2>
-<p>Complete the application details.</p>
+  <!-- =====================================================
+       LOANS
+  ====================================================== -->
 
-<div id="personalLoanStatus" class="status-message"></div>
+  <section id="loans">
 
-<form id="personalLoanForm">
+    <div class="container">
 
-<div class="form-group">
-<label for="personalAmount">Loan Amount</label>
-<input id="personalAmount" type="number" min="1" placeholder="Enter amount" required>
-</div>
+      <div class="section-title">
 
-<div class="form-group">
-<label for="personalPurpose">Purpose</label>
-<textarea id="personalPurpose" rows="3" placeholder="Explain what the loan will be used for" required></textarea>
-</div>
+        <h2>Loan Solutions</h2>
 
-<div class="form-group">
-<label for="personalDuration">Repayment Period</label>
+        <p>
+          Choose a financing solution that matches your needs.
+        </p>
 
-<select id="personalDuration" required>
-<option value="">Select period</option>
-<option value="1">1 Month</option>
-<option value="2">2 Months</option>
-<option value="3">3 Months</option>
-<option value="4">4 Months</option>
-<option value="5">5 Months</option>
-<option value="6">6 Months</option>
-<option value="9">9 Months</option>
-<option value="12">12 Months</option>
-<option value="18">18 Months</option>
-<option value="24">24 Months</option>
-</select>
-</div>
+      </div>
 
-<button id="personalLoanButton" type="submit" class="btn btn-primary">
-Submit Application
-</button>
 
-</form>
-</div>
-</div>
+      <div class="loan-grid">
 
+        <div class="loan-card">
 
-<!-- BUSINESS LOAN -->
-<div class="modal" id="businessLoanModal">
-<div class="modal-box">
+          <h3>Personal Loans</h3>
 
-<button class="close-btn" onclick="closeModal('businessLoanModal')">×</button>
+          <p>
+            Flexible financing for personal needs and important
+            expenses.
+          </p>
 
-<h2>Business Loan Application</h2>
-<p>Submit your business financing request.</p>
+          <ul>
+            <li>Simple application process</li>
+            <li>Flexible repayment planning</li>
+            <li>Customer dashboard tracking</li>
+            <li>Payment history</li>
+          </ul>
 
-<div id="businessLoanStatus" class="status-message"></div>
+          <button
+            class="btn btn-primary"
+            onclick="openPersonalLoan()"
+          >
+            Apply Personal Loan
+          </button>
 
-<form id="businessLoanForm">
+        </div>
 
-<div class="form-group">
-<label for="businessName">Business Name</label>
-<input id="businessName" type="text" required>
-</div>
 
-<div class="form-group">
-<label for="businessAmount">Loan Amount</label>
-<input id="businessAmount" type="number" min="1" required>
-</div>
+        <div class="loan-card">
 
-<div class="form-group">
-<label for="businessPurpose">Business Purpose</label>
-<textarea id="businessPurpose" rows="3" placeholder="Explain how the business will use the loan" required></textarea>
-</div>
+          <h3>Business Loans</h3>
 
-<div class="form-group">
-<label for="businessDuration">Repayment Period</label>
+          <p>
+            Financing support for businesses, projects and
+            growth opportunities.
+          </p>
 
-<select id="businessDuration" required>
-<option value="">Select period</option>
-<option value="1">1 Month</option>
-<option value="2">2 Months</option>
-<option value="3">3 Months</option>
-<option value="4">4 Months</option>
-<option value="5">5 Months</option>
-<option value="6">6 Months</option>
-<option value="9">9 Months</option>
-<option value="12">12 Months</option>
-<option value="18">18 Months</option>
-<option value="24">24 Months</option>
-</select>
-</div>
+          <ul>
+            <li>Business financing</li>
+            <li>Project support</li>
+            <li>Repayment management</li>
+            <li>Business account tracking</li>
+          </ul>
 
-<button id="businessLoanButton" type="submit" class="btn btn-primary">
-Submit Application
-</button>
+          <button
+            class="btn btn-primary"
+            onclick="openBusinessLoan()"
+          >
+            Apply Business Loan
+          </button>
 
-</form>
-</div>
-</div>
+        </div>
 
+      </div>
 
-<!-- ACCOUNT RECOVERY -->
-<div class="modal" id="recoveryModal">
-<div class="modal-box">
+    </div>
 
-<button class="close-btn" onclick="closeModal('recoveryModal')">×</button>
+  </section>
 
-<h2>Account Recovery</h2>
-<p>Enter your registered email or phone number.</p>
 
-<div id="recoveryStatus" class="status-message"></div>
+  <!-- =====================================================
+       CALCULATOR
+  ====================================================== -->
 
-<form id="recoveryForm">
+  <section id="calculator">
 
-<div class="form-group">
-<label for="recoveryIdentifier">Email or Phone</label>
-<input id="recoveryIdentifier" type="text" placeholder="Email or phone number" required>
-</div>
+    <div class="container">
 
-<button type="submit" class="btn btn-primary">
-Request Recovery
-</button>
+      <div class="section-title">
 
-</form>
+        <h2>Loan Calculator</h2>
 
-<div class="form-note" style="margin-top:15px">
-OTP/password reset backend will be connected in the account-recovery module.
-</div>
+        <p>
+          Estimate your repayment before submitting an application.
+        </p>
 
-</div>
-</div>
+      </div>
 
 
-<!-- SUPPORT -->
-<div class="modal" id="supportModal">
-<div class="modal-box">
+      <div class="calculator">
 
-<button class="close-btn" onclick="closeModal('supportModal')">×</button>
+        <div>
 
-<h2>Contact Support</h2>
-<p>Tell us how we can assist you.</p>
+          <h2 style="margin-bottom:12px">
+            Calculate Your Loan
+          </h2>
 
-<div id="supportStatus" class="status-message"></div>
+          <p>
+            This calculator uses the JAY C O B monthly
+            interest method.
+          </p>
 
-<form id="supportForm">
+          <p style="margin-top:15px">
 
-<div class="form-group">
-<label for="supportSubject">Subject</label>
-<input id="supportSubject" type="text" required>
-</div>
+            <strong style="color:#facc15">
+              Formula:
+            </strong>
 
-<div class="form-group">
-<label for="supportCategory">Category</label>
+            Interest =
+            Principal × Monthly Rate × Number of Months
 
-<select id="supportCategory">
-<option value="general">General</option>
-<option value="account">Account</option>
-<option value="loan">Loan</option>
-<option value="transaction">Transaction</option>
-<option value="savings">Savings</option>
-<option value="kyc">KYC</option>
-<option value="technical">Technical</option>
-<option value="other">Other</option>
-</select>
-</div>
+          </p>
 
-<div class="form-group">
-<label for="supportPriority">Priority</label>
+          <p style="margin-top:10px">
+            Total Repayment = Principal + Interest
+          </p>
 
-<select id="supportPriority">
-<option value="low">Low</option>
-<option value="medium" selected>Medium</option>
-<option value="high">High</option>
-<option value="urgent">Urgent</option>
-</select>
-</div>
+        </div>
 
-<div class="form-group">
-<label for="supportMessage">Message</label>
-<textarea id="supportMessage" rows="5" required></textarea>
-</div>
 
-<button id="supportButton" type="submit" class="btn btn-primary">
-Send Message
-</button>
+        <div class="calc-form">
 
-</form>
+          <div class="form-group">
 
-<div class="form-note" style="margin-top:15px">
-Your message will be recorded as a support ticket.
-</div>
+            <label for="loanAmount">
+              Loan Amount (MWK)
+            </label>
 
-</div>
-</div>
+            <input
+              id="loanAmount"
+              type="number"
+              min="1"
+              placeholder="e.g. 100000"
+            >
 
+          </div>
 
-<!-- LOADING -->
-<div id="loadingOverlay">
-<div class="loader-box">
-<div class="spinner"></div>
-<p>Please wait...</p>
-</div>
-</div>
 
+          <div class="form-group">
 
-<script>
-/* =========================================================
-   API CONFIGURATION
-========================================================= */
+            <label for="loanRate">
+              Monthly Interest Rate (%)
+            </label>
 
-const API_BASE_URL =
-"https://emmanueljacobgithubio-production.up.railway.app/api";
+            <input
+              id="loanRate"
+              type="number"
+              min="0"
+              step=".01"
+              placeholder="e.g. 25"
+            >
 
-const CUSTOMER_TOKEN_KEY="jaycob_customer_token";
-const CUSTOMER_DATA_KEY="jaycob_customer_data";
+          </div>
 
 
-/* =========================================================
-   CUSTOMER SESSION
-========================================================= */
+          <div class="form-group">
 
-function saveCustomerSession(token,customer){
-localStorage.setItem(CUSTOMER_TOKEN_KEY,token);
-localStorage.setItem(CUSTOMER_DATA_KEY,JSON.stringify(customer));
-}
+            <label for="loanMonths">
+              Repayment Period (Months)
+            </label>
 
-function getCustomerToken(){
-return localStorage.getItem(CUSTOMER_TOKEN_KEY);
-}
+            <input
+              id="loanMonths"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="e.g. 1"
+            >
 
-function getCustomerData(){
-const data=localStorage.getItem(CUSTOMER_DATA_KEY);
-if(!data)return null;
+          </div>
 
-try{
-return JSON.parse(data);
-}catch{
-return null;
-}
-}
 
-function clearCustomerSession(){
-localStorage.removeItem(CUSTOMER_TOKEN_KEY);
-localStorage.removeItem(CUSTOMER_DATA_KEY);
-}
+          <button
+            class="btn btn-primary"
+            onclick="calculateLoan()"
+          >
+            Calculate
+          </button>
 
 
-/* =========================================================
-   API REQUEST
-========================================================= */
+          <div
+            id="calcResult"
+            class="calc-result"
+          >
+            <span style="color:#d1d5db">
+              Enter loan details to calculate.
+            </span>
+          </div>
 
-async function apiRequest(endpoint,options={}){
-const token=getCustomerToken();
+        </div>
 
-const headers={
-"Content-Type":"application/json",
-...(options.headers||{})
-};
+      </div>
 
-if(token){
-headers.Authorization=`Bearer ${token}`;
-}
+    </div>
 
-const response=await fetch(
-API_BASE_URL+endpoint,
-{
-...options,
-headers
-}
-);
+  </section>
 
-let data=null;
 
-try{
-data=await response.json();
-}catch{}
+  <!-- =====================================================
+       ABOUT
+  ====================================================== -->
 
-if(!response.ok){
-throw new Error(
-data?.message||
-data?.error||
-`Request failed (${response.status})`
-);
-}
+  <section id="about">
 
-return data;
-}
+    <div class="container">
 
+      <div class="section-title">
 
-/* =========================================================
-   LOADING / STATUS
-========================================================= */
+        <h2>Why Choose JAY C O B?</h2>
 
-function showLoading(){
-document.getElementById("loadingOverlay").classList.add("active");
-}
+        <p>
+          Built around transparency, accessibility and
+          responsible financial management.
+        </p>
 
-function hideLoading(){
-document.getElementById("loadingOverlay").classList.remove("active");
-}
+      </div>
 
-function showStatus(elementId,message,type="error"){
-const element=document.getElementById(elementId);
-if(!element)return;
 
-element.textContent=message;
-element.className=`status-message show ${type}`;
-}
+      <div class="two-col">
 
-function clearStatus(elementId){
-const element=document.getElementById(elementId);
-if(!element)return;
+        <div class="feature-list">
 
-element.textContent="";
-element.className="status-message";
-}
+          <div class="feature">
 
+            <strong>
+              🔐 Secure Customer Access
+            </strong>
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
+            <span>
+              Customers have a dedicated account and dashboard.
+            </span>
 
-function toggleMenu(){
-document.getElementById("navLinks").classList.toggle("active");
-}
+          </div>
 
-document.querySelectorAll("#navLinks a").forEach(link=>{
-link.addEventListener("click",()=>{
-document.getElementById("navLinks").classList.remove("active");
-});
-});
 
+          <div class="feature">
 
-/* =========================================================
-   MODALS
-========================================================= */
+            <strong>
+              📱 Accessible Online
+            </strong>
 
-function openModal(id){
-const modal=document.getElementById(id);
-if(modal)modal.classList.add("active");
-}
+            <span>
+              Access your financial services from your
+              phone or computer.
+            </span>
 
-function closeModal(id){
-const modal=document.getElementById(id);
-if(modal)modal.classList.remove("active");
-}
+          </div>
 
-document.querySelectorAll(".modal").forEach(modal=>{
-modal.addEventListener("click",event=>{
-if(event.target===modal){
-modal.classList.remove("active");
-}
-});
-});
 
+          <div class="feature">
 
-/* =========================================================
-   LOAN CHOOSER
-========================================================= */
+            <strong>
+              📊 Transparent Records
+            </strong>
 
-function openLoanChooser(){
-openModal("loanChooserModal");
-}
+            <span>
+              Track balances, payments, applications and
+              transactions.
+            </span>
 
-function openPersonalLoan(){
+          </div>
 
-closeModal("loanChooserModal");
 
-const customer=getCustomerData();
+          <div class="feature">
 
-if(!customer){
-openModal("loginModal");
+            <strong>
+              🤝 Customer Support
+            </strong>
 
-showStatus(
-"loginStatus",
-"Please login to apply for a loan.",
-"error"
-);
+            <span>
+              Contact our support team whenever you need
+              assistance.
+            </span>
 
-return;
-}
+          </div>
 
-openModal("personalLoanModal");
-}
+        </div>
 
-function openBusinessLoan(){
 
-closeModal("loanChooserModal");
+        <div>
 
-const customer=getCustomerData();
+          <h2
+            style="
+              font-size:38px;
+              margin-bottom:15px
+            "
+          >
+            Financial services built for real people.
+          </h2>
 
-if(!customer){
-openModal("loginModal");
+          <p
+            style="
+              color:#6b7280;
+              margin-bottom:20px
+            "
+          >
+            JAY C O B FINANCIAL SERVICES is focused on
+            providing accessible financial solutions while
+            helping customers manage their financial
+            responsibilities effectively.
+          </p>
 
-showStatus(
-"loginStatus",
-"Please login to apply for a loan.",
-"error"
-);
+          <button
+            class="btn btn-dark"
+            onclick="openDashboard()"
+          >
+            Open Customer Dashboard
+          </button>
 
-return;
-}
+        </div>
 
-openModal("businessLoanModal");
-}
+      </div>
 
+    </div>
 
-/* =========================================================
-   PASSWORD TOGGLE
-========================================================= */
+  </section>
 
-function togglePassword(id){
 
-const input=document.getElementById(id);
+  <!-- =====================================================
+       SUPPORT
+  ====================================================== -->
 
-if(!input)return;
+  <section id="support">
 
-input.type=
-input.type==="password"
-?"text"
-:"password";
-}
+    <div class="container">
 
+      <div class="support-box">
 
-/* =========================================================
-   CALCULATOR
-========================================================= */
+        <h2>Need Help?</h2>
 
-function formatMoney(value){
+        <p>
+          Our support system is designed to help customers
+          with account, loan and financial service questions.
+        </p>
 
-return "MWK "+
-Number(value).toLocaleString(
-"en-MW",
-{
-minimumFractionDigits:2,
-maximumFractionDigits:2
-}
-);
-}
+        <button
+          class="btn btn-primary"
+          onclick="openSupport()"
+        >
+          Contact Support
+        </button>
 
-function calculateLoan(){
+      </div>
 
-const amount=Number(
-document.getElementById("loanAmount").value
-);
+    </div>
 
-const monthlyRate=Number(
-document.getElementById("loanRate").value
-);
+  </section>
 
-const months=Number(
-document.getElementById("loanMonths").value
-);
 
-const result=document.getElementById("calcResult");
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
-if(!amount||amount<=0){
+  <footer>
 
-result.innerHTML=`
-<span style="color:#fca5a5">
-Please enter a valid loan amount.
-</span>`;
+    <div class="container">
 
-return;
-}
+      <div class="footer-grid">
 
-if(monthlyRate<0||!Number.isFinite(monthlyRate)){
+        <div>
 
-result.innerHTML=`
-<span style="color:#fca5a5">
-Please enter a valid monthly interest rate.
-</span>`;
+          <h3>JAY C O B</h3>
 
-return;
-}
+          <p>
+            JAY C O B FINANCIAL SERVICES.
+            Your financial partner.
+          </p>
 
-if(!months||months<=0){
+        </div>
 
-result.innerHTML=`
-<span style="color:#fca5a5">
-Please enter a valid repayment period.
-</span>`;
 
-return;
-}
+        <div>
 
-const interestAmount=
-amount*(monthlyRate/100)*months;
+          <h4>Services</h4>
 
-const totalAmount=
-amount+interestAmount;
+          <a href="#loans">Loans</a>
+          <a href="#services">Savings</a>
+          <a href="#services">Transfers</a>
+          <a href="#services">Statements</a>
 
-const monthlyPayment=
-totalAmount/months;
+        </div>
 
-result.innerHTML=`
 
-<div class="calc-result-row">
-<span>Principal</span>
-<strong>${formatMoney(amount)}</strong>
-</div>
+        <div>
 
-<div class="calc-result-row">
-<span>Interest Rate</span>
-<strong>${monthlyRate.toFixed(2)}% / month</strong>
-</div>
+          <h4>Account</h4>
 
-<div class="calc-result-row">
-<span>Interest Amount</span>
-<strong>${formatMoney(interestAmount)}</strong>
-</div>
+          <a
+            href="#"
+            onclick="
+              openModal('loginModal');
+              return false;
+            "
+          >
+            Login
+          </a>
 
-<div class="calc-result-row">
-<span>Total Amount</span>
-<strong>${formatMoney(totalAmount)}</strong>
-</div>
+          <a
+            href="#"
+            onclick="
+              openModal('registerModal');
+              return false;
+            "
+          >
+            Register
+          </a>
 
-<div class="calc-result-row">
-<span>Monthly Payment</span>
-<strong>${formatMoney(monthlyPayment)}</strong>
-</div>
+          <a
+            href="#"
+            onclick="
+              openDashboard();
+              return false;
+            "
+          >
+            Dashboard
+          </a>
 
-<div style="margin-top:12px;font-size:12px;color:#d1d5db">
-Calculation uses simple monthly interest.
-</div>
-`;
-}
+          <a
+            href="admin-login.html"
+            style="color:#facc15;font-weight:800"
+          >
+            🔐 Admin Portal
+          </a>
 
+        </div>
 
-/* =========================================================
-   CUSTOMER LOGIN
-========================================================= */
 
-document.getElementById("loginForm")
-.addEventListener("submit",async event=>{
+        <div>
 
-event.preventDefault();
+          <h4>Help</h4>
 
-clearStatus("loginStatus");
+          <a href="#support">
+            Support
+          </a>
 
-const identifier=
-document.getElementById("loginIdentifier")
-.value.trim();
+          <a
+            href="#"
+            onclick="
+              openModal('recoveryModal');
+              return false;
+            "
+          >
+            Account Recovery
+          </a>
 
-const password=
-document.getElementById("loginPassword")
-.value;
+        </div>
 
-if(!identifier){
+      </div>
 
-showStatus(
-"loginStatus",
-"Please enter your email address or phone number.",
-"error"
-);
 
-return;
-}
+      <div class="copyright">
 
-if(!password){
+        © 2026 JAY C O B FINANCIAL SERVICES.
+        All rights reserved.
 
-showStatus(
-"loginStatus",
-"Please enter your password.",
-"error"
-);
+      </div>
 
-return;
-}
+    </div>
 
-const loginPayload={
-password
-};
+  </footer>
 
-if(identifier.includes("@")){
-loginPayload.email=identifier;
-}else{
-loginPayload.phone=identifier;
-}
 
-const button=
-document.getElementById("loginButton");
+  <!-- =====================================================
+       LOAN CHOOSER
+  ====================================================== -->
 
-button.disabled=true;
-button.textContent="Logging in...";
+  <div
+    class="modal"
+    id="loanChooserModal"
+  >
 
-try{
+    <div class="modal-box">
 
-showLoading();
+      <button
+        class="close-btn"
+        onclick="closeModal('loanChooserModal')"
+      >
+        ×
+      </button>
 
-const data=await apiRequest(
-"/customers/login",
-{
-method:"POST",
-body:JSON.stringify(loginPayload)
-}
-);
+      <h2>Choose Loan Type</h2>
 
-if(!data||!data.success){
-throw new Error(
-data?.message||"Login failed."
-);
-}
+      <p>
+        Select the type of financing you need.
+      </p>
 
-if(!data.session_token||!data.customer){
-throw new Error(
-"Login succeeded but the server did not return a valid customer session."
-);
-}
+      <div class="form-actions">
 
-saveCustomerSession(
-data.session_token,
-data.customer
-);
+        <button
+          class="btn btn-primary"
+          onclick="openPersonalLoan()"
+        >
+          Personal Loan
+        </button>
 
-showStatus(
-"loginStatus",
-"Login successful. Opening your dashboard...",
-"success"
-);
+        <button
+          class="btn btn-dark"
+          onclick="openBusinessLoan()"
+        >
+          Business Loan
+        </button>
 
-setTimeout(()=>{
-closeModal("loginModal");
-openDashboard();
-},700);
+      </div>
 
-}catch(error){
+    </div>
 
-console.error("LOGIN ERROR:",error);
+  </div>
 
-showStatus(
-"loginStatus",
-error.message||"Unable to login.",
-"error"
-);
 
-}finally{
+  <!-- =====================================================
+       LOGIN
+  ====================================================== -->
 
-hideLoading();
+  <div
+    class="modal"
+    id="loginModal"
+  >
 
-button.disabled=false;
-button.textContent="Login";
-}
+    <div class="modal-box">
 
-});
+      <button
+        class="close-btn"
+        onclick="closeModal('loginModal')"
+      >
+        ×
+      </button>
 
+      <h2>Customer Login</h2>
 
-/* =========================================================
-   REGISTER
-========================================================= */
+      <p>
+        Login using your registered email address or
+        phone number.
+      </p>
 
-document.getElementById("registerForm")
-.addEventListener("submit",async event=>{
+      <div
+        id="loginStatus"
+        class="status-message"
+      ></div>
 
-event.preventDefault();
 
-clearStatus("registerStatus");
+      <form id="loginForm">
 
-const fullName=
-document.getElementById("registerName").value.trim();
+        <div class="form-group">
 
-const email=
-document.getElementById("registerEmail").value.trim();
+          <label for="loginIdentifier">
+            Email or Phone Number
+          </label>
 
-const phone=
-document.getElementById("registerPhone").value.trim();
+          <input
+            id="loginIdentifier"
+            type="text"
+            placeholder="Email or phone"
+            required
+          >
 
-const password=
-document.getElementById("registerPassword").value;
+        </div>
 
-const confirmPassword=
-document.getElementById("registerConfirmPassword").value;
 
-if(!fullName){
-showStatus("registerStatus","Please enter your full name.");
-return;
-}
+        <div class="form-group">
 
-if(!email){
-showStatus("registerStatus","Please enter your email address.");
-return;
-}
+          <label for="loginPassword">
+            Password
+          </label>
 
-if(!phone){
-showStatus("registerStatus","Please enter your phone number.");
-return;
-}
+          <div class="password-wrap">
 
-if(password.length<8){
-showStatus(
-"registerStatus",
-"Password must contain at least 8 characters."
-);
-return;
-}
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Your password"
+              required
+            >
 
-if(password!==confirmPassword){
-showStatus(
-"registerStatus",
-"Passwords do not match."
-);
-return;
-}
+            <button
+              type="button"
+              class="password-toggle"
+              onclick="togglePassword('loginPassword')"
+            >
+              👁
+            </button>
 
-const button=
-document.getElementById("registerButton");
+          </div>
 
-button.disabled=true;
-button.textContent="Creating Account...";
+        </div>
 
-try{
 
-showLoading();
+        <button
+          id="loginButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Login
+        </button>
 
-const data=await apiRequest(
-"/customers/register",
-{
-method:"POST",
-body:JSON.stringify({
-full_name:fullName,
-email,
-phone,
-password
-})
-}
-);
+      </form>
 
-if(!data||!data.success){
-throw new Error(
-data?.message||"Registration failed."
-);
-}
 
-showStatus(
-"registerStatus",
-data.message||"Account created successfully.",
-"success"
-);
+      <div style="margin-top:15px">
 
-document.getElementById("registerForm").reset();
+        <button
+          class="btn btn-dark"
+          onclick="switchToRegister()"
+        >
+          Create Account
+        </button>
 
-setTimeout(()=>{
-closeModal("registerModal");
-openModal("loginModal");
+      </div>
 
-showStatus(
-"loginStatus",
-"Your account has been created. Please login with your email or phone number.",
-"success"
-);
-},1200);
 
-}catch(error){
+      <p style="margin-top:15px">
 
-console.error("REGISTRATION ERROR:",error);
+        Forgot your password?
 
-showStatus(
-"registerStatus",
-error.message||
-"Unable to create account. Please try again."
-);
+        <span
+          class="switch-link"
+          onclick="switchToRecovery()"
+        >
+          Recover account
+        </span>
 
-}finally{
+      </p>
 
-hideLoading();
+    </div>
 
-button.disabled=false;
-button.textContent="Create Account";
-}
+  </div>
 
-});
 
+  <!-- =====================================================
+       REGISTER
+  ====================================================== -->
 
-/* =========================================================
-   PERSONAL LOAN
-========================================================= */
+  <div
+    class="modal"
+    id="registerModal"
+  >
 
-document.getElementById("personalLoanForm")
-.addEventListener("submit",async event=>{
+    <div class="modal-box">
 
-event.preventDefault();
+      <button
+        class="close-btn"
+        onclick="closeModal('registerModal')"
+      >
+        ×
+      </button>
 
-clearStatus("personalLoanStatus");
+      <h2>Create Customer Account</h2>
 
-const customer=getCustomerData();
+      <p>
+        Register for your JAY C O B customer account.
+      </p>
 
-if(!customer){
+      <div
+        id="registerStatus"
+        class="status-message"
+      ></div>
 
-showStatus(
-"personalLoanStatus",
-"You must be logged in to submit a loan application."
-);
 
-return;
-}
+      <form id="registerForm">
 
-const amount=Number(
-document.getElementById("personalAmount").value
-);
+        <div class="form-group">
 
-const purpose=
-document.getElementById("personalPurpose")
-.value.trim();
+          <label for="registerName">
+            Full Name
+          </label>
 
-const duration=Number(
-document.getElementById("personalDuration").value
-);
+          <input
+            id="registerName"
+            type="text"
+            required
+          >
 
-if(!amount||amount<=0){
+        </div>
 
-showStatus(
-"personalLoanStatus",
-"Please enter a valid loan amount."
-);
 
-return;
-}
+        <div class="form-group">
 
-if(!duration){
+          <label for="registerEmail">
+            Email
+          </label>
 
-showStatus(
-"personalLoanStatus",
-"Please select a repayment period."
-);
+          <input
+            id="registerEmail"
+            type="email"
+            required
+          >
 
-return;
-}
+        </div>
 
-const button=
-document.getElementById("personalLoanButton");
 
-button.disabled=true;
-button.textContent="Submitting...";
+        <div class="form-group">
 
-try{
+          <label for="registerPhone">
+            Phone
+          </label>
 
-showLoading();
+          <input
+            id="registerPhone"
+            type="tel"
+            placeholder="+265..."
+            required
+          >
 
-const data=await apiRequest(
-"/loans/apply",
-{
-method:"POST",
-body:JSON.stringify({
+        </div>
 
-customer_id:customer.id,
-loan_type:"personal",
-amount,
-duration_months:duration,
-purpose,
 
-applicant_name:customer.full_name,
-phone:customer.phone,
-email:customer.email,
+        <div class="form-group">
 
-residential_address:
-customer.residential_address||
-customer.address||
-"",
+          <label for="registerPassword">
+            Password
+          </label>
 
-employment_status:
-customer.employment_status||"",
+          <div class="password-wrap">
 
-monthly_income:
-customer.monthly_income||null,
+            <input
+              id="registerPassword"
+              type="password"
+              minlength="8"
+              required
+            >
 
-interest_rate:null
+            <button
+              type="button"
+              class="password-toggle"
+              onclick="togglePassword('registerPassword')"
+            >
+              👁
+            </button>
 
-})
-}
-);
+          </div>
 
-if(!data.success){
-throw new Error(
-data.message||"Loan application failed."
-);
-}
+          <div class="form-note">
+            Password must contain at least 8 characters.
+          </div>
 
-showStatus(
-"personalLoanStatus",
-"Personal loan application submitted successfully.",
-"success"
-);
+        </div>
 
-document.getElementById("personalLoanForm").reset();
 
-}catch(error){
+        <div class="form-group">
 
-showStatus(
-"personalLoanStatus",
-error.message||
-"Unable to submit application."
-);
+          <label for="registerConfirmPassword">
+            Confirm Password
+          </label>
 
-}finally{
+          <div class="password-wrap">
 
-hideLoading();
+            <input
+              id="registerConfirmPassword"
+              type="password"
+              minlength="8"
+              required
+            >
 
-button.disabled=false;
-button.textContent="Submit Application";
-}
+            <button
+              type="button"
+              class="password-toggle"
+              onclick="togglePassword('registerConfirmPassword')"
+            >
+              👁
+            </button>
 
-});
+          </div>
 
+        </div>
 
-/* =========================================================
-   BUSINESS LOAN
-========================================================= */
 
-document.getElementById("businessLoanForm")
-.addEventListener("submit",async event=>{
+        <button
+          id="registerButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Create Account
+        </button>
 
-event.preventDefault();
+      </form>
 
-clearStatus("businessLoanStatus");
 
-const customer=getCustomerData();
+      <p style="margin-top:15px">
 
-if(!customer){
+        Already have an account?
 
-showStatus(
-"businessLoanStatus",
-"You must be logged in to submit a loan application."
-);
+        <span
+          class="switch-link"
+          onclick="switchToLogin()"
+        >
+          Login
+        </span>
 
-return;
-}
+      </p>
 
-const businessName=
-document.getElementById("businessName")
-.value.trim();
+    </div>
 
-const amount=Number(
-document.getElementById("businessAmount").value
-);
+  </div>
 
-const purpose=
-document.getElementById("businessPurpose")
-.value.trim();
 
-const duration=Number(
-document.getElementById("businessDuration").value
-);
+  <!-- =====================================================
+       PERSONAL LOAN
+  ====================================================== -->
 
-if(!businessName){
+  <div
+    class="modal"
+    id="personalLoanModal"
+  >
 
-showStatus(
-"businessLoanStatus",
-"Please enter the business name."
-);
+    <div class="modal-box">
 
-return;
-}
+      <button
+        class="close-btn"
+        onclick="closeModal('personalLoanModal')"
+      >
+        ×
+      </button>
 
-if(!amount||amount<=0){
+      <h2>Personal Loan Application</h2>
 
-showStatus(
-"businessLoanStatus",
-"Please enter a valid loan amount."
-);
+      <p>
+        Complete the application details.
+      </p>
 
-return;
-}
+      <div
+        id="personalLoanStatus"
+        class="status-message"
+      ></div>
 
-if(!duration){
 
-showStatus(
-"businessLoanStatus",
-"Please select a repayment period."
-);
+      <form id="personalLoanForm">
 
-return;
-}
+        <div class="form-group">
 
-const button=
-document.getElementById("businessLoanButton");
+          <label for="personalAmount">
+            Loan Amount
+          </label>
 
-button.disabled=true;
-button.textContent="Submitting...";
+          <input
+            id="personalAmount"
+            type="number"
+            min="1"
+            placeholder="Enter amount"
+            required
+          >
 
-try{
+        </div>
 
-showLoading();
 
-const data=await apiRequest(
-"/loans/apply",
-{
-method:"POST",
-body:JSON.stringify({
+        <div class="form-group">
 
-customer_id:customer.id,
-loan_type:"business",
-amount,
-duration_months:duration,
-purpose,
+          <label for="personalPurpose">
+            Purpose
+          </label>
 
-applicant_name:customer.full_name,
-phone:customer.phone,
-email:customer.email,
+          <textarea
+            id="personalPurpose"
+            rows="3"
+            placeholder="Explain what the loan will be used for"
+            required
+          ></textarea>
 
-residential_address:
-customer.residential_address||
-customer.address||
-"",
+        </div>
 
-business_name:businessName,
-business_address:"",
-business_type:"",
-monthly_business_income:null,
 
-interest_rate:null
+        <div class="form-group">
 
-})
-}
-);
+          <label for="personalDuration">
+            Repayment Period
+          </label>
 
-if(!data.success){
+          <select
+            id="personalDuration"
+            required
+          >
 
-throw new Error(
-data.message||"Loan application failed."
-);
-}
+            <option value="">
+              Select period
+            </option>
 
-showStatus(
-"businessLoanStatus",
-"Business loan application submitted successfully.",
-"success"
-);
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="4">4 Months</option>
+            <option value="5">5 Months</option>
+            <option value="6">6 Months</option>
+            <option value="9">9 Months</option>
+            <option value="12">12 Months</option>
+            <option value="18">18 Months</option>
+            <option value="24">24 Months</option>
 
-document.getElementById("businessLoanForm").reset();
+          </select>
 
-}catch(error){
+        </div>
 
-showStatus(
-"businessLoanStatus",
-error.message||
-"Unable to submit application."
-);
 
-}finally{
+        <button
+          id="personalLoanButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Submit Application
+        </button>
 
-hideLoading();
+      </form>
 
-button.disabled=false;
-button.textContent="Submit Application";
-}
+    </div>
 
-});
+  </div>
 
 
-/* =========================================================
-   ACCOUNT RECOVERY
-========================================================= */
+  <!-- =====================================================
+       BUSINESS LOAN
+  ====================================================== -->
 
-document.getElementById("recoveryForm")
-.addEventListener("submit",event=>{
+  <div
+    class="modal"
+    id="businessLoanModal"
+  >
 
-event.preventDefault();
+    <div class="modal-box">
 
-showStatus(
-"recoveryStatus",
-"Account recovery backend is not activated yet. OTP and password reset will be connected in the next security module.",
-"error"
-);
+      <button
+        class="close-btn"
+        onclick="closeModal('businessLoanModal')"
+      >
+        ×
+      </button>
 
-});
+      <h2>Business Loan Application</h2>
 
+      <p>
+        Submit your business financing request.
+      </p>
 
-/* =========================================================
-   REAL SUPPORT TICKET SYSTEM
-========================================================= */
+      <div
+        id="businessLoanStatus"
+        class="status-message"
+      ></div>
 
-document.getElementById("supportForm")
-.addEventListener("submit",async event=>{
 
-event.preventDefault();
+      <form id="businessLoanForm">
 
-clearStatus("supportStatus");
+        <div class="form-group">
 
-const customer=getCustomerData();
+          <label for="businessName">
+            Business Name
+          </label>
 
-if(!customer){
+          <input
+            id="businessName"
+            type="text"
+            required
+          >
 
-showStatus(
-"supportStatus",
-"Please login to your customer account before creating a support ticket.",
-"error"
-);
+        </div>
 
-return;
-}
 
-const subject=
-document.getElementById("supportSubject")
-.value.trim();
+        <div class="form-group">
 
-const category=
-document.getElementById("supportCategory")
-.value;
+          <label for="businessAmount">
+            Loan Amount
+          </label>
 
-const priority=
-document.getElementById("supportPriority")
-.value;
+          <input
+            id="businessAmount"
+            type="number"
+            min="1"
+            required
+          >
 
-const message=
-document.getElementById("supportMessage")
-.value.trim();
+        </div>
 
-if(!subject){
 
-showStatus(
-"supportStatus",
-"Please enter a subject.",
-"error"
-);
+        <div class="form-group">
 
-return;
-}
+          <label for="businessPurpose">
+            Business Purpose
+          </label>
 
-if(!message){
+          <textarea
+            id="businessPurpose"
+            rows="3"
+            placeholder="Explain how the business will use the loan"
+            required
+          ></textarea>
 
-showStatus(
-"supportStatus",
-"Please enter your message.",
-"error"
-);
+        </div>
 
-return;
-}
 
-const button=
-document.getElementById("supportButton");
+        <div class="form-group">
 
-button.disabled=true;
-button.textContent="Sending...";
+          <label for="businessDuration">
+            Repayment Period
+          </label>
 
-try{
+          <select
+            id="businessDuration"
+            required
+          >
 
-showLoading();
+            <option value="">
+              Select period
+            </option>
 
-const data=await apiRequest(
-"/support/tickets",
-{
-method:"POST",
-body:JSON.stringify({
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="4">4 Months</option>
+            <option value="5">5 Months</option>
+            <option value="6">6 Months</option>
+            <option value="9">9 Months</option>
+            <option value="12">12 Months</option>
+            <option value="18">18 Months</option>
+            <option value="24">24 Months</option>
 
-customer_id:customer.id,
-subject,
-message,
-category,
-priority
+          </select>
 
-})
-}
-);
+        </div>
 
-if(!data||!data.success){
 
-throw new Error(
-data?.message||
-"Unable to create support ticket."
-);
-}
+        <button
+          id="businessLoanButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Submit Application
+        </button>
 
-showStatus(
-"supportStatus",
-"Support ticket created successfully. Our support team can now review your request.",
-"success"
-);
+      </form>
 
-document.getElementById("supportForm").reset();
+    </div>
 
-}catch(error){
+  </div>
 
-console.error("SUPPORT ERROR:",error);
 
-showStatus(
-"supportStatus",
-error.message||
-"Unable to send support request.",
-"error"
-);
+  <!-- =====================================================
+       ACCOUNT RECOVERY
+  ====================================================== -->
 
-}finally{
+  <div
+    class="modal"
+    id="recoveryModal"
+  >
 
-hideLoading();
+    <div class="modal-box">
 
-button.disabled=false;
-button.textContent="Send Message";
-}
+      <button
+        class="close-btn"
+        onclick="closeModal('recoveryModal')"
+      >
+        ×
+      </button>
 
-});
+      <h2>Account Recovery</h2>
 
+      <p>
+        Enter your registered email or phone number.
+      </p>
 
-/* =========================================================
-   SWITCH MODALS
-========================================================= */
+      <div
+        id="recoveryStatus"
+        class="status-message"
+      ></div>
 
-function switchToRegister(){
 
-closeModal("loginModal");
-openModal("registerModal");
-}
+      <form id="recoveryForm">
 
-function switchToLogin(){
+        <div class="form-group">
 
-closeModal("registerModal");
-openModal("loginModal");
-}
+          <label for="recoveryIdentifier">
+            Email or Phone
+          </label>
 
-function switchToRecovery(){
+          <input
+            id="recoveryIdentifier"
+            type="text"
+            placeholder="Email or phone number"
+            required
+          >
 
-closeModal("loginModal");
-openModal("recoveryModal");
-}
+        </div>
 
 
-/* =========================================================
-   CUSTOMER DASHBOARD
-========================================================= */
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Request Recovery
+        </button>
 
-function openDashboard(){
+      </form>
 
-const customer=getCustomerData();
 
-if(!customer){
+      <div
+        class="form-note"
+        style="margin-top:15px"
+      >
+        OTP/password reset backend will be connected
+        in the account-recovery security module.
+      </div>
 
-openModal("loginModal");
+    </div>
 
-showStatus(
-"loginStatus",
-"Please login to access your customer dashboard.",
-"error"
-);
+  </div>
 
-return;
-}
 
-window.location.href="dashboard.html";
-}
+  <!-- =====================================================
+       SUPPORT
+  ====================================================== -->
 
+  <div
+    class="modal"
+    id="supportModal"
+  >
 
-/* =========================================================
-   SESSION CHECK
-========================================================= */
+    <div class="modal-box">
 
-function checkCustomerSession(){
+      <button
+        class="close-btn"
+        onclick="closeModal('supportModal')"
+      >
+        ×
+      </button>
 
-const token=getCustomerToken();
-const customer=getCustomerData();
+      <h2>Contact Support</h2>
 
-if(token&&customer){
+      <p>
+        Tell us how we can assist you.
+      </p>
 
-console.log(
-"JAY C O B customer session detected."
-);
+      <div
+        id="supportStatus"
+        class="status-message"
+      ></div>
 
-}
 
-}
+      <form id="supportForm">
 
+        <div class="form-group">
 
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
+          <label for="supportSubject">
+            Subject
+          </label>
 
-document.addEventListener("keydown",event=>{
+          <input
+            id="supportSubject"
+            type="text"
+            required
+          >
 
-if(event.key==="Escape"){
+        </div>
 
-document.querySelectorAll(".modal.active")
-.forEach(modal=>{
-modal.classList.remove("active");
-});
 
-}
+        <div class="form-group">
 
-});
+          <label for="supportCategory">
+            Category
+          </label>
 
+          <select id="supportCategory">
 
-/* =========================================================
-   START
-========================================================= */
+            <option value="general">
+              General
+            </option>
 
-checkCustomerSession();
+            <option value="account">
+              Account
+            </option>
 
-console.log(
-"JAY C O B FINANCIAL SERVICES public website loaded."
-);
+            <option value="loan">
+              Loan
+            </option>
 
-console.log(
-"JAY C O B calculator loaded using MONTHLY INTEREST."
-);
+            <option value="transaction">
+              Transaction
+            </option>
 
-console.log(
-"JAY C O B Admin Portal link: admin-login.html"
-);
+            <option value="savings">
+              Savings
+            </option>
 
-</script>
+            <option value="kyc">
+              KYC
+            </option>
+
+            <option value="technical">
+              Technical
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="supportPriority">
+            Priority
+          </label>
+
+          <select id="supportPriority">
+
+            <option value="low">
+              Low
+            </option>
+
+            <option
+              value="medium"
+              selected
+            >
+              Medium
+            </option>
+
+            <option value="high">
+              High
+            </option>
+
+            <option value="urgent">
+              Urgent
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="supportMessage">
+            Message
+          </label>
+
+          <textarea
+            id="supportMessage"
+            rows="5"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <button
+          id="supportButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Send Message
+        </button>
+
+      </form>
+
+
+      <div
+        class="form-note"
+        style="margin-top:15px"
+      >
+        Your message will be recorded as a support ticket.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+  ====================================================== -->
+
+  <div id="loadingOverlay">
+
+    <div class="loader-box">
+
+      <div class="spinner"></div>
+
+      <p>
+        Please wait...
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       API CONFIGURATION
+    ====================================================== */
+
+    const API_BASE_URL =
+      "https://emmanueljacobgithubio-production.up.railway.app/api";
+
+    const CUSTOMER_TOKEN_KEY =
+      "jaycob_customer_token";
+
+    const CUSTOMER_DATA_KEY =
+      "jaycob_customer_data";
+
+
+    /* =====================================================
+       CUSTOMER SESSION
+    ====================================================== */
+
+    function saveCustomerSession(token, customer) {
+
+      localStorage.setItem(
+        CUSTOMER_TOKEN_KEY,
+        token
+      );
+
+      localStorage.setItem(
+        CUSTOMER_DATA_KEY,
+        JSON.stringify(customer)
+      );
+    }
+
+
+    function getCustomerToken() {
+
+      return localStorage.getItem(
+        CUSTOMER_TOKEN_KEY
+      );
+    }
+
+
+    function getCustomerData() {
+
+      const data =
+        localStorage.getItem(
+          CUSTOMER_DATA_KEY
+        );
+
+      if (!data) {
+        return null;
+      }
+
+      try {
+
+        return JSON.parse(data);
+
+      } catch {
+
+        return null;
+
+      }
+    }
+
+
+    function clearCustomerSession() {
+
+      localStorage.removeItem(
+        CUSTOMER_TOKEN_KEY
+      );
+
+      localStorage.removeItem(
+        CUSTOMER_DATA_KEY
+      );
+
+    }
+
+
+    /* =====================================================
+       API REQUEST
+    ====================================================== */
+
+    async function apiRequest(
+      endpoint,
+      options = {}
+    ) {
+
+      const token =
+        getCustomerToken();
+
+      const headers = {
+        "Content-Type": "application/json",
+        ...(options.headers || {})
+      };
+
+
+      if (token) {
+
+        headers.Authorization =
+          `Bearer ${token}`;
+
+      }
+
+
+      const response =
+        await fetch(
+          API_BASE_URL + endpoint,
+          {
+            ...options,
+            headers
+          }
+        );
+
+
+      let data = null;
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch {
+
+        data = null;
+
+      }
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data?.message ||
+          data?.error ||
+          `Request failed (${response.status})`
+        );
+
+      }
+
+
+      return data;
+
+    }
+
+
+    /* =====================================================
+       LOADING / STATUS
+    ====================================================== */
+
+    function showLoading() {
+
+      document
+        .getElementById("loadingOverlay")
+        .classList.add("active");
+
+    }
+
+
+    function hideLoading() {
+
+      document
+        .getElementById("loadingOverlay")
+        .classList.remove("active");
+
+    }
+
+
+    function showStatus(
+      elementId,
+      message,
+      type = "error"
+    ) {
+
+      const element =
+        document.getElementById(
+          elementId
+        );
+
+      if (!element) {
+        return;
+      }
+
+
+      element.textContent =
+        message;
+
+      element.className =
+        `status-message show ${type}`;
+
+    }
+
+
+    function clearStatus(elementId) {
+
+      const element =
+        document.getElementById(
+          elementId
+        );
+
+      if (!element) {
+        return;
+      }
+
+
+      element.textContent = "";
+
+      element.className =
+        "status-message";
+
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+    ====================================================== */
+
+    function toggleMenu() {
+
+      document
+        .getElementById("navLinks")
+        .classList.toggle("active");
+
+    }
+
+
+    document
+      .querySelectorAll("#navLinks a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            document
+              .getElementById("navLinks")
+              .classList.remove("active");
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       MODALS
+    ====================================================== */
+
+    function openModal(id) {
+
+      const modal =
+        document.getElementById(id);
+
+      if (modal) {
+
+        modal.classList.add("active");
+
+      }
+
+    }
+
+
+    function closeModal(id) {
+
+      const modal =
+        document.getElementById(id);
+
+      if (modal) {
+
+        modal.classList.remove("active");
+
+      }
+
+    }
+
+
+    document
+      .querySelectorAll(".modal")
+      .forEach(modal => {
+
+        modal.addEventListener(
+          "click",
+          event => {
+
+            if (
+              event.target === modal
+            ) {
+
+              modal.classList.remove(
+                "active"
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       SUPPORT OPEN
+    ====================================================== */
+
+    function openSupport() {
+
+      clearStatus("supportStatus");
+
+      const customer =
+        getCustomerData();
+
+
+      if (!customer) {
+
+        openModal("loginModal");
+
+        showStatus(
+          "loginStatus",
+          "Please login to your customer account before creating a support ticket.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      openModal("supportModal");
+
+    }
+
+
+    /* =====================================================
+       LOAN CHOOSER
+    ====================================================== */
+
+    function openLoanChooser() {
+
+      openModal(
+        "loanChooserModal"
+      );
+
+    }
+
+
+    function openPersonalLoan() {
+
+      closeModal(
+        "loanChooserModal"
+      );
+
+
+      const customer =
+        getCustomerData();
+
+
+      if (!customer) {
+
+        openModal(
+          "loginModal"
+        );
+
+        showStatus(
+          "loginStatus",
+          "Please login to apply for a loan.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      openModal(
+        "personalLoanModal"
+      );
+
+    }
+
+
+    function openBusinessLoan() {
+
+      closeModal(
+        "loanChooserModal"
+      );
+
+
+      const customer =
+        getCustomerData();
+
+
+      if (!customer) {
+
+        openModal(
+          "loginModal"
+        );
+
+        showStatus(
+          "loginStatus",
+          "Please login to apply for a loan.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      openModal(
+        "businessLoanModal"
+      );
+
+    }
+
+
+    /* =====================================================
+       PASSWORD TOGGLE
+    ====================================================== */
+
+    function togglePassword(id) {
+
+      const input =
+        document.getElementById(id);
+
+      if (!input) {
+        return;
+      }
+
+
+      input.type =
+        input.type === "password"
+          ? "text"
+          : "password";
+
+    }
+
+
+    /* =====================================================
+       MONEY FORMAT
+    ====================================================== */
+
+    function formatMoney(value) {
+
+      return (
+        "MWK " +
+        Number(value).toLocaleString(
+          "en-MW",
+          {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }
+        )
+      );
+
+    }
+
+
+    /* =====================================================
+       LOAN CALCULATOR
+    ====================================================== */
+
+    function calculateLoan() {
+
+      const amount =
+        Number(
+          document.getElementById(
+            "loanAmount"
+          ).value
+        );
+
+
+      const monthlyRate =
+        Number(
+          document.getElementById(
+            "loanRate"
+          ).value
+        );
+
+
+      const months =
+        Number(
+          document.getElementById(
+            "loanMonths"
+          ).value
+        );
+
+
+      const result =
+        document.getElementById(
+          "calcResult"
+        );
+
+
+      if (
+        !amount ||
+        amount <= 0
+      ) {
+
+        result.innerHTML = `
+          <span style="color:#fca5a5">
+            Please enter a valid loan amount.
+          </span>
+        `;
+
+        return;
+
+      }
+
+
+      if (
+        monthlyRate < 0 ||
+        !Number.isFinite(monthlyRate)
+      ) {
+
+        result.innerHTML = `
+          <span style="color:#fca5a5">
+            Please enter a valid monthly interest rate.
+          </span>
+        `;
+
+        return;
+
+      }
+
+
+      if (
+        !months ||
+        months <= 0
+      ) {
+
+        result.innerHTML = `
+          <span style="color:#fca5a5">
+            Please enter a valid repayment period.
+          </span>
+        `;
+
+        return;
+
+      }
+
+
+      /*
+        JAY C O B MONTHLY INTEREST FORMULA
+
+        Interest =
+        Principal × Monthly Rate × Months
+      */
+
+      const interestAmount =
+        amount *
+        (monthlyRate / 100) *
+        months;
+
+
+      const totalAmount =
+        amount +
+        interestAmount;
+
+
+      const monthlyPayment =
+        totalAmount /
+        months;
+
+
+      result.innerHTML = `
+
+        <div class="calc-result-row">
+
+          <span>Principal</span>
+
+          <strong>
+            ${formatMoney(amount)}
+          </strong>
+
+        </div>
+
+
+        <div class="calc-result-row">
+
+          <span>Interest Rate</span>
+
+          <strong>
+            ${monthlyRate.toFixed(2)}% / month
+          </strong>
+
+        </div>
+
+
+        <div class="calc-result-row">
+
+          <span>Interest Amount</span>
+
+          <strong>
+            ${formatMoney(interestAmount)}
+          </strong>
+
+        </div>
+
+
+        <div class="calc-result-row">
+
+          <span>Total Amount</span>
+
+          <strong>
+            ${formatMoney(totalAmount)}
+          </strong>
+
+        </div>
+
+
+        <div class="calc-result-row">
+
+          <span>Monthly Payment</span>
+
+          <strong>
+            ${formatMoney(monthlyPayment)}
+          </strong>
+
+        </div>
+
+
+        <div
+          style="
+            margin-top:12px;
+            font-size:12px;
+            color:#d1d5db
+          "
+        >
+          Calculation uses simple monthly interest.
+        </div>
+
+      `;
+
+    }
+
+
+    /* =====================================================
+       CUSTOMER LOGIN
+    ====================================================== */
+
+    document
+      .getElementById("loginForm")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearStatus(
+            "loginStatus"
+          );
+
+
+          const identifier =
+            document
+              .getElementById(
+                "loginIdentifier"
+              )
+              .value
+              .trim();
+
+
+          const password =
+            document
+              .getElementById(
+                "loginPassword"
+              )
+              .value;
+
+
+          if (!identifier) {
+
+            showStatus(
+              "loginStatus",
+              "Please enter your email address or phone number.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (!password) {
+
+            showStatus(
+              "loginStatus",
+              "Please enter your password.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const loginPayload = {
+            password
+          };
+
+
+          if (
+            identifier.includes("@")
+          ) {
+
+            loginPayload.email =
+              identifier;
+
+          } else {
+
+            loginPayload.phone =
+              identifier;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "loginButton"
+            );
+
+
+          button.disabled = true;
+
+          button.textContent =
+            "Logging in...";
+
+
+          try {
+
+            showLoading();
+
+
+            const data =
+              await apiRequest(
+                "/customers/login",
+                {
+                  method: "POST",
+
+                  body:
+                    JSON.stringify(
+                      loginPayload
+                    )
+                }
+              );
+
+
+            if (
+              !data ||
+              !data.success
+            ) {
+
+              throw new Error(
+                data?.message ||
+                "Login failed."
+              );
+
+            }
+
+
+            if (
+              !data.session_token ||
+              !data.customer
+            ) {
+
+              throw new Error(
+                "Login succeeded but the server did not return a valid customer session."
+              );
+
+            }
+
+
+            saveCustomerSession(
+              data.session_token,
+              data.customer
+            );
+
+
+            showStatus(
+              "loginStatus",
+              "Login successful. Opening your dashboard...",
+              "success"
+            );
+
+
+            setTimeout(
+              () => {
+
+                closeModal(
+                  "loginModal"
+                );
+
+                openDashboard();
+
+              },
+              700
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              "LOGIN ERROR:",
+              error
+            );
+
+
+            showStatus(
+              "loginStatus",
+              error.message ||
+              "Unable to login.",
+              "error"
+            );
+
+
+          } finally {
+
+            hideLoading();
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Login";
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       REGISTER
+    ====================================================== */
+
+    document
+      .getElementById("registerForm")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearStatus(
+            "registerStatus"
+          );
+
+
+          const fullName =
+            document
+              .getElementById(
+                "registerName"
+              )
+              .value
+              .trim();
+
+
+          const email =
+            document
+              .getElementById(
+                "registerEmail"
+              )
+              .value
+              .trim();
+
+
+          const phone =
+            document
+              .getElementById(
+                "registerPhone"
+              )
+              .value
+              .trim();
+
+
+          const password =
+            document
+              .getElementById(
+                "registerPassword"
+              )
+              .value;
+
+
+          const confirmPassword =
+            document
+              .getElementById(
+                "registerConfirmPassword"
+              )
+              .value;
+
+
+          if (!fullName) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your full name."
+            );
+
+            return;
+
+          }
+
+
+          if (!email) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your email address."
+            );
+
+            return;
+
+          }
+
+
+          if (!phone) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your phone number."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            password.length < 8
+          ) {
+
+            showStatus(
+              "registerStatus",
+              "Password must contain at least 8 characters."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            password !==
+            confirmPassword
+          ) {
+
+            showStatus(
+              "registerStatus",
+              "Passwords do not match."
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "registerButton"
+            );
+
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Creating Account...";
+
+
+          try {
+
+            showLoading();
+
+
+            const data =
+              await apiRequest(
+                "/customers/register",
+                {
+                  method: "POST",
+
+                  body:
+                    JSON.stringify(
+                      {
+                        full_name:
+                          fullName,
+
+                        email,
+
+                        phone,
+
+                        password
+                      }
+                    )
+                }
+              );
+
+
+            if (
+              !data ||
+              !data.success
+            ) {
+
+              throw new Error(
+                data?.message ||
+                "Registration failed."
+              );
+
+            }
+
+
+            showStatus(
+              "registerStatus",
+              data.message ||
+              "Account created successfully.",
+              "success"
+            );
+
+
+            document
+              .getElementById(
+                "registerForm"
+              )
+              .reset();
+
+
+            setTimeout(
+              () => {
+
+                closeModal(
+                  "registerModal"
+                );
+
+                openModal(
+                  "loginModal"
+                );
+
+
+                showStatus(
+                  "loginStatus",
+                  "Your account has been created. Please login with your email or phone number.",
+                  "success"
+                );
+
+              },
+              1200
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              "REGISTRATION ERROR:",
+              error
+            );
+
+
+            showStatus(
+              "registerStatus",
+              error.message ||
+              "Unable to create account. Please try again."
+            );
+
+
+          } finally {
+
+            hideLoading();
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Create Account";
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       PERSONAL LOAN
+    ====================================================== */
+
+    document
+      .getElementById(
+        "personalLoanForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearStatus(
+            "personalLoanStatus"
+          );
+
+
+          const customer =
+            getCustomerData();
+
+
+          if (!customer) {
+
+            showStatus(
+              "personalLoanStatus",
+              "You must be logged in to submit a loan application."
+            );
+
+            return;
+
+          }
+
+
+          const amount =
+            Number(
+              document.getElementById(
+                "personalAmount"
+              ).value
+            );
+
+
+          const purpose =
+            document
+              .getElementById(
+                "personalPurpose"
+              )
+              .value
+              .trim();
+
+
+          const duration =
+            Number(
+              document.getElementById(
+                "personalDuration"
+              ).value
+            );
+
+
+          if (
+            !amount ||
+            amount <= 0
+          ) {
+
+            showStatus(
+              "personalLoanStatus",
+              "Please enter a valid loan amount."
+            );
+
+            return;
+
+          }
+
+
+          if (!duration) {
+
+            showStatus(
+              "personalLoanStatus",
+              "Please select a repayment period."
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "personalLoanButton"
+            );
+
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Submitting...";
+
+
+          try {
+
+            showLoading();
+
+
+            const data =
+              await apiRequest(
+                "/loans/apply",
+                {
+                  method: "POST",
+
+                  body:
+                    JSON.stringify(
+                      {
+                        customer_id:
+                          customer.id,
+
+                        loan_type:
+                          "personal",
+
+                        amount,
+
+                        duration_months:
+                          duration,
+
+                        purpose,
+
+                        applicant_name:
+                          customer.full_name,
+
+                        phone:
+                          customer.phone,
+
+                        email:
+                          customer.email,
+
+                        residential_address:
+                          customer.residential_address ||
+                          customer.address ||
+                          "",
+
+                        employment_status:
+                          customer.employment_status ||
+                          "",
+
+                        monthly_income:
+                          customer.monthly_income ||
+                          null,
+
+                        interest_rate:
+                          null
+                      }
+                    )
+                }
+              );
+
+
+            if (
+              !data ||
+              !data.success
+            ) {
+
+              throw new Error(
+                data?.message ||
+                "Loan application failed."
+              );
+
+            }
+
+
+            showStatus(
+              "personalLoanStatus",
+              "Personal loan application submitted successfully.",
+              "success"
+            );
+
+
+            document
+              .getElementById(
+                "personalLoanForm"
+              )
+              .reset();
+
+
+          } catch (error) {
+
+            console.error(
+              "PERSONAL LOAN ERROR:",
+              error
+            );
+
+
+            showStatus(
+              "personalLoanStatus",
+              error.message ||
+              "Unable to submit application."
+            );
+
+
+          } finally {
+
+            hideLoading();
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Submit Application";
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       BUSINESS LOAN
+    ====================================================== */
+
+    document
+      .getElementById(
+        "businessLoanForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearStatus(
+            "businessLoanStatus"
+          );
+
+
+          const customer =
+            getCustomerData();
+
+
+          if (!customer) {
+
+            showStatus(
+              "businessLoanStatus",
+              "You must be logged in to submit a loan application."
+            );
+
+            return;
+
+          }
+
+
+          const businessName =
+            document
+              .getElementById(
+                "businessName"
+              )
+              .value
+              .trim();
+
+
+          const amount =
+            Number(
+              document.getElementById(
+                "businessAmount"
+              ).value
+            );
+
+
+          const purpose =
+            document
+              .getElementById(
+                "businessPurpose"
+              )
+              .value
+              .trim();
+
+
+          const duration =
+            Number(
+              document.getElementById(
+                "businessDuration"
+              ).value
+            );
+
+
+          if (!businessName) {
+
+            showStatus(
+              "businessLoanStatus",
+              "Please enter the business name."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            !amount ||
+            amount <= 0
+          ) {
+
+            showStatus(
+              "businessLoanStatus",
+              "Please enter a valid loan amount."
+            );
+
+            return;
+
+          }
+
+
+          if (!duration) {
+
+            showStatus(
+              "businessLoanStatus",
+              "Please select a repayment period."
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "businessLoanButton"
+            );
+
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Submitting...";
+
+
+          try {
+
+            showLoading();
+
+
+            const data =
+              await apiRequest(
+                "/loans/apply",
+                {
+                  method: "POST",
+
+                  body:
+                    JSON.stringify(
+                      {
+                        customer_id:
+                          customer.id,
+
+                        loan_type:
+                          "business",
+
+                        amount,
+
+                        duration_months:
+                          duration,
+
+                        purpose,
+
+                        applicant_name:
+                          customer.full_name,
+
+                        phone:
+                          customer.phone,
+
+                        email:
+                          customer.email,
+
+                        residential_address:
+                          customer.residential_address ||
+                          customer.address ||
+                          "",
+
+                        business_name:
+                          businessName,
+
+                        business_address:
+                          "",
+
+                        business_type:
+                          "",
+
+                        monthly_business_income:
+                          null,
+
+                        interest_rate:
+                          null
+                      }
+                    )
+                }
+              );
+
+
+            if (
+              !data ||
+              !data.success
+            ) {
+
+              throw new Error(
+                data?.message ||
+                "Loan application failed."
+              );
+
+            }
+
+
+            showStatus(
+              "businessLoanStatus",
+              "Business loan application submitted successfully.",
+              "success"
+            );
+
+
+            document
+              .getElementById(
+                "businessLoanForm"
+              )
+              .reset();
+
+
+          } catch (error) {
+
+            console.error(
+              "BUSINESS LOAN ERROR:",
+              error
+            );
+
+
+            showStatus(
+              "businessLoanStatus",
+              error.message ||
+              "Unable to submit application."
+            );
+
+
+          } finally {
+
+            hideLoading();
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Submit Application";
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       ACCOUNT RECOVERY
+    ====================================================== */
+
+    document
+      .getElementById(
+        "recoveryForm"
+      )
+      .addEventListener(
+        "submit",
+        event => {
+
+          event.preventDefault();
+
+
+          showStatus(
+            "recoveryStatus",
+            "Account recovery backend is not activated yet. OTP and password reset will be connected in the next security module.",
+            "error"
+          );
+
+        }
+      );
+
+
+    /* =====================================================
+       REAL SUPPORT TICKET SYSTEM
+    ====================================================== */
+
+    document
+      .getElementById(
+        "supportForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearStatus(
+            "supportStatus"
+          );
+
+
+          const customer =
+            getCustomerData();
+
+
+          if (!customer) {
+
+            showStatus(
+              "supportStatus",
+              "Please login to your customer account before creating a support ticket.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const subject =
+            document
+              .getElementById(
+                "supportSubject"
+              )
+              .value
+              .trim();
+
+
+          const category =
+            document
+              .getElementById(
+                "supportCategory"
+              )
+              .value;
+
+
+          const priority =
+            document
+              .getElementById(
+                "supportPriority"
+              )
+              .value;
+
+
+          const message =
+            document
+              .getElementById(
+                "supportMessage"
+              )
+              .value
+              .trim();
+
+
+          if (!subject) {
+
+            showStatus(
+              "supportStatus",
+              "Please enter a subject.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (!message) {
+
+            showStatus(
+              "supportStatus",
+              "Please enter your message.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document.getElementById(
+              "supportButton"
+            );
+
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Sending...";
+
+
+          try {
+
+            showLoading();
+
+
+            const data =
+              await apiRequest(
+                "/support/tickets",
+                {
+                  method: "POST",
+
+                  body:
+                    JSON.stringify(
+                      {
+                        customer_id:
+                          customer.id,
+
+                        subject,
+
+                        message,
+
+                        category,
+
+                        priority
+                      }
+                    )
+                }
+              );
+
+
+            if (
+              !data ||
+              !data.success
+            ) {
+
+              throw new Error(
+                data?.message ||
+                "Unable to create support ticket."
+              );
+
+            }
+
+
+            showStatus(
+              "supportStatus",
+              "Support ticket created successfully. Our support team can now review your request.",
+              "success"
+            );
+
+
+            document
+              .getElementById(
+                "supportForm"
+              )
+              .reset();
+
+
+          } catch (error) {
+
+            console.error(
+              "SUPPORT ERROR:",
+              error
+            );
+
+
+            showStatus(
+              "supportStatus",
+              error.message ||
+              "Unable to send support request.",
+              "error"
+            );
+
+
+          } finally {
+
+            hideLoading();
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Send Message";
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       SWITCH MODALS
+    ====================================================== */
+
+    function switchToRegister() {
+
+      closeModal(
+        "loginModal"
+      );
+
+      openModal(
+        "registerModal"
+      );
+
+    }
+
+
+    function switchToLogin() {
+
+      closeModal(
+        "registerModal"
+      );
+
+      openModal(
+        "loginModal"
+      );
+
+    }
+
+
+    function switchToRecovery() {
+
+      closeModal(
+        "loginModal"
+      );
+
+      openModal(
+        "recoveryModal"
+      );
+
+    }
+
+
+    /* =====================================================
+       CUSTOMER DASHBOARD
+    ====================================================== */
+
+    function openDashboard() {
+
+      const customer =
+        getCustomerData();
+
+
+      if (!customer) {
+
+        openModal(
+          "loginModal"
+        );
+
+
+        showStatus(
+          "loginStatus",
+          "Please login to access your customer dashboard.",
+          "error"
+        );
+
+
+        return;
+
+      }
+
+
+      window.location.href =
+        "dashboard.html";
+
+    }
+
+
+    /* =====================================================
+       SESSION CHECK
+    ====================================================== */
+
+    function checkCustomerSession() {
+
+      const token =
+        getCustomerToken();
+
+
+      const customer =
+        getCustomerData();
+
+
+      if (
+        token &&
+        customer
+      ) {
+
+        console.log(
+          "JAY C O B customer session detected."
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          document
+            .querySelectorAll(
+              ".modal.active"
+            )
+            .forEach(
+              modal => {
+
+                modal.classList.remove(
+                  "active"
+                );
+
+              }
+            );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       START
+    ====================================================== */
+
+    checkCustomerSession();
+
+
+    console.log(
+      "JAY C O B FINANCIAL SERVICES public website loaded."
+    );
+
+
+    console.log(
+      "JAY C O B calculator loaded using MONTHLY INTEREST."
+    );
+
+
+    console.log(
+      "JAY C O B Support Ticket System connected."
+    );
+
+
+    console.log(
+      "JAY C O B Admin Portal: admin-login.html"
+    );
+
+  </script>
 
 </body>
 </html>
