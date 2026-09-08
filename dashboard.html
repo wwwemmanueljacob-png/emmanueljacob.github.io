@@ -649,31 +649,116 @@
       ========================== -->
 
       <section
-        id="loansSection"
-        class="section"
-        style="display:none;">
+  id="loansSection"
+  class="section"
+  style="display:none;">
 
-        <div class="section-header">
-          <h2>My Loans</h2>
+  <div class="section-header">
 
-          <button
-            class="primary-btn"
-            onclick="openLoans()">
-            Apply for Loan
-          </button>
+    <div>
+      <h2>My Loans</h2>
+
+      <small
+        id="loanSummary"
+        style="color:#68758a;">
+        Loading your loan information...
+      </small>
+    </div>
+
+    <button
+      class="primary-btn"
+      onclick="openLoans()">
+      💰 Apply for Loan
+    </button>
+
+  </div>
+
+
+  <div class="section-body">
+
+    <!-- LOAN SUMMARY CARDS -->
+
+    <div
+      class="cards"
+      style="margin-bottom:20px;">
+
+      <div class="card">
+
+        <div class="card-label">
+          Total Applications
         </div>
 
-        <div class="section-body">
-
-          <div id="allLoanList" class="loan-list">
-            <div class="loading">
-              Loading loans...
-            </div>
-          </div>
-
+        <div
+          class="card-value"
+          id="totalLoanApplications">
+          0
         </div>
 
-      </section>
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-label">
+          Approved Loans
+        </div>
+
+        <div
+          class="card-value status-active"
+          id="approvedLoanCount">
+          0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-label">
+          Pending Loans
+        </div>
+
+        <div
+          class="card-value status-pending"
+          id="pendingLoanCount">
+          0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-label">
+          Rejected Loans
+        </div>
+
+        <div
+          class="card-value status-blocked"
+          id="rejectedLoanCount">
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOAN LIST -->
+
+    <div
+      id="allLoanList"
+      class="loan-list">
+
+      <div class="loading">
+        Loading loans...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
     <section
@@ -1628,150 +1713,521 @@ function formatDateTime(
 
     async function loadLoans() {
 
-      if (!customer || !customer.id) return;
-
-      const loanList =
-        document.getElementById("loanList");
-
-      const allLoanList =
-        document.getElementById("allLoanList");
-
-      try {
-
-        const response =
-          await apiRequest(
-            `/loans/customer/${customer.id}`
-          );
-
-        const loans =
-          response.loans || [];
+  if (!customer || !customer.id) {
+    return;
+  }
 
 
-        if (!loans.length) {
+  const loanList =
+    document.getElementById(
+      "loanList"
+    );
 
-          const message = `
-            <div class="empty">
-              You have no loan applications yet.
-            </div>
-          `;
-
-          loanList.innerHTML = message;
-          allLoanList.innerHTML = message;
-
-          return;
-        }
+  const allLoanList =
+    document.getElementById(
+      "allLoanList"
+    );
 
 
-        const html =
-          loans.map(
-            loan => createLoanHTML(loan)
-          ).join("");
+  try {
+
+    const response =
+      await apiRequest(
+        `/loans/customer/${customer.id}`
+      );
 
 
-        loanList.innerHTML =
-          html;
+    const loans =
+      response.loans || [];
 
-        allLoanList.innerHTML =
-          html;
 
-      } catch (error) {
+    /* ================================================
+       LOAN COUNTS
+    ================================================= */
 
-        console.error(
-          "Loan loading error:",
-          error
-        );
+    const total =
+      loans.length;
 
-        loanList.innerHTML = `
-          <div class="empty">
-            Unable to load loan applications.
-          </div>
-        `;
 
-        allLoanList.innerHTML = `
-          <div class="empty">
-            Unable to load loan applications.
-          </div>
-        `;
-      }
+    const approved =
+      loans.filter(
+        loan =>
+          String(
+            loan.status || ""
+          ).toLowerCase() === "approved"
+      ).length;
+
+
+    const pending =
+      loans.filter(
+        loan =>
+          String(
+            loan.status || ""
+          ).toLowerCase() === "pending"
+      ).length;
+
+
+    const rejected =
+      loans.filter(
+        loan =>
+          String(
+            loan.status || ""
+          ).toLowerCase() === "rejected"
+      ).length;
+
+
+    /* ================================================
+       UPDATE SUMMARY
+    ================================================= */
+
+    const totalElement =
+      document.getElementById(
+        "totalLoanApplications"
+      );
+
+    const approvedElement =
+      document.getElementById(
+        "approvedLoanCount"
+      );
+
+    const pendingElement =
+      document.getElementById(
+        "pendingLoanCount"
+      );
+
+    const rejectedElement =
+      document.getElementById(
+        "rejectedLoanCount"
+      );
+
+    const summaryElement =
+      document.getElementById(
+        "loanSummary"
+      );
+
+
+    if (totalElement) {
+      totalElement.textContent = total;
     }
+
+    if (approvedElement) {
+      approvedElement.textContent = approved;
+    }
+
+    if (pendingElement) {
+      pendingElement.textContent = pending;
+    }
+
+    if (rejectedElement) {
+      rejectedElement.textContent = rejected;
+    }
+
+
+    if (summaryElement) {
+
+      summaryElement.textContent =
+        total === 0
+          ? "You have no loan applications yet."
+          : `${total} loan application${
+              total === 1 ? "" : "s"
+            } on your account.`;
+
+    }
+
+
+    /* ================================================
+       NO LOANS
+    ================================================= */
+
+    if (!loans.length) {
+
+      const message = `
+        <div class="empty">
+
+          <div
+            style="
+              font-size:40px;
+              margin-bottom:10px;
+            ">
+            💰
+          </div>
+
+          <strong>
+            No loan applications yet
+          </strong>
+
+          <p style="margin-top:8px;">
+            You can apply for a personal
+            or business loan.
+          </p>
+
+        </div>
+      `;
+
+
+      if (loanList) {
+        loanList.innerHTML =
+          message;
+      }
+
+      if (allLoanList) {
+        allLoanList.innerHTML =
+          message;
+      }
+
+      return;
+    }
+
+
+    /* ================================================
+       SORT — NEWEST FIRST
+    ================================================= */
+
+    loans.sort(
+      (a, b) =>
+        new Date(
+          b.created_at || 0
+        ) -
+        new Date(
+          a.created_at || 0
+        )
+    );
+
+
+    /* ================================================
+       CREATE LOAN HTML
+    ================================================= */
+
+    const html =
+      loans
+        .map(
+          loan =>
+            createLoanHTML(loan)
+        )
+        .join("");
+
+
+    if (loanList) {
+      loanList.innerHTML =
+        html;
+    }
+
+    if (allLoanList) {
+      allLoanList.innerHTML =
+        html;
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Loan loading error:",
+      error
+    );
+
+
+    const errorHTML = `
+      <div class="empty">
+
+        Unable to load your loans.
+
+        <br>
+
+        <small>
+          ${escapeHTML(
+            error.message ||
+            "Please try again."
+          )}
+        </small>
+
+      </div>
+    `;
+
+
+    if (loanList) {
+      loanList.innerHTML =
+        errorHTML;
+    }
+
+    if (allLoanList) {
+      allLoanList.innerHTML =
+        errorHTML;
+    }
+
+  }
+}
 
 
     /* =====================================================
        LOAN CARD
     ====================================================== */
 
-    function createLoanHTML(loan) {
+  function createLoanHTML(loan) {
 
-      const status =
-        String(
-          loan.status || "pending"
-        ).toLowerCase();
-
-
-      const statusClass =
-        status === "approved"
-          ? "status-active"
-          : status === "rejected"
-            ? "status-blocked"
-            : "status-pending";
+  const status =
+    String(
+      loan.status || "pending"
+    ).toLowerCase();
 
 
-      return `
-        <div class="loan-item">
+  const statusClass =
+    status === "approved"
+      ? "status-active"
+      : status === "rejected"
+        ? "status-blocked"
+        : "status-pending";
 
-          <div class="loan-top">
 
-            <div class="loan-type">
-              ${escapeHTML(
-                loan.loan_type || "Loan"
-              )}
-            </div>
+  const amount =
+    Number(
+      loan.amount || 0
+    );
 
-            <div class="loan-status ${statusClass}">
-              ${escapeHTML(status)}
-            </div>
 
+  const rate =
+    Number(
+      loan.interest_rate || 0
+    );
+
+
+  const duration =
+    Number(
+      loan.duration_months || 0
+    );
+
+
+  /*
+    Simple monthly-interest calculation
+    matching the calculator rule used by JAY C O B.
+  */
+
+  const interest =
+    amount *
+    (rate / 100) *
+    duration;
+
+
+  const totalRepayment =
+    amount +
+    interest;
+
+
+  return `
+    <div class="loan-item">
+
+      <div class="loan-top">
+
+        <div>
+
+          <div class="loan-type">
+            ${escapeHTML(
+              loan.loan_type || "Loan"
+            )}
           </div>
 
+          <small
+            style="
+              color:#7a8495;
+              display:block;
+              margin-top:4px;
+            ">
 
-          <div class="loan-grid">
+            Application:
+            ${formatDate(
+              loan.created_at
+            )}
 
-            <div class="loan-info">
-              <small>Amount</small>
-              <strong>
-                ${formatMoney(loan.amount)}
-              </strong>
-            </div>
-
-
-            <div class="loan-info">
-              <small>Duration</small>
-              <strong>
-                ${loan.duration_months || 0} months
-              </strong>
-            </div>
-
-
-            <div class="loan-info">
-              <small>Interest Rate</small>
-              <strong>
-                ${loan.interest_rate ?? 0}% / month
-              </strong>
-            </div>
-
-
-            <div class="loan-info">
-              <small>Applied</small>
-              <strong>
-                ${formatDate(loan.created_at)}
-              </strong>
-            </div>
-
-          </div>
+          </small>
 
         </div>
-      `;
-    }
+
+
+        <div
+          class="loan-status ${statusClass}">
+
+          ${escapeHTML(status)}
+
+        </div>
+
+      </div>
+
+
+      <div class="loan-grid">
+
+        <div class="loan-info">
+
+          <small>
+            Loan Amount
+          </small>
+
+          <strong>
+            ${formatMoney(amount)}
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Duration
+          </small>
+
+          <strong>
+            ${duration} month${
+              duration === 1 ? "" : "s"
+            }
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Interest Rate
+          </small>
+
+          <strong>
+            ${rate.toFixed(2)}% / month
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Estimated Interest
+          </small>
+
+          <strong>
+            ${formatMoney(interest)}
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Total Repayment
+          </small>
+
+          <strong>
+            ${formatMoney(
+              totalRepayment
+            )}
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Purpose
+          </small>
+
+          <strong>
+            ${escapeHTML(
+              loan.purpose || "—"
+            )}
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Reviewed
+          </small>
+
+          <strong>
+            ${
+              loan.reviewed_at
+                ? formatDate(
+                    loan.reviewed_at
+                  )
+                : "Not reviewed"
+            }
+          </strong>
+
+        </div>
+
+
+        <div class="loan-info">
+
+          <small>
+            Reference
+          </small>
+
+          <strong>
+            ${
+              loan.id
+                ? "#" + escapeHTML(
+                    loan.id
+                  )
+                : "—"
+            }
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      ${
+        status === "rejected" &&
+        loan.rejection_reason
+          ? `
+            <div
+              style="
+                margin-top:15px;
+                padding:12px;
+                border-radius:8px;
+                background:#fff1f1;
+                color:#b42318;
+              ">
+
+              <strong>
+                Rejection reason:
+              </strong>
+
+              ${escapeHTML(
+                loan.rejection_reason
+              )}
+
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        status === "approved"
+          ? `
+            <div
+              style="
+                margin-top:15px;
+                padding:12px;
+                border-radius:8px;
+                background:#eefaf1;
+                color:#16833a;
+              ">
+
+              Your loan application
+              has been approved.
+
+            </div>
+          `
+          : ""
+      }
+
+    </div>
+  `;
+}
 
 
     /* =====================================================
