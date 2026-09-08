@@ -2711,121 +2711,106 @@
 
     function calculateLoan() {
 
-      const principal =
-        Number(
-          document.getElementById(
-            "loanAmount"
-          ).value
-        );
-
-      const annualRate =
-        Number(
-          document.getElementById(
-            "loanRate"
-          ).value
-        );
-
-      const months =
-        Number(
-          document.getElementById(
-            "loanMonths"
-          ).value
-        );
-
-
-      if (
-        !principal ||
-        principal <= 0 ||
-        months <= 0
-      ) {
-
-        document.getElementById(
-          "calcResult"
-        ).textContent =
-          "Please enter a valid loan amount and repayment period.";
-
-        return;
-      }
-
-
-      const monthlyRate =
-        annualRate / 100 / 12;
-
-
-      let payment;
-
-
-      if (monthlyRate === 0) {
-
-        payment =
-          principal / months;
-
-      } else {
-
-        payment =
-          principal *
-          (
-            monthlyRate *
-            Math.pow(
-              1 + monthlyRate,
-              months
-            )
-          ) /
-          (
-            Math.pow(
-              1 + monthlyRate,
-              months
-            ) - 1
-          );
-
-      }
-
-
-      const total =
-        payment * months;
-
-      const interest =
-        total - principal;
-
-
-      const formatter =
-        new Intl.NumberFormat(
-          "en-MW",
-          {
-            style: "currency",
-            currency: "MWK",
-            maximumFractionDigits: 2
-          }
-        );
-
-
+  const amount =
+    Number(
       document.getElementById(
-        "calcResult"
-      ).innerHTML = `
-        <div>
-          Estimated Monthly Payment:
-          <br>
-          <strong>
-            ${formatter.format(payment)}
-          </strong>
-        </div>
+        "calcAmount"
+      ).value
+    );
 
-        <div style="margin-top:10px;">
-          Estimated Total Repayment:
-          <br>
-          <strong>
-            ${formatter.format(total)}
-          </strong>
-        </div>
+  const monthlyRate =
+    Number(
+      document.getElementById(
+        "calcRate"
+      ).value
+    );
 
-        <div style="margin-top:10px;">
-          Estimated Interest:
-          <br>
-          ${formatter.format(interest)}
-        </div>
-      `;
+  const months =
+    Number(
+      document.getElementById(
+        "calcMonths"
+      ).value
+    );
 
-    }
+
+  if (
+    amount <= 0 ||
+    monthlyRate < 0 ||
+    months <= 0
+  ) {
+
+    alert(
+      "Please enter valid loan details."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    MONTHLY INTEREST
+
+    Example:
+
+    Loan Amount = 100,000
+    Monthly Rate = 10%
+    Months = 2
+
+    Monthly Interest:
+    100,000 × 10% = 10,000
+
+    Total Interest:
+    10,000 × 2 = 20,000
+  */
+
+  const interestPerMonth =
+    amount *
+    (monthlyRate / 100);
+
+
+  const totalInterest =
+    interestPerMonth *
+    months;
+
+
+  const totalRepayment =
+    amount +
+    totalInterest;
+
+
+  const monthlyPayment =
+    totalRepayment /
+    months;
+
+
+  document.getElementById(
+    "calcInterest"
+  ).textContent =
+    "MWK " +
+    formatMoney(totalInterest);
+
+
+  document.getElementById(
+    "calcTotal"
+  ).textContent =
+    "MWK " +
+    formatMoney(totalRepayment);
+
+
+  document.getElementById(
+    "calcMonthly"
+  ).textContent =
+    "MWK " +
+    formatMoney(monthlyPayment);
+
+
+  document.getElementById(
+    "calculatorResult"
+  ).style.display =
+    "block";
+
+}
 
 
     /* =========================================================
