@@ -1879,7 +1879,9 @@ function formatDateTime(
           .classList.add("active");
       }
 
-
+if (section === "transactions") {
+  loadTransactions();
+}
       window.scrollTo({
         top: 0,
         behavior: "smooth"
