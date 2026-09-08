@@ -1104,24 +1104,108 @@
 </section>
 
 
-      <section
-        id="statementsSection"
-        class="section"
-        style="display:none;">
+      <!-- =====================================================
+     ACCOUNT STATEMENTS
+====================================================== -->
 
-        <div class="section-header">
-          <h2>Statements</h2>
-        </div>
+<section id="statementsSection">
 
-        <div class="section-body">
+  <div class="section-header">
+    <div>
+      <h2>Account Statements</h2>
+      <p>View your complete account transaction history.</p>
+    </div>
 
-          <div class="empty">
-            Account statements will appear here.
-          </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="loadStatements()"
+    >
+      🔄 Refresh
+    </button>
+  </div>
 
-        </div>
+  <!-- STATEMENT SUMMARY -->
 
-      </section>
+  <div class="dashboard-cards">
+
+    <div class="dashboard-card">
+      <div class="card-icon">💳</div>
+      <div>
+        <span>Total Transactions</span>
+        <strong id="statementTransactionCount">0</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">📥</div>
+      <div>
+        <span>Total Credit</span>
+        <strong id="statementTotalCredit">MWK 0.00</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">📤</div>
+      <div>
+        <span>Total Debit</span>
+        <strong id="statementTotalDebit">MWK 0.00</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">💰</div>
+      <div>
+        <span>Current Balance</span>
+        <strong id="statementCurrentBalance">MWK 0.00</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STATEMENTS TABLE -->
+
+  <div class="dashboard-table-container">
+
+    <div class="table-header">
+      <h3>Transaction History</h3>
+    </div>
+
+    <div id="statementsStatus" class="status-message"></div>
+
+    <div class="table-responsive">
+
+      <table class="dashboard-table">
+
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Reference</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+
+        <tbody id="statementsTableBody">
+
+          <tr>
+            <td colspan="7">
+              No statements found.
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
 
 
       <section
