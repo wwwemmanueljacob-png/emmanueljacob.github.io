@@ -881,23 +881,227 @@
 
 
       <section
-        id="savingsSection"
-        class="section"
-        style="display:none;">
+  id="savingsSection"
+  class="section"
+  style="display:none;">
 
-        <div class="section-header">
-          <h2>Savings</h2>
+  <div class="section-header">
+
+    <div>
+      <h2>🏦 Savings</h2>
+
+      <small
+        id="savingsSummary"
+        style="color:#68758a;">
+        Loading savings information...
+      </small>
+    </div>
+
+    <button
+      class="primary-btn"
+      onclick="loadSavings()">
+      🔄 Refresh
+    </button>
+
+  </div>
+
+
+  <div class="section-body">
+
+
+    <!-- SAVINGS BALANCE -->
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="card-label">
+          Current Savings Balance
         </div>
 
-        <div class="section-body">
+        <div
+          class="card-value"
+          id="savingsBalance">
 
-          <div class="empty">
-            Your savings information will appear here.
-          </div>
+          MWK 0.00
 
         </div>
 
-      </section>
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-label">
+          Total Deposits
+        </div>
+
+        <div
+          class="card-value status-active"
+          id="totalSavingsDeposits">
+
+          MWK 0.00
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-label">
+          Total Withdrawals
+        </div>
+
+        <div
+          class="card-value status-blocked"
+          id="totalSavingsWithdrawals">
+
+          MWK 0.00
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-label">
+          Savings Transactions
+        </div>
+
+        <div
+          class="card-value"
+          id="savingsTransactionCount">
+
+          0
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SAVINGS HISTORY -->
+
+    <div class="section"
+      style="margin-bottom:0;">
+
+      <div class="section-header">
+
+        <h2>
+          Savings History
+        </h2>
+
+      </div>
+
+
+      <div class="section-body"
+        style="overflow-x:auto;">
+
+        <table
+          style="
+            width:100%;
+            border-collapse:collapse;
+            min-width:750px;
+          ">
+
+          <thead>
+
+            <tr
+              style="
+                border-bottom:
+                1px solid #e6ebf2;
+              ">
+
+              <th
+                style="
+                  text-align:left;
+                  padding:12px;
+                ">
+                Date
+              </th>
+
+              <th
+                style="
+                  text-align:left;
+                  padding:12px;
+                ">
+                Type
+              </th>
+
+              <th
+                style="
+                  text-align:left;
+                  padding:12px;
+                ">
+                Description
+              </th>
+
+              <th
+                style="
+                  text-align:right;
+                  padding:12px;
+                ">
+                Amount
+              </th>
+
+              <th
+                style="
+                  text-align:right;
+                  padding:12px;
+                ">
+                Balance After
+              </th>
+
+              <th
+                style="
+                  text-align:left;
+                  padding:12px;
+                ">
+                Status
+              </th>
+
+              <th
+                style="
+                  text-align:left;
+                  padding:12px;
+                ">
+                Reference
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody
+            id="savingsTableBody">
+
+            <tr>
+
+              <td
+                colspan="7"
+                class="loading">
+
+                Loading savings...
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
       <section
@@ -1740,7 +1944,438 @@ function formatDateTime(
     const loans =
       response.loans || [];
 
+    
+/* =====================================================
+   LOAD SAVINGS
+===================================================== */
 
+async function loadSavings() {
+
+  if (!customer || !customer.id) {
+    return;
+  }
+
+
+  const tableBody =
+    document.getElementById(
+      "savingsTableBody"
+    );
+
+
+  const balanceElement =
+    document.getElementById(
+      "savingsBalance"
+    );
+
+
+  const depositsElement =
+    document.getElementById(
+      "totalSavingsDeposits"
+    );
+
+
+  const withdrawalsElement =
+    document.getElementById(
+      "totalSavingsWithdrawals"
+    );
+
+
+  const countElement =
+    document.getElementById(
+      "savingsTransactionCount"
+    );
+
+
+  const summaryElement =
+    document.getElementById(
+      "savingsSummary"
+    );
+
+
+  if (tableBody) {
+
+    tableBody.innerHTML = `
+      <tr>
+
+        <td
+          colspan="7"
+          class="loading">
+
+          Loading savings...
+
+        </td>
+
+      </tr>
+    `;
+
+  }
+
+
+  try {
+
+    const response =
+      await apiRequest(
+        `/savings/customer/${customer.id}`
+      );
+
+
+    const savings =
+      response.savings || [];
+
+
+    /*
+      SORT NEWEST FIRST
+    */
+
+    savings.sort(
+      (a, b) =>
+        new Date(
+          b.created_at || 0
+        ) -
+        new Date(
+          a.created_at || 0
+        )
+    );
+
+
+    /*
+      TOTAL DEPOSITS
+    */
+
+    const totalDeposits =
+      savings
+        .filter(item =>
+          String(
+            item.transaction_type || ""
+          )
+          .toLowerCase()
+          .includes("deposit")
+        )
+        .reduce(
+          (total, item) =>
+            total +
+            Number(
+              item.amount || 0
+            ),
+          0
+        );
+
+
+    /*
+      TOTAL WITHDRAWALS
+    */
+
+    const totalWithdrawals =
+      savings
+        .filter(item =>
+          String(
+            item.transaction_type || ""
+          )
+          .toLowerCase()
+          .includes("withdraw")
+        )
+        .reduce(
+          (total, item) =>
+            total +
+            Number(
+              item.amount || 0
+            ),
+          0
+        );
+
+
+    /*
+      CURRENT BALANCE
+
+      Uses the newest transaction's
+      balance_after.
+    */
+
+    const currentBalance =
+      savings.length > 0
+        ? Number(
+            savings[0].balance_after || 0
+          )
+        : 0;
+
+
+    /*
+      UPDATE SUMMARY CARDS
+    */
+
+    if (balanceElement) {
+
+      balanceElement.textContent =
+        formatMoney(
+          currentBalance
+        );
+
+    }
+
+
+    if (depositsElement) {
+
+      depositsElement.textContent =
+        formatMoney(
+          totalDeposits
+        );
+
+    }
+
+
+    if (withdrawalsElement) {
+
+      withdrawalsElement.textContent =
+        formatMoney(
+          totalWithdrawals
+        );
+
+    }
+
+
+    if (countElement) {
+
+      countElement.textContent =
+        savings.length;
+
+    }
+
+
+    if (summaryElement) {
+
+      summaryElement.textContent =
+        savings.length === 0
+          ? "No savings transactions yet."
+          : `${savings.length} savings transaction${
+              savings.length === 1
+                ? ""
+                : "s"
+            } found.`;
+
+    }
+
+
+    /*
+      NO SAVINGS
+    */
+
+    if (!savings.length) {
+
+      if (tableBody) {
+
+        tableBody.innerHTML = `
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty">
+
+              🏦 No savings transactions found.
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+      return;
+
+    }
+
+
+    /*
+      DISPLAY SAVINGS
+    */
+
+    if (tableBody) {
+
+      tableBody.innerHTML =
+        savings.map(item => {
+
+          const type =
+            String(
+              item.transaction_type ||
+              "transaction"
+            );
+
+
+          const normalizedType =
+            type.toLowerCase();
+
+
+          const isDeposit =
+            normalizedType.includes(
+              "deposit"
+            );
+
+
+          const amount =
+            Number(
+              item.amount || 0
+            );
+
+
+          const status =
+            item.status || "pending";
+
+
+          return `
+            <tr
+              style="
+                border-bottom:
+                1px solid #edf1f5;
+              ">
+
+
+              <td
+                style="padding:12px;">
+
+                ${formatDate(
+                  item.created_at
+                )}
+
+              </td>
+
+
+              <td
+                style="
+                  padding:12px;
+                  font-weight:bold;
+                  color:${
+                    isDeposit
+                      ? "#16833a"
+                      : "#d62828"
+                  };
+                ">
+
+                ${escapeHTML(type)}
+
+              </td>
+
+
+              <td
+                style="padding:12px;">
+
+                ${escapeHTML(
+                  item.description ||
+                  "Savings transaction"
+                )}
+
+              </td>
+
+
+              <td
+                style="
+                  padding:12px;
+                  text-align:right;
+                  font-weight:bold;
+                ">
+
+                ${
+                  isDeposit
+                    ? "+"
+                    : "-"
+                }
+
+                ${formatMoney(amount)}
+
+              </td>
+
+
+              <td
+                style="
+                  padding:12px;
+                  text-align:right;
+                ">
+
+                ${formatMoney(
+                  item.balance_after
+                )}
+
+              </td>
+
+
+              <td
+                style="
+                  padding:12px;
+                  text-transform:capitalize;
+                ">
+
+                ${escapeHTML(status)}
+
+              </td>
+
+
+              <td
+                style="padding:12px;">
+
+                ${escapeHTML(
+                  item.reference_number ||
+                  "—"
+                )}
+
+              </td>
+
+
+            </tr>
+          `;
+
+        }).join("");
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Savings loading error:",
+      error
+    );
+
+
+    if (summaryElement) {
+
+      summaryElement.textContent =
+        "Unable to load savings.";
+
+    }
+
+
+    if (tableBody) {
+
+      tableBody.innerHTML = `
+        <tr>
+
+          <td
+            colspan="7"
+            class="empty">
+
+            Unable to load savings.
+
+            <br>
+
+            <small>
+
+              ${escapeHTML(
+                error.message ||
+                "Please try again."
+              )}
+
+            </small>
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+  }
+
+}
+
+    
     /* ================================================
        LOAN COUNTS
     ================================================= */
@@ -2337,6 +2972,9 @@ function formatDateTime(
 
 if (section === "transactions") {
   loadTransactions();
+}
+      if (section === "savings") {
+  loadSavings();
 }
       window.scrollTo({
         top: 0,
