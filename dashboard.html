@@ -1258,24 +1258,108 @@
       </section>
 
 
-      <section
-        id="kycSection"
-        class="section"
-        style="display:none;">
+      <!-- =====================================================
+     KYC DOCUMENTS
+====================================================== -->
 
-        <div class="section-header">
-          <h2>KYC Verification</h2>
-        </div>
+<section id="kycSection">
 
-        <div class="section-body">
+  <div class="section-header">
+    <div>
+      <h2>KYC Documents</h2>
+      <p>Manage and monitor your identity verification documents.</p>
+    </div>
 
-          <div class="empty">
-            KYC verification tools will be connected next.
-          </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="loadKYC()"
+    >
+      🔄 Refresh
+    </button>
+  </div>
 
-        </div>
+  <!-- KYC SUMMARY -->
 
-      </section>
+  <div class="dashboard-cards">
+
+    <div class="dashboard-card">
+      <div class="card-icon">📄</div>
+      <div>
+        <span>Total Documents</span>
+        <strong id="kycDocumentCount">0</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">⏳</div>
+      <div>
+        <span>Pending</span>
+        <strong id="kycPendingCount">0</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">✅</div>
+      <div>
+        <span>Verified</span>
+        <strong id="kycVerifiedCount">0</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">❌</div>
+      <div>
+        <span>Rejected</span>
+        <strong id="kycRejectedCount">0</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- KYC DOCUMENTS TABLE -->
+
+  <div class="dashboard-table-container">
+
+    <div class="table-header">
+      <h3>My KYC Documents</h3>
+    </div>
+
+    <div id="kycStatus" class="status-message"></div>
+
+    <div class="table-responsive">
+
+      <table class="dashboard-table">
+
+        <thead>
+          <tr>
+            <th>Document Type</th>
+            <th>Document Number</th>
+            <th>Status</th>
+            <th>Submitted</th>
+            <th>Verified</th>
+            <th>Rejection Reason</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+
+        <tbody id="kycTableBody">
+
+          <tr>
+            <td colspan="7">
+              No KYC documents found.
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
 
 
       <section
@@ -2676,6 +2760,208 @@ async function loadStatements() {
   }
 }
     
+    /* =========================================================
+   LOAD KYC DOCUMENTS
+========================================================= */
+
+async function loadKYC() {
+
+  if (!customer) return;
+
+  const tableBody =
+    document.getElementById(
+      "kycTableBody"
+    );
+
+  const status =
+    document.getElementById(
+      "kycStatus"
+    );
+
+  try {
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          Loading KYC documents...
+        </td>
+      </tr>
+    `;
+
+    status.textContent = "";
+
+    const response =
+      await apiRequest(
+        `/kyc/customer/${customer.id}`
+      );
+
+    if (
+      !response ||
+      !response.success
+    ) {
+      throw new Error(
+        response?.message ||
+        "Unable to load KYC documents."
+      );
+    }
+
+    const documents =
+      Array.isArray(response.documents)
+        ? response.documents
+        : [];
+
+    /* -----------------------------------------------------
+       COUNTS
+    ----------------------------------------------------- */
+
+    const pendingCount =
+      documents.filter(
+        document =>
+          String(
+            document.status || ""
+          ).toLowerCase() === "pending"
+      ).length;
+
+    const verifiedCount =
+      documents.filter(
+        document =>
+          String(
+            document.status || ""
+          ).toLowerCase() === "verified"
+      ).length;
+
+    const rejectedCount =
+      documents.filter(
+        document =>
+          String(
+            document.status || ""
+          ).toLowerCase() === "rejected"
+      ).length;
+
+    document.getElementById(
+      "kycDocumentCount"
+    ).textContent =
+      documents.length;
+
+    document.getElementById(
+      "kycPendingCount"
+    ).textContent =
+      pendingCount;
+
+    document.getElementById(
+      "kycVerifiedCount"
+    ).textContent =
+      verifiedCount;
+
+    document.getElementById(
+      "kycRejectedCount"
+    ).textContent =
+      rejectedCount;
+
+    /* -----------------------------------------------------
+       EMPTY STATE
+    ----------------------------------------------------- */
+
+    if (documents.length === 0) {
+
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7">
+            No KYC documents found yet.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    /* -----------------------------------------------------
+       RENDER DOCUMENTS
+    ----------------------------------------------------- */
+
+    tableBody.innerHTML =
+      documents.map(document => {
+
+        const submittedDate =
+          document.submitted_at ||
+          document.created_at;
+
+        const verifiedDate =
+          document.verified_at;
+
+        const statusValue =
+          String(
+            document.status || "pending"
+          );
+
+        return `
+          <tr>
+
+            <td>
+              ${document.document_type || "—"}
+            </td>
+
+            <td>
+              ${document.document_number || "—"}
+            </td>
+
+            <td>
+              ${statusValue}
+            </td>
+
+            <td>
+              ${
+                submittedDate &&
+                typeof formatDateTime === "function"
+                  ? formatDateTime(submittedDate)
+                  : submittedDate || "—"
+              }
+            </td>
+
+            <td>
+              ${
+                verifiedDate &&
+                typeof formatDateTime === "function"
+                  ? formatDateTime(verifiedDate)
+                  : verifiedDate || "—"
+              }
+            </td>
+
+            <td>
+              ${document.rejection_reason || "—"}
+            </td>
+
+            <td>
+              ${document.notes || "—"}
+            </td>
+
+          </tr>
+        `;
+
+      }).join("");
+
+  } catch (error) {
+
+    console.error(
+      "KYC ERROR:",
+      error
+    );
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          Unable to load KYC documents.
+        </td>
+      </tr>
+    `;
+
+    status.textContent =
+      error.message ||
+      "Unable to load KYC documents.";
+
+  }
+}
+    
     
     /* ================================================
        LOAN COUNTS
@@ -3279,6 +3565,9 @@ if (section === "transactions") {
 }
       if (section === "statements") {
   loadStatements();
+}
+      if (section === "kyc") {
+  loadKYC();
 }
       window.scrollTo({
         top: 0,
