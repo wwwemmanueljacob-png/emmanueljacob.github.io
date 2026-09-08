@@ -2684,139 +2684,200 @@
 
 
   /* =========================================================
-     LOGIN
-  ========================================================== */
+   LOGIN
+========================================================= */
 
-  document
-    .getElementById("loginForm")
-    .addEventListener(
-      "submit",
-      async event => {
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async event => {
 
-        event.preventDefault();
+      event.preventDefault();
 
-        clearStatus("loginStatus");
+      clearStatus("loginStatus");
 
+      const identifier =
+        document
+          .getElementById("loginIdentifier")
+          .value
+          .trim();
 
-        const identifier =
-          document
-            .getElementById("loginIdentifier")
-            .value
-            .trim();
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
 
+      /* =====================================================
+         VALIDATE LOGIN DETAILS
+      ====================================================== */
 
-        const password =
-          document
-            .getElementById("loginPassword")
-            .value;
+      if (!identifier) {
+        showStatus(
+          "loginStatus",
+          "Please enter your email address or phone number.",
+          "error"
+        );
+        return;
+      }
 
+      if (!password) {
+        showStatus(
+          "loginStatus",
+          "Please enter your password.",
+          "error"
+        );
+        return;
+      }
 
-        if (!identifier || !password) {
+      /* =====================================================
+         PREPARE LOGIN DATA
 
-          showStatus(
-            "loginStatus",
-            "Please enter your login details.",
-            "error"
-          );
+         If user enters an email:
+         email = identifier
 
-          return;
+         If user enters a phone:
+         phone = identifier
+      ====================================================== */
 
-        }
+      const loginPayload = {
+        password: password
+      };
 
+      if (identifier.includes("@")) {
 
-        const button =
-          document.getElementById(
-            "loginButton"
-          );
+        loginPayload.email = identifier;
 
+      } else {
 
-        button.disabled = true;
-
-        button.textContent =
-          "Logging in...";
-
-
-        try {
-
-          showLoading();
-
-
-          const data =
-            await apiRequest(
-              "/customers/login",
-              {
-                method: "POST",
-
-                body: JSON.stringify({
-                  identifier,
-                  password
-                })
-              }
-            );
-
-
-          if (
-            !data ||
-            !data.success
-          ) {
-
-            throw new Error(
-              data?.message ||
-              "Login failed."
-            );
-
-          }
-
-
-          saveCustomerSession(
-            data.session_token,
-            data.customer
-          );
-
-
-          showStatus(
-            "loginStatus",
-            "Login successful. Opening your dashboard...",
-            "success"
-          );
-
-
-          setTimeout(
-            () => {
-
-              closeModal(
-                "loginModal"
-              );
-
-              openDashboard();
-
-            },
-            700
-          );
-
-
-        } catch (error) {
-
-          showStatus(
-            "loginStatus",
-            error.message ||
-              "Unable to login.",
-            "error"
-          );
-
-        } finally {
-
-          hideLoading();
-
-          button.disabled = false;
-
-          button.textContent =
-            "Login";
-
-        }
+        loginPayload.phone = identifier;
 
       }
-    );
+
+      console.log(
+        "Login request:",
+        {
+          email: loginPayload.email || null,
+          phone: loginPayload.phone || null
+        }
+      );
+
+      const button =
+        document.getElementById(
+          "loginButton"
+        );
+
+      button.disabled = true;
+      button.textContent = "Logging in...";
+
+      try {
+
+        showLoading();
+
+        const data =
+          await apiRequest(
+            "/customers/login",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify(
+                  loginPayload
+                )
+            }
+          );
+
+        /* ===================================================
+           CHECK SERVER RESPONSE
+        ==================================================== */
+
+        if (
+          !data ||
+          !data.success
+        ) {
+
+          throw new Error(
+            data?.message ||
+            "Login failed."
+          );
+
+        }
+
+        /* ===================================================
+           SAVE CUSTOMER SESSION
+        ==================================================== */
+
+        if (
+          !data.session_token ||
+          !data.customer
+        ) {
+
+          throw new Error(
+            "Login succeeded but the server did not return a valid customer session."
+          );
+
+        }
+
+        saveCustomerSession(
+          data.session_token,
+          data.customer
+        );
+
+        /* ===================================================
+           SUCCESS
+        ==================================================== */
+
+        showStatus(
+          "loginStatus",
+          "Login successful. Opening your dashboard...",
+          "success"
+        );
+
+        setTimeout(
+          () => {
+
+            closeModal(
+              "loginModal"
+            );
+
+            openDashboard();
+
+          },
+          700
+        );
+
+      } catch (error) {
+
+        console.error(
+          "LOGIN ERROR:",
+          error
+        );
+
+        showStatus(
+          "loginStatus",
+          error.message ||
+            "Unable to login.",
+          "error"
+        );
+
+      } finally {
+
+        hideLoading();
+
+        button.disabled = false;
+
+        button.textContent =
+          "Login";
+
+      }
+
+    }
+  );
 
   
   /* =========================================================
