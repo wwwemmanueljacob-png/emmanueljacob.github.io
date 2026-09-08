@@ -2818,186 +2818,232 @@
       }
     );
 
-
+  
   /* =========================================================
-     REGISTER
-  ========================================================== */
+   REGISTER
+========================================================== */
 
-  document
-    .getElementById("registerForm")
-    .addEventListener(
-      "submit",
-      async event => {
+const registerForm = document.getElementById("registerForm");
 
-        event.preventDefault();
+if (registerForm) {
+  registerForm.addEventListener("submit", async event => {
+    event.preventDefault();
 
-        clearStatus(
-          "registerStatus"
-        );
+    clearStatus("registerStatus");
 
+    /* ---------------------------------------------
+       GET FORM VALUES
+    --------------------------------------------- */
 
-        const fullName =
-          document
-            .getElementById("registerName")
-            .value
-            .trim();
+    const fullNameInput =
+      document.getElementById("registerName");
 
+    const emailInput =
+      document.getElementById("registerEmail");
 
-        const email =
-          document
-            .getElementById("registerEmail")
-            .value
-            .trim();
+    const phoneInput =
+      document.getElementById("registerPhone");
 
+    const passwordInput =
+      document.getElementById("registerPassword");
 
-        const phone =
-          document
-            .getElementById("registerPhone")
-            .value
-            .trim();
+    const confirmPasswordInput =
+      document.getElementById("registerConfirmPassword");
 
+    const fullName =
+      fullNameInput?.value?.trim() || "";
 
-        const password =
-          document
-            .getElementById("registerPassword")
-            .value;
+    const email =
+      emailInput?.value?.trim() || "";
 
+    const phone =
+      phoneInput?.value?.trim() || "";
 
-        const confirmPassword =
-          document
-            .getElementById(
-              "registerConfirmPassword"
-            )
-            .value;
+    const password =
+      passwordInput?.value || "";
 
+    const confirmPassword =
+      confirmPasswordInput?.value || "";
 
-        if (
-          password.length < 8
-        ) {
+    /* ---------------------------------------------
+       VALIDATE REQUIRED FIELDS
+    --------------------------------------------- */
 
-          showStatus(
-            "registerStatus",
-            "Password must contain at least 8 characters.",
-            "error"
-          );
+    if (!fullName) {
+      showStatus(
+        "registerStatus",
+        "Please enter your full name.",
+        "error"
+      );
+      fullNameInput?.focus();
+      return;
+    }
 
-          return;
+    if (!email) {
+      showStatus(
+        "registerStatus",
+        "Please enter your email address.",
+        "error"
+      );
+      emailInput?.focus();
+      return;
+    }
 
-        }
+    if (!phone) {
+      showStatus(
+        "registerStatus",
+        "Please enter your phone number.",
+        "error"
+      );
+      phoneInput?.focus();
+      return;
+    }
 
+    if (!password) {
+      showStatus(
+        "registerStatus",
+        "Please enter a password.",
+        "error"
+      );
+      passwordInput?.focus();
+      return;
+    }
 
-        if (
-          password !==
-          confirmPassword
-        ) {
+    if (password.length < 8) {
+      showStatus(
+        "registerStatus",
+        "Password must contain at least 8 characters.",
+        "error"
+      );
+      passwordInput?.focus();
+      return;
+    }
 
-          showStatus(
-            "registerStatus",
-            "Passwords do not match.",
-            "error"
-          );
+    if (password !== confirmPassword) {
+      showStatus(
+        "registerStatus",
+        "Passwords do not match.",
+        "error"
+      );
+      confirmPasswordInput?.focus();
+      return;
+    }
 
-          return;
+    /* ---------------------------------------------
+       CREATE EXACT BACKEND PAYLOAD
+    --------------------------------------------- */
 
-        }
+    const registrationPayload = {
+      full_name: fullName,
+      email: email,
+      phone: phone,
+      password: password
+    };
 
+    /* ---------------------------------------------
+       DEBUG INFORMATION
+       Password is intentionally NOT logged.
+    --------------------------------------------- */
 
-        const button =
-          document.getElementById(
-            "registerButton"
-          );
-
-
-        button.disabled = true;
-
-        button.textContent =
-          "Creating Account...";
-
-
-        try {
-
-          showLoading();
-
-
-          const data =
-            await apiRequest(
-              "/customers/register",
-              {
-                method: "POST",
-
-                body: JSON.stringify({
-                  full_name: fullName,
-                  email,
-                  phone,
-                  password
-                })
-              }
-            );
-
-
-          if (!data.success) {
-
-            throw new Error(
-              data.message ||
-              "Registration failed."
-            );
-
-          }
-
-
-          showStatus(
-            "registerStatus",
-            data.message ||
-              "Account created successfully.",
-            "success"
-          );
-
-
-          document
-            .getElementById(
-              "registerForm"
-            )
-            .reset();
-
-
-          setTimeout(
-            () => {
-
-              closeModal(
-                "registerModal"
-              );
-
-              openModal(
-                "loginModal"
-              );
-
-            },
-            1000
-          );
-
-
-        } catch (error) {
-
-          showStatus(
-            "registerStatus",
-            error.message ||
-              "Unable to create account.",
-            "error"
-          );
-
-        } finally {
-
-          hideLoading();
-
-          button.disabled = false;
-
-          button.textContent =
-            "Create Account";
-
-        }
-
+    console.log(
+      "JAY C O B registration payload:",
+      {
+        full_name: registrationPayload.full_name,
+        email: registrationPayload.email,
+        phone: registrationPayload.phone,
+        password_present:
+          registrationPayload.password.length > 0
       }
     );
+
+    /* ---------------------------------------------
+       BUTTON
+    --------------------------------------------- */
+
+    const button =
+      document.getElementById("registerButton");
+
+    button.disabled = true;
+    button.textContent = "Creating Account...";
+
+    try {
+      showLoading();
+
+      const data = await apiRequest(
+        "/customers/register",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify(
+            registrationPayload
+          )
+        }
+      );
+
+      console.log(
+        "JAY C O B registration response:",
+        data
+      );
+
+      if (!data || !data.success) {
+        throw new Error(
+          data?.message ||
+          "Registration failed."
+        );
+      }
+
+      /* ---------------------------------------------
+         SUCCESS
+      --------------------------------------------- */
+
+      showStatus(
+        "registerStatus",
+        data.message ||
+          "Account created successfully.",
+        "success"
+      );
+
+      registerForm.reset();
+
+      setTimeout(() => {
+        closeModal("registerModal");
+        openModal("loginModal");
+
+        showStatus(
+          "loginStatus",
+          "Your account has been created. Please login with your email or phone number.",
+          "success"
+        );
+      }, 1200);
+
+    } catch (error) {
+
+      console.error(
+        "JAY C O B registration error:",
+        error
+      );
+
+      showStatus(
+        "registerStatus",
+        error.message ||
+          "Unable to create account. Please try again.",
+        "error"
+      );
+
+    } finally {
+
+      hideLoading();
+
+      button.disabled = false;
+      button.textContent = "Create Account";
+    }
+  });
+}
+  
 
 
   /* =========================================================
