@@ -19,14 +19,16 @@
       color: #172033;
     }
 
-    button {
+    button,
+    input,
+    select,
+    textarea {
       font-family: inherit;
-      cursor: pointer;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
+    button {
+      cursor: pointer;
+    }
 
     header {
       background: #071a33;
@@ -59,10 +61,6 @@
     .logout-btn:hover {
       opacity: 0.9;
     }
-
-    /* =========================
-       LAYOUT
-    ========================= */
 
     .layout {
       display: flex;
@@ -111,10 +109,6 @@
       width: 100%;
     }
 
-    /* =========================
-       WELCOME
-    ========================= */
-
     .welcome {
       margin-bottom: 22px;
     }
@@ -129,23 +123,44 @@
       font-size: 14px;
     }
 
-    /* =========================
-       CARDS
-    ========================= */
-
-    .cards {
+    .cards,
+    .dashboard-cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-bottom: 24px;
     }
 
-    .card {
+    .card,
+    .dashboard-card {
       background: white;
       border-radius: 14px;
       padding: 20px;
       box-shadow: 0 4px 18px rgba(25, 45, 75, 0.07);
       border: 1px solid #e6ebf2;
+    }
+
+    .dashboard-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .dashboard-card h4 {
+      margin-bottom: 6px;
+      color: #68758a;
+    }
+
+    .dashboard-card-value {
+      font-size: 23px;
+      font-weight: 800;
+      color: #0b2344;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      min-width: 42px;
+      text-align: center;
     }
 
     .card-label {
@@ -161,20 +176,16 @@
     }
 
     .status-active {
-      color: #16833a;
+      color: #16833a !important;
     }
 
     .status-blocked {
-      color: #d62828;
+      color: #d62828 !important;
     }
 
     .status-pending {
-      color: #c77b00;
+      color: #c77b00 !important;
     }
-
-    /* =========================
-       SECTION
-    ========================= */
 
     .section {
       background: white;
@@ -198,26 +209,43 @@
       font-size: 18px;
     }
 
-    .primary-btn {
-      background: #0b5ed7;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-weight: bold;
-    }
-
-    .primary-btn:hover {
-      background: #084db3;
+    .section-header p {
+      margin-top: 5px;
+      color: #68758a;
+      font-size: 13px;
     }
 
     .section-body {
       padding: 20px;
     }
 
-    /* =========================
-       LOANS
-    ========================= */
+    .primary-btn,
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-weight: bold;
+    }
+
+    .primary-btn,
+    .btn-primary {
+      background: #0b5ed7;
+      color: white;
+    }
+
+    .primary-btn:hover,
+    .btn-primary:hover {
+      background: #084db3;
+    }
+
+    .btn-secondary {
+      background: #eef2f7;
+      color: #17365f;
+    }
+
+    .btn-secondary:hover {
+      background: #dfe7f1;
+    }
 
     .loan-list {
       display: grid;
@@ -266,11 +294,8 @@
 
     .loan-info strong {
       color: #172033;
+      word-break: break-word;
     }
-
-    /* =========================
-       QUICK ACTIONS
-    ========================= */
 
     .quick-actions {
       display: grid;
@@ -293,16 +318,7 @@
       border-color: #b9d1f5;
     }
 
-    /* =========================
-       EMPTY / LOADING
-    ========================= */
-
-    .loading {
-      text-align: center;
-      padding: 25px;
-      color: #68758a;
-    }
-
+    .loading,
     .empty {
       text-align: center;
       padding: 25px;
@@ -319,12 +335,99 @@
       display: none;
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    .status-message {
+      margin: 12px 0;
+      color: #68758a;
+      font-size: 13px;
+    }
+
+    .dashboard-table-container {
+      background: white;
+      border: 1px solid #e6ebf2;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e6ebf2;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .dashboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    .dashboard-table th {
+      background: #f5f7fa;
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e1e7ef;
+      font-size: 13px;
+    }
+
+    .dashboard-table td {
+      padding: 13px 12px;
+      border-bottom: 1px solid #edf0f4;
+      font-size: 13px;
+      vertical-align: top;
+    }
+
+    .dashboard-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+      color: #344054;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d6dde8;
+      border-radius: 8px;
+      outline: none;
+      background: white;
+      color: #172033;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #0b5ed7;
+    }
+
+    .support-message {
+      white-space: pre-wrap;
+      color: #596579;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .support-response {
+      white-space: pre-wrap;
+      color: #344054;
+      font-size: 13px;
+    }
 
     @media (max-width: 1000px) {
-      .cards {
+      .cards,
+      .dashboard-cards {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -377,16 +480,19 @@
         font-size: 23px;
       }
 
-      .cards {
+      .cards,
+      .dashboard-cards {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
 
-      .card {
+      .card,
+      .dashboard-card {
         padding: 15px;
       }
 
-      .card-value {
+      .card-value,
+      .dashboard-card-value {
         font-size: 18px;
       }
 
@@ -400,14 +506,9 @@
     }
 
     @media (max-width: 450px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .loan-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .cards,
+      .dashboard-cards,
+      .loan-grid,
       .quick-actions {
         grid-template-columns: 1fr;
       }
@@ -416,224 +517,775 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .logout-btn {
+        padding: 8px 11px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+<header>
+  <div class="brand">
+    JAY C O B FINANCIAL SERVICES
+  </div>
 
-  <header>
-    <div class="brand">
-      JAY C O B FINANCIAL SERVICES
+  <button
+    class="logout-btn"
+    type="button"
+    onclick="logoutCustomer()">
+    Logout
+  </button>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-title">
+      Customer Portal
     </div>
 
-    <button class="logout-btn" onclick="logoutCustomer()">
-      Logout
+    <button
+      class="nav-btn active"
+      type="button"
+      onclick="showSection('overview')">
+      🏠 Dashboard
     </button>
-  </header>
 
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('loans')">
+      💰 My Loans
+    </button>
 
-  <!-- =========================
-       LAYOUT
-  ========================== -->
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('transactions')">
+      💳 Transactions
+    </button>
 
-  <div class="layout">
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('savings')">
+      🏦 Savings
+    </button>
 
-    <!-- SIDEBAR -->
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('statements')">
+      📄 Statements
+    </button>
 
-    <aside class="sidebar">
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('profile')">
+      👤 My Profile
+    </button>
 
-      <div class="sidebar-title">
-        Customer Portal
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('kyc')">
+      🪪 KYC
+    </button>
+
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('support')">
+      🎧 Support
+    </button>
+
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="showSection('security')">
+      🔐 Security
+    </button>
+
+  </aside>
+
+  <main class="main">
+
+    <div id="errorBox" class="error"></div>
+
+    <!-- ================= OVERVIEW ================= -->
+
+    <section
+      id="overviewSection"
+      class="dashboard-section">
+
+      <div class="welcome">
+
+        <h1>
+          Welcome,
+          <span id="customerName">
+            Customer
+          </span>
+          👋
+        </h1>
+
+        <p>
+          Manage your JAY C O B FINANCIAL SERVICES account.
+        </p>
+
       </div>
 
-      <button class="nav-btn active" onclick="showSection('overview')">
-        🏠 Dashboard
-      </button>
+      <div class="cards">
 
-      <button class="nav-btn" onclick="showSection('loans')">
-        💰 My Loans
-      </button>
+        <div class="card">
+          <div class="card-label">
+            Account Balance
+          </div>
 
-      <button class="nav-btn" onclick="showSection('transactions')">
-        💳 Transactions
-      </button>
-
-      <button class="nav-btn" onclick="showSection('savings')">
-        🏦 Savings
-      </button>
-
-      <button class="nav-btn" onclick="showSection('statements')">
-        📄 Statements
-      </button>
-
-      <button class="nav-btn" onclick="showSection('profile')">
-        👤 My Profile
-      </button>
-
-      <button class="nav-btn" onclick="showSection('kyc')">
-        🪪 KYC
-      </button>
-
-      <button class="nav-btn" onclick="showSection('support')">
-        🎧 Support
-      </button>
-
-      <button class="nav-btn" onclick="showSection('security')">
-        🔐 Security
-      </button>
-
-    </aside>
-
-
-    <!-- MAIN -->
-
-    <main class="main">
-
-      <!-- ERROR -->
-
-      <div id="errorBox" class="error"></div>
-
-
-      <!-- =========================
-           OVERVIEW
-      ========================== -->
-
-      <section id="overviewSection">
-
-        <div class="welcome">
-          <h1>
-            Welcome, <span id="customerName">Customer</span> 👋
-          </h1>
-
-          <p>
-            Manage your JAY C O B FINANCIAL SERVICES account.
-          </p>
+          <div
+            class="card-value"
+            id="accountBalance">
+            MWK 0.00
+          </div>
         </div>
 
-
-        <!-- SUMMARY CARDS -->
-
-        <div class="cards">
-
-          <div class="card">
-            <div class="card-label">
-              Account Balance
-            </div>
-
-            <div class="card-value" id="accountBalance">
-              MWK 0.00
-            </div>
+        <div class="card">
+          <div class="card-label">
+            Account Number
           </div>
 
-
-          <div class="card">
-            <div class="card-label">
-              Account Number
-            </div>
-
-            <div class="card-value" id="accountNumber">
-              —
-            </div>
+          <div
+            class="card-value"
+            id="accountNumber">
+            —
           </div>
-
-
-          <div class="card">
-            <div class="card-label">
-              Account Status
-            </div>
-
-            <div class="card-value status-active" id="accountStatus">
-              —
-            </div>
-          </div>
-
-
-          <div class="card">
-            <div class="card-label">
-              Verification
-            </div>
-
-            <div class="card-value" id="verificationStatus">
-              —
-            </div>
-          </div>
-
         </div>
 
-
-        <!-- QUICK ACTIONS -->
-
-        <div class="section">
-
-          <div class="section-header">
-            <h2>Quick Actions</h2>
+        <div class="card">
+          <div class="card-label">
+            Account Status
           </div>
 
-          <div class="section-body">
-
-            <div class="quick-actions">
-
-              <button
-                class="action-btn"
-                onclick="openLoans()">
-                💰 Apply for Loan
-              </button>
-
-              <button
-                class="action-btn"
-                onclick="showSection('transactions')">
-                💳 View Transactions
-              </button>
-
-              <button
-                class="action-btn"
-                onclick="showSection('statements')">
-                📄 View Statements
-              </button>
-
-              <button
-                class="action-btn"
-                onclick="showSection('support')">
-                🎧 Contact Support
-              </button>
-
-            </div>
-
+          <div
+            class="card-value status-active"
+            id="accountStatus">
+            —
           </div>
-
         </div>
 
+        <div class="card">
+          <div class="card-label">
+            Verification
+          </div>
 
-        <!-- RECENT LOANS -->
+          <div
+            class="card-value"
+            id="verificationStatus">
+            —
+          </div>
+        </div>
 
-        <div class="section">
+      </div>
 
-          <div class="section-header">
+      <div class="section">
 
-            <h2>
-              Recent Loan Applications
-            </h2>
+        <div class="section-header">
+          <h2>Quick Actions</h2>
+        </div>
+
+        <div class="section-body">
+
+          <div class="quick-actions">
 
             <button
-              class="primary-btn"
+              class="action-btn"
+              type="button"
               onclick="openLoans()">
-              Apply for Loan
+              💰 Apply for Loan
+            </button>
+
+            <button
+              class="action-btn"
+              type="button"
+              onclick="showSection('transactions')">
+              💳 View Transactions
+            </button>
+
+            <button
+              class="action-btn"
+              type="button"
+              onclick="showSection('statements')">
+              📄 View Statements
+            </button>
+
+            <button
+              class="action-btn"
+              type="button"
+              onclick="showSection('support')">
+              🎧 Contact Support
             </button>
 
           </div>
 
-          <div class="section-body">
+        </div>
 
-            <div id="loanList" class="loan-list">
+      </div>
 
-              <div class="loading">
-                Loading loan applications...
-              </div>
+      <div class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Recent Loan Applications
+          </h2>
+
+          <button
+            class="primary-btn"
+            type="button"
+            onclick="openLoans()">
+            Apply for Loan
+          </button>
+
+        </div>
+
+        <div class="section-body">
+
+          <div
+            id="loanList"
+            class="loan-list">
+
+            <div class="loading">
+              Loading loan applications...
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= LOANS ================= -->
+
+    <section
+      id="loansSection"
+      class="section dashboard-section"
+      style="display:none;">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>My Loans</h2>
+
+          <small
+            id="loanSummary"
+            style="color:#68758a;">
+            Loading your loan information...
+          </small>
+
+        </div>
+
+        <button
+          class="primary-btn"
+          type="button"
+          onclick="openLoans()">
+          💰 Apply for Loan
+        </button>
+
+      </div>
+
+      <div class="section-body">
+
+        <div
+          class="cards"
+          style="margin-bottom:20px;">
+
+          <div class="card">
+            <div class="card-label">
+              Total Applications
+            </div>
+
+            <div
+              class="card-value"
+              id="totalLoanApplications">
+              0
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">
+              Approved Loans
+            </div>
+
+            <div
+              class="card-value status-active"
+              id="approvedLoanCount">
+              0
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">
+              Pending Loans
+            </div>
+
+            <div
+              class="card-value status-pending"
+              id="pendingLoanCount">
+              0
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">
+              Rejected Loans
+            </div>
+
+            <div
+              class="card-value status-blocked"
+              id="rejectedLoanCount">
+              0
+            </div>
+          </div>
+
+        </div>
+
+        <div
+          id="allLoanList"
+          class="loan-list">
+
+          <div class="loading">
+            Loading loans...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= TRANSACTIONS ================= -->
+
+    <section
+      id="transactionsSection"
+      class="section dashboard-section"
+      style="display:none;">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>Transactions</h2>
+
+          <small
+            id="transactionSummary"
+            style="color:#68758a;">
+            Your recent account activity
+          </small>
+
+        </div>
+
+        <button
+          class="primary-btn"
+          type="button"
+          onclick="loadTransactions()">
+          🔄 Refresh
+        </button>
+
+      </div>
+
+      <div class="section-body">
+
+        <div
+          class="card"
+          style="margin-bottom:20px;">
+
+          <div class="card-label">
+            Current Account Balance
+          </div>
+
+          <div
+            class="card-value"
+            id="transactionBalance">
+            MWK 0.00
+          </div>
+
+        </div>
+
+        <div style="overflow-x:auto;">
+
+          <table
+            style="
+              width:100%;
+              border-collapse:collapse;
+              min-width:850px;
+            ">
+
+            <thead>
+
+              <tr
+                style="
+                  background:#f5f7fa;
+                  border-bottom:1px solid #e1e7ef;
+                ">
+
+                <th style="padding:12px;text-align:left;">
+                  Date
+                </th>
+
+                <th style="padding:12px;text-align:left;">
+                  Type
+                </th>
+
+                <th style="padding:12px;text-align:left;">
+                  Description
+                </th>
+
+                <th style="padding:12px;text-align:right;">
+                  Amount
+                </th>
+
+                <th style="padding:12px;text-align:right;">
+                  Balance
+                </th>
+
+                <th style="padding:12px;text-align:left;">
+                  Status
+                </th>
+
+                <th style="padding:12px;text-align:left;">
+                  Reference
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="transactionList">
+
+              <tr>
+
+                <td
+                  colspan="7"
+                  style="
+                    padding:25px;
+                    text-align:center;
+                    color:#68758a;
+                  ">
+
+                  Loading transactions...
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= SAVINGS ================= -->
+
+    <section
+      id="savingsSection"
+      class="section dashboard-section"
+      style="display:none;">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>🏦 Savings</h2>
+
+          <small
+            id="savingsSummary"
+            style="color:#68758a;">
+            Loading savings information...
+          </small>
+
+        </div>
+
+        <button
+          class="primary-btn"
+          type="button"
+          onclick="loadSavings()">
+          🔄 Refresh
+        </button>
+
+      </div>
+
+      <div class="section-body">
+
+        <div class="cards">
+
+          <div class="card">
+
+            <div class="card-label">
+              Current Savings Balance
+            </div>
+
+            <div
+              class="card-value"
+              id="savingsBalance">
+              MWK 0.00
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="card-label">
+              Total Deposits
+            </div>
+
+            <div
+              class="card-value status-active"
+              id="totalSavingsDeposits">
+              MWK 0.00
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="card-label">
+              Total Withdrawals
+            </div>
+
+            <div
+              class="card-value status-blocked"
+              id="totalSavingsWithdrawals">
+              MWK 0.00
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="card-label">
+              Savings Transactions
+            </div>
+
+            <div
+              class="card-value"
+              id="savingsTransactionCount">
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+        <div
+          class="section"
+          style="margin-bottom:0;">
+
+          <div class="section-header">
+
+            <h2>
+              Savings History
+            </h2>
+
+          </div>
+
+          <div
+            class="section-body"
+            style="overflow-x:auto;">
+
+            <table
+              style="
+                width:100%;
+                border-collapse:collapse;
+                min-width:750px;
+              ">
+
+              <thead>
+
+                <tr
+                  style="
+                    border-bottom:1px solid #e6ebf2;
+                  ">
+
+                  <th style="text-align:left;padding:12px;">
+                    Date
+                  </th>
+
+                  <th style="text-align:left;padding:12px;">
+                    Type
+                  </th>
+
+                  <th style="text-align:left;padding:12px;">
+                    Description
+                  </th>
+
+                  <th style="text-align:right;padding:12px;">
+                    Amount
+                  </th>
+
+                  <th style="text-align:right;padding:12px;">
+                    Balance After
+                  </th>
+
+                  <th style="text-align:left;padding:12px;">
+                    Status
+                  </th>
+
+                  <th style="text-align:left;padding:12px;">
+                    Reference
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="savingsTableBody">
+
+                <tr>
+
+                  <td
+                    colspan="7"
+                    class="loading">
+
+                    Loading savings...
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= STATEMENTS ================= -->
+
+    <section
+      id="statementsSection"
+      class="section dashboard-section"
+      style="display:none;">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>📄 Account Statements</h2>
+
+          <p>
+            View your complete account transaction history.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="loadStatements()">
+          🔄 Refresh
+        </button>
+
+      </div>
+
+      <div class="section-body">
+
+        <div class="dashboard-cards">
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">💳</div>
+
+            <div>
+
+              <span>
+                Total Transactions
+              </span>
+
+              <strong
+                class="dashboard-card-value"
+                id="statementTransactionCount">
+                0
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">📥</div>
+
+            <div>
+
+              <span>
+                Total Credit
+              </span>
+
+              <strong
+                class="dashboard-card-value status-active"
+                id="statementTotalCredit">
+                MWK 0.00
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">📤</div>
+
+            <div>
+
+              <span>
+                Total Debit
+              </span>
+
+              <strong
+                class="dashboard-card-value status-blocked"
+                id="statementTotalDebit">
+                MWK 0.00
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">💰</div>
+
+            <div>
+
+              <span>
+                Current Balance
+              </span>
+
+              <strong
+                class="dashboard-card-value"
+                id="statementCurrentBalance">
+                MWK 0.00
+              </strong>
 
             </div>
 
@@ -641,3616 +1293,784 @@
 
         </div>
 
-      </section>
+        <div class="dashboard-table-container">
 
+          <div class="table-header">
+            <h3>
+              Transaction History
+            </h3>
+          </div>
 
-      <!-- =========================
-           OTHER SECTIONS
-      ========================== -->
+          <div
+            id="statementsStatus"
+            class="status-message">
+          </div>
 
-      <section
-  id="loansSection"
-  class="section"
-  style="display:none;">
+          <div class="table-responsive">
 
-  <div class="section-header">
+            <table class="dashboard-table">
 
-    <div>
-      <h2>My Loans</h2>
+              <thead>
 
-      <small
-        id="loanSummary"
-        style="color:#68758a;">
-        Loading your loan information...
-      </small>
-    </div>
+                <tr>
 
-    <button
-      class="primary-btn"
-      onclick="openLoans()">
-      💰 Apply for Loan
-    </button>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Reference</th>
+                  <th>Debit</th>
+                  <th>Credit</th>
+                  <th>Balance</th>
 
-  </div>
+                </tr>
 
+              </thead>
 
-  <div class="section-body">
+              <tbody id="statementsTableBody">
 
-    <!-- LOAN SUMMARY CARDS -->
+                <tr>
 
-    <div
-      class="cards"
-      style="margin-bottom:20px;">
+                  <td colspan="7">
+                    No statements found.
+                  </td>
 
-      <div class="card">
+                </tr>
 
-        <div class="card-label">
-          Total Applications
-        </div>
+              </tbody>
 
-        <div
-          class="card-value"
-          id="totalLoanApplications">
-          0
-        </div>
+            </table>
 
-      </div>
+          </div>
 
-
-      <div class="card">
-
-        <div class="card-label">
-          Approved Loans
-        </div>
-
-        <div
-          class="card-value status-active"
-          id="approvedLoanCount">
-          0
         </div>
 
       </div>
 
-
-      <div class="card">
-
-        <div class="card-label">
-          Pending Loans
-        </div>
-
-        <div
-          class="card-value status-pending"
-          id="pendingLoanCount">
-          0
-        </div>
-
-      </div>
+    </section>
 
 
-      <div class="card">
-
-        <div class="card-label">
-          Rejected Loans
-        </div>
-
-        <div
-          class="card-value status-blocked"
-          id="rejectedLoanCount">
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- LOAN LIST -->
-
-    <div
-      id="allLoanList"
-      class="loan-list">
-
-      <div class="loading">
-        Loading loans...
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
+    <!-- ================= PROFILE ================= -->
 
     <section
-  id="transactionsSection"
-  class="section"
-  style="display:none;">
-
-  <div class="section-header">
-    <div>
-      <h2>Transactions</h2>
-      <small id="transactionSummary">
-        Your recent account activity
-      </small>
-    </div>
-
-    <button
-      class="primary-btn"
-      onclick="loadTransactions()">
-      🔄 Refresh
-    </button>
-  </div>
-
-  <div class="section-body">
-
-    <!-- TRANSACTION BALANCE -->
-
-    <div class="card" style="margin-bottom:20px;">
-
-      <div class="card-label">
-        Current Account Balance
-      </div>
-
-      <div
-        class="card-value"
-        id="transactionBalance">
-        MWK 0.00
-      </div>
-
-    </div>
-
-
-    <!-- TRANSACTION TABLE -->
-
-    <div style="overflow-x:auto;">
-
-      <table
-        style="
-          width:100%;
-          border-collapse:collapse;
-          min-width:850px;
-        ">
-
-        <thead>
-
-          <tr
-            style="
-              background:#f5f7fa;
-              border-bottom:1px solid #e1e7ef;
-            ">
-
-            <th style="padding:12px;text-align:left;">
-              Date
-            </th>
-
-            <th style="padding:12px;text-align:left;">
-              Type
-            </th>
-
-            <th style="padding:12px;text-align:left;">
-              Description
-            </th>
-
-            <th style="padding:12px;text-align:right;">
-              Amount
-            </th>
-
-            <th style="padding:12px;text-align:right;">
-              Balance
-            </th>
-
-            <th style="padding:12px;text-align:left;">
-              Status
-            </th>
-
-            <th style="padding:12px;text-align:left;">
-              Reference
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody id="transactionList">
-
-          <tr>
-
-            <td
-              colspan="7"
-              style="
-                padding:25px;
-                text-align:center;
-                color:#68758a;
-              ">
-
-              Loading transactions...
-
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-      <section
-  id="savingsSection"
-  class="section"
-  style="display:none;">
-
-  <div class="section-header">
-
-    <div>
-      <h2>🏦 Savings</h2>
-
-      <small
-        id="savingsSummary"
-        style="color:#68758a;">
-        Loading savings information...
-      </small>
-    </div>
-
-    <button
-      class="primary-btn"
-      onclick="loadSavings()">
-      🔄 Refresh
-    </button>
-
-  </div>
-
-
-  <div class="section-body">
-
-
-    <!-- SAVINGS BALANCE -->
-
-    <div class="cards">
-
-      <div class="card">
-
-        <div class="card-label">
-          Current Savings Balance
-        </div>
-
-        <div
-          class="card-value"
-          id="savingsBalance">
-
-          MWK 0.00
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-label">
-          Total Deposits
-        </div>
-
-        <div
-          class="card-value status-active"
-          id="totalSavingsDeposits">
-
-          MWK 0.00
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-label">
-          Total Withdrawals
-        </div>
-
-        <div
-          class="card-value status-blocked"
-          id="totalSavingsWithdrawals">
-
-          MWK 0.00
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-label">
-          Savings Transactions
-        </div>
-
-        <div
-          class="card-value"
-          id="savingsTransactionCount">
-
-          0
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- SAVINGS HISTORY -->
-
-    <div class="section"
-      style="margin-bottom:0;">
+      id="profileSection"
+      class="section dashboard-section"
+      style="display:none;">
 
       <div class="section-header">
 
         <h2>
-          Savings History
+          👤 My Profile
         </h2>
 
       </div>
 
+      <div class="section-body">
 
-      <div class="section-body"
-        style="overflow-x:auto;">
+        <div class="loan-grid">
 
-        <table
-          style="
-            width:100%;
-            border-collapse:collapse;
-            min-width:750px;
-          ">
+          <div class="loan-info">
 
-          <thead>
+            <small>
+              Full Name
+            </small>
 
-            <tr
-              style="
-                border-bottom:
-                1px solid #e6ebf2;
-              ">
+            <strong id="profileName">
+              —
+            </strong>
 
-              <th
-                style="
-                  text-align:left;
-                  padding:12px;
-                ">
-                Date
-              </th>
+          </div>
 
-              <th
-                style="
-                  text-align:left;
-                  padding:12px;
-                ">
-                Type
-              </th>
+          <div class="loan-info">
 
-              <th
-                style="
-                  text-align:left;
-                  padding:12px;
-                ">
-                Description
-              </th>
+            <small>
+              Email
+            </small>
 
-              <th
-                style="
-                  text-align:right;
-                  padding:12px;
-                ">
-                Amount
-              </th>
+            <strong id="profileEmail">
+              —
+            </strong>
 
-              <th
-                style="
-                  text-align:right;
-                  padding:12px;
-                ">
-                Balance After
-              </th>
+          </div>
 
-              <th
-                style="
-                  text-align:left;
-                  padding:12px;
-                ">
-                Status
-              </th>
+          <div class="loan-info">
 
-              <th
-                style="
-                  text-align:left;
-                  padding:12px;
-                ">
-                Reference
-              </th>
+            <small>
+              Phone
+            </small>
 
-            </tr>
+            <strong id="profilePhone">
+              —
+            </strong>
 
-          </thead>
+          </div>
 
+          <div class="loan-info">
 
-          <tbody
-            id="savingsTableBody">
+            <small>
+              Occupation
+            </small>
 
-            <tr>
+            <strong id="profileOccupation">
+              —
+            </strong>
 
-              <td
-                colspan="7"
-                class="loading">
+          </div>
 
-                Loading savings...
+          <div class="loan-info">
 
-              </td>
+            <small>
+              Address
+            </small>
 
-            </tr>
+            <strong id="profileAddress">
+              —
+            </strong>
 
-          </tbody>
+          </div>
 
-        </table>
+          <div class="loan-info">
 
-      </div>
+            <small>
+              ID Number
+            </small>
 
-    </div>
+            <strong id="profileIdNumber">
+              —
+            </strong>
 
-  </div>
+          </div>
 
-</section>
-
-
-      <!-- =====================================================
-     ACCOUNT STATEMENTS
-====================================================== -->
-
-<section id="statementsSection">
-
-  <div class="section-header">
-    <div>
-      <h2>Account Statements</h2>
-      <p>View your complete account transaction history.</p>
-    </div>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      onclick="loadStatements()"
-    >
-      🔄 Refresh
-    </button>
-  </div>
-
-  <!-- STATEMENT SUMMARY -->
-
-  <div class="dashboard-cards">
-
-    <div class="dashboard-card">
-      <div class="card-icon">💳</div>
-      <div>
-        <span>Total Transactions</span>
-        <strong id="statementTransactionCount">0</strong>
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <div class="card-icon">📥</div>
-      <div>
-        <span>Total Credit</span>
-        <strong id="statementTotalCredit">MWK 0.00</strong>
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <div class="card-icon">📤</div>
-      <div>
-        <span>Total Debit</span>
-        <strong id="statementTotalDebit">MWK 0.00</strong>
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <div class="card-icon">💰</div>
-      <div>
-        <span>Current Balance</span>
-        <strong id="statementCurrentBalance">MWK 0.00</strong>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- STATEMENTS TABLE -->
-
-  <div class="dashboard-table-container">
-
-    <div class="table-header">
-      <h3>Transaction History</h3>
-    </div>
-
-    <div id="statementsStatus" class="status-message"></div>
-
-    <div class="table-responsive">
-
-      <table class="dashboard-table">
-
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Reference</th>
-            <th>Debit</th>
-            <th>Credit</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-
-        <tbody id="statementsTableBody">
-
-          <tr>
-            <td colspan="7">
-              No statements found.
-            </td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-      <section
-        id="profileSection"
-        class="section"
-        style="display:none;">
-
-        <div class="section-header">
-          <h2>My Profile</h2>
         </div>
 
-        <div class="section-body">
+      </div>
 
-          <div class="loan-grid">
+    </section>
 
-            <div class="loan-info">
-              <small>Full Name</small>
-              <strong id="profileName">—</strong>
+
+    <!-- ================= KYC ================= -->
+
+    <section
+      id="kycSection"
+      class="section dashboard-section"
+      style="display:none;">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>
+            🪪 KYC Documents
+          </h2>
+
+          <p>
+            Manage and monitor your identity verification documents.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="loadKYC()">
+          🔄 Refresh
+        </button>
+
+      </div>
+
+      <div class="section-body">
+
+        <div class="dashboard-cards">
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">
+              📄
             </div>
 
-            <div class="loan-info">
-              <small>Email</small>
-              <strong id="profileEmail">—</strong>
+            <div>
+
+              <span>
+                Total Documents
+              </span>
+
+              <strong
+                class="dashboard-card-value"
+                id="kycDocumentCount">
+                0
+              </strong>
+
             </div>
 
-            <div class="loan-info">
-              <small>Phone</small>
-              <strong id="profilePhone">—</strong>
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">
+              ⏳
             </div>
 
-            <div class="loan-info">
-              <small>Occupation</small>
-              <strong id="profileOccupation">—</strong>
+            <div>
+
+              <span>
+                Pending
+              </span>
+
+              <strong
+                class="dashboard-card-value status-pending"
+                id="kycPendingCount">
+                0
+              </strong>
+
             </div>
 
-            <div class="loan-info">
-              <small>Address</small>
-              <strong id="profileAddress">—</strong>
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">
+              ✅
             </div>
 
-            <div class="loan-info">
-              <small>ID Number</small>
-              <strong id="profileIdNumber">—</strong>
+            <div>
+
+              <span>
+                Verified
+              </span>
+
+              <strong
+                class="dashboard-card-value status-active"
+                id="kycVerifiedCount">
+                0
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="card-icon">
+              ❌
+            </div>
+
+            <div>
+
+              <span>
+                Rejected
+              </span>
+
+              <strong
+                class="dashboard-card-value status-blocked"
+                id="kycRejectedCount">
+                0
+              </strong>
+
             </div>
 
           </div>
 
         </div>
 
-      </section>
+        <div class="dashboard-table-container">
 
+          <div class="table-header">
 
-      <!-- =====================================================
-     KYC DOCUMENTS
-====================================================== -->
+            <h3>
+              My KYC Documents
+            </h3>
 
-<section id="kycSection">
+          </div>
 
-  <div class="section-header">
-    <div>
-      <h2>KYC Documents</h2>
-      <p>Manage and monitor your identity verification documents.</p>
-    </div>
+          <div
+            id="kycStatus"
+            class="status-message">
+          </div>
 
-    <button
-      type="button"
-      class="btn btn-secondary"
-      onclick="loadKYC()"
-    >
-      🔄 Refresh
-    </button>
-  </div>
+          <div class="table-responsive">
 
-  <!-- KYC SUMMARY -->
+            <table class="dashboard-table">
 
-  <div class="dashboard-cards">
+              <thead>
 
-    <div class="dashboard-card">
-      <div class="card-icon">📄</div>
-      <div>
-        <span>Total Documents</span>
-        <strong id="kycDocumentCount">0</strong>
-      </div>
-    </div>
+                <tr>
 
-    <div class="dashboard-card">
-      <div class="card-icon">⏳</div>
-      <div>
-        <span>Pending</span>
-        <strong id="kycPendingCount">0</strong>
-      </div>
-    </div>
+                  <th>Document Type</th>
+                  <th>Document Number</th>
+                  <th>Status</th>
+                  <th>Submitted</th>
+                  <th>Verified</th>
+                  <th>Rejection Reason</th>
+                  <th>Notes</th>
 
-    <div class="dashboard-card">
-      <div class="card-icon">✅</div>
-      <div>
-        <span>Verified</span>
-        <strong id="kycVerifiedCount">0</strong>
-      </div>
-    </div>
+                </tr>
 
-    <div class="dashboard-card">
-      <div class="card-icon">❌</div>
-      <div>
-        <span>Rejected</span>
-        <strong id="kycRejectedCount">0</strong>
-      </div>
-    </div>
+              </thead>
 
-  </div>
+              <tbody id="kycTableBody">
 
-  <!-- KYC DOCUMENTS TABLE -->
+                <tr>
 
-  <div class="dashboard-table-container">
+                  <td colspan="7">
+                    No KYC documents found.
+                  </td>
 
-    <div class="table-header">
-      <h3>My KYC Documents</h3>
-    </div>
+                </tr>
 
-    <div id="kycStatus" class="status-message"></div>
+              </tbody>
 
-    <div class="table-responsive">
+            </table>
 
-      <table class="dashboard-table">
+          </div>
 
-        <thead>
-          <tr>
-            <th>Document Type</th>
-            <th>Document Number</th>
-            <th>Status</th>
-            <th>Submitted</th>
-            <th>Verified</th>
-            <th>Rejection Reason</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
+        </div>
 
-        <tbody id="kycTableBody">
-
-          <tr>
-            <td colspan="7">
-              No KYC documents found.
-            </td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</section>
-
-      
-<section id="supportSection" class="dashboard-section">
-
-  <div class="section-header">
-    <div>
-      <h2>Support Tickets</h2>
-      <p>Create and track your support requests.</p>
-    </div>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      onclick="openSupportTicketForm()"
-    >
-      + New Support Ticket
-    </button>
-  </div>
-
-  <!-- SUPPORT SUMMARY -->
-  <div class="dashboard-cards">
-
-    <div class="dashboard-card">
-      <h4>Total Tickets</h4>
-      <div
-        class="dashboard-card-value"
-        id="supportTotalTickets"
-      >
-        0
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <h4>Open</h4>
-      <div
-        class="dashboard-card-value"
-        id="supportOpenTickets"
-      >
-        0
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <h4>Pending</h4>
-      <div
-        class="dashboard-card-value"
-        id="supportPendingTickets"
-      >
-        0
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <h4>Closed</h4>
-      <div
-        class="dashboard-card-value"
-        id="supportClosedTickets"
-      >
-        0
-      </div>
-    </div>
-
-  </div>
-
-  <!-- NEW TICKET FORM -->
-  <div
-    id="supportTicketForm"
-    style="display:none; margin-top:20px;"
-  >
-
-    <div class="dashboard-card">
-
-      <h3>Create Support Ticket</h3>
-
-      <div
-        id="supportCreateStatus"
-        style="margin-bottom:15px;"
-      ></div>
-
-      <div class="form-group">
-        <label for="supportSubject">
-          Subject
-        </label>
-
-        <input
-          type="text"
-          id="supportSubject"
-          placeholder="Enter your issue subject"
-          maxlength="150"
-        >
       </div>
 
-      <div class="form-group">
-        <label for="supportCategory">
-          Category
-        </label>
+    </section>
 
-        <select id="supportCategory">
 
-          <option value="general">
-            General
-          </option>
+    <!-- ================= SUPPORT ================= -->
 
-          <option value="account">
-            Account
-          </option>
+    <section
+      id="supportSection"
+      class="section dashboard-section"
+      style="display:none;">
 
-          <option value="loan">
-            Loan
-          </option>
+      <div class="section-header">
 
-          <option value="transaction">
-            Transaction
-          </option>
+        <div>
 
-          <option value="savings">
-            Savings
-          </option>
+          <h2>
+            🎧 Support Tickets
+          </h2>
 
-          <option value="kyc">
-            KYC
-          </option>
+          <p>
+            Create and track your support requests.
+          </p>
 
-          <option value="technical">
-            Technical
-          </option>
-
-          <option value="other">
-            Other
-          </option>
-
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="supportPriority">
-          Priority
-        </label>
-
-        <select id="supportPriority">
-
-          <option value="low">
-            Low
-          </option>
-
-          <option value="medium" selected>
-            Medium
-          </option>
-
-          <option value="high">
-            High
-          </option>
-
-          <option value="urgent">
-            Urgent
-          </option>
-
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="supportMessage">
-          Message
-        </label>
-
-        <textarea
-          id="supportMessage"
-          rows="6"
-          placeholder="Describe your issue..."
-          maxlength="2000"
-        ></textarea>
-      </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        </div>
 
         <button
           type="button"
           class="btn btn-primary"
-          id="supportSubmitButton"
-          onclick="createSupportTicket()"
-        >
-          Submit Ticket
-        </button>
-
-        <button
-          type="button"
-          class="btn"
-          onclick="closeSupportTicketForm()"
-        >
-          Cancel
+          onclick="openSupportTicketForm()">
+          + New Support Ticket
         </button>
 
       </div>
 
-    </div>
+      <div class="section-body">
 
-  </div>
+        <div class="dashboard-cards">
 
-  <!-- TICKETS -->
-  <div
-    class="dashboard-card"
-    style="margin-top:20px;"
-  >
+          <div class="dashboard-card">
 
-    <div
-      style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        gap:10px;
-        flex-wrap:wrap;
-      "
-    >
+            <div>
 
-      <div>
-        <h3>My Support Tickets</h3>
-        <p>
-          View your submitted requests and administrator responses.
-        </p>
-      </div>
+              <h4>
+                Total Tickets
+              </h4>
 
-      <button
-        type="button"
-        class="btn"
-        onclick="loadSupportTickets()"
-      >
-        Refresh
-      </button>
+              <div
+                class="dashboard-card-value"
+                id="supportTotalTickets">
+                0
+              </div>
 
-    </div>
+            </div>
 
-    <div
-      id="supportStatus"
-      style="margin:15px 0;"
-    ></div>
+          </div>
 
-    <div style="overflow-x:auto;">
+          <div class="dashboard-card">
 
-      <table class="dashboard-table">
+            <div>
 
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Subject</th>
-            <th>Category</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Admin Response</th>
-            <th>Updated</th>
-          </tr>
-        </thead>
+              <h4>
+                Open
+              </h4>
 
-        <tbody id="supportTableBody">
+              <div
+                class="dashboard-card-value status-active"
+                id="supportOpenTickets">
+                0
+              </div>
 
-          <tr>
-            <td colspan="7">
-              No support tickets loaded yet.
-            </td>
-          </tr>
+            </div>
 
-        </tbody>
+          </div>
 
-      </table>
+          <div class="dashboard-card">
 
-    </div>
+            <div>
 
-  </div>
+              <h4>
+                Pending
+              </h4>
 
-</section>
-      
+              <div
+                class="dashboard-card-value status-pending"
+                id="supportPendingTickets">
+                0
+              </div>
 
+            </div>
 
-      <section
-        id="securitySection"
-        class="section"
-        style="display:none;">
+          </div>
 
-        <div class="section-header">
-          <h2>Security</h2>
-        </div>
+          <div class="dashboard-card">
 
-        <div class="section-body">
+            <div>
 
-          <div class="empty">
-            Login activity and security events will be connected next.
+              <h4>
+                Closed
+              </h4>
+
+              <div
+                class="dashboard-card-value"
+                id="supportClosedTickets">
+                0
+              </div>
+
+            </div>
+
           </div>
 
         </div>
 
-      </section>
 
-    </main>
+        <!-- NEW SUPPORT TICKET -->
 
-  </div>
-
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
-  <script>
-
-    /* =====================================================
-       API CONFIGURATION
-    ====================================================== */
-
-    const API_BASE_URL =
-      "https://emmanueljacobgithubio-production.up.railway.app/api";
-
-
-    /* =====================================================
-       SESSION DATA
-    ====================================================== */
-
-    const sessionToken =
-      localStorage.getItem("jaycob_customer_token");
-
-    let customer = null;
-
-
-    /* =====================================================
-       CHECK LOGIN
-    ====================================================== */
-
-    function checkCustomerSession() {
-
-      const storedCustomer =
-        localStorage.getItem("jaycob_customer_data");
-
-      if (!sessionToken || !storedCustomer) {
-
-        window.location.href = "index.html";
-
-        return false;
-      }
-
-      try {
-
-        customer = JSON.parse(storedCustomer);
-
-      } catch (error) {
-
-        localStorage.removeItem("jaycob_customer_token");
-        localStorage.removeItem("jaycob_customer_data");
-
-        window.location.href = "index.html";
-
-        return false;
-      }
-
-      return true;
-    }
-
-
-    /* =====================================================
-       API REQUEST
-    ====================================================== */
-
-    async function apiRequest(endpoint, options = {}) {
-
-      const headers = {
-        "Content-Type": "application/json",
-        ...(options.headers || {})
-      };
-
-      if (sessionToken) {
-
-        headers.Authorization =
-          `Bearer ${sessionToken}`;
-      }
-
-      const response = await fetch(
-        `${API_BASE_URL}${endpoint}`,
-        {
-          ...options,
-          headers
-        }
-      );
-
-      let data;
-
-      try {
-
-        data = await response.json();
-
-      } catch {
-
-        data = {};
-      }
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.message ||
-          "Request failed"
-        );
-      }
-
-      return data;
-    }
-
-
-    /* =====================================================
-       FORMAT MONEY
-    ====================================================== */
-
-    function formatMoney(value) {
-
-      return "MWK " +
-        Number(value || 0).toLocaleString(
-          "en-MW",
-          {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }
-        );
-    }
-
-
-    /* =====================================================
-       LOAD CUSTOMER
-    ====================================================== */
-
-    async function loadCustomer() {
-
-      if (!customer) return;
-
-      try {
-
-        const response =
-          await apiRequest(
-            `/customers/${customer.id}`
-          );
-
-        if (
-          response.success &&
-          response.customer
-        ) {
-
-          customer = response.customer;
-
-          localStorage.setItem(
-            "jaycob_customer_data",
-            JSON.stringify(customer)
-          );
-        }
-
-      } catch (error) {
-
-        console.log(
-          "Customer refresh:",
-          error.message
-        );
-      }
-
-
-      renderCustomer();
-
-    }
-
-
-    /* =====================================================
-       DISPLAY CUSTOMER
-    ====================================================== */
-
-    function renderCustomer() {
-
-      document.getElementById(
-        "customerName"
-      ).textContent =
-        customer.full_name || "Customer";
-
-
-      document.getElementById(
-        "accountNumber"
-      ).textContent =
-        customer.account_number || "—";
-
-
-      document.getElementById(
-        "accountBalance"
-      ).textContent =
-        formatMoney(customer.balance);
-
-
-      const status =
-        customer.account_status || "unknown";
-
-      const statusElement =
-        document.getElementById("accountStatus");
-
-      statusElement.textContent =
-        status;
-
-
-      statusElement.className =
-        "card-value " +
-        (
-          status === "active"
-            ? "status-active"
-            : status === "blocked"
-              ? "status-blocked"
-              : "status-pending"
-        );
-
-
-      document.getElementById(
-        "verificationStatus"
-      ).textContent =
-        customer.is_verified
-          ? "Verified"
-          : "Not Verified";
-
-
-      /* PROFILE */
-
-      document.getElementById(
-        "profileName"
-      ).textContent =
-        customer.full_name || "—";
-
-
-      document.getElementById(
-        "profileEmail"
-      ).textContent =
-        customer.email || "—";
-
-
-      document.getElementById(
-        "profilePhone"
-      ).textContent =
-        customer.phone || "—";
-
-
-      document.getElementById(
-        "profileOccupation"
-      ).textContent =
-        customer.occupation || "—";
-
-
-      document.getElementById(
-        "profileAddress"
-      ).textContent =
-        customer.residential_address ||
-        customer.address ||
-        "—";
-
-
-      document.getElementById(
-        "profileIdNumber"
-      ).textContent =
-        customer.id_number || "—";
-    }
-
-    /* =====================================================
-   LOAD REAL TRANSACTIONS
-===================================================== */
-
-async function loadTransactions() {
-
-  if (!customer || !customer.id) {
-    return;
-  }
-
-  const transactionList =
-    document.getElementById(
-      "transactionList"
-    );
-
-  const transactionBalance =
-    document.getElementById(
-      "transactionBalance"
-    );
-
-  const transactionSummary =
-    document.getElementById(
-      "transactionSummary"
-    );
-
-
-  transactionList.innerHTML = `
-    <tr>
-      <td
-        colspan="7"
-        style="
-          padding:25px;
-          text-align:center;
-          color:#68758a;
-        ">
-        Loading transactions...
-      </td>
-    </tr>
-  `;
-
-
-  try {
-
-    const response =
-      await apiRequest(
-        `/transactions/customer/${customer.id}`
-      );
-
-
-    const transactions =
-      response.transactions || [];
-
-
-    /* ================================================
-       UPDATE BALANCE
-    ================================================= */
-
-    transactionBalance.textContent =
-      formatMoney(customer.balance);
-
-
-    if (!transactions.length) {
-
-      transactionSummary.textContent =
-        "No transactions found yet.";
-
-      transactionList.innerHTML = `
-        <tr>
-
-          <td
-            colspan="7"
-            style="
-              padding:30px;
-              text-align:center;
-              color:#68758a;
-            ">
-
-            No transactions found.
-
-          </td>
-
-        </tr>
-      `;
-
-      return;
-    }
-
-
-    transactionSummary.textContent =
-      `${transactions.length} transaction${
-        transactions.length === 1
-          ? ""
-          : "s"
-      } found`;
-
-
-    transactionList.innerHTML =
-      transactions
-        .map(
-          transaction =>
-            createTransactionHTML(
-              transaction
-            )
-        )
-        .join("");
-
-
-  } catch (error) {
-
-    console.error(
-      "Transaction loading error:",
-      error
-    );
-
-
-    transactionList.innerHTML = `
-      <tr>
-
-        <td
-          colspan="7"
+        <div
+          id="supportTicketForm"
           style="
-            padding:30px;
-            text-align:center;
-            color:#b42318;
+            display:none;
+            margin-top:20px;
           ">
 
-          Unable to load transactions.
+          <div class="dashboard-card">
 
-          <br>
+            <h3>
+              Create Support Ticket
+            </h3>
 
-          <small>
-            ${escapeHTML(
-              error.message ||
-              "Please try again."
-            )}
-          </small>
+            <div
+              id="supportCreateStatus"
+              class="status-message">
+            </div>
 
-        </td>
+            <div class="form-group">
 
-      </tr>
-    `;
+              <label for="supportSubject">
+                Subject
+              </label>
 
-  }
+              <input
+                type="text"
+                id="supportSubject"
+                placeholder="Enter your issue subject"
+                maxlength="150">
 
-}
+            </div>
 
+            <div class="form-group">
 
-/* =====================================================
-   TRANSACTION ROW
-===================================================== */
+              <label for="supportCategory">
+                Category
+              </label>
 
-function createTransactionHTML(
-  transaction
-) {
+              <select id="supportCategory">
 
-  const type =
-    String(
-      transaction.type ||
-      "transaction"
-    ).toLowerCase();
+                <option value="general">
+                  General
+                </option>
 
+                <option value="account">
+                  Account
+                </option>
 
-  const status =
-    String(
-      transaction.status ||
-      "pending"
-    ).toLowerCase();
+                <option value="loan">
+                  Loan
+                </option>
 
+                <option value="transaction">
+                  Transaction
+                </option>
 
-  const amount =
-    Number(
-      transaction.amount || 0
-    );
+                <option value="savings">
+                  Savings
+                </option>
 
+                <option value="kyc">
+                  KYC
+                </option>
 
-  const incomingTypes = [
-    "deposit",
-    "loan_disbursement"
-  ];
+                <option value="technical">
+                  Technical
+                </option>
 
+                <option value="other">
+                  Other
+                </option>
 
-  const outgoingTypes = [
-    "withdrawal",
-    "transfer",
-    "loan_repayment"
-  ];
+              </select>
 
+            </div>
 
-  let amountPrefix = "";
+            <div class="form-group">
 
+              <label for="supportPriority">
+                Priority
+              </label>
 
-  if (
-    incomingTypes.includes(type)
-  ) {
+              <select id="supportPriority">
 
-    amountPrefix = "+ ";
+                <option value="low">
+                  Low
+                </option>
 
-  } else if (
-    outgoingTypes.includes(type)
-  ) {
+                <option value="medium" selected>
+                  Medium
+                </option>
 
-    amountPrefix = "- ";
+                <option value="high">
+                  High
+                </option>
 
-  }
+                <option value="urgent">
+                  Urgent
+                </option>
 
+              </select>
 
-  const amountClass =
-    incomingTypes.includes(type)
-      ? "status-active"
-      : outgoingTypes.includes(type)
-        ? "status-blocked"
-        : "status-pending";
+            </div>
 
+            <div class="form-group">
 
-  const statusClass =
-    status === "completed"
-      ? "status-active"
-      : status === "failed" ||
-        status === "reversed"
-        ? "status-blocked"
-        : "status-pending";
+              <label for="supportMessage">
+                Message
+              </label>
 
+              <textarea
+                id="supportMessage"
+                rows="6"
+                placeholder="Describe your issue..."
+                maxlength="2000"></textarea>
 
-  const description =
-    transaction.description ||
-    formatTransactionType(type);
+            </div>
 
-
-  const balanceAfter =
-    transaction.balance_after;
-
-
-  return `
-    <tr
-      style="
-        border-bottom:1px solid #edf0f4;
-      ">
-
-      <td
-        style="
-          padding:14px 12px;
-          white-space:nowrap;
-        ">
-
-        ${formatDateTime(
-          transaction.created_at
-        )}
-
-      </td>
-
-
-      <td
-        style="
-          padding:14px 12px;
-          font-weight:bold;
-          text-transform:capitalize;
-        ">
-
-        ${escapeHTML(type.replaceAll("_", " "))}
-
-      </td>
-
-
-      <td
-        style="
-          padding:14px 12px;
-        ">
-
-        ${escapeHTML(description)}
-
-      </td>
-
-
-      <td
-        style="
-          padding:14px 12px;
-          text-align:right;
-          font-weight:bold;
-        "
-        class="${amountClass}">
-
-        ${amountPrefix}
-        ${formatMoney(amount)}
-
-      </td>
-
-
-      <td
-        style="
-          padding:14px 12px;
-          text-align:right;
-        ">
-
-        ${
-          balanceAfter !== null &&
-          balanceAfter !== undefined
-            ? formatMoney(balanceAfter)
-            : "—"
-        }
-
-      </td>
-
-
-      <td
-        style="
-          padding:14px 12px;
-        ">
-
-        <span
-          class="${statusClass}"
-          style="
-            text-transform:capitalize;
-            font-weight:bold;
-          ">
-
-          ${escapeHTML(status)}
-
-        </span>
-
-      </td>
-
-
-      <td
-        style="
-          padding:14px 12px;
-          font-family:monospace;
-          font-size:12px;
-        ">
-
-        ${escapeHTML(
-          transaction.reference ||
-          "—"
-        )}
-
-      </td>
-
-    </tr>
-  `;
-}
-
-
-/* =====================================================
-   TRANSACTION TYPE LABEL
-===================================================== */
-
-function formatTransactionType(
-  type
-) {
-
-  const labels = {
-
-    deposit:
-      "Money deposited into your account",
-
-    withdrawal:
-      "Money withdrawn from your account",
-
-    transfer:
-      "Account transfer",
-
-    loan_disbursement:
-      "Loan disbursement",
-
-    loan_repayment:
-      "Loan repayment"
-
-  };
-
-
-  return (
-    labels[type] ||
-    "Account transaction"
-  );
-}
-
-
-/* =====================================================
-   FORMAT DATE + TIME
-===================================================== */
-
-function formatDateTime(
-  date
-) {
-
-  if (!date) {
-    return "—";
-  }
-
-
-  const d =
-    new Date(date);
-
-
-  if (
-    Number.isNaN(
-      d.getTime()
-    )
-  ) {
-
-    return "—";
-  }
-
-
-  return d.toLocaleString(
-    "en-MW",
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
-}
-
-    /* =====================================================
-       LOAD LOANS
-    ====================================================== */
-
-    async function loadLoans() {
-
-  if (!customer || !customer.id) {
-    return;
-  }
-
-
-  const loanList =
-    document.getElementById(
-      "loanList"
-    );
-
-  const allLoanList =
-    document.getElementById(
-      "allLoanList"
-    );
-
-
-  try {
-
-    const response =
-      await apiRequest(
-        `/loans/customer/${customer.id}`
-      );
-
-
-    const loans =
-      response.loans || [];
-
-    
-/* =====================================================
-   LOAD SAVINGS
-===================================================== */
-
-async function loadSavings() {
-
-  if (!customer || !customer.id) {
-    return;
-  }
-
-
-  const tableBody =
-    document.getElementById(
-      "savingsTableBody"
-    );
-
-
-  const balanceElement =
-    document.getElementById(
-      "savingsBalance"
-    );
-
-
-  const depositsElement =
-    document.getElementById(
-      "totalSavingsDeposits"
-    );
-
-
-  const withdrawalsElement =
-    document.getElementById(
-      "totalSavingsWithdrawals"
-    );
-
-
-  const countElement =
-    document.getElementById(
-      "savingsTransactionCount"
-    );
-
-
-  const summaryElement =
-    document.getElementById(
-      "savingsSummary"
-    );
-
-
-  if (tableBody) {
-
-    tableBody.innerHTML = `
-      <tr>
-
-        <td
-          colspan="7"
-          class="loading">
-
-          Loading savings...
-
-        </td>
-
-      </tr>
-    `;
-
-  }
-
-
-  try {
-
-    const response =
-      await apiRequest(
-        `/savings/customer/${customer.id}`
-      );
-
-
-    const savings =
-      response.savings || [];
-
-
-    /*
-      SORT NEWEST FIRST
-    */
-
-    savings.sort(
-      (a, b) =>
-        new Date(
-          b.created_at || 0
-        ) -
-        new Date(
-          a.created_at || 0
-        )
-    );
-
-
-    /*
-      TOTAL DEPOSITS
-    */
-
-    const totalDeposits =
-      savings
-        .filter(item =>
-          String(
-            item.transaction_type || ""
-          )
-          .toLowerCase()
-          .includes("deposit")
-        )
-        .reduce(
-          (total, item) =>
-            total +
-            Number(
-              item.amount || 0
-            ),
-          0
-        );
-
-
-    /*
-      TOTAL WITHDRAWALS
-    */
-
-    const totalWithdrawals =
-      savings
-        .filter(item =>
-          String(
-            item.transaction_type || ""
-          )
-          .toLowerCase()
-          .includes("withdraw")
-        )
-        .reduce(
-          (total, item) =>
-            total +
-            Number(
-              item.amount || 0
-            ),
-          0
-        );
-
-
-    /*
-      CURRENT BALANCE
-
-      Uses the newest transaction's
-      balance_after.
-    */
-
-    const currentBalance =
-      savings.length > 0
-        ? Number(
-            savings[0].balance_after || 0
-          )
-        : 0;
-
-
-    /*
-      UPDATE SUMMARY CARDS
-    */
-
-    if (balanceElement) {
-
-      balanceElement.textContent =
-        formatMoney(
-          currentBalance
-        );
-
-    }
-
-
-    if (depositsElement) {
-
-      depositsElement.textContent =
-        formatMoney(
-          totalDeposits
-        );
-
-    }
-
-
-    if (withdrawalsElement) {
-
-      withdrawalsElement.textContent =
-        formatMoney(
-          totalWithdrawals
-        );
-
-    }
-
-
-    if (countElement) {
-
-      countElement.textContent =
-        savings.length;
-
-    }
-
-
-    if (summaryElement) {
-
-      summaryElement.textContent =
-        savings.length === 0
-          ? "No savings transactions yet."
-          : `${savings.length} savings transaction${
-              savings.length === 1
-                ? ""
-                : "s"
-            } found.`;
-
-    }
-
-
-    /*
-      NO SAVINGS
-    */
-
-    if (!savings.length) {
-
-      if (tableBody) {
-
-        tableBody.innerHTML = `
-          <tr>
-
-            <td
-              colspan="7"
-              class="empty">
-
-              🏦 No savings transactions found.
-
-            </td>
-
-          </tr>
-        `;
-
-      }
-
-      return;
-
-    }
-
-
-    /*
-      DISPLAY SAVINGS
-    */
-
-    if (tableBody) {
-
-      tableBody.innerHTML =
-        savings.map(item => {
-
-          const type =
-            String(
-              item.transaction_type ||
-              "transaction"
-            );
-
-
-          const normalizedType =
-            type.toLowerCase();
-
-
-          const isDeposit =
-            normalizedType.includes(
-              "deposit"
-            );
-
-
-          const amount =
-            Number(
-              item.amount || 0
-            );
-
-
-          const status =
-            item.status || "pending";
-
-
-          return `
-            <tr
+            <div
               style="
-                border-bottom:
-                1px solid #edf1f5;
+                display:flex;
+                gap:10px;
+                flex-wrap:wrap;
               ">
 
-
-              <td
-                style="padding:12px;">
-
-                ${formatDate(
-                  item.created_at
-                )}
-
-              </td>
-
-
-              <td
-                style="
-                  padding:12px;
-                  font-weight:bold;
-                  color:${
-                    isDeposit
-                      ? "#16833a"
-                      : "#d62828"
-                  };
-                ">
-
-                ${escapeHTML(type)}
-
-              </td>
-
-
-              <td
-                style="padding:12px;">
-
-                ${escapeHTML(
-                  item.description ||
-                  "Savings transaction"
-                )}
-
-              </td>
-
-
-              <td
-                style="
-                  padding:12px;
-                  text-align:right;
-                  font-weight:bold;
-                ">
-
-                ${
-                  isDeposit
-                    ? "+"
-                    : "-"
-                }
-
-                ${formatMoney(amount)}
-
-              </td>
-
-
-              <td
-                style="
-                  padding:12px;
-                  text-align:right;
-                ">
-
-                ${formatMoney(
-                  item.balance_after
-                )}
-
-              </td>
-
-
-              <td
-                style="
-                  padding:12px;
-                  text-transform:capitalize;
-                ">
-
-                ${escapeHTML(status)}
-
-              </td>
-
-
-              <td
-                style="padding:12px;">
-
-                ${escapeHTML(
-                  item.reference_number ||
-                  "—"
-                )}
-
-              </td>
-
-
-            </tr>
-          `;
-
-        }).join("");
-
-    }
-
-
-  } catch (error) {
-
-    console.error(
-      "Savings loading error:",
-      error
-    );
-
-
-    if (summaryElement) {
-
-      summaryElement.textContent =
-        "Unable to load savings.";
-
-    }
-
-
-    if (tableBody) {
-
-      tableBody.innerHTML = `
-        <tr>
-
-          <td
-            colspan="7"
-            class="empty">
-
-            Unable to load savings.
-
-            <br>
-
-            <small>
-
-              ${escapeHTML(
-                error.message ||
-                "Please try again."
-              )}
-
-            </small>
-
-          </td>
-
-        </tr>
-      `;
-
-    }
-
-  }
-
-}
-
-    /* =========================================================
-   LOAD ACCOUNT STATEMENTS
-========================================================= */
-
-async function loadStatements() {
-
-  if (!customer) return;
-
-  const tableBody =
-    document.getElementById(
-      "statementsTableBody"
-    );
-
-  const status =
-    document.getElementById(
-      "statementsStatus"
-    );
-
-  try {
-
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="7">
-          Loading account statements...
-        </td>
-      </tr>
-    `;
-
-    status.textContent = "";
-
-    const response =
-      await apiRequest(
-        `/statements/customer/${customer.id}`
-      );
-
-    if (
-      !response ||
-      !response.success
-    ) {
-      throw new Error(
-        response?.message ||
-        "Unable to load account statements."
-      );
-    }
-
-    const statements =
-      Array.isArray(response.statements)
-        ? response.statements
-        : [];
-
-    /* -----------------------------------------------------
-       SUMMARY
-    ----------------------------------------------------- */
-
-    const totalCredit =
-      statements.reduce(
-        (total, item) =>
-          total +
-          Number(item.credit || 0),
-        0
-      );
-
-    const totalDebit =
-      statements.reduce(
-        (total, item) =>
-          total +
-          Number(item.debit || 0),
-        0
-      );
-
-    const latestStatement =
-      statements.length > 0
-        ? statements[0]
-        : null;
-
-    const currentBalance =
-      latestStatement
-        ? Number(
-            latestStatement.balance_after || 0
-          )
-        : Number(
-            customer.balance || 0
-          );
-
-    document.getElementById(
-      "statementTransactionCount"
-    ).textContent =
-      statements.length;
-
-    document.getElementById(
-      "statementTotalCredit"
-    ).textContent =
-      formatCurrency(totalCredit);
-
-    document.getElementById(
-      "statementTotalDebit"
-    ).textContent =
-      formatCurrency(totalDebit);
-
-    document.getElementById(
-      "statementCurrentBalance"
-    ).textContent =
-      formatCurrency(currentBalance);
-
-    /* -----------------------------------------------------
-       EMPTY STATE
-    ----------------------------------------------------- */
-
-    if (statements.length === 0) {
-
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="7">
-            No account statements found yet.
-          </td>
-        </tr>
-      `;
-
-      return;
-    }
-
-    /* -----------------------------------------------------
-       RENDER STATEMENTS
-    ----------------------------------------------------- */
-
-    tableBody.innerHTML =
-      statements.map(statement => {
-
-        const date =
-          statement.transaction_date ||
-          statement.created_at;
-
-        const debit =
-          Number(
-            statement.debit || 0
-          );
-
-        const credit =
-          Number(
-            statement.credit || 0
-          );
-
-        const balance =
-          Number(
-            statement.balance_after || 0
-          );
-
-        return `
-          <tr>
-
-            <td>
-              ${
-                typeof formatDateTime === "function"
-                  ? formatDateTime(date)
-                  : date || "—"
-              }
-            </td>
-
-            <td>
-              ${statement.transaction_type || "—"}
-            </td>
-
-            <td>
-              ${statement.description || "—"}
-            </td>
-
-            <td>
-              ${statement.reference_number || "—"}
-            </td>
-
-            <td>
-              ${
-                debit > 0
-                  ? formatCurrency(debit)
-                  : "—"
-              }
-            </td>
-
-            <td>
-              ${
-                credit > 0
-                  ? formatCurrency(credit)
-                  : "—"
-              }
-            </td>
-
-            <td>
-              ${formatCurrency(balance)}
-            </td>
-
-          </tr>
-        `;
-
-      }).join("");
-
-  } catch (error) {
-
-    console.error(
-      "STATEMENTS ERROR:",
-      error
-    );
-
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="7">
-          Unable to load account statements.
-        </td>
-      </tr>
-    `;
-
-    status.textContent =
-      error.message ||
-      "Unable to load account statements.";
-
-  }
-}
-    
-    /* =========================================================
-   LOAD KYC DOCUMENTS
-========================================================= */
-
-async function loadKYC() {
-
-  if (!customer) return;
-
-  const tableBody =
-    document.getElementById(
-      "kycTableBody"
-    );
-
-  const status =
-    document.getElementById(
-      "kycStatus"
-    );
-
-  try {
-
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="7">
-          Loading KYC documents...
-        </td>
-      </tr>
-    `;
-
-    status.textContent = "";
-
-    const response =
-      await apiRequest(
-        `/kyc/customer/${customer.id}`
-      );
-
-    if (
-      !response ||
-      !response.success
-    ) {
-      throw new Error(
-        response?.message ||
-        "Unable to load KYC documents."
-      );
-    }
-
-    const documents =
-      Array.isArray(response.documents)
-        ? response.documents
-        : [];
-
-    /* -----------------------------------------------------
-       COUNTS
-    ----------------------------------------------------- */
-
-    const pendingCount =
-      documents.filter(
-        document =>
-          String(
-            document.status || ""
-          ).toLowerCase() === "pending"
-      ).length;
-
-    const verifiedCount =
-      documents.filter(
-        document =>
-          String(
-            document.status || ""
-          ).toLowerCase() === "verified"
-      ).length;
-
-    const rejectedCount =
-      documents.filter(
-        document =>
-          String(
-            document.status || ""
-          ).toLowerCase() === "rejected"
-      ).length;
-
-    document.getElementById(
-      "kycDocumentCount"
-    ).textContent =
-      documents.length;
-
-    document.getElementById(
-      "kycPendingCount"
-    ).textContent =
-      pendingCount;
-
-    document.getElementById(
-      "kycVerifiedCount"
-    ).textContent =
-      verifiedCount;
-
-    document.getElementById(
-      "kycRejectedCount"
-    ).textContent =
-      rejectedCount;
-
-    /* -----------------------------------------------------
-       EMPTY STATE
-    ----------------------------------------------------- */
-
-    if (documents.length === 0) {
-
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="7">
-            No KYC documents found yet.
-          </td>
-        </tr>
-      `;
-
-      return;
-    }
-  
-
-    /* -----------------------------------------------------
-       RENDER DOCUMENTS
-    ----------------------------------------------------- */
-
-    tableBody.innerHTML =
-      documents.map(document => {
-
-        const submittedDate =
-          document.submitted_at ||
-          document.created_at;
-
-        const verifiedDate =
-          document.verified_at;
-
-        const statusValue =
-          String(
-            document.status || "pending"
-          );
-
-        return `
-          <tr>
-
-            <td>
-              ${document.document_type || "—"}
-            </td>
-
-            <td>
-              ${document.document_number || "—"}
-            </td>
-
-            <td>
-              ${statusValue}
-            </td>
-
-            <td>
-              ${
-                submittedDate &&
-                typeof formatDateTime === "function"
-                  ? formatDateTime(submittedDate)
-                  : submittedDate || "—"
-              }
-            </td>
-
-            <td>
-              ${
-                verifiedDate &&
-                typeof formatDateTime === "function"
-                  ? formatDateTime(verifiedDate)
-                  : verifiedDate || "—"
-              }
-            </td>
-
-            <td>
-              ${document.rejection_reason || "—"}
-            </td>
-
-            <td>
-              ${document.notes || "—"}
-            </td>
-
-          </tr>
-        `;
-
-      }).join("");
-
-  } catch (error) {
-
-    console.error(
-      "KYC ERROR:",
-      error
-    );
-
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="7">
-          Unable to load KYC documents.
-        </td>
-      </tr>
-    `;
-
-    status.textContent =
-      error.message ||
-      "Unable to load KYC documents.";
-
-  }
-}
-    /* =========================================================
-   SUPPORT TICKETS
-========================================================= */
-
-function openSupportTicketForm() {
-
-  const form =
-    document.getElementById("supportTicketForm");
-
-  if (form) {
-    form.style.display = "block";
-  }
-
-}
-
-
-function closeSupportTicketForm() {
-
-  const form =
-    document.getElementById("supportTicketForm");
-
-  if (form) {
-    form.style.display = "none";
-  }
-
-  const status =
-    document.getElementById("supportCreateStatus");
-
-  if (status) {
-    status.textContent = "";
-  }
-
-}
-
-
-async function loadSupportTickets() {
-
-  if (!customer) return;
-
-  const tableBody =
-    document.getElementById(
-      "supportTableBody"
-    );
-
-  const status =
-    document.getElementById(
-      "supportStatus"
-    );
-
-  try {
-
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="7">
-          Loading support tickets...
-        </td>
-      </tr>
-    `;
-
-    status.textContent = "";
-
-    const response =
-      await apiRequest(
-        `/support/customer/${customer.id}`
-      );
-
-    if (
-      !response ||
-      !response.success
-    ) {
-
-      throw new Error(
-        response?.message ||
-        "Unable to load support tickets."
-      );
-
-    }
-
-    const tickets =
-      Array.isArray(response.tickets)
-        ? response.tickets
-        : [];
-
-    const openCount =
-      tickets.filter(ticket =>
-        String(ticket.status || "")
-          .toLowerCase() === "open"
-      ).length;
-
-    const pendingCount =
-      tickets.filter(ticket =>
-        String(ticket.status || "")
-          .toLowerCase() === "pending"
-      ).length;
-
-    const closedCount =
-      tickets.filter(ticket => {
-
-        const value =
-          String(ticket.status || "")
-            .toLowerCase();
-
-        return (
-          value === "closed" ||
-          value === "resolved"
-        );
-
-      }).length;
-
-
-    document.getElementById(
-      "supportTotalTickets"
-    ).textContent =
-      tickets.length;
-
-    document.getElementById(
-      "supportOpenTickets"
-    ).textContent =
-      openCount;
-
-    document.getElementById(
-      "supportPendingTickets"
-    ).textContent =
-      pendingCount;
-
-    document.getElementById(
-      "supportClosedTickets"
-    ).textContent =
-      closedCount;
-
-
-    if (tickets.length === 0) {
-
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="7">
-            No support tickets found yet.
-          </td>
-        </tr>
-      `;
-
-      return;
-    }
-
-
-    tableBody.innerHTML =
-      tickets.map(ticket => {
-
-        const createdDate =
-          ticket.created_at;
-
-        const updatedDate =
-          ticket.updated_at ||
-          ticket.created_at;
-
-        return `
-          <tr>
-
-            <td>
-              ${
-                typeof formatDateTime === "function"
-                  ? formatDateTime(createdDate)
-                  : createdDate || "—"
-              }
-            </td>
-
-            <td>
-              <strong>
-                ${ticket.subject || "—"}
-              </strong>
-
-              <div style="margin-top:5px;">
-                ${
-                  ticket.message
-                    ? ticket.message
-                    : ""
-                }
-              </div>
-            </td>
-
-            <td>
-              ${ticket.category || "—"}
-            </td>
-
-            <td>
-              ${ticket.priority || "—"}
-            </td>
-
-            <td>
-              ${ticket.status || "—"}
-            </td>
-
-            <td>
-              ${
-                ticket.admin_response ||
-                "Waiting for administrator response."
-              }
-            </td>
-
-            <td>
-              ${
-                typeof formatDateTime === "function"
-                  ? formatDateTime(updatedDate)
-                  : updatedDate || "—"
-              }
-            </td>
-
-          </tr>
-        `;
-
-      }).join("");
-
-
-  } catch (error) {
-
-    console.error(
-      "SUPPORT TICKETS ERROR:",
-      error
-    );
-
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="7">
-          Unable to load support tickets.
-        </td>
-      </tr>
-    `;
-
-    status.textContent =
-      error.message ||
-      "Unable to load support tickets.";
-
-  }
-
-}
-
-
-/* =========================================================
-   CREATE SUPPORT TICKET
-========================================================= */
-
-async function createSupportTicket() {
-
-  if (!customer) return;
-
-  const subject =
-    document
-      .getElementById("supportSubject")
-      .value
-      .trim();
-
-  const message =
-    document
-      .getElementById("supportMessage")
-      .value
-      .trim();
-
-  const category =
-    document
-      .getElementById("supportCategory")
-      .value;
-
-  const priority =
-    document
-      .getElementById("supportPriority")
-      .value;
-
-  const status =
-    document.getElementById(
-      "supportCreateStatus"
-    );
-
-  const button =
-    document.getElementById(
-      "supportSubmitButton"
-    );
-
-
-  if (!subject) {
-
-    status.textContent =
-      "Please enter a subject.";
-
-    return;
-
-  }
-
-
-  if (!message) {
-
-    status.textContent =
-      "Please describe your issue.";
-
-    return;
-
-  }
-
-
-  button.disabled = true;
-  button.textContent =
-    "Submitting...";
-
-
-  try {
-
-    status.textContent =
-      "Creating your support ticket...";
-
-
-    const response =
-      await apiRequest(
-        "/support/tickets",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-            customer_id:
-              customer.id,
-
-            subject:
-              subject,
-
-            message:
-              message,
-
-            category:
-              category,
-
-            priority:
-              priority
-          })
-        }
-      );
-
-
-    if (
-      !response ||
-      !response.success
-    ) {
-
-      throw new Error(
-        response?.message ||
-        "Unable to create support ticket."
-      );
-
-    }
-
-
-    status.textContent =
-      "Support ticket created successfully.";
-
-
-    document.getElementById(
-      "supportSubject"
-    ).value = "";
-
-    document.getElementById(
-      "supportMessage"
-    ).value = "";
-
-    document.getElementById(
-      "supportCategory"
-    ).value = "general";
-
-    document.getElementById(
-      "supportPriority"
-    ).value = "medium";
-
-
-    await loadSupportTickets();
-
-
-    setTimeout(() => {
-
-      closeSupportTicketForm();
-
-    }, 1200);
-
-
-  } catch (error) {
-
-    console.error(
-      "CREATE SUPPORT ERROR:",
-      error
-    );
-
-    status.textContent =
-      error.message ||
-      "Unable to create support ticket.";
-
-  } finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "Submit Ticket";
-
-  }
-
-}
-    
-    
-    /* ================================================
-       LOAN COUNTS
-    ================================================= */
-
-    const total =
-      loans.length;
-
-
-    const approved =
-      loans.filter(
-        loan =>
-          String(
-            loan.status || ""
-          ).toLowerCase() === "approved"
-      ).length;
-
-
-    const pending =
-      loans.filter(
-        loan =>
-          String(
-            loan.status || ""
-          ).toLowerCase() === "pending"
-      ).length;
-
-
-    const rejected =
-      loans.filter(
-        loan =>
-          String(
-            loan.status || ""
-          ).toLowerCase() === "rejected"
-      ).length;
-
-
-    /* ================================================
-       UPDATE SUMMARY
-    ================================================= */
-
-    const totalElement =
-      document.getElementById(
-        "totalLoanApplications"
-      );
-
-    const approvedElement =
-      document.getElementById(
-        "approvedLoanCount"
-      );
-
-    const pendingElement =
-      document.getElementById(
-        "pendingLoanCount"
-      );
-
-    const rejectedElement =
-      document.getElementById(
-        "rejectedLoanCount"
-      );
-
-    const summaryElement =
-      document.getElementById(
-        "loanSummary"
-      );
-
-
-    if (totalElement) {
-      totalElement.textContent = total;
-    }
-
-    if (approvedElement) {
-      approvedElement.textContent = approved;
-    }
-
-    if (pendingElement) {
-      pendingElement.textContent = pending;
-    }
-
-    if (rejectedElement) {
-      rejectedElement.textContent = rejected;
-    }
-
-
-    if (summaryElement) {
-
-      summaryElement.textContent =
-        total === 0
-          ? "You have no loan applications yet."
-          : `${total} loan application${
-              total === 1 ? "" : "s"
-            } on your account.`;
-
-    }
-
-
-    /* ================================================
-       NO LOANS
-    ================================================= */
-
-    if (!loans.length) {
-
-      const message = `
-        <div class="empty">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="supportSubmitButton"
+                onclick="createSupportTicket()">
+                Submit Ticket
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="closeSupportTicketForm()">
+                Cancel
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SUPPORT TICKETS -->
+
+        <div
+          class="dashboard-card"
+          style="
+            display:block;
+            margin-top:20px;
+          ">
 
           <div
             style="
-              font-size:40px;
-              margin-bottom:10px;
-            ">
-            💰
-          </div>
-
-          <strong>
-            No loan applications yet
-          </strong>
-
-          <p style="margin-top:8px;">
-            You can apply for a personal
-            or business loan.
-          </p>
-
-        </div>
-      `;
-
-
-      if (loanList) {
-        loanList.innerHTML =
-          message;
-      }
-
-      if (allLoanList) {
-        allLoanList.innerHTML =
-          message;
-      }
-
-      return;
-    }
-
-
-    /* ================================================
-       SORT — NEWEST FIRST
-    ================================================= */
-
-    loans.sort(
-      (a, b) =>
-        new Date(
-          b.created_at || 0
-        ) -
-        new Date(
-          a.created_at || 0
-        )
-    );
-
-
-    /* ================================================
-       CREATE LOAN HTML
-    ================================================= */
-
-    const html =
-      loans
-        .map(
-          loan =>
-            createLoanHTML(loan)
-        )
-        .join("");
-
-
-    if (loanList) {
-      loanList.innerHTML =
-        html;
-    }
-
-    if (allLoanList) {
-      allLoanList.innerHTML =
-        html;
-    }
-
-
-  } catch (error) {
-
-    console.error(
-      "Loan loading error:",
-      error
-    );
-
-
-    const errorHTML = `
-      <div class="empty">
-
-        Unable to load your loans.
-
-        <br>
-
-        <small>
-          ${escapeHTML(
-            error.message ||
-            "Please try again."
-          )}
-        </small>
-
-      </div>
-    `;
-
-
-    if (loanList) {
-      loanList.innerHTML =
-        errorHTML;
-    }
-
-    if (allLoanList) {
-      allLoanList.innerHTML =
-        errorHTML;
-    }
-
-  }
-}
-
-
-    /* =====================================================
-       LOAN CARD
-    ====================================================== */
-
-  function createLoanHTML(loan) {
-
-  const status =
-    String(
-      loan.status || "pending"
-    ).toLowerCase();
-
-
-  const statusClass =
-    status === "approved"
-      ? "status-active"
-      : status === "rejected"
-        ? "status-blocked"
-        : "status-pending";
-
-
-  const amount =
-    Number(
-      loan.amount || 0
-    );
-
-
-  const rate =
-    Number(
-      loan.interest_rate || 0
-    );
-
-
-  const duration =
-    Number(
-      loan.duration_months || 0
-    );
-
-
-  /*
-    Simple monthly-interest calculation
-    matching the calculator rule used by JAY C O B.
-  */
-
-  const interest =
-    amount *
-    (rate / 100) *
-    duration;
-
-
-  const totalRepayment =
-    amount +
-    interest;
-
-
-  return `
-    <div class="loan-item">
-
-      <div class="loan-top">
-
-        <div>
-
-          <div class="loan-type">
-            ${escapeHTML(
-              loan.loan_type || "Loan"
-            )}
-          </div>
-
-          <small
-            style="
-              color:#7a8495;
-              display:block;
-              margin-top:4px;
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              gap:10px;
+              flex-wrap:wrap;
             ">
 
-            Application:
-            ${formatDate(
-              loan.created_at
-            )}
+            <div>
 
-          </small>
+              <h3>
+                My Support Tickets
+              </h3>
 
-        </div>
+              <p
+                style="
+                  color:#68758a;
+                  margin-top:5px;
+                  font-size:13px;
+                ">
 
+                View your submitted requests and administrator responses.
 
-        <div
-          class="loan-status ${statusClass}">
+              </p>
 
-          ${escapeHTML(status)}
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="loadSupportTickets()">
+              🔄 Refresh
+            </button>
+
+          </div>
+
+          <div
+            id="supportStatus"
+            class="status-message">
+          </div>
+
+          <div
+            class="table-responsive">
+
+            <table class="dashboard-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>Date</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Admin Response</th>
+                  <th>Updated</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="supportTableBody">
+
+                <tr>
+
+                  <td colspan="7">
+                    No support tickets loaded yet.
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
 
         </div>
 
       </div>
 
-
-      <div class="loan-grid">
-
-        <div class="loan-info">
-
-          <small>
-            Loan Amount
-          </small>
-
-          <strong>
-            ${formatMoney(amount)}
-          </strong>
-
-        </div>
+    </section>
 
 
-        <div class="loan-info">
+    <!-- ================= SECURITY ================= -->
 
-          <small>
-            Duration
-          </small>
+    <section
+      id="securitySection"
+      class="section dashboard-section"
+      style="display:none;">
 
-          <strong>
-            ${duration} month${
-              duration === 1 ? "" : "s"
-            }
-          </strong>
+      <div class="section-header">
 
-        </div>
+        <h2>
+          🔐 Security
+        </h2>
 
+      </div>
 
-        <div class="loan-info">
+      <div class="section-body">
 
-          <small>
-            Interest Rate
-          </small>
+        <div class="empty">
 
-          <strong>
-            ${rate.toFixed(2)}% / month
-          </strong>
-
-        </div>
-
-
-        <div class="loan-info">
-
-          <small>
-            Estimated Interest
-          </small>
-
-          <strong>
-            ${formatMoney(interest)}
-          </strong>
-
-        </div>
-
-
-        <div class="loan-info">
-
-          <small>
-            Total Repayment
-          </small>
-
-          <strong>
-            ${formatMoney(
-              totalRepayment
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="loan-info">
-
-          <small>
-            Purpose
-          </small>
-
-          <strong>
-            ${escapeHTML(
-              loan.purpose || "—"
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="loan-info">
-
-          <small>
-            Reviewed
-          </small>
-
-          <strong>
-            ${
-              loan.reviewed_at
-                ? formatDate(
-                    loan.reviewed_at
-                  )
-                : "Not reviewed"
-            }
-          </strong>
-
-        </div>
-
-
-        <div class="loan-info">
-
-          <small>
-            Reference
-          </small>
-
-          <strong>
-            ${
-              loan.id
-                ? "#" + escapeHTML(
-                    loan.id
-                  )
-                : "—"
-            }
-          </strong>
+          Login activity and security events will be connected next.
 
         </div>
 
       </div>
 
+    </section>
 
-      ${
-        status === "rejected" &&
-        loan.rejection_reason
-          ? `
-            <div
-              style="
-                margin-top:15px;
-                padding:12px;
-                border-radius:8px;
-                background:#fff1f1;
-                color:#b42318;
-              ">
+  </main>
 
-              <strong>
-                Rejection reason:
-              </strong>
-
-              ${escapeHTML(
-                loan.rejection_reason
-              )}
-
-            </div>
-          `
-          : ""
-      }
+</div>
 
 
-      ${
-        status === "approved"
-          ? `
-            <div
-              style="
-                margin-top:15px;
-                padding:12px;
-                border-radius:8px;
-                background:#eefaf1;
-                color:#16833a;
-              ">
+<script>
 
-              Your loan application
-              has been approved.
+  /* =====================================================
+     API CONFIGURATION
+  ===================================================== */
 
-            </div>
-          `
-          : ""
-      }
-
-    </div>
-  `;
-}
+  const API_BASE_URL =
+    "https://emmanueljacobgithubio-production.up.railway.app/api";
 
 
-    /* =====================================================
-       FORMAT DATE
-    ====================================================== */
+  /* =====================================================
+     SESSION DATA
+  ===================================================== */
 
-    function formatDate(date) {
+  let sessionToken =
+    localStorage.getItem(
+      "jaycob_customer_token"
+    );
 
-      if (!date) return "—";
+  let customer = null;
 
-      const d =
-        new Date(date);
 
-      if (Number.isNaN(d.getTime())) {
-        return "—";
-      }
+  /* =====================================================
+     CHECK CUSTOMER SESSION
+  ===================================================== */
 
-      return d.toLocaleDateString(
-        "en-MW",
-        {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        }
+  function checkCustomerSession() {
+
+    const storedCustomer =
+      localStorage.getItem(
+        "jaycob_customer_data"
       );
-    }
 
+    sessionToken =
+      localStorage.getItem(
+        "jaycob_customer_token"
+      );
 
-    /* =====================================================
-       ESCAPE HTML
-    ====================================================== */
-
-    function escapeHTML(value) {
-
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-
-    /* =====================================================
-       SECTION NAVIGATION
-    ====================================================== */
-
-    function showSection(section) {
-
-      const sections = [
-        "overview",
-        "loans",
-        "transactions",
-        "savings",
-        "statements",
-        "profile",
-        "kyc",
-        "support",
-        "security"
-      ];
-
-
-      sections.forEach(name => {
-
-        const element =
-          document.getElementById(
-            `${name}Section`
-          );
-
-        if (!element) return;
-
-        element.style.display =
-          name === section
-            ? (
-                name === "overview"
-                  ? "block"
-                  : "block"
-              )
-            : "none";
-      });
-
-
-      document.querySelectorAll(
-        ".nav-btn"
-      ).forEach(button => {
-
-        button.classList.remove("active");
-
-      });
-
-
-      const buttons =
-        document.querySelectorAll(
-          ".nav-btn"
-        );
-
-
-      const index =
-        sections.indexOf(section);
-
-
-      if (buttons[index]) {
-
-        buttons[index]
-          .classList.add("active");
-      }
-
-if (section === "transactions") {
-  loadTransactions();
-}
-      if (section === "savings") {
-  loadSavings();
-}
-      if (section === "statements") {
-  loadStatements();
-}
-      if (section === "kyc") {
-  loadKYC();
-}
-      if (section === "support") {
-  loadSupportTickets();
-}      
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-
-    /* =====================================================
-       OPEN LOANS
-    ====================================================== */
-
-    function openLoans() {
+    if (
+      !sessionToken ||
+      !storedCustomer
+    ) {
 
       window.location.href =
-        "index.html#loans";
+        "index.html";
+
+      return false;
     }
 
+    try {
 
-    /* =====================================================
-       LOGOUT
-    ====================================================== */
+      customer =
+        JSON.parse(
+          storedCustomer
+        );
 
-    function logoutCustomer() {
+    } catch (error) {
 
       localStorage.removeItem(
         "jaycob_customer_token"
@@ -4262,32 +2082,3414 @@ if (section === "transactions") {
 
       window.location.href =
         "index.html";
+
+      return false;
+    }
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+
+      localStorage.removeItem(
+        "jaycob_customer_token"
+      );
+
+      localStorage.removeItem(
+        "jaycob_customer_data"
+      );
+
+      window.location.href =
+        "index.html";
+
+      return false;
+    }
+
+    return true;
+  }
+
+
+  /* =====================================================
+     API REQUEST
+  ===================================================== */
+
+  async function apiRequest(
+    endpoint,
+    options = {}
+  ) {
+
+    const headers = {
+
+      "Content-Type":
+        "application/json",
+
+      ...(options.headers || {})
+
+    };
+
+    sessionToken =
+      localStorage.getItem(
+        "jaycob_customer_token"
+      );
+
+    if (sessionToken) {
+
+      headers.Authorization =
+        `Bearer ${sessionToken}`;
+
+    }
+
+    const response =
+      await fetch(
+        `${API_BASE_URL}${endpoint}`,
+        {
+          ...options,
+          headers
+        }
+      );
+
+
+    let data;
+
+    try {
+
+      data =
+        await response.json();
+
+    } catch {
+
+      data = {};
+
     }
 
 
-    /* =====================================================
-       START DASHBOARD
-    ====================================================== */
+    if (!response.ok) {
 
-    async function startDashboard() {
+      throw new Error(
+        data.message ||
+        `Request failed (${response.status})`
+      );
 
-  if (!checkCustomerSession()) {
-    return;
+    }
+
+
+    return data;
+
   }
 
-  renderCustomer();
 
-  await loadCustomer();
+  /* =====================================================
+     MONEY FORMAT
+  ===================================================== */
 
-  await loadLoans();
+  function formatMoney(value) {
 
-  await loadTransactions();
-}
+    return (
+      "MWK " +
+      Number(
+        value || 0
+      ).toLocaleString(
+        "en-MW",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      )
+    );
+
+  }
 
 
-    startDashboard();
+  /* Compatibility alias */
+  function formatCurrency(value) {
 
-  </script>
+    return formatMoney(value);
+
+  }
+
+
+  /* =====================================================
+     DATE FORMAT
+  ===================================================== */
+
+  function formatDate(date) {
+
+    if (!date) {
+      return "—";
+    }
+
+    const d =
+      new Date(date);
+
+    if (
+      Number.isNaN(
+        d.getTime()
+      )
+    ) {
+
+      return "—";
+
+    }
+
+    return d.toLocaleDateString(
+      "en-MW",
+      {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }
+    );
+
+  }
+
+
+  function formatDateTime(date) {
+
+    if (!date) {
+      return "—";
+    }
+
+    const d =
+      new Date(date);
+
+    if (
+      Number.isNaN(
+        d.getTime()
+      )
+    ) {
+
+      return "—";
+
+    }
+
+    return d.toLocaleString(
+      "en-MW",
+      {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     ESCAPE HTML
+  ===================================================== */
+
+  function escapeHTML(value) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  /* =====================================================
+     LOAD CUSTOMER
+  ===================================================== */
+
+  async function loadCustomer() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/customers/${customer.id}`
+        );
+
+      if (
+        response.success &&
+        response.customer
+      ) {
+
+        customer =
+          response.customer;
+
+        localStorage.setItem(
+          "jaycob_customer_data",
+          JSON.stringify(customer)
+        );
+
+      }
+
+    } catch (error) {
+
+      console.log(
+        "Customer refresh:",
+        error.message
+      );
+
+    }
+
+    renderCustomer();
+
+  }
+
+
+  /* =====================================================
+     RENDER CUSTOMER
+  ===================================================== */
+
+  function renderCustomer() {
+
+    if (!customer) {
+      return;
+    }
+
+    const customerName =
+      document.getElementById(
+        "customerName"
+      );
+
+    const accountNumber =
+      document.getElementById(
+        "accountNumber"
+      );
+
+    const accountBalance =
+      document.getElementById(
+        "accountBalance"
+      );
+
+    const accountStatus =
+      document.getElementById(
+        "accountStatus"
+      );
+
+    const verificationStatus =
+      document.getElementById(
+        "verificationStatus"
+      );
+
+
+    if (customerName) {
+
+      customerName.textContent =
+        customer.full_name ||
+        "Customer";
+
+    }
+
+
+    if (accountNumber) {
+
+      accountNumber.textContent =
+        customer.account_number ||
+        "—";
+
+    }
+
+
+    if (accountBalance) {
+
+      accountBalance.textContent =
+        formatMoney(
+          customer.balance
+        );
+
+    }
+
+
+    const status =
+      String(
+        customer.account_status ||
+        "unknown"
+      ).toLowerCase();
+
+
+    if (accountStatus) {
+
+      accountStatus.textContent =
+        status;
+
+      accountStatus.className =
+        "card-value " +
+        (
+          status === "active"
+            ? "status-active"
+            : status === "blocked"
+              ? "status-blocked"
+              : "status-pending"
+        );
+
+    }
+
+
+    if (verificationStatus) {
+
+      verificationStatus.textContent =
+        customer.is_verified
+          ? "Verified"
+          : "Not Verified";
+
+      verificationStatus.className =
+        customer.is_verified
+          ? "card-value status-active"
+          : "card-value status-pending";
+
+    }
+
+
+    /* PROFILE */
+
+    const profileName =
+      document.getElementById(
+        "profileName"
+      );
+
+    const profileEmail =
+      document.getElementById(
+        "profileEmail"
+      );
+
+    const profilePhone =
+      document.getElementById(
+        "profilePhone"
+      );
+
+    const profileOccupation =
+      document.getElementById(
+        "profileOccupation"
+      );
+
+    const profileAddress =
+      document.getElementById(
+        "profileAddress"
+      );
+
+    const profileIdNumber =
+      document.getElementById(
+        "profileIdNumber"
+      );
+
+
+    if (profileName) {
+
+      profileName.textContent =
+        customer.full_name ||
+        "—";
+
+    }
+
+    if (profileEmail) {
+
+      profileEmail.textContent =
+        customer.email ||
+        "—";
+
+    }
+
+    if (profilePhone) {
+
+      profilePhone.textContent =
+        customer.phone ||
+        "—";
+
+    }
+
+    if (profileOccupation) {
+
+      profileOccupation.textContent =
+        customer.occupation ||
+        "—";
+
+    }
+
+    if (profileAddress) {
+
+      profileAddress.textContent =
+        customer.residential_address ||
+        customer.address ||
+        "—";
+
+    }
+
+    if (profileIdNumber) {
+
+      profileIdNumber.textContent =
+        customer.id_number ||
+        "—";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     LOAD LOANS
+  ===================================================== */
+
+  async function loadLoans() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const loanList =
+      document.getElementById(
+        "loanList"
+      );
+
+    const allLoanList =
+      document.getElementById(
+        "allLoanList"
+      );
+
+
+    if (loanList) {
+
+      loanList.innerHTML = `
+        <div class="loading">
+          Loading loan applications...
+        </div>
+      `;
+
+    }
+
+
+    if (allLoanList) {
+
+      allLoanList.innerHTML = `
+        <div class="loading">
+          Loading loans...
+        </div>
+      `;
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/loans/customer/${customer.id}`
+        );
+
+
+      const loans =
+        Array.isArray(
+          response.loans
+        )
+          ? response.loans
+          : [];
+
+
+      /* COUNTS */
+
+      const total =
+        loans.length;
+
+
+      const approved =
+        loans.filter(
+          loan =>
+            String(
+              loan.status || ""
+            ).toLowerCase() ===
+            "approved"
+        ).length;
+
+
+      const pending =
+        loans.filter(
+          loan =>
+            String(
+              loan.status || ""
+            ).toLowerCase() ===
+            "pending"
+        ).length;
+
+
+      const rejected =
+        loans.filter(
+          loan =>
+            String(
+              loan.status || ""
+            ).toLowerCase() ===
+            "rejected"
+        ).length;
+
+
+      /* SUMMARY */
+
+      const totalElement =
+        document.getElementById(
+          "totalLoanApplications"
+        );
+
+      const approvedElement =
+        document.getElementById(
+          "approvedLoanCount"
+        );
+
+      const pendingElement =
+        document.getElementById(
+          "pendingLoanCount"
+        );
+
+      const rejectedElement =
+        document.getElementById(
+          "rejectedLoanCount"
+        );
+
+      const summaryElement =
+        document.getElementById(
+          "loanSummary"
+        );
+
+
+      if (totalElement) {
+
+        totalElement.textContent =
+          total;
+
+      }
+
+      if (approvedElement) {
+
+        approvedElement.textContent =
+          approved;
+
+      }
+
+      if (pendingElement) {
+
+        pendingElement.textContent =
+          pending;
+
+      }
+
+      if (rejectedElement) {
+
+        rejectedElement.textContent =
+          rejected;
+
+      }
+
+
+      if (summaryElement) {
+
+        summaryElement.textContent =
+          total === 0
+            ? "You have no loan applications yet."
+            : `${total} loan application${
+                total === 1
+                  ? ""
+                  : "s"
+              } on your account.`;
+
+      }
+
+
+      /* EMPTY */
+
+      if (!loans.length) {
+
+        const message = `
+          <div class="empty">
+
+            <div
+              style="
+                font-size:40px;
+                margin-bottom:10px;
+              ">
+              💰
+            </div>
+
+            <strong>
+              No loan applications yet
+            </strong>
+
+            <p style="margin-top:8px;">
+              You can apply for a personal
+              or business loan.
+            </p>
+
+          </div>
+        `;
+
+
+        if (loanList) {
+
+          loanList.innerHTML =
+            message;
+
+        }
+
+
+        if (allLoanList) {
+
+          allLoanList.innerHTML =
+            message;
+
+        }
+
+        return;
+
+      }
+
+
+      /* NEWEST FIRST */
+
+      loans.sort(
+        (a, b) =>
+          new Date(
+            b.created_at || 0
+          ) -
+          new Date(
+            a.created_at || 0
+          )
+      );
+
+
+      const html =
+        loans
+          .map(
+            loan =>
+              createLoanHTML(
+                loan
+              )
+          )
+          .join("");
+
+
+      if (loanList) {
+
+        loanList.innerHTML =
+          html;
+
+      }
+
+
+      if (allLoanList) {
+
+        allLoanList.innerHTML =
+          html;
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Loan loading error:",
+        error
+      );
+
+
+      const errorHTML = `
+        <div class="empty">
+
+          Unable to load your loans.
+
+          <br>
+
+          <small>
+            ${escapeHTML(
+              error.message ||
+              "Please try again."
+            )}
+          </small>
+
+        </div>
+      `;
+
+
+      if (loanList) {
+
+        loanList.innerHTML =
+          errorHTML;
+
+      }
+
+
+      if (allLoanList) {
+
+        allLoanList.innerHTML =
+          errorHTML;
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     CREATE LOAN HTML
+  ===================================================== */
+
+  function createLoanHTML(
+    loan
+  ) {
+
+    const status =
+      String(
+        loan.status ||
+        "pending"
+      ).toLowerCase();
+
+
+    const statusClass =
+      status === "approved"
+        ? "status-active"
+        : status === "rejected"
+          ? "status-blocked"
+          : "status-pending";
+
+
+    const amount =
+      Number(
+        loan.amount || 0
+      );
+
+
+    const rate =
+      Number(
+        loan.interest_rate || 0
+      );
+
+
+    const duration =
+      Number(
+        loan.duration_months || 0
+      );
+
+
+    const interest =
+      amount *
+      (rate / 100) *
+      duration;
+
+
+    const totalRepayment =
+      amount +
+      interest;
+
+
+    return `
+      <div class="loan-item">
+
+        <div class="loan-top">
+
+          <div>
+
+            <div class="loan-type">
+              ${escapeHTML(
+                loan.loan_type ||
+                "Loan"
+              )}
+            </div>
+
+            <small
+              style="
+                color:#7a8495;
+                display:block;
+                margin-top:4px;
+              ">
+
+              Application:
+              ${formatDate(
+                loan.created_at
+              )}
+
+            </small>
+
+          </div>
+
+          <div
+            class="loan-status ${statusClass}">
+
+            ${escapeHTML(
+              status
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div class="loan-grid">
+
+          <div class="loan-info">
+
+            <small>
+              Loan Amount
+            </small>
+
+            <strong>
+              ${formatMoney(
+                amount
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Duration
+            </small>
+
+            <strong>
+              ${duration}
+              month${
+                duration === 1
+                  ? ""
+                  : "s"
+              }
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Interest Rate
+            </small>
+
+            <strong>
+              ${rate.toFixed(2)}% / month
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Estimated Interest
+            </small>
+
+            <strong>
+              ${formatMoney(
+                interest
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Total Repayment
+            </small>
+
+            <strong>
+              ${formatMoney(
+                totalRepayment
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Purpose
+            </small>
+
+            <strong>
+              ${escapeHTML(
+                loan.purpose ||
+                "—"
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Reviewed
+            </small>
+
+            <strong>
+              ${
+                loan.reviewed_at
+                  ? formatDate(
+                      loan.reviewed_at
+                    )
+                  : "Not reviewed"
+              }
+            </strong>
+
+          </div>
+
+
+          <div class="loan-info">
+
+            <small>
+              Reference
+            </small>
+
+            <strong>
+              ${
+                loan.id
+                  ? "#" +
+                    escapeHTML(
+                      loan.id
+                    )
+                  : "—"
+              }
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        ${
+          status === "rejected" &&
+          loan.rejection_reason
+            ? `
+              <div
+                style="
+                  margin-top:15px;
+                  padding:12px;
+                  border-radius:8px;
+                  background:#fff1f1;
+                  color:#b42318;
+                ">
+
+                <strong>
+                  Rejection reason:
+                </strong>
+
+                ${escapeHTML(
+                  loan.rejection_reason
+                )}
+
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          status === "approved"
+            ? `
+              <div
+                style="
+                  margin-top:15px;
+                  padding:12px;
+                  border-radius:8px;
+                  background:#eefaf1;
+                  color:#16833a;
+                ">
+
+                Your loan application
+                has been approved.
+
+              </div>
+            `
+            : ""
+        }
+
+      </div>
+    `;
+
+  }
+
+
+  /* =====================================================
+     LOAD TRANSACTIONS
+  ===================================================== */
+
+  async function loadTransactions() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const transactionList =
+      document.getElementById(
+        "transactionList"
+      );
+
+    const transactionBalance =
+      document.getElementById(
+        "transactionBalance"
+      );
+
+    const transactionSummary =
+      document.getElementById(
+        "transactionSummary"
+      );
+
+
+    if (transactionList) {
+
+      transactionList.innerHTML = `
+        <tr>
+          <td
+            colspan="7"
+            style="
+              padding:25px;
+              text-align:center;
+              color:#68758a;
+            ">
+            Loading transactions...
+          </td>
+        </tr>
+      `;
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/transactions/customer/${customer.id}`
+        );
+
+
+      const transactions =
+        Array.isArray(
+          response.transactions
+        )
+          ? response.transactions
+          : [];
+
+
+      if (transactionBalance) {
+
+        transactionBalance.textContent =
+          formatMoney(
+            customer.balance
+          );
+
+      }
+
+
+      if (!transactions.length) {
+
+        if (transactionSummary) {
+
+          transactionSummary.textContent =
+            "No transactions found yet.";
+
+        }
+
+
+        if (transactionList) {
+
+          transactionList.innerHTML = `
+            <tr>
+
+              <td
+                colspan="7"
+                style="
+                  padding:30px;
+                  text-align:center;
+                  color:#68758a;
+                ">
+
+                No transactions found.
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      if (transactionSummary) {
+
+        transactionSummary.textContent =
+          `${transactions.length} transaction${
+            transactions.length === 1
+              ? ""
+              : "s"
+          } found`;
+
+      }
+
+
+      if (transactionList) {
+
+        transactionList.innerHTML =
+          transactions
+            .map(
+              transaction =>
+                createTransactionHTML(
+                  transaction
+                )
+            )
+            .join("");
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Transaction loading error:",
+        error
+      );
+
+
+      if (transactionList) {
+
+        transactionList.innerHTML = `
+          <tr>
+
+            <td
+              colspan="7"
+              style="
+                padding:30px;
+                text-align:center;
+                color:#b42318;
+              ">
+
+              Unable to load transactions.
+
+              <br>
+
+              <small>
+                ${escapeHTML(
+                  error.message ||
+                  "Please try again."
+                )}
+              </small>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     TRANSACTION ROW
+  ===================================================== */
+
+  function createTransactionHTML(
+    transaction
+  ) {
+
+    const type =
+      String(
+        transaction.type ||
+        "transaction"
+      ).toLowerCase();
+
+
+    const status =
+      String(
+        transaction.status ||
+        "pending"
+      ).toLowerCase();
+
+
+    const amount =
+      Number(
+        transaction.amount || 0
+      );
+
+
+    const incomingTypes = [
+      "deposit",
+      "loan_disbursement"
+    ];
+
+
+    const outgoingTypes = [
+      "withdrawal",
+      "transfer",
+      "loan_repayment"
+    ];
+
+
+    let amountPrefix = "";
+
+
+    if (
+      incomingTypes.includes(type)
+    ) {
+
+      amountPrefix = "+ ";
+
+    } else if (
+      outgoingTypes.includes(type)
+    ) {
+
+      amountPrefix = "- ";
+
+    }
+
+
+    const amountClass =
+      incomingTypes.includes(type)
+        ? "status-active"
+        : outgoingTypes.includes(type)
+          ? "status-blocked"
+          : "status-pending";
+
+
+    const statusClass =
+      status === "completed"
+        ? "status-active"
+        : status === "failed" ||
+          status === "reversed"
+          ? "status-blocked"
+          : "status-pending";
+
+
+    const description =
+      transaction.description ||
+      formatTransactionType(
+        type
+      );
+
+
+    const balanceAfter =
+      transaction.balance_after;
+
+
+    return `
+      <tr>
+
+        <td style="
+          padding:14px 12px;
+          white-space:nowrap;
+        ">
+
+          ${formatDateTime(
+            transaction.created_at
+          )}
+
+        </td>
+
+
+        <td style="
+          padding:14px 12px;
+          font-weight:bold;
+          text-transform:capitalize;
+        ">
+
+          ${escapeHTML(
+            type.replaceAll(
+              "_",
+              " "
+            )
+          )}
+
+        </td>
+
+
+        <td style="
+          padding:14px 12px;
+        ">
+
+          ${escapeHTML(
+            description
+          )}
+
+        </td>
+
+
+        <td
+          class="${amountClass}"
+          style="
+            padding:14px 12px;
+            text-align:right;
+            font-weight:bold;
+          ">
+
+          ${amountPrefix}
+          ${formatMoney(
+            amount
+          )}
+
+        </td>
+
+
+        <td style="
+          padding:14px 12px;
+          text-align:right;
+        ">
+
+          ${
+            balanceAfter !== null &&
+            balanceAfter !== undefined
+              ? formatMoney(
+                  balanceAfter
+                )
+              : "—"
+          }
+
+        </td>
+
+
+        <td style="
+          padding:14px 12px;
+        ">
+
+          <span
+            class="${statusClass}"
+            style="
+              text-transform:capitalize;
+              font-weight:bold;
+            ">
+
+            ${escapeHTML(
+              status
+            )}
+
+          </span>
+
+        </td>
+
+
+        <td style="
+          padding:14px 12px;
+          font-family:monospace;
+          font-size:12px;
+        ">
+
+          ${escapeHTML(
+            transaction.reference ||
+            "—"
+          )}
+
+        </td>
+
+      </tr>
+    `;
+
+  }
+
+
+  function formatTransactionType(
+    type
+  ) {
+
+    const labels = {
+
+      deposit:
+        "Money deposited into your account",
+
+      withdrawal:
+        "Money withdrawn from your account",
+
+      transfer:
+        "Account transfer",
+
+      loan_disbursement:
+        "Loan disbursement",
+
+      loan_repayment:
+        "Loan repayment"
+
+    };
+
+
+    return (
+      labels[type] ||
+      "Account transaction"
+    );
+
+  }
+
+
+  /* =====================================================
+     LOAD SAVINGS
+  ===================================================== */
+
+  async function loadSavings() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const tableBody =
+      document.getElementById(
+        "savingsTableBody"
+      );
+
+    const balanceElement =
+      document.getElementById(
+        "savingsBalance"
+      );
+
+    const depositsElement =
+      document.getElementById(
+        "totalSavingsDeposits"
+      );
+
+    const withdrawalsElement =
+      document.getElementById(
+        "totalSavingsWithdrawals"
+      );
+
+    const countElement =
+      document.getElementById(
+        "savingsTransactionCount"
+      );
+
+    const summaryElement =
+      document.getElementById(
+        "savingsSummary"
+      );
+
+
+    if (tableBody) {
+
+      tableBody.innerHTML = `
+        <tr>
+
+          <td
+            colspan="7"
+            class="loading">
+
+            Loading savings...
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/savings/customer/${customer.id}`
+        );
+
+
+      const savings =
+        Array.isArray(
+          response.savings
+        )
+          ? response.savings
+          : [];
+
+
+      savings.sort(
+        (a, b) =>
+          new Date(
+            b.created_at || 0
+          ) -
+          new Date(
+            a.created_at || 0
+          )
+      );
+
+
+      const totalDeposits =
+        savings
+          .filter(
+            item =>
+              String(
+                item.transaction_type ||
+                ""
+              )
+                .toLowerCase()
+                .includes(
+                  "deposit"
+                )
+          )
+          .reduce(
+            (total, item) =>
+              total +
+              Number(
+                item.amount || 0
+              ),
+            0
+          );
+
+
+      const totalWithdrawals =
+        savings
+          .filter(
+            item =>
+              String(
+                item.transaction_type ||
+                ""
+              )
+                .toLowerCase()
+                .includes(
+                  "withdraw"
+                )
+          )
+          .reduce(
+            (total, item) =>
+              total +
+              Number(
+                item.amount || 0
+              ),
+            0
+          );
+
+
+      const currentBalance =
+        savings.length > 0
+          ? Number(
+              savings[0].balance_after ||
+              0
+            )
+          : 0;
+
+
+      if (balanceElement) {
+
+        balanceElement.textContent =
+          formatMoney(
+            currentBalance
+          );
+
+      }
+
+
+      if (depositsElement) {
+
+        depositsElement.textContent =
+          formatMoney(
+            totalDeposits
+          );
+
+      }
+
+
+      if (withdrawalsElement) {
+
+        withdrawalsElement.textContent =
+          formatMoney(
+            totalWithdrawals
+          );
+
+      }
+
+
+      if (countElement) {
+
+        countElement.textContent =
+          savings.length;
+
+      }
+
+
+      if (summaryElement) {
+
+        summaryElement.textContent =
+          savings.length === 0
+            ? "No savings transactions yet."
+            : `${savings.length} savings transaction${
+                savings.length === 1
+                  ? ""
+                  : "s"
+              } found.`;
+
+      }
+
+
+      if (!savings.length) {
+
+        if (tableBody) {
+
+          tableBody.innerHTML = `
+            <tr>
+
+              <td
+                colspan="7"
+                class="empty">
+
+                🏦 No savings transactions found.
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML =
+          savings
+            .map(
+              item => {
+
+                const type =
+                  String(
+                    item.transaction_type ||
+                    "transaction"
+                  );
+
+
+                const normalizedType =
+                  type.toLowerCase();
+
+
+                const isDeposit =
+                  normalizedType.includes(
+                    "deposit"
+                  );
+
+
+                const amount =
+                  Number(
+                    item.amount || 0
+                  );
+
+
+                const status =
+                  String(
+                    item.status ||
+                    "pending"
+                  );
+
+
+                return `
+                  <tr>
+
+                    <td>
+                      ${formatDate(
+                        item.created_at
+                      )}
+                    </td>
+
+                    <td
+                      class="${
+                        isDeposit
+                          ? "status-active"
+                          : "status-blocked"
+                      }"
+                      style="font-weight:bold;">
+
+                      ${escapeHTML(
+                        type
+                      )}
+
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        item.description ||
+                        "Savings transaction"
+                      )}
+                    </td>
+
+                    <td
+                      style="
+                        text-align:right;
+                        font-weight:bold;
+                      ">
+
+                      ${
+                        isDeposit
+                          ? "+"
+                          : "-"
+                      }
+
+                      ${formatMoney(
+                        amount
+                      )}
+
+                    </td>
+
+                    <td
+                      style="text-align:right;">
+
+                      ${formatMoney(
+                        item.balance_after
+                      )}
+
+                    </td>
+
+                    <td
+                      style="
+                        text-transform:capitalize;
+                      ">
+
+                      ${escapeHTML(
+                        status
+                      )}
+
+                    </td>
+
+                    <td>
+
+                      ${escapeHTML(
+                        item.reference_number ||
+                        "—"
+                      )}
+
+                    </td>
+
+                  </tr>
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Savings loading error:",
+        error
+      );
+
+
+      if (summaryElement) {
+
+        summaryElement.textContent =
+          "Unable to load savings.";
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML = `
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty">
+
+              Unable to load savings.
+
+              <br>
+
+              <small>
+                ${escapeHTML(
+                  error.message ||
+                  "Please try again."
+                )}
+              </small>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     LOAD ACCOUNT STATEMENTS
+  ===================================================== */
+
+  async function loadStatements() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const tableBody =
+      document.getElementById(
+        "statementsTableBody"
+      );
+
+    const status =
+      document.getElementById(
+        "statementsStatus"
+      );
+
+
+    if (tableBody) {
+
+      tableBody.innerHTML = `
+        <tr>
+
+          <td colspan="7">
+            Loading account statements...
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+
+    if (status) {
+
+      status.textContent =
+        "";
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/statements/customer/${customer.id}`
+        );
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        throw new Error(
+          response?.message ||
+          "Unable to load account statements."
+        );
+
+      }
+
+
+      const statements =
+        Array.isArray(
+          response.statements
+        )
+          ? response.statements
+          : [];
+
+
+      const totalCredit =
+        statements.reduce(
+          (total, item) =>
+            total +
+            Number(
+              item.credit || 0
+            ),
+          0
+        );
+
+
+      const totalDebit =
+        statements.reduce(
+          (total, item) =>
+            total +
+            Number(
+              item.debit || 0
+            ),
+          0
+        );
+
+
+      const latestStatement =
+        statements.length
+          ? statements[0]
+          : null;
+
+
+      const currentBalance =
+        latestStatement
+          ? Number(
+              latestStatement.balance_after ||
+              0
+            )
+          : Number(
+              customer.balance ||
+              0
+            );
+
+
+      const countElement =
+        document.getElementById(
+          "statementTransactionCount"
+        );
+
+      const creditElement =
+        document.getElementById(
+          "statementTotalCredit"
+        );
+
+      const debitElement =
+        document.getElementById(
+          "statementTotalDebit"
+        );
+
+      const balanceElement =
+        document.getElementById(
+          "statementCurrentBalance"
+        );
+
+
+      if (countElement) {
+
+        countElement.textContent =
+          statements.length;
+
+      }
+
+
+      if (creditElement) {
+
+        creditElement.textContent =
+          formatMoney(
+            totalCredit
+          );
+
+      }
+
+
+      if (debitElement) {
+
+        debitElement.textContent =
+          formatMoney(
+            totalDebit
+          );
+
+      }
+
+
+      if (balanceElement) {
+
+        balanceElement.textContent =
+          formatMoney(
+            currentBalance
+          );
+
+      }
+
+
+      if (!statements.length) {
+
+        if (tableBody) {
+
+          tableBody.innerHTML = `
+            <tr>
+
+              <td colspan="7">
+
+                No account statements found yet.
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML =
+          statements
+            .map(
+              statement => {
+
+                const date =
+                  statement.transaction_date ||
+                  statement.created_at;
+
+
+                const debit =
+                  Number(
+                    statement.debit || 0
+                  );
+
+
+                const credit =
+                  Number(
+                    statement.credit || 0
+                  );
+
+
+                const balance =
+                  Number(
+                    statement.balance_after || 0
+                  );
+
+
+                return `
+                  <tr>
+
+                    <td>
+                      ${formatDateTime(
+                        date
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        statement.transaction_type ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        statement.description ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        statement.reference_number ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td
+                      class="status-blocked">
+
+                      ${
+                        debit > 0
+                          ? formatMoney(
+                              debit
+                            )
+                          : "—"
+                      }
+
+                    </td>
+
+                    <td
+                      class="status-active">
+
+                      ${
+                        credit > 0
+                          ? formatMoney(
+                              credit
+                            )
+                          : "—"
+                      }
+
+                    </td>
+
+                    <td>
+                      ${formatMoney(
+                        balance
+                      )}
+                    </td>
+
+                  </tr>
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "STATEMENTS ERROR:",
+        error
+      );
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML = `
+          <tr>
+
+            <td colspan="7">
+
+              Unable to load account statements.
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+
+      if (status) {
+
+        status.textContent =
+          error.message ||
+          "Unable to load account statements.";
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     LOAD KYC DOCUMENTS
+  ===================================================== */
+
+  async function loadKYC() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const tableBody =
+      document.getElementById(
+        "kycTableBody"
+      );
+
+    const status =
+      document.getElementById(
+        "kycStatus"
+      );
+
+
+    if (tableBody) {
+
+      tableBody.innerHTML = `
+        <tr>
+
+          <td colspan="7">
+            Loading KYC documents...
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+
+    if (status) {
+
+      status.textContent =
+        "";
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/kyc/customer/${customer.id}`
+        );
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        throw new Error(
+          response?.message ||
+          "Unable to load KYC documents."
+        );
+
+      }
+
+
+      const documents =
+        Array.isArray(
+          response.documents
+        )
+          ? response.documents
+          : [];
+
+
+      const pendingCount =
+        documents.filter(
+          document =>
+            String(
+              document.status || ""
+            ).toLowerCase() ===
+            "pending"
+        ).length;
+
+
+      const verifiedCount =
+        documents.filter(
+          document =>
+            String(
+              document.status || ""
+            ).toLowerCase() ===
+            "verified"
+        ).length;
+
+
+      const rejectedCount =
+        documents.filter(
+          document =>
+            String(
+              document.status || ""
+            ).toLowerCase() ===
+            "rejected"
+        ).length;
+
+
+      document.getElementById(
+        "kycDocumentCount"
+      ).textContent =
+        documents.length;
+
+
+      document.getElementById(
+        "kycPendingCount"
+      ).textContent =
+        pendingCount;
+
+
+      document.getElementById(
+        "kycVerifiedCount"
+      ).textContent =
+        verifiedCount;
+
+
+      document.getElementById(
+        "kycRejectedCount"
+      ).textContent =
+        rejectedCount;
+
+
+      if (!documents.length) {
+
+        if (tableBody) {
+
+          tableBody.innerHTML = `
+            <tr>
+
+              <td colspan="7">
+
+                No KYC documents found yet.
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML =
+          documents
+            .map(
+              document => {
+
+                const submittedDate =
+                  document.submitted_at ||
+                  document.created_at;
+
+
+                const verifiedDate =
+                  document.verified_at;
+
+
+                const statusValue =
+                  String(
+                    document.status ||
+                    "pending"
+                  );
+
+
+                const normalizedStatus =
+                  statusValue.toLowerCase();
+
+
+                const statusClass =
+                  normalizedStatus ===
+                    "verified"
+                    ? "status-active"
+                    : normalizedStatus ===
+                        "rejected"
+                      ? "status-blocked"
+                      : "status-pending";
+
+
+                return `
+                  <tr>
+
+                    <td>
+                      ${escapeHTML(
+                        document.document_type ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        document.document_number ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td
+                      class="${statusClass}"
+                      style="font-weight:bold;">
+
+                      ${escapeHTML(
+                        statusValue
+                      )}
+
+                    </td>
+
+                    <td>
+                      ${formatDateTime(
+                        submittedDate
+                      )}
+                    </td>
+
+                    <td>
+                      ${
+                        verifiedDate
+                          ? formatDateTime(
+                              verifiedDate
+                            )
+                          : "—"
+                      }
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        document.rejection_reason ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        document.notes ||
+                        "—"
+                      )}
+                    </td>
+
+                  </tr>
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "KYC ERROR:",
+        error
+      );
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML = `
+          <tr>
+
+            <td colspan="7">
+
+              Unable to load KYC documents.
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+
+      if (status) {
+
+        status.textContent =
+          error.message ||
+          "Unable to load KYC documents.";
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SUPPORT — OPEN FORM
+  ===================================================== */
+
+  function openSupportTicketForm() {
+
+    const form =
+      document.getElementById(
+        "supportTicketForm"
+      );
+
+
+    const status =
+      document.getElementById(
+        "supportCreateStatus"
+      );
+
+
+    if (form) {
+
+      form.style.display =
+        "block";
+
+    }
+
+
+    if (status) {
+
+      status.textContent =
+        "";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SUPPORT — CLOSE FORM
+  ===================================================== */
+
+  function closeSupportTicketForm() {
+
+    const form =
+      document.getElementById(
+        "supportTicketForm"
+      );
+
+
+    const status =
+      document.getElementById(
+        "supportCreateStatus"
+      );
+
+
+    if (form) {
+
+      form.style.display =
+        "none";
+
+    }
+
+
+    if (status) {
+
+      status.textContent =
+        "";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     LOAD SUPPORT TICKETS
+  ===================================================== */
+
+  async function loadSupportTickets() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const tableBody =
+      document.getElementById(
+        "supportTableBody"
+      );
+
+    const status =
+      document.getElementById(
+        "supportStatus"
+      );
+
+
+    if (tableBody) {
+
+      tableBody.innerHTML = `
+        <tr>
+
+          <td colspan="7">
+
+            Loading support tickets...
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+
+    if (status) {
+
+      status.textContent =
+        "";
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/support/customer/${customer.id}`
+        );
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        throw new Error(
+          response?.message ||
+          "Unable to load support tickets."
+        );
+
+      }
+
+
+      const tickets =
+        Array.isArray(
+          response.tickets
+        )
+          ? response.tickets
+          : [];
+
+
+      const openCount =
+        tickets.filter(
+          ticket =>
+            String(
+              ticket.status || ""
+            ).toLowerCase() ===
+            "open"
+        ).length;
+
+
+      const pendingCount =
+        tickets.filter(
+          ticket =>
+            String(
+              ticket.status || ""
+            ).toLowerCase() ===
+            "pending"
+        ).length;
+
+
+      const closedCount =
+        tickets.filter(
+          ticket => {
+
+            const value =
+              String(
+                ticket.status || ""
+              ).toLowerCase();
+
+            return (
+              value === "closed" ||
+              value === "resolved"
+            );
+
+          }
+        ).length;
+
+
+      document.getElementById(
+        "supportTotalTickets"
+      ).textContent =
+        tickets.length;
+
+
+      document.getElementById(
+        "supportOpenTickets"
+      ).textContent =
+        openCount;
+
+
+      document.getElementById(
+        "supportPendingTickets"
+      ).textContent =
+        pendingCount;
+
+
+      document.getElementById(
+        "supportClosedTickets"
+      ).textContent =
+        closedCount;
+
+
+      if (!tickets.length) {
+
+        if (tableBody) {
+
+          tableBody.innerHTML = `
+            <tr>
+
+              <td colspan="7">
+
+                No support tickets found yet.
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML =
+          tickets
+            .map(
+              ticket => {
+
+                const createdDate =
+                  ticket.created_at;
+
+
+                const updatedDate =
+                  ticket.updated_at ||
+                  ticket.created_at;
+
+
+                const ticketStatus =
+                  String(
+                    ticket.status ||
+                    "open"
+                  ).toLowerCase();
+
+
+                const statusClass =
+                  ticketStatus ===
+                    "closed" ||
+                  ticketStatus ===
+                    "resolved"
+                    ? "status-active"
+                    : ticketStatus ===
+                        "pending"
+                      ? "status-pending"
+                      : "status-active";
+
+
+                const priority =
+                  String(
+                    ticket.priority ||
+                    "medium"
+                  ).toLowerCase();
+
+
+                const priorityClass =
+                  priority === "urgent" ||
+                  priority === "high"
+                    ? "status-blocked"
+                    : priority === "low"
+                      ? "status-active"
+                      : "status-pending";
+
+
+                return `
+                  <tr>
+
+                    <td>
+                      ${formatDateTime(
+                        createdDate
+                      )}
+                    </td>
+
+                    <td>
+
+                      <strong>
+                        ${escapeHTML(
+                          ticket.subject ||
+                          "—"
+                        )}
+                      </strong>
+
+                      ${
+                        ticket.message
+                          ? `
+                            <div class="support-message">
+                              ${escapeHTML(
+                                ticket.message
+                              )}
+                            </div>
+                          `
+                          : ""
+                      }
+
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        ticket.category ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td
+                      class="${priorityClass}"
+                      style="
+                        text-transform:capitalize;
+                        font-weight:bold;
+                      ">
+
+                      ${escapeHTML(
+                        priority
+                      )}
+
+                    </td>
+
+                    <td
+                      class="${statusClass}"
+                      style="
+                        text-transform:capitalize;
+                        font-weight:bold;
+                      ">
+
+                      ${escapeHTML(
+                        ticketStatus
+                      )}
+
+                    </td>
+
+                    <td>
+
+                      <div class="support-response">
+
+                        ${escapeHTML(
+                          ticket.admin_response ||
+                          "Waiting for administrator response."
+                        )}
+
+                      </div>
+
+                    </td>
+
+                    <td>
+                      ${formatDateTime(
+                        updatedDate
+                      )}
+                    </td>
+
+                  </tr>
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "SUPPORT TICKETS ERROR:",
+        error
+      );
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML = `
+          <tr>
+
+            <td colspan="7">
+
+              Unable to load support tickets.
+
+              <br>
+
+              <small>
+                ${escapeHTML(
+                  error.message ||
+                  "Please try again."
+                )}
+              </small>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+
+      if (status) {
+
+        status.textContent =
+          error.message ||
+          "Unable to load support tickets.";
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     CREATE SUPPORT TICKET
+  ===================================================== */
+
+  async function createSupportTicket() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const subjectInput =
+      document.getElementById(
+        "supportSubject"
+      );
+
+    const messageInput =
+      document.getElementById(
+        "supportMessage"
+      );
+
+    const categoryInput =
+      document.getElementById(
+        "supportCategory"
+      );
+
+    const priorityInput =
+      document.getElementById(
+        "supportPriority"
+      );
+
+    const status =
+      document.getElementById(
+        "supportCreateStatus"
+      );
+
+    const button =
+      document.getElementById(
+        "supportSubmitButton"
+      );
+
+
+    const subject =
+      subjectInput
+        ? subjectInput.value.trim()
+        : "";
+
+
+    const message =
+      messageInput
+        ? messageInput.value.trim()
+        : "";
+
+
+    const category =
+      categoryInput
+        ? categoryInput.value
+        : "general";
+
+
+    const priority =
+      priorityInput
+        ? priorityInput.value
+        : "medium";
+
+
+    if (!subject) {
+
+      if (status) {
+
+        status.textContent =
+          "Please enter a subject.";
+
+      }
+
+      return;
+
+    }
+
+
+    if (!message) {
+
+      if (status) {
+
+        status.textContent =
+          "Please describe your issue.";
+
+      }
+
+      return;
+
+    }
+
+
+    if (button) {
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Submitting...";
+
+    }
+
+
+    try {
+
+      if (status) {
+
+        status.textContent =
+          "Creating your support ticket...";
+
+      }
+
+
+      const response =
+        await apiRequest(
+          "/support/tickets",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                customer_id:
+                  customer.id,
+
+                subject:
+                  subject,
+
+                message:
+                  message,
+
+                category:
+                  category,
+
+                priority:
+                  priority
+
+              })
+
+          }
+        );
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        throw new Error(
+          response?.message ||
+          "Unable to create support ticket."
+        );
+
+      }
+
+
+      if (status) {
+
+        status.textContent =
+          "Support ticket created successfully.";
+
+      }
+
+
+      if (subjectInput) {
+
+        subjectInput.value =
+          "";
+
+      }
+
+
+      if (messageInput) {
+
+        messageInput.value =
+          "";
+
+      }
+
+
+      if (categoryInput) {
+
+        categoryInput.value =
+          "general";
+
+      }
+
+
+      if (priorityInput) {
+
+        priorityInput.value =
+          "medium";
+
+      }
+
+
+      await loadSupportTickets();
+
+
+      setTimeout(
+        () => {
+
+          closeSupportTicketForm();
+
+        },
+        1200
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "CREATE SUPPORT ERROR:",
+        error
+      );
+
+
+      if (status) {
+
+        status.textContent =
+          error.message ||
+          "Unable to create support ticket.";
+
+      }
+
+    } finally {
+
+      if (button) {
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          "Submit Ticket";
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SECTION NAVIGATION
+  ===================================================== */
+
+  function showSection(
+    section
+  ) {
+
+    const sections = [
+      "overview",
+      "loans",
+      "transactions",
+      "savings",
+      "statements",
+      "profile",
+      "kyc",
+      "support",
+      "security"
+    ];
+
+
+    if (
+      !sections.includes(
+        section
+      )
+    ) {
+
+      section =
+        "overview";
+
+    }
+
+
+    sections.forEach(
+      name => {
+
+        const element =
+          document.getElementById(
+            `${name}Section`
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        element.style.display =
+          name === section
+            ? "block"
+            : "none";
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(
+        ".nav-btn"
+      )
+      .forEach(
+        button => {
+
+          button.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+    const buttons =
+      document.querySelectorAll(
+        ".nav-btn"
+      );
+
+
+    const index =
+      sections.indexOf(
+        section
+      );
+
+
+    if (
+      buttons[index]
+    ) {
+
+      buttons[index]
+        .classList.add(
+          "active"
+        );
+
+    }
+
+
+    /* LOAD SECTION DATA */
+
+    if (
+      section ===
+      "loans"
+    ) {
+
+      loadLoans();
+
+    }
+
+
+    if (
+      section ===
+      "transactions"
+    ) {
+
+      loadTransactions();
+
+    }
+
+
+    if (
+      section ===
+      "savings"
+    ) {
+
+      loadSavings();
+
+    }
+
+
+    if (
+      section ===
+      "statements"
+    ) {
+
+      loadStatements();
+
+    }
+
+
+    if (
+      section ===
+      "kyc"
+    ) {
+
+      loadKYC();
+
+    }
+
+
+    if (
+      section ===
+      "support"
+    ) {
+
+      loadSupportTickets();
+
+    }
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =====================================================
+     OPEN LOANS
+  ===================================================== */
+
+  function openLoans() {
+
+    window.location.href =
+      "index.html#loans";
+
+  }
+
+
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
+
+  function logoutCustomer() {
+
+    localStorage.removeItem(
+      "jaycob_customer_token"
+    );
+
+    localStorage.removeItem(
+      "jaycob_customer_data"
+    );
+
+    window.location.href =
+      "index.html";
+
+  }
+
+
+  /* =====================================================
+     START DASHBOARD
+  ===================================================== */
+
+  async function startDashboard() {
+
+    if (
+      !checkCustomerSession()
+    ) {
+      return;
+    }
+
+
+    renderCustomer();
+
+
+    await loadCustomer();
+
+
+    await loadLoans();
+
+
+    await loadTransactions();
+
+  }
+
+
+  /* =====================================================
+     START
+  ===================================================== */
+
+  startDashboard();
+
+</script>
 
 </body>
 </html>
