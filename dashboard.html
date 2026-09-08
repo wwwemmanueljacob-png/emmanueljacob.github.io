@@ -2459,6 +2459,223 @@ async function loadSavings() {
 
 }
 
+    /* =========================================================
+   LOAD ACCOUNT STATEMENTS
+========================================================= */
+
+async function loadStatements() {
+
+  if (!customer) return;
+
+  const tableBody =
+    document.getElementById(
+      "statementsTableBody"
+    );
+
+  const status =
+    document.getElementById(
+      "statementsStatus"
+    );
+
+  try {
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          Loading account statements...
+        </td>
+      </tr>
+    `;
+
+    status.textContent = "";
+
+    const response =
+      await apiRequest(
+        `/statements/customer/${customer.id}`
+      );
+
+    if (
+      !response ||
+      !response.success
+    ) {
+      throw new Error(
+        response?.message ||
+        "Unable to load account statements."
+      );
+    }
+
+    const statements =
+      Array.isArray(response.statements)
+        ? response.statements
+        : [];
+
+    /* -----------------------------------------------------
+       SUMMARY
+    ----------------------------------------------------- */
+
+    const totalCredit =
+      statements.reduce(
+        (total, item) =>
+          total +
+          Number(item.credit || 0),
+        0
+      );
+
+    const totalDebit =
+      statements.reduce(
+        (total, item) =>
+          total +
+          Number(item.debit || 0),
+        0
+      );
+
+    const latestStatement =
+      statements.length > 0
+        ? statements[0]
+        : null;
+
+    const currentBalance =
+      latestStatement
+        ? Number(
+            latestStatement.balance_after || 0
+          )
+        : Number(
+            customer.balance || 0
+          );
+
+    document.getElementById(
+      "statementTransactionCount"
+    ).textContent =
+      statements.length;
+
+    document.getElementById(
+      "statementTotalCredit"
+    ).textContent =
+      formatCurrency(totalCredit);
+
+    document.getElementById(
+      "statementTotalDebit"
+    ).textContent =
+      formatCurrency(totalDebit);
+
+    document.getElementById(
+      "statementCurrentBalance"
+    ).textContent =
+      formatCurrency(currentBalance);
+
+    /* -----------------------------------------------------
+       EMPTY STATE
+    ----------------------------------------------------- */
+
+    if (statements.length === 0) {
+
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7">
+            No account statements found yet.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    /* -----------------------------------------------------
+       RENDER STATEMENTS
+    ----------------------------------------------------- */
+
+    tableBody.innerHTML =
+      statements.map(statement => {
+
+        const date =
+          statement.transaction_date ||
+          statement.created_at;
+
+        const debit =
+          Number(
+            statement.debit || 0
+          );
+
+        const credit =
+          Number(
+            statement.credit || 0
+          );
+
+        const balance =
+          Number(
+            statement.balance_after || 0
+          );
+
+        return `
+          <tr>
+
+            <td>
+              ${
+                typeof formatDateTime === "function"
+                  ? formatDateTime(date)
+                  : date || "—"
+              }
+            </td>
+
+            <td>
+              ${statement.transaction_type || "—"}
+            </td>
+
+            <td>
+              ${statement.description || "—"}
+            </td>
+
+            <td>
+              ${statement.reference_number || "—"}
+            </td>
+
+            <td>
+              ${
+                debit > 0
+                  ? formatCurrency(debit)
+                  : "—"
+              }
+            </td>
+
+            <td>
+              ${
+                credit > 0
+                  ? formatCurrency(credit)
+                  : "—"
+              }
+            </td>
+
+            <td>
+              ${formatCurrency(balance)}
+            </td>
+
+          </tr>
+        `;
+
+      }).join("");
+
+  } catch (error) {
+
+    console.error(
+      "STATEMENTS ERROR:",
+      error
+    );
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          Unable to load account statements.
+        </td>
+      </tr>
+    `;
+
+    status.textContent =
+      error.message ||
+      "Unable to load account statements.";
+
+  }
+}
+    
     
     /* ================================================
        LOAN COUNTS
@@ -3059,6 +3276,9 @@ if (section === "transactions") {
 }
       if (section === "savings") {
   loadSavings();
+}
+      if (section === "statements") {
+  loadStatements();
 }
       window.scrollTo({
         top: 0,
