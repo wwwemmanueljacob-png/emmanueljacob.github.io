@@ -1361,25 +1361,275 @@
 
 </section>
 
+      
+<section id="supportSection" class="dashboard-section">
 
-      <section
-        id="supportSection"
-        class="section"
-        style="display:none;">
+  <div class="section-header">
+    <div>
+      <h2>Support Tickets</h2>
+      <p>Create and track your support requests.</p>
+    </div>
 
-        <div class="section-header">
-          <h2>Support</h2>
-        </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="openSupportTicketForm()"
+    >
+      + New Support Ticket
+    </button>
+  </div>
 
-        <div class="section-body">
+  <!-- SUPPORT SUMMARY -->
+  <div class="dashboard-cards">
 
-          <div class="empty">
-            Support tickets will be connected to the backend next.
-          </div>
+    <div class="dashboard-card">
+      <h4>Total Tickets</h4>
+      <div
+        class="dashboard-card-value"
+        id="supportTotalTickets"
+      >
+        0
+      </div>
+    </div>
 
-        </div>
+    <div class="dashboard-card">
+      <h4>Open</h4>
+      <div
+        class="dashboard-card-value"
+        id="supportOpenTickets"
+      >
+        0
+      </div>
+    </div>
 
-      </section>
+    <div class="dashboard-card">
+      <h4>Pending</h4>
+      <div
+        class="dashboard-card-value"
+        id="supportPendingTickets"
+      >
+        0
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <h4>Closed</h4>
+      <div
+        class="dashboard-card-value"
+        id="supportClosedTickets"
+      >
+        0
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEW TICKET FORM -->
+  <div
+    id="supportTicketForm"
+    style="display:none; margin-top:20px;"
+  >
+
+    <div class="dashboard-card">
+
+      <h3>Create Support Ticket</h3>
+
+      <div
+        id="supportCreateStatus"
+        style="margin-bottom:15px;"
+      ></div>
+
+      <div class="form-group">
+        <label for="supportSubject">
+          Subject
+        </label>
+
+        <input
+          type="text"
+          id="supportSubject"
+          placeholder="Enter your issue subject"
+          maxlength="150"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="supportCategory">
+          Category
+        </label>
+
+        <select id="supportCategory">
+
+          <option value="general">
+            General
+          </option>
+
+          <option value="account">
+            Account
+          </option>
+
+          <option value="loan">
+            Loan
+          </option>
+
+          <option value="transaction">
+            Transaction
+          </option>
+
+          <option value="savings">
+            Savings
+          </option>
+
+          <option value="kyc">
+            KYC
+          </option>
+
+          <option value="technical">
+            Technical
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="supportPriority">
+          Priority
+        </label>
+
+        <select id="supportPriority">
+
+          <option value="low">
+            Low
+          </option>
+
+          <option value="medium" selected>
+            Medium
+          </option>
+
+          <option value="high">
+            High
+          </option>
+
+          <option value="urgent">
+            Urgent
+          </option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="supportMessage">
+          Message
+        </label>
+
+        <textarea
+          id="supportMessage"
+          rows="6"
+          placeholder="Describe your issue..."
+          maxlength="2000"
+        ></textarea>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="supportSubmitButton"
+          onclick="createSupportTicket()"
+        >
+          Submit Ticket
+        </button>
+
+        <button
+          type="button"
+          class="btn"
+          onclick="closeSupportTicketForm()"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TICKETS -->
+  <div
+    class="dashboard-card"
+    style="margin-top:20px;"
+  >
+
+    <div
+      style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+        flex-wrap:wrap;
+      "
+    >
+
+      <div>
+        <h3>My Support Tickets</h3>
+        <p>
+          View your submitted requests and administrator responses.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="btn"
+        onclick="loadSupportTickets()"
+      >
+        Refresh
+      </button>
+
+    </div>
+
+    <div
+      id="supportStatus"
+      style="margin:15px 0;"
+    ></div>
+
+    <div style="overflow-x:auto;">
+
+      <table class="dashboard-table">
+
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Admin Response</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+
+        <tbody id="supportTableBody">
+
+          <tr>
+            <td colspan="7">
+              No support tickets loaded yet.
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+      
 
 
       <section
@@ -2874,6 +3124,7 @@ async function loadKYC() {
 
       return;
     }
+  
 
     /* -----------------------------------------------------
        RENDER DOCUMENTS
@@ -2960,6 +3211,411 @@ async function loadKYC() {
       "Unable to load KYC documents.";
 
   }
+}
+    /* =========================================================
+   SUPPORT TICKETS
+========================================================= */
+
+function openSupportTicketForm() {
+
+  const form =
+    document.getElementById("supportTicketForm");
+
+  if (form) {
+    form.style.display = "block";
+  }
+
+}
+
+
+function closeSupportTicketForm() {
+
+  const form =
+    document.getElementById("supportTicketForm");
+
+  if (form) {
+    form.style.display = "none";
+  }
+
+  const status =
+    document.getElementById("supportCreateStatus");
+
+  if (status) {
+    status.textContent = "";
+  }
+
+}
+
+
+async function loadSupportTickets() {
+
+  if (!customer) return;
+
+  const tableBody =
+    document.getElementById(
+      "supportTableBody"
+    );
+
+  const status =
+    document.getElementById(
+      "supportStatus"
+    );
+
+  try {
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          Loading support tickets...
+        </td>
+      </tr>
+    `;
+
+    status.textContent = "";
+
+    const response =
+      await apiRequest(
+        `/support/customer/${customer.id}`
+      );
+
+    if (
+      !response ||
+      !response.success
+    ) {
+
+      throw new Error(
+        response?.message ||
+        "Unable to load support tickets."
+      );
+
+    }
+
+    const tickets =
+      Array.isArray(response.tickets)
+        ? response.tickets
+        : [];
+
+    const openCount =
+      tickets.filter(ticket =>
+        String(ticket.status || "")
+          .toLowerCase() === "open"
+      ).length;
+
+    const pendingCount =
+      tickets.filter(ticket =>
+        String(ticket.status || "")
+          .toLowerCase() === "pending"
+      ).length;
+
+    const closedCount =
+      tickets.filter(ticket => {
+
+        const value =
+          String(ticket.status || "")
+            .toLowerCase();
+
+        return (
+          value === "closed" ||
+          value === "resolved"
+        );
+
+      }).length;
+
+
+    document.getElementById(
+      "supportTotalTickets"
+    ).textContent =
+      tickets.length;
+
+    document.getElementById(
+      "supportOpenTickets"
+    ).textContent =
+      openCount;
+
+    document.getElementById(
+      "supportPendingTickets"
+    ).textContent =
+      pendingCount;
+
+    document.getElementById(
+      "supportClosedTickets"
+    ).textContent =
+      closedCount;
+
+
+    if (tickets.length === 0) {
+
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7">
+            No support tickets found yet.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+
+    tableBody.innerHTML =
+      tickets.map(ticket => {
+
+        const createdDate =
+          ticket.created_at;
+
+        const updatedDate =
+          ticket.updated_at ||
+          ticket.created_at;
+
+        return `
+          <tr>
+
+            <td>
+              ${
+                typeof formatDateTime === "function"
+                  ? formatDateTime(createdDate)
+                  : createdDate || "—"
+              }
+            </td>
+
+            <td>
+              <strong>
+                ${ticket.subject || "—"}
+              </strong>
+
+              <div style="margin-top:5px;">
+                ${
+                  ticket.message
+                    ? ticket.message
+                    : ""
+                }
+              </div>
+            </td>
+
+            <td>
+              ${ticket.category || "—"}
+            </td>
+
+            <td>
+              ${ticket.priority || "—"}
+            </td>
+
+            <td>
+              ${ticket.status || "—"}
+            </td>
+
+            <td>
+              ${
+                ticket.admin_response ||
+                "Waiting for administrator response."
+              }
+            </td>
+
+            <td>
+              ${
+                typeof formatDateTime === "function"
+                  ? formatDateTime(updatedDate)
+                  : updatedDate || "—"
+              }
+            </td>
+
+          </tr>
+        `;
+
+      }).join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "SUPPORT TICKETS ERROR:",
+      error
+    );
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          Unable to load support tickets.
+        </td>
+      </tr>
+    `;
+
+    status.textContent =
+      error.message ||
+      "Unable to load support tickets.";
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATE SUPPORT TICKET
+========================================================= */
+
+async function createSupportTicket() {
+
+  if (!customer) return;
+
+  const subject =
+    document
+      .getElementById("supportSubject")
+      .value
+      .trim();
+
+  const message =
+    document
+      .getElementById("supportMessage")
+      .value
+      .trim();
+
+  const category =
+    document
+      .getElementById("supportCategory")
+      .value;
+
+  const priority =
+    document
+      .getElementById("supportPriority")
+      .value;
+
+  const status =
+    document.getElementById(
+      "supportCreateStatus"
+    );
+
+  const button =
+    document.getElementById(
+      "supportSubmitButton"
+    );
+
+
+  if (!subject) {
+
+    status.textContent =
+      "Please enter a subject.";
+
+    return;
+
+  }
+
+
+  if (!message) {
+
+    status.textContent =
+      "Please describe your issue.";
+
+    return;
+
+  }
+
+
+  button.disabled = true;
+  button.textContent =
+    "Submitting...";
+
+
+  try {
+
+    status.textContent =
+      "Creating your support ticket...";
+
+
+    const response =
+      await apiRequest(
+        "/support/tickets",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            customer_id:
+              customer.id,
+
+            subject:
+              subject,
+
+            message:
+              message,
+
+            category:
+              category,
+
+            priority:
+              priority
+          })
+        }
+      );
+
+
+    if (
+      !response ||
+      !response.success
+    ) {
+
+      throw new Error(
+        response?.message ||
+        "Unable to create support ticket."
+      );
+
+    }
+
+
+    status.textContent =
+      "Support ticket created successfully.";
+
+
+    document.getElementById(
+      "supportSubject"
+    ).value = "";
+
+    document.getElementById(
+      "supportMessage"
+    ).value = "";
+
+    document.getElementById(
+      "supportCategory"
+    ).value = "general";
+
+    document.getElementById(
+      "supportPriority"
+    ).value = "medium";
+
+
+    await loadSupportTickets();
+
+
+    setTimeout(() => {
+
+      closeSupportTicketForm();
+
+    }, 1200);
+
+
+  } catch (error) {
+
+    console.error(
+      "CREATE SUPPORT ERROR:",
+      error
+    );
+
+    status.textContent =
+      error.message ||
+      "Unable to create support ticket.";
+
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Submit Ticket";
+
+  }
+
 }
     
     
@@ -3569,6 +4225,9 @@ if (section === "transactions") {
       if (section === "kyc") {
   loadKYC();
 }
+      if (section === "support") {
+  loadSupportTickets();
+}      
       window.scrollTo({
         top: 0,
         behavior: "smooth"
