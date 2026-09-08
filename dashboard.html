@@ -676,25 +676,123 @@
       </section>
 
 
-      <section
-        id="transactionsSection"
-        class="section"
-        style="display:none;">
+    <section
+  id="transactionsSection"
+  class="section"
+  style="display:none;">
 
-        <div class="section-header">
-          <h2>Transactions</h2>
-        </div>
+  <div class="section-header">
+    <div>
+      <h2>Transactions</h2>
+      <small id="transactionSummary">
+        Your recent account activity
+      </small>
+    </div>
 
-        <div class="section-body">
+    <button
+      class="primary-btn"
+      onclick="loadTransactions()">
+      🔄 Refresh
+    </button>
+  </div>
 
-          <div class="empty">
-            Transaction history will appear here when the
-            transactions backend is connected.
-          </div>
+  <div class="section-body">
 
-        </div>
+    <!-- TRANSACTION BALANCE -->
 
-      </section>
+    <div class="card" style="margin-bottom:20px;">
+
+      <div class="card-label">
+        Current Account Balance
+      </div>
+
+      <div
+        class="card-value"
+        id="transactionBalance">
+        MWK 0.00
+      </div>
+
+    </div>
+
+
+    <!-- TRANSACTION TABLE -->
+
+    <div style="overflow-x:auto;">
+
+      <table
+        style="
+          width:100%;
+          border-collapse:collapse;
+          min-width:850px;
+        ">
+
+        <thead>
+
+          <tr
+            style="
+              background:#f5f7fa;
+              border-bottom:1px solid #e1e7ef;
+            ">
+
+            <th style="padding:12px;text-align:left;">
+              Date
+            </th>
+
+            <th style="padding:12px;text-align:left;">
+              Type
+            </th>
+
+            <th style="padding:12px;text-align:left;">
+              Description
+            </th>
+
+            <th style="padding:12px;text-align:right;">
+              Amount
+            </th>
+
+            <th style="padding:12px;text-align:right;">
+              Balance
+            </th>
+
+            <th style="padding:12px;text-align:left;">
+              Status
+            </th>
+
+            <th style="padding:12px;text-align:left;">
+              Reference
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="transactionList">
+
+          <tr>
+
+            <td
+              colspan="7"
+              style="
+                padding:25px;
+                text-align:center;
+                color:#68758a;
+              ">
+
+              Loading transactions...
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
 
 
       <section
@@ -1109,6 +1207,420 @@
         customer.id_number || "—";
     }
 
+    /* =====================================================
+   LOAD REAL TRANSACTIONS
+===================================================== */
+
+async function loadTransactions() {
+
+  if (!customer || !customer.id) {
+    return;
+  }
+
+  const transactionList =
+    document.getElementById(
+      "transactionList"
+    );
+
+  const transactionBalance =
+    document.getElementById(
+      "transactionBalance"
+    );
+
+  const transactionSummary =
+    document.getElementById(
+      "transactionSummary"
+    );
+
+
+  transactionList.innerHTML = `
+    <tr>
+      <td
+        colspan="7"
+        style="
+          padding:25px;
+          text-align:center;
+          color:#68758a;
+        ">
+        Loading transactions...
+      </td>
+    </tr>
+  `;
+
+
+  try {
+
+    const response =
+      await apiRequest(
+        `/transactions/customer/${customer.id}`
+      );
+
+
+    const transactions =
+      response.transactions || [];
+
+
+    /* ================================================
+       UPDATE BALANCE
+    ================================================= */
+
+    transactionBalance.textContent =
+      formatMoney(customer.balance);
+
+
+    if (!transactions.length) {
+
+      transactionSummary.textContent =
+        "No transactions found yet.";
+
+      transactionList.innerHTML = `
+        <tr>
+
+          <td
+            colspan="7"
+            style="
+              padding:30px;
+              text-align:center;
+              color:#68758a;
+            ">
+
+            No transactions found.
+
+          </td>
+
+        </tr>
+      `;
+
+      return;
+    }
+
+
+    transactionSummary.textContent =
+      `${transactions.length} transaction${
+        transactions.length === 1
+          ? ""
+          : "s"
+      } found`;
+
+
+    transactionList.innerHTML =
+      transactions
+        .map(
+          transaction =>
+            createTransactionHTML(
+              transaction
+            )
+        )
+        .join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "Transaction loading error:",
+      error
+    );
+
+
+    transactionList.innerHTML = `
+      <tr>
+
+        <td
+          colspan="7"
+          style="
+            padding:30px;
+            text-align:center;
+            color:#b42318;
+          ">
+
+          Unable to load transactions.
+
+          <br>
+
+          <small>
+            ${escapeHTML(
+              error.message ||
+              "Please try again."
+            )}
+          </small>
+
+        </td>
+
+      </tr>
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   TRANSACTION ROW
+===================================================== */
+
+function createTransactionHTML(
+  transaction
+) {
+
+  const type =
+    String(
+      transaction.type ||
+      "transaction"
+    ).toLowerCase();
+
+
+  const status =
+    String(
+      transaction.status ||
+      "pending"
+    ).toLowerCase();
+
+
+  const amount =
+    Number(
+      transaction.amount || 0
+    );
+
+
+  const incomingTypes = [
+    "deposit",
+    "loan_disbursement"
+  ];
+
+
+  const outgoingTypes = [
+    "withdrawal",
+    "transfer",
+    "loan_repayment"
+  ];
+
+
+  let amountPrefix = "";
+
+
+  if (
+    incomingTypes.includes(type)
+  ) {
+
+    amountPrefix = "+ ";
+
+  } else if (
+    outgoingTypes.includes(type)
+  ) {
+
+    amountPrefix = "- ";
+
+  }
+
+
+  const amountClass =
+    incomingTypes.includes(type)
+      ? "status-active"
+      : outgoingTypes.includes(type)
+        ? "status-blocked"
+        : "status-pending";
+
+
+  const statusClass =
+    status === "completed"
+      ? "status-active"
+      : status === "failed" ||
+        status === "reversed"
+        ? "status-blocked"
+        : "status-pending";
+
+
+  const description =
+    transaction.description ||
+    formatTransactionType(type);
+
+
+  const balanceAfter =
+    transaction.balance_after;
+
+
+  return `
+    <tr
+      style="
+        border-bottom:1px solid #edf0f4;
+      ">
+
+      <td
+        style="
+          padding:14px 12px;
+          white-space:nowrap;
+        ">
+
+        ${formatDateTime(
+          transaction.created_at
+        )}
+
+      </td>
+
+
+      <td
+        style="
+          padding:14px 12px;
+          font-weight:bold;
+          text-transform:capitalize;
+        ">
+
+        ${escapeHTML(type.replaceAll("_", " "))}
+
+      </td>
+
+
+      <td
+        style="
+          padding:14px 12px;
+        ">
+
+        ${escapeHTML(description)}
+
+      </td>
+
+
+      <td
+        style="
+          padding:14px 12px;
+          text-align:right;
+          font-weight:bold;
+        "
+        class="${amountClass}">
+
+        ${amountPrefix}
+        ${formatMoney(amount)}
+
+      </td>
+
+
+      <td
+        style="
+          padding:14px 12px;
+          text-align:right;
+        ">
+
+        ${
+          balanceAfter !== null &&
+          balanceAfter !== undefined
+            ? formatMoney(balanceAfter)
+            : "—"
+        }
+
+      </td>
+
+
+      <td
+        style="
+          padding:14px 12px;
+        ">
+
+        <span
+          class="${statusClass}"
+          style="
+            text-transform:capitalize;
+            font-weight:bold;
+          ">
+
+          ${escapeHTML(status)}
+
+        </span>
+
+      </td>
+
+
+      <td
+        style="
+          padding:14px 12px;
+          font-family:monospace;
+          font-size:12px;
+        ">
+
+        ${escapeHTML(
+          transaction.reference ||
+          "—"
+        )}
+
+      </td>
+
+    </tr>
+  `;
+}
+
+
+/* =====================================================
+   TRANSACTION TYPE LABEL
+===================================================== */
+
+function formatTransactionType(
+  type
+) {
+
+  const labels = {
+
+    deposit:
+      "Money deposited into your account",
+
+    withdrawal:
+      "Money withdrawn from your account",
+
+    transfer:
+      "Account transfer",
+
+    loan_disbursement:
+      "Loan disbursement",
+
+    loan_repayment:
+      "Loan repayment"
+
+  };
+
+
+  return (
+    labels[type] ||
+    "Account transaction"
+  );
+}
+
+
+/* =====================================================
+   FORMAT DATE + TIME
+===================================================== */
+
+function formatDateTime(
+  date
+) {
+
+  if (!date) {
+    return "—";
+  }
+
+
+  const d =
+    new Date(date);
+
+
+  if (
+    Number.isNaN(
+      d.getTime()
+    )
+  ) {
+
+    return "—";
+  }
+
+
+  return d.toLocaleString(
+    "en-MW",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+}
 
     /* =====================================================
        LOAD LOANS
@@ -1411,16 +1923,18 @@
 
     async function startDashboard() {
 
-      if (!checkCustomerSession()) {
-        return;
-      }
+  if (!checkCustomerSession()) {
+    return;
+  }
 
-      renderCustomer();
+  renderCustomer();
 
-      await loadCustomer();
+  await loadCustomer();
 
-      await loadLoans();
-    }
+  await loadLoans();
+
+  await loadTransactions();
+}
 
 
     startDashboard();
