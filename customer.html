@@ -3458,11 +3458,12 @@ console.log(
 console.log(
     "✅ CUSTOMER LOGOUT SYSTEM UPDATED"
 );
+    
 /* =====================================================
-   PREVENT DASHBOARD FROM REAPPEARING AFTER LOGOUT
+   SERVER-VERIFIED SESSION PROTECTION
 ===================================================== */
 
-window.addEventListener("pageshow", function () {
+async function verifyCustomerSession() {
 
     const savedToken =
         localStorage.getItem(TOKEN_KEY);
@@ -3470,6 +3471,7 @@ window.addEventListener("pageshow", function () {
     const savedCustomer =
         localStorage.getItem(CUSTOMER_KEY);
 
+    /* No local session */
     if (!savedToken || !savedCustomer) {
 
         token = "";
@@ -3497,11 +3499,117 @@ window.addEventListener("pageshow", function () {
             auth.style.display = "block";
         }
 
-        console.log(
-            "Dashboard blocked: customer session is logged out."
-        );
+        return false;
     }
-});
+
+    try {
+
+        const response =
+            await fetch(
+                API + "/auth/session",
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " + savedToken,
+
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    cache: "no-store"
+                }
+            );
+
+        const result =
+            await response.json();
+
+        console.log(
+            "CUSTOMER SESSION CHECK:",
+            response.status,
+            result
+        );
+
+        /* Session is no longer valid */
+        if (
+            !response.ok ||
+            result.authenticated !== true
+        ) {
+
+            console.warn(
+                "CUSTOMER SESSION INVALID."
+            );
+
+            token = "";
+            customer = null;
+            applications = [];
+            payments = [];
+
+            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem(CUSTOMER_KEY);
+
+            sessionStorage.removeItem(TOKEN_KEY);
+            sessionStorage.removeItem(CUSTOMER_KEY);
+
+            const app =
+                document.getElementById("app");
+
+            const auth =
+                document.getElementById("auth");
+
+            if (app) {
+                app.style.display = "none";
+            }
+
+            if (auth) {
+                auth.style.display = "block";
+            }
+
+            return false;
+        }
+
+        /* Session is valid */
+        token = savedToken;
+
+        customer =
+            JSON.parse(savedCustomer);
+
+        console.log(
+            "CUSTOMER SESSION VERIFIED."
+        );
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "SESSION VERIFICATION ERROR:",
+            error
+        );
+
+        /*
+        Do not automatically log the customer out
+        just because the network temporarily failed.
+        */
+
+        return true;
+    }
+}
+
+
+/* =====================================================
+   CHECK SESSION WHEN PAGE IS RESTORED
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    async function () {
+
+        await verifyCustomerSession();
+
+    }
+);
     
 </script>
 
