@@ -3458,7 +3458,51 @@ console.log(
 console.log(
     "✅ CUSTOMER LOGOUT SYSTEM UPDATED"
 );
+/* =====================================================
+   PREVENT DASHBOARD FROM REAPPEARING AFTER LOGOUT
+===================================================== */
 
+window.addEventListener("pageshow", function () {
+
+    const savedToken =
+        localStorage.getItem(TOKEN_KEY);
+
+    const savedCustomer =
+        localStorage.getItem(CUSTOMER_KEY);
+
+    if (!savedToken || !savedCustomer) {
+
+        token = "";
+        customer = null;
+        applications = [];
+        payments = [];
+
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(CUSTOMER_KEY);
+
+        sessionStorage.removeItem(TOKEN_KEY);
+        sessionStorage.removeItem(CUSTOMER_KEY);
+
+        const app =
+            document.getElementById("app");
+
+        const auth =
+            document.getElementById("auth");
+
+        if (app) {
+            app.style.display = "none";
+        }
+
+        if (auth) {
+            auth.style.display = "block";
+        }
+
+        console.log(
+            "Dashboard blocked: customer session is logged out."
+        );
+    }
+});
+    
 </script>
 
 
