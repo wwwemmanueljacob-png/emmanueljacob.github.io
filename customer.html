@@ -1820,82 +1820,113 @@ function updateProfile() {
 
 }
 
-
 /* =====================================================
    LOGOUT
+   REAL RAILWAY CUSTOMER LOGOUT
 ===================================================== */
 
 async function logout() {
 
-    /*
-       The current customer backend does not
-       have an /auth/logout endpoint.
+    try {
 
-       The customer session is therefore cleared
-       locally.
-    */
+        /*
+           Tell the REAL backend to terminate
+           the customer's Supabase session.
+        */
 
-    token = "";
+        if (token) {
 
-    customer = null;
+            try {
 
-    applications = [];
+                await api(
+                    "/auth/logout",
+                    {
+                        method: "POST"
+                    }
+                );
 
-    payments = [];
+            } catch (error) {
 
+                console.error(
+                    "Backend logout error:",
+                    error
+                );
 
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
+            }
 
-    localStorage.removeItem(
-        CUSTOMER_KEY
-    );
+        }
 
+    } finally {
 
-    el("app")
-        .classList
-        .add("hidden");
+        /*
+           Clear local customer session.
+        */
 
-    el("authScreen")
-        .classList
-        .remove("hidden");
+        token = "";
 
+        customer = null;
 
-    /*
-       Reset login screen.
-    */
+        applications = [];
 
-    el("loginEmail")
-        .value = "";
-
-    el("loginPassword")
-        .value = "";
+        payments = [];
 
 
-    el("loginMsg")
-        .innerHTML = "";
+        localStorage.removeItem(
+            TOKEN_KEY
+        );
+
+        localStorage.removeItem(
+            CUSTOMER_KEY
+        );
 
 
-    el("registerMsg")
-        .innerHTML = "";
+        /*
+           Return to authentication screen.
+        */
+
+        el("app")
+            .classList
+            .add("hidden");
+
+        el("authScreen")
+            .classList
+            .remove("hidden");
 
 
-    /*
-       Always return to Login box.
-    */
+        /*
+           Reset login screen.
+        */
 
-    el("registerBox")
-        .classList
-        .add("hidden");
+        el("loginEmail")
+            .value = "";
 
-    el("loginBox")
-        .classList
-        .remove("hidden");
+        el("loginPassword")
+            .value = "";
+
+
+        el("loginMsg")
+            .innerHTML = "";
+
+        el("registerMsg")
+            .innerHTML = "";
+
+
+        /*
+           Always return to Login box.
+        */
+
+        el("registerBox")
+            .classList
+            .add("hidden");
+
+        el("loginBox")
+            .classList
+            .remove("hidden");
+
+    }
 
 }
-
-
+    
 /* =====================================================
    NAVIGATION
 ===================================================== */
