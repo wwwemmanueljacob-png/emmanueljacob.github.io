@@ -1,7 +1,21 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JAY C O B Financial Services - Customer Dashboard</title><style>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    JAY C O B Financial Services - Customer Dashboard
+</title>
+
+<style>
+
 * {
     box-sizing: border-box;
 }
@@ -200,6 +214,10 @@ button {
 .logout {
     background: #9e2222 !important;
     margin-top: 15px;
+}
+
+.logout:hover {
+    background: #c42b2b !important;
 }
 
 .main {
@@ -529,654 +547,961 @@ td {
         padding: 0 15px;
     }
 }
-</style></head><body><!-- =====================================================
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
      AUTHENTICATION
-===================================================== --><div id="authScreen" class="auth"><div id="loginBox" class="auth-box">
+===================================================== -->
 
-    <div class="logo">
-        <h1>JAY C O B</h1>
-        <p>FINANCIAL SERVICES</p>
-    </div>
+<div id="authScreen" class="auth">
 
-    <h2>Customer Login</h2>
+    <div id="loginBox" class="auth-box">
 
-    <div id="loginMsg"></div>
+        <div class="logo">
 
-    <div class="field">
-        <label>Email</label>
-        <input
-            id="loginEmail"
-            type="email"
-            placeholder="Email address"
-        >
-    </div>
+            <h1>JAY C O B</h1>
 
-    <div class="field">
-        <label>Password</label>
-        <input
-            id="loginPassword"
-            type="password"
-            placeholder="Password"
-        >
-    </div>
+            <p>
+                FINANCIAL SERVICES
+            </p>
 
-    <button
-        id="loginBtn"
-        type="button"
-        class="primary"
-    >
-        Login
-    </button>
+        </div>
 
-    <div class="switch">
-        Don't have an account?
+        <h2>
+            Customer Login
+        </h2>
+
+        <div id="loginMsg"></div>
+
+        <div class="field">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="Email address"
+                autocomplete="email"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+        </div>
+
         <button
-            id="showRegister"
+            id="loginBtn"
             type="button"
-        >
-            Create Account
-        </button>
-    </div>
-
-</div>
-
-
-<div id="registerBox" class="auth-box hidden">
-
-    <div class="logo">
-        <h1>JAY C O B</h1>
-        <p>FINANCIAL SERVICES</p>
-    </div>
-
-    <h2>Create Account</h2>
-
-    <div id="registerMsg"></div>
-
-    <div class="field">
-        <label>Full Name</label>
-        <input
-            id="registerName"
-            type="text"
-            placeholder="Full name"
-        >
-    </div>
-
-    <div class="field">
-        <label>Email</label>
-        <input
-            id="registerEmail"
-            type="email"
-            placeholder="Email"
-        >
-    </div>
-
-    <div class="field">
-        <label>Phone</label>
-        <input
-            id="registerPhone"
-            type="tel"
-            placeholder="+265..."
-        >
-    </div>
-
-    <div class="field">
-        <label>Password</label>
-        <input
-            id="registerPassword"
-            type="password"
-            placeholder="At least 6 characters"
-        >
-    </div>
-
-    <button
-        id="registerBtn"
-        type="button"
-        class="primary"
-    >
-        Create Account
-    </button>
-
-    <div class="switch">
-        Already have an account?
-        <button
-            id="showLogin"
-            type="button"
+            class="primary"
         >
             Login
         </button>
+
+        <div class="switch">
+
+            Don't have an account?
+
+            <button
+                id="showRegister"
+                type="button"
+            >
+                Create Account
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="registerBox" class="auth-box hidden">
+
+        <div class="logo">
+
+            <h1>JAY C O B</h1>
+
+            <p>
+                FINANCIAL SERVICES
+            </p>
+
+        </div>
+
+        <h2>
+            Create Account
+        </h2>
+
+        <div id="registerMsg"></div>
+
+        <div class="field">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                id="registerName"
+                type="text"
+                placeholder="Full name"
+                autocomplete="name"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                id="registerEmail"
+                type="email"
+                placeholder="Email"
+                autocomplete="email"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                id="registerPhone"
+                type="tel"
+                placeholder="+265..."
+                autocomplete="tel"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="At least 6 characters"
+                autocomplete="new-password"
+            >
+
+        </div>
+
+        <button
+            id="registerBtn"
+            type="button"
+            class="primary"
+        >
+            Create Account
+        </button>
+
+        <div class="switch">
+
+            Already have an account?
+
+            <button
+                id="showLogin"
+                type="button"
+            >
+                Login
+            </button>
+
+        </div>
+
     </div>
 
 </div>
 
-</div><!-- =====================================================
+
+<!-- =====================================================
      CUSTOMER APP
-===================================================== --><div id="app" class="app hidden"><aside id="sidebar" class="sidebar">
+===================================================== -->
 
-    <div class="sidebar-logo">
-        <h2>JAY C O B</h2>
-        <small>FINANCIAL SERVICES</small>
-    </div>
+<div id="app" class="app hidden">
 
-    <div class="nav">
+    <aside
+        id="sidebar"
+        class="sidebar"
+    >
 
-        <button
-            class="nav-btn active"
-            data-page="dashboard"
-            type="button"
-        >
-            🏠 Dashboard
-        </button>
+        <div class="sidebar-logo">
 
-        <button
-            class="nav-btn"
-            data-page="apply"
-            type="button"
-        >
-            💰 Apply for Loan
-        </button>
+            <h2>
+                JAY C O B
+            </h2>
 
-        <button
-            class="nav-btn"
-            data-page="applications"
-            type="button"
-        >
-            📋 My Applications
-        </button>
+            <small>
+                FINANCIAL SERVICES
+            </small>
 
-        <button
-            class="nav-btn"
-            data-page="payments"
-            type="button"
-        >
-            💳 My Payments
-        </button>
-
-        <button
-            class="nav-btn"
-            data-page="support"
-            type="button"
-        >
-            💬 Support
-        </button>
-
-        <button
-            class="nav-btn"
-            data-page="profile"
-            type="button"
-        >
-            👤 My Profile
-        </button>
-
-        <button
-            id="logoutBtn"
-            class="nav-btn logout"
-            type="button"
-        >
-            🚪 Logout
-        </button>
-
-    </div>
-
-</aside>
-
-
-<main class="main">
-
-    <header class="topbar">
-
-        <button
-            id="menuBtn"
-            class="menu"
-            type="button"
-        >
-            ☰
-        </button>
-
-        <div>
-            Welcome,
-            <strong id="customerName">
-                Customer
-            </strong>
         </div>
 
-        <div id="statusText">
-            Checking...
+
+        <div class="nav">
+
+
+            <button
+                class="nav-btn active"
+                data-page="dashboard"
+                type="button"
+            >
+                🏠 Dashboard
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="apply"
+                type="button"
+            >
+                💰 Apply for Loan
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="applications"
+                type="button"
+            >
+                📋 My Applications
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="payments"
+                type="button"
+            >
+                💳 My Payments
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="support"
+                type="button"
+            >
+                💬 Support
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="profile"
+                type="button"
+            >
+                👤 My Profile
+            </button>
+
+
+            <!-- =================================================
+                 UPDATED LOGOUT BUTTON
+            ================================================== -->
+
+            <button
+                id="logoutBtn"
+                class="nav-btn logout"
+                type="button"
+                aria-label="Logout from customer account"
+            >
+                🚪 Logout
+            </button>
+
+
         </div>
 
-    </header>
+    </aside>
 
 
-    <div class="content">
+    <main class="main">
 
 
-        <!-- ==========================================
-             DASHBOARD
-        =========================================== -->
+        <header class="topbar">
 
-        <section
-            id="dashboard"
-            class="page active"
-        >
 
-            <div class="page-title">
-                <h2>Customer Dashboard</h2>
-                <p>Welcome to your financial services account.</p>
-            </div>
+            <button
+                id="menuBtn"
+                class="menu"
+                type="button"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
 
-            <div class="stats">
 
-                <div class="stat">
-                    <small>Total Applications</small>
-                    <h3 id="totalApplications">0</h3>
-                </div>
+            <div>
 
-                <div class="stat">
-                    <small>Pending</small>
-                    <h3 id="pendingApplications">0</h3>
-                </div>
+                Welcome,
 
-                <div class="stat">
-                    <small>Approved</small>
-                    <h3 id="approvedApplications">0</h3>
-                </div>
-
-                <div class="stat">
-                    <small>Payments</small>
-                    <h3 id="totalPayments">0</h3>
-                </div>
+                <strong id="customerName">
+                    Customer
+                </strong>
 
             </div>
 
-            <div class="card">
 
-                <h3>Welcome to JAY C O B Financial Services</h3>
-
-                <p style="line-height:1.7;color:#687383;">
-                    Use the menu to apply for a loan,
-                    monitor your applications, view payments
-                    and contact customer support.
-                </p>
-
+            <div id="statusText">
+                Checking...
             </div>
 
-        </section>
+
+        </header>
 
 
-        <!-- ==========================================
-             APPLY
-        =========================================== -->
+        <div class="content">
 
-        <section
-            id="apply"
-            class="page"
-        >
 
-            <div class="page-title">
-                <h2>Apply for a Loan</h2>
-                <p>Complete the loan application below.</p>
-            </div>
+            <!-- ==========================================
+                 DASHBOARD
+            =========================================== -->
 
-            <div class="card loan-box">
+            <section
+                id="dashboard"
+                class="page active"
+            >
 
-                <div id="loanMsg"></div>
+                <div class="page-title">
 
-                <div class="loan-field">
+                    <h2>
+                        Customer Dashboard
+                    </h2>
 
-                    <label for="v4LoanType">
-                        Loan Type
-                    </label>
-
-                    <select id="v4LoanType">
-
-                        <option value="">
-                            -- Select Loan Type --
-                        </option>
-
-                        <option value="Personal Loan">
-                            Personal Loan
-                        </option>
-
-                        <option value="Business Loan">
-                            Business Loan
-                        </option>
-
-                        <option value="Emergency Loan">
-                            Emergency Loan
-                        </option>
-
-                        <option value="Education Loan">
-                            Education Loan
-                        </option>
-
-                        <option value="Agriculture Loan">
-                            Agriculture Loan
-                        </option>
-
-                        <option value="Salary Loan">
-                            Salary Loan
-                        </option>
-
-                    </select>
+                    <p>
+                        Welcome to your financial services account.
+                    </p>
 
                 </div>
 
 
-                <div class="loan-field">
+                <div class="stats">
 
-                    <label for="v4LoanAmount">
-                        Loan Amount (MWK)
-                    </label>
 
-                    <input
-                        id="v4LoanAmount"
-                        type="number"
-                        inputmode="numeric"
-                        min="1"
-                        step="1"
-                        placeholder="Example: 100000"
+                    <div class="stat">
+
+                        <small>
+                            Total Applications
+                        </small>
+
+                        <h3 id="totalApplications">
+                            0
+                        </h3>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <small>
+                            Pending
+                        </small>
+
+                        <h3 id="pendingApplications">
+                            0
+                        </h3>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <small>
+                            Approved
+                        </small>
+
+                        <h3 id="approvedApplications">
+                            0
+                        </h3>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <small>
+                            Payments
+                        </small>
+
+                        <h3 id="totalPayments">
+                            0
+                        </h3>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Welcome to JAY C O B Financial Services
+                    </h3>
+
+                    <p
+                        style="
+                            line-height:1.7;
+                            color:#687383;
+                        "
+                    >
+                        Use the menu to apply for a loan,
+                        monitor your applications, view payments
+                        and contact customer support.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ==========================================
+                 APPLY
+            =========================================== -->
+
+            <section
+                id="apply"
+                class="page"
+            >
+
+                <div class="page-title">
+
+                    <h2>
+                        Apply for a Loan
+                    </h2>
+
+                    <p>
+                        Complete the loan application below.
+                    </p>
+
+                </div>
+
+
+                <div class="card loan-box">
+
+
+                    <div id="loanMsg"></div>
+
+
+                    <div class="loan-field">
+
+                        <label for="v4LoanType">
+                            Loan Type
+                        </label>
+
+                        <select id="v4LoanType">
+
+                            <option value="">
+                                -- Select Loan Type --
+                            </option>
+
+                            <option value="Personal Loan">
+                                Personal Loan
+                            </option>
+
+                            <option value="Business Loan">
+                                Business Loan
+                            </option>
+
+                            <option value="Emergency Loan">
+                                Emergency Loan
+                            </option>
+
+                            <option value="Education Loan">
+                                Education Loan
+                            </option>
+
+                            <option value="Agriculture Loan">
+                                Agriculture Loan
+                            </option>
+
+                            <option value="Salary Loan">
+                                Salary Loan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="v4LoanAmount">
+                            Loan Amount (MWK)
+                        </label>
+
+                        <input
+                            id="v4LoanAmount"
+                            type="number"
+                            inputmode="numeric"
+                            min="1"
+                            step="1"
+                            placeholder="Example: 100000"
+                        >
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="v4LoanDuration">
+                            Loan Duration
+                        </label>
+
+                        <select id="v4LoanDuration">
+
+                            <option value="">
+                                -- Select Duration --
+                            </option>
+
+                            <option value="1">
+                                1 Month
+                            </option>
+
+                            <option value="2">
+                                2 Months
+                            </option>
+
+                            <option value="3">
+                                3 Months
+                            </option>
+
+                            <option value="6">
+                                6 Months
+                            </option>
+
+                            <option value="9">
+                                9 Months
+                            </option>
+
+                            <option value="12">
+                                12 Months
+                            </option>
+
+                            <option value="18">
+                                18 Months
+                            </option>
+
+                            <option value="24">
+                                24 Months
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="readout">
+
+                        <h4>
+                            Application Check
+                        </h4>
+
+
+                        <div class="readout-row">
+
+                            <span>
+                                Loan Type
+                            </span>
+
+                            <span
+                                id="showLoanType"
+                                class="readout-value"
+                            >
+                                Not selected
+                            </span>
+
+                        </div>
+
+
+                        <div class="readout-row">
+
+                            <span>
+                                Amount
+                            </span>
+
+                            <span
+                                id="showLoanAmount"
+                                class="readout-value"
+                            >
+                                Not entered
+                            </span>
+
+                        </div>
+
+
+                        <div class="readout-row">
+
+                            <span>
+                                Duration
+                            </span>
+
+                            <span
+                                id="showLoanDuration"
+                                class="readout-value"
+                            >
+                                Not selected
+                            </span>
+
+                        </div>
+
+
+                        <div class="readout-row">
+
+                            <span>
+                                Validation
+                            </span>
+
+                            <span
+                                id="showValidation"
+                                class="readout-value"
+                            >
+                                Waiting
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        id="v4SubmitLoan"
+                        type="button"
+                        class="submit"
+                    >
+                        Submit Loan Application
+                    </button>
+
+
+                    <div
+                        id="railwayBox"
+                        class="railway-box hidden"
                     >
 
+                        <h4>
+                            Railway API Communication
+                        </h4>
+
+                        <pre id="railwayOutput"></pre>
+
+                    </div>
+
+
                 </div>
 
+            </section>
 
-                <div class="loan-field">
 
-                    <label for="v4LoanDuration">
-                        Loan Duration
-                    </label>
+            <!-- ==========================================
+                 APPLICATIONS
+            =========================================== -->
 
-                    <select id="v4LoanDuration">
+            <section
+                id="applications"
+                class="page"
+            >
 
-                        <option value="">
-                            -- Select Duration --
-                        </option>
+                <div class="page-title">
 
-                        <option value="1">
-                            1 Month
-                        </option>
+                    <h2>
+                        My Applications
+                    </h2>
 
-                        <option value="2">
-                            2 Months
-                        </option>
-
-                        <option value="3">
-                            3 Months
-                        </option>
-
-                        <option value="6">
-                            6 Months
-                        </option>
-
-                        <option value="9">
-                            9 Months
-                        </option>
-
-                        <option value="12">
-                            12 Months
-                        </option>
-
-                        <option value="18">
-                            18 Months
-                        </option>
-
-                        <option value="24">
-                            24 Months
-                        </option>
-
-                    </select>
+                    <p>
+                        Your loan application history.
+                    </p>
 
                 </div>
 
 
-                <div class="readout">
+                <div class="card">
 
-                    <h4>Application Check</h4>
-
-                    <div class="readout-row">
-                        <span>Loan Type</span>
-                        <span
-                            id="showLoanType"
-                            class="readout-value"
-                        >
-                            Not selected
-                        </span>
-                    </div>
-
-                    <div class="readout-row">
-                        <span>Amount</span>
-                        <span
-                            id="showLoanAmount"
-                            class="readout-value"
-                        >
-                            Not entered
-                        </span>
-                    </div>
-
-                    <div class="readout-row">
-                        <span>Duration</span>
-                        <span
-                            id="showLoanDuration"
-                            class="readout-value"
-                        >
-                            Not selected
-                        </span>
-                    </div>
-
-                    <div class="readout-row">
-                        <span>Validation</span>
-                        <span
-                            id="showValidation"
-                            class="readout-value"
-                        >
-                            Waiting
-                        </span>
+                    <div id="applicationsList">
+                        Loading...
                     </div>
 
                 </div>
 
-
-                <button
-                    id="v4SubmitLoan"
-                    type="button"
-                    class="submit"
-                >
-                    Submit Loan Application
-                </button>
+            </section>
 
 
-                <div
-                    id="railwayBox"
-                    class="railway-box hidden"
-                >
+            <!-- ==========================================
+                 PAYMENTS
+            =========================================== -->
 
-                    <h4>Railway API Communication</h4>
+            <section
+                id="payments"
+                class="page"
+            >
 
-                    <pre id="railwayOutput"></pre>
+                <div class="page-title">
 
-                </div>
+                    <h2>
+                        My Payments
+                    </h2>
 
-            </div>
-
-        </section>
-
-
-        <!-- ==========================================
-             APPLICATIONS
-        =========================================== -->
-
-        <section
-            id="applications"
-            class="page"
-        >
-
-            <div class="page-title">
-                <h2>My Applications</h2>
-                <p>Your loan application history.</p>
-            </div>
-
-            <div class="card">
-
-                <div id="applicationsList">
-                    Loading...
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==========================================
-             PAYMENTS
-        =========================================== -->
-
-        <section
-            id="payments"
-            class="page"
-        >
-
-            <div class="page-title">
-                <h2>My Payments</h2>
-                <p>Your payment history.</p>
-            </div>
-
-            <div class="card">
-
-                <div class="table-wrap">
-
-                    <table>
-
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th>Reference</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="paymentsList"></tbody>
-
-                    </table>
+                    <p>
+                        Your payment history.
+                    </p>
 
                 </div>
 
-            </div>
 
-        </section>
+                <div class="card">
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Date
+                                    </th>
+
+                                    <th>
+                                        Amount
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Reference
+                                    </th>
+
+                                </tr>
+
+                            </thead>
 
 
-        <!-- ==========================================
-             SUPPORT
-        =========================================== -->
+                            <tbody id="paymentsList"></tbody>
 
-        <section
-            id="support"
-            class="page"
-        >
+                        </table>
 
-            <div class="page-title">
-                <h2>Customer Support</h2>
-                <p>Contact JAY C O B Financial Services.</p>
-            </div>
+                    </div>
 
-            <div class="card">
+                </div>
 
-                <div id="supportMsg"></div>
+            </section>
 
-                <div class="field">
-                    <label>Subject</label>
-                    <input
-                        id="supportSubject"
-                        type="text"
-                        placeholder="Subject"
+
+            <!-- ==========================================
+                 SUPPORT
+            =========================================== -->
+
+            <section
+                id="support"
+                class="page"
+            >
+
+                <div class="page-title">
+
+                    <h2>
+                        Customer Support
+                    </h2>
+
+                    <p>
+                        Contact JAY C O B Financial Services.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div id="supportMsg"></div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Subject
+                        </label>
+
+                        <input
+                            id="supportSubject"
+                            type="text"
+                            placeholder="Subject"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Message
+                        </label>
+
+                        <textarea
+                            id="supportText"
+                            rows="6"
+                            placeholder="Write your message..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        id="supportBtn"
+                        type="button"
+                        class="primary"
                     >
+                        Send Message
+                    </button>
+
                 </div>
 
-                <div class="field">
-                    <label>Message</label>
-                    <textarea
-                        id="supportText"
-                        rows="6"
-                        placeholder="Write your message..."
-                    ></textarea>
+
+                <div class="card">
+
+                    <h3>
+                        My Messages
+                    </h3>
+
+                    <div id="supportList">
+                        Loading...
+                    </div>
+
                 </div>
 
-                <button
-                    id="supportBtn"
-                    type="button"
-                    class="primary"
-                >
-                    Send Message
-                </button>
+            </section>
 
-            </div>
 
-            <div class="card">
+            <!-- ==========================================
+                 PROFILE
+            =========================================== -->
 
-                <h3>My Messages</h3>
+            <section
+                id="profile"
+                class="page"
+            >
 
-                <div id="supportList">
-                    Loading...
+                <div class="page-title">
+
+                    <h2>
+                        My Profile
+                    </h2>
+
+                    <p>
+                        Your customer account information.
+                    </p>
+
                 </div>
 
-            </div>
 
-        </section>
+                <div class="card">
 
 
-        <!-- ==========================================
-             PROFILE
-        =========================================== -->
+                    <div class="profile-row">
 
-        <section
-            id="profile"
-            class="page"
-        >
+                        <span>
+                            Customer ID
+                        </span>
 
-            <div class="page-title">
-                <h2>My Profile</h2>
-                <p>Your customer account information.</p>
-            </div>
+                        <strong id="profileId">
+                            -
+                        </strong>
 
-            <div class="card">
+                    </div>
 
-                <div class="profile-row">
-                    <span>Customer ID</span>
-                    <strong id="profileId">-</strong>
+
+                    <div class="profile-row">
+
+                        <span>
+                            Full Name
+                        </span>
+
+                        <strong id="profileName">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong id="profileEmail">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span>
+                            Phone
+                        </span>
+
+                        <strong id="profilePhone">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong id="profileStatus">
+                            -
+                        </strong>
+
+                    </div>
+
+
                 </div>
 
-                <div class="profile-row">
-                    <span>Full Name</span>
-                    <strong id="profileName">-</strong>
-                </div>
+            </section>
 
-                <div class="profile-row">
-                    <span>Email</span>
-                    <strong id="profileEmail">-</strong>
-                </div>
 
-                <div class="profile-row">
-                    <span>Phone</span>
-                    <strong id="profilePhone">-</strong>
-                </div>
+        </div>
 
-                <div class="profile-row">
-                    <span>Status</span>
-                    <strong id="profileStatus">-</strong>
-                </div>
+    </main>
 
-            </div>
+</div>
 
-        </section>
 
-    </div>
-
-</main>
-
-</div><script>
+<script>
 
 /* =====================================================
-   JAY C O B CUSTOMER DASHBOARD V4
+   JAY C O B CUSTOMER DASHBOARD V4.2
    RAILWAY + SUPABASE CUSTOMER AUTHENTICATION
 ===================================================== */
 
@@ -1325,11 +1650,6 @@ async function api(
         response.status === 403
     ) {
 
-        /*
-           Clear the local session when
-           Railway says the request is unauthorized.
-        */
-
         if (token) {
 
             token = "";
@@ -1418,7 +1738,6 @@ el("showLogin")
 
 /* =====================================================
    LOGIN
-   REAL RAILWAY ENDPOINT
 ===================================================== */
 
 async function login() {
@@ -1462,17 +1781,12 @@ async function login() {
     el("loginBtn")
         .disabled = true;
 
-
     el("loginBtn")
         .textContent =
         "Logging in...";
 
 
     try {
-
-        /*
-           NEW REAL CUSTOMER LOGIN ROUTE
-        */
 
         const data =
             await api(
@@ -1487,14 +1801,8 @@ async function login() {
             );
 
 
-        /*
-           NEW BACKEND RETURNS
-           session_token
-        */
-
         token =
             data.session_token;
-
 
         customer =
             data.customer;
@@ -1556,7 +1864,6 @@ async function login() {
 
 /* =====================================================
    REGISTER
-   REAL RAILWAY + SUPABASE ENDPOINT
 ===================================================== */
 
 async function register() {
@@ -1636,17 +1943,12 @@ async function register() {
     el("registerBtn")
         .disabled = true;
 
-
     el("registerBtn")
         .textContent =
         "Creating Account...";
 
 
     try {
-
-        /*
-           NEW REAL CUSTOMER REGISTRATION ROUTE
-        */
 
         const data =
             await api(
@@ -1662,15 +1964,6 @@ async function register() {
                 }
             );
 
-
-        /*
-           Registration endpoint creates
-           the customer but does not return
-           a login session.
-
-           Therefore we now log the customer
-           in using the same credentials.
-        */
 
         message(
             "registerMsg",
@@ -1694,7 +1987,6 @@ async function register() {
 
         token =
             loginData.session_token;
-
 
         customer =
             loginData.customer;
@@ -1809,124 +2101,290 @@ function updateProfile() {
         customer.phone || "-";
 
 
-    /*
-       Supabase customers table uses
-       account_status.
-    */
-
     el("profileStatus")
         .textContent =
         customer.account_status || "-";
 
 }
 
+
 /* =====================================================
-   LOGOUT
-   REAL RAILWAY CUSTOMER LOGOUT
+   UPDATED CUSTOMER LOGOUT
+   RAILWAY + SUPABASE SESSION TERMINATION
 ===================================================== */
 
 async function logout() {
 
-    try {
+    console.log(
+        "========================================"
+    );
 
-        /*
-           Tell the REAL backend to terminate
-           the customer's Supabase session.
-        */
+    console.log(
+        "🔥 CUSTOMER LOGOUT BUTTON CLICKED"
+    );
 
-        if (token) {
+    console.log(
+        "========================================"
+    );
 
-            try {
 
-                await api(
-                    "/auth/logout",
+    /*
+       Save the current token before clearing it.
+    */
+
+    const oldToken =
+        token;
+
+
+    /*
+       Disable button while logout is running.
+    */
+
+    const logoutButton =
+        el("logoutBtn");
+
+
+    if (logoutButton) {
+
+        logoutButton.disabled = true;
+
+        logoutButton.textContent =
+            "⏳ Logging out...";
+
+    }
+
+
+    /*
+       Send logout request DIRECTLY to Railway.
+       This intentionally bypasses api() so that
+       a 401 response from the logout endpoint
+       cannot clear the token before the request
+       has completed.
+    */
+
+    if (oldToken) {
+
+        try {
+
+            const response =
+                await fetch(
+                    API + "/auth/logout",
                     {
-                        method: "POST"
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                oldToken
+                        },
+
+                        body:
+                            JSON.stringify({})
                     }
                 );
 
-            } catch (error) {
 
-                console.error(
-                    "Backend logout error:",
-                    error
+            const responseText =
+                await response.text();
+
+
+            console.log(
+                "LOGOUT HTTP STATUS:",
+                response.status
+            );
+
+
+            console.log(
+                "LOGOUT RESPONSE:",
+                responseText
+            );
+
+
+            /*
+               Backend successfully received
+               and processed the logout.
+            */
+
+            if (
+                response.ok
+            ) {
+
+                console.log(
+                    "✅ RAILWAY LOGOUT SUCCESSFUL"
+                );
+
+            } else {
+
+                console.warn(
+                    "⚠️ RAILWAY LOGOUT RETURNED STATUS:",
+                    response.status
                 );
 
             }
 
+
+        } catch(error) {
+
+            /*
+               Even if the network fails,
+               the local browser session will
+               still be destroyed below.
+            */
+
+            console.error(
+                "❌ LOGOUT NETWORK ERROR:",
+                error
+            );
+
         }
 
-    } finally {
+    } else {
 
-        /*
-           Clear local customer session.
-        */
-
-        token = "";
-
-        customer = null;
-
-        applications = [];
-
-        payments = [];
-
-
-        localStorage.removeItem(
-            TOKEN_KEY
+        console.warn(
+            "⚠️ No customer token was found."
         );
-
-        localStorage.removeItem(
-            CUSTOMER_KEY
-        );
-
-
-        /*
-           Return to authentication screen.
-        */
-
-        el("app")
-            .classList
-            .add("hidden");
-
-        el("authScreen")
-            .classList
-            .remove("hidden");
-
-
-        /*
-           Reset login screen.
-        */
-
-        el("loginEmail")
-            .value = "";
-
-        el("loginPassword")
-            .value = "";
-
-
-        el("loginMsg")
-            .innerHTML = "";
-
-        el("registerMsg")
-            .innerHTML = "";
-
-
-        /*
-           Always return to Login box.
-        */
-
-        el("registerBox")
-            .classList
-            .add("hidden");
-
-        el("loginBox")
-            .classList
-            .remove("hidden");
 
     }
 
+
+    /*
+       Clear application state.
+    */
+
+    token = "";
+
+    customer = null;
+
+    applications = [];
+
+    payments = [];
+
+
+    /*
+       Clear localStorage.
+    */
+
+    localStorage.removeItem(
+        TOKEN_KEY
+    );
+
+    localStorage.removeItem(
+        CUSTOMER_KEY
+    );
+
+
+    /*
+       Clear any possible cached
+       customer information.
+    */
+
+    try {
+
+        sessionStorage.removeItem(
+            TOKEN_KEY
+        );
+
+        sessionStorage.removeItem(
+            CUSTOMER_KEY
+        );
+
+    } catch(error) {
+
+        console.warn(
+            "Session storage cleanup warning:",
+            error
+        );
+
+    }
+
+
+    /*
+       Hide customer dashboard.
+    */
+
+    el("app")
+        .classList
+        .add("hidden");
+
+
+    /*
+       Show authentication screen.
+    */
+
+    el("authScreen")
+        .classList
+        .remove("hidden");
+
+
+    /*
+       Reset login form.
+    */
+
+    el("loginEmail")
+        .value = "";
+
+    el("loginPassword")
+        .value = "";
+
+
+    /*
+       Clear messages.
+    */
+
+    el("loginMsg")
+        .innerHTML = "";
+
+    el("registerMsg")
+        .innerHTML = "";
+
+
+    /*
+       Always show Login instead of
+       Create Account.
+    */
+
+    el("registerBox")
+        .classList
+        .add("hidden");
+
+    el("loginBox")
+        .classList
+        .remove("hidden");
+
+
+    /*
+       Restore logout button.
+    */
+
+    if (logoutButton) {
+
+        logoutButton.disabled = false;
+
+        logoutButton.innerHTML =
+            "🚪 Logout";
+
+    }
+
+
+    console.log(
+        "========================================"
+    );
+
+    console.log(
+        "✅ LOCAL CUSTOMER SESSION CLEARED"
+    );
+
+    console.log(
+        "========================================"
+
+    );
+
 }
-    
+
+
 /* =====================================================
    NAVIGATION
 ===================================================== */
@@ -1953,9 +2411,17 @@ document
                 });
 
 
-            el(page)
-                .classList
-                .add("active");
+            const selectedPage =
+                el(page);
+
+
+            if (selectedPage) {
+
+                selectedPage
+                    .classList
+                    .add("active");
+
+            }
 
 
             document
@@ -2912,7 +3378,7 @@ function formatDate(value) {
 
 
 /* =====================================================
-   BUTTONS
+   BUTTON EVENTS
 ===================================================== */
 
 el("loginBtn")
@@ -2928,6 +3394,11 @@ el("registerBtn")
         register
     );
 
+
+/*
+   IMPORTANT:
+   Logout has ONE event listener only.
+*/
 
 el("logoutBtn")
     .addEventListener(
@@ -2981,10 +3452,21 @@ if (
 ===================================================== */
 
 console.log(
-    "JAY C O B CUSTOMER DASHBOARD V4.1 - RAILWAY + SUPABASE"
+    "JAY C O B CUSTOMER DASHBOARD V4.2 - RAILWAY + SUPABASE"
 );
 
-</script><div
+console.log(
+    "✅ CUSTOMER LOGOUT SYSTEM UPDATED"
+);
+
+</script>
+
+
+<!-- =====================================================
+     VERSION DISPLAY
+===================================================== -->
+
+<div
     style="
         position:fixed;
         bottom:0;
@@ -2996,6 +3478,10 @@ console.log(
         font-size:10px;
     "
 >
-    Customer Dashboard V4.1
-</div></body>
+    Customer Dashboard V4.2
+</div>
+
+
+</body>
+
 </html>
