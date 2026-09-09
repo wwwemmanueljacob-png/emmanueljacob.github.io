@@ -1981,33 +1981,158 @@
 
     </section>
 
+<!-- ================= SECURITY ================= -->
+<section
+  id="securitySection"
+  class="section dashboard-section"
+  style="display:none;">
 
-    <!-- ================= SECURITY ================= -->
+  <div class="section-header">
+    <h2>🔐 Security</h2>
+    <p>
+      Monitor login activity, security events and active customer sessions.
+    </p>
+  </div>
 
-    <section
-      id="securitySection"
-      class="section dashboard-section"
-      style="display:none;">
+  <!-- SECURITY STATISTICS -->
+  <div class="stats-grid">
 
-      <div class="section-header">
-
-        <h2>
-          🔐 Security
-        </h2>
-
+    <div class="stat-card">
+      <div class="stat-title">
+        Failed Logins
       </div>
 
-      <div class="section-body">
+      <div
+        class="stat-value"
+        id="securityFailedLogins">
+        0
+      </div>
+    </div>
 
-        <div class="empty">
-
-          Login activity and security events will be connected next.
-
-        </div>
-
+    <div class="stat-card">
+      <div class="stat-title">
+        Security Events
       </div>
 
-    </section>
+      <div
+        class="stat-value"
+        id="securityEventsCount">
+        0
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-title">
+        Active Customer Sessions
+      </div>
+
+      <div
+        class="stat-value"
+        id="securityActiveSessions">
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- LOGIN ACTIVITY -->
+  <div class="card">
+
+    <h3>🕵️ Login Activity</h3>
+
+    <div
+      id="loginActivityContainer"
+      class="table-container">
+
+      <div class="empty">
+        Loading login activity...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SECURITY EVENTS -->
+  <div class="card">
+
+    <h3>🚨 Security Events</h3>
+
+    <div
+      id="securityEventsContainer"
+      class="table-container">
+
+      <div class="empty">
+        Loading security events...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ACTIVE CUSTOMER SESSIONS -->
+  <div class="card">
+
+    <h3>📱 Active Customer Sessions</h3>
+
+    <div
+      id="activeSessionsContainer"
+      class="table-container">
+
+      <div class="empty">
+        Loading active customer sessions...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SECURITY STATUS -->
+  <div class="card">
+
+    <h3>🛡️ Security Status</h3>
+
+    <div class="profile-row">
+      <span>
+        Login Protection
+      </span>
+
+      <strong
+        id="loginProtectionStatus">
+        Checking...
+      </strong>
+    </div>
+
+    <div class="profile-row">
+      <span>
+        Session Monitoring
+      </span>
+
+      <strong
+        id="sessionMonitoringStatus">
+        Checking...
+      </strong>
+    </div>
+
+    <div class="profile-row">
+      <span>
+        Security Monitoring
+      </span>
+
+      <strong
+        id="securityMonitoringStatus">
+        Checking...
+      </strong>
+    </div>
+
+  </div>
+
+</section>
+ 
+ 
 
   </main>
 
@@ -5414,14 +5539,802 @@
       loadSupportTickets();
 
     }
-
-
+    
+    if (
+  section ===
+  "security"
+) {
+  loadAdminSecurity();
+}
+    
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
 
   }
+
+  /* =====================================================
+   ADMIN SECURITY SYSTEM
+===================================================== */
+
+async function loadAdminSecurity() {
+
+  const failedLoginsElement =
+    document.getElementById(
+      "securityFailedLogins"
+    );
+
+  const securityEventsElement =
+    document.getElementById(
+      "securityEventsCount"
+    );
+
+  const activeSessionsElement =
+    document.getElementById(
+      "securityActiveSessions"
+    );
+
+  const loginActivityContainer =
+    document.getElementById(
+      "loginActivityContainer"
+    );
+
+  const securityEventsContainer =
+    document.getElementById(
+      "securityEventsContainer"
+    );
+
+  const activeSessionsContainer =
+    document.getElementById(
+      "activeSessionsContainer"
+    );
+
+  const loginProtectionStatus =
+    document.getElementById(
+      "loginProtectionStatus"
+    );
+
+  const sessionMonitoringStatus =
+    document.getElementById(
+      "sessionMonitoringStatus"
+    );
+
+  const securityMonitoringStatus =
+    document.getElementById(
+      "securityMonitoringStatus"
+    );
+
+
+  if (loginActivityContainer) {
+    loginActivityContainer.innerHTML =
+      `<div class="empty">
+        Loading login activity...
+      </div>`;
+  }
+
+  if (securityEventsContainer) {
+    securityEventsContainer.innerHTML =
+      `<div class="empty">
+        Loading security events...
+      </div>`;
+  }
+
+  if (activeSessionsContainer) {
+    activeSessionsContainer.innerHTML =
+      `<div class="empty">
+        Loading active customer sessions...
+      </div>`;
+  }
+
+
+  try {
+
+    /* =================================================
+       SECURITY OVERVIEW
+    ================================================= */
+
+    const overviewResponse =
+      await adminApiRequest(
+        "/admin/security/overview"
+      );
+
+    if (
+      overviewResponse &&
+      overviewResponse.success
+    ) {
+
+      const statistics =
+        overviewResponse.statistics || {};
+
+      if (failedLoginsElement) {
+        failedLoginsElement.textContent =
+          statistics.failedLogins || 0;
+      }
+
+      if (securityEventsElement) {
+        securityEventsElement.textContent =
+          statistics.securityEvents || 0;
+      }
+
+      if (activeSessionsElement) {
+        activeSessionsElement.textContent =
+          statistics.activeSessions || 0;
+      }
+
+    }
+
+
+    /* =================================================
+       LOGIN ATTEMPTS
+    ================================================= */
+
+    const loginResponse =
+      await adminApiRequest(
+        "/admin/security/login-attempts"
+      );
+
+    const loginAttempts =
+      Array.isArray(
+        loginResponse?.loginAttempts
+      )
+        ? loginResponse.loginAttempts
+        : Array.isArray(
+            loginResponse?.attempts
+          )
+          ? loginResponse.attempts
+          : [];
+
+
+    if (!loginAttempts.length) {
+
+      if (loginActivityContainer) {
+
+        loginActivityContainer.innerHTML =
+          `<div class="empty">
+            No login activity found.
+          </div>`;
+
+      }
+
+    } else {
+
+      if (loginActivityContainer) {
+
+        loginActivityContainer.innerHTML = `
+
+          <div style="overflow-x:auto;">
+
+            <table
+              style="
+                width:100%;
+                border-collapse:collapse;
+                min-width:700px;
+              ">
+
+              <thead>
+
+                <tr>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Date
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Customer
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Email
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    IP Address
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Status
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                ${loginAttempts
+                  .map(attempt => {
+
+                    const status =
+                      String(
+                        attempt.status ||
+                        (
+                          attempt.success === true
+                            ? "success"
+                            : "failed"
+                        )
+                      ).toLowerCase();
+
+                    const statusClass =
+                      status === "success" ||
+                      status === "successful"
+                        ? "status-active"
+                        : "status-blocked";
+
+                    return `
+
+                      <tr>
+
+                        <td style="padding:12px;">
+                          ${
+                            attempt.created_at
+                              ? formatDateTime(
+                                  attempt.created_at
+                                )
+                              : "—"
+                          }
+                        </td>
+
+                        <td style="padding:12px;">
+                          ${
+                            escapeHTML(
+                              attempt.customer_name ||
+                              attempt.name ||
+                              attempt.user_name ||
+                              "—"
+                            )
+                          }
+                        </td>
+
+                        <td style="padding:12px;">
+                          ${
+                            escapeHTML(
+                              attempt.email ||
+                              "—"
+                            )
+                          }
+                        </td>
+
+                        <td style="padding:12px;">
+                          ${
+                            escapeHTML(
+                              attempt.ip_address ||
+                              attempt.ip ||
+                              "—"
+                            )
+                          }
+                        </td>
+
+                        <td
+                          class="${statusClass}"
+                          style="
+                            padding:12px;
+                            font-weight:bold;
+                            text-transform:capitalize;
+                          ">
+
+                          ${
+                            escapeHTML(status)
+                          }
+
+                        </td>
+
+                      </tr>
+
+                    `;
+
+                  })
+                  .join("")}
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =================================================
+       SECURITY EVENTS
+    ================================================= */
+
+    const eventsResponse =
+      await adminApiRequest(
+        "/admin/security/events"
+      );
+
+    const securityEvents =
+      Array.isArray(
+        eventsResponse?.securityEvents
+      )
+        ? eventsResponse.securityEvents
+        : Array.isArray(
+            eventsResponse?.events
+          )
+          ? eventsResponse.events
+          : [];
+
+
+    if (!securityEvents.length) {
+
+      if (securityEventsContainer) {
+
+        securityEventsContainer.innerHTML =
+          `<div class="empty">
+            No security events found.
+          </div>`;
+
+      }
+
+    } else {
+
+      if (securityEventsContainer) {
+
+        securityEventsContainer.innerHTML = `
+
+          <div style="overflow-x:auto;">
+
+            <table
+              style="
+                width:100%;
+                border-collapse:collapse;
+                min-width:750px;
+              ">
+
+              <thead>
+
+                <tr>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Date
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Event
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Description
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Severity
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    IP Address
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                ${securityEvents
+                  .map(event => {
+
+                    const severity =
+                      String(
+                        event.severity ||
+                        event.level ||
+                        "info"
+                      ).toLowerCase();
+
+                    const severityClass =
+                      severity === "critical" ||
+                      severity === "high"
+                        ? "status-blocked"
+                        : severity === "medium"
+                          ? "status-pending"
+                          : "status-active";
+
+                    return `
+
+                      <tr>
+
+                        <td style="padding:12px;">
+                          ${
+                            event.created_at
+                              ? formatDateTime(
+                                  event.created_at
+                                )
+                              : "—"
+                          }
+                        </td>
+
+                        <td
+                          style="
+                            padding:12px;
+                            font-weight:bold;
+                          ">
+
+                          ${
+                            escapeHTML(
+                              event.event_type ||
+                              event.event ||
+                              event.action ||
+                              "Security Event"
+                            )
+                          }
+
+                        </td>
+
+                        <td style="padding:12px;">
+
+                          ${
+                            escapeHTML(
+                              event.description ||
+                              event.message ||
+                              "—"
+                            )
+                          }
+
+                        </td>
+
+                        <td
+                          class="${severityClass}"
+                          style="
+                            padding:12px;
+                            font-weight:bold;
+                            text-transform:capitalize;
+                          ">
+
+                          ${
+                            escapeHTML(
+                              severity
+                            )
+                          }
+
+                        </td>
+
+                        <td style="padding:12px;">
+
+                          ${
+                            escapeHTML(
+                              event.ip_address ||
+                              event.ip ||
+                              "—"
+                            )
+                          }
+
+                        </td>
+
+                      </tr>
+
+                    `;
+
+                  })
+                  .join("")}
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =================================================
+       ACTIVE CUSTOMER SESSIONS
+    ================================================= */
+
+    const sessionsResponse =
+      await adminApiRequest(
+        "/admin/security/active-sessions"
+      );
+
+    const activeSessions =
+      Array.isArray(
+        sessionsResponse?.activeSessions
+      )
+        ? sessionsResponse.activeSessions
+        : Array.isArray(
+            sessionsResponse?.sessions
+          )
+          ? sessionsResponse.sessions
+          : [];
+
+
+    if (!activeSessions.length) {
+
+      if (activeSessionsContainer) {
+
+        activeSessionsContainer.innerHTML =
+          `<div class="empty">
+            No active customer sessions found.
+          </div>`;
+
+      }
+
+    } else {
+
+      if (activeSessionsContainer) {
+
+        activeSessionsContainer.innerHTML = `
+
+          <div style="overflow-x:auto;">
+
+            <table
+              style="
+                width:100%;
+                border-collapse:collapse;
+                min-width:750px;
+              ">
+
+              <thead>
+
+                <tr>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Customer
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Session Started
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Last Activity
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    IP Address
+                  </th>
+
+                  <th
+                    style="
+                      padding:12px;
+                      text-align:left;
+                    ">
+                    Status
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                ${activeSessions
+                  .map(session => {
+
+                    return `
+
+                      <tr>
+
+                        <td style="padding:12px;">
+
+                          ${
+                            escapeHTML(
+                              session.customer_name ||
+                              session.name ||
+                              session.email ||
+                              session.customer_id ||
+                              "Customer"
+                            )
+                          }
+
+                        </td>
+
+                        <td style="padding:12px;">
+
+                          ${
+                            session.created_at
+                              ? formatDateTime(
+                                  session.created_at
+                                )
+                              : "—"
+                          }
+
+                        </td>
+
+                        <td style="padding:12px;">
+
+                          ${
+                            session.last_activity_at
+                              ? formatDateTime(
+                                  session.last_activity_at
+                                )
+                              : session.updated_at
+                                ? formatDateTime(
+                                    session.updated_at
+                                  )
+                                : "—"
+                          }
+
+                        </td>
+
+                        <td style="padding:12px;">
+
+                          ${
+                            escapeHTML(
+                              session.ip_address ||
+                              session.ip ||
+                              "—"
+                            )
+                          }
+
+                        </td>
+
+                        <td
+                          class="status-active"
+                          style="
+                            padding:12px;
+                            font-weight:bold;
+                          ">
+
+                          ACTIVE
+
+                        </td>
+
+                      </tr>
+
+                    `;
+
+                  })
+                  .join("")}
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =================================================
+       SECURITY STATUS
+    ================================================= */
+
+    if (loginProtectionStatus) {
+
+      loginProtectionStatus.textContent =
+        "ACTIVE";
+
+      loginProtectionStatus.className =
+        "status-active";
+
+    }
+
+    if (sessionMonitoringStatus) {
+
+      sessionMonitoringStatus.textContent =
+        "ACTIVE";
+
+      sessionMonitoringStatus.className =
+        "status-active";
+
+    }
+
+    if (securityMonitoringStatus) {
+
+      securityMonitoringStatus.textContent =
+        "ACTIVE";
+
+      securityMonitoringStatus.className =
+        "status-active";
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "ADMIN SECURITY ERROR:",
+      error
+    );
+
+
+    if (loginActivityContainer) {
+
+      loginActivityContainer.innerHTML =
+        `<div class="empty">
+          Unable to load login activity.
+          <br>
+          <small>
+            ${escapeHTML(
+              error.message ||
+              "Please try again."
+            )}
+          </small>
+        </div>`;
+
+    }
+
+
+    if (securityEventsContainer) {
+
+      securityEventsContainer.innerHTML =
+        `<div class="empty">
+          Unable to load security events.
+        </div>`;
+
+    }
+
+
+    if (activeSessionsContainer) {
+
+      activeSessionsContainer.innerHTML =
+        `<div class="empty">
+          Unable to load active customer sessions.
+        </div>`;
+
+    }
+
+  }
+
+}
 
 
   /* =====================================================
