@@ -841,13 +841,6 @@ td {
 
                     <div id="loanMsg"></div>
 
-
-                    <!-- NO FORM TAG.
-                         NO REQUIRED ATTRIBUTES.
-                         NO HTML FORM VALIDATION.
-                    -->
-
-
                     <div class="loan-field">
 
                         <label for="v4LoanType">
@@ -956,10 +949,6 @@ td {
                     </div>
 
 
-                    <!-- ======================================
-                         LIVE VALUES
-                    ======================================= -->
-
                     <div class="readout">
 
                         <h4>Application Check</h4>
@@ -1007,13 +996,6 @@ td {
                     </div>
 
 
-                    <!-- ======================================
-                         SUBMIT BUTTON
-
-                         TYPE BUTTON IS INTENTIONAL.
-                         IT DOES NOT SUBMIT A FORM.
-                    ======================================= -->
-
                     <button
                         id="v4SubmitLoan"
                         type="button"
@@ -1022,10 +1004,6 @@ td {
                         Submit Loan Application
                     </button>
 
-
-                    <!-- ======================================
-                         RAILWAY DEBUG
-                    ======================================= -->
 
                     <div
                         id="railwayBox"
@@ -1223,7 +1201,7 @@ td {
 
 /* =====================================================
    JAY C O B CUSTOMER DASHBOARD V4
-   COMPLETELY NEW LOAN VALIDATION SYSTEM
+   AUTHENTICATION + SESSION FIX
 ===================================================== */
 
 
@@ -1233,6 +1211,9 @@ td {
 
 const API =
 "https://emmanueljacobgithubio-production.up.railway.app/api";
+
+const RAILWAY_BASE =
+"https://emmanueljacobgithubio-production.up.railway.app";
 
 
 /* =====================================================
@@ -1371,6 +1352,13 @@ async function api(
         response.status === 403
     ) {
 
+        /*
+           Do not call backend logout here.
+
+           The server has already rejected the session.
+           Just clear the local session.
+        */
+
         logout(false);
 
         throw new Error(
@@ -1439,6 +1427,7 @@ el("showLogin")
 
 /* =====================================================
    LOGIN
+   REAL RAILWAY CUSTOMER LOGIN
 ===================================================== */
 
 async function login() {
@@ -1488,13 +1477,34 @@ async function login() {
         "Logging in...";
 
 
+    message(
+        "loginMsg",
+        "Connecting to JAY C O B Financial Services...",
+        "info"
+    );
+
+
     try {
+
+        /*
+           IMPORTANT:
+
+           Railway customerAuth.js uses:
+
+           POST /customers/login
+
+           and returns:
+
+           session_token
+           customer
+        */
 
         const data =
             await api(
-                "/auth/login",
+                "/customers/login",
                 {
                     method:"POST",
+
                     body:JSON.stringify({
                         email,
                         password
@@ -1503,8 +1513,18 @@ async function login() {
             );
 
 
+        if (!data.session_token) {
+
+            throw new Error(
+                "Login succeeded but Railway did not return a session token."
+            );
+
+        }
+
+
         token =
-            data.token;
+            data.session_token;
+
 
         customer =
             data.customer;
@@ -1519,6 +1539,13 @@ async function login() {
         localStorage.setItem(
             CUSTOMER_KEY,
             JSON.stringify(customer)
+        );
+
+
+        message(
+            "loginMsg",
+            "Login successful.",
+            "success"
         );
 
 
@@ -1629,13 +1656,28 @@ async function register() {
         .disabled = true;
 
 
+    el("registerBtn")
+        .textContent =
+        "Creating Account...";
+
+
     try {
+
+        /*
+           NOTE:
+
+           This keeps the existing registration endpoint
+           from your original dashboard.
+
+           We have not invented a new registration backend.
+        */
 
         const data =
             await api(
                 "/auth/register",
                 {
                     method:"POST",
+
                     body:JSON.stringify({
                         full_name,
                         email,
@@ -1647,16 +1689,23 @@ async function register() {
 
 
         token =
-            data.token;
+            data.token ||
+            data.session_token ||
+            "";
+
 
         customer =
             data.customer;
 
 
-        localStorage.setItem(
-            TOKEN_KEY,
-            token
-        );
+        if (token) {
+
+            localStorage.setItem(
+                TOKEN_KEY,
+                token
+            );
+
+        }
 
 
         localStorage.setItem(
@@ -1680,6 +1729,10 @@ async function register() {
 
         el("registerBtn")
             .disabled = false;
+
+        el("registerBtn")
+            .textContent =
+            "Create Account";
 
     }
 
@@ -1710,6 +1763,132 @@ function openApp() {
     loadPayments();
 
     loadSupport();
+
+}
+
+
+/* =====================================================
+   VERIFY SAVED SESSION
+===================================================== */
+
+async function verifySavedSession() {
+
+    if (!token) {
+
+        return false;
+
+    }
+
+
+    try {
+
+        const result =
+            await api(
+                "/auth/profile"
+            );
+
+
+        if (
+            !result ||
+            !result.success ||
+            !result.customer
+        ) {
+
+            throw new Error(
+                "Invalid session."
+            );
+
+        }
+
+
+        customer =
+            result.customer;
+
+
+        localStorage.setItem(
+            CUSTOMER_KEY,
+            JSON.stringify(customer)
+        );
+
+
+        return true;
+
+
+    } catch(error) {
+
+        console.warn(
+            "Saved customer session is invalid:",
+            error.message
+        );
+
+
+        token = "";
+
+        customer = null;
+
+        applications = [];
+
+        payments = [];
+
+
+        localStorage.removeItem(
+            TOKEN_KEY
+        );
+
+        localStorage.removeItem(
+            CUSTOMER_KEY
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =====================================================
+   START SAVED SESSION
+===================================================== */
+
+async function startSavedSession() {
+
+    if (
+        !token ||
+        !customer
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       Check the real Railway session first.
+    */
+
+    const valid =
+        await verifySavedSession();
+
+
+    if (valid) {
+
+        openApp();
+
+    } else {
+
+        el("app")
+            .classList
+            .add("hidden");
+
+        el("authScreen")
+            .classList
+            .remove("hidden");
+
+        el("loginMsg")
+            .innerHTML = "";
+
+    }
 
 }
 
@@ -1751,35 +1930,106 @@ function updateProfile() {
 
     el("profileStatus")
         .textContent =
-        customer.status || "-";
+        customer.status ||
+        customer.account_status ||
+        "-";
 
 }
 
 
 /* =====================================================
    LOGOUT
+   REAL RAILWAY CUSTOMER LOGOUT
 ===================================================== */
 
 async function logout(sendRequest=true) {
 
+    const oldToken =
+        token;
+
+
+    /*
+       If this is a real user logout,
+       tell Railway to deactivate the session.
+    */
+
     if (
         sendRequest &&
-        token
+        oldToken
     ) {
 
         try {
 
-            await api(
-                "/auth/logout",
-                {
-                    method:"POST"
-                }
+            const response =
+                await fetch(
+                    API + "/auth/logout",
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                oldToken
+                        }
+                    }
+                );
+
+
+            let result = null;
+
+
+            try {
+
+                result =
+                    await response.json();
+
+            } catch {}
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result?.message ||
+                    "Railway logout request failed."
+                );
+
+            }
+
+
+            console.log(
+                "Customer logout successful:",
+                result
             );
 
-        } catch {}
+
+        } catch(error) {
+
+            console.error(
+                "Customer backend logout failed:",
+                error
+            );
+
+
+            message(
+                "loginMsg",
+                "Logout failed on the server. Please try again.",
+                "error"
+            );
+
+
+            return;
+
+        }
 
     }
 
+
+    /*
+       Clear local session.
+    */
 
     token = "";
 
@@ -1806,6 +2056,32 @@ async function logout(sendRequest=true) {
     el("authScreen")
         .classList
         .remove("hidden");
+
+
+    el("loginEmail")
+        .value = "";
+
+    el("loginPassword")
+        .value = "";
+
+
+    el("loginMsg")
+        .innerHTML = "";
+
+
+    el("registerBox")
+        .classList
+        .add("hidden");
+
+
+    el("loginBox")
+        .classList
+        .remove("hidden");
+
+
+    console.log(
+        "Customer local session cleared."
+    );
 
 }
 
@@ -1890,9 +2166,22 @@ async function checkServer() {
 
     try {
 
+        /*
+           The backend root is:
+
+           https://emmanueljacobgithubio-production.up.railway.app
+
+           There is no /api/health route.
+
+           Therefore check the actual Railway root.
+        */
+
         const response =
             await fetch(
-                API + "/health"
+                RAILWAY_BASE,
+                {
+                    method:"GET"
+                }
             );
 
 
@@ -1922,24 +2211,8 @@ async function checkServer() {
 
 
 /* =====================================================
-   =====================================================
-   NEW LOAN VALIDATION
-   =====================================================
+   LOAN VALIDATION
 ===================================================== */
-
-
-/*
-   IMPORTANT:
-
-   This is NOT a form.
-
-   There is NO form.submit().
-   There is NO required attribute.
-   There is NO browser validation.
-
-   Everything is read manually.
-*/
-
 
 function getLoanValues() {
 
@@ -1952,10 +2225,6 @@ function getLoanValues() {
     const durationElement =
         el("v4LoanDuration");
 
-
-    /*
-       Read loan type.
-    */
 
     let loan_type =
         "";
@@ -1970,10 +2239,6 @@ function getLoanValues() {
 
     }
 
-
-    /*
-       Read amount.
-    */
 
     let amountText =
         amountElement
@@ -1993,10 +2258,6 @@ function getLoanValues() {
     const amount =
         Number(amountText);
 
-
-    /*
-       Read duration.
-    */
 
     let durationText =
         durationElement
@@ -2116,24 +2377,12 @@ el("v4LoanDuration")
 
 async function submitLoan() {
 
-    /*
-       READ VALUES AGAIN DIRECTLY.
-    */
-
     const data =
         getLoanValues();
 
 
-    /*
-       UPDATE SCREEN.
-    */
-
     refreshLoanDisplay();
 
-
-    /*
-       MANUAL VALIDATION.
-    */
 
     if (!data.loan_type) {
 
@@ -2189,10 +2438,6 @@ async function submitLoan() {
     }
 
 
-    /*
-       EXACT PAYLOAD REQUIRED BY RAILWAY.
-    */
-
     const payload = {
 
         loan_type:
@@ -2206,10 +2451,6 @@ async function submitLoan() {
 
     };
 
-
-    /*
-       SHOW PAYLOAD.
-    */
 
     el("railwayBox")
         .classList
@@ -2248,15 +2489,12 @@ async function submitLoan() {
 
     try {
 
-        /*
-           SEND REQUEST.
-        */
-
         const result =
             await api(
                 "/loans/apply",
                 {
                     method:"POST",
+
                     body:
                         JSON.stringify(
                             payload
@@ -2264,10 +2502,6 @@ async function submitLoan() {
                 }
             );
 
-
-        /*
-           SHOW COMPLETE RAILWAY RESPONSE.
-        */
 
         el("railwayOutput")
             .textContent +=
@@ -2287,10 +2521,6 @@ async function submitLoan() {
         );
 
 
-        /*
-           CLEAR FORM.
-        */
-
         el("v4LoanType")
             .value = "";
 
@@ -2304,18 +2534,10 @@ async function submitLoan() {
         refreshLoanDisplay();
 
 
-        /*
-           Reload applications.
-        */
-
         await loadApplications();
 
 
     } catch(error) {
-
-        /*
-           SHOW EXACT ERROR.
-        */
 
         el("railwayOutput")
             .textContent +=
@@ -2715,6 +2937,7 @@ async function sendSupport() {
                 "/support/send",
                 {
                     method:"POST",
+
                     body:JSON.stringify({
                         subject,
                         message:msg
@@ -2917,14 +3140,7 @@ refreshLoanDisplay();
    START SESSION
 ===================================================== */
 
-if (
-    token &&
-    customer
-) {
-
-    openApp();
-
-}
+startSavedSession();
 
 
 /* =====================================================
@@ -2932,7 +3148,7 @@ if (
 ===================================================== */
 
 console.log(
-    "JAY C O B CUSTOMER DASHBOARD V4.0"
+    "JAY C O B CUSTOMER DASHBOARD V4.1 - AUTH SESSION FIXED"
 );
 
 </script>
@@ -2950,7 +3166,7 @@ console.log(
         font-size:10px;
     "
 >
-    Customer Dashboard V4.0
+    Customer Dashboard V4.1
 </div>
 
 </body>
