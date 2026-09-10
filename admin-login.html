@@ -8117,12 +8117,16 @@ setTimeout(
             recoveryModal.classList.remove("show");
         }
 
-        const loginScreen =
-            document.getElementById("loginScreen");
+      const loginScreen =
+    document.getElementById("loginScreen");
 
-        if(loginScreen){
-            loginScreen.style.display = "flex";
-        }
+    if(loginScreen){
+
+    loginScreen.classList.remove("hidden");
+
+    loginScreen.style.display = "flex";
+
+       }
 
         const recoveryOtp =
             document.getElementById("recoveryOtp");
