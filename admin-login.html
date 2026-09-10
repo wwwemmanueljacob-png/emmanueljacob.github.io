@@ -5071,6 +5071,56 @@ async function changeApplicationStatus(
         decodeURIComponent(encodedId);
 
 
+    /* =====================================
+       REJECTION REASON
+    ===================================== */
+
+    let rejectionReason = "";
+
+
+    if(
+        status === "REJECTED"
+    ){
+
+        rejectionReason =
+            prompt(
+                "Please enter the reason for rejecting this loan application:"
+            );
+
+
+        if(
+            rejectionReason === null
+        ){
+
+            return;
+
+        }
+
+
+        rejectionReason =
+            rejectionReason.trim();
+
+
+        if(
+            !rejectionReason
+        ){
+
+            showToast(
+                "Rejection reason is required.",
+                "error"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* =====================================
+       CONFIRM ACTION
+    ===================================== */
+
     if(
         !confirm(
             `Are you sure you want to mark this application as ${status}?`
@@ -5088,8 +5138,14 @@ async function changeApplicationStatus(
             `/admin/applications/${encodeURIComponent(id)}/status`,
             {
                 method:"PUT",
+
                 body:JSON.stringify({
-                    status
+
+                    status,
+
+                    rejection_reason:
+                        rejectionReason
+
                 })
             }
         );
@@ -5101,6 +5157,7 @@ async function changeApplicationStatus(
 
 
         closeModal();
+
 
         await Promise.allSettled([
 
@@ -5116,7 +5173,8 @@ async function changeApplicationStatus(
     }catch(error){
 
         showToast(
-            error.message,
+            error.message ||
+            "Unable to update loan application status.",
             "error"
         );
 
