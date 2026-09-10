@@ -3445,10 +3445,11 @@ textarea:focus{
             </h3>
 
             <button
-                class="modal-close"
-                onclick="closeModal()"
-            >
-                ×
+    type="button"
+    class="modal-close"
+    onclick="document.getElementById('recoveryModal').classList.remove('show')"
+>
+    ×
             </button>
 
         </div>
