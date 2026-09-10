@@ -5924,6 +5924,169 @@ const moduleConfig = {
 
 };
 
+/* =========================================================
+   SAVE SUPPORT TICKET
+========================================================= */
+
+async function saveSupportTicket(
+    encodedId
+){
+
+    const ticketId =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    const statusInput =
+        document.getElementById(
+            "supportAdminStatus"
+        );
+
+
+    const priorityInput =
+        document.getElementById(
+            "supportAdminPriority"
+        );
+
+
+    const responseInput =
+        document.getElementById(
+            "supportAdminResponse"
+        );
+
+
+    const assignedInput =
+        document.getElementById(
+            "supportAssignedTo"
+        );
+
+
+    const button =
+        document.getElementById(
+            "saveSupportTicketBtn"
+        );
+
+
+    const status =
+        statusInput
+            ? statusInput.value
+            : "open";
+
+
+    const priority =
+        priorityInput
+            ? priorityInput.value
+            : "medium";
+
+
+    const adminResponse =
+        responseInput
+            ? responseInput.value.trim()
+            : "";
+
+
+    const assignedTo =
+        assignedInput
+            ? assignedInput.value.trim()
+            : "";
+
+
+    if(button){
+
+        button.disabled = true;
+
+        button.textContent =
+            "Saving...";
+
+    }
+
+
+    try{
+
+        const response =
+            await apiRequest(
+                `/admin/support-tickets/${encodeURIComponent(ticketId)}`,
+                {
+                    method:"PUT",
+
+                    body:
+                        JSON.stringify({
+
+                            status:
+                                status,
+
+                            priority:
+                                priority,
+
+                            admin_response:
+                                adminResponse,
+
+                            assigned_to:
+                                assignedTo
+
+                        })
+
+                }
+            );
+
+
+        if(
+            !response ||
+            !response.success
+        ){
+
+            throw new Error(
+                response?.message ||
+                "Unable to update support ticket."
+            );
+
+        }
+
+
+        showToast(
+            "Support ticket updated successfully."
+        );
+
+
+        closeModal();
+
+
+        await loadModule(
+            "support"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "SAVE SUPPORT TICKET ERROR:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to update support ticket.",
+            "error"
+        );
+
+
+    }finally{
+
+        if(button){
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "💾 Save Changes";
+
+        }
+
+    }
+
+}
 
 /* =========================================================
    GENERIC MODULE LOADER
