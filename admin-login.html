@@ -3486,10 +3486,14 @@ textarea:focus{
         <div class="modal-body">
 
             <p style="font-size:12px;color:#6d7b8d;margin-bottom:15px;">
-                Enter the administrator email address. The actual OTP
-                and password reset process will be connected to the
-                secure Railway backend.
+                Enter your administrator email address to begin
+                secure account recovery.
             </p>
+
+
+            <!-- =========================================
+                 ADMIN EMAIL
+            ========================================== -->
 
             <div class="form-group">
 
@@ -3503,14 +3507,123 @@ textarea:focus{
 
             </div>
 
+
+            <!-- =========================================
+                 SEND OTP
+            ========================================== -->
+
             <button
                 class="primary-btn"
+                id="sendRecoveryOtpBtn"
                 onclick="requestRecovery()"
             >
                 Send Recovery OTP
             </button>
 
-            <div id="recoveryMessage" class="login-message"></div>
+
+            <!-- =========================================
+                 OTP
+            ========================================== -->
+
+            <div
+                class="form-group"
+                id="recoveryOtpGroup"
+                style="display:none;margin-top:15px;"
+            >
+
+                <label>Recovery OTP</label>
+
+                <input
+                    id="recoveryOtp"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="6"
+                    placeholder="Enter 6-digit OTP"
+                >
+
+            </div>
+
+
+            <!-- =========================================
+                 VERIFY OTP
+            ========================================== -->
+
+            <button
+                class="primary-btn"
+                id="verifyRecoveryOtpBtn"
+                onclick="verifyRecoveryOtp()"
+                style="display:none;margin-top:10px;"
+            >
+                Verify OTP
+            </button>
+
+
+            <!-- =========================================
+                 NEW PASSWORD
+            ========================================== -->
+
+            <div
+                class="form-group"
+                id="newPasswordGroup"
+                style="display:none;margin-top:15px;"
+            >
+
+                <label>New Password</label>
+
+                <input
+                    id="recoveryNewPassword"
+                    type="password"
+                    minlength="8"
+                    placeholder="Enter new password"
+                >
+
+            </div>
+
+
+            <!-- =========================================
+                 CONFIRM PASSWORD
+            ========================================== -->
+
+            <div
+                class="form-group"
+                id="confirmPasswordGroup"
+                style="display:none;margin-top:15px;"
+            >
+
+                <label>Confirm New Password</label>
+
+                <input
+                    id="recoveryConfirmPassword"
+                    type="password"
+                    minlength="8"
+                    placeholder="Confirm new password"
+                >
+
+            </div>
+
+
+            <!-- =========================================
+                 RESET PASSWORD
+            ========================================== -->
+
+            <button
+                class="primary-btn"
+                id="resetPasswordBtn"
+                onclick="resetAdminPassword()"
+                style="display:none;margin-top:10px;"
+            >
+                Reset Administrator Password
+            </button>
+
+
+            <!-- =========================================
+                 RECOVERY MESSAGE
+            ========================================== -->
+
+            <div
+                id="recoveryMessage"
+                class="login-message"
+            ></div>
 
         </div>
 
@@ -7630,55 +7743,6 @@ function viewRecord(
    MODAL
 ========================================================= */
 
-function closeModal(){
-
-    document
-        .getElementById("applicationModal")
-        .classList.remove("show");
-
-}
-
-
-document
-    .getElementById("applicationModal")
-    .addEventListener(
-        "click",
-        function(event){
-
-            if(
-                event.target === this
-            ){
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   RECOVERY
-========================================================= */
-
-function openRecoveryModal(){
-
-    document
-        .getElementById("recoveryModal")
-        .classList.add("show");
-
-}
-
-
-function closeRecoveryModal(){
-
-    document
-        .getElementById("recoveryModal")
-        .classList.remove("show");
-
-}
-
-
 async function requestRecovery(){
 
     const email =
@@ -7687,10 +7751,21 @@ async function requestRecovery(){
         .value
         .trim();
 
-
     const message =
         document
         .getElementById("recoveryMessage");
+
+    const otpGroup =
+        document
+        .getElementById("recoveryOtpGroup");
+
+    const verifyButton =
+        document
+        .getElementById("verifyRecoveryOtpBtn");
+
+    const sendButton =
+        document
+        .getElementById("sendRecoveryOtpBtn");
 
 
     if(!email){
@@ -7708,10 +7783,18 @@ async function requestRecovery(){
 
     try{
 
+        sendButton.disabled =
+            true;
+
+        sendButton.textContent =
+            "Sending OTP...";
+
+
         await apiRequest(
             "/admin/recovery/request",
             {
                 method:"POST",
+
                 body:JSON.stringify({
                     email
                 })
@@ -7720,38 +7803,135 @@ async function requestRecovery(){
 
 
         message.textContent =
-            "Recovery request submitted. Check the server logs for your OTP.";
+            "Recovery OTP generated. Check Railway logs for your OTP.";
 
         message.className =
             "login-message success";
 
 
-        /* =====================================
-           ASK FOR OTP
-        ===================================== */
+        otpGroup.style.display =
+            "block";
 
-        const otp =
-            prompt(
-                "Enter the 6-digit recovery OTP:"
-            );
+        verifyButton.style.display =
+            "block";
 
 
-        if(!otp){
-
-            return;
-
-        }
+        sendButton.textContent =
+            "OTP Sent";
 
 
-        /* =====================================
-           VERIFY OTP
-        ===================================== */
+    }catch(error){
+
+        message.textContent =
+            error.message;
+
+        message.className =
+            "login-message error";
+
+
+        sendButton.disabled =
+            false;
+
+        sendButton.textContent =
+            "Send Recovery OTP";
+
+    }
+
+}
+
+async function verifyRecoveryOtp(){
+
+    const email =
+        document
+        .getElementById("recoveryEmail")
+        .value
+        .trim();
+
+    const otp =
+        document
+        .getElementById("recoveryOtp")
+        .value
+        .trim();
+
+    const message =
+        document
+        .getElementById("recoveryMessage");
+
+    const otpGroup =
+        document
+        .getElementById("recoveryOtpGroup");
+
+    const verifyButton =
+        document
+        .getElementById("verifyRecoveryOtpBtn");
+
+    const newPasswordGroup =
+        document
+        .getElementById("newPasswordGroup");
+
+    const confirmPasswordGroup =
+        document
+        .getElementById("confirmPasswordGroup");
+
+    const resetButton =
+        document
+        .getElementById("resetPasswordBtn");
+
+
+    if(!email){
+
+        message.textContent =
+            "Administrator email is required.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    if(!otp){
+
+        message.textContent =
+            "Enter the 6-digit recovery OTP.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    if(!/^\d{6}$/.test(otp)){
+
+        message.textContent =
+            "OTP must contain exactly 6 digits.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    try{
+
+        verifyButton.disabled =
+            true;
+
+        verifyButton.textContent =
+            "Verifying OTP...";
+
 
         const result =
             await apiRequest(
                 "/admin/recovery/verify",
                 {
                     method:"POST",
+
                     body:JSON.stringify({
                         email,
                         otp
@@ -7768,8 +7948,169 @@ async function requestRecovery(){
             "login-message success";
 
 
-        alert(
-            "OTP verified successfully. The next step will allow you to create a new administrator password."
+        otpGroup.style.display =
+            "none";
+
+        verifyButton.style.display =
+            "none";
+
+
+        newPasswordGroup.style.display =
+            "block";
+
+        confirmPasswordGroup.style.display =
+            "block";
+
+        resetButton.style.display =
+            "block";
+
+
+    }catch(error){
+
+        message.textContent =
+            error.message;
+
+        message.className =
+            "login-message error";
+
+        verifyButton.disabled =
+            false;
+
+        verifyButton.textContent =
+            "Verify OTP";
+
+    }
+
+}
+       
+async function resetAdminPassword(){
+
+    const email =
+        document
+        .getElementById("recoveryEmail")
+        .value
+        .trim();
+
+    const otp =
+        document
+        .getElementById("recoveryOtp")
+        .value
+        .trim();
+
+    const newPassword =
+        document
+        .getElementById("recoveryNewPassword")
+        .value;
+
+    const confirmPassword =
+        document
+        .getElementById("recoveryConfirmPassword")
+        .value;
+
+    const message =
+        document
+        .getElementById("recoveryMessage");
+
+    const resetButton =
+        document
+        .getElementById("resetPasswordBtn");
+
+
+    if(!email){
+
+        message.textContent =
+            "Administrator email is required.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    if(!otp){
+
+        message.textContent =
+            "Recovery OTP is required.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    if(newPassword.length < 8){
+
+        message.textContent =
+            "New password must contain at least 8 characters.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    if(newPassword !== confirmPassword){
+
+        message.textContent =
+            "New passwords do not match.";
+
+        message.className =
+            "login-message error";
+
+        return;
+
+    }
+
+
+    try{
+
+        resetButton.disabled =
+            true;
+
+        resetButton.textContent =
+            "Resetting Password...";
+
+
+        const result =
+            await apiRequest(
+                "/admin/recovery/reset-password",
+                {
+                    method:"POST",
+
+                    body:JSON.stringify({
+                        email,
+                        otp,
+                        newPassword
+                    })
+                }
+            );
+
+
+        message.textContent =
+            result.message ||
+            "Administrator password reset successfully.";
+
+        message.className =
+            "login-message success";
+
+
+        resetButton.textContent =
+            "Password Reset Successfully";
+
+
+        setTimeout(
+            function(){
+
+                closeRecoveryModal();
+
+            },
+            2000
         );
 
 
@@ -7781,10 +8122,16 @@ async function requestRecovery(){
         message.className =
             "login-message error";
 
+        resetButton.disabled =
+            false;
+
+        resetButton.textContent =
+            "Reset Administrator Password";
+
     }
 
 }
-
+      
 /* =========================================================
    ADMIN PROFILE
 ========================================================= */
