@@ -7720,10 +7720,57 @@ async function requestRecovery(){
 
 
         message.textContent =
-            "Recovery request submitted.";
+            "Recovery request submitted. Check the server logs for your OTP.";
 
         message.className =
             "login-message success";
+
+
+        /* =====================================
+           ASK FOR OTP
+        ===================================== */
+
+        const otp =
+            prompt(
+                "Enter the 6-digit recovery OTP:"
+            );
+
+
+        if(!otp){
+
+            return;
+
+        }
+
+
+        /* =====================================
+           VERIFY OTP
+        ===================================== */
+
+        const result =
+            await apiRequest(
+                "/admin/recovery/verify",
+                {
+                    method:"POST",
+                    body:JSON.stringify({
+                        email,
+                        otp
+                    })
+                }
+            );
+
+
+        message.textContent =
+            result.message ||
+            "OTP verified successfully.";
+
+        message.className =
+            "login-message success";
+
+
+        alert(
+            "OTP verified successfully. The next step will allow you to create a new administrator password."
+        );
 
 
     }catch(error){
@@ -7737,7 +7784,6 @@ async function requestRecovery(){
     }
 
 }
-
 
 /* =========================================================
    ADMIN PROFILE
