@@ -8104,15 +8104,49 @@ async function resetAdminPassword(){
             "Password Reset Successfully";
 
 
-        setTimeout(
-            function(){
+setTimeout(
+    function(){
 
-                closeRecoveryModal();
+        closeRecoveryModal();
 
-            },
-            2000
-        );
+        const recoveryModal =
+            document.getElementById("recoveryModal");
 
+        if(recoveryModal){
+            recoveryModal.classList.remove("show");
+        }
+
+        const loginScreen =
+            document.getElementById("loginScreen");
+
+        if(loginScreen){
+            loginScreen.style.display = "flex";
+        }
+
+        const recoveryOtp =
+            document.getElementById("recoveryOtp");
+
+        if(recoveryOtp){
+            recoveryOtp.value = "";
+        }
+
+        const newPassword =
+            document.getElementById("recoveryNewPassword");
+
+        if(newPassword){
+            newPassword.value = "";
+        }
+
+        const confirmPassword =
+            document.getElementById("recoveryConfirmPassword");
+
+        if(confirmPassword){
+            confirmPassword.value = "";
+        }
+
+    },
+    2000
+);
 
     }catch(error){
 
