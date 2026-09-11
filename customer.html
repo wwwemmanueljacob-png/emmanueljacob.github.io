@@ -763,7 +763,6 @@ td {
 
         <div class="nav">
 
-
             <button
                 class="nav-btn active"
                 data-page="dashboard"
@@ -818,10 +817,6 @@ td {
             </button>
 
 
-            <!-- =================================================
-                 UPDATED LOGOUT BUTTON
-            ================================================== -->
-
             <button
                 id="logoutBtn"
                 class="nav-btn logout"
@@ -831,7 +826,6 @@ td {
                 🚪 Logout
             </button>
 
-
         </div>
 
     </aside>
@@ -839,9 +833,7 @@ td {
 
     <main class="main">
 
-
         <header class="topbar">
-
 
             <button
                 id="menuBtn"
@@ -867,7 +859,6 @@ td {
             <div id="statusText">
                 Checking...
             </div>
-
 
         </header>
 
@@ -898,7 +889,6 @@ td {
 
 
                 <div class="stats">
-
 
                     <div class="stat">
 
@@ -951,7 +941,6 @@ td {
 
                     </div>
 
-
                 </div>
 
 
@@ -973,7 +962,6 @@ td {
                     </p>
 
                 </div>
-
 
             </section>
 
@@ -1001,7 +989,6 @@ td {
 
 
                 <div class="card loan-box">
-
 
                     <div id="loanMsg"></div>
 
@@ -1184,7 +1171,6 @@ td {
 
                         </div>
 
-
                     </div>
 
 
@@ -1209,7 +1195,6 @@ td {
                         <pre id="railwayOutput"></pre>
 
                     </div>
-
 
                 </div>
 
@@ -1420,7 +1405,6 @@ td {
 
                 <div class="card">
 
-
                     <div class="profile-row">
 
                         <span>
@@ -1485,7 +1469,6 @@ td {
 
                     </div>
 
-
                 </div>
 
             </section>
@@ -1501,7 +1484,7 @@ td {
 <script>
 
 /* =====================================================
-   JAY C O B CUSTOMER DASHBOARD V4.2
+   JAY C O B CUSTOMER DASHBOARD V4.3
    RAILWAY + SUPABASE CUSTOMER AUTHENTICATION
 ===================================================== */
 
@@ -1511,7 +1494,7 @@ td {
 ===================================================== */
 
 const API =
-"https://emmanueljacobgithubio-production.up.railway.app/api";
+    "https://emmanueljacobgithubio-production.up.railway.app/api";
 
 
 /* =====================================================
@@ -1519,10 +1502,10 @@ const API =
 ===================================================== */
 
 const TOKEN_KEY =
-"jaycob_customer_token";
+    "jaycob_customer_token";
 
 const CUSTOMER_KEY =
-"jaycob_customer";
+    "jaycob_customer";
 
 
 /* =====================================================
@@ -1530,12 +1513,9 @@ const CUSTOMER_KEY =
 ===================================================== */
 
 let token =
-localStorage.getItem(TOKEN_KEY) || "";
+    localStorage.getItem(TOKEN_KEY) || "";
 
-let customer =
-JSON.parse(
-    localStorage.getItem(CUSTOMER_KEY) || "null"
-);
+let customer = null;
 
 let applications = [];
 
@@ -1560,11 +1540,11 @@ function el(id) {
 function escapeHTML(value) {
 
     return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
@@ -1573,7 +1553,7 @@ function escapeHTML(value) {
    MESSAGE
 ===================================================== */
 
-function message(id,text,type) {
+function message(id, text, type) {
 
     const box =
         el(id);
@@ -1589,12 +1569,111 @@ function message(id,text,type) {
 
 
 /* =====================================================
+   CLEAR LOCAL SESSION
+===================================================== */
+
+function clearLocalSession() {
+
+    token = "";
+
+    customer = null;
+
+    applications = [];
+
+    payments = [];
+
+
+    localStorage.removeItem(
+        TOKEN_KEY
+    );
+
+    localStorage.removeItem(
+        CUSTOMER_KEY
+    );
+
+
+    try {
+
+        sessionStorage.removeItem(
+            TOKEN_KEY
+        );
+
+        sessionStorage.removeItem(
+            CUSTOMER_KEY
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Session storage cleanup warning:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW LOGIN SCREEN
+===================================================== */
+
+function showLoginScreen() {
+
+    el("app")
+        .classList
+        .add("hidden");
+
+    el("authScreen")
+        .classList
+        .remove("hidden");
+
+
+    el("registerBox")
+        .classList
+        .add("hidden");
+
+    el("loginBox")
+        .classList
+        .remove("hidden");
+
+
+    el("loginEmail")
+        .value = "";
+
+    el("loginPassword")
+        .value = "";
+
+
+    el("loginMsg")
+        .innerHTML = "";
+
+    el("registerMsg")
+        .innerHTML = "";
+
+
+    const logoutButton =
+        el("logoutBtn");
+
+    if (logoutButton) {
+
+        logoutButton.disabled = false;
+
+        logoutButton.innerHTML =
+            "🚪 Logout";
+
+    }
+
+}
+
+
+/* =====================================================
    API REQUEST
 ===================================================== */
 
 async function api(
     endpoint,
-    options={}
+    options = {}
 ) {
 
     const headers = {
@@ -1635,7 +1714,7 @@ async function api(
 
         data = {
 
-            success:false,
+            success: false,
 
             message:
                 "Railway returned an invalid response."
@@ -1650,25 +1729,13 @@ async function api(
         response.status === 403
     ) {
 
-        if (token) {
+        clearLocalSession();
 
-            token = "";
-
-            customer = null;
-
-            localStorage.removeItem(
-                TOKEN_KEY
-            );
-
-            localStorage.removeItem(
-                CUSTOMER_KEY
-            );
-
-        }
+        showLoginScreen();
 
         throw new Error(
             data.message ||
-            "Session expired."
+            "Your customer session has expired."
         );
 
     }
@@ -1792,13 +1859,27 @@ async function login() {
             await api(
                 "/customers/login",
                 {
-                    method:"POST",
-                    body:JSON.stringify({
-                        email,
-                        password
-                    })
+                    method: "POST",
+
+                    body:
+                        JSON.stringify({
+                            email,
+                            password
+                        })
                 }
             );
+
+
+        if (
+            !data.session_token ||
+            !data.customer
+        ) {
+
+            throw new Error(
+                "Login succeeded but no customer session was returned."
+            );
+
+        }
 
 
         token =
@@ -1806,15 +1887,6 @@ async function login() {
 
         customer =
             data.customer;
-
-
-        if (!token || !customer) {
-
-            throw new Error(
-                "Login succeeded but no customer session was returned."
-            );
-
-        }
 
 
         localStorage.setItem(
@@ -1840,7 +1912,7 @@ async function login() {
         openApp();
 
 
-    } catch(error) {
+    } catch (error) {
 
         message(
             "loginMsg",
@@ -1954,13 +2026,15 @@ async function register() {
             await api(
                 "/customers/register",
                 {
-                    method:"POST",
-                    body:JSON.stringify({
-                        full_name,
-                        email,
-                        phone,
-                        password
-                    })
+                    method: "POST",
+
+                    body:
+                        JSON.stringify({
+                            full_name,
+                            email,
+                            phone,
+                            password
+                        })
                 }
             );
 
@@ -1976,13 +2050,27 @@ async function register() {
             await api(
                 "/customers/login",
                 {
-                    method:"POST",
-                    body:JSON.stringify({
-                        email,
-                        password
-                    })
+                    method: "POST",
+
+                    body:
+                        JSON.stringify({
+                            email,
+                            password
+                        })
                 }
             );
+
+
+        if (
+            !loginData.session_token ||
+            !loginData.customer
+        ) {
+
+            throw new Error(
+                "Account created, but automatic login failed."
+            );
+
+        }
 
 
         token =
@@ -1990,15 +2078,6 @@ async function register() {
 
         customer =
             loginData.customer;
-
-
-        if (!token || !customer) {
-
-            throw new Error(
-                "Account created, but automatic login failed."
-            );
-
-        }
 
 
         localStorage.setItem(
@@ -2016,7 +2095,7 @@ async function register() {
         openApp();
 
 
-    } catch(error) {
+    } catch (error) {
 
         message(
             "registerMsg",
@@ -2109,8 +2188,8 @@ function updateProfile() {
 
 
 /* =====================================================
-   UPDATED CUSTOMER LOGOUT
-   RAILWAY + SUPABASE SESSION TERMINATION
+   CUSTOMER LOGOUT
+   REAL RAILWAY + SUPABASE SESSION TERMINATION
 ===================================================== */
 
 async function logout() {
@@ -2128,17 +2207,9 @@ async function logout() {
     );
 
 
-    /*
-       Save the current token before clearing it.
-    */
-
     const oldToken =
         token;
 
-
-    /*
-       Disable button while logout is running.
-    */
 
     const logoutButton =
         el("logoutBtn");
@@ -2155,11 +2226,9 @@ async function logout() {
 
 
     /*
-       Send logout request DIRECTLY to Railway.
-       This intentionally bypasses api() so that
-       a 401 response from the logout endpoint
-       cannot clear the token before the request
-       has completed.
+       If a token exists, Railway MUST confirm
+       the server-side session was deactivated
+       before the local session is cleared.
     */
 
     if (oldToken) {
@@ -2203,184 +2272,119 @@ async function logout() {
             );
 
 
-            /*
-               Backend successfully received
-               and processed the logout.
-            */
+            let result = null;
 
-            if (
-                response.ok
-            ) {
 
-                console.log(
-                    "✅ RAILWAY LOGOUT SUCCESSFUL"
-                );
+            try {
 
-            } else {
+                result =
+                    responseText
+                        ? JSON.parse(responseText)
+                        : null;
 
-                console.warn(
-                    "⚠️ RAILWAY LOGOUT RETURNED STATUS:",
-                    response.status
+            } catch {
+
+                result = null;
+
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result?.message ||
+                    "Railway could not complete customer logout."
                 );
 
             }
 
 
-        } catch(error) {
+            if (
+                result &&
+                result.success === false
+            ) {
+
+                throw new Error(
+                    result.message ||
+                    "Customer logout was rejected by Railway."
+                );
+
+            }
+
+
+            console.log(
+                "✅ RAILWAY CUSTOMER LOGOUT SUCCESSFUL"
+            );
+
 
             /*
-               Even if the network fails,
-               the local browser session will
-               still be destroyed below.
+               Only after Railway confirms success
+               do we clear the local session.
             */
 
+            clearLocalSession();
+
+            showLoginScreen();
+
+
+            console.log(
+                "========================================"
+            );
+
+            console.log(
+                "✅ CUSTOMER SESSION COMPLETELY CLEARED"
+            );
+
+            console.log(
+                "========================================"
+            );
+
+
+            return;
+
+
+        } catch (error) {
+
             console.error(
-                "❌ LOGOUT NETWORK ERROR:",
+                "❌ CUSTOMER LOGOUT FAILED:",
                 error
             );
 
+
+            if (logoutButton) {
+
+                logoutButton.disabled = false;
+
+                logoutButton.innerHTML =
+                    "🚪 Logout";
+
+            }
+
+
+            alert(
+                "Logout could not be completed on the server. Please try again."
+            );
+
+            return;
+
         }
 
-    } else {
-
-        console.warn(
-            "⚠️ No customer token was found."
-        );
-
     }
 
 
     /*
-       Clear application state.
+       No token means there is no active
+       server session to terminate.
     */
 
-    token = "";
-
-    customer = null;
-
-    applications = [];
-
-    payments = [];
-
-
-    /*
-       Clear localStorage.
-    */
-
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
-
-    localStorage.removeItem(
-        CUSTOMER_KEY
+    console.warn(
+        "⚠️ No customer token found. Clearing local session."
     );
 
 
-    /*
-       Clear any possible cached
-       customer information.
-    */
+    clearLocalSession();
 
-    try {
-
-        sessionStorage.removeItem(
-            TOKEN_KEY
-        );
-
-        sessionStorage.removeItem(
-            CUSTOMER_KEY
-        );
-
-    } catch(error) {
-
-        console.warn(
-            "Session storage cleanup warning:",
-            error
-        );
-
-    }
-
-
-    /*
-       Hide customer dashboard.
-    */
-
-    el("app")
-        .classList
-        .add("hidden");
-
-
-    /*
-       Show authentication screen.
-    */
-
-    el("authScreen")
-        .classList
-        .remove("hidden");
-
-
-    /*
-       Reset login form.
-    */
-
-    el("loginEmail")
-        .value = "";
-
-    el("loginPassword")
-        .value = "";
-
-
-    /*
-       Clear messages.
-    */
-
-    el("loginMsg")
-        .innerHTML = "";
-
-    el("registerMsg")
-        .innerHTML = "";
-
-
-    /*
-       Always show Login instead of
-       Create Account.
-    */
-
-    el("registerBox")
-        .classList
-        .add("hidden");
-
-    el("loginBox")
-        .classList
-        .remove("hidden");
-
-
-    /*
-       Restore logout button.
-    */
-
-    if (logoutButton) {
-
-        logoutButton.disabled = false;
-
-        logoutButton.innerHTML =
-            "🚪 Logout";
-
-    }
-
-
-    console.log(
-        "========================================"
-    );
-
-    console.log(
-        "✅ LOCAL CUSTOMER SESSION CLEARED"
-    );
-
-    console.log(
-        "========================================"
-
-    );
+    showLoginScreen();
 
 }
 
@@ -2390,62 +2394,62 @@ async function logout() {
 ===================================================== */
 
 document
-.querySelectorAll(".nav-btn[data-page]")
-.forEach(button => {
+    .querySelectorAll(".nav-btn[data-page]")
+    .forEach(button => {
 
-    button.addEventListener(
-        "click",
-        () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            const page =
-                button.dataset.page;
-
-
-            document
-                .querySelectorAll(".page")
-                .forEach(item => {
-
-                    item.classList
-                        .remove("active");
-
-                });
+                const page =
+                    button.dataset.page;
 
 
-            const selectedPage =
-                el(page);
+                document
+                    .querySelectorAll(".page")
+                    .forEach(item => {
+
+                        item.classList
+                            .remove("active");
+
+                    });
 
 
-            if (selectedPage) {
+                const selectedPage =
+                    el(page);
 
-                selectedPage
-                    .classList
+
+                if (selectedPage) {
+
+                    selectedPage
+                        .classList
+                        .add("active");
+
+                }
+
+
+                document
+                    .querySelectorAll(".nav-btn")
+                    .forEach(item => {
+
+                        item.classList
+                            .remove("active");
+
+                    });
+
+
+                button.classList
                     .add("active");
 
+
+                el("sidebar")
+                    .classList
+                    .remove("open");
+
             }
+        );
 
-
-            document
-                .querySelectorAll(".nav-btn")
-                .forEach(item => {
-
-                    item.classList
-                        .remove("active");
-
-                });
-
-
-            button.classList
-                .add("active");
-
-
-            el("sidebar")
-                .classList
-                .remove("open");
-
-        }
-    );
-
-});
+    });
 
 
 /* =====================================================
@@ -2520,8 +2524,7 @@ function getLoanValues() {
         el("v4LoanDuration");
 
 
-    let loan_type =
-        "";
+    let loan_type = "";
 
 
     if (typeElement) {
@@ -2787,7 +2790,8 @@ async function submitLoan() {
             await api(
                 "/loans/apply",
                 {
-                    method:"POST",
+                    method: "POST",
+
                     body:
                         JSON.stringify(
                             payload
@@ -2830,7 +2834,7 @@ async function submitLoan() {
         await loadApplications();
 
 
-    } catch(error) {
+    } catch (error) {
 
         el("railwayOutput")
             .textContent +=
@@ -2857,7 +2861,7 @@ async function submitLoan() {
 
 
 /* =====================================================
-   ONLY ONE SUBMIT EVENT
+   ONLY ONE LOAN SUBMIT EVENT
 ===================================================== */
 
 el("v4SubmitLoan")
@@ -2890,7 +2894,7 @@ async function loadApplications() {
         updateStats();
 
 
-    } catch(error) {
+    } catch (error) {
 
         el("applicationsList")
             .innerHTML =
@@ -2925,102 +2929,102 @@ function renderApplications() {
     el("applicationsList")
         .innerHTML =
         applications
-        .map(item => {
+            .map(item => {
 
-            const status =
-                String(
-                    item.status ||
-                    "PENDING"
-                ).toUpperCase();
-
-
-            let badge =
-                "pending";
+                const status =
+                    String(
+                        item.status ||
+                        "PENDING"
+                    ).toUpperCase();
 
 
-            if (status === "APPROVED")
-                badge = "approved";
+                let badge =
+                    "pending";
 
 
-            if (status === "REJECTED")
-                badge = "rejected";
+                if (status === "APPROVED")
+                    badge = "approved";
 
 
-            if (status === "UNDER REVIEW")
-                badge = "review";
+                if (status === "REJECTED")
+                    badge = "rejected";
 
 
-            return `
+                if (status === "UNDER REVIEW")
+                    badge = "review";
 
-                <div class="application">
 
-                    <div class="application-head">
+                return `
 
-                        <strong>
-                            ${escapeHTML(
-                                item.loan_type
-                            )}
-                        </strong>
+                    <div class="application">
 
-                        <span class="badge ${badge}">
-                            ${escapeHTML(status)}
-                        </span>
+                        <div class="application-head">
 
-                    </div>
-
-                    <div class="application-grid">
-
-                        <div>
-                            <small>ID</small>
-                            <strong>
-                                ${escapeHTML(item.id)}
-                            </strong>
-                        </div>
-
-                        <div>
-                            <small>Amount</small>
-                            <strong>
-                                MWK ${Number(
-                                    item.amount || 0
-                                ).toLocaleString()}
-                            </strong>
-                        </div>
-
-                        <div>
-                            <small>Duration</small>
                             <strong>
                                 ${escapeHTML(
-                                    item.duration_months
-                                )} months
-                            </strong>
-                        </div>
-
-                        <div>
-                            <small>Interest</small>
-                            <strong>
-                                ${escapeHTML(
-                                    item.interest_rate ?? 0
-                                )}%
-                            </strong>
-                        </div>
-
-                        <div>
-                            <small>Date</small>
-                            <strong>
-                                ${formatDate(
-                                    item.created_at
+                                    item.loan_type
                                 )}
                             </strong>
+
+                            <span class="badge ${badge}">
+                                ${escapeHTML(status)}
+                            </span>
+
+                        </div>
+
+                        <div class="application-grid">
+
+                            <div>
+                                <small>ID</small>
+                                <strong>
+                                    ${escapeHTML(item.id)}
+                                </strong>
+                            </div>
+
+                            <div>
+                                <small>Amount</small>
+                                <strong>
+                                    MWK ${Number(
+                                        item.amount || 0
+                                    ).toLocaleString()}
+                                </strong>
+                            </div>
+
+                            <div>
+                                <small>Duration</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        item.duration_months
+                                    )} months
+                                </strong>
+                            </div>
+
+                            <div>
+                                <small>Interest</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        item.interest_rate ?? 0
+                                    )}%
+                                </strong>
+                            </div>
+
+                            <div>
+                                <small>Date</small>
+                                <strong>
+                                    ${formatDate(
+                                        item.created_at
+                                    )}
+                                </strong>
+                            </div>
+
                         </div>
 
                     </div>
 
-                </div>
+                `;
 
-            `;
-
-        })
-        .join("");
+            })
+            .join("");
 
 }
 
@@ -3048,7 +3052,7 @@ async function loadPayments() {
         updateStats();
 
 
-    } catch(error) {
+    } catch (error) {
 
         el("paymentsList")
             .innerHTML =
@@ -3087,42 +3091,42 @@ function renderPayments() {
     el("paymentsList")
         .innerHTML =
         payments
-        .map(item => {
+            .map(item => {
 
-            return `
+                return `
 
-                <tr>
+                    <tr>
 
-                    <td>
-                        ${formatDate(
-                            item.created_at
-                        )}
-                    </td>
+                        <td>
+                            ${formatDate(
+                                item.created_at
+                            )}
+                        </td>
 
-                    <td>
-                        MWK ${Number(
-                            item.amount || 0
-                        ).toLocaleString()}
-                    </td>
+                        <td>
+                            MWK ${Number(
+                                item.amount || 0
+                            ).toLocaleString()}
+                        </td>
 
-                    <td>
-                        ${escapeHTML(
-                            item.status || "-"
-                        )}
-                    </td>
+                        <td>
+                            ${escapeHTML(
+                                item.status || "-"
+                            )}
+                        </td>
 
-                    <td>
-                        ${escapeHTML(
-                            item.reference || "-"
-                        )}
-                    </td>
+                        <td>
+                            ${escapeHTML(
+                                item.reference || "-"
+                            )}
+                        </td>
 
-                </tr>
+                    </tr>
 
-            `;
+                `;
 
-        })
-        .join("");
+            })
+            .join("");
 
 }
 
@@ -3229,11 +3233,13 @@ async function sendSupport() {
             await api(
                 "/support/send",
                 {
-                    method:"POST",
-                    body:JSON.stringify({
-                        subject,
-                        message:msg
-                    })
+                    method: "POST",
+
+                    body:
+                        JSON.stringify({
+                            subject,
+                            message: msg
+                        })
                 }
             );
 
@@ -3253,10 +3259,10 @@ async function sendSupport() {
             .value = "";
 
 
-        loadSupport();
+        await loadSupport();
 
 
-    } catch(error) {
+    } catch (error) {
 
         message(
             "supportMsg",
@@ -3303,44 +3309,44 @@ async function loadSupport() {
         el("supportList")
             .innerHTML =
             messages
-            .map(item => {
+                .map(item => {
 
-                return `
+                    return `
 
-                    <div
-                        style="
-                            border-bottom:1px solid #ddd;
-                            padding:12px 0;
-                        "
-                    >
+                        <div
+                            style="
+                                border-bottom:1px solid #ddd;
+                                padding:12px 0;
+                            "
+                        >
 
-                        <strong>
-                            ${escapeHTML(
-                                item.subject
-                            )}
-                        </strong>
+                            <strong>
+                                ${escapeHTML(
+                                    item.subject
+                                )}
+                            </strong>
 
-                        <p>
-                            ${escapeHTML(
-                                item.message
-                            )}
-                        </p>
+                            <p>
+                                ${escapeHTML(
+                                    item.message
+                                )}
+                            </p>
 
-                        <small>
-                            ${formatDate(
-                                item.created_at
-                            )}
-                        </small>
+                            <small>
+                                ${formatDate(
+                                    item.created_at
+                                )}
+                            </small>
 
-                    </div>
+                        </div>
 
-                `;
+                    `;
 
-            })
-            .join("");
+                })
+                .join("");
 
 
-    } catch(error) {
+    } catch (error) {
 
         el("supportList")
             .innerHTML =
@@ -3434,73 +3440,73 @@ refreshLoanDisplay();
 
 
 /* =====================================================
-   START SESSION
-===================================================== */
-
-if (
-    token &&
-    customer
-) {
-
-    openApp();
-
-}
-
-
-/* =====================================================
-   VERSION
-===================================================== */
-
-console.log(
-    "JAY C O B CUSTOMER DASHBOARD V4.2 - RAILWAY + SUPABASE"
-);
-
-console.log(
-    "✅ CUSTOMER LOGOUT SYSTEM UPDATED"
-);
-    
-/* =====================================================
-   SERVER-VERIFIED SESSION PROTECTION
+   SERVER-VERIFIED CUSTOMER SESSION
 ===================================================== */
 
 async function verifyCustomerSession() {
 
     const savedToken =
-        localStorage.getItem(TOKEN_KEY);
+        localStorage.getItem(
+            TOKEN_KEY
+        );
 
     const savedCustomer =
-        localStorage.getItem(CUSTOMER_KEY);
+        localStorage.getItem(
+            CUSTOMER_KEY
+        );
 
-    /* No local session */
-    if (!savedToken || !savedCustomer) {
 
-        token = "";
-        customer = null;
-        applications = [];
-        payments = [];
+    /*
+       No local session.
+    */
 
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(CUSTOMER_KEY);
+    if (
+        !savedToken ||
+        !savedCustomer
+    ) {
 
-        sessionStorage.removeItem(TOKEN_KEY);
-        sessionStorage.removeItem(CUSTOMER_KEY);
+        clearLocalSession();
 
-        const app =
-            document.getElementById("app");
+        showLoginScreen();
 
-        const auth =
-            document.getElementById("auth");
-
-        if (app) {
-            app.style.display = "none";
-        }
-
-        if (auth) {
-            auth.style.display = "block";
-        }
+        console.log(
+            "CUSTOMER SESSION: No saved session."
+        );
 
         return false;
+
     }
+
+
+    /*
+       Validate saved customer JSON.
+    */
+
+    let savedCustomerObject;
+
+
+    try {
+
+        savedCustomerObject =
+            JSON.parse(
+                savedCustomer
+            );
+
+    } catch (error) {
+
+        console.error(
+            "CUSTOMER DATA JSON ERROR:",
+            error
+        );
+
+        clearLocalSession();
+
+        showLoginScreen();
+
+        return false;
+
+    }
+
 
     try {
 
@@ -3512,7 +3518,8 @@ async function verifyCustomerSession() {
 
                     headers: {
                         "Authorization":
-                            "Bearer " + savedToken,
+                            "Bearer " +
+                            savedToken,
 
                         "Content-Type":
                             "application/json"
@@ -3522,8 +3529,21 @@ async function verifyCustomerSession() {
                 }
             );
 
-        const result =
-            await response.json();
+
+        let result;
+
+
+        try {
+
+            result =
+                await response.json();
+
+        } catch {
+
+            result = {};
+
+        }
+
 
         console.log(
             "CUSTOMER SESSION CHECK:",
@@ -3531,7 +3551,11 @@ async function verifyCustomerSession() {
             result
         );
 
-        /* Session is no longer valid */
+
+        /*
+           Session is invalid.
+        */
+
         if (
             !response.ok ||
             result.authenticated !== true
@@ -3541,61 +3565,97 @@ async function verifyCustomerSession() {
                 "CUSTOMER SESSION INVALID."
             );
 
-            token = "";
-            customer = null;
-            applications = [];
-            payments = [];
 
-            localStorage.removeItem(TOKEN_KEY);
-            localStorage.removeItem(CUSTOMER_KEY);
+            clearLocalSession();
 
-            sessionStorage.removeItem(TOKEN_KEY);
-            sessionStorage.removeItem(CUSTOMER_KEY);
+            showLoginScreen();
 
-            const app =
-                document.getElementById("app");
 
-            const auth =
-                document.getElementById("auth");
+            message(
+                "loginMsg",
+                result.message ||
+                "Your customer session has expired. Please log in again.",
+                "error"
+            );
 
-            if (app) {
-                app.style.display = "none";
-            }
-
-            if (auth) {
-                auth.style.display = "block";
-            }
 
             return false;
+
         }
 
-        /* Session is valid */
-        token = savedToken;
+
+        /*
+           Server verified the session.
+        */
+
+        token =
+            savedToken;
+
+
+        /*
+           Prefer the customer information
+           returned by the server when available.
+        */
 
         customer =
-            JSON.parse(savedCustomer);
+            result.customer ||
+            savedCustomerObject;
 
-        console.log(
-            "CUSTOMER SESSION VERIFIED."
+
+        localStorage.setItem(
+            CUSTOMER_KEY,
+            JSON.stringify(customer)
         );
 
+
+        console.log(
+            "✅ CUSTOMER SESSION VERIFIED BY RAILWAY"
+        );
+
+
+        openApp();
+
+
         return true;
+
 
     } catch (error) {
 
         console.error(
-            "SESSION VERIFICATION ERROR:",
+            "CUSTOMER SESSION VERIFICATION ERROR:",
             error
         );
 
+
         /*
-        Do not automatically log the customer out
-        just because the network temporarily failed.
+           Do NOT destroy a valid local session
+           just because the network temporarily
+           failed.
         */
 
+        token =
+            savedToken;
+
+        customer =
+            savedCustomerObject;
+
+
+        openApp();
+
+
         return true;
+
     }
+
 }
+
+
+/* =====================================================
+   START SESSION
+   SERVER VERIFICATION FIRST
+===================================================== */
+
+verifyCustomerSession();
 
 
 /* =====================================================
@@ -3606,11 +3666,51 @@ window.addEventListener(
     "pageshow",
     async function () {
 
-        await verifyCustomerSession();
+        /*
+           Only verify again when a local
+           session exists.
+        */
+
+        const savedToken =
+            localStorage.getItem(
+                TOKEN_KEY
+            );
+
+        const savedCustomer =
+            localStorage.getItem(
+                CUSTOMER_KEY
+            );
+
+
+        if (
+            savedToken &&
+            savedCustomer
+        ) {
+
+            await verifyCustomerSession();
+
+        }
 
     }
 );
-    
+
+
+/* =====================================================
+   VERSION
+===================================================== */
+
+console.log(
+    "JAY C O B CUSTOMER DASHBOARD V4.3"
+);
+
+console.log(
+    "✅ RAILWAY + SUPABASE CUSTOMER SESSION PROTECTION ACTIVE"
+);
+
+console.log(
+    "✅ CUSTOMER LOGOUT TERMINATES SERVER SESSION"
+);
+
 </script>
 
 
@@ -3630,7 +3730,7 @@ window.addEventListener(
         font-size:10px;
     "
 >
-    Customer Dashboard V4.2
+    Customer Dashboard V4.3
 </div>
 
 
