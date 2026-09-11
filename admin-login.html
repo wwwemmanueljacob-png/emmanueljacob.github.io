@@ -6622,6 +6622,296 @@ async function saveSupportTicket(
 }
 
 /* =========================================================
+   CREATE RECORD MODAL
+========================================================= */
+
+function openCreateModal(module){
+
+    if(module !== "deposits"){
+        return;
+    }
+
+    const modal =
+        document.getElementById("applicationModal");
+
+    const title =
+        document.getElementById("applicationModalTitle");
+
+    const body =
+        document.getElementById("applicationModalBody");
+
+    if(!modal || !title || !body){
+        showToast(
+            "Deposit form could not be opened.",
+            "error"
+        );
+        return;
+    }
+
+    title.textContent =
+        "Record Deposit";
+
+    body.innerHTML = `
+        <form id="recordDepositForm">
+
+            <div class="form-group">
+                <label>Customer</label>
+
+                <select
+                    id="depositCustomer"
+                    required
+                >
+                    <option value="">
+                        Select customer
+                    </option>
+
+                    ${allCustomers.map(customer => `
+                        <option value="${escapeHTML(customer.id)}">
+                            ${escapeHTML(
+                                customer.full_name ||
+                                customer.name ||
+                                customer.email ||
+                                ("Customer #" + customer.id)
+                            )}
+                            ${customer.account_number
+                                ? " — " + escapeHTML(customer.account_number)
+                                : ""}
+                        </option>
+                    `).join("")}
+
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Amount (MWK)</label>
+
+                <input
+                    type="number"
+                    id="depositAmount"
+                    min="1"
+                    step="0.01"
+                    placeholder="Enter deposit amount"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Payment Method</label>
+
+                <select
+                    id="depositPaymentMethod"
+                    required
+                >
+                    <option value="">Select payment method</option>
+                    <option value="AIRTEL MONEY">Airtel Money</option>
+                    <option value="MPAMBA">Mpamba</option>
+                    <option value="BANK">Bank</option>
+                    <option value="CASH">Cash</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Reference Number</label>
+
+                <input
+                    type="text"
+                    id="depositReference"
+                    placeholder="Enter transaction/reference number"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Description</label>
+
+                <textarea
+                    id="depositDescription"
+                    rows="3"
+                    placeholder="Optional description"
+                ></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label>Status</label>
+
+                <select
+                    id="depositStatus"
+                    required
+                >
+                    <option value="COMPLETED">
+                        Completed
+                    </option>
+                    <option value="PENDING">
+                        Pending
+                    </option>
+                    <option value="FAILED">
+                        Failed
+                    </option>
+                </select>
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="small-btn"
+                    onclick="closeModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="small-btn primary"
+                >
+                    Record Deposit
+                </button>
+
+            </div>
+
+        </form>
+    `;
+
+
+    modal.classList.add("show");
+
+
+    const form =
+        document.getElementById(
+            "recordDepositForm"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const customer_id =
+                document.getElementById(
+                    "depositCustomer"
+                ).value;
+
+
+            const amount =
+                document.getElementById(
+                    "depositAmount"
+                ).value;
+
+
+            const payment_method =
+                document.getElementById(
+                    "depositPaymentMethod"
+                ).value;
+
+
+            const reference_number =
+                document.getElementById(
+                    "depositReference"
+                ).value.trim();
+
+
+            const description =
+                document.getElementById(
+                    "depositDescription"
+                ).value.trim();
+
+
+            const status =
+                document.getElementById(
+                    "depositStatus"
+                ).value;
+
+
+            if(!customer_id){
+
+                showToast(
+                    "Please select a customer.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if(!amount || Number(amount) <= 0){
+
+                showToast(
+                    "Enter a valid deposit amount.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            try{
+
+                const result =
+                    await apiRequest(
+                        "/admin/deposits",
+                        {
+                            method:"POST",
+
+                            body:JSON.stringify({
+
+                                customer_id,
+                                amount,
+                                payment_method,
+                                reference_number,
+                                description,
+                                status
+
+                            })
+                        }
+                    );
+
+
+                showToast(
+                    result.message ||
+                    "Deposit recorded successfully.",
+                    "success"
+                );
+
+
+                closeModal();
+
+
+                await Promise.all([
+
+                    loadModule("deposits"),
+
+                    loadCustomers(),
+
+                    loadStatistics()
+
+                ]);
+
+
+            }catch(error){
+
+                showToast(
+                    error.message ||
+                    "Failed to record deposit.",
+                    "error"
+                );
+
+            }
+
+        }
+    );
+
+}
+      
+/* =========================================================
    GENERIC MODULE LOADER
 ========================================================= */
 
