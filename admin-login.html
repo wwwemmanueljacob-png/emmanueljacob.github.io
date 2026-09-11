@@ -6635,10 +6635,10 @@ function openCreateModal(module){
         document.getElementById("applicationModal");
 
     const title =
-        document.getElementById("applicationModalTitle");
+        document.getElementById("modalTitle");
 
     const body =
-        document.getElementById("applicationModalBody");
+        document.getElementById("modalBody");
 
     if(!modal || !title || !body){
         showToast(
@@ -6648,8 +6648,7 @@ function openCreateModal(module){
         return;
     }
 
-    title.textContent =
-        "Record Deposit";
+    title.textContent = "Record Deposit";
 
     body.innerHTML = `
         <form id="recordDepositForm">
@@ -6657,10 +6656,7 @@ function openCreateModal(module){
             <div class="form-group">
                 <label>Customer</label>
 
-                <select
-                    id="depositCustomer"
-                    required
-                >
+                <select id="depositCustomer" required>
                     <option value="">
                         Select customer
                     </option>
@@ -6673,15 +6669,11 @@ function openCreateModal(module){
                                 customer.email ||
                                 ("Customer #" + customer.id)
                             )}
-                            ${customer.account_number
-                                ? " — " + escapeHTML(customer.account_number)
-                                : ""}
                         </option>
                     `).join("")}
 
                 </select>
             </div>
-
 
             <div class="form-group">
                 <label>Amount (MWK)</label>
@@ -6696,23 +6688,30 @@ function openCreateModal(module){
                 >
             </div>
 
-
             <div class="form-group">
                 <label>Payment Method</label>
 
-                <select
-                    id="depositPaymentMethod"
-                    required
-                >
-                    <option value="">Select payment method</option>
-                    <option value="AIRTEL MONEY">Airtel Money</option>
-                    <option value="MPAMBA">Mpamba</option>
-                    <option value="BANK">Bank</option>
-                    <option value="CASH">Cash</option>
-                    <option value="OTHER">Other</option>
+                <select id="depositPaymentMethod" required>
+                    <option value="">
+                        Select payment method
+                    </option>
+                    <option value="AIRTEL MONEY">
+                        Airtel Money
+                    </option>
+                    <option value="MPAMBA">
+                        Mpamba
+                    </option>
+                    <option value="BANK">
+                        Bank
+                    </option>
+                    <option value="CASH">
+                        Cash
+                    </option>
+                    <option value="OTHER">
+                        Other
+                    </option>
                 </select>
             </div>
-
 
             <div class="form-group">
                 <label>Reference Number</label>
@@ -6724,7 +6723,6 @@ function openCreateModal(module){
                 >
             </div>
 
-
             <div class="form-group">
                 <label>Description</label>
 
@@ -6735,26 +6733,15 @@ function openCreateModal(module){
                 ></textarea>
             </div>
 
-
             <div class="form-group">
                 <label>Status</label>
 
-                <select
-                    id="depositStatus"
-                    required
-                >
+                <select id="depositStatus" required>
                     <option value="COMPLETED">
                         Completed
                     </option>
-                    <option value="PENDING">
-                        Pending
-                    </option>
-                    <option value="FAILED">
-                        Failed
-                    </option>
                 </select>
             </div>
-
 
             <div class="modal-actions">
 
@@ -6769,6 +6756,7 @@ function openCreateModal(module){
                 <button
                     type="submit"
                     class="small-btn primary"
+                    id="recordDepositBtn"
                 >
                     Record Deposit
                 </button>
@@ -6778,15 +6766,10 @@ function openCreateModal(module){
         </form>
     `;
 
-
     modal.classList.add("show");
 
-
     const form =
-        document.getElementById(
-            "recordDepositForm"
-        );
-
+        document.getElementById("recordDepositForm");
 
     form.addEventListener(
         "submit",
@@ -6794,42 +6777,40 @@ function openCreateModal(module){
 
             event.preventDefault();
 
-
             const customer_id =
                 document.getElementById(
                     "depositCustomer"
                 ).value;
-
 
             const amount =
                 document.getElementById(
                     "depositAmount"
                 ).value;
 
-
             const payment_method =
                 document.getElementById(
                     "depositPaymentMethod"
                 ).value;
-
 
             const reference_number =
                 document.getElementById(
                     "depositReference"
                 ).value.trim();
 
-
             const description =
                 document.getElementById(
                     "depositDescription"
                 ).value.trim();
-
 
             const status =
                 document.getElementById(
                     "depositStatus"
                 ).value;
 
+            const submitButton =
+                document.getElementById(
+                    "recordDepositBtn"
+                );
 
             if(!customer_id){
 
@@ -6841,7 +6822,6 @@ function openCreateModal(module){
                 return;
             }
 
-
             if(!amount || Number(amount) <= 0){
 
                 showToast(
@@ -6852,8 +6832,23 @@ function openCreateModal(module){
                 return;
             }
 
+            if(!payment_method){
+
+                showToast(
+                    "Please select a payment method.",
+                    "error"
+                );
+
+                return;
+            }
 
             try{
+
+                if(submitButton){
+                    submitButton.disabled = true;
+                    submitButton.textContent =
+                        "Recording...";
+                }
 
                 const result =
                     await apiRequest(
@@ -6874,18 +6869,15 @@ function openCreateModal(module){
                         }
                     );
 
-
                 showToast(
                     result.message ||
                     "Deposit recorded successfully.",
                     "success"
                 );
 
-
                 closeModal();
 
-
-                await Promise.all([
+                await Promise.allSettled([
 
                     loadModule("deposits"),
 
@@ -6895,7 +6887,6 @@ function openCreateModal(module){
 
                 ]);
 
-
             }catch(error){
 
                 showToast(
@@ -6904,12 +6895,18 @@ function openCreateModal(module){
                     "error"
                 );
 
+                if(submitButton){
+                    submitButton.disabled = false;
+                    submitButton.textContent =
+                        "Record Deposit";
+                }
+
             }
 
         }
     );
 
-}
+ }
       
 /* =========================================================
    GENERIC MODULE LOADER
