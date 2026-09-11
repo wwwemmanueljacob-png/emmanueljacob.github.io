@@ -1942,15 +1942,17 @@ function updateProfile() {
    REAL RAILWAY CUSTOMER LOGOUT
 ===================================================== */
 
-async function logout(sendRequest=true) {
+async function logout(sendRequest = true) {
 
     const oldToken =
-        token;
+        sessionToken;
 
 
     /*
-       If this is a real user logout,
-       tell Railway to deactivate the session.
+    -----------------------------------------------------
+    REAL USER LOGOUT
+    Tell Railway to deactivate the Supabase session.
+    -----------------------------------------------------
     */
 
     if (
@@ -1962,17 +1964,16 @@ async function logout(sendRequest=true) {
 
             const response =
                 await fetch(
-                    API + "/auth/logout",
+                    `${API_BASE_URL}/auth/logout`,
                     {
-                        method:"POST",
+                        method: "POST",
 
-                        headers:{
+                        headers: {
                             "Content-Type":
                                 "application/json",
 
                             "Authorization":
-                                "Bearer " +
-                                oldToken
+                                `Bearer ${oldToken}`
                         }
                     }
                 );
@@ -1986,7 +1987,11 @@ async function logout(sendRequest=true) {
                 result =
                     await response.json();
 
-            } catch {}
+            } catch {
+
+                result = null;
+
+            }
 
 
             if (!response.ok) {
@@ -2005,7 +2010,7 @@ async function logout(sendRequest=true) {
             );
 
 
-        } catch(error) {
+        } catch (error) {
 
             console.error(
                 "Customer backend logout failed:",
@@ -2028,10 +2033,12 @@ async function logout(sendRequest=true) {
 
 
     /*
-       Clear local session.
+    -----------------------------------------------------
+    CLEAR LOCAL CUSTOMER SESSION
+    -----------------------------------------------------
     */
 
-    token = "";
+    sessionToken = "";
 
     customer = null;
 
@@ -2041,13 +2048,19 @@ async function logout(sendRequest=true) {
 
 
     localStorage.removeItem(
-        TOKEN_KEY
+        "jaycob_customer_token"
     );
 
     localStorage.removeItem(
-        CUSTOMER_KEY
+        "jaycob_customer_data"
     );
 
+
+    /*
+    -----------------------------------------------------
+    RETURN TO LOGIN SCREEN
+    -----------------------------------------------------
+    */
 
     el("app")
         .classList
