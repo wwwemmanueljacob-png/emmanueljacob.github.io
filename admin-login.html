@@ -1186,7 +1186,7 @@ textarea:focus{
     background:
         rgba(2,11,27,.72);
 
-    display:flex;
+    display:none;
 
     align-items:center;
     justify-content:center;
@@ -1195,6 +1195,9 @@ textarea:focus{
 
     backdrop-filter:blur(4px);
 }
+ .modal.show{
+    display:flex;
+ }
 
 .modal-box{
     width:100%;
@@ -3479,12 +3482,13 @@ textarea:focus{
 
             <h3>Account Recovery</h3>
 
-            <button
-                class="modal-close"
-                onclick="closeRecoveryModal()"
-            >
-                ×
-            </button>
+           <button
+    type="button"
+    class="modal-close"
+    onclick="document.getElementById('recoveryModal').classList.remove('show')"
+>
+    ×
+</button>
 
         </div>
 
