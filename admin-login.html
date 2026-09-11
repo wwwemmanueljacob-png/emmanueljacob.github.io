@@ -8039,7 +8039,21 @@ function viewRecord(
 /* =========================================================
    MODAL
 ========================================================= */
+/* =========================================================
+   CLOSE GENERAL MODAL
+========================================================= */
 
+function closeModal(){
+
+    const modal =
+        document.getElementById("applicationModal");
+
+    if(modal){
+        modal.classList.remove("show");
+    }
+
+}
+      
 async function requestRecovery(){
 
     const email =
