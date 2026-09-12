@@ -7274,10 +7274,12 @@ function viewRecord(
         decodeURIComponent(encodedId);
 
 
-    const records =
+  const records =
     module === "customers"
         ? allCustomers
-        : (moduleData[module] || []);
+        : module === "activeLoans"
+            ? allActiveLoans
+            : (moduleData[module] || []);  
 
 
 const record =
