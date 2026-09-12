@@ -642,6 +642,61 @@ td {
             >
         </div>
 
+        <div class="field">
+
+    <label>KYC Document Type</label>
+
+    <select id="registerKycType">
+
+        <option value="">
+            Select document type
+        </option>
+
+        <option value="NATIONAL_ID">
+            National ID
+        </option>
+
+        <option value="PASSPORT">
+            Passport
+        </option>
+
+        <option value="DRIVING_LICENSE">
+            Driving License
+        </option>
+
+    </select>
+
+</div>
+
+
+<div class="field">
+
+    <label>KYC Document Number</label>
+
+    <input
+        id="registerKycNumber"
+        type="text"
+        placeholder="Enter document number"
+    >
+
+</div>
+
+<div class="field">
+
+    <label>KYC Document</label>
+
+    <input
+        id="registerKycFile"
+        type="file"
+        accept="image/*,.pdf"
+    >
+
+    <small>
+        Upload a clear image or PDF of your identification document.
+    </small>
+
+</div>
+
         <button
             id="registerBtn"
             type="button"
