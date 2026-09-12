@@ -1354,12 +1354,14 @@ async function api(
     options={}
 ) {
 
-    const headers = {
+   const headers = {};
 
-        "Content-Type":
-            "application/json"
+if (!(options.body instanceof FormData)) {
 
-    };
+    headers["Content-Type"] =
+        "application/json";
+
+}
 
 
     if (token) {
