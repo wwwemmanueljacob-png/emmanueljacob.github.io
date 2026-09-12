@@ -1651,8 +1651,23 @@ async function register() {
             .trim();
 
     const password =
-        el("registerPassword")
-            .value;
+    el("registerPassword")
+        .value;
+
+
+const kyc_type =
+    el("registerKycType")
+        .value
+        .trim();
+
+const kyc_number =
+    el("registerKycNumber")
+        .value
+        .trim();
+
+const kyc_file =
+    el("registerKycFile")
+        .files[0];
 
 
     if (!full_name) {
