@@ -7956,6 +7956,280 @@ function viewRecord(
 
     }
 
+   /* =====================================================
+       CUSTOMER DETAILS VIEW
+    ===================================================== */
+
+    if(module === "customers"){
+
+        const customer =
+            record;
+
+
+        document
+            .getElementById("modalTitle")
+            .textContent =
+                "Customer Details";
+
+
+        const value = (field, fallback = "-") => {
+
+            const result =
+                customer[field];
+
+            if(
+                result === null ||
+                result === undefined ||
+                result === ""
+            ){
+
+                return fallback;
+
+            }
+
+            return escapeHTML(
+                String(result)
+            );
+
+        };
+
+
+        const money =
+            customer.balance !== null &&
+            customer.balance !== undefined
+                ? formatMoney(customer.balance)
+                : "MWK 0.00";
+
+
+        const status =
+            customer.account_status ||
+            "UNKNOWN";
+
+
+        const verification =
+            customer.is_verified
+                ? "Verified"
+                : "Not Verified";
+
+
+        document
+            .getElementById("modalBody")
+            .innerHTML = `
+
+                <div class="detail-grid">
+
+                    <div class="detail-item">
+                        <small>Customer ID</small>
+                        <strong>
+                            ${value("id")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Full Name</small>
+                        <strong>
+                            ${value("full_name")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Email</small>
+                        <strong>
+                            ${value("email")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Phone</small>
+                        <strong>
+                            ${value("phone")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Account Number</small>
+                        <strong>
+                            ${value("account_number")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Account Status</small>
+                        <strong>
+                            ${statusBadge(status)}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Balance</small>
+                        <strong>
+                            ${money}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Verification</small>
+                        <strong>
+                            ${verification}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>ID Number</small>
+                        <strong>
+                            ${value("id_number")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Date of Birth</small>
+                        <strong>
+                            ${value("date_of_birth")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Occupation</small>
+                        <strong>
+                            ${value("occupation")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Employment Number</small>
+                        <strong>
+                            ${value("employment_number")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Address</small>
+                        <strong>
+                            ${value("address")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Residential Address</small>
+                        <strong>
+                            ${value("residential_address")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Next of Kin</small>
+                        <strong>
+                            ${value("next_of_kin")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Next of Kin Address</small>
+                        <strong>
+                            ${value("next_of_kin_home_address")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Next of Kin Phone</small>
+                        <strong>
+                            ${value("next_of_kin_phone_number")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Failed Attempts</small>
+                        <strong>
+                            ${value("failed_attempts", "0")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Locked Until</small>
+                        <strong>
+                            ${value("locked_until")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Role</small>
+                        <strong>
+                            ${value("role")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Auth User ID</small>
+                        <strong>
+                            ${value("auth_user_id")}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Registered</small>
+                        <strong>
+                            ${formatDate(
+                                customer.created_at
+                            )}
+                        </strong>
+                    </div>
+
+
+                    <div class="detail-item">
+                        <small>Last Updated</small>
+                        <strong>
+                            ${formatDate(
+                                customer.updated_at
+                            )}
+                        </strong>
+                    </div>
+
+                </div>
+            `;
+
+
+        document
+            .getElementById("modalFooter")
+            .innerHTML = `
+                <button
+                    class="small-btn"
+                    onclick="closeModal()"
+                >
+                    Close
+                </button>
+            `;
+
+
+        document
+            .getElementById("applicationModal")
+            .classList.add("show");
+
+
+        return;
+
+    }
+
 
     /* =====================================================
        GENERIC VIEW — ALL OTHER MODULES
