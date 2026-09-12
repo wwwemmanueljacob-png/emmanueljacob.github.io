@@ -1721,6 +1721,44 @@ const kyc_file =
 
     }
 
+    if (!kyc_type) {
+
+    message(
+        "registerMsg",
+        "Select your KYC document type.",
+        "error"
+    );
+
+    return;
+
+}
+
+
+if (!kyc_number) {
+
+    message(
+        "registerMsg",
+        "Enter your KYC document number.",
+        "error"
+    );
+
+    return;
+
+}
+
+
+if (!kyc_file) {
+
+    message(
+        "registerMsg",
+        "Upload your KYC document.",
+        "error"
+    );
+
+    return;
+
+}
+
 
     el("registerBtn")
         .disabled = true;
@@ -1744,16 +1782,53 @@ const kyc_file =
 
         const data =
             await api(
-                "/auth/register",
+                "/customers/register",
                 {
                     method:"POST",
 
-                    body:JSON.stringify({
-                        full_name,
-                        email,
-                        phone,
-                        password
-                    })
+                   body: (() => {
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "full_name",
+        full_name
+    );
+
+    formData.append(
+        "email",
+        email
+    );
+
+    formData.append(
+        "phone",
+        phone
+    );
+
+    formData.append(
+        "password",
+        password
+    );
+
+    formData.append(
+        "kyc_type",
+        kyc_type
+    );
+
+    formData.append(
+        "kyc_number",
+        kyc_number
+    );
+
+    formData.append(
+        "kyc_file",
+        kyc_file
+    );
+
+    return formData;
+
+})()
                 }
             );
 
