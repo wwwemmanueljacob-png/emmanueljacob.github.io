@@ -4895,10 +4895,11 @@ function renderCustomers(){
 
 
             const status =
-                getValue(
-                    customer,
-                    "status"
-                ) || "UNKNOWN";
+    getValue(
+        customer,
+        "account_status",
+        "status"
+    ) || "UNKNOWN";
 
 
             const date =
