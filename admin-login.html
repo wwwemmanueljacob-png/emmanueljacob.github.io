@@ -7274,23 +7274,29 @@ function viewRecord(
         decodeURIComponent(encodedId);
 
 
-    const record =
-        (moduleData[module] || [])
-        .find(item=>{
+    const records =
+    module === "customers"
+        ? allCustomers
+        : (moduleData[module] || []);
 
-            const recordId =
-                getValue(
-                    item,
-                    "id",
-                    "uuid",
-                    "record_id"
-                );
 
-            return String(recordId)
-                === String(id);
+const record =
+    records
+    .find(item=>{
 
-        });
+        const recordId =
+            getValue(
+                item,
+                "id",
+                "uuid",
+                "record_id",
+                "customer_id"
+            );
 
+        return String(recordId)
+            === String(id);
+
+    });
 
     if(!record){
 
