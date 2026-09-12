@@ -4827,9 +4827,11 @@ function renderCustomers(){
 
 
             const customerStatus =
-                String(
-                    customer.status || ""
-                ).toUpperCase();
+    String(
+        customer.account_status ||
+        customer.status ||
+        ""
+    ).toUpperCase();
 
 
             const matchesStatus =
