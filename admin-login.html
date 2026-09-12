@@ -6121,19 +6121,19 @@ function renderActiveLoans(){
 const moduleConfig = {
 
     repayments:{
-        endpoint:"/admin/repayments",
-        body:"repaymentsBody",
-        keys:["repayments","data","items"],
-        columns:[
-            ["id","repayment_id","Repayment ID"],
-            ["customer_name","customer_id","Customer"],
-            ["loan_id","loan","Loan"],
-            ["amount","payment_amount","Amount"],
-            ["method","payment_method","Method"],
-            ["status","status","Status"],
-            ["created_at","paid_at","Date"]
-        ]
-    },
+    endpoint:"/api/repayments",
+    body:"repaymentsBody",
+    keys:["repayments","data","items"],
+    columns:[
+        ["id","repayment_id","Repayment ID"],
+        ["customer_id","Customer"],
+        ["loan_id","Loan"],
+        ["amount","payment_amount","Amount"],
+        ["payment_method","method","Method"],
+        ["status","Status"],
+        ["payment_date","created_at","Date"]
+    ]
+},
 
     schedules:{
         endpoint:"/admin/schedules",
