@@ -2314,6 +2314,152 @@ textarea:focus{
 
 </section>
 
+/* =========================================================
+   KYC APPROVAL
+========================================================= */
+
+async function approveKYC(encodedId){
+
+    const id =
+        decodeURIComponent(encodedId);
+
+    if(
+        !confirm(
+            "Are you sure you want to approve this KYC document?"
+        )
+    ){
+        return;
+    }
+
+
+    try{
+
+        await apiRequest(
+            `/admin/kyc/${encodeURIComponent(id)}/approve`,
+            {
+                method: "PUT"
+            }
+        );
+
+
+        showToast(
+            "KYC document approved successfully."
+        );
+
+
+        await loadAdminKYC();
+
+
+    }catch(error){
+
+        console.error(
+            "Approve KYC error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to approve KYC document.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   KYC REJECTION
+========================================================= */
+
+async function rejectKYC(encodedId){
+
+    const id =
+        decodeURIComponent(encodedId);
+
+
+    const reason =
+        prompt(
+            "Enter the reason for rejecting this KYC document:"
+        );
+
+
+    if(reason === null){
+
+        return;
+
+    }
+
+
+    const rejectionReason =
+        reason.trim();
+
+
+    if(!rejectionReason){
+
+        showToast(
+            "Rejection reason is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "Are you sure you want to reject this KYC document?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await apiRequest(
+            `/admin/kyc/${encodeURIComponent(id)}/reject`,
+            {
+                method: "PUT",
+
+                body: JSON.stringify({
+                    rejection_reason:
+                        rejectionReason
+                })
+            }
+        );
+
+
+        showToast(
+            "KYC document rejected successfully."
+        );
+
+
+        await loadAdminKYC();
+
+
+    }catch(error){
+
+        console.error(
+            "Reject KYC error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to reject KYC document.",
+            "error"
+        );
+
+    }
+
+}            
+
               
 <!-- ========================================================
      ACTIVE LOANS
