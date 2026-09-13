@@ -3739,44 +3739,110 @@
               Step 2 will connect these documents to
               Supabase Storage and the KYC table securely.
             */
+            
+ /* =====================================================
+   SEND CUSTOMER REGISTRATION + KYC DOCUMENT
+===================================================== */
 
-            const data =
-              await apiRequest(
-                "/customers/register",
-                {
-                  method: "POST",
+const formData =
+  new FormData();
 
-                  body:
-                    JSON.stringify(
-                      {
-                        full_name:
-                          fullName,
 
-                        email,
+formData.append(
+  "full_name",
+  fullName
+);
 
-                        phone,
+formData.append(
+  "email",
+  email
+);
 
-                        password,
+formData.append(
+  "phone",
+  phone
+);
 
-                        residential_address:
-                          residentialAddress,
+formData.append(
+  "password",
+  password
+);
 
-                        next_of_kin:
-                          nextOfKin,
+formData.append(
+  "residential_address",
+  residentialAddress
+);
 
-                        next_of_kin_phone:
-                          nextOfKinPhone,
+formData.append(
+  "next_of_kin",
+  nextOfKin
+);
 
-                        identification_type:
-                          idType,
+formData.append(
+  "next_of_kin_phone_number",
+  nextOfKinPhone
+);
 
-                        identification_number:
-                          idNumber
-                      }
-                    )
-                }
-              );
+formData.append(
+  "kyc_type",
+  idType
+);
 
+formData.append(
+  "kyc_number",
+  idNumber
+);
+
+
+/*
+-----------------------------------------------------
+PRIMARY KYC DOCUMENT
+Backend currently accepts one file as kyc_file
+-----------------------------------------------------
+*/
+
+formData.append(
+  "kyc_file",
+  idDocument
+);
+
+
+const response =
+  await fetch(
+    API_BASE_URL +
+    "/customers/register",
+    {
+      method: "POST",
+
+      body: formData
+    }
+  );
+
+
+let data = null;
+
+
+try {
+
+  data =
+    await response.json();
+
+} catch {
+
+  data = null;
+
+}
+
+
+if (!response.ok) {
+
+  throw new Error(
+    data?.message ||
+    data?.error ||
+    `Registration failed (${response.status})`
+  );
+
+}
 
             if (
               !data ||
