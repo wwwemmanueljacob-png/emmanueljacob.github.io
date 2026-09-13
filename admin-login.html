@@ -2193,7 +2193,128 @@ textarea:focus{
 
 </section>
 
+<!-- ========================================================
+     KYC VERIFICATION
+========================================================= -->
 
+<section id="section-kyc" class="section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>KYC Verification</h2>
+
+            <p>
+                Review and verify customer identification documents.
+            </p>
+
+        </div>
+
+        <button
+            class="small-btn"
+            onclick="loadAdminKYC()"
+        >
+            🔄 Refresh
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <input
+                        id="kycSearch"
+                        placeholder="Search customer, document number..."
+                    >
+
+                </div>
+
+
+                <select id="kycStatusFilter">
+
+                    <option value="">
+                        All statuses
+                    </option>
+
+                    <option value="PENDING">
+                        Pending
+                    </option>
+
+                    <option value="APPROVED">
+                        Approved
+                    </option>
+
+                    <option value="REJECTED">
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Customer ID</th>
+
+                            <th>Document Type</th>
+
+                            <th>Document Number</th>
+
+                            <th>Status</th>
+
+                            <th>Submitted</th>
+
+                            <th>Verified</th>
+
+                            <th>Rejection Reason</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="adminKycBody">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="loading"
+                            >
+                                KYC documents will appear here.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+              
 <!-- ========================================================
      ACTIVE LOANS
 ========================================================= -->
@@ -4502,6 +4623,8 @@ async function loadAllData(){
         loadCustomers(),
 
         loadActiveLoans()
+
+        loadAdminKYC()
 
     ]);
 
