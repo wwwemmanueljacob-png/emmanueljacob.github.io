@@ -557,6 +557,53 @@
       box-shadow: 0 0 0 3px rgba(245, 158, 11, .12);
     }
 
+    /* ================= KYC FORM ================= */
+
+    .form-section-title {
+      margin: 25px 0 15px;
+      padding: 12px 14px;
+      background: #fef3c7;
+      border-left: 4px solid #facc15;
+      border-radius: 8px;
+      color: #111827;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .4px;
+    }
+
+    .kyc-note {
+      background: #f3f4f6;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 18px;
+      color: #4b5563;
+      font-size: 12px;
+    }
+
+    .file-input {
+      padding: 10px !important;
+      background: #f9fafb !important;
+    }
+
+    .file-input::file-selector-button {
+      border: none;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-right: 10px;
+      background: #111827;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .file-help {
+      display: block;
+      margin-top: 6px;
+      color: #6b7280;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
     .password-wrap {
       position: relative;
     }
@@ -778,7 +825,6 @@
         <a href="#about">About</a>
         <a href="#support">Support</a>
 
-        <!-- ADMIN PORTAL -->
         <a
           href="admin-login.html"
           style="color:#facc15;font-weight:800"
@@ -791,7 +837,6 @@
 
       <div class="nav-actions">
 
-        <!-- ADMIN PORTAL -->
         <a
           href="admin-login.html"
           class="btn admin-btn"
@@ -876,7 +921,6 @@
             Customer Login
           </button>
 
-          <!-- ADMIN PORTAL -->
           <a
             href="admin-login.html"
             class="btn admin-btn"
@@ -1642,7 +1686,7 @@
 
 
   <!-- =====================================================
-       REGISTER
+       REGISTER WITH KYC
   ====================================================== -->
 
   <div
@@ -1673,6 +1717,8 @@
 
       <form id="registerForm">
 
+        <!-- BASIC ACCOUNT INFORMATION -->
+
         <div class="form-group">
 
           <label for="registerName">
@@ -1682,6 +1728,7 @@
           <input
             id="registerName"
             type="text"
+            autocomplete="name"
             required
           >
 
@@ -1697,6 +1744,7 @@
           <input
             id="registerEmail"
             type="email"
+            autocomplete="email"
             required
           >
 
@@ -1713,6 +1761,7 @@
             id="registerPhone"
             type="tel"
             placeholder="+265..."
+            autocomplete="tel"
             required
           >
 
@@ -1731,6 +1780,7 @@
               id="registerPassword"
               type="password"
               minlength="8"
+              autocomplete="new-password"
               required
             >
 
@@ -1763,6 +1813,7 @@
               id="registerConfirmPassword"
               type="password"
               minlength="8"
+              autocomplete="new-password"
               required
             >
 
@@ -1775,6 +1826,186 @@
             </button>
 
           </div>
+
+        </div>
+
+
+        <!-- =================================================
+             KYC INFORMATION
+        ================================================== -->
+
+        <div class="form-section-title">
+          🔐 KYC INFORMATION
+        </div>
+
+
+        <div class="kyc-note">
+
+          Please provide accurate information for your
+          customer verification. Your KYC information will
+          be securely connected to your customer account.
+
+        </div>
+
+
+        <!-- RESIDENTIAL ADDRESS -->
+
+        <div class="form-group">
+
+          <label for="registerResidentialAddress">
+            Residential Address
+          </label>
+
+          <input
+            id="registerResidentialAddress"
+            type="text"
+            placeholder="Enter your residential address"
+            autocomplete="street-address"
+            required
+          >
+
+        </div>
+
+
+        <!-- NEXT OF KIN -->
+
+        <div class="form-group">
+
+          <label for="registerNextOfKin">
+            Next of Kin Full Name
+          </label>
+
+          <input
+            id="registerNextOfKin"
+            type="text"
+            placeholder="Enter next of kin full name"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="registerNextOfKinPhone">
+            Next of Kin Phone
+          </label>
+
+          <input
+            id="registerNextOfKinPhone"
+            type="tel"
+            placeholder="+265..."
+            required
+          >
+
+        </div>
+
+
+        <!-- IDENTIFICATION TYPE -->
+
+        <div class="form-group">
+
+          <label for="registerIdType">
+            Identification Type
+          </label>
+
+          <select
+            id="registerIdType"
+            required
+          >
+
+            <option value="">
+              Select identification type
+            </option>
+
+            <option value="national_id">
+              National ID
+            </option>
+
+            <option value="passport">
+              Passport
+            </option>
+
+            <option value="drivers_license">
+              Driver's Licence
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- IDENTIFICATION NUMBER -->
+
+        <div class="form-group">
+
+          <label for="registerIdNumber">
+            Identification Number
+          </label>
+
+          <input
+            id="registerIdNumber"
+            type="text"
+            placeholder="Enter identification number"
+            required
+          >
+
+        </div>
+
+
+        <!-- ID DOCUMENT -->
+
+        <div class="form-group">
+
+          <label for="registerIdDocument">
+            Upload Identification Document
+          </label>
+
+          <input
+            id="registerIdDocument"
+            class="file-input"
+            type="file"
+            accept=".jpg,.jpeg,.png,.pdf"
+            required
+          >
+
+          <small class="file-help">
+            Accepted formats: JPG, JPEG, PNG or PDF.
+            Maximum recommended size: 5 MB.
+          </small>
+
+        </div>
+
+
+        <!-- PROOF OF ADDRESS -->
+
+        <div class="form-group">
+
+          <label for="registerProofOfAddress">
+            Upload Proof of Address
+          </label>
+
+          <input
+            id="registerProofOfAddress"
+            class="file-input"
+            type="file"
+            accept=".jpg,.jpeg,.png,.pdf"
+            required
+          >
+
+          <small class="file-help">
+            Accepted formats: JPG, JPEG, PNG or PDF.
+            Maximum recommended size: 5 MB.
+          </small>
+
+        </div>
+
+
+        <div class="kyc-note">
+
+          📌 Your KYC documents will be connected to your
+          customer profile when the secure document-upload
+          backend is activated.
 
         </div>
 
@@ -2840,13 +3071,6 @@
       }
 
 
-      /*
-        JAY C O B MONTHLY INTEREST FORMULA
-
-        Interest =
-        Principal × Monthly Rate × Months
-      */
-
       const interestAmount =
         amount *
         (monthlyRate / 100) *
@@ -3131,7 +3355,7 @@
 
 
     /* =====================================================
-       REGISTER
+       REGISTER WITH KYC
     ====================================================== */
 
     document
@@ -3146,6 +3370,8 @@
             "registerStatus"
           );
 
+
+          /* BASIC INFORMATION */
 
           const fullName =
             document
@@ -3189,6 +3415,70 @@
               )
               .value;
 
+
+          /* KYC INFORMATION */
+
+          const residentialAddress =
+            document
+              .getElementById(
+                "registerResidentialAddress"
+              )
+              .value
+              .trim();
+
+
+          const nextOfKin =
+            document
+              .getElementById(
+                "registerNextOfKin"
+              )
+              .value
+              .trim();
+
+
+          const nextOfKinPhone =
+            document
+              .getElementById(
+                "registerNextOfKinPhone"
+              )
+              .value
+              .trim();
+
+
+          const idType =
+            document
+              .getElementById(
+                "registerIdType"
+              )
+              .value;
+
+
+          const idNumber =
+            document
+              .getElementById(
+                "registerIdNumber"
+              )
+              .value
+              .trim();
+
+
+          const idDocument =
+            document
+              .getElementById(
+                "registerIdDocument"
+              )
+              .files[0];
+
+
+          const proofOfAddress =
+            document
+              .getElementById(
+                "registerProofOfAddress"
+              )
+              .files[0];
+
+
+          /* BASIC VALIDATION */
 
           if (!fullName) {
 
@@ -3255,6 +3545,169 @@
           }
 
 
+          /* KYC VALIDATION */
+
+          if (!residentialAddress) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your residential address."
+            );
+
+            return;
+
+          }
+
+
+          if (!nextOfKin) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your next of kin full name."
+            );
+
+            return;
+
+          }
+
+
+          if (!nextOfKinPhone) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your next of kin phone number."
+            );
+
+            return;
+
+          }
+
+
+          if (!idType) {
+
+            showStatus(
+              "registerStatus",
+              "Please select your identification type."
+            );
+
+            return;
+
+          }
+
+
+          if (!idNumber) {
+
+            showStatus(
+              "registerStatus",
+              "Please enter your identification number."
+            );
+
+            return;
+
+          }
+
+
+          if (!idDocument) {
+
+            showStatus(
+              "registerStatus",
+              "Please select your identification document."
+            );
+
+            return;
+
+          }
+
+
+          if (!proofOfAddress) {
+
+            showStatus(
+              "registerStatus",
+              "Please select your proof of address document."
+            );
+
+            return;
+
+          }
+
+
+          /* FILE SIZE VALIDATION */
+
+          const maxFileSize =
+            5 * 1024 * 1024;
+
+
+          if (
+            idDocument.size >
+            maxFileSize
+          ) {
+
+            showStatus(
+              "registerStatus",
+              "Identification document must not exceed 5 MB."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            proofOfAddress.size >
+            maxFileSize
+          ) {
+
+            showStatus(
+              "registerStatus",
+              "Proof of address must not exceed 5 MB."
+            );
+
+            return;
+
+          }
+
+
+          /* FILE TYPE VALIDATION */
+
+          const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "application/pdf"
+          ];
+
+
+          if (
+            !allowedTypes.includes(
+              idDocument.type
+            )
+          ) {
+
+            showStatus(
+              "registerStatus",
+              "Identification document must be JPG, PNG or PDF."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            !allowedTypes.includes(
+              proofOfAddress.type
+            )
+          ) {
+
+            showStatus(
+              "registerStatus",
+              "Proof of address must be JPG, PNG or PDF."
+            );
+
+            return;
+
+          }
+
+
           const button =
             document.getElementById(
               "registerButton"
@@ -3273,6 +3726,20 @@
             showLoading();
 
 
+            /*
+              IMPORTANT:
+
+              The current backend registration endpoint
+              accepts JSON only.
+
+              Therefore the KYC fields are collected and
+              validated here, but the actual document files
+              are NOT uploaded yet.
+
+              Step 2 will connect these documents to
+              Supabase Storage and the KYC table securely.
+            */
+
             const data =
               await apiRequest(
                 "/customers/register",
@@ -3289,7 +3756,22 @@
 
                         phone,
 
-                        password
+                        password,
+
+                        residential_address:
+                          residentialAddress,
+
+                        next_of_kin:
+                          nextOfKin,
+
+                        next_of_kin_phone:
+                          nextOfKinPhone,
+
+                        identification_type:
+                          idType,
+
+                        identification_number:
+                          idNumber
                       }
                     )
                 }
@@ -3311,8 +3793,7 @@
 
             showStatus(
               "registerStatus",
-              data.message ||
-              "Account created successfully.",
+              "Account created successfully. Your KYC information is ready for secure document verification.",
               "success"
             );
 
