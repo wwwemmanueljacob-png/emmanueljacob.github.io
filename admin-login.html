@@ -6039,6 +6039,286 @@ function getRejectionReason(){
 
 }
 
+/* =========================================================
+   ADMIN KYC
+========================================================= */
+
+async function loadAdminKYC(){
+
+    const body =
+        document.getElementById(
+            "adminKycBody"
+        );
+
+
+    if(!body){
+        return;
+    }
+
+
+    body.innerHTML =
+        `<tr>
+            <td colspan="8" class="loading">
+                <span class="spinner"></span>
+                Loading KYC documents...
+            </td>
+        </tr>`;
+
+
+    try{
+
+        const result =
+            await apiRequest(
+                "/admin/kyc"
+            );
+
+
+        allKYC =
+            normalizeArray(
+                result,
+                [
+                    "kyc",
+                    "data",
+                    "items"
+                ]
+            );
+
+
+        renderAdminKYC();
+
+
+    }catch(error){
+
+        console.error(
+            "Admin KYC error:",
+            error
+        );
+
+
+        body.innerHTML =
+            `<tr>
+                <td colspan="8" class="empty">
+                    ${escapeHTML(
+                        error.message ||
+                        "Unable to load KYC documents."
+                    )}
+                </td>
+            </tr>`;
+
+    }
+
+}
+
+
+function renderAdminKYC(){
+
+    const body =
+        document.getElementById(
+            "adminKycBody"
+        );
+
+
+    if(!body){
+        return;
+    }
+
+
+    const search =
+        (
+            document
+            .getElementById("kycSearch")
+            ?.value ||
+            ""
+        )
+        .toLowerCase();
+
+
+    const statusFilter =
+        (
+            document
+            .getElementById("kycStatusFilter")
+            ?.value ||
+            ""
+        )
+        .toUpperCase();
+
+
+    const filtered =
+        allKYC.filter(kyc=>{
+
+            const text =
+                [
+                    kyc.id,
+                    kyc.customer_id,
+                    kyc.document_type,
+                    kyc.document_number,
+                    kyc.status
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+            const matchesSearch =
+                !search ||
+                text.includes(search);
+
+
+            const kycStatus =
+                String(
+                    kyc.status || ""
+                ).toUpperCase();
+
+
+            const matchesStatus =
+                !statusFilter ||
+                kycStatus === statusFilter;
+
+
+            return (
+                matchesSearch &&
+                matchesStatus
+            );
+
+        });
+
+
+    if(!filtered.length){
+
+        body.innerHTML =
+            `<tr>
+                <td colspan="8" class="empty">
+                    No KYC documents found.
+                </td>
+            </tr>`;
+
+        return;
+
+    }
+
+
+    body.innerHTML =
+        filtered.map(kyc=>{
+
+            const id =
+                kyc.id;
+
+
+            const customerId =
+                kyc.customer_id || "-";
+
+
+            const documentType =
+                kyc.document_type || "-";
+
+
+            const documentNumber =
+                kyc.document_number || "-";
+
+
+            const status =
+                kyc.status || "PENDING";
+
+
+            const submitted =
+                kyc.submitted_at ||
+                kyc.created_at;
+
+
+            const verified =
+                kyc.verified_at;
+
+
+            const rejectionReason =
+                kyc.rejection_reason || "-";
+
+
+            return `
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHTML(
+                                customerId
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            documentType
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            documentNumber
+                        )}
+                    </td>
+
+                    <td>
+                        ${statusBadge(status)}
+                    </td>
+
+                    <td>
+                        ${formatDate(submitted)}
+                    </td>
+
+                    <td>
+                        ${formatDate(verified)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            rejectionReason
+                        )}
+                    </td>
+
+                    <td>
+
+                        <div class="action-group">
+
+                            <button
+                                class="small-btn"
+                                onclick="viewKYC('${encodeURIComponent(id)}')"
+                            >
+                                View
+                            </button>
+
+                            ${
+                                String(status)
+                                .toUpperCase()
+                                === "PENDING"
+                                ?
+                                `
+                                <button
+                                    class="small-btn success"
+                                    onclick="approveKYC('${encodeURIComponent(id)}')"
+                                >
+                                    Approve
+                                </button>
+
+                                <button
+                                    class="small-btn danger"
+                                    onclick="rejectKYC('${encodeURIComponent(id)}')"
+                                >
+                                    Reject
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+
+}
+      
       
 /* =========================================================
    ACTIVE LOANS
