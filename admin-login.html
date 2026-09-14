@@ -1952,6 +1952,26 @@ textarea:focus{
                         <strong id="summaryPortfolio">MWK 0</strong>
                     </div>
 
+                      <div class="summary-row">
+    <span>Admin Available Balance</span>
+    <strong id="summaryAdminBalance">MWK 0</strong>
+</div>
+
+<div class="summary-row">
+    <span>Loans Disbursed</span>
+    <strong id="summaryLoanDisbursed">MWK 0</strong>
+</div>
+
+<div class="summary-row">
+    <span>Outstanding Loans</span>
+    <strong id="summaryOutstandingLoans">MWK 0</strong>
+</div>
+
+<div class="summary-row">
+    <span>Total Interest Earned</span>
+    <strong id="summaryInterestEarned">MWK 0</strong>
+</div>
+
                     <div class="summary-row">
                         <span>Total Deposits</span>
                         <strong id="summaryDeposits">MWK 0</strong>
@@ -5086,6 +5106,24 @@ async function loadStatistics(){
             "summarySavings",
             formatMoney(savings)
         );
+
+          setText(
+    "summaryWithdrawals",
+    formatMoney(
+        getValue(
+            stats,
+            "totalWithdrawalAmount"
+        ) || 0
+    )
+);
+
+setText(
+    "summaryPendingWithdrawals",
+    getValue(
+        stats,
+        "pendingWithdrawals"
+    ) || 0
+);
 
 
     }catch(error){
