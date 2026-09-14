@@ -570,6 +570,15 @@
     </button>
 
     <button
+  class="nav-btn"
+  type="button"
+  onclick="showSection('withdrawal')">
+
+  💸 Withdraw Money
+
+    </button>
+
+    <button
       class="nav-btn"
       type="button"
       onclick="showSection('savings')">
@@ -992,6 +1001,275 @@
           </table>
 
         </div>
+
+      </div>
+
+    </section>
+
+
+        <!-- ================= WITHDRAW MONEY ================= -->
+
+    <section
+      id="withdrawalSection"
+      class="section dashboard-section"
+      style="display:none;">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>Withdraw Money</h2>
+
+          <small
+            id="withdrawalSummary"
+            style="color:#68758a;">
+            Request a withdrawal from your account
+          </small>
+
+        </div>
+
+        <button
+          class="primary-btn"
+          type="button"
+          onclick="loadWithdrawals()">
+          🔄 Refresh
+        </button>
+
+      </div>
+
+
+      <div class="section-body">
+
+
+        <!-- CURRENT BALANCE -->
+
+        <div
+          class="card"
+          style="margin-bottom:20px;">
+
+          <div class="card-label">
+            Available Account Balance
+          </div>
+
+          <div
+            class="card-value"
+            id="withdrawalBalance">
+            MWK 0.00
+          </div>
+
+        </div>
+
+
+        <!-- WITHDRAWAL FORM -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Request Withdrawal
+            </h3>
+
+          </div>
+
+
+          <div class="card-body">
+
+
+            <div
+              id="withdrawalStatus"
+              style="
+                margin-bottom:15px;
+                font-weight:bold;
+              ">
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="withdrawalAmount">
+                Withdrawal Amount (MWK)
+              </label>
+
+              <input
+                type="number"
+                id="withdrawalAmount"
+                min="1"
+                step="0.01"
+                placeholder="Enter amount"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="withdrawalMethod">
+                Withdrawal Method
+              </label>
+
+              <select
+                id="withdrawalMethod">
+
+                <option value="">
+                  Select withdrawal method
+                </option>
+
+                <option value="Airtel Money">
+                  Airtel Money
+                </option>
+
+                <option value="Mpamba">
+                  Mpamba
+                </option>
+
+                <option value="Bank Transfer">
+                  Bank Transfer
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="withdrawalDestination">
+                Destination Number / Account
+              </label>
+
+              <input
+                type="text"
+                id="withdrawalDestination"
+                placeholder="Enter Airtel/Mpamba number or bank account"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="withdrawalDescription">
+                Description (Optional)
+              </label>
+
+              <textarea
+                id="withdrawalDescription"
+                rows="3"
+                placeholder="Enter any additional information">
+              </textarea>
+
+            </div>
+
+
+            <button
+              class="primary-btn"
+              type="button"
+              id="withdrawalSubmitButton"
+              onclick="requestWithdrawal()">
+
+              💸 Request Withdrawal
+
+            </button>
+
+
+          </div>
+
+        </div>
+
+
+        <!-- WITHDRAWAL HISTORY -->
+
+        <div
+          class="card"
+          style="margin-top:20px;">
+
+          <div class="card-header">
+
+            <h3>
+              Withdrawal History
+            </h3>
+
+          </div>
+
+
+          <div class="card-body">
+
+            <div
+              style="overflow-x:auto;">
+
+              <table
+                style="
+                  width:100%;
+                  border-collapse:collapse;
+                  min-width:850px;
+                ">
+
+                <thead>
+
+                  <tr
+                    style="
+                      background:#f5f7fa;
+                      border-bottom:1px solid #e1e7ef;
+                    ">
+
+                    <th style="padding:12px;text-align:left;">
+                      Date
+                    </th>
+
+                    <th style="padding:12px;text-align:right;">
+                      Amount
+                    </th>
+
+                    <th style="padding:12px;text-align:left;">
+                      Method
+                    </th>
+
+                    <th style="padding:12px;text-align:left;">
+                      Destination
+                    </th>
+
+                    <th style="padding:12px;text-align:left;">
+                      Reference
+                    </th>
+
+                    <th style="padding:12px;text-align:left;">
+                      Status
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+
+                <tbody id="withdrawalTableBody">
+
+                  <tr>
+
+                    <td
+                      colspan="6"
+                      style="
+                        padding:25px;
+                        text-align:center;
+                        color:#68758a;
+                      ">
+
+                      No withdrawal requests yet.
+
+                    </td>
+
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
 
       </div>
 
@@ -3673,6 +3951,604 @@
 
   }
 
+    /* =====================================================
+     LOAD WITHDRAWALS
+  ===================================================== */
+
+  async function loadWithdrawals() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const tableBody =
+      document.getElementById(
+        "withdrawalTableBody"
+      );
+
+    const balanceElement =
+      document.getElementById(
+        "withdrawalBalance"
+      );
+
+    const summaryElement =
+      document.getElementById(
+        "withdrawalSummary"
+      );
+
+
+    if (balanceElement) {
+
+      balanceElement.textContent =
+        formatMoney(
+          customer.balance || 0
+        );
+
+    }
+
+
+    if (tableBody) {
+
+      tableBody.innerHTML = `
+        <tr>
+
+          <td
+            colspan="6"
+            style="
+              padding:25px;
+              text-align:center;
+              color:#68758a;
+            ">
+
+            Loading withdrawal history...
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+
+    try {
+
+      const response =
+        await apiRequest(
+          `/withdrawals/customer/${customer.id}`
+        );
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        throw new Error(
+          response?.message ||
+          "Unable to load withdrawals."
+        );
+
+      }
+
+
+      const withdrawals =
+        Array.isArray(
+          response.withdrawals
+        )
+          ? response.withdrawals
+          : [];
+
+
+      if (!withdrawals.length) {
+
+        if (summaryElement) {
+
+          summaryElement.textContent =
+            "No withdrawal requests yet.";
+
+        }
+
+
+        if (tableBody) {
+
+          tableBody.innerHTML = `
+            <tr>
+
+              <td
+                colspan="6"
+                style="
+                  padding:30px;
+                  text-align:center;
+                  color:#68758a;
+                ">
+
+                No withdrawal requests yet.
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      if (summaryElement) {
+
+        summaryElement.textContent =
+          `${withdrawals.length} withdrawal request${
+            withdrawals.length === 1
+              ? ""
+              : "s"
+          } found`;
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML =
+          withdrawals
+            .map(
+              withdrawal => {
+
+                const amount =
+                  Number(
+                    withdrawal.amount || 0
+                  );
+
+
+                const status =
+                  String(
+                    withdrawal.status ||
+                    "pending"
+                  ).toLowerCase();
+
+
+                const statusClass =
+                  status === "completed"
+                    ? "status-active"
+                    : status === "rejected" ||
+                      status === "failed"
+                      ? "status-blocked"
+                      : "status-pending";
+
+
+                return `
+                  <tr>
+
+                    <td>
+                      ${formatDateTime(
+                        withdrawal.created_at
+                      )}
+                    </td>
+
+                    <td
+                      style="
+                        text-align:right;
+                        font-weight:bold;
+                      ">
+
+                      ${formatMoney(
+                        amount
+                      )}
+
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        withdrawal.withdrawal_method ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHTML(
+                        withdrawal.destination_number ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td
+                      style="
+                        font-family:monospace;
+                        font-size:12px;
+                      ">
+
+                      ${escapeHTML(
+                        withdrawal.reference_number ||
+                        "—"
+                      )}
+
+                    </td>
+
+                    <td
+                      class="${statusClass}"
+                      style="
+                        text-transform:capitalize;
+                        font-weight:bold;
+                      ">
+
+                      ${escapeHTML(
+                        status
+                      )}
+
+                    </td>
+
+                  </tr>
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "WITHDRAWAL HISTORY ERROR:",
+        error
+      );
+
+
+      if (summaryElement) {
+
+        summaryElement.textContent =
+          "Unable to load withdrawal history.";
+
+      }
+
+
+      if (tableBody) {
+
+        tableBody.innerHTML = `
+          <tr>
+
+            <td
+              colspan="6"
+              style="
+                padding:30px;
+                text-align:center;
+                color:#b42318;
+              ">
+
+              Unable to load withdrawal history.
+
+              <br>
+
+              <small>
+                ${escapeHTML(
+                  error.message ||
+                  "Please try again."
+                )}
+              </small>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     REQUEST WITHDRAWAL
+  ===================================================== */
+
+  async function requestWithdrawal() {
+
+    if (
+      !customer ||
+      !customer.id
+    ) {
+      return;
+    }
+
+
+    const amountInput =
+      document.getElementById(
+        "withdrawalAmount"
+      );
+
+    const methodInput =
+      document.getElementById(
+        "withdrawalMethod"
+      );
+
+    const destinationInput =
+      document.getElementById(
+        "withdrawalDestination"
+      );
+
+    const descriptionInput =
+      document.getElementById(
+        "withdrawalDescription"
+      );
+
+    const statusElement =
+      document.getElementById(
+        "withdrawalStatus"
+      );
+
+    const button =
+      document.getElementById(
+        "withdrawalSubmitButton"
+      );
+
+
+    const amount =
+      amountInput
+        ? Number(
+            amountInput.value
+          )
+        : 0;
+
+
+    const method =
+      methodInput
+        ? methodInput.value
+        : "";
+
+
+    const destination =
+      destinationInput
+        ? destinationInput.value.trim()
+        : "";
+
+
+    const description =
+      descriptionInput
+        ? descriptionInput.value.trim()
+        : "";
+
+
+    if (
+      !amount ||
+      amount <= 0
+    ) {
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          "Please enter a valid withdrawal amount.";
+
+        statusElement.style.color =
+          "#b42318";
+
+      }
+
+      return;
+
+    }
+
+
+    const currentBalance =
+      Number(
+        customer.balance || 0
+      );
+
+
+    if (
+      amount > currentBalance
+    ) {
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          "Insufficient account balance.";
+
+        statusElement.style.color =
+          "#b42318";
+
+      }
+
+      return;
+
+    }
+
+
+    if (!method) {
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          "Please select a withdrawal method.";
+
+        statusElement.style.color =
+          "#b42318";
+
+      }
+
+      return;
+
+    }
+
+
+    if (!destination) {
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          "Please enter the destination number or account.";
+
+        statusElement.style.color =
+          "#b42318";
+
+      }
+
+      return;
+
+    }
+
+
+    if (button) {
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Submitting...";
+
+    }
+
+
+    try {
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          "Submitting your withdrawal request...";
+
+        statusElement.style.color =
+          "#68758a";
+
+      }
+
+
+      const response =
+        await apiRequest(
+          "/withdrawals",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                customer_id:
+                  customer.id,
+
+                amount:
+                  amount,
+
+                withdrawal_method:
+                  method,
+
+                destination_number:
+                  destination,
+
+                description:
+                  description
+
+              })
+
+          }
+        );
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        throw new Error(
+          response?.message ||
+          "Unable to submit withdrawal request."
+        );
+
+      }
+
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          "Withdrawal request submitted successfully.";
+
+        statusElement.style.color =
+          "#16833a";
+
+      }
+
+
+      if (amountInput) {
+
+        amountInput.value =
+          "";
+
+      }
+
+
+      if (methodInput) {
+
+        methodInput.value =
+          "";
+
+      }
+
+
+      if (destinationInput) {
+
+        destinationInput.value =
+          "";
+
+      }
+
+
+      if (descriptionInput) {
+
+        descriptionInput.value =
+          "";
+
+      }
+
+
+      await loadCustomer();
+
+      await loadWithdrawals();
+
+
+    } catch (error) {
+
+      console.error(
+        "REQUEST WITHDRAWAL ERROR:",
+        error
+      );
+
+
+      if (statusElement) {
+
+        statusElement.textContent =
+          error.message ||
+          "Unable to submit withdrawal request.";
+
+        statusElement.style.color =
+          "#b42318";
+
+      }
+
+    } finally {
+
+      if (button) {
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          "💸 Request Withdrawal";
+
+      }
+
+    }
+
+  }
+
 
   /* =====================================================
      LOAD SAVINGS
@@ -5393,16 +6269,17 @@
   ) {
 
     const sections = [
-      "overview",
-      "loans",
-      "transactions",
-      "savings",
-      "statements",
-      "profile",
-      "kyc",
-      "support",
-      "security"
-    ];
+  "overview",
+  "loans",
+  "withdrawal",
+  "transactions",
+  "savings",
+  "statements",
+  "profile",
+  "kyc",
+  "support",
+  "security"
+];
 
 
     if (
