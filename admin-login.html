@@ -5925,25 +5925,594 @@ function viewApplication(encodedId){
 }
 
 
+/* =========================================================
+   LOAN APPROVAL
+   Admin sets interest rate before approving
+========================================================= */
+
+let pendingLoanApproval = null;
+
+
+function openLoanApprovalModal(
+    application,
+    principal,
+    duration
+){
+
+    pendingLoanApproval = {
+        application,
+        principal,
+        duration
+    };
+
+
+    const modal =
+        document.getElementById(
+            "loanApprovalModal"
+        );
+
+
+    const customerName =
+        application.applicant_name ||
+        application.customer_name ||
+        application.full_name ||
+        application.email ||
+        "Customer";
+
+
+    document.getElementById(
+        "approvalCustomerName"
+    ).textContent =
+        customerName;
+
+
+    document.getElementById(
+        "approvalPrincipal"
+    ).textContent =
+        principal.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+
+    document.getElementById(
+        "approvalDuration"
+    ).textContent =
+        duration;
+
+
+    document.getElementById(
+        "approvalInterestRate"
+    ).value = "";
+
+
+    document.getElementById(
+        "approvalCalculation"
+    ).style.display =
+        "none";
+
+
+    const button =
+        document.getElementById(
+            "confirmLoanApprovalButton"
+        );
+
+
+    button.disabled = true;
+
+    button.style.opacity = "0.6";
+
+    button.textContent =
+        "Approve Loan";
+
+
+    modal.classList.add("show");
+
+}
+
+
+
+function closeLoanApprovalModal(){
+
+    const modal =
+        document.getElementById(
+            "loanApprovalModal"
+        );
+
+
+    if(modal){
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    pendingLoanApproval = null;
+
+}
+
+
+
+function calculateApprovalLoan(){
+
+    if(!pendingLoanApproval){
+
+        return;
+
+    }
+
+
+    const rate =
+        Number(
+            document.getElementById(
+                "approvalInterestRate"
+            ).value
+        );
+
+
+    const principal =
+        pendingLoanApproval.principal;
+
+
+    const duration =
+        pendingLoanApproval.duration;
+
+
+    const calculation =
+        document.getElementById(
+            "approvalCalculation"
+        );
+
+
+    const button =
+        document.getElementById(
+            "confirmLoanApprovalButton"
+        );
+
+
+    if(
+        !Number.isFinite(rate) ||
+        rate < 0
+    ){
+
+        calculation.style.display =
+            "none";
+
+        button.disabled = true;
+
+        button.style.opacity =
+            "0.6";
+
+        return;
+
+    }
+
+
+    const totalInterest =
+        principal *
+        (rate / 100) *
+        duration;
+
+
+    const totalAmount =
+        principal +
+        totalInterest;
+
+
+    const roundedTotalAmount =
+        Number(
+            totalAmount.toFixed(2)
+        );
+
+
+    const monthlyInstallment =
+        roundedTotalAmount /
+        duration;
+
+
+    document.getElementById(
+        "approvalTotalInterest"
+    ).textContent =
+        totalInterest.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+
+    document.getElementById(
+        "approvalTotalAmount"
+    ).textContent =
+        roundedTotalAmount.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+
+    document.getElementById(
+        "approvalMonthlyInstallment"
+    ).textContent =
+        monthlyInstallment.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+
+    calculation.style.display =
+        "block";
+
+
+    button.disabled = false;
+
+    button.style.opacity =
+        "1";
+
+}
+
+
+
+async function confirmLoanApproval(){
+
+    if(!pendingLoanApproval){
+
+        showToast(
+            "No loan application selected.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const rate =
+        Number(
+            document.getElementById(
+                "approvalInterestRate"
+            ).value
+        );
+
+
+    if(
+        !Number.isFinite(rate) ||
+        rate < 0
+    ){
+
+        showToast(
+            "Please enter a valid interest rate.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const application =
+        pendingLoanApproval.application;
+
+
+    const principal =
+        pendingLoanApproval.principal;
+
+
+    const duration =
+        pendingLoanApproval.duration;
+
+
+    const totalInterest =
+        principal *
+        (rate / 100) *
+        duration;
+
+
+    const totalAmount =
+        Number(
+            (
+                principal +
+                totalInterest
+            ).toFixed(2)
+        );
+
+
+    const monthlyInstallment =
+        Number(
+            (
+                totalAmount /
+                duration
+            ).toFixed(2)
+        );
+
+
+    const customerName =
+        application.applicant_name ||
+        application.customer_name ||
+        application.full_name ||
+        application.email ||
+        "Customer";
+
+
+    const confirmed =
+        confirm(
+
+            "CONFIRM LOAN APPROVAL\n\n" +
+
+            "Customer: " +
+            customerName +
+
+            "\n\nLoan Amount: MWK " +
+
+            principal.toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            ) +
+
+            "\nInterest Rate: " +
+            rate +
+            "% per month" +
+
+            "\nDuration: " +
+            duration +
+            " month(s)" +
+
+            "\nTotal Interest: MWK " +
+
+            totalInterest.toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            ) +
+
+            "\nTotal Repayment: MWK " +
+
+            totalAmount.toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            ) +
+
+            "\nMonthly Installment: MWK " +
+
+            monthlyInstallment.toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            ) +
+
+            "\n\nThe system will create the loan and repayment schedule."
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "confirmLoanApprovalButton"
+        );
+
+
+    button.disabled = true;
+
+    button.style.opacity =
+        "0.6";
+
+    button.textContent =
+        "Creating Loan...";
+
+
+    try{
+
+        await apiRequest(
+
+            `/admin/applications/${encodeURIComponent(application.id)}/status`,
+
+            {
+                method:"PUT",
+
+                body:JSON.stringify({
+
+                    status:"APPROVED",
+
+                    interest_rate:rate,
+
+                    rejection_reason:null
+
+                })
+
+            }
+
+        );
+
+
+        closeLoanApprovalModal();
+
+
+        showToast(
+            "Loan approved and repayment schedule created successfully."
+        );
+
+
+        await Promise.allSettled([
+
+            loadApplications(),
+
+            loadStatistics(),
+
+            loadActiveLoans(),
+
+            loadAdminKYC()
+
+        ]);
+
+
+    }catch(error){
+
+        console.error(
+            "Loan approval error:",
+            error
+        );
+
+
+        showToast(
+
+            error.message ||
+
+            "Unable to approve loan.",
+
+            "error"
+
+        );
+
+
+        button.disabled = false;
+
+        button.style.opacity =
+            "1";
+
+        button.textContent =
+            "Approve Loan";
+
+    }
+
+}
+
+
+
 async function changeApplicationStatus(
     encodedId,
     status
 ){
 
     const id =
-        decodeURIComponent(encodedId);
+        decodeURIComponent(
+            encodedId
+        );
 
 
-    /* =====================================
-       REJECTION REASON
-    ===================================== */
+    /* =====================================================
+       APPROVE
+    ===================================================== */
+
+    if(status === "APPROVED"){
+
+        const application =
+            allApplications.find(
+
+                item =>
+
+                    String(item.id) ===
+                    String(id)
+
+            );
+
+
+        if(!application){
+
+            showToast(
+                "Unable to find this loan application.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const principal =
+            Number(
+                application.amount || 0
+            );
+
+
+        const duration =
+            Number(
+                application.duration_months || 0
+            );
+
+
+        if(
+            !Number.isFinite(principal) ||
+            principal <= 0
+        ){
+
+            showToast(
+                "Invalid loan amount.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isInteger(duration) ||
+            duration <= 0
+        ){
+
+            showToast(
+                "Invalid loan duration.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        openLoanApprovalModal(
+
+            application,
+
+            principal,
+
+            duration
+
+        );
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       REJECTION / OTHER STATUS
+       KEEP THE EXISTING BEHAVIOUR
+    ===================================================== */
 
     let rejectionReason = "";
 
 
-    if(
-        status === "REJECTED"
-    ){
+    if(status === "REJECTED"){
 
         rejectionReason =
             await getRejectionReason();
@@ -5962,9 +6531,7 @@ async function changeApplicationStatus(
             rejectionReason.trim();
 
 
-        if(
-            !rejectionReason
-        ){
+        if(!rejectionReason){
 
             showToast(
                 "Rejection reason is required.",
@@ -5977,10 +6544,6 @@ async function changeApplicationStatus(
 
     }
 
-
-    /* =====================================
-       CONFIRM ACTION
-    ===================================== */
 
     if(
         !confirm(
@@ -5996,8 +6559,11 @@ async function changeApplicationStatus(
     try{
 
         await apiRequest(
+
             `/admin/applications/${encodeURIComponent(id)}/status`,
+
             {
+
                 method:"PUT",
 
                 body:JSON.stringify({
@@ -6008,12 +6574,16 @@ async function changeApplicationStatus(
                         rejectionReason
 
                 })
+
             }
+
         );
 
 
         showToast(
+
             `Application ${status.toLowerCase()} successfully.`
+
         );
 
 
@@ -6034,15 +6604,18 @@ async function changeApplicationStatus(
     }catch(error){
 
         showToast(
+
             error.message ||
+
             "Unable to update loan application status.",
+
             "error"
+
         );
 
     }
 
 }
-
 
 /* =====================================
    REJECTION REASON MODAL
