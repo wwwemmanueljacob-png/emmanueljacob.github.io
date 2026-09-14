@@ -342,58 +342,553 @@ router.get("/loans", authenticateAdmin, async (req, res) => {
 });
 
 // ==========================================
-// UPDATE LOAN STATUS
+// UPDATE LOAN APPLICATION STATUS
+// + CREATE LOAN + REPAYMENT SCHEDULES
 // ==========================================
-router.patch(
-  "/loans/:id/status",
+router.put(
+  "/applications/:id/status",
   authenticateAdmin,
   async (req, res) => {
     try {
-      const { status } = req.body;
 
-      if (!["pending", "approved", "rejected"].includes(status)) {
+      const applicationId = req.params.id;
+
+      const requestedStatus =
+        String(req.body?.status || "")
+          .trim()
+          .toUpperCase();
+
+      const rejectionReason =
+        String(req.body?.rejection_reason || "")
+          .trim();
+
+      const allowedStatuses = [
+        "PENDING",
+        "UNDER REVIEW",
+        "APPROVED",
+        "REJECTED"
+      ];
+
+      if (!allowedStatuses.includes(requestedStatus)) {
         return res.status(400).json({
           success: false,
           message: "Invalid loan status"
         });
       }
 
-      const { data, error } = await supabase
+
+      // ==========================================
+      // GET LOAN APPLICATION
+      // ==========================================
+
+      const {
+        data: application,
+        error: applicationError
+      } = await supabase
         .from("loan_applications")
-        .update({ status })
-        .eq("id", req.params.id)
-        .select(
-          "id, customer_id, loan_type, amount, duration_months, purpose, status, created_at"
-        )
+        .select(`
+          id,
+          customer_id,
+          loan_type,
+          amount,
+          duration_months,
+          interest_rate,
+          purpose,
+          status,
+          created_at
+        `)
+        .eq("id", applicationId)
         .maybeSingle();
 
-      if (error) {
-        console.error(error);
+      if (applicationError) {
+        console.error(
+          "Loan application fetch error:",
+          applicationError
+        );
 
         return res.status(500).json({
           success: false,
-          message: "Could not update loan status"
+          message: "Could not retrieve loan application",
+          error: applicationError.message
         });
       }
 
-      if (!data) {
+      if (!application) {
         return res.status(404).json({
           success: false,
           message: "Loan application not found"
         });
       }
 
+
+      // ==========================================
+      // REJECTION
+      // ==========================================
+
+      if (requestedStatus === "REJECTED") {
+
+        if (!rejectionReason) {
+          return res.status(400).json({
+            success: false,
+            message: "Rejection reason is required"
+          });
+        }
+
+        const {
+          data,
+          error
+        } = await supabase
+          .from("loan_applications")
+          .update({
+            status: "REJECTED",
+            rejection_reason: rejectionReason,
+            reviewed_at: new Date().toISOString(),
+            reviewed_by: req.admin?.admin_id || null
+          })
+          .eq("id", applicationId)
+          .select()
+          .maybeSingle();
+
+        if (error) {
+          console.error(
+            "Loan rejection error:",
+            error
+          );
+
+          return res.status(500).json({
+            success: false,
+            message: "Could not reject loan application",
+            error: error.message
+          });
+        }
+
+        return res.json({
+          success: true,
+          message: "Loan application rejected successfully",
+          application: data
+        });
+      }
+
+
+      // ==========================================
+      // NON-APPROVED STATUS
+      // ==========================================
+
+      if (requestedStatus !== "APPROVED") {
+
+        const {
+          data,
+          error
+        } = await supabase
+          .from("loan_applications")
+          .update({
+            status: requestedStatus,
+            reviewed_at: new Date().toISOString(),
+            reviewed_by: req.admin?.admin_id || null
+          })
+          .eq("id", applicationId)
+          .select()
+          .maybeSingle();
+
+        if (error) {
+          console.error(
+            "Loan status update error:",
+            error
+          );
+
+          return res.status(500).json({
+            success: false,
+            message: "Could not update loan status",
+            error: error.message
+          });
+        }
+
+        return res.json({
+          success: true,
+          message: "Loan status updated successfully",
+          application: data
+        });
+      }
+
+
+      // ==========================================
+      // APPROVAL
+      // ==========================================
+
+      const principal =
+        Number(application.amount);
+
+      const duration =
+        Number(application.duration_months);
+
+      const interestRate =
+        Number(application.interest_rate || 0);
+
+      if (
+        !Number.isFinite(principal) ||
+        principal <= 0
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid loan amount"
+        });
+      }
+
+      if (
+        !Number.isFinite(duration) ||
+        duration <= 0
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid loan duration"
+        });
+      }
+
+
+      // ==========================================
+      // FLAT MONTHLY INTEREST
+      // ==========================================
+
+      const totalInterest =
+        principal *
+        (interestRate / 100) *
+        duration;
+
+      const totalAmount =
+        principal +
+        totalInterest;
+
+      const monthlyInstallment =
+        totalAmount / duration;
+
+      const approvalDate =
+        new Date();
+
+
+      // ==========================================
+      // CHECK WHETHER LOAN ALREADY EXISTS
+      // ==========================================
+
+      const {
+        data: existingLoan,
+        error: existingLoanError
+      } = await supabase
+        .from("loans")
+        .select("id")
+        .eq("customer_id", application.customer_id)
+        .eq("loan_amount", principal)
+        .eq("application_date", application.created_at)
+        .maybeSingle();
+
+      if (existingLoanError) {
+        console.error(
+          "Existing loan check error:",
+          existingLoanError
+        );
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not verify existing loan",
+          error: existingLoanError.message
+        });
+      }
+
+
+      let loan = existingLoan;
+
+
+      // ==========================================
+      // CREATE LOAN RECORD
+      // ==========================================
+
+      if (!loan) {
+
+        const finalDueDate =
+          new Date(approvalDate);
+
+        finalDueDate.setMonth(
+          finalDueDate.getMonth() + duration
+        );
+
+
+        const {
+          data: newLoan,
+          error: loanError
+        } = await supabase
+          .from("loans")
+          .insert({
+            customer_id:
+              application.customer_id,
+
+            loan_amount:
+              principal,
+
+            interest_rate:
+              interestRate,
+
+            total_amount:
+              totalAmount,
+
+            amount_paid:
+              0,
+
+            remaining_balance:
+              totalAmount,
+
+            loan_status:
+              "APPROVED",
+
+            application_date:
+              application.created_at,
+
+            approval_date:
+              approvalDate.toISOString(),
+
+            due_date:
+              finalDueDate.toISOString(),
+
+            approved_by:
+              req.admin?.admin_id || null,
+
+            purpose:
+              application.purpose || null
+          })
+          .select()
+          .single();
+
+        if (loanError) {
+          console.error(
+            "Loan creation error:",
+            loanError
+          );
+
+          return res.status(500).json({
+            success: false,
+            message: "Could not create approved loan",
+            error: loanError.message
+          });
+        }
+
+        loan = newLoan;
+      }
+
+
+      // ==========================================
+      // CHECK FOR EXISTING SCHEDULES
+      // ==========================================
+
+      const {
+        data: existingSchedules,
+        error: scheduleCheckError
+      } = await supabase
+        .from("loan_schedules")
+        .select("id")
+        .eq("loan_id", loan.id);
+
+      if (scheduleCheckError) {
+        console.error(
+          "Schedule check error:",
+          scheduleCheckError
+        );
+
+        return res.status(500).json({
+          success: false,
+          message: "Could not check repayment schedules",
+          error: scheduleCheckError.message
+        });
+      }
+
+
+      // ==========================================
+      // CREATE REPAYMENT SCHEDULE
+      // ==========================================
+
+      if (
+        !existingSchedules ||
+        existingSchedules.length === 0
+      ) {
+
+        const schedules = [];
+
+        for (
+          let installment = 1;
+          installment <= duration;
+          installment++
+        ) {
+
+          const dueDate =
+            new Date(approvalDate);
+
+          dueDate.setMonth(
+            dueDate.getMonth() + installment
+          );
+
+
+          // Handle rounding on the final installment
+          let installmentAmount =
+            monthlyInstallment;
+
+          if (installment === duration) {
+            installmentAmount =
+              totalAmount -
+              (monthlyInstallment *
+               (duration - 1));
+          }
+
+
+          schedules.push({
+            loan_id:
+              loan.id,
+
+            customer_id:
+              application.customer_id,
+
+            installment_number:
+              installment,
+
+            due_date:
+              dueDate.toISOString(),
+
+            amount_due:
+              Number(
+                installmentAmount.toFixed(2)
+              ),
+
+            amount_paid:
+              0,
+
+            remaining_amount:
+              Number(
+                installmentAmount.toFixed(2)
+              ),
+
+            status:
+              "PENDING",
+
+            paid_date:
+              null
+          });
+        }
+
+
+        const {
+          error: scheduleError
+        } = await supabase
+          .from("loan_schedules")
+          .insert(schedules);
+
+        if (scheduleError) {
+          console.error(
+            "Schedule creation error:",
+            scheduleError
+          );
+
+          return res.status(500).json({
+            success: false,
+            message:
+              "Loan created but repayment schedules could not be created",
+            error:
+              scheduleError.message
+          });
+        }
+      }
+
+
+      // ==========================================
+      // UPDATE APPLICATION
+      // ==========================================
+
+      const {
+        data: updatedApplication,
+        error: updateError
+      } = await supabase
+        .from("loan_applications")
+        .update({
+          status:
+            "APPROVED",
+
+          reviewed_at:
+            approvalDate.toISOString(),
+
+          reviewed_by:
+            req.admin?.admin_id || null,
+
+          rejection_reason:
+            null
+        })
+        .eq("id", applicationId)
+        .select()
+        .maybeSingle();
+
+      if (updateError) {
+        console.error(
+          "Application approval update error:",
+          updateError
+        );
+
+        return res.status(500).json({
+          success: false,
+          message:
+            "Loan created but application status could not be updated",
+          error:
+            updateError.message
+        });
+      }
+
+
+      // ==========================================
+      // SUCCESS
+      // ==========================================
+
       return res.json({
         success: true,
-        message: "Loan status updated successfully",
-        loan: data
+
+        message:
+          "Loan approved and repayment schedule created successfully.",
+
+        application:
+          updatedApplication,
+
+        loan:
+          loan,
+
+        schedule: {
+          duration_months:
+            duration,
+
+          interest_rate:
+            interestRate,
+
+          total_interest:
+            Number(
+              totalInterest.toFixed(2)
+            ),
+
+          total_amount:
+            Number(
+              totalAmount.toFixed(2)
+            ),
+
+          monthly_installment:
+            Number(
+              monthlyInstallment.toFixed(2)
+            )
+        }
       });
+
     } catch (error) {
-      console.error(error);
+
+      console.error(
+        "Loan approval server error:",
+        error
+      );
 
       return res.status(500).json({
         success: false,
-        message: "Could not update loan status"
+        message:
+          "Could not approve loan application",
+        error:
+          error.message
       });
     }
   }
