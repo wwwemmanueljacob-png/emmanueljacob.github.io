@@ -4912,35 +4912,64 @@ async function loadStatistics(){
 
 
         const portfolio =
-            getValue(
-                stats,
-                "portfolio",
-                "totalPortfolio",
-                "loanPortfolio"
-            ) || 0;
+    getValue(
+        stats,
+        "portfolio",
+        "totalPortfolio",
+        "loanPortfolio",
+        "totalLoanValue"
+    ) || 0;
 
 
         const repayments =
-            getValue(
-                stats,
-                "repayments",
-                "totalRepayments"
-            ) || 0;
+    getValue(
+        stats,
+        "repayments",
+        "totalRepayments",
+        "totalRepaymentAmount"
+    ) || 0;
 
 
         const deposits =
-            getValue(
-                stats,
-                "deposits",
-                "totalDeposits"
-            ) || 0;
+    getValue(
+        stats,
+        "deposits",
+        "totalDeposits",
+        "totalDepositAmount"
+    ) || 0;
 
 
         const savings =
+    getValue(
+        stats,
+        "savings",
+        "totalSavings",
+        "totalSavingsAmount"
+    ) || 0;
+
+
+       const adminBalance =
             getValue(
                 stats,
-                "savings",
-                "totalSavings"
+                "adminAvailableBalance"
+            ) || 0;
+
+        const loanDisbursed =
+            getValue(
+                stats,
+                "totalLoanDisbursed"
+            ) || 0;
+
+        const outstandingLoans =
+            getValue(
+                stats,
+                "totalOutstandingLoans"
+            ) || 0;
+
+        const interestEarned =
+            getValue(
+                stats,
+                "totalInterestEarned"
             ) || 0;
 
 
@@ -4993,6 +5022,27 @@ async function loadStatistics(){
         setText(
             "statisticsActiveLoans",
             activeLoans
+        );
+
+
+                  setText(
+            "summaryAdminBalance",
+            formatMoney(adminBalance)
+        );
+
+        setText(
+            "summaryLoanDisbursed",
+            formatMoney(loanDisbursed)
+        );
+
+        setText(
+            "summaryOutstandingLoans",
+            formatMoney(outstandingLoans)
+        );
+
+        setText(
+            "summaryInterestEarned",
+            formatMoney(interestEarned)
         );
 
 
