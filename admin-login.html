@@ -8325,6 +8325,214 @@ function openCreateModal(module){
     );
 
  }
+
+      /* =========================================================
+   WITHDRAWAL ACTIONS
+========================================================= */
+
+
+/* =========================================================
+   APPROVE WITHDRAWAL
+========================================================= */
+
+async function approveWithdrawal(withdrawalId){
+
+    if(!withdrawalId){
+
+        alert(
+            "Invalid withdrawal ID."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to approve this withdrawal?\n\n" +
+            "This will deduct the amount from the customer's balance " +
+            "and create a completed transaction."
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await apiRequest(
+                `/admin/withdrawals/${decodeURIComponent(withdrawalId)}/approve`,
+                {
+                    method:"PUT",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Unable to approve withdrawal."
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "Withdrawal approved successfully."
+        );
+
+
+        await loadModule(
+            "withdrawals"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "APPROVE WITHDRAWAL ERROR:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to approve withdrawal."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REJECT WITHDRAWAL
+========================================================= */
+
+async function rejectWithdrawal(withdrawalId){
+
+    if(!withdrawalId){
+
+        alert(
+            "Invalid withdrawal ID."
+        );
+
+        return;
+
+    }
+
+
+    const reason =
+        prompt(
+            "Enter the reason for rejecting this withdrawal:"
+        );
+
+
+    if(
+        reason === null
+    ){
+
+        return;
+
+    }
+
+
+    const trimmedReason =
+        reason.trim();
+
+
+    if(!trimmedReason){
+
+        alert(
+            "A rejection reason is required."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await apiRequest(
+                `/admin/withdrawals/${decodeURIComponent(withdrawalId)}/reject`,
+                {
+                    method:"PUT",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            rejection_reason:
+                                trimmedReason
+
+                        })
+
+                }
+            );
+
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Unable to reject withdrawal."
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "Withdrawal rejected successfully."
+        );
+
+
+        await loadModule(
+            "withdrawals"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "REJECT WITHDRAWAL ERROR:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to reject withdrawal."
+        );
+
+    }
+
+}
       
 /* =========================================================
    GENERIC MODULE LOADER
@@ -8586,16 +8794,58 @@ function renderGenericModule(
 
                     <td>
 
-                        <div class="action-group">
+                       <div class="action-group">
 
-                            <button
-                                class="small-btn"
-                                onclick="viewRecord('${module}','${encodeURIComponent(firstId)}')"
-                            >
-                                View
-                            </button>
+    <button
+        class="small-btn"
+        onclick="viewRecord('${module}','${encodeURIComponent(firstId)}')"
+    >
+        View
+    </button>
 
-                        </div>
+    ${
+        module === "withdrawals" &&
+        String(
+            getValue(
+                record,
+                "status"
+            ) || ""
+        ).toLowerCase() === "pending"
+
+        ?
+
+        `
+        <button
+            class="small-btn"
+            onclick="approveWithdrawal('${encodeURIComponent(firstId)}')"
+            style="
+                background:#198754;
+                color:#fff;
+                border-color:#198754;
+            "
+        >
+            ✓ Approve
+        </button>
+
+        <button
+            class="small-btn"
+            onclick="rejectWithdrawal('${encodeURIComponent(firstId)}')"
+            style="
+                background:#dc3545;
+                color:#fff;
+                border-color:#dc3545;
+            "
+        >
+            ✕ Reject
+        </button>
+        `
+
+        :
+
+        ""
+    }
+
+</div>
 
                     </td>
 
