@@ -8788,69 +8788,69 @@ function renderGenericModule(
 
 
             return `
-                <tr>
+    <tr>
 
-                    ${cells}
+        ${cells}
 
-                    <td>
+        <td>
 
-                       <div class="action-group">
+            <div class="action-group">
 
-    <button
-        class="small-btn"
-        onclick="viewRecord('${module}','${encodeURIComponent(firstId)}')"
-    >
-        View
-    </button>
+                <button
+                    class="small-btn"
+                    onclick="viewRecord('${module}','${encodeURIComponent(firstId)}')"
+                >
+                    View
+                </button>
 
-    ${
-        module === "withdrawals" &&
-        String(
-            getValue(
-                record,
-                "status"
-            ) || ""
-        ).toLowerCase() === "pending"
+                ${
+                    module === "withdrawals" &&
+                    String(
+                        getValue(
+                            record,
+                            "status"
+                        ) || ""
+                    ).toLowerCase() === "pending"
 
-        ?
+                    ?
 
-        `
-        <button
-            class="small-btn"
-            onclick="approveWithdrawal('${encodeURIComponent(firstId)}')"
-            style="
-                background:#198754;
-                color:#fff;
-                border-color:#198754;
-            "
-        >
-            ✓ Approve
-        </button>
+                    `
+                    <button
+                        class="small-btn"
+                        onclick="approveWithdrawal('${encodeURIComponent(firstId)}')"
+                        style="
+                            background:#198754;
+                            color:#fff;
+                            border-color:#198754;
+                        "
+                    >
+                        ✓ Approve
+                    </button>
 
-        <button
-            class="small-btn"
-            onclick="rejectWithdrawal('${encodeURIComponent(firstId)}')"
-            style="
-                background:#dc3545;
-                color:#fff;
-                border-color:#dc3545;
-            "
-        >
-            ✕ Reject
-        </button>
-        `
+                    <button
+                        class="small-btn"
+                        onclick="rejectWithdrawal('${encodeURIComponent(firstId)}')"
+                        style="
+                            background:#dc3545;
+                            color:#fff;
+                            border-color:#dc3545;
+                        "
+                    >
+                        ✕ Reject
+                    </button>
+                    `
 
-        :
+                    :
 
-        ""
-    }
+                    ""
+                }
 
-</div>
+            </div>
 
-                    </td>
+        </td>
 
-                </tr>
-            `;
+    </tr>
+`;
 
         }).join("");
 
