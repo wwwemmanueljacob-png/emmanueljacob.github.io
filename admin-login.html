@@ -8392,7 +8392,190 @@ function openCreateModal(module){
         </form>
     `;
 
-    modal.classList.add("show");
+        modal.classList.add("show");
+
+    const form =
+        document.getElementById(
+            "createLoanProductForm"
+        );
+
+    form.addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+            const submitButton =
+                document.getElementById(
+                    "createLoanProductBtn"
+                );
+
+            const product_code =
+                document.getElementById(
+                    "loanProductCode"
+                ).value.trim();
+
+            const name =
+                document.getElementById(
+                    "loanProductName"
+                ).value.trim();
+
+            const description =
+                document.getElementById(
+                    "loanProductDescription"
+                ).value.trim();
+
+            const min_amount =
+                document.getElementById(
+                    "loanProductMinAmount"
+                ).value;
+
+            const max_amount =
+                document.getElementById(
+                    "loanProductMaxAmount"
+                ).value;
+
+            const interest_rate =
+                document.getElementById(
+                    "loanProductInterestRate"
+                ).value;
+
+            const interest_type =
+                document.getElementById(
+                    "loanProductInterestType"
+                ).value;
+
+            const min_duration_months =
+                document.getElementById(
+                    "loanProductMinDuration"
+                ).value;
+
+            const max_duration_months =
+                document.getElementById(
+                    "loanProductMaxDuration"
+                ).value;
+
+            const processing_fee =
+                document.getElementById(
+                    "loanProductProcessingFee"
+                ).value;
+
+            const processing_fee_type =
+                document.getElementById(
+                    "loanProductProcessingFeeType"
+                ).value;
+
+            const eligibility =
+                document.getElementById(
+                    "loanProductEligibility"
+                ).value.trim();
+
+            const status =
+                document.getElementById(
+                    "loanProductStatus"
+                ).value;
+
+            if(!product_code || !name){
+
+                showToast(
+                    "Product code and product name are required.",
+                    "error"
+                );
+
+                return;
+            }
+
+            if(Number(min_amount) > Number(max_amount)){
+
+                showToast(
+                    "Minimum amount cannot exceed maximum amount.",
+                    "error"
+                );
+
+                return;
+            }
+
+            if(Number(min_duration_months) >
+               Number(max_duration_months)){
+
+                showToast(
+                    "Minimum duration cannot exceed maximum duration.",
+                    "error"
+                );
+
+                return;
+            }
+
+            try{
+
+                if(submitButton){
+
+                    submitButton.disabled = true;
+
+                    submitButton.textContent =
+                        "Creating...";
+
+                }
+
+                const result =
+                    await apiRequest(
+                        "/admin/loan-products",
+                        {
+                            method:"POST",
+
+                            body:JSON.stringify({
+
+                                product_code,
+                                name,
+                                description,
+                                min_amount,
+                                max_amount,
+                                interest_rate,
+                                interest_type,
+                                min_duration_months,
+                                max_duration_months,
+                                processing_fee,
+                                processing_fee_type,
+                                eligibility,
+                                status
+
+                            })
+                        }
+                    );
+
+                showToast(
+                    result.message ||
+                    "Loan product created successfully.",
+                    "success"
+                );
+
+                closeModal();
+
+                await loadModule(
+                    "loanProducts"
+                );
+
+            }catch(error){
+
+                showToast(
+                    error.message ||
+                    "Failed to create loan product.",
+                    "error"
+                );
+
+                if(submitButton){
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Create Product";
+
+                }
+
+            }
+
+        }
+    );
 
     return;
 }
