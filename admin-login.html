@@ -8211,8 +8211,8 @@ async function saveSupportTicket(
 
 function openCreateModal(module){
 
-    if(module !== "deposits"){
-        return;
+    if(module !== "deposits" && module !== "loanProducts"){
+    return;
     }
 
     const modal =
