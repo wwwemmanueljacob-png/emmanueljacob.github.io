@@ -8232,7 +8232,15 @@ function openCreateModal(module){
         return;
     }
 
+    if(module === "loanProducts"){
+
+    title.textContent = "Add Loan Product";
+
+}else{
+
     title.textContent = "Record Deposit";
+
+    }
 
     body.innerHTML = `
         <form id="recordDepositForm">
