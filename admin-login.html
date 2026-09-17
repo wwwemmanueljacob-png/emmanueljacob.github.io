@@ -9317,6 +9317,21 @@ function renderGenericModule(
                     View
                 </button>
 
+                                ${
+                    module === "loanProducts"
+                    ?
+                    `
+                    <button
+                        class="small-btn"
+                        onclick="editLoanProduct('${encodeURIComponent(firstId)}')"
+                    >
+                        ✏️ Edit
+                    </button>
+                    `
+                    :
+                    ""
+      }
+
                 ${
                     module === "withdrawals" &&
                     String(
