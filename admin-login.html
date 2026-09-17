@@ -10180,6 +10180,312 @@ const record =
 
     }
 
+          /* =====================================================
+       LOAN PRODUCT DETAILS VIEW
+    ===================================================== */
+
+    if(module === "loanProducts"){
+
+        const product = record;
+
+        const productName =
+            getValue(
+                product,
+                "name",
+                "product_name"
+            ) || "-";
+
+        const description =
+            getValue(
+                product,
+                "description"
+            ) || "-";
+
+        const minimumAmount =
+            getValue(
+                product,
+                "minimum_amount",
+                "min_amount"
+            );
+
+        const maximumAmount =
+            getValue(
+                product,
+                "maximum_amount",
+                "max_amount"
+            );
+
+        const interestRate =
+            getValue(
+                product,
+                "interest_rate",
+                "interest"
+            );
+
+        const minimumDuration =
+            getValue(
+                product,
+                "minimum_duration_months",
+                "min_duration_months"
+            );
+
+        const maximumDuration =
+            getValue(
+                product,
+                "maximum_duration_months",
+                "max_duration_months"
+            );
+
+        const processingFee =
+            getValue(
+                product,
+                "processing_fee"
+            );
+
+        const latePaymentFee =
+            getValue(
+                product,
+                "late_payment_fee"
+            );
+
+        const isActive =
+            getValue(
+                product,
+                "is_active"
+            ) === true;
+
+        const status =
+            isActive
+                ? "ACTIVE"
+                : "INACTIVE";
+
+        const createdAt =
+            getValue(
+                product,
+                "created_at"
+            );
+
+        const updatedAt =
+            getValue(
+                product,
+                "updated_at"
+            );
+
+
+        document
+            .getElementById("modalTitle")
+            .textContent =
+                "Loan Product Details";
+
+
+        document
+            .getElementById("modalBody")
+            .innerHTML = `
+
+                <div style="
+                    display:grid;
+                    gap:18px;
+                ">
+
+                    <!-- PRODUCT INFORMATION -->
+
+                    <div style="
+                        border:1px solid #ddd;
+                        border-radius:10px;
+                        padding:16px;
+                    ">
+
+                        <h4 style="
+                            margin:0 0 14px 0;
+                            color:#071a3d;
+                        ">
+                            💰 Product Information
+                        </h4>
+
+                        <div class="detail-grid">
+
+                            <div class="detail-item">
+                                <small>Product ID</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        String(
+                                            product.id ?? "-"
+                                        )
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Product Name</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        String(
+                                            productName
+                                        )
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Minimum Amount</small>
+                                <strong>
+                                    ${formatMoney(
+                                        minimumAmount
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Maximum Amount</small>
+                                <strong>
+                                    ${formatMoney(
+                                        maximumAmount
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Interest Rate</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        String(
+                                            interestRate ?? "-"
+                                        )
+                                    )}%
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Duration</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        String(
+                                            minimumDuration ?? "-"
+                                        )
+                                    )}
+                                    -
+                                    ${escapeHTML(
+                                        String(
+                                            maximumDuration ?? "-"
+                                        )
+                                    )}
+                                    months
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Processing Fee</small>
+                                <strong>
+                                    ${formatMoney(
+                                        processingFee
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Late Payment Fee</small>
+                                <strong>
+                                    ${formatMoney(
+                                        latePaymentFee
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Status</small>
+                                <strong>
+                                    ${statusBadge(
+                                        status
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Created</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        formatDate(
+                                            createdAt
+                                        )
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <small>Last Updated</small>
+                                <strong>
+                                    ${escapeHTML(
+                                        formatDate(
+                                            updatedAt
+                                        )
+                                    )}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div style="
+                        border:1px solid #ddd;
+                        border-radius:10px;
+                        padding:16px;
+                    ">
+
+                        <h4 style="
+                            margin:0 0 12px 0;
+                            color:#071a3d;
+                        ">
+                            📝 Description
+                        </h4>
+
+                        <div style="
+                            padding:14px;
+                            background:#f7f7f7;
+                            border-radius:8px;
+                            white-space:pre-wrap;
+                            line-height:1.6;
+                        ">
+                            ${escapeHTML(
+                                String(
+                                    description
+                                )
+                            )}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+        document
+            .getElementById("modalFooter")
+            .innerHTML = `
+
+                <button
+                    class="small-btn"
+                    onclick="closeModal()"
+                >
+                    Close
+                </button>
+
+            `;
+
+
+        document
+            .getElementById("applicationModal")
+            .classList.add("show");
+
+
+        return;
+
+    }
+
    /* =====================================================
        CUSTOMER DETAILS VIEW
     ===================================================== */
