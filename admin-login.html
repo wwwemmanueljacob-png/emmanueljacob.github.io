@@ -9332,6 +9332,28 @@ function renderGenericModule(
                     ""
       }
 
+                      ${
+                    module === "loanProducts"
+                    ?
+                    `
+                    <button
+                        class="small-btn"
+                        onclick="toggleLoanProduct('${encodeURIComponent(firstId)}')"
+                    >
+                        ${
+                            getValue(
+                                record,
+                                "is_active"
+                            ) === true
+                            ? "⏸ Deactivate"
+                            : "▶️ Activate"
+                        }
+                    </button>
+                    `
+                    :
+                    ""
+         }
+
                 ${
                     module === "withdrawals" &&
                     String(
