@@ -10980,6 +10980,496 @@ const record =
 
 }
 
+      /* =========================================================
+   EDIT LOAN PRODUCT
+========================================================= */
+
+function editLoanProduct(encodedId){
+
+    const id =
+        decodeURIComponent(encodedId);
+
+
+    const records =
+        moduleData.loanProducts || [];
+
+
+    const product =
+        records.find(item =>
+            String(
+                getValue(
+                    item,
+                    "id"
+                )
+            ) === String(id)
+        );
+
+
+    if(!product){
+
+        showToast(
+            "Loan product not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const modal =
+        document.getElementById(
+            "applicationModal"
+        );
+
+
+    const title =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    const body =
+        document.getElementById(
+            "modalBody"
+        );
+
+
+    if(!modal || !title || !body){
+
+        showToast(
+            "Edit form could not be opened.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    title.textContent =
+        "Edit Loan Product";
+
+
+    body.innerHTML = `
+
+        <form id="editLoanProductForm">
+
+            <div class="form-group">
+
+                <label>Product Name</label>
+
+                <input
+                    type="text"
+                    id="editLoanProductName"
+                    value="${escapeHTML(
+                        product.name || ""
+                    )}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea
+                    id="editLoanProductDescription"
+                    rows="3"
+                >${escapeHTML(
+                    product.description || ""
+                )}</textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Minimum Amount (MWK)</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductMinAmount"
+                    min="0"
+                    step="0.01"
+                    value="${product.minimum_amount ?? ""}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Maximum Amount (MWK)</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductMaxAmount"
+                    min="0"
+                    step="0.01"
+                    value="${product.maximum_amount ?? ""}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Interest Rate (%)</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductInterestRate"
+                    min="0"
+                    step="0.01"
+                    value="${product.interest_rate ?? ""}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Minimum Duration (Months)</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductMinDuration"
+                    min="1"
+                    value="${product.minimum_duration_months ?? ""}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Maximum Duration (Months)</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductMaxDuration"
+                    min="1"
+                    value="${product.maximum_duration_months ?? ""}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Processing Fee</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductProcessingFee"
+                    min="0"
+                    step="0.01"
+                    value="${product.processing_fee ?? 0}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Late Payment Fee</label>
+
+                <input
+                    type="number"
+                    id="editLoanProductLatePaymentFee"
+                    min="0"
+                    step="0.01"
+                    value="${product.late_payment_fee ?? 0}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select
+                    id="editLoanProductStatus"
+                    required
+                >
+
+                    <option
+                        value="ACTIVE"
+                        ${
+                            product.is_active === true
+                            ? "selected"
+                            : ""
+                        }
+                    >
+                        Active
+                    </option>
+
+                    <option
+                        value="INACTIVE"
+                        ${
+                            product.is_active !== true
+                            ? "selected"
+                            : ""
+                        }
+                    >
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="small-btn"
+                    onclick="closeModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="small-btn primary"
+                    id="updateLoanProductBtn"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    `;
+
+
+    modal.classList.add("show");
+
+
+    const form =
+        document.getElementById(
+            "editLoanProductForm"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "editLoanProductName"
+                ).value.trim();
+
+
+            const description =
+                document.getElementById(
+                    "editLoanProductDescription"
+                ).value.trim();
+
+
+            const min_amount =
+                document.getElementById(
+                    "editLoanProductMinAmount"
+                ).value;
+
+
+            const max_amount =
+                document.getElementById(
+                    "editLoanProductMaxAmount"
+                ).value;
+
+
+            const interest_rate =
+                document.getElementById(
+                    "editLoanProductInterestRate"
+                ).value;
+
+
+            const min_duration_months =
+                document.getElementById(
+                    "editLoanProductMinDuration"
+                ).value;
+
+
+            const max_duration_months =
+                document.getElementById(
+                    "editLoanProductMaxDuration"
+                ).value;
+
+
+            const processing_fee =
+                document.getElementById(
+                    "editLoanProductProcessingFee"
+                ).value;
+
+
+            const late_payment_fee =
+                document.getElementById(
+                    "editLoanProductLatePaymentFee"
+                ).value;
+
+
+            const status =
+                document.getElementById(
+                    "editLoanProductStatus"
+                ).value;
+
+
+            if(!name){
+
+                showToast(
+                    "Product name is required.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                Number(min_amount) >
+                Number(max_amount)
+            ){
+
+                showToast(
+                    "Minimum amount cannot exceed maximum amount.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                Number(min_duration_months) >
+                Number(max_duration_months)
+            ){
+
+                showToast(
+                    "Minimum duration cannot exceed maximum duration.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "updateLoanProductBtn"
+                );
+
+
+            try{
+
+                button.disabled = true;
+
+                button.textContent =
+                    "Saving...";
+
+
+                await apiRequest(
+                    `/admin/loan-products/${encodeURIComponent(id)}`,
+                    {
+                        method:"PUT",
+
+                        body:JSON.stringify({
+
+                            name,
+                            description,
+
+                            minimum_amount:
+                                Number(min_amount),
+
+                            maximum_amount:
+                                Number(max_amount),
+
+                            interest_rate:
+                                Number(interest_rate),
+
+                            minimum_duration_months:
+                                Number(
+                                    min_duration_months
+                                ),
+
+                            maximum_duration_months:
+                                Number(
+                                    max_duration_months
+                                ),
+
+                            processing_fee:
+                                Number(
+                                    processing_fee || 0
+                                ),
+
+                            late_payment_fee:
+                                Number(
+                                    late_payment_fee || 0
+                                ),
+
+                            is_active:
+                                status === "ACTIVE"
+
+                        })
+                    }
+                );
+
+
+                showToast(
+                    "Loan product updated successfully.",
+                    "success"
+                );
+
+
+                closeModal();
+
+
+                await loadModule(
+                    "loanProducts"
+                );
+
+
+            }catch(error){
+
+                showToast(
+                    error.message ||
+                    "Failed to update loan product.",
+                    "error"
+                );
+
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Save Changes";
+
+            }
+
+        }
+    );
+
+}
+
 
 /* =========================================================
    MODAL
