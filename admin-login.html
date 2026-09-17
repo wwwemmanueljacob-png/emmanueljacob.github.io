@@ -11003,6 +11003,139 @@ const record =
 }
 
       /* =========================================================
+   TOGGLE LOAN PRODUCT STATUS
+========================================================= */
+
+async function toggleLoanProduct(encodedId){
+
+    const id =
+        decodeURIComponent(encodedId);
+
+    const records =
+        moduleData.loanProducts || [];
+
+    const product =
+        records.find(item =>
+            String(
+                getValue(item, "id")
+            ) === String(id)
+        );
+
+    if(!product){
+
+        showToast(
+            "Loan product not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const currentlyActive =
+        getValue(
+            product,
+            "is_active"
+        ) === true;
+
+    const newStatus =
+        !currentlyActive;
+
+    const action =
+        newStatus
+        ? "activate"
+        : "deactivate";
+
+    const confirmed =
+        confirm(
+            `Are you sure you want to ${action} this loan product?`
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+    try{
+
+        await apiRequest(
+            `/admin/loan-products/${encodeURIComponent(id)}`,
+            {
+                method:"PUT",
+
+                body:JSON.stringify({
+
+                    name:
+                        product.name || "",
+
+                    description:
+                        product.description || "",
+
+                    minimum_amount:
+                        Number(
+                            product.minimum_amount || 0
+                        ),
+
+                    maximum_amount:
+                        Number(
+                            product.maximum_amount || 0
+                        ),
+
+                    interest_rate:
+                        Number(
+                            product.interest_rate || 0
+                        ),
+
+                    minimum_duration_months:
+                        Number(
+                            product.minimum_duration_months || 1
+                        ),
+
+                    maximum_duration_months:
+                        Number(
+                            product.maximum_duration_months || 1
+                        ),
+
+                    processing_fee:
+                        Number(
+                            product.processing_fee || 0
+                        ),
+
+                    late_payment_fee:
+                        Number(
+                            product.late_payment_fee || 0
+                        ),
+
+                    is_active:
+                        newStatus
+
+                })
+            }
+        );
+
+        showToast(
+            newStatus
+            ? "Loan product activated successfully."
+            : "Loan product deactivated successfully.",
+            "success"
+        );
+
+        await loadModule(
+            "loanProducts"
+        );
+
+    }catch(error){
+
+        showToast(
+            error.message ||
+            "Failed to change loan product status.",
+            "error"
+        );
+
+    }
+
+}
+
+      /* =========================================================
    EDIT LOAN PRODUCT
 ========================================================= */
 
