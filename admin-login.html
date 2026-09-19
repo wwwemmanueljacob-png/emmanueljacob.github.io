@@ -10392,16 +10392,21 @@ function renderSettings(data){
                     const name =
                         getValue(
                             setting,
-                            "name",
-                            "key",
-                            "setting_name"
+                            "setting_key"
                         );
+
 
                     const value =
                         getValue(
                             setting,
-                            "value",
                             "setting_value"
+                        );
+
+
+                    const description =
+                        getValue(
+                            setting,
+                            "description"
                         );
 
 
@@ -10416,6 +10421,20 @@ function renderSettings(data){
                                 ${escapeHTML(value)}
                             </strong>
 
+                            ${
+                                description
+                                ?
+                                `<div style="
+                                    margin-top:6px;
+                                    font-size:12px;
+                                    color:#6b7280;
+                                ">
+                                    ${escapeHTML(description)}
+                                </div>`
+                                :
+                                ""
+                            }
+
                         </div>
                     `;
 
@@ -10425,7 +10444,6 @@ function renderSettings(data){
         </div>`;
 
 }
-
 
 /* =========================================================
    VIEW RECORD
