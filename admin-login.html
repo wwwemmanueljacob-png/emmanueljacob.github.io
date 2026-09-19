@@ -9305,6 +9305,425 @@ function openFollowupModal(){
 
  }
       
+ // ========================================================
+// LOAN DOCUMENT CREATE MODAL
+// ========================================================
+
+function openLoanDocumentModal(){
+
+    const modal =
+        document.getElementById("applicationModal");
+
+    const title =
+        document.getElementById("modalTitle");
+
+    const body =
+        document.getElementById("modalBody");
+
+
+    if(!modal || !title || !body){
+
+        showToast(
+            "Loan document form could not be opened.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    title.textContent = "Add Loan Document";
+
+
+    body.innerHTML = `
+
+        <form id="createLoanDocumentForm">
+
+            <div class="form-group">
+
+                <label>Customer ID</label>
+
+                <input
+                    type="number"
+                    id="loanDocumentCustomerId"
+                    placeholder="Enter customer ID"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Loan ID</label>
+
+                <input
+                    type="number"
+                    id="loanDocumentLoanId"
+                    placeholder="Optional"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Loan Application ID</label>
+
+                <input
+                    type="number"
+                    id="loanDocumentApplicationId"
+                    placeholder="Optional"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Document Type</label>
+
+                <select
+                    id="loanDocumentType"
+                    required
+                >
+
+                    <option value="">
+                        Select Document Type
+                    </option>
+
+                    <option value="National ID">
+                        National ID
+                    </option>
+
+                    <option value="Passport">
+                        Passport
+                    </option>
+
+                    <option value="Driving License">
+                        Driving License
+                    </option>
+
+                    <option value="Proof of Income">
+                        Proof of Income
+                    </option>
+
+                    <option value="Bank Statement">
+                        Bank Statement
+                    </option>
+
+                    <option value="Payslip">
+                        Payslip
+                    </option>
+
+                    <option value="Employment Letter">
+                        Employment Letter
+                    </option>
+
+                    <option value="Business Registration">
+                        Business Registration
+                    </option>
+
+                    <option value="Collateral Document">
+                        Collateral Document
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Document Name</label>
+
+                <input
+                    type="text"
+                    id="loanDocumentName"
+                    placeholder="Enter document name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Document URL</label>
+
+                <input
+                    type="url"
+                    id="loanDocumentUrl"
+                    placeholder="https://..."
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select id="loanDocumentStatus">
+
+                    <option value="PENDING">
+                        Pending
+                    </option>
+
+                    <option value="VERIFIED">
+                        Verified
+                    </option>
+
+                    <option value="REJECTED">
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Notes</label>
+
+                <textarea
+                    id="loanDocumentNotes"
+                    rows="3"
+                    placeholder="Enter document notes"
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="small-btn"
+                    onclick="closeModal()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="small-btn primary"
+                    id="createLoanDocumentBtn"
+                >
+                    Create Document
+                </button>
+
+            </div>
+
+        </form>
+
+    `;
+
+
+    modal.classList.add("show");
+
+
+    const form =
+        document.getElementById(
+            "createLoanDocumentForm"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const submitButton =
+                document.getElementById(
+                    "createLoanDocumentBtn"
+                );
+
+
+            const customer_id =
+                document.getElementById(
+                    "loanDocumentCustomerId"
+                ).value;
+
+
+            const loan_id =
+                document.getElementById(
+                    "loanDocumentLoanId"
+                ).value;
+
+
+            const loan_application_id =
+                document.getElementById(
+                    "loanDocumentApplicationId"
+                ).value;
+
+
+            const document_type =
+                document.getElementById(
+                    "loanDocumentType"
+                ).value;
+
+
+            const document_name =
+                document.getElementById(
+                    "loanDocumentName"
+                ).value.trim();
+
+
+            const document_url =
+                document.getElementById(
+                    "loanDocumentUrl"
+                ).value.trim();
+
+
+            const status =
+                document.getElementById(
+                    "loanDocumentStatus"
+                ).value;
+
+
+            const notes =
+                document.getElementById(
+                    "loanDocumentNotes"
+                ).value.trim();
+
+
+            if(!customer_id){
+
+                showToast(
+                    "Customer ID is required.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(!document_type){
+
+                showToast(
+                    "Document type is required.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(!document_name){
+
+                showToast(
+                    "Document name is required.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Saving...";
+
+
+            try{
+
+                const result =
+                    await apiRequest(
+                        "/loan-documents",
+                        {
+                            method:"POST",
+
+                            body:JSON.stringify({
+
+                                customer_id:
+                                    Number(customer_id),
+
+                                loan_id:
+                                    loan_id
+                                        ? Number(loan_id)
+                                        : null,
+
+                                loan_application_id:
+                                    loan_application_id
+                                        ? Number(
+                                            loan_application_id
+                                          )
+                                        : null,
+
+                                document_type,
+
+                                document_name,
+
+                                document_url:
+                                    document_url || null,
+
+                                status,
+
+                                notes:
+                                    notes || null
+
+                            })
+                        }
+                    );
+
+
+                showToast(
+                    result.message ||
+                    "Loan document created successfully.",
+                    "success"
+                );
+
+
+                closeModal();
+
+
+                loadModule(
+                    "loanDocuments"
+                );
+
+
+            }catch(error){
+
+                console.error(
+                    "CREATE LOAN DOCUMENT ERROR:",
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Failed to create loan document.",
+                    "error"
+                );
+
+
+            }finally{
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    "Create Document";
+
+            }
+
+        }
+    );
+}
+      
  /* =========================================================
    WITHDRAWAL ACTIONS
 ========================================================= */
