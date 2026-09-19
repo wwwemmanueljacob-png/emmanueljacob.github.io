@@ -3082,7 +3082,10 @@ textarea:focus{
             <h2>Follow-ups</h2>
             <p>Customer and application follow-up activities.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('followups')">🔄 Refresh</button>
+        <div style="display:flex;gap:8px;align-items:center;">
+    <button class="small-btn" onclick="openFollowupModal()">➕ Add Follow-Up</button>
+    <button class="small-btn" onclick="loadModule('followups')">🔄 Refresh</button>
+        </div>
     </div>
     <div class="card">
         <div class="card-body">
