@@ -2399,6 +2399,9 @@ function getLoanValues() {
     const durationElement =
         el("v4LoanDuration");
 
+    const purposeElement =
+        el("v4LoanPurpose");
+
 
     let loan_type =
         "";
@@ -2448,6 +2451,14 @@ function getLoanValues() {
         );
 
 
+    let purpose =
+        purposeElement
+            ? String(
+                purposeElement.value
+              ).trim()
+            : "";
+
+
     return {
 
         loan_type,
@@ -2455,6 +2466,8 @@ function getLoanValues() {
         amount,
 
         duration_months,
+
+        purpose,
 
         amountText,
 
