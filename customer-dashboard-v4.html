@@ -2626,17 +2626,21 @@ async function submitLoan() {
 
 
     const payload = {
+const payload = {
 
-        loan_type:
-            data.loan_type,
+    loan_type:
+        data.loan_type,
 
-        amount:
-            data.amount,
+    amount:
+        data.amount,
 
-        duration_months:
-            data.duration_months
+    duration_months:
+        data.duration_months,
 
-    };
+    purpose:
+        data.purpose
+
+};
 
 
     el("railwayBox")
