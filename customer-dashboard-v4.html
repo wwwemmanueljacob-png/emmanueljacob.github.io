@@ -2623,6 +2623,21 @@ async function submitLoan() {
         return;
 
     }
+    
+       if (!data.purpose) {
+
+        message(
+            "loanMsg",
+            "Please enter the purpose of the loan.",
+            "error"
+        );
+
+        el("v4LoanPurpose")
+            .focus();
+
+        return;
+
+  }
 
 
     const payload = {
