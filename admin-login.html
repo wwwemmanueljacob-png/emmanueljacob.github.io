@@ -13657,6 +13657,93 @@ function filterGenericModule(module){
 
 }
 
+ /* =========================================================
+   SAVE SYSTEM SETTING
+========================================================= */
+
+async function saveSetting(id){
+
+    try{
+
+        const input =
+            document.getElementById(
+                `setting-${id}`
+            );
+
+
+        if(!input){
+
+            showToast(
+                "Setting field not found.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const settingValue =
+            input.value.trim();
+
+
+        if(!settingValue){
+
+            showToast(
+                "Setting value cannot be empty.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        await apiRequest(
+            `/settings/${id}`,
+            {
+                method:"PUT",
+
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:JSON.stringify({
+
+                    setting_value:
+                        settingValue
+
+                })
+
+            }
+        );
+
+
+        showToast(
+            "Setting saved successfully."
+        );
+
+
+        loadModule("settings");
+
+
+    }catch(error){
+
+        console.error(
+            "SAVE SETTING ERROR:",
+            error
+        );
+
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+
+} 
 
 /* =========================================================
    REPORTS
