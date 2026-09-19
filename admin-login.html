@@ -2961,7 +2961,23 @@ textarea:focus{
             <h2>Loan Documents</h2>
             <p>Loan-related customer documents.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('loanDocuments')">🔄 Refresh</button>
+        <div style="display:flex;gap:8px;align-items:center;">
+
+    <button
+        class="small-btn"
+        onclick="openLoanDocumentModal()"
+    >
+        ➕ Add Document
+    </button>
+
+    <button
+        class="small-btn"
+        onclick="loadModule('loanDocuments')"
+    >
+        🔄 Refresh
+    </button>
+
+</div>
     </div>
     <div class="card">
         <div class="card-body">
