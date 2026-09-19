@@ -13628,7 +13628,10 @@ async function generateReport(type){
 
 
         const data =
-            result.data || [];
+    result.data || [];
+
+const isFinancialReport =
+    type === "financial";
 
 
         const reportWindow =
@@ -13660,21 +13663,74 @@ async function generateReport(type){
 
 
         if(
-            Array.isArray(data) &&
-            data.length > 0
-        ){
+    isFinancialReport ||
+    (
+        Array.isArray(data) &&
+        data.length > 0
+    )
+){
 
-            const columns =
-                Object.keys(data[0]);
+           let columns = [];
 
 
-            rows =
-                data.map(record => {
+if(isFinancialReport){
 
-                    return `
+    const sections = [
+        ["Loans", data.loans || []],
+        ["Repayments", data.repayments || []],
+        ["Deposits", data.deposits || []],
+        ["Withdrawals", data.withdrawals || []]
+    ];
+
+
+    rows =
+        sections.map(section => {
+
+            const sectionName = section[0];
+            const records = section[1];
+
+
+            if(!records.length){
+
+                return `
+                    <tr>
+                        <td colspan="20">
+                            <strong>${sectionName}</strong>
+                            — No records found.
+                        </td>
+                    </tr>
+                `;
+
+            }
+
+
+            const sectionColumns =
+                Object.keys(records[0]);
+
+
+            return `
+
+                <tr>
+                    <td colspan="20">
+                        <strong>${sectionName}</strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    ${
+                        sectionColumns.map(column => `
+                            <th>
+                                ${column}
+                            </th>
+                        `).join("")
+                    }
+                </tr>
+
+                ${
+                    records.map(record => `
                         <tr>
                             ${
-                                columns.map(column => `
+                                sectionColumns.map(column => `
                                     <td>
                                         ${
                                             record[column] ??
@@ -13684,9 +13740,44 @@ async function generateReport(type){
                                 `).join("")
                             }
                         </tr>
-                    `;
+                    `).join("")
+                }
 
-                }).join("");
+            `;
+
+        }).join("");
+
+}
+else{
+
+    const firstRecord =
+        data[0];
+
+    columns =
+        Object.keys(firstRecord);
+
+
+    rows =
+        data.map(record => {
+
+            return `
+                <tr>
+                    ${
+                        columns.map(column => `
+                            <td>
+                                ${
+                                    record[column] ??
+                                    "-"
+                                }
+                            </td>
+                        `).join("")
+                    }
+                </tr>
+            `;
+
+        }).join("");
+
+}
 
 
             reportWindow.document.write(`
