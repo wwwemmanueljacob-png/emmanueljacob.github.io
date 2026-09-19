@@ -10389,6 +10389,13 @@ function renderSettings(data){
             ${
                 data.map(setting=>{
 
+                    const id =
+                        getValue(
+                            setting,
+                            "id"
+                        );
+
+
                     const name =
                         getValue(
                             setting,
@@ -10417,9 +10424,20 @@ function renderSettings(data){
                                 ${escapeHTML(name)}
                             </small>
 
-                            <strong>
-                                ${escapeHTML(value)}
-                            </strong>
+
+                            <input
+                                type="text"
+                                id="setting-${id}"
+                                value="${escapeHTML(value)}"
+                                style="
+                                    width:100%;
+                                    margin-top:8px;
+                                    padding:10px;
+                                    border:1px solid #d1d5db;
+                                    border-radius:6px;
+                                "
+                            >
+
 
                             ${
                                 description
@@ -10434,6 +10452,15 @@ function renderSettings(data){
                                 :
                                 ""
                             }
+
+
+                            <button
+                                class="small-btn"
+                                style="margin-top:10px;"
+                                onclick="saveSetting(${id})"
+                            >
+                                💾 Save
+                            </button>
 
                         </div>
                     `;
