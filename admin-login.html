@@ -4311,20 +4311,71 @@ function getValue(obj,...keys){
 
     for(const key of keys){
 
+        if(!obj){
+            continue;
+        }
+
+
+        // Support nested paths such as:
+        // customers.full_name
+
         if(
-            obj &&
-            obj[key] !== undefined &&
-            obj[key] !== null
+            typeof key === "string" &&
+            key.includes(".")
         ){
 
-            return obj[key];
+            const parts =
+                key.split(".");
+
+            let value = obj;
+
+
+            for(const part of parts){
+
+                if(
+                    value === null ||
+                    value === undefined
+                ){
+
+                    value = undefined;
+
+                    break;
+
+                }
+
+                value =
+                    value[part];
+
+            }
+
+
+            if(
+                value !== undefined &&
+                value !== null
+            ){
+
+                return value;
+
+            }
+
+        }
+        else{
+
+            if(
+                obj[key] !== undefined &&
+                obj[key] !== null
+            ){
+
+                return obj[key];
+
+            }
 
         }
 
     }
 
     return "";
-
+      
 }
 
 
