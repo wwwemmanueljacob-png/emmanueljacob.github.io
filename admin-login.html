@@ -13628,10 +13628,11 @@ async function generateReport(type){
 
 
         const data =
-    result.data || [];
+            result.data || [];
 
-const isFinancialReport =
-    type === "financial";
+
+        const isFinancialReport =
+            type === "financial";
 
 
         const reportWindow =
@@ -13659,214 +13660,194 @@ const isFinancialReport =
             " Report";
 
 
-        let rows = "";
+        let reportContent = "";
 
 
-        if(
-    isFinancialReport ||
-    (
-        Array.isArray(data) &&
-        data.length > 0
-    )
-){
+        /* =====================================================
+           FINANCIAL REPORT
+        ===================================================== */
 
-           let columns = [];
+        if(isFinancialReport){
 
+            const sections = [
 
-if(isFinancialReport){
+                [
+                    "Loans",
+                    data.loans || []
+                ],
 
-    const sections = [
-        ["Loans", data.loans || []],
-        ["Repayments", data.repayments || []],
-        ["Deposits", data.deposits || []],
-        ["Withdrawals", data.withdrawals || []]
-    ];
+                [
+                    "Repayments",
+                    data.repayments || []
+                ],
 
+                [
+                    "Deposits",
+                    data.deposits || []
+                ],
 
-    rows =
-        sections.map(section => {
+                [
+                    "Withdrawals",
+                    data.withdrawals || []
+                ]
 
-            const sectionName = section[0];
-            const records = section[1];
-
-
-            if(!records.length){
-
-                return `
-                    <tr>
-                        <td colspan="20">
-                            <strong>${sectionName}</strong>
-                            — No records found.
-                        </td>
-                    </tr>
-                `;
-
-            }
+            ];
 
 
-            const sectionColumns =
-                Object.keys(records[0]);
+            reportContent =
+                sections.map(section => {
+
+                    const sectionName =
+                        section[0];
+
+                    const records =
+                        section[1];
 
 
-            return `
+                    if(!records.length){
 
-                <tr>
-                    <td colspan="20">
-                        <strong>${sectionName}</strong>
-                    </td>
-                </tr>
+                        return `
 
-                <tr>
-                    ${
-                        sectionColumns.map(column => `
-                            <th>
-                                ${column}
-                            </th>
-                        `).join("")
+                            <div class="report-section">
+
+                                <h2>
+                                    ${sectionName}
+                                </h2>
+
+                                <div class="empty-report">
+                                    No records found.
+                                </div>
+
+                            </div>
+
+                        `;
+
                     }
-                </tr>
 
-                ${
-                    records.map(record => `
+
+                    const columns =
+                        Object.keys(records[0]);
+
+
+                    const sectionRows =
+                        records.map(record => {
+
+                            return `
+
+                                <tr>
+
+                                    ${
+                                        columns.map(column => `
+
+                                            <td>
+                                                ${
+                                                    record[column] ??
+                                                    "-"
+                                                }
+                                            </td>
+
+                                        `).join("")
+                                    }
+
+                                </tr>
+
+                            `;
+
+                        }).join("");
+
+
+                    return `
+
+                        <div class="report-section">
+
+                            <h2>
+                                ${sectionName}
+                            </h2>
+
+                            <div class="table-wrap">
+
+                                <table>
+
+                                    <thead>
+
+                                        <tr>
+
+                                            ${
+                                                columns.map(column => `
+
+                                                    <th>
+                                                        ${column}
+                                                    </th>
+
+                                                `).join("")
+                                            }
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        ${sectionRows}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+        /* =====================================================
+           NORMAL REPORTS
+        ===================================================== */
+
+        else if(
+            Array.isArray(data) &&
+            data.length > 0
+        ){
+
+            const columns =
+                Object.keys(data[0]);
+
+
+            const rows =
+                data.map(record => {
+
+                    return `
+
                         <tr>
+
                             ${
-                                sectionColumns.map(column => `
+                                columns.map(column => `
+
                                     <td>
                                         ${
                                             record[column] ??
                                             "-"
                                         }
                                     </td>
+
                                 `).join("")
                             }
+
                         </tr>
-                    `).join("")
-                }
 
-            `;
+                    `;
 
-        }).join("");
-
-}
-else{
-
-    const firstRecord =
-        data[0];
-
-    columns =
-        Object.keys(firstRecord);
+                }).join("");
 
 
-    rows =
-        data.map(record => {
+            reportContent = `
 
-            return `
-                <tr>
-                    ${
-                        columns.map(column => `
-                            <td>
-                                ${
-                                    record[column] ??
-                                    "-"
-                                }
-                            </td>
-                        `).join("")
-                    }
-                </tr>
-            `;
-
-        }).join("");
-
-}
-
-
-            reportWindow.document.write(`
-
-                <!DOCTYPE html>
-
-                <html>
-
-                <head>
-
-                    <title>${title}</title>
-
-                    <style>
-
-                        body{
-                            font-family:Arial,sans-serif;
-                            background:#f4f7fb;
-                            margin:0;
-                            padding:30px;
-                            color:#111827;
-                        }
-
-                        .report-header{
-                            background:#07111f;
-                            color:#facc15;
-                            padding:20px;
-                            border-radius:10px;
-                            margin-bottom:20px;
-                        }
-
-                        h1{
-                            margin:0 0 8px;
-                        }
-
-                        .report-info{
-                            color:#d1d5db;
-                        }
-
-                        table{
-                            width:100%;
-                            border-collapse:collapse;
-                            background:white;
-                            box-shadow:0 4px 15px rgba(0,0,0,.08);
-                        }
-
-                        th{
-                            background:#07111f;
-                            color:#facc15;
-                            padding:12px;
-                            text-align:left;
-                        }
-
-                        td{
-                            padding:10px;
-                            border-bottom:1px solid #e5e7eb;
-                        }
-
-                        tr:hover{
-                            background:#f9fafb;
-                        }
-
-                        .print-btn{
-                            margin-top:20px;
-                            padding:12px 20px;
-                            border:none;
-                            border-radius:6px;
-                            background:#facc15;
-                            color:#07111f;
-                            font-weight:bold;
-                            cursor:pointer;
-                        }
-
-                    </style>
-
-                </head>
-
-                <body>
-
-                    <div class="report-header">
-
-                        <h1>
-                            JAY C O B FINANCIAL SERVICES
-                        </h1>
-
-                        <div class="report-info">
-                            ${title}
-                        </div>
-
-                    </div>
+                <div class="table-wrap">
 
                     <table>
 
@@ -13876,9 +13857,11 @@ else{
 
                                 ${
                                     columns.map(column => `
+
                                         <th>
                                             ${column}
                                         </th>
+
                                     `).join("")
                                 }
 
@@ -13894,62 +13877,286 @@ else{
 
                     </table>
 
-                    <button
-                        class="print-btn"
-                        onclick="window.print()"
-                    >
-                        🖨️ Print Report
-                    </button>
+                </div>
 
-                </body>
-
-                </html>
-
-            `);
+            `;
 
         }
+
+
+        /* =====================================================
+           NO RECORDS
+        ===================================================== */
+
         else{
 
-            reportWindow.document.write(`
+            reportContent = `
 
-                <!DOCTYPE html>
+                <div class="empty-report">
 
-                <html>
+                    No records found.
 
-                <head>
+                </div>
 
-                    <title>${title}</title>
-
-                    <style>
-
-                        body{
-                            font-family:Arial,sans-serif;
-                            background:#f4f7fb;
-                            padding:40px;
-                            text-align:center;
-                        }
-
-                        h1{
-                            color:#07111f;
-                        }
-
-                    </style>
-
-                </head>
-
-                <body>
-
-                    <h1>${title}</h1>
-
-                    <p>No records found.</p>
-
-                </body>
-
-                </html>
-
-            `);
+            `;
 
         }
+
+
+        /* =====================================================
+           REPORT WINDOW
+        ===================================================== */
+
+        reportWindow.document.write(`
+
+            <!DOCTYPE html>
+
+            <html>
+
+            <head>
+
+                <title>${title}</title>
+
+                <style>
+
+                    body{
+
+                        font-family:
+                            Arial,
+                            sans-serif;
+
+                        background:
+                            #f4f7fb;
+
+                        margin:0;
+
+                        padding:30px;
+
+                        color:#111827;
+
+                    }
+
+
+                    .report-header{
+
+                        background:
+                            #07111f;
+
+                        color:
+                            #facc15;
+
+                        padding:20px;
+
+                        border-radius:10px;
+
+                        margin-bottom:20px;
+
+                    }
+
+
+                    h1{
+
+                        margin:
+                            0 0 8px;
+
+                    }
+
+
+                    .report-info{
+
+                        color:
+                            #d1d5db;
+
+                    }
+
+
+                    .report-section{
+
+                        margin-bottom:30px;
+
+                    }
+
+
+                    .report-section h2{
+
+                        background:
+                            #07111f;
+
+                        color:
+                            #facc15;
+
+                        padding:12px 15px;
+
+                        margin:
+                            0 0 10px;
+
+                        border-radius:
+                            8px;
+
+                    }
+
+
+                    .table-wrap{
+
+                        width:100%;
+
+                        overflow-x:auto;
+
+                    }
+
+
+                    table{
+
+                        width:100%;
+
+                        border-collapse:
+                            collapse;
+
+                        background:white;
+
+                        box-shadow:
+                            0 4px 15px
+                            rgba(0,0,0,.08);
+
+                    }
+
+
+                    th{
+
+                        background:
+                            #07111f;
+
+                        color:
+                            #facc15;
+
+                        padding:12px;
+
+                        text-align:left;
+
+                        white-space:
+                            nowrap;
+
+                    }
+
+
+                    td{
+
+                        padding:10px;
+
+                        border-bottom:
+                            1px solid #e5e7eb;
+
+                    }
+
+
+                    tr:hover{
+
+                        background:
+                            #f9fafb;
+
+                    }
+
+
+                    .empty-report{
+
+                        background:white;
+
+                        padding:25px;
+
+                        text-align:center;
+
+                        border-radius:8px;
+
+                        box-shadow:
+                            0 4px 15px
+                            rgba(0,0,0,.08);
+
+                        color:#6b7280;
+
+                    }
+
+
+                    .print-btn{
+
+                        margin-top:20px;
+
+                        padding:12px 20px;
+
+                        border:none;
+
+                        border-radius:6px;
+
+                        background:
+                            #facc15;
+
+                        color:
+                            #07111f;
+
+                        font-weight:bold;
+
+                        cursor:pointer;
+
+                    }
+
+
+                    @media print{
+
+                        .print-btn{
+
+                            display:none;
+
+                        }
+
+                        body{
+
+                            background:white;
+
+                            padding:10px;
+
+                        }
+
+                    }
+
+                </style>
+
+            </head>
+
+            <body>
+
+
+                <div class="report-header">
+
+                    <h1>
+                        JAY C O B FINANCIAL SERVICES
+                    </h1>
+
+                    <div class="report-info">
+
+                        ${title}
+
+                    </div>
+
+                </div>
+
+
+                ${reportContent}
+
+
+                <button
+                    class="print-btn"
+                    onclick="window.print()"
+                >
+
+                    🖨️ Print Report
+
+                </button>
+
+
+            </body>
+
+            </html>
+
+        `);
 
 
         reportWindow.document.close();
