@@ -13627,18 +13627,255 @@ async function generateReport(type){
             );
 
 
+        const data =
+            result.data || [];
+
+
+        const reportWindow =
+            window.open(
+                "",
+                "_blank"
+            );
+
+
+        if(!reportWindow){
+
+            showToast(
+                "Please allow pop-ups for the Admin Dashboard.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        let title =
+            type.charAt(0).toUpperCase() +
+            type.slice(1) +
+            " Report";
+
+
+        let rows = "";
+
+
+        if(
+            Array.isArray(data) &&
+            data.length > 0
+        ){
+
+            const columns =
+                Object.keys(data[0]);
+
+
+            rows =
+                data.map(record => {
+
+                    return `
+                        <tr>
+                            ${
+                                columns.map(column => `
+                                    <td>
+                                        ${
+                                            record[column] ??
+                                            "-"
+                                        }
+                                    </td>
+                                `).join("")
+                            }
+                        </tr>
+                    `;
+
+                }).join("");
+
+
+            reportWindow.document.write(`
+
+                <!DOCTYPE html>
+
+                <html>
+
+                <head>
+
+                    <title>${title}</title>
+
+                    <style>
+
+                        body{
+                            font-family:Arial,sans-serif;
+                            background:#f4f7fb;
+                            margin:0;
+                            padding:30px;
+                            color:#111827;
+                        }
+
+                        .report-header{
+                            background:#07111f;
+                            color:#facc15;
+                            padding:20px;
+                            border-radius:10px;
+                            margin-bottom:20px;
+                        }
+
+                        h1{
+                            margin:0 0 8px;
+                        }
+
+                        .report-info{
+                            color:#d1d5db;
+                        }
+
+                        table{
+                            width:100%;
+                            border-collapse:collapse;
+                            background:white;
+                            box-shadow:0 4px 15px rgba(0,0,0,.08);
+                        }
+
+                        th{
+                            background:#07111f;
+                            color:#facc15;
+                            padding:12px;
+                            text-align:left;
+                        }
+
+                        td{
+                            padding:10px;
+                            border-bottom:1px solid #e5e7eb;
+                        }
+
+                        tr:hover{
+                            background:#f9fafb;
+                        }
+
+                        .print-btn{
+                            margin-top:20px;
+                            padding:12px 20px;
+                            border:none;
+                            border-radius:6px;
+                            background:#facc15;
+                            color:#07111f;
+                            font-weight:bold;
+                            cursor:pointer;
+                        }
+
+                    </style>
+
+                </head>
+
+                <body>
+
+                    <div class="report-header">
+
+                        <h1>
+                            JAY C O B FINANCIAL SERVICES
+                        </h1>
+
+                        <div class="report-info">
+                            ${title}
+                        </div>
+
+                    </div>
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                ${
+                                    columns.map(column => `
+                                        <th>
+                                            ${column}
+                                        </th>
+                                    `).join("")
+                                }
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${rows}
+
+                        </tbody>
+
+                    </table>
+
+                    <button
+                        class="print-btn"
+                        onclick="window.print()"
+                    >
+                        🖨️ Print Report
+                    </button>
+
+                </body>
+
+                </html>
+
+            `);
+
+        }
+        else{
+
+            reportWindow.document.write(`
+
+                <!DOCTYPE html>
+
+                <html>
+
+                <head>
+
+                    <title>${title}</title>
+
+                    <style>
+
+                        body{
+                            font-family:Arial,sans-serif;
+                            background:#f4f7fb;
+                            padding:40px;
+                            text-align:center;
+                        }
+
+                        h1{
+                            color:#07111f;
+                        }
+
+                    </style>
+
+                </head>
+
+                <body>
+
+                    <h1>${title}</h1>
+
+                    <p>No records found.</p>
+
+                </body>
+
+                </html>
+
+            `);
+
+        }
+
+
+        reportWindow.document.close();
+
+
         showToast(
-            "Report request completed."
-        );
-
-
-        console.log(
-            "Report:",
-            result
+            "Report generated successfully."
         );
 
 
     }catch(error){
+
+        console.error(
+            "REPORT ERROR:",
+            error
+        );
+
 
         showToast(
             error.message,
