@@ -13923,7 +13923,89 @@ async function saveSetting(id){
 
     }
 
-} 
+}
+
+      /* =========================================================
+   TEST CENTRAL NOTIFICATION ENGINE
+========================================================= */
+
+async function createTestNotification(){
+
+    try{
+
+        const result =
+            await apiRequest(
+                "/notifications",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        title:
+                            "Central Engine Test",
+
+                        message:
+                            "JAY C O B central notification engine is working successfully.",
+
+                        type:
+                            "SYSTEM",
+
+                        priority:
+                            "NORMAL",
+
+                        sms_required:
+                            false,
+
+                        action:
+                            "CENTRAL_ENGINE_TEST"
+
+                    })
+
+                }
+            );
+
+
+        if(result.success){
+
+            showToast(
+                "Central notification engine test successful."
+            );
+
+            loadModule(
+                "notifications"
+            );
+
+        }else{
+
+            showToast(
+                result.message ||
+                "Notification test failed.",
+                "error"
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "CENTRAL NOTIFICATION TEST ERROR:",
+            error
+        );
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+      
 
 /* =========================================================
    REPORTS
