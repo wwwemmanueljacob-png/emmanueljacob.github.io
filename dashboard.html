@@ -5040,13 +5040,123 @@ function renderNotifications() {
                   <p
                     style="
                       line-height:1.6;
-                      color:#596579;
+function renderNotifications() {
+
+  const container =
+    document.getElementById(
+      "notificationsList"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  if (!notifications.length) {
+
+    container.innerHTML = `
+      <div class="empty">
+
+        <div
+          style="
+            font-size:42px;
+            margin-bottom:10px;
+          ">
+          🔔
+        </div>
+
+        <strong>
+          No notifications yet
+        </strong>
+
+        <p style="margin-top:8px;">
+          New account and transaction
+          notifications will appear here.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML =
+    notifications
+      .map(
+        notification => {
+
+          const date =
+            notification.created_at
+              ? formatDateTime(
+                  notification.created_at
+                )
+              : "—";
+
+          const priority =
+            String(
+              notification.priority ||
+              "NORMAL"
+            ).toUpperCase();
+
+          const isNew =
+            !notification.is_read;
+
+          const priorityClass =
+            priority === "HIGH" ||
+            priority === "URGENT"
+              ? "status-blocked"
+              : priority === "LOW"
+                ? "status-active"
+                : "status-pending";
+
+          return `
+            <div
+              class="card"
+              onclick="openNotification(${notification.id})"
+              style="
+                margin-bottom:14px;
+                border-left:4px solid #facc15;
+                cursor:pointer;
+                transition:0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'"
+              onmouseout="this.style.transform='translateY(0)'">
+
+              <div
+                style="
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:flex-start;
+                  gap:12px;
+                ">
+
+                <div style="flex:1;">
+
+                  <h3
+                    style="
+                      margin-bottom:7px;
+                      color:#0b2344;
                     ">
 
+                    🔔
                     ${escapeHTML(
-                      notification.message ||
-                      ""
+                      notification.title ||
+                      "Notification"
                     )}
+
+                  </h3>
+
+                  <p
+                    style="
+                      margin:0;
+                      color:#68758a;
+                      font-size:13px;
+                    ">
+
+                    ${
+                      isNew
+                        ? "Tap to view this notification"
+                        : "Tap to view message"
+                    }
 
                   </p>
 
@@ -5065,12 +5175,23 @@ function renderNotifications() {
                           color:#07111f;
                           white-space:nowrap;
                         ">
-
                         NEW
-
                       </span>
                     `
-                    : ""
+                    : `
+                      <span
+                        style="
+                          font-size:11px;
+                          font-weight:bold;
+                          padding:5px 9px;
+                          border-radius:20px;
+                          background:#e5e7eb;
+                          color:#596579;
+                          white-space:nowrap;
+                        ">
+                        READ
+                      </span>
+                    `
                 }
 
               </div>
@@ -5108,6 +5229,258 @@ function renderNotifications() {
       .join("");
 }
 
+
+/* =====================================================
+   OPEN NOTIFICATION + MARK AS READ
+===================================================== */
+
+async function openNotification(
+  notificationId
+) {
+
+  const notification =
+    notifications.find(
+      item =>
+        Number(item.id) ===
+        Number(notificationId)
+    );
+
+  if (!notification) {
+    return;
+  }
+
+  /*
+   * Mark notification as read
+   * when the customer opens it.
+   */
+
+  if (!notification.is_read) {
+
+    try {
+
+      await apiRequest(
+        `/notifications/${notification.id}/read`,
+        {
+          method: "PUT"
+        }
+      );
+
+      notification.is_read = true;
+
+      updateNotificationBadge();
+
+    } catch (error) {
+
+      console.error(
+        "MARK NOTIFICATION READ ERROR:",
+        error
+      );
+
+    }
+  }
+
+
+  /*
+   * Create notification viewer.
+   */
+
+  const existing =
+    document.getElementById(
+      "notificationViewer"
+    );
+
+  if (existing) {
+    existing.remove();
+  }
+
+
+  const viewer =
+    document.createElement("div");
+
+  viewer.id =
+    "notificationViewer";
+
+  viewer.innerHTML = `
+    <div
+      onclick="closeNotificationViewer(event)"
+      style="
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.65);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        z-index:99999;
+      ">
+
+      <div
+        onclick="event.stopPropagation()"
+        style="
+          width:100%;
+          max-width:520px;
+          background:#ffffff;
+          border-radius:16px;
+          padding:24px;
+          box-shadow:0 20px 60px rgba(0,0,0,0.3);
+        ">
+
+        <div
+          style="
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            gap:15px;
+          ">
+
+          <h2
+            style="
+              margin:0;
+              color:#0b2344;
+            ">
+
+            🔔
+            ${escapeHTML(
+              notification.title ||
+              "Notification"
+            )}
+
+          </h2>
+
+          <button
+            type="button"
+            onclick="closeNotificationViewer()"
+            style="
+              border:0;
+              background:#f1f3f5;
+              width:36px;
+              height:36px;
+              border-radius:50%;
+              font-size:20px;
+              cursor:pointer;
+            ">
+
+            ×
+
+          </button>
+
+        </div>
+
+        <div
+          style="
+            margin-top:18px;
+            padding:16px;
+            background:#f7f9fc;
+            border-radius:12px;
+            color:#344054;
+            line-height:1.7;
+            white-space:pre-wrap;
+          ">
+
+          ${escapeHTML(
+            notification.message ||
+            ""
+          )}
+
+        </div>
+
+        <div
+          style="
+            margin-top:16px;
+            display:flex;
+            justify-content:space-between;
+            gap:10px;
+            flex-wrap:wrap;
+            color:#68758a;
+            font-size:12px;
+          ">
+
+          <span>
+            ${
+              notification.created_at
+                ? escapeHTML(
+                    formatDateTime(
+                      notification.created_at
+                    )
+                  )
+                : "—"
+            }
+          </span>
+
+          <span>
+            Priority:
+            ${escapeHTML(
+              String(
+                notification.priority ||
+                "NORMAL"
+              ).toUpperCase()
+            )}
+          </span>
+
+        </div>
+
+        <button
+          type="button"
+          onclick="closeNotificationViewer()"
+          style="
+            width:100%;
+            margin-top:20px;
+            padding:12px;
+            border:0;
+            border-radius:10px;
+            background:#0b2344;
+            color:#ffffff;
+            font-weight:bold;
+            cursor:pointer;
+          ">
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(viewer);
+
+
+  /*
+   * Refresh the notification list
+   * so NEW changes to READ immediately.
+   */
+
+  renderNotifications();
+}
+
+
+/* =====================================================
+   CLOSE NOTIFICATION VIEWER
+===================================================== */
+
+function closeNotificationViewer(
+  event
+) {
+
+  if (
+    event &&
+    event.target &&
+    event.target.id !==
+      "notificationViewer"
+  ) {
+    return;
+  }
+
+  const viewer =
+    document.getElementById(
+      "notificationViewer"
+    );
+
+  if (viewer) {
+    viewer.remove();
+  }
+}
 
 function updateNotificationBadge() {
 
