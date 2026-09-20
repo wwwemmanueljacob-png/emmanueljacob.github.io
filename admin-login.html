@@ -10396,11 +10396,48 @@ function renderSettings(data){
                         );
 
 
-                    const name =
-                        getValue(
-                            setting,
-                            "setting_key"
-                        );
+                    const key =
+    getValue(
+        setting,
+        "setting_key"
+    );
+
+
+const settingNames = {
+
+    company_name:
+        "Company Name",
+
+    company_phone:
+        "Company Phone",
+
+    company_email:
+        "Company Email",
+
+    company_address:
+        "Company Address",
+
+    currency:
+        "Currency",
+
+    system_status:
+        "System Status",
+
+    default_loan_interest_rate:
+        "Default Loan Interest Rate",
+
+    default_loan_duration:
+        "Default Loan Duration",
+
+    system_notifications:
+        "System Notifications"
+
+};
+
+
+const name =
+    settingNames[key] ||
+    key;
 
 
                     const value =
