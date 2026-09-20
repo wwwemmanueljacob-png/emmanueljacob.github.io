@@ -10383,129 +10383,268 @@ function renderSettings(data){
     }
 
 
-    container.innerHTML =
-        `<div class="detail-grid">
+    const settingNames = {
 
-            ${
-                data.map(setting=>{
+        company_name:
+            "Company Name",
 
-                    const id =
-                        getValue(
-                            setting,
-                            "id"
-                        );
+        company_phone:
+            "Company Phone",
 
+        company_email:
+            "Company Email",
 
-                    const key =
-    getValue(
-        setting,
-        "setting_key"
-    );
+        company_address:
+            "Company Address",
 
+        currency:
+            "Currency",
 
-const settingNames = {
+        system_status:
+            "System Status",
 
-    company_name:
-        "Company Name",
+        default_loan_interest_rate:
+            "Default Loan Interest Rate",
 
-    company_phone:
-        "Company Phone",
+        default_loan_duration:
+            "Default Loan Duration",
 
-    company_email:
-        "Company Email",
+        system_notifications:
+            "System Notifications"
 
-    company_address:
-        "Company Address",
-
-    currency:
-        "Currency",
-
-    system_status:
-        "System Status",
-
-    default_loan_interest_rate:
-        "Default Loan Interest Rate",
-
-    default_loan_duration:
-        "Default Loan Duration",
-
-    system_notifications:
-        "System Notifications"
-
-};
+    };
 
 
-const name =
-    settingNames[key] ||
-    key;
+    const companySettings =
+        data.filter(setting => {
+
+            const key =
+                getValue(
+                    setting,
+                    "setting_key"
+                );
+
+            return [
+                "company_name",
+                "company_phone",
+                "company_email",
+                "company_address"
+            ].includes(key);
+
+        });
 
 
-                    const value =
-                        getValue(
-                            setting,
-                            "setting_value"
-                        );
+    const loanSettings =
+        data.filter(setting => {
+
+            const key =
+                getValue(
+                    setting,
+                    "setting_key"
+                );
+
+            return [
+                "currency",
+                "default_loan_interest_rate",
+                "default_loan_duration"
+            ].includes(key);
+
+        });
 
 
-                    const description =
-                        getValue(
-                            setting,
-                            "description"
-                        );
+    const systemSettings =
+        data.filter(setting => {
+
+            const key =
+                getValue(
+                    setting,
+                    "setting_key"
+                );
+
+            return [
+                "system_status",
+                "system_notifications"
+            ].includes(key);
+
+        });
 
 
-                    return `
-                        <div class="detail-item">
+    function renderSettingCards(settings){
 
-                            <small>
-                                ${escapeHTML(name)}
-                            </small>
+        return settings.map(setting => {
 
-
-                            <input
-                                type="text"
-                                id="setting-${id}"
-                                value="${escapeHTML(value)}"
-                                style="
-                                    width:100%;
-                                    margin-top:8px;
-                                    padding:10px;
-                                    border:1px solid #d1d5db;
-                                    border-radius:6px;
-                                "
-                            >
+            const id =
+                getValue(
+                    setting,
+                    "id"
+                );
 
 
-                            ${
-                                description
-                                ?
-                                `<div style="
-                                    margin-top:6px;
-                                    font-size:12px;
-                                    color:#6b7280;
-                                ">
-                                    ${escapeHTML(description)}
-                                </div>`
-                                :
-                                ""
-                            }
+            const key =
+                getValue(
+                    setting,
+                    "setting_key"
+                );
 
 
-                            <button
-                                class="small-btn"
-                                style="margin-top:10px;"
-                                onclick="saveSetting(${id})"
-                            >
-                                💾 Save
-                            </button>
+            const name =
+                settingNames[key] ||
+                key;
 
-                        </div>
-                    `;
 
-                }).join("")
-            }
+            const value =
+                getValue(
+                    setting,
+                    "setting_value"
+                );
 
-        </div>`;
+
+            const description =
+                getValue(
+                    setting,
+                    "description"
+                );
+
+
+            return `
+
+                <div class="detail-item">
+
+                    <small>
+                        ${escapeHTML(name)}
+                    </small>
+
+
+                    <input
+                        type="text"
+                        id="setting-${id}"
+                        value="${escapeHTML(value)}"
+                        style="
+                            width:100%;
+                            margin-top:8px;
+                            padding:11px;
+                            border:1px solid #d1d5db;
+                            border-radius:7px;
+                            font-size:14px;
+                        "
+                    >
+
+
+                    ${
+                        description
+                        ?
+                        `<div style="
+                            margin-top:7px;
+                            font-size:12px;
+                            color:#6b7280;
+                            line-height:1.5;
+                        ">
+                            ${escapeHTML(description)}
+                        </div>`
+                        :
+                        ""
+                    }
+
+
+                    <button
+                        class="small-btn"
+                        style="
+                            margin-top:10px;
+                        "
+                        onclick="saveSetting(${id})"
+                    >
+                        💾 Save Changes
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+    }
+
+
+    container.innerHTML = `
+
+        <!-- COMPANY INFORMATION -->
+
+        <div style="margin-bottom:30px;">
+
+            <h3 style="
+                margin:0 0 15px;
+                color:#07111f;
+                font-size:18px;
+            ">
+                🏢 Company Information
+            </h3>
+
+
+            <div class="detail-grid">
+
+                ${
+                    renderSettingCards(
+                        companySettings
+                    )
+                }
+
+            </div>
+
+        </div>
+
+
+        <!-- LOAN CONFIGURATION -->
+
+        <div style="margin-bottom:30px;">
+
+            <h3 style="
+                margin:0 0 15px;
+                color:#07111f;
+                font-size:18px;
+            ">
+                💰 Loan Configuration
+            </h3>
+
+
+            <div class="detail-grid">
+
+                ${
+                    renderSettingCards(
+                        loanSettings
+                    )
+                }
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM CONTROL -->
+
+        <div style="margin-bottom:10px;">
+
+            <h3 style="
+                margin:0 0 15px;
+                color:#07111f;
+                font-size:18px;
+            ">
+                ⚙️ System Control
+            </h3>
+
+
+            <div class="detail-grid">
+
+                ${
+                    renderSettingCards(
+                        systemSettings
+                    )
+                }
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
