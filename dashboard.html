@@ -3409,7 +3409,11 @@ function createTransactionHTML(
     transaction.balance_after;
 
   return `
-    <tr>
+    <tr
+  onclick='openTransactionReceipt(${JSON.stringify(transaction).replace(/'/g, "&#39;")})'
+  style="cursor:pointer;"
+  title="View transaction receipt"
+>
 
       <td>
         ${formatDateTime(
