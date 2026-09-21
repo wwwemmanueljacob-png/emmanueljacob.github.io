@@ -6711,25 +6711,51 @@ startDashboard();
       "
     >
 
-      <button
-        type="button"
-        onclick="closeTransactionReceipt()"
-        style="
-          width:100%;
-          padding:13px;
-          border:none;
-          border-radius:10px;
-          background:#07111f;
-          color:#ffffff;
-          font-size:15px;
-          font-weight:700;
-          cursor:pointer;
-        "
-      >
-        Close
-      </button>
+      <div
+  style="
+    display:flex;
+    gap:10px;
+  "
+>
 
-    </div>
+  <button
+    type="button"
+    onclick="saveTransactionReceipt()"
+    style="
+      flex:1;
+      padding:13px;
+      border:none;
+      border-radius:10px;
+      background:#facc15;
+      color:#07111f;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+    "
+  >
+    🧾 Save Receipt
+  </button>
+
+
+  <button
+    type="button"
+    onclick="closeTransactionReceipt()"
+    style="
+      flex:1;
+      padding:13px;
+      border:none;
+      border-radius:10px;
+      background:#07111f;
+      color:#ffffff;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+    "
+  >
+    Close
+  </button>
+
+      </div>
 
   </div>
 
