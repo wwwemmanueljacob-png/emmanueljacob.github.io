@@ -3498,6 +3498,291 @@ function formatTransactionType(type) {
 }
 
 
+  /* =====================================================
+   TRANSACTION RECEIPT
+===================================================== */
+
+function openTransactionReceipt(transaction) {
+
+  const modal =
+    document.getElementById(
+      "transactionReceiptModal"
+    );
+
+  const content =
+    document.getElementById(
+      "transactionReceiptContent"
+    );
+
+  if (!modal || !content) {
+    return;
+  }
+
+
+  const type =
+    String(
+      transaction.type ||
+      "transaction"
+    ).toLowerCase();
+
+
+  const status =
+    String(
+      transaction.status ||
+      "pending"
+    ).toLowerCase();
+
+
+  const amount =
+    Number(
+      transaction.amount || 0
+    );
+
+
+  const balanceBefore =
+    transaction.balance_before;
+
+
+  const balanceAfter =
+    transaction.balance_after;
+
+
+  const description =
+    transaction.description ||
+    formatTransactionType(type);
+
+
+  const reference =
+    transaction.reference_number ||
+    "—";
+
+
+  const incomingTypes = [
+    "deposit",
+    "loan_disbursement"
+  ];
+
+
+  const amountPrefix =
+    incomingTypes.includes(type)
+      ? "+ "
+      : "- ";
+
+
+  const amountClass =
+    incomingTypes.includes(type)
+      ? "status-active"
+      : "status-blocked";
+
+
+  const statusClass =
+    status === "completed"
+      ? "status-active"
+      : status === "failed" ||
+        status === "reversed"
+        ? "status-blocked"
+        : "status-pending";
+
+
+  content.innerHTML = `
+
+    <div
+      style="
+        text-align:center;
+        margin-bottom:25px;
+      "
+    >
+
+      <div
+        class="${amountClass}"
+        style="
+          font-size:30px;
+          font-weight:800;
+        "
+      >
+        ${amountPrefix}${formatMoney(amount)}
+      </div>
+
+      <div
+        class="${statusClass}"
+        style="
+          margin-top:8px;
+          font-weight:700;
+          text-transform:uppercase;
+        "
+      >
+        ${escapeHTML(status)}
+      </div>
+
+    </div>
+
+
+    <div
+      style="
+        border-top:1px solid #e1e7ef;
+      "
+    >
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          gap:20px;
+          padding:14px 0;
+          border-bottom:1px solid #e1e7ef;
+        "
+      >
+
+        <strong>Transaction Type</strong>
+
+        <span>
+          ${escapeHTML(
+            type.replaceAll("_"," ")
+          )}
+        </span>
+
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          gap:20px;
+          padding:14px 0;
+          border-bottom:1px solid #e1e7ef;
+        "
+      >
+
+        <strong>Date & Time</strong>
+
+        <span>
+          ${formatDateTime(
+            transaction.created_at
+          )}
+        </span>
+
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          gap:20px;
+          padding:14px 0;
+          border-bottom:1px solid #e1e7ef;
+        "
+      >
+
+        <strong>Reference</strong>
+
+        <span
+          style="
+            word-break:break-all;
+            text-align:right;
+          "
+        >
+          ${escapeHTML(reference)}
+        </span>
+
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          gap:20px;
+          padding:14px 0;
+          border-bottom:1px solid #e1e7ef;
+        "
+      >
+
+        <strong>Balance Before</strong>
+
+        <span>
+          ${
+            balanceBefore !== null &&
+            balanceBefore !== undefined
+              ? formatMoney(balanceBefore)
+              : "—"
+          }
+        </span>
+
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          gap:20px;
+          padding:14px 0;
+          border-bottom:1px solid #e1e7ef;
+        "
+      >
+
+        <strong>Balance After</strong>
+
+        <span>
+          ${
+            balanceAfter !== null &&
+            balanceAfter !== undefined
+              ? formatMoney(balanceAfter)
+              : "—"
+          }
+        </span>
+
+      </div>
+
+
+      <div
+        style="
+          padding:14px 0;
+          border-bottom:1px solid #e1e7ef;
+        "
+      >
+
+        <strong>Description</strong>
+
+        <div
+          style="
+            margin-top:7px;
+            color:#68758a;
+          "
+        >
+          ${escapeHTML(description)}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  modal.style.display = "block";
+
+}
+
+
+function closeTransactionReceipt() {
+
+  const modal =
+    document.getElementById(
+      "transactionReceiptModal"
+    );
+
+  if (modal) {
+
+    modal.style.display = "none";
+
+  }
+
+}
+
+  
 /* =====================================================
    LOAD WITHDRAWALS
 ===================================================== */
