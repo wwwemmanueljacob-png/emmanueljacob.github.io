@@ -4873,7 +4873,7 @@ async function loadNotifications() {
 
     const response =
       await apiRequest(
-        `/notifications/customer/999999999`
+        /notifications/customer/${customer.id}
       );
 
     notifications =
