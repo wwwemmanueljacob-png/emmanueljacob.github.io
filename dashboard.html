@@ -4872,9 +4872,9 @@ async function loadNotifications() {
   try {
 
     const response =
-      await apiRequest(
-        '/notifications/customer/${customer.id}
-      );
+    await apiRequest(
+        `/notifications/customer/${customer.id}`
+    );
 
     notifications =
       Array.isArray(
