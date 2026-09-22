@@ -5106,6 +5106,20 @@ async function loadAllData(){
 ========================================================= */
 
 async function loadStatistics(){
+      
+          const refreshButton =
+        document.querySelector(
+            '#statistics button[onclick="loadStatistics()"]'
+        );
+
+    if(refreshButton){
+
+        refreshButton.disabled = true;
+
+        refreshButton.innerHTML =
+            `<span class="spinner"></span> Refreshing...`;
+
+      }
 
     try{
 
@@ -5372,16 +5386,25 @@ setText(
 );
 
 
-    }catch(error){
+        }catch(error){
 
         console.error(
             "Statistics error:",
             error
         );
 
-    }
+    }finally{
 
-}
+        if(refreshButton){
+
+            refreshButton.disabled = false;
+
+            refreshButton.innerHTML =
+                "🔄 Refresh";
+
+        }
+
+    }
 
 
 /* =========================================================
