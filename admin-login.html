@@ -5145,12 +5145,13 @@ async function loadStatistics(){
 
 
         const approved =
-            getValue(
-                stats,
-                "approved",
-                "approvedApplications",
-                "approved_count"
-            ) || 0;
+    getValue(
+        stats,
+        "approved",
+        "approvedApplications",
+        "approvedLoans",
+        "approved_count"
+    ) || 0;
 
 
         const rejected =
