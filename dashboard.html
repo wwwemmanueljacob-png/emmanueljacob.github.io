@@ -2815,13 +2815,23 @@ async function loadLoans() {
           "approved"
       ).length;
 
-    const pending =
+   const pending =
       loans.filter(
-        loan =>
-          String(
-            loan.status || ""
-          ).toLowerCase() ===
-          "pending"
+        loan => {
+
+          const status =
+            String(
+              loan.status || ""
+            )
+              .trim()
+              .toLowerCase();
+
+          return (
+            status === "pending" ||
+            status === "under review"
+          );
+
+        }
       ).length;
 
     const rejected =
