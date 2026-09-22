@@ -923,6 +923,16 @@ header {
         </div>
       </div>
 
+      <div class="card">
+  <div class="card-label">Active Loans</div>
+
+  <div
+    class="card-value status-active"
+    id="activeLoanCount">
+    0
+  </div>
+      </div>
+
     </div>
 
     <div
@@ -2843,6 +2853,25 @@ async function loadLoans() {
           "rejected"
       ).length;
 
+    const active =
+      loans.filter(
+        loan => {
+
+      const status =
+        String(
+          loan.status || ""
+        )
+          .trim()
+          .toLowerCase();
+
+      return (
+        status === "active" ||
+        status === "disbursed"
+      );
+
+    }
+  ).length;
+
     const totalElement =
       document.getElementById(
         "totalLoanApplications"
@@ -2863,6 +2892,11 @@ async function loadLoans() {
         "rejectedLoanCount"
       );
 
+    const activeElement =
+     document.getElementById(
+        "activeLoanCount"
+      );
+
     const summaryElement =
       document.getElementById(
         "loanSummary"
@@ -2879,6 +2913,9 @@ async function loadLoans() {
 
     if (rejectedElement)
       rejectedElement.textContent = rejected;
+
+    if (activeElement)
+        activeElement.textContent = active;
 
     if (summaryElement) {
 
