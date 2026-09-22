@@ -2991,7 +2991,9 @@ function createLoanHTML(loan) {
     ).toLowerCase();
 
   const statusClass =
-    status === "approved"
+    status === "approved" ||
+    status === "active" ||
+    status === "disbursed"
       ? "status-active"
       : status === "rejected"
         ? "status-blocked"
@@ -3156,24 +3158,56 @@ function createLoanHTML(loan) {
       }
 
       ${
-        status === "approved"
-          ? `
-            <div
-              style="
-                margin-top:15px;
-                padding:12px;
-                border-radius:8px;
-                background:#eefaf1;
-                color:#16833a;
-              ">
+  status === "approved"
+    ? `
+      <div
+        style="
+          margin-top:15px;
+          padding:12px;
+          border-radius:8px;
+          background:#eefaf1;
+          color:#16833a;
+        ">
 
-              Your loan application
-              has been approved.
+        Your loan application
+        has been approved.
 
-            </div>
-          `
-          : ""
-      }
+      </div>
+    `
+    : status === "active"
+      ? `
+        <div
+          style="
+            margin-top:15px;
+            padding:12px;
+            border-radius:8px;
+            background:#eefaf1;
+            color:#16833a;
+          ">
+
+          Your loan is currently
+          <strong>ACTIVE</strong>.
+
+        </div>
+      `
+      : status === "disbursed"
+        ? `
+          <div
+            style="
+              margin-top:15px;
+              padding:12px;
+              border-radius:8px;
+              background:#eefaf1;
+              color:#16833a;
+            ">
+
+            Your loan has been
+            <strong>DISBURSED</strong>.
+
+          </div>
+        `
+        : ""
+}
 
     </div>
   `;
