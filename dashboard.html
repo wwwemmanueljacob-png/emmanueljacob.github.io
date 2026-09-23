@@ -2816,6 +2816,9 @@ async function loadLoans() {
       )
         ? response.loans
         : [];
+    
+    window.customerLoans =
+  loans;
 
     const total =
       loans.length;
