@@ -2820,6 +2820,16 @@ async function loadLoans() {
     window.customerLoans =
   loans;
 
+    window.customerLoanSchedules =
+  loans.flatMap(
+    loan =>
+      Array.isArray(
+        loan.schedules
+      )
+        ? loan.schedules
+        : []
+  );
+
     const total =
       loans.length;
 
