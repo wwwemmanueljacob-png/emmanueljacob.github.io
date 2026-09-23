@@ -2766,6 +2766,31 @@ function renderCustomer() {
 
 async function loadLoans() {
 
+  console.log(
+  "TESTING REAL CUSTOMER LOANS..."
+);
+
+try {
+
+  const testLoans =
+    await apiRequest(
+      "/loans/my-loans"
+    );
+
+  console.log(
+    "REAL CUSTOMER LOANS:",
+    testLoans
+  );
+
+} catch (error) {
+
+  console.error(
+    "REAL CUSTOMER LOANS ERROR:",
+    error
+  );
+
+}
+
   if (
     !customer ||
     !customer.id
