@@ -4004,6 +4004,21 @@ function openLoanRepayment(
   selectedRepaymentLoan =
     loan;
 
+  const loanSchedules =
+  Array.isArray(
+    loan.schedules
+  )
+    ? loan.schedules
+    : [];
+
+const unpaidSchedule =
+  loanSchedules.find(
+    schedule =>
+      Number(
+        schedule.remaining_amount || 0
+      ) > 0
+  ) || null;
+
 
   /* -----------------------------------------------
      DISPLAY LOAN INFORMATION
