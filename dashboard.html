@@ -4167,6 +4167,302 @@ function closeLoanRepayment() {
 
 }
 
+  /* =====================================================
+   SUBMIT LOAN REPAYMENT
+===================================================== */
+
+async function submitLoanRepayment() {
+
+  const amountInput =
+    document.getElementById(
+      "repaymentAmount"
+    );
+
+  const methodInput =
+    document.getElementById(
+      "repaymentPaymentMethod"
+    );
+
+  const message =
+    document.getElementById(
+      "loanRepaymentMessage"
+    );
+
+  if (
+    !selectedRepaymentLoan
+  ) {
+
+    return;
+
+  }
+
+  const amount =
+    Number(
+      amountInput?.value || 0
+    );
+
+  const paymentMethod =
+    methodInput?.value || "";
+
+  const loan =
+    selectedRepaymentLoan;
+
+  const schedules =
+    Array.isArray(
+      loan.schedules
+    )
+      ? loan.schedules
+      : [];
+
+  const schedule =
+    schedules.find(
+      item =>
+        Number(
+          item.remaining_amount || 0
+        ) > 0
+    );
+
+  if (!schedule) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "No unpaid repayment schedule was found for this loan.";
+
+    }
+
+    return;
+
+  }
+
+  const remainingLoan =
+    Number(
+      loan.remaining_balance || 0
+    );
+
+  const remainingSchedule =
+    Number(
+      schedule.remaining_amount || 0
+    );
+
+  if (
+    !amount ||
+    amount <= 0
+  ) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Please enter a valid repayment amount.";
+
+    }
+
+    return;
+
+  }
+
+  if (!paymentMethod) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Please select a payment method.";
+
+    }
+
+    return;
+
+  }
+
+  if (
+    amount >
+    remainingLoan
+  ) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Repayment amount cannot exceed the remaining loan balance.";
+
+    }
+
+    return;
+
+  }
+
+  if (
+    amount >
+    remainingSchedule
+  ) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Repayment amount cannot exceed the remaining scheduled amount.";
+
+    }
+
+    return;
+
+  }
+
+  try {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fff7cc";
+
+      message.style.color =
+        "#7a5b00";
+
+      message.textContent =
+        "Processing repayment...";
+
+    }
+
+    const response =
+      await apiRequest(
+        "/repayments",
+        {
+          method: "POST",
+
+          body:
+            JSON.stringify({
+
+              loan_id:
+                Number(
+                  loan.id
+                ),
+
+              schedule_id:
+                Number(
+                  schedule.id
+                ),
+
+              amount:
+                amount,
+
+              payment_method:
+                paymentMethod
+
+            })
+        }
+      );
+
+    if (!response.success) {
+
+      throw new Error(
+        response.message ||
+        "Repayment could not be processed."
+      );
+
+    }
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#dcfce7";
+
+      message.style.color =
+        "#166534";
+
+      message.textContent =
+        "Repayment submitted successfully.";
+
+    }
+
+    alert(
+      "Repayment submitted successfully."
+    );
+
+    closeLoanRepayment();
+
+    await loadLoans();
+
+    if (
+      typeof loadTransactions ===
+      "function"
+    ) {
+
+      await loadTransactions();
+
+    }
+
+  } catch (error) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        error.message ||
+        "Unable to process repayment.";
+
+    }
+
+  }
+
+}
+
 
 function closeTransactionReceipt() {
 
