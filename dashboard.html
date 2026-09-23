@@ -2766,6 +2766,53 @@ function renderCustomer() {
 
 async function loadLoans() {
 
+  const testResult =
+  document.createElement("div");
+
+testResult.style.cssText = `
+  position:fixed;
+  top:10px;
+  left:10px;
+  right:10px;
+  z-index:99999;
+  background:#07111f;
+  color:#ffffff;
+  padding:15px;
+  border-radius:10px;
+  font-size:14px;
+  max-height:300px;
+  overflow:auto;
+`;
+
+testResult.textContent =
+  "Testing /api/loans/my-loans...";
+
+document.body.appendChild(
+  testResult
+);
+
+try {
+
+  const testLoans =
+    await apiRequest(
+      "/loans/my-loans"
+    );
+
+  testResult.textContent =
+    JSON.stringify(
+      testLoans,
+      null,
+      2
+    );
+
+} catch (error) {
+
+  testResult.textContent =
+    "ERROR: " +
+    error.message;
+
+}
+
   console.log(
   "TESTING REAL CUSTOMER LOANS..."
 );
