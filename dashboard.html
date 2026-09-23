@@ -3914,6 +3914,231 @@ function openTransactionReceipt(transaction) {
 
 }
 
+  /* =====================================================
+   LOAN REPAYMENT MODAL
+===================================================== */
+
+let selectedRepaymentLoan = null;
+
+
+/* =====================================================
+   OPEN LOAN REPAYMENT
+===================================================== */
+
+function openLoanRepayment(
+  loanId
+) {
+
+  const modal =
+    document.getElementById(
+      "loanRepaymentModal"
+    );
+
+  const info =
+    document.getElementById(
+      "loanRepaymentInfo"
+    );
+
+  const amountInput =
+    document.getElementById(
+      "repaymentAmount"
+    );
+
+  const methodInput =
+    document.getElementById(
+      "repaymentPaymentMethod"
+    );
+
+  const message =
+    document.getElementById(
+      "loanRepaymentMessage"
+    );
+
+
+  if (!modal) {
+    return;
+  }
+
+
+  /* -----------------------------------------------
+     FIND SELECTED LOAN
+  ------------------------------------------------ */
+
+  const loan =
+    window.customerLoans &&
+    Array.isArray(
+      window.customerLoans
+    )
+      ? window.customerLoans.find(
+          item =>
+            Number(item.id) ===
+            Number(loanId)
+        )
+      : null;
+
+
+  if (!loan) {
+
+    alert(
+      "Unable to find this loan."
+    );
+
+    return;
+
+  }
+
+
+  selectedRepaymentLoan =
+    loan;
+
+
+  /* -----------------------------------------------
+     DISPLAY LOAN INFORMATION
+  ------------------------------------------------ */
+
+  const remaining =
+    Number(
+      loan.remaining_balance || 0
+    );
+
+
+  info.innerHTML = `
+
+    <div
+      style="
+        background:#f4f7fb;
+        padding:15px;
+        border-radius:10px;
+      "
+    >
+
+      <div
+        style="
+          font-size:14px;
+          color:#68758a;
+          margin-bottom:5px;
+        "
+      >
+        Loan #${escapeHTML(
+          String(loan.id)
+        )}
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:8px;
+        "
+      >
+
+        <span>
+          Remaining Balance
+        </span>
+
+        <strong>
+          ${formatMoney(
+            remaining
+          )}
+        </strong>
+
+      </div>
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+        "
+      >
+
+        <span>
+          Due Date
+        </span>
+
+        <strong>
+          ${
+            loan.due_date
+              ? formatDate(
+                  loan.due_date
+                )
+              : "Not set"
+          }
+        </strong>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  /* -----------------------------------------------
+     RESET FORM
+  ------------------------------------------------ */
+
+  if (amountInput) {
+
+    amountInput.value = "";
+
+    amountInput.max =
+      remaining;
+
+  }
+
+
+  if (methodInput) {
+
+    methodInput.value = "";
+
+  }
+
+
+  if (message) {
+
+    message.style.display =
+      "none";
+
+    message.textContent =
+      "";
+
+  }
+
+
+  /* -----------------------------------------------
+     SHOW MODAL
+  ------------------------------------------------ */
+
+  modal.style.display =
+    "block";
+
+}
+
+
+/* =====================================================
+   CLOSE LOAN REPAYMENT
+===================================================== */
+
+function closeLoanRepayment() {
+
+  const modal =
+    document.getElementById(
+      "loanRepaymentModal"
+    );
+
+  if (modal) {
+
+    modal.style.display =
+      "none";
+
+  }
+
+  selectedRepaymentLoan =
+    null;
+
+}
+
 
 function closeTransactionReceipt() {
 
