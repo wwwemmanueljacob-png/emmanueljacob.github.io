@@ -2764,32 +2764,11 @@ function renderCustomer() {
    LOAD LOANS
 ===================================================== */
 
+/* =====================================================
+   LOAD REAL CUSTOMER LOANS
+===================================================== */
+
 async function loadLoans() {
-
-  console.log(
-  "TESTING REAL CUSTOMER LOANS..."
-);
-
-try {
-
-  const testLoans =
-    await apiRequest(
-      "/loans/my-loans"
-    );
-
-  console.log(
-    "REAL CUSTOMER LOANS:",
-    testLoans
-  );
-
-} catch (error) {
-
-  console.error(
-    "REAL CUSTOMER LOANS ERROR:",
-    error
-  );
-
-}
 
   if (
     !customer ||
@@ -2808,7 +2787,7 @@ try {
 
     loanList.innerHTML = `
       <div class="loading">
-        Loading loan applications...
+        Loading your loans...
       </div>
     `;
 
@@ -2818,7 +2797,7 @@ try {
 
     allLoanList.innerHTML = `
       <div class="loading">
-        Loading loans...
+        Loading your loans...
       </div>
     `;
 
@@ -2828,74 +2807,48 @@ try {
 
     const response =
       await apiRequest(
-        `/loans/customer/${customer.id}`
+        "/loans/my-loans"
       );
 
     const loans =
       Array.isArray(
-        response.applications
+        response.loans
       )
-        ? response.applications
+        ? response.loans
         : [];
 
     const total =
       loans.length;
 
-    const approved =
-      loans.filter(
-        loan =>
-          String(
-            loan.status || ""
-          ).toLowerCase() ===
-          "approved"
-      ).length;
-
-   const pending =
+    const active =
       loans.filter(
         loan => {
 
           const status =
             String(
-              loan.status || ""
+              loan.loan_status || ""
             )
               .trim()
               .toLowerCase();
 
           return (
-            status === "pending" ||
-            status === "under review"
+            status === "active" ||
+            status === "disbursed"
           );
 
         }
       ).length;
 
-    const rejected =
+    const approved =
       loans.filter(
         loan =>
           String(
-            loan.status || ""
-          ).toLowerCase() ===
-          "rejected"
+            loan.loan_status || ""
+          )
+            .trim()
+            .toLowerCase() ===
+          "approved"
       ).length;
-
-    const active =
-      loans.filter(
-        loan => {
-
-      const status =
-        String(
-          loan.status || ""
-        )
-          .trim()
-          .toLowerCase();
-
-      return (
-        status === "active" ||
-        status === "disbursed"
-      );
-
-    }
-  ).length;
 
     const totalElement =
       document.getElementById(
@@ -2918,7 +2871,7 @@ try {
       );
 
     const activeElement =
-     document.getElementById(
+      document.getElementById(
         "activeLoanCount"
       );
 
@@ -2928,26 +2881,31 @@ try {
       );
 
     if (totalElement)
-      totalElement.textContent = total;
+      totalElement.textContent =
+        total;
 
     if (approvedElement)
-      approvedElement.textContent = approved;
+      approvedElement.textContent =
+        approved;
 
     if (pendingElement)
-      pendingElement.textContent = pending;
+      pendingElement.textContent =
+        0;
 
     if (rejectedElement)
-      rejectedElement.textContent = rejected;
+      rejectedElement.textContent =
+        0;
 
     if (activeElement)
-        activeElement.textContent = active;
+      activeElement.textContent =
+        active;
 
     if (summaryElement) {
 
       summaryElement.textContent =
         total === 0
-          ? "You have no loan applications yet."
-          : `${total} loan application${
+          ? "You have no active loan records yet."
+          : `${total} loan record${
               total === 1 ? "" : "s"
             } on your account.`;
 
@@ -2967,45 +2925,55 @@ try {
           </div>
 
           <strong>
-            No loan applications yet
+            No loans found
           </strong>
 
           <p style="margin-top:8px;">
-            You can apply for a personal
-            or business loan.
+            You currently have no loan records.
           </p>
 
         </div>
       `;
 
       if (loanList)
-        loanList.innerHTML = message;
+        loanList.innerHTML =
+          message;
 
       if (allLoanList)
-        allLoanList.innerHTML = message;
+        allLoanList.innerHTML =
+          message;
 
       return;
+
     }
 
     loans.sort(
-      (a,b) =>
-        new Date(b.created_at || 0) -
-        new Date(a.created_at || 0)
+      (a, b) =>
+        new Date(
+          b.created_at || 0
+        ) -
+        new Date(
+          a.created_at || 0
+        )
     );
 
     const html =
       loans
         .map(
           loan =>
-            createLoanHTML(loan)
+            createRealLoanHTML(
+              loan
+            )
         )
         .join("");
 
     if (loanList)
-      loanList.innerHTML = html;
+      loanList.innerHTML =
+        html;
 
     if (allLoanList)
-      allLoanList.innerHTML = html;
+      allLoanList.innerHTML =
+        html;
 
   } catch (error) {
 
@@ -3032,13 +3000,16 @@ try {
     `;
 
     if (loanList)
-      loanList.innerHTML = errorHTML;
+      loanList.innerHTML =
+        errorHTML;
 
     if (allLoanList)
-      allLoanList.innerHTML = errorHTML;
-  }
-}
+      allLoanList.innerHTML =
+        errorHTML;
 
+  }
+
+}
 
 /* =====================================================
    CREATE LOAN HTML
