@@ -10307,6 +10307,120 @@ async function rejectWithdrawal(withdrawalId){
 
 }
       
+
+/* =========================================================
+   REJECT DEPOSIT REQUEST
+========================================================= */
+
+async function rejectDepositRequest(requestId){
+
+    if(!requestId){
+
+        alert(
+            "Invalid deposit request ID."
+        );
+
+        return;
+
+    }
+
+
+    const reason =
+        prompt(
+            "Enter the reason for rejecting this deposit request:"
+        );
+
+
+    if(
+        reason === null
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !reason.trim()
+    ){
+
+        alert(
+            "A rejection reason is required."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await apiRequest(
+                `/admin/deposit-requests/${decodeURIComponent(requestId)}/status`,
+                {
+                    method:"PUT",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        status:"REJECTED",
+
+                        rejection_reason:
+                            reason.trim()
+
+                    })
+
+                }
+            );
+
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Unable to reject deposit request."
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "Deposit request rejected successfully."
+        );
+
+
+        await loadModule(
+            "depositRequests"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "REJECT DEPOSIT REQUEST ERROR:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to reject deposit request."
+        );
+
+    }
+
+  }
+      
+      
 /* =========================================================
    GENERIC MODULE LOADER
 ========================================================= */
