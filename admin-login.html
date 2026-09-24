@@ -5360,10 +5360,16 @@ const depositCount =
             ) || 0;
 
         const loanDisbursed =
-            getValue(
-                stats,
-                "totalLoanDisbursed"
-            ) || 0;
+    getValue(
+        stats,
+        "totalLoanDisbursed"
+    ) || 0;
+
+const loanDisbursementCount =
+    getValue(
+        stats,
+        "loanDisbursementCount"
+    ) || 0;
 
         const outstandingLoans =
             getValue(
@@ -5436,9 +5442,19 @@ const depositCount =
         );
 
         setText(
-            "summaryLoanDisbursed",
-            formatMoney(loanDisbursed)
-        );
+    "summaryLoanDisbursed",
+    formatMoney(loanDisbursed)
+);
+
+setText(
+    "summaryLoanDisbursedCount",
+    loanDisbursementCount +
+    (
+        loanDisbursementCount === 1
+            ? " loan disbursed"
+            : " loans disbursed"
+    )
+);
 
         setText(
             "summaryOutstandingLoans",
