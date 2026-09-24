@@ -4195,6 +4195,191 @@ function closeDeposit() {
 }
 
   /* =====================================================
+   SUBMIT CUSTOMER DEPOSIT
+===================================================== */
+
+async function submitDeposit() {
+
+  const amountInput =
+    document.getElementById(
+      "depositAmount"
+    );
+
+  const methodInput =
+    document.getElementById(
+      "depositPaymentMethod"
+    );
+
+  const message =
+    document.getElementById(
+      "depositMessage"
+    );
+
+
+  const amount =
+    Number(
+      amountInput?.value || 0
+    );
+
+  const paymentMethod =
+    methodInput?.value || "";
+
+
+  /* ==============================
+     VALIDATE AMOUNT
+  ============================== */
+
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Please enter a valid deposit amount.";
+
+    }
+
+    return;
+
+  }
+
+
+  /* ==============================
+     VALIDATE PAYMENT METHOD
+  ============================== */
+
+  if (!paymentMethod) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Please select a payment method.";
+
+    }
+
+    return;
+
+  }
+
+
+  try {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fff7cc";
+
+      message.style.color =
+        "#7a5b00";
+
+      message.textContent =
+        "Submitting deposit request...";
+
+    }
+
+
+    const response =
+      await apiRequest(
+        "/deposits/request",
+        {
+          method: "POST",
+
+          body:
+            JSON.stringify({
+
+              amount:
+                amount,
+
+              payment_method:
+                paymentMethod
+
+            })
+        }
+      );
+
+
+    if (!response.success) {
+
+      throw new Error(
+        response.message ||
+        "Deposit request could not be submitted."
+      );
+
+    }
+
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#dcfce7";
+
+      message.style.color =
+        "#166534";
+
+      message.textContent =
+        "Deposit request submitted successfully.";
+
+    }
+
+
+    alert(
+      "Deposit request submitted successfully."
+    );
+
+
+    closeDeposit();
+
+
+  } catch (error) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        error.message ||
+        "Unable to submit deposit request.";
+
+    }
+
+  }
+
+}
+
+  /* =====================================================
    SUBMIT LOAN REPAYMENT
 ===================================================== */
 
