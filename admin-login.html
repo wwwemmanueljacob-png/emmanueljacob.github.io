@@ -10096,6 +10096,102 @@ async function approveWithdrawal(withdrawalId){
     }
 
 }
+      
+
+ /* =========================================================
+   APPROVE DEPOSIT REQUEST
+========================================================= */
+
+async function approveDepositRequest(requestId){
+
+    if(!requestId){
+
+        alert(
+            "Invalid deposit request ID."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to approve this deposit request?\n\n" +
+            "The request will be marked as approved."
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await apiRequest(
+                `/admin/deposit-requests/${decodeURIComponent(requestId)}/status`,
+                {
+                    method:"PUT",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        status:"APPROVED"
+
+                    })
+
+                }
+            );
+
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Unable to approve deposit request."
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "Deposit request approved successfully."
+        );
+
+
+        await loadModule(
+            "depositRequests"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "APPROVE DEPOSIT REQUEST ERROR:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to approve deposit request."
+        );
+
+    }
+
+ }
 
 
 /* =========================================================
