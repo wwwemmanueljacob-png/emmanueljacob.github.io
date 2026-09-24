@@ -5322,18 +5322,25 @@ async function loadStatistics(){
         const repayments =
     getValue(
         stats,
-        "repayments",
-        "totalRepayments",
         "totalRepaymentAmount"
     ) || 0;
 
+const repaymentCount =
+    getValue(
+        stats,
+        "totalRepayments"
+    ) || 0;
 
         const deposits =
     getValue(
         stats,
-        "deposits",
-        "totalDeposits",
         "totalDepositAmount"
+    ) || 0;
+
+const depositCount =
+    getValue(
+        stats,
+        "totalDeposits"
     ) || 0;
 
 
@@ -5471,14 +5478,34 @@ async function loadStatistics(){
         );
 
         setText(
-            "summaryDeposits",
-            formatMoney(deposits)
-        );
+    "summaryDeposits",
+    formatMoney(deposits)
+);
+
+setText(
+    "summaryDepositCount",
+    depositCount +
+    (
+        depositCount === 1
+            ? " deposit transaction"
+            : " deposit transactions"
+    )
+);
 
         setText(
-            "summaryRepayments",
-            formatMoney(repayments)
-        );
+    "summaryRepayments",
+    formatMoney(repayments)
+);
+
+setText(
+    "summaryRepaymentCount",
+    repaymentCount +
+    (
+        repaymentCount === 1
+            ? " repayment transaction"
+            : " repayment transactions"
+    )
+);
 
         setText(
             "summarySavings",
