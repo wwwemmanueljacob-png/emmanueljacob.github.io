@@ -5367,9 +5367,13 @@ const depositCount =
         const savings =
     getValue(
         stats,
-        "savings",
-        "totalSavings",
         "totalSavingsAmount"
+    ) || 0;
+
+const savingsTransactionCount =
+    getValue(
+        stats,
+        "totalSavingsTransactions"
     ) || 0;
 
 
@@ -5544,9 +5548,19 @@ setText(
 );
 
         setText(
-            "summarySavings",
-            formatMoney(savings)
-        );
+    "summarySavings",
+    formatMoney(savings)
+);
+
+setText(
+    "summarySavingsCount",
+    savingsTransactionCount +
+    (
+        savingsTransactionCount === 1
+            ? " savings transaction"
+            : " savings transactions"
+    )
+);
 
           const withdrawalAmount =
     getValue(
