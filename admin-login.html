@@ -5538,14 +5538,21 @@ setText(
             formatMoney(savings)
         );
 
-          setText(
+          const withdrawalAmount =
+    getValue(
+        stats,
+        "totalWithdrawalAmount"
+    ) || 0;
+
+const withdrawalCount =
+    getValue(
+        stats,
+        "totalWithdrawals"
+    ) || 0;
+
+setText(
     "summaryWithdrawals",
-    formatMoney(
-        getValue(
-            stats,
-            "totalWithdrawalAmount"
-        ) || 0
-    )
+    formatMoney(withdrawalAmount)
 );
 
 setText(
