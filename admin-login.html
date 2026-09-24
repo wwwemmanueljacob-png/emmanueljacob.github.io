@@ -5035,14 +5035,6 @@ function switchSection(section){
 
         });
 
-      alert(
-    "TARGET: section-" + section +
-    "\nEXISTS: " +
-    !!document.getElementById("section-" + section) +
-    "\nSECTIONS FOUND: " +
-    document.querySelectorAll(".section").length
-);
-
 
     document
         .querySelectorAll(".section")
@@ -5055,12 +5047,6 @@ function switchSection(section){
             );
 
         });
-
-
-     alert(
-    "ACTIVE SECTION: " +
-    document.querySelector(".section.active")?.id
-);
 
 
     document
