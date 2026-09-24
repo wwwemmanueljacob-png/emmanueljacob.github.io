@@ -10537,55 +10537,94 @@ function renderGenericModule(
          }
 
                 ${
-                    module === "withdrawals" &&
-                    String(
-                        getValue(
-                            record,
-                            "status"
-                        ) || ""
-                    ).toLowerCase() === "pending"
+    (
+        module === "withdrawals" ||
+        module === "depositRequests"
+    ) &&
+    String(
+        getValue(
+            record,
+            "status"
+        ) || ""
+    ).toLowerCase() === "pending"
 
-                    ?
+    ?
 
-                    `
-                    <button
-                        class="small-btn"
-                        onclick="approveWithdrawal('${encodeURIComponent(firstId)}')"
-                        style="
-                            background:#198754;
-                            color:#fff;
-                            border-color:#198754;
-                        "
-                    >
-                        ✓ Approve
-                    </button>
+    `
+    ${
+        module === "withdrawals"
+        ?
 
-                    <button
-                        class="small-btn"
-                        onclick="rejectWithdrawal('${encodeURIComponent(firstId)}')"
-                        style="
-                            background:#dc3545;
-                            color:#fff;
-                            border-color:#dc3545;
-                        "
-                    >
-                        ✕ Reject
-                    </button>
-                    `
+        `
+        <button
+            class="small-btn"
+            onclick="approveWithdrawal('${encodeURIComponent(firstId)}')"
+            style="
+                background:#198754;
+                color:#fff;
+                border-color:#198754;
+            "
+        >
+            ✓ Approve
+        </button>
 
-                    :
+        <button
+            class="small-btn"
+            onclick="rejectWithdrawal('${encodeURIComponent(firstId)}')"
+            style="
+                background:#dc3545;
+                color:#fff;
+                border-color:#dc3545;
+            "
+        >
+            ✕ Reject
+        </button>
+        `
 
-                    ""
-                }
+        :
 
-            </div>
+        `
+        <button
+            class="small-btn"
+            onclick="approveDepositRequest('${encodeURIComponent(firstId)}')"
+            style="
+                background:#198754;
+                color:#fff;
+                border-color:#198754;
+            "
+        >
+            ✓ Approve
+        </button>
 
-        </td>
+        <button
+            class="small-btn"
+            onclick="rejectDepositRequest('${encodeURIComponent(firstId)}')"
+            style="
+                background:#dc3545;
+                color:#fff;
+                border-color:#dc3545;
+            "
+        >
+            ✕ Reject
+        </button>
+        `
+    }
+    `
 
-    </tr>
+    :
+
+    ""
+}
+
+
+</div>
+
+ </td>
+
+ </tr>
 `;
 
-        }).join("");
+  }).join("");
 
 }
 
