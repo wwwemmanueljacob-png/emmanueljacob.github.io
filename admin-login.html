@@ -5566,6 +5566,16 @@ setText(
 );
 
 setText(
+    "summaryWithdrawalCount",
+    withdrawalCount +
+    (
+        withdrawalCount === 1
+            ? " withdrawal transaction"
+            : " withdrawal transactions"
+    )
+);
+
+setText(
     "summaryPendingWithdrawals",
     getValue(
         stats,
