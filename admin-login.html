@@ -2681,6 +2681,95 @@ textarea:focus{
     </div>
 </section>
 
+              <!-- =====================================================
+     CUSTOMER DEPOSIT REQUESTS
+===================================================== -->
+
+<section id="section-deposit-requests" class="section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>Deposit Requests</h2>
+
+            <p>
+                Customer requests waiting for payment processing.
+            </p>
+
+        </div>
+
+        <button
+            class="small-btn"
+            onclick="loadModule('depositRequests')">
+
+            🔄 Refresh
+
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <input
+                        placeholder="Search customer, method or reference..."
+                        data-module-search="depositRequests">
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Request ID</th>
+
+                            <th>Customer</th>
+
+                            <th>Amount</th>
+
+                            <th>Payment Method</th>
+
+                            <th>Reference</th>
+
+                            <th>Status</th>
+
+                            <th>Date</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="depositRequestsBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <section id="section-withdrawals" class="section">
     <div class="section-header">
