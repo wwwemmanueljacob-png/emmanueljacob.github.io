@@ -8200,6 +8200,21 @@ const moduleConfig = {
         ]
     },
 
+    depositRequests:{
+        endpoint:"/admin/deposit-requests",
+        body:"depositRequestsBody",
+        keys:["depositRequests","data","items"],
+        columns:[
+            ["id","request_id","Request ID"],
+            ["customer_name","customer_id","Customer"],
+            ["amount","amount","Amount"],
+            ["payment_method","method","Payment Method"],
+            ["reference_number","reference","Reference"],
+            ["status","status","Status"],
+            ["created_at","date","Date"]
+        ]
+    },
+
     audit:{
         endpoint:"/admin/audit-logs",
         body:"auditBody",
