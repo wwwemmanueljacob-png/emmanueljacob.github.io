@@ -7496,8 +7496,17 @@ function openLoans() {
 
 function openDeposit() {
 
-window.location.href =
-    "index.html#deposit";
+  const modal =
+    document.getElementById("depositModal");
+
+  if (!modal) {
+    console.error(
+      "Deposit modal not found."
+    );
+    return;
+  }
+
+  modal.style.display = "block";
 
 }
 
