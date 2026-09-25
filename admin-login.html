@@ -3152,49 +3152,6 @@ textarea:focus{
 </section>
 
 
-<section id="section-kyc" class="section">
-    <div class="section-header">
-        <div>
-            <h2>KYC Verification</h2>
-            <p>Customer identity verification and compliance.</p>
-        </div>
-        <button class="small-btn" onclick="loadModule('kyc')">🔄 Refresh</button>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="toolbar">
-                <div class="search-box">
-                    <input placeholder="Search customer or KYC record..." data-module-search="kyc">
-                </div>
-                <select data-module-status="kyc">
-                    <option value="">All statuses</option>
-                    <option value="PENDING">Pending</option>
-                    <option value="VERIFIED">Verified</option>
-                    <option value="REJECTED">Rejected</option>
-                </select>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>KYC ID</th>
-                            <th>Customer</th>
-                            <th>Document Type</th>
-                            <th>Document Number</th>
-                            <th>Status</th>
-                            <th>Submitted</th>
-                            <th>Verified</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="kycBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <!-- ========================================================
      CUSTOMER SERVICES
 ========================================================= -->
