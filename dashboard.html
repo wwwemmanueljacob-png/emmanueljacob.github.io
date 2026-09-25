@@ -4387,6 +4387,202 @@ async function submitDeposit() {
 }
 
   /* =====================================================
+   SUBMIT CUSTOMER TRANSFER
+===================================================== */
+
+async function submitTransfer() {
+
+  const recipientInput =
+    document.getElementById(
+      "transferRecipientAccount"
+    );
+
+  const amountInput =
+    document.getElementById(
+      "transferAmount"
+    );
+
+  const descriptionInput =
+    document.getElementById(
+      "transferDescription"
+    );
+
+  const message =
+    document.getElementById(
+      "transferMessage"
+    );
+
+
+  const recipientAccount =
+    recipientInput?.value.trim() || "";
+
+  const amount =
+    Number(
+      amountInput?.value || 0
+    );
+
+  const description =
+    descriptionInput?.value.trim() || "";
+
+
+  /* ==============================
+     VALIDATE RECIPIENT
+  ============================== */
+
+  if (!recipientAccount) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Please enter the recipient account number.";
+
+    }
+
+    return;
+
+  }
+
+
+  /* ==============================
+     VALIDATE AMOUNT
+  ============================== */
+
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        "Please enter a valid transfer amount.";
+
+    }
+
+    return;
+
+  }
+
+
+  try {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fff7cc";
+
+      message.style.color =
+        "#7a5b00";
+
+      message.textContent =
+        "Processing transfer...";
+
+    }
+
+
+    const response =
+      await apiRequest(
+        "/transfers",
+        {
+          method: "POST",
+
+          body:
+            JSON.stringify({
+
+              recipient_account_number:
+                recipientAccount,
+
+              amount:
+                amount,
+
+              description:
+                description
+
+            })
+        }
+      );
+
+
+    if (!response.success) {
+
+      throw new Error(
+        response.message ||
+        "Transfer could not be completed."
+      );
+
+    }
+
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#dcfce7";
+
+      message.style.color =
+        "#166534";
+
+      message.textContent =
+        "Transfer completed successfully.";
+
+    }
+
+
+    alert(
+      "Transfer completed successfully."
+    );
+
+
+    closeTransfer();
+
+
+  } catch (error) {
+
+    if (message) {
+
+      message.style.display =
+        "block";
+
+      message.style.background =
+        "#fee2e2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        error.message ||
+        "Unable to complete transfer.";
+
+    }
+
+  }
+
+}
+
+  /* =====================================================
    SUBMIT LOAN REPAYMENT
 ===================================================== */
 
