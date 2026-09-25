@@ -7706,6 +7706,24 @@ function openLoans() {
 
 }
 
+
+function openTransfer() {
+
+  const modal =
+    document.getElementById("transferModal");
+
+  if (!modal) {
+    console.error(
+      "Transfer modal not found."
+    );
+    return;
+  }
+
+  modal.style.display = "block";
+
+}
+
+
 function openDeposit() {
 
   const modal =
