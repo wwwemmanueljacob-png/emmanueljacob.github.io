@@ -8257,6 +8257,231 @@ startDashboard();
   </div>
 
 </div>
+
+  <!-- =====================================================
+     CUSTOMER TRANSFER MODAL
+===================================================== -->
+
+<div
+  id="transferModal"
+  style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+    z-index:99999;
+    padding:20px;
+    overflow-y:auto;
+  "
+>
+
+  <div
+    style="
+      max-width:520px;
+      margin:40px auto;
+      background:#ffffff;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    "
+  >
+
+    <!-- HEADER -->
+
+    <div
+      style="
+        background:#07111f;
+        color:#ffffff;
+        padding:22px;
+        text-align:center;
+      "
+    >
+
+      <div
+        style="
+          font-size:24px;
+          font-weight:800;
+          letter-spacing:1px;
+        "
+      >
+        JAY C O B
+      </div>
+
+      <div
+        style="
+          color:#facc15;
+          font-size:13px;
+          font-weight:700;
+          margin-top:4px;
+        "
+      >
+        FINANCIAL SERVICES
+      </div>
+
+      <div
+        style="
+          margin-top:15px;
+          font-size:18px;
+          font-weight:700;
+        "
+      >
+        TRANSFER MONEY
+      </div>
+
+    </div>
+
+
+    <!-- TRANSFER CONTENT -->
+
+    <div
+      style="
+        padding:24px;
+      "
+    >
+
+      <label
+        style="
+          display:block;
+          font-weight:700;
+          margin-bottom:7px;
+        "
+      >
+        Recipient Account Number
+      </label>
+
+      <input
+        type="text"
+        id="transferRecipientAccount"
+        placeholder="Enter recipient account number"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #d5dbe5;
+          border-radius:10px;
+          font-size:16px;
+          margin-bottom:15px;
+        "
+      />
+
+
+      <label
+        style="
+          display:block;
+          font-weight:700;
+          margin-bottom:7px;
+        "
+      >
+        Transfer Amount
+      </label>
+
+      <input
+        type="number"
+        id="transferAmount"
+        min="1"
+        step="0.01"
+        placeholder="Enter transfer amount"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #d5dbe5;
+          border-radius:10px;
+          font-size:16px;
+          margin-bottom:15px;
+        "
+      />
+
+
+      <label
+        style="
+          display:block;
+          font-weight:700;
+          margin-bottom:7px;
+        "
+      >
+        Description
+      </label>
+
+      <input
+        type="text"
+        id="transferDescription"
+        placeholder="Optional description"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #d5dbe5;
+          border-radius:10px;
+          font-size:16px;
+          margin-bottom:15px;
+        "
+      />
+
+
+      <div
+        id="transferMessage"
+        style="
+          display:none;
+          padding:12px;
+          border-radius:8px;
+          margin-bottom:15px;
+          font-size:14px;
+        "
+      >
+      </div>
+
+
+      <!-- BUTTONS -->
+
+      <div
+        style="
+          display:flex;
+          gap:10px;
+        "
+      >
+
+        <button
+          type="button"
+          onclick="submitTransfer()"
+          style="
+            flex:1;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+            background:#facc15;
+            color:#07111f;
+            font-size:15px;
+            font-weight:800;
+            cursor:pointer;
+          "
+        >
+          💸 Send Money
+        </button>
+
+
+        <button
+          type="button"
+          onclick="closeTransfer()"
+          style="
+            flex:1;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+            background:#07111f;
+            color:#ffffff;
+            font-size:15px;
+            font-weight:700;
+            cursor:pointer;
+          "
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
   
 <!-- =====================================================
      TRANSACTION RECEIPT MODAL
