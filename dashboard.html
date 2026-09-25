@@ -7722,6 +7722,23 @@ function openTransfer() {
   modal.style.display = "block";
 
 }
+  
+
+  function closeTransfer() {
+
+  const modal =
+    document.getElementById("transferModal");
+
+  if (!modal) {
+    console.error(
+      "Transfer modal not found."
+    );
+    return;
+  }
+
+  modal.style.display = "none";
+
+  }
 
 
 function openDeposit() {
