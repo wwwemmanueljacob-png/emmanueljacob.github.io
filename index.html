@@ -796,10 +796,126 @@
     display: block;
 }
   
+/* =====================================================
+   JAY C O B LOADING SCREEN
+===================================================== */
+
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #07111f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: loadingFadeIn 1s ease-out;
+}
+
+.loading-logo {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+.loading-brand {
+  margin-top: 18px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #facc15;
+}
+
+.loading-subtitle {
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #ffffff;
+}
+
+.loading-spinner {
+  width: 34px;
+  height: 34px;
+  margin-top: 28px;
+  border: 3px solid rgba(250, 204, 21, 0.25);
+  border-top: 3px solid #facc15;
+  border-radius: 50%;
+  animation: loadingSpin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 15px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #cbd5e1;
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes loadingFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+    
+  
   </style>
 </head>
 
 <body>
+
+  <!-- JAY C O B LOADING SCREEN -->
+<div id="loadingScreen">
+    <div class="loading-content">
+        <img src="assets/jaycob-logo.png"
+             alt="JAY C O B Financial Services Logo"
+             class="loading-logo">
+
+        <div class="loading-brand">
+            JAY C O B
+        </div>
+
+        <div class="loading-subtitle">
+            FINANCIAL SERVICES
+        </div>
+
+        <div class="loading-spinner"></div>
+
+        <div class="loading-text">
+            SECURE FINANCIAL SERVICES
+        </div>
+    </div>
+</div>
+
 
   <!-- =====================================================
        HEADER
@@ -4836,10 +4952,28 @@ if (!response.ok) {
 
 
     console.log(
-      "JAY C O B Admin Portal: admin-login.html"
-    );
+  "JAY C O B Admin Portal: admin-login.html"
+);
 
-  </script>
+</script>
+
+<!-- JAY C O B LOADING SCREEN CONTROL -->
+<script>
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      const loadingScreen = document.getElementById("loadingScreen");
+
+      if (loadingScreen) {
+        loadingScreen.style.transition = "opacity 0.6s ease";
+        loadingScreen.style.opacity = "0";
+
+        setTimeout(function () {
+          loadingScreen.style.display = "none";
+        }, 600);
+      }
+    }, 1800);
+  });
+</script>
 
 </body>
-</html>
+</html>>
