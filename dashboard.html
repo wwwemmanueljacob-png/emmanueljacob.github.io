@@ -577,6 +577,108 @@ header {
     padding: 8px 11px;
   }
 }
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL BRANDING
+===================================================== */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portal-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #facc15;
+}
+
+.brand-subtitle {
+  margin-top: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #ffffff;
+}
+
+/* Mobile adjustment */
+@media (max-width: 600px) {
+  .portal-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .brand-subtitle {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+  }
+  /* =====================================================
+   JAY C O B CUSTOMER SIDEBAR BRANDING
+===================================================== */
+
+.sidebar {
+  background: #07111f;
+  border-right: 1px solid rgba(250, 204, 21, 0.18);
+}
+
+.sidebar-title {
+  color: #facc15;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 20px 18px;
+  border-bottom: 1px solid rgba(250, 204, 21, 0.15);
+  text-transform: uppercase;
+}
+
+.nav-btn {
+  color: #cbd5e1;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: 5px 10px;
+  transition: all 0.25s ease;
+}
+
+.nav-btn:hover {
+  color: #ffffff;
+  background: rgba(250, 204, 21, 0.08);
+  border-color: rgba(250, 204, 21, 0.2);
+  transform: translateX(3px);
+}
+
+.nav-btn.active {
+  color: #07111f;
+  background: #facc15;
+  font-weight: 800;
+  box-shadow: 0 5px 18px rgba(250, 204, 21, 0.18);
+}
 </style>
 </head>
 
