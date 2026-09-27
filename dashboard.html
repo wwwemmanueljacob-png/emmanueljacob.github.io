@@ -1424,7 +1424,378 @@ header {
   }
 }
 
-  
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   TRANSACTIONS
+===================================================== */
+
+#transactionsSection {
+  background: #ffffff;
+}
+
+/* Header */
+#transactionsSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#transactionsSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#transactionsSection #transactionSummary {
+  display: block;
+  margin-top: 6px;
+  color: #cbd5e1 !important;
+  font-size: 12px;
+}
+
+/* Refresh button */
+#transactionsSection > .section-header .primary-btn {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#transactionsSection > .section-header .primary-btn:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+}
+
+/* Balance card */
+#transactionsSection .card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 9px 26px rgba(7, 17, 31, 0.12);
+}
+
+#transactionsSection .card-label {
+  color: #cbd5e1;
+}
+
+#transactionsSection #transactionBalance {
+  margin-top: 8px;
+  color: #facc15;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* Transaction table wrapper */
+#transactionsSection .section-body > div[style*="overflow-x:auto"] {
+  border: 1px solid #e5eaf0;
+  border-radius: 14px;
+  overflow-x: auto;
+  box-shadow: 0 6px 20px rgba(7, 17, 31, 0.06);
+}
+
+/* Table */
+#transactionsSection table {
+  background: #ffffff;
+}
+
+/* Table header */
+#transactionsSection thead tr {
+  background: #07111f !important;
+  border-bottom: 2px solid #facc15 !important;
+}
+
+#transactionsSection th {
+  padding: 14px 12px !important;
+  color: #facc15;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Transaction rows */
+#transactionsSection tbody tr {
+  border-bottom: 1px solid #eef1f5;
+  transition: background 0.2s ease;
+}
+
+#transactionsSection tbody tr:hover {
+  background: #f8fafc;
+}
+
+#transactionsSection td {
+  padding: 14px 12px !important;
+  color: #334155;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+#transactionsSection tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Loading / empty message */
+#transactionsSection tbody td[colspan="7"] {
+  padding: 28px !important;
+  color: #64748b;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  #transactionsSection > .section-header {
+    align-items: stretch;
+  }
+
+  #transactionsSection > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #transactionsSection #transactionBalance {
+    font-size: 24px;
+  }
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   WITHDRAW MONEY
+===================================================== */
+
+#withdrawalSection {
+  background: #ffffff;
+}
+
+/* Header */
+#withdrawalSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#withdrawalSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#withdrawalSection #withdrawalSummary {
+  display: block;
+  margin-top: 6px;
+  color: #cbd5e1 !important;
+  font-size: 12px;
+}
+
+/* Refresh button */
+#withdrawalSection > .section-header .primary-btn {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#withdrawalSection > .section-header .primary-btn:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+}
+
+/* Balance card */
+#withdrawalSection .section-body > .card:first-child {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 9px 26px rgba(7, 17, 31, 0.12);
+}
+
+#withdrawalSection .section-body > .card:first-child .card-label {
+  color: #cbd5e1;
+}
+
+#withdrawalSection #withdrawalBalance {
+  margin-top: 8px;
+  color: #facc15;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* Form card */
+#withdrawalSection .section-body > .card:nth-child(2) {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  box-shadow: 0 8px 25px rgba(7, 17, 31, 0.07);
+}
+
+#withdrawalSection .section-body > .card:nth-child(2) h3,
+#withdrawalSection .section-body > .card:nth-child(3) h3 {
+  margin-top: 0;
+  color: #07111f;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+/* Form fields */
+#withdrawalSection .form-group {
+  margin-bottom: 18px;
+}
+
+#withdrawalSection .form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#withdrawalSection .form-group input,
+#withdrawalSection .form-group select,
+#withdrawalSection .form-group textarea {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #d9e0e8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #07111f;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#withdrawalSection .form-group input:focus,
+#withdrawalSection .form-group select:focus,
+#withdrawalSection .form-group textarea:focus {
+  border-color: #facc15;
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.12);
+}
+
+#withdrawalSection .form-group textarea {
+  resize: vertical;
+}
+
+/* Submit button */
+#withdrawalSection #withdrawalSubmitButton {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#withdrawalSection #withdrawalSubmitButton:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(250, 204, 21, 0.20);
+}
+
+/* Withdrawal status */
+#withdrawalSection #withdrawalStatus {
+  padding: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* History card */
+#withdrawalSection .section-body > .card:nth-child(3) {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  box-shadow: 0 8px 25px rgba(7, 17, 31, 0.07);
+}
+
+/* History table */
+#withdrawalSection .dashboard-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+#withdrawalSection .dashboard-table th {
+  padding: 13px 12px;
+  background: #07111f;
+  color: #facc15;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#withdrawalSection .dashboard-table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid #eef1f5;
+  color: #334155;
+  font-size: 13px;
+}
+
+#withdrawalSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#withdrawalSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #withdrawalSection > .section-header {
+    align-items: stretch;
+  }
+
+  #withdrawalSection > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #withdrawalSection .section-body > .card:nth-child(2),
+  #withdrawalSection .section-body > .card:nth-child(3) {
+    padding: 18px;
+  }
+
+  #withdrawalSection #withdrawalBalance {
+    font-size: 24px;
+  }
+
+  #withdrawalSection #withdrawalSubmitButton {
+    width: 100%;
+  }
+}
   
 </style>
 </head>
