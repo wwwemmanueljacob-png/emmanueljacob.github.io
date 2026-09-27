@@ -10865,12 +10865,23 @@ textarea:focus-visible {
 
     </div>
 
-    <button
-      class="primary-btn"
-      type="button"
-      onclick="loadSavings()">
-      🔄 Refresh
-    </button>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+
+  <button
+    class="primary-btn"
+    type="button"
+    onclick="openSavingsDepositModal()">
+    💰 Make Deposit
+  </button>
+
+  <button
+    class="primary-btn"
+    type="button"
+    onclick="loadSavings()">
+    🔄 Refresh
+  </button>
+
+    </div>
 
   </div>
 
@@ -10991,6 +11002,137 @@ textarea:focus-visible {
   </div>
 
 </section>
+
+
+  <!-- ================= SAVINGS DEPOSIT MODAL ================= -->
+
+<div
+  id="savingsDepositModal"
+  class="modal"
+  style="display:none;">
+
+  <div class="modal-content">
+
+    <button
+      type="button"
+      class="close"
+      onclick="closeSavingsDepositModal()">
+      ×
+    </button>
+
+    <h2>💰 Make a Savings Deposit</h2>
+
+    <p>
+      Submit your savings deposit for processing.
+    </p>
+
+    <form
+      id="savingsDepositForm"
+      onsubmit="submitSavingsDeposit(event)">
+
+      <div class="form-group">
+
+        <label for="savingsDepositAmount">
+          Deposit Amount (MWK)
+        </label>
+
+        <input
+          type="number"
+          id="savingsDepositAmount"
+          min="1"
+          step="0.01"
+          placeholder="Enter amount"
+          required>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="savingsPaymentMethod">
+          Payment Method
+        </label>
+
+        <select
+          id="savingsPaymentMethod"
+          required>
+
+          <option value="">
+            Select payment method
+          </option>
+
+          <option value="Airtel Money">
+            Airtel Money
+          </option>
+
+          <option value="Mpamba">
+            Mpamba
+          </option>
+
+          <option value="Bank">
+            Bank Transfer
+          </option>
+
+          <option value="Cash">
+            Cash
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="savingsReferenceNumber">
+          Reference Number
+        </label>
+
+        <input
+          type="text"
+          id="savingsReferenceNumber"
+          placeholder="Payment reference">
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="savingsDepositDescription">
+          Description
+        </label>
+
+        <textarea
+          id="savingsDepositDescription"
+          placeholder="Optional description"></textarea>
+
+      </div>
+
+      <div
+        id="savingsDepositMessage"
+        style="display:none;">
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="closeSavingsDepositModal()">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary-btn"
+          id="savingsDepositSubmitBtn">
+          Submit Deposit
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
 
 
 <!-- ================= STATEMENTS ================= -->
