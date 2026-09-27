@@ -11048,7 +11048,11 @@ function renderGenericModule(
         `
         <button
             class="small-btn"
-            onclick="approveDepositRequest('${encodeURIComponent(firstId)}')"
+           onclick="${
+    module === "savings"
+    ? `approveSavingsDeposit('${encodeURIComponent(firstId)}')`
+    : `approveDepositRequest('${encodeURIComponent(firstId)}')`
+}"
             style="
                 background:#198754;
                 color:#fff;
@@ -11059,17 +11063,20 @@ function renderGenericModule(
         </button>
 
         <button
-            class="small-btn"
-            onclick="rejectDepositRequest('${encodeURIComponent(firstId)}')"
-            style="
-                background:#dc3545;
-                color:#fff;
-                border-color:#dc3545;
-            "
-        >
-            ✕ Reject
-        </button>
-        `
+    class="small-btn"
+    onclick="${
+        module === "savings"
+        ? `rejectSavingsDeposit('${encodeURIComponent(firstId)}')`
+        : `rejectDepositRequest('${encodeURIComponent(firstId)}')`
+    }"
+    style="
+        background:#dc3545;
+        color:#fff;
+        border-color:#dc3545;
+    "
+>
+    ✕ Reject
+</button>
     }
     `
 
