@@ -1059,6 +1059,108 @@ header {
   }
 }
 
+  /* =====================================================
+   JAY C O B MY LOANS
+   LOAN SUMMARY CARDS
+===================================================== */
+
+#loansSection .cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#loansSection .card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 7px 22px rgba(7, 17, 31, 0.07);
+}
+
+#loansSection .card-label {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#loansSection .card-value {
+  margin-top: 9px;
+  color: #07111f;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+/* Total Applications */
+#loansSection .card:nth-child(1) {
+  border-top: 4px solid #facc15;
+}
+
+/* Approved */
+#loansSection .card:nth-child(2) {
+  border-top: 4px solid #22c55e;
+}
+
+#loansSection #approvedLoanCount {
+  color: #16a34a;
+}
+
+/* Pending */
+#loansSection .card:nth-child(3) {
+  border-top: 4px solid #f59e0b;
+}
+
+#loansSection #pendingLoanCount {
+  color: #d97706;
+}
+
+/* Rejected */
+#loansSection .card:nth-child(4) {
+  border-top: 4px solid #ef4444;
+}
+
+#loansSection #rejectedLoanCount {
+  color: #dc2626;
+}
+
+/* Active Loans */
+#loansSection .card:nth-child(5) {
+  border-top: 4px solid #2563eb;
+}
+
+#loansSection #activeLoanCount {
+  color: #2563eb;
+}
+
+/* Hover */
+#loansSection .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  #loansSection .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  #loansSection .cards {
+    grid-template-columns: 1fr;
+  }
+
+  #loansSection .card {
+    padding: 18px;
+  }
+
+  #loansSection .card-value {
+    font-size: 23px;
+  }
+}
   
 </style>
 </head>
