@@ -7881,7 +7881,2191 @@ header {
   }
 
 }
+  
+/* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 34B — PREMIUM FOOTER
+===================================================== */
 
+.portal-footer {
+  position: relative;
+
+  margin-top: 0;
+
+  padding: 30px 24px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #0b1b2f 55%,
+      #07111f 100%
+    );
+
+  border-top: 1px solid rgba(250, 204, 21, 0.22);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 -8px 25px rgba(7, 17, 31, 0.10);
+
+  text-align: center;
+}
+
+/* BRAND */
+
+.portal-footer-brand {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+.portal-footer-logo {
+  width: 48px;
+  height: 48px;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+.portal-footer-name {
+  color: #facc15;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  line-height: 1.1;
+}
+
+.portal-footer-subtitle {
+  margin-top: 4px;
+
+  color: #ffffff;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2.5px;
+}
+
+/* SECURE MESSAGE */
+
+.portal-footer-message {
+  color: #cbd5e1;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+/* GOLD DIVIDER */
+
+.portal-footer-line {
+  width: 80px;
+
+  height: 3px;
+
+  margin: 18px auto;
+
+  background: #facc15;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 0 12px rgba(250, 204, 21, 0.20);
+}
+
+/* BOTTOM COPYRIGHT */
+
+.portal-footer-bottom {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+/* SEPARATOR */
+
+.portal-footer-bottom span + span::before {
+  content: "•";
+
+  margin-right: 10px;
+
+  color: #facc15;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .portal-footer {
+    padding: 25px 17px 18px;
+  }
+
+  .portal-footer-logo {
+    width: 43px;
+    height: 43px;
+  }
+
+  .portal-footer-name {
+    font-size: 16px;
+
+    letter-spacing: 1.5px;
+  }
+
+  .portal-footer-subtitle {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+  }
+
+  .portal-footer-message {
+    font-size: 11px;
+  }
+
+  .portal-footer-bottom {
+    flex-direction: column;
+
+    gap: 4px;
+
+    font-size: 9px;
+  }
+
+  .portal-footer-bottom span + span::before {
+    content: "";
+    margin-right: 0;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 35 — FOOTER MOBILE & PAGE SPACING
+===================================================== */
+
+.portal-footer {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.portal-footer * {
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+
+  .portal-footer {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .portal-footer-brand {
+    width: 100%;
+  }
+
+  .portal-footer-message {
+    width: 100%;
+    text-align: center;
+  }
+
+  .portal-footer-line {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .portal-footer-bottom {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 36 — PREMIUM PAGE BACKGROUND
+===================================================== */
+
+body {
+  background:
+    linear-gradient(
+      135deg,
+      #f4f7fb 0%,
+      #eef3f8 50%,
+      #f8fafc 100%
+    );
+}
+
+.dashboard-main {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248, 250, 252, 0.96) 0%,
+      rgba(241, 245, 249, 0.96) 100%
+    );
+}
+
+.dashboard-section {
+  position: relative;
+}
+
+.dashboard-section::before {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(250, 204, 21, 0.35),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 37 — PREMIUM SECTION TRANSITIONS
+===================================================== */
+
+.dashboard-section {
+  animation: jaycobSectionFade 0.35s ease;
+}
+
+@keyframes jaycobSectionFade {
+
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.dashboard-section .card,
+.dashboard-section .stat-card,
+.dashboard-section .quick-action,
+.dashboard-section .application-card,
+.dashboard-section .loan-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dashboard-section .card:hover,
+.dashboard-section .stat-card:hover,
+.dashboard-section .application-card:hover,
+.dashboard-section .loan-card:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .dashboard-section {
+    animation: none;
+  }
+
+  .dashboard-section .card,
+  .dashboard-section .stat-card,
+  .dashboard-section .quick-action,
+  .dashboard-section .application-card,
+  .dashboard-section .loan-card {
+    transition: none;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 38 — PREMIUM BUTTONS
+===================================================== */
+
+.dashboard-section button {
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dashboard-section button:hover {
+  transform: translateY(-2px);
+}
+
+.dashboard-section button:active {
+  transform: translateY(0);
+}
+
+/* Primary buttons */
+
+.dashboard-section .btn-primary,
+.dashboard-section .primary-btn,
+.dashboard-section .action-btn {
+  background: linear-gradient(
+    135deg,
+    #facc15 0%,
+    #eab308 100%
+  );
+
+  color: #07111f;
+
+  border: 1px solid #eab308;
+
+  box-shadow:
+    0 5px 14px rgba(234, 179, 8, 0.20);
+}
+
+.dashboard-section .btn-primary:hover,
+.dashboard-section .primary-btn:hover,
+.dashboard-section .action-btn:hover {
+  box-shadow:
+    0 8px 20px rgba(234, 179, 8, 0.30);
+}
+
+/* Secondary buttons */
+
+.dashboard-section .btn-secondary,
+.dashboard-section .secondary-btn {
+  background: #07111f;
+
+  color: #ffffff;
+
+  border: 1px solid #102a46;
+
+  box-shadow:
+    0 5px 14px rgba(7, 17, 31, 0.15);
+}
+
+.dashboard-section .btn-secondary:hover,
+.dashboard-section .secondary-btn:hover {
+  background: #102a46;
+}
+
+/* Disabled buttons */
+
+.dashboard-section button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .dashboard-section button {
+    min-height: 42px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 39 — PREMIUM FORM INPUTS
+===================================================== */
+
+.dashboard-section input,
+.dashboard-section select,
+.dashboard-section textarea {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  color: #07111f;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ec;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.dashboard-section input:focus,
+.dashboard-section select:focus,
+.dashboard-section textarea:focus {
+  border-color: #facc15;
+
+  background: #fffef5;
+
+  box-shadow:
+    0 0 0 3px rgba(250, 204, 21, 0.14);
+}
+
+.dashboard-section input::placeholder,
+.dashboard-section textarea::placeholder {
+  color: #94a3b8;
+}
+
+.dashboard-section textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.dashboard-section select {
+  cursor: pointer;
+}
+
+/* File upload */
+
+.dashboard-section input[type="file"] {
+  padding: 9px 10px;
+
+  background: #f8fafc;
+
+  border: 1px dashed #cbd5e1;
+
+  cursor: pointer;
+}
+
+.dashboard-section input[type="file"]:hover {
+  border-color: #facc15;
+
+  background: #fffef5;
+}
+
+/* Labels */
+
+.dashboard-section label {
+  color: #334155;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .dashboard-section input,
+  .dashboard-section select,
+  .dashboard-section textarea {
+    padding: 11px 12px;
+    font-size: 12px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 40 — FORM LABELS & FIELD SPACING
+===================================================== */
+
+.dashboard-section .form-group {
+  margin-bottom: 18px;
+}
+
+.dashboard-section .form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #07111f;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.45px;
+}
+
+.dashboard-section .form-group small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #64748b;
+
+  font-size: 10px;
+
+  line-height: 1.45;
+}
+
+.dashboard-section .form-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.dashboard-section .form-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 22px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #eef1f5;
+}
+
+@media (max-width: 700px) {
+
+  .dashboard-section .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-section .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-section .form-actions button {
+    width: 100%;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 41 — PREMIUM TABLES
+===================================================== */
+
+.dashboard-section .table-container {
+  width: 100%;
+  overflow-x: auto;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 18px rgba(7, 17, 31, 0.06);
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-section .table-container table {
+  width: 100%;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  min-width: 650px;
+}
+
+.dashboard-section .table-container thead th {
+  padding: 14px 13px;
+
+  color: #facc15;
+
+  background: #07111f;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+
+  border-bottom: 2px solid #facc15;
+}
+
+.dashboard-section .table-container tbody td {
+  padding: 14px 13px;
+
+  color: #334155;
+
+  background: #ffffff;
+
+  font-size: 12px;
+
+  border-bottom: 1px solid #eef1f5;
+
+  vertical-align: middle;
+
+  white-space: nowrap;
+}
+
+.dashboard-section .table-container tbody tr {
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dashboard-section .table-container tbody tr:hover td {
+  background: #fffef5;
+}
+
+.dashboard-section .table-container tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dashboard-section .table-container .empty {
+  padding: 35px 20px;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  text-align: center;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* Status badges inside tables */
+
+.dashboard-section .table-container .status,
+.dashboard-section .table-container .badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.3px;
+
+  white-space: nowrap;
+}
+
+/* Mobile table spacing */
+
+@media (max-width: 600px) {
+
+  .dashboard-section .table-container {
+    border-radius: 11px;
+  }
+
+  .dashboard-section .table-container table {
+    min-width: 600px;
+  }
+
+  .dashboard-section .table-container thead th {
+    padding: 12px 10px;
+
+    font-size: 9px;
+  }
+
+  .dashboard-section .table-container tbody td {
+    padding: 12px 10px;
+
+    font-size: 11px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 42 — PREMIUM STATUS BADGES
+===================================================== */
+
+.dashboard-section .status-badge,
+.dashboard-section .badge,
+.dashboard-section .status {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 78px;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+}
+
+/* Pending */
+
+.dashboard-section .status-pending {
+  color: #92400e;
+
+  background: #fef3c7;
+
+  border-color: #fde68a;
+}
+
+/* Approved / Active / Completed */
+
+.dashboard-section .status-approved,
+.dashboard-section .status-active,
+.dashboard-section .status-completed {
+  color: #166534;
+
+  background: #dcfce7;
+
+  border-color: #bbf7d0;
+}
+
+/* Rejected / Failed */
+
+.dashboard-section .status-rejected,
+.dashboard-section .status-failed {
+  color: #991b1b;
+
+  background: #fee2e2;
+
+  border-color: #fecaca;
+}
+
+/* Under Review */
+
+.dashboard-section .status-review,
+.dashboard-section .status-under-review {
+  color: #1e40af;
+
+  background: #dbeafe;
+
+  border-color: #bfdbfe;
+}
+
+/* Cancelled */
+
+.dashboard-section .status-cancelled {
+  color: #475569;
+
+  background: #e2e8f0;
+
+  border-color: #cbd5e1;
+}
+
+/* Processing */
+
+.dashboard-section .status-processing {
+  color: #6b21a8;
+
+  background: #f3e8ff;
+
+  border-color: #e9d5ff;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .dashboard-section .status-badge,
+  .dashboard-section .badge,
+  .dashboard-section .status {
+    min-width: 70px;
+
+    padding: 5px 9px;
+
+    font-size: 8px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 43 — PREMIUM CARDS & PANELS
+===================================================== */
+
+.dashboard-section .card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dashboard-section .card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #facc15,
+      #eab308,
+      #facc15
+    );
+
+  opacity: 0.85;
+}
+
+.dashboard-section .card:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(250, 204, 21, 0.28);
+
+  box-shadow:
+    0 12px 28px rgba(7, 17, 31, 0.10);
+}
+
+/* Card headings */
+
+.dashboard-section .card h3 {
+  color: #07111f;
+
+  font-weight: 900;
+}
+
+.dashboard-section .card h4 {
+  color: #102a46;
+
+  font-weight: 800;
+}
+
+/* Card descriptions */
+
+.dashboard-section .card p {
+  color: #64748b;
+
+  line-height: 1.6;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .dashboard-section .card {
+    border-radius: 13px;
+  }
+
+  .dashboard-section .card:hover {
+    transform: none;
+  }
+
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 44 — PREMIUM SECTION HEADERS
+===================================================== */
+
+.dashboard-section > .section-header {
+  position: relative;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom:
+    1px solid rgba(250, 204, 21, 0.20);
+
+  overflow: hidden;
+}
+
+.dashboard-section > .section-header::after {
+  content: "";
+
+  position: absolute;
+
+  right: -35px;
+  top: -45px;
+
+  width: 120px;
+  height: 120px;
+
+  border: 2px solid
+    rgba(250, 204, 21, 0.10);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.dashboard-section > .section-header h2 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.2px;
+}
+
+.dashboard-section > .section-header p {
+  position: relative;
+  z-index: 1;
+
+  margin: 7px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+
+  .dashboard-section > .section-header {
+    padding: 18px;
+  }
+
+  .dashboard-section > .section-header h2 {
+    font-size: 18px;
+  }
+
+  .dashboard-section > .section-header p {
+    font-size: 11px;
+  }
+
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 45 — PREMIUM SCROLLBAR
+===================================================== */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #facc15 #07111f;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #07111f;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #facc15,
+    #eab308
+  );
+
+  border-radius: 10px;
+
+  border: 1px solid #07111f;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #facc15;
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 46 — LOADING & PROCESSING STATES
+===================================================== */
+
+.dashboard-section .loading,
+.dashboard-section .loading-state,
+.dashboard-section .processing,
+.dashboard-section .processing-state {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-height: 80px;
+
+  padding: 20px;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.dashboard-section .loading::before,
+.dashboard-section .loading-state::before,
+.dashboard-section .processing::before,
+.dashboard-section .processing-state::before {
+  content: "";
+
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 18px;
+
+  border: 3px solid #e2e8f0;
+
+  border-top-color: #facc15;
+
+  border-radius: 50%;
+
+  animation: jaycobSpinner 0.8s linear infinite;
+}
+
+@keyframes jaycobSpinner {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .dashboard-section .loading::before,
+  .dashboard-section .loading-state::before,
+  .dashboard-section .processing::before,
+  .dashboard-section .processing-state::before {
+    animation: none;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 47 — PREMIUM ALERTS & MESSAGES
+===================================================== */
+
+.dashboard-section .alert,
+.dashboard-section .message,
+.dashboard-section .notification {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin: 14px 0;
+
+  padding: 13px 15px;
+
+  border-radius: 11px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  line-height: 1.5;
+}
+
+/* Success */
+
+.dashboard-section .alert-success,
+.dashboard-section .message-success {
+  color: #166534;
+
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+
+  border-left: 4px solid #16a34a;
+}
+
+/* Error */
+
+.dashboard-section .alert-error,
+.dashboard-section .message-error {
+  color: #991b1b;
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+
+  border-left: 4px solid #dc2626;
+}
+
+/* Warning */
+
+.dashboard-section .alert-warning,
+.dashboard-section .message-warning {
+  color: #92400e;
+
+  background: #fffbeb;
+
+  border: 1px solid #fde68a;
+
+  border-left: 4px solid #facc15;
+}
+
+/* Information */
+
+.dashboard-section .alert-info,
+.dashboard-section .message-info {
+  color: #1e40af;
+
+  background: #eff6ff;
+
+  border: 1px solid #bfdbfe;
+
+  border-left: 4px solid #2563eb;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .dashboard-section .alert,
+  .dashboard-section .message,
+  .dashboard-section .notification {
+    padding: 12px;
+
+    font-size: 11px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 48 — PREMIUM MODAL WINDOWS
+===================================================== */
+
+.modal {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  background:
+    rgba(7, 17, 31, 0.68);
+}
+
+.modal-content {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid
+    rgba(250, 204, 21, 0.25);
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 22px 55px rgba(7, 17, 31, 0.28);
+}
+
+.modal-content::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #facc15,
+      #eab308,
+      #facc15
+    );
+}
+
+.modal-content h2,
+.modal-content h3 {
+  color: #07111f;
+
+  font-weight: 900;
+}
+
+.modal-content label {
+  color: #334155;
+
+  font-weight: 800;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  border-color: #dbe3ec;
+
+  border-radius: 10px;
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+  border-color: #facc15;
+
+  box-shadow:
+    0 0 0 3px rgba(250, 204, 21, 0.14);
+}
+
+@media (max-width: 600px) {
+
+  .modal-content {
+    width: calc(100% - 24px);
+
+    max-width: none;
+
+    border-radius: 14px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 49 — PREMIUM MODAL CLOSE BUTTONS
+===================================================== */
+
+.modal .close,
+.modal .close-btn,
+.modal .modal-close {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  background: #07111f;
+
+  border: 1px solid
+    rgba(250, 204, 21, 0.25);
+
+  border-radius: 50%;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.modal .close:hover,
+.modal .close-btn:hover,
+.modal .modal-close:hover {
+  color: #07111f;
+
+  background: #facc15;
+
+  transform: rotate(90deg);
+
+  box-shadow:
+    0 5px 15px rgba(250, 204, 21, 0.25);
+}
+
+.modal .close:active,
+.modal .close-btn:active,
+.modal .modal-close:active {
+  transform: rotate(90deg) scale(0.94);
+}
+
+@media (max-width: 600px) {
+
+  .modal .close,
+  .modal .close-btn,
+  .modal .modal-close {
+    width: 32px;
+    height: 32px;
+
+    font-size: 17px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 50 — PREMIUM EMPTY STATES
+===================================================== */
+
+.dashboard-section .empty-state,
+.dashboard-section .empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 120px;
+
+  padding: 28px 20px;
+
+  color: #64748b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fafc 0%,
+      #ffffff 100%
+    );
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 13px;
+
+  text-align: center;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.dashboard-section .empty-state::before {
+  content: "◌";
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 10px;
+
+  color: #facc15;
+
+  background: #07111f;
+
+  border-radius: 50%;
+
+  font-size: 24px;
+
+  font-weight: 900;
+}
+
+.dashboard-section .empty-state strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #07111f;
+
+  font-size: 13px;
+
+  font-weight: 900;
+}
+
+.dashboard-section .empty-state p {
+  margin: 0;
+
+  max-width: 420px;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+
+  .dashboard-section .empty-state,
+  .dashboard-section .empty {
+    min-height: 105px;
+
+    padding: 22px 15px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 51 — PREMIUM PROFILE AVATAR
+===================================================== */
+
+.dashboard-section .profile-avatar,
+.dashboard-section .avatar,
+.dashboard-section .user-avatar {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 82px;
+  height: 82px;
+
+  flex: 0 0 82px;
+
+  overflow: hidden;
+
+  color: #facc15;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border: 3px solid #facc15;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 7px 20px rgba(7, 17, 31, 0.18);
+}
+
+.dashboard-section .profile-avatar img,
+.dashboard-section .avatar img,
+.dashboard-section .user-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+.dashboard-section .profile-avatar span,
+.dashboard-section .avatar span,
+.dashboard-section .user-avatar span {
+  color: #facc15;
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+
+  .dashboard-section .profile-avatar,
+  .dashboard-section .avatar,
+  .dashboard-section .user-avatar {
+    width: 68px;
+    height: 68px;
+
+    flex-basis: 68px;
+
+    border-width: 2px;
+  }
+
+  .dashboard-section .profile-avatar span,
+  .dashboard-section .avatar span,
+  .dashboard-section .user-avatar span {
+    font-size: 23px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 52 — PREMIUM INFORMATION ROWS
+===================================================== */
+
+.dashboard-section .profile-row,
+.dashboard-section .info-row,
+.dashboard-section .detail-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid #eef1f5;
+}
+
+.dashboard-section .profile-row:last-child,
+.dashboard-section .info-row:last-child,
+.dashboard-section .detail-row:last-child {
+  border-bottom: none;
+}
+
+.dashboard-section .profile-row span,
+.dashboard-section .info-row span,
+.dashboard-section .detail-row span {
+  color: #64748b;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.35px;
+}
+
+.dashboard-section .profile-row strong,
+.dashboard-section .info-row strong,
+.dashboard-section .detail-row strong {
+  color: #07111f;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  text-align: right;
+
+  word-break: break-word;
+}
+
+.dashboard-section .profile-row:hover,
+.dashboard-section .info-row:hover,
+.dashboard-section .detail-row:hover {
+  background: #fffef5;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .dashboard-section .profile-row,
+  .dashboard-section .info-row,
+  .dashboard-section .detail-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 13px 0;
+  }
+
+  .dashboard-section .profile-row strong,
+  .dashboard-section .info-row strong,
+  .dashboard-section .detail-row strong {
+    text-align: left;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 53 — PREMIUM NAVIGATION ACTIVE STATE
+===================================================== */
+
+.sidebar a.active,
+.sidebar button.active,
+.sidebar .active {
+  position: relative;
+
+  color: #07111f !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #eab308 100%
+    ) !important;
+
+  border-color: #facc15 !important;
+
+  box-shadow:
+    0 5px 15px rgba(250, 204, 21, 0.20);
+
+  font-weight: 900;
+}
+
+.sidebar a.active::before,
+.sidebar button.active::before,
+.sidebar .active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 20%;
+
+  width: 4px;
+  height: 60%;
+
+  background: #07111f;
+
+  border-radius: 0 5px 5px 0;
+}
+
+.sidebar a.active:hover,
+.sidebar button.active:hover,
+.sidebar .active:hover {
+  color: #07111f !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #eab308 100%
+    ) !important;
+}
+
+@media (max-width: 600px) {
+
+  .sidebar a.active::before,
+  .sidebar button.active::before,
+  .sidebar .active::before {
+    width: 3px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 54 — PREMIUM SIDEBAR HOVER EFFECTS
+===================================================== */
+
+.sidebar a,
+.sidebar button {
+  position: relative;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sidebar a:not(.active):hover,
+.sidebar button:not(.active):hover {
+  color: #facc15 !important;
+
+  background:
+    rgba(250, 204, 21, 0.08) !important;
+
+  transform: translateX(3px);
+}
+
+.sidebar a:not(.active)::after,
+.sidebar button:not(.active)::after {
+  content: "";
+
+  position: absolute;
+
+  left: 12px;
+  right: 12px;
+  bottom: 3px;
+
+  height: 1px;
+
+  background: #facc15;
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition:
+    transform 0.2s ease;
+
+  opacity: 0.45;
+}
+
+.sidebar a:not(.active):hover::after,
+.sidebar button:not(.active):hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sidebar a,
+  .sidebar button {
+    transition: none;
+  }
+
+  .sidebar a:not(.active):hover,
+  .sidebar button:not(.active):hover {
+    transform: none;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 55 — PREMIUM HEADER ENHANCEMENT
+===================================================== */
+
+header {
+  position: relative;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #0b1b2f 55%,
+      #07111f 100%
+    );
+
+  border-bottom:
+    1px solid rgba(250, 204, 21, 0.20);
+
+  box-shadow:
+    0 5px 20px rgba(7, 17, 31, 0.16);
+}
+
+header::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #facc15,
+      transparent
+    );
+
+  opacity: 0.65;
+
+  pointer-events: none;
+}
+
+header .brand {
+  position: relative;
+  z-index: 1;
+}
+
+header .brand-text {
+  line-height: 1.1;
+}
+
+header .brand-name {
+  color: #facc15;
+
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+}
+
+header .brand-subtitle {
+  color: #cbd5e1;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+header .logout-btn {
+  position: relative;
+  z-index: 2;
+
+  border: 1px solid
+    rgba(250, 204, 21, 0.35);
+
+  border-radius: 9px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+header .logout-btn:hover {
+  color: #07111f;
+
+  background: #facc15;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 15px rgba(250, 204, 21, 0.20);
+}
+
+@media (max-width: 600px) {
+
+  header {
+    box-shadow:
+      0 4px 15px rgba(7, 17, 31, 0.14);
+  }
+
+  header .brand-name {
+    letter-spacing: 1.3px;
+  }
+
+  header .brand-subtitle {
+    letter-spacing: 1.5px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 56 — PREMIUM LOGO TREATMENT
+===================================================== */
+
+.portal-logo {
+  width: 48px;
+  height: 48px;
+
+  object-fit: contain;
+
+  display: block;
+
+  border-radius: 12px;
+
+  filter:
+    drop-shadow(
+      0 4px 8px rgba(0, 0, 0, 0.25)
+    );
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.portal-logo:hover {
+  transform: scale(1.05);
+
+  filter:
+    drop-shadow(
+      0 5px 12px rgba(250, 204, 21, 0.28)
+    );
+}
+
+.portal-footer-logo {
+  filter:
+    drop-shadow(
+      0 4px 8px rgba(0, 0, 0, 0.25)
+    );
+}
+
+@media (max-width: 600px) {
+
+  .portal-logo {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 10px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 57 — PREMIUM CONTENT SPACING
+===================================================== */
+
+.dashboard-main {
+  padding: 24px;
+}
+
+.dashboard-section {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.dashboard-section:last-child {
+  margin-bottom: 0;
+}
+
+.dashboard-section > .card + .card {
+  margin-top: 18px;
+}
+
+.dashboard-section .stats-grid {
+  margin-bottom: 22px;
+}
+
+.dashboard-section .quick-actions {
+  margin-bottom: 22px;
+}
+
+.dashboard-section .table-container {
+  margin-top: 10px;
+}
+
+@media (max-width: 850px) {
+
+  .dashboard-main {
+    padding: 20px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .dashboard-main {
+    padding: 15px;
+  }
+
+  .dashboard-section {
+    margin-bottom: 18px;
+  }
+
+  .dashboard-section > .card + .card {
+    margin-top: 14px;
+  }
+
+  .dashboard-section .stats-grid {
+    margin-bottom: 17px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 58 — PREMIUM RESPONSIVE MOBILE LAYOUT
+===================================================== */
+
+@media (max-width: 600px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  header {
+    min-height: 64px;
+  }
+
+  header .brand {
+    gap: 8px;
+  }
+
+  header .brand-text {
+    min-width: 0;
+  }
+
+  header .brand-name {
+    font-size: 15px;
+  }
+
+  header .brand-subtitle {
+    font-size: 7px;
+  }
+
+  header .logout-btn {
+    padding: 9px 11px;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+  }
+
+  .dashboard-main {
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: hidden;
+  }
+
+  .dashboard-section {
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow: hidden;
+  }
+
+  .dashboard-section .card {
+    width: 100%;
+
+    max-width: 100%;
+  }
+
+  .dashboard-section h2 {
+    word-break: break-word;
+  }
+
+  .dashboard-section p {
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-section button {
+    max-width: 100%;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  header .brand-name {
+    font-size: 13px;
+  }
+
+  header .brand-subtitle {
+    font-size: 6px;
+  }
+
+  header .logout-btn {
+    padding: 8px 9px;
+
+    font-size: 9px;
+  }
+
+  .dashboard-main {
+    padding: 12px;
+  }
+
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 59 — PREMIUM FOCUS & ACCESSIBILITY
+===================================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(250, 204, 21, 0.45);
+
+  outline-offset: 3px;
+}
+
+.dashboard-section button:focus-visible {
+  box-shadow:
+    0 0 0 4px rgba(250, 204, 21, 0.15);
+}
+
+.dashboard-section input:disabled,
+.dashboard-section select:disabled,
+.dashboard-section textarea:disabled {
+  color: #94a3b8;
+
+  background: #f1f5f9;
+
+  border-color: #e2e8f0;
+
+  cursor: not-allowed;
+}
+
+.dashboard-section button:disabled {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+}
   
 </style>
 </head>
@@ -16152,5 +18336,64 @@ startDashboard();
   </div>
 
 </div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     JAY C O B CUSTOMER PORTAL FOOTER
+===================================================== -->
+
+<footer class="portal-footer">
+
+  <div class="portal-footer-brand">
+
+    <img
+      src="assets/jaycob-logo.png"
+      alt="JAY C O B Financial Services Logo"
+      class="portal-footer-logo"
+    >
+
+    <div>
+
+      <div class="portal-footer-name">
+        JAY C O B
+      </div>
+
+      <div class="portal-footer-subtitle">
+        FINANCIAL SERVICES
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="portal-footer-message">
+
+    Secure Customer Portal
+
+  </div>
+
+
+  <div class="portal-footer-line"></div>
+
+
+  <div class="portal-footer-bottom">
+
+    <span>
+      © 2026 JAY C O B FINANCIAL SERVICES
+    </span>
+
+    <span>
+      All Rights Reserved
+    </span>
+
+  </div>
+
+</footer>
+
 </body>
 </html>
+  
