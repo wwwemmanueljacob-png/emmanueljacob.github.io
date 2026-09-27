@@ -1161,6 +1161,75 @@ header {
     font-size: 23px;
   }
 }
+
+  /* =====================================================
+   JAY C O B MY LOANS
+   HEADER
+===================================================== */
+
+#loansSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#loansSection > .section-header h2 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0;
+}
+
+#loansSection #loanSummary {
+  display: block;
+  margin-top: 6px;
+  color: #cbd5e1 !important;
+  font-size: 12px;
+}
+
+/* Header buttons */
+#loansSection > .section-header .primary-btn {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 15px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#loansSection > .section-header .primary-btn:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* Transfer button */
+#loansSection > .section-header .primary-btn:nth-of-type(2) {
+  background: #ffffff;
+  color: #07111f;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#loansSection > .section-header .primary-btn:nth-of-type(2):hover {
+  background: #f8fafc;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  #loansSection > .section-header {
+    align-items: stretch;
+  }
+
+  #loansSection > .section-header .primary-btn {
+    width: 100%;
+  }
+}
   
 </style>
 </head>
