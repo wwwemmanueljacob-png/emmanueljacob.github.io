@@ -824,6 +824,240 @@ header {
   }
 }
 
+/* =====================================================
+   JAY C O B DASHBOARD STATUS CARDS
+===================================================== */
+
+/* Account Number */
+#accountNumber {
+  color: #0f172a;
+  letter-spacing: 1px;
+}
+
+/* Account Status */
+#accountStatus {
+  color: #16a34a;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* Verification Status */
+#verificationStatus {
+  color: #2563eb;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* Add subtle accent to status cards */
+.card:nth-child(2) {
+  border-left: 4px solid #facc15;
+}
+
+.card:nth-child(3) {
+  border-left: 4px solid #22c55e;
+}
+
+.card:nth-child(4) {
+  border-left: 4px solid #3b82f6;
+}
+
+/* Card labels */
+.card:nth-child(2) .card-label,
+.card:nth-child(3) .card-label,
+.card:nth-child(4) .card-label {
+  color: #64748b;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #accountStatus,
+  #verificationStatus {
+    font-size: 20px;
+  }
+
+  #accountNumber {
+    font-size: 21px;
+  }
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quick-actions button {
+  min-height: 58px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(7, 17, 31, 0.10);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.quick-actions button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(7, 17, 31, 0.14);
+}
+
+/* Standard action buttons */
+.quick-actions .action-btn {
+  background: #ffffff;
+  color: #07111f;
+}
+
+.quick-actions .action-btn:hover {
+  background: #f8fafc;
+  border-color: rgba(250, 204, 21, 0.55);
+}
+
+/* Primary action */
+.quick-actions .primary-btn {
+  background: #facc15;
+  color: #07111f;
+  border-color: #facc15;
+  font-weight: 900;
+}
+
+.quick-actions .primary-btn:hover {
+  background: #fde047;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .quick-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-actions button {
+    width: 100%;
+    min-height: 54px;
+  }
+    
+ }
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   RECENT LOAN APPLICATIONS
+===================================================== */
+
+.loan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Loading message */
+.loan-list .loading {
+  padding: 25px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Loan application cards */
+.loan-list > div {
+  border-radius: 14px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.loan-list > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(7, 17, 31, 0.10);
+}
+
+/* Recent loan section */
+.section {
+  margin-top: 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  box-shadow: 0 8px 25px rgba(7, 17, 31, 0.07);
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 18px 22px;
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.18);
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.section-body {
+  padding: 20px 22px;
+}
+
+/* Section buttons */
+.section-header .primary-btn {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.section-header .primary-btn:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .section-header .primary-btn {
+    width: 100%;
+  }
+
+  .section-body {
+    padding: 16px;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+  }
+}
 
   
 </style>
