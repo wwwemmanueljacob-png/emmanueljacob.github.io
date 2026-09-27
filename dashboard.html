@@ -3550,6 +3550,4337 @@ header {
   }
 
 }
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 18 — PREMIUM SIDEBAR
+===================================================== */
+
+.sidebar {
+  background:
+    linear-gradient(
+      180deg,
+      #07111f 0%,
+      #0b1b2f 55%,
+      #07111f 100%
+    );
+
+  border-right: 1px solid rgba(250, 204, 21, 0.22);
+  box-shadow: 8px 0 28px rgba(7, 17, 31, 0.18);
+
+  padding: 0 10px 20px;
+}
+
+/* SIDEBAR BRAND */
+.sidebar-title {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 70px;
+  padding: 18px 14px;
+
+  color: #facc15;
+
+  font-size: 17px;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 204, 21, 0.08),
+      rgba(255, 255, 255, 0.02)
+    );
+
+  text-shadow:
+    0 2px 8px rgba(250, 204, 21, 0.18);
+}
+
+/* SMALL GOLD LINE UNDER BRAND */
+.sidebar-title::after {
+  content: "";
+
+  position: absolute;
+
+  left: 14px;
+  bottom: -1px;
+
+  width: 65px;
+  height: 3px;
+
+  background: #facc15;
+  border-radius: 5px;
+}
+
+/* NAVIGATION BUTTONS */
+.sidebar .nav-btn {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: calc(100% - 4px);
+
+  min-height: 48px;
+
+  margin: 6px 2px;
+  padding: 12px 14px;
+
+  color: #cbd5e1;
+
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 11px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+/* HOVER */
+.sidebar .nav-btn:hover {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(250, 204, 21, 0.12),
+      rgba(250, 204, 21, 0.04)
+    );
+
+  border-color: rgba(250, 204, 21, 0.18);
+
+  transform: translateX(4px);
+
+  box-shadow:
+    0 5px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ACTIVE BUTTON */
+.sidebar .nav-btn.active {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border-color: #facc15;
+
+  font-weight: 900;
+
+  transform: translateX(3px);
+
+  box-shadow:
+    0 7px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* ACTIVE INDICATOR */
+.sidebar .nav-btn.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: -3px;
+  top: 8px;
+  bottom: 8px;
+
+  width: 4px;
+
+  background: #facc15;
+
+  border-radius: 0 5px 5px 0;
+}
+
+/* KEEP NOTIFICATION BADGE VISIBLE */
+.sidebar .nav-btn #notificationBadge {
+  margin-left: auto;
+}
+
+/* NAVIGATION FOCUS */
+.sidebar .nav-btn:focus-visible {
+  outline: 2px solid #facc15;
+  outline-offset: 2px;
+}
+
+/* MOBILE SIDEBAR */
+@media (max-width: 850px) {
+
+  .sidebar {
+    padding: 0 7px 15px;
+  }
+
+  .sidebar-title {
+    min-height: 60px;
+    padding: 15px 12px;
+
+    font-size: 15px;
+    letter-spacing: 1.5px;
+  }
+
+  .sidebar .nav-btn {
+    min-height: 44px;
+
+    margin: 5px 1px;
+    padding: 10px 11px;
+
+    font-size: 12px;
+    border-radius: 9px;
+  }
+
+}
+
+/* VERY SMALL SCREENS */
+@media (max-width: 500px) {
+
+  .sidebar-title {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .sidebar .nav-btn {
+    font-size: 11px;
+    padding: 9px 10px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 19 — MAIN DASHBOARD LAYOUT
+===================================================== */
+
+.main {
+  background:
+    linear-gradient(
+      135deg,
+      #f8fafc 0%,
+      #eef3f8 100%
+    );
+
+  min-height: 100vh;
+
+  color: #07111f;
+}
+
+/* MAIN CONTENT AREA */
+.main > .dashboard-section,
+.main > .section {
+  position: relative;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.07);
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 28px rgba(7, 17, 31, 0.07);
+
+  overflow: hidden;
+}
+
+/* SMOOTH SECTION APPEARANCE */
+.main > .dashboard-section::before,
+.main > .section::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #facc15,
+      #fde047,
+      #facc15
+    );
+
+  pointer-events: none;
+}
+
+/* ERROR MESSAGE */
+#errorBox {
+  margin-bottom: 15px;
+
+  border-radius: 10px;
+}
+
+/* GENERAL CONTENT SPACING */
+.main {
+  padding: 24px;
+}
+
+/* MOBILE */
+@media (max-width: 850px) {
+
+  .main {
+    padding: 18px;
+  }
+
+  .main > .dashboard-section,
+  .main > .section {
+    border-radius: 13px;
+  }
+
+}
+
+/* SMALL MOBILE */
+@media (max-width: 500px) {
+
+  .main {
+    padding: 12px;
+  }
+
+  .main > .dashboard-section,
+  .main > .section {
+    border-radius: 11px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 20 — PREMIUM WELCOME BANNER
+===================================================== */
+
+#overviewSection .welcome {
+  position: relative;
+  overflow: hidden;
+
+  margin-bottom: 24px;
+  padding: 30px 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 65%,
+      #173b5f 100%
+    );
+
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 30px rgba(7, 17, 31, 0.16);
+}
+
+/* GOLD DECORATIVE CIRCLE */
+#overviewSection .welcome::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  right: -70px;
+  top: -80px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(250, 204, 21, 0.16);
+
+  box-shadow:
+    0 0 0 20px rgba(250, 204, 21, 0.035),
+    0 0 0 40px rgba(250, 204, 21, 0.025);
+
+  pointer-events: none;
+}
+
+/* WELCOME HEADING */
+#overviewSection .welcome h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 28px;
+  font-weight: 900;
+
+  line-height: 1.25;
+}
+
+/* CUSTOMER NAME */
+#overviewSection #customerName {
+  color: #facc15;
+
+  font-weight: 900;
+
+  text-shadow:
+    0 2px 10px rgba(250, 204, 21, 0.18);
+}
+
+/* WELCOME DESCRIPTION */
+#overviewSection .welcome p {
+  position: relative;
+  z-index: 1;
+
+  margin: 10px 0 0;
+
+  max-width: 650px;
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #overviewSection .welcome {
+    padding: 24px 20px;
+    border-radius: 15px;
+  }
+
+  #overviewSection .welcome h1 {
+    font-size: 22px;
+  }
+
+  #overviewSection .welcome p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+}
+
+/* SMALL MOBILE */
+@media (max-width: 450px) {
+
+  #overviewSection .welcome {
+    padding: 20px 17px;
+  }
+
+  #overviewSection .welcome h1 {
+    font-size: 19px;
+  }
+
+  #overviewSection .welcome p {
+    font-size: 12px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 21 — ACCOUNT SUMMARY CARDS
+===================================================== */
+
+#overviewSection .cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 26px;
+}
+
+/* SUMMARY CARD */
+#overviewSection .cards > .card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 125px;
+
+  padding: 21px;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-top: 4px solid #facc15;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 8px 24px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+/* HOVER */
+#overviewSection .cards > .card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 14px 30px rgba(7, 17, 31, 0.12);
+
+  border-top-color: #07111f;
+}
+
+/* CARD LABEL */
+#overviewSection .cards > .card .card-label {
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+/* CARD VALUE */
+#overviewSection .cards > .card .card-value {
+  margin-top: 9px;
+
+  color: #07111f;
+
+  font-size: 22px;
+  font-weight: 900;
+
+  line-height: 1.3;
+
+  word-break: break-word;
+}
+
+/* ACCOUNT BALANCE */
+#overviewSection #accountBalance {
+  color: #b8860b;
+
+  font-size: 24px;
+
+  text-shadow:
+    0 1px 3px rgba(250, 204, 21, 0.18);
+}
+
+/* ACCOUNT NUMBER */
+#overviewSection #accountNumber {
+  color: #2563eb;
+
+  letter-spacing: 1px;
+}
+
+/* ACCOUNT STATUS */
+#overviewSection #accountStatus {
+  color: #15803d;
+}
+
+/* VERIFICATION */
+#overviewSection #verificationStatus {
+  color: #7c3aed;
+}
+
+/* DECORATIVE GOLD GLOW */
+#overviewSection .cards > .card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 75px;
+  height: 75px;
+
+  right: -32px;
+  bottom: -32px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(250, 204, 21, 0.07);
+
+  pointer-events: none;
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+
+  #overviewSection .cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+  #overviewSection .cards {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+  }
+
+  #overviewSection .cards > .card {
+    min-height: 105px;
+
+    padding: 18px;
+  }
+
+  #overviewSection .cards > .card .card-value {
+    font-size: 20px;
+  }
+
+  #overviewSection #accountBalance {
+    font-size: 22px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 22 — QUICK ACTIONS
+===================================================== */
+
+#overviewSection .quick-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 5px;
+}
+
+/* ALL QUICK ACTION BUTTONS */
+#overviewSection .quick-actions .action-btn,
+#overviewSection .quick-actions .primary-btn {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 58px;
+
+  padding: 13px 14px;
+
+  border-radius: 12px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+}
+
+/* STANDARD ACTION */
+#overviewSection .quick-actions .action-btn {
+  color: #07111f;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ec;
+
+  box-shadow:
+    0 5px 16px rgba(7, 17, 31, 0.06);
+}
+
+/* PRIMARY ACTION */
+#overviewSection .quick-actions .primary-btn {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+
+  box-shadow:
+    0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* HOVER */
+#overviewSection .quick-actions .action-btn:hover,
+#overviewSection .quick-actions .primary-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 25px rgba(7, 17, 31, 0.12);
+}
+
+/* STANDARD HOVER */
+#overviewSection .quick-actions .action-btn:hover {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border-color: rgba(250, 204, 21, 0.65);
+}
+
+/* PRIMARY HOVER */
+#overviewSection .quick-actions .primary-btn:hover {
+  background: #fde047;
+}
+
+/* CLICK EFFECT */
+#overviewSection .quick-actions button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* GOLD TOP LINE */
+#overviewSection .quick-actions button::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 0;
+
+  height: 3px;
+
+  background: #facc15;
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  transition: transform 0.22s ease;
+}
+
+#overviewSection .quick-actions button:hover::before {
+  transform: scaleX(1);
+}
+
+/* FOCUS ACCESSIBILITY */
+#overviewSection .quick-actions button:focus-visible {
+  outline: 2px solid #facc15;
+  outline-offset: 2px;
+}
+
+/* TABLET */
+@media (max-width: 1050px) {
+
+  #overviewSection .quick-actions {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+/* SMALL TABLET */
+@media (max-width: 750px) {
+
+  #overviewSection .quick-actions {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+
+  #overviewSection .quick-actions {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  #overviewSection .quick-actions .action-btn,
+  #overviewSection .quick-actions .primary-btn {
+    width: 100%;
+
+    min-height: 52px;
+
+    font-size: 12px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 23 — RECENT LOAN APPLICATIONS
+===================================================== */
+
+#overviewSection > .section {
+  margin-top: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+  overflow: hidden;
+}
+
+/* SECTION HEADER */
+#overviewSection > .section > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 18px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+/* TITLE */
+#overviewSection > .section > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 900;
+}
+
+/* APPLY BUTTON */
+#overviewSection > .section > .section-header .primary-btn {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 17px rgba(250, 204, 21, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+#overviewSection > .section > .section-header .primary-btn:hover {
+  background: #fde047;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(250, 204, 21, 0.25);
+}
+
+/* SECTION BODY */
+#overviewSection > .section > .section-body {
+  padding: 22px;
+  background: #ffffff;
+}
+
+/* LOAN LIST */
+#overviewSection #loanList {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+/* LOAN ITEMS */
+#overviewSection #loanList .loan-item {
+  position: relative;
+  overflow: hidden;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #facc15;
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 5px 17px rgba(7, 17, 31, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* LOAN ITEM HOVER */
+#overviewSection #loanList .loan-item:hover {
+  transform: translateY(-3px);
+
+  border-left-color: #07111f;
+
+  box-shadow:
+    0 11px 25px rgba(7, 17, 31, 0.10);
+}
+
+/* LOAN ITEM DECORATION */
+#overviewSection #loanList .loan-item::after {
+  content: "";
+
+  position: absolute;
+
+  width: 70px;
+  height: 70px;
+
+  right: -30px;
+  bottom: -30px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(250, 204, 21, 0.07);
+
+  pointer-events: none;
+}
+
+/* LOAN GRID */
+#overviewSection #loanList .loan-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+/* LOAN INFORMATION */
+#overviewSection #loanList .loan-info {
+  padding: 13px;
+
+  background: #ffffff;
+
+  border: 1px solid #edf1f5;
+  border-radius: 10px;
+}
+
+/* LABEL */
+#overviewSection #loanList .loan-info small {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* VALUE */
+#overviewSection #loanList .loan-info strong {
+  display: block;
+
+  color: #07111f;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  line-height: 1.4;
+}
+
+/* LOADING STATE */
+#overviewSection #loanList .loading {
+  padding: 30px 20px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  border: 1px dashed #cbd5e1;
+  border-radius: 13px;
+
+  font-size: 13px;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #overviewSection > .section > .section-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  #overviewSection > .section > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #overviewSection > .section > .section-body {
+    padding: 17px;
+  }
+
+  #overviewSection #loanList .loan-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* SMALL MOBILE */
+@media (max-width: 450px) {
+
+  #overviewSection > .section > .section-header {
+    padding: 16px;
+  }
+
+  #overviewSection > .section > .section-header h2 {
+    font-size: 16px;
+  }
+
+  #overviewSection #loanList .loan-item {
+    padding: 15px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 24 — MY LOANS
+===================================================== */
+
+#loansSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#loansSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+/* TITLE */
+#loansSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* SUMMARY TEXT */
+#loansSection #loanSummary {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #cbd5e1 !important;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* HEADER BUTTONS */
+#loansSection > .section-header .primary-btn {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 15px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#loansSection > .section-header .primary-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#loansSection > .section-body {
+  padding: 22px;
+  background: #ffffff;
+}
+
+/* SUMMARY CARDS */
+#loansSection > .section-body > .cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+/* CARD */
+#loansSection > .section-body > .cards > .card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 110px;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-top: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 20px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#loansSection > .section-body > .cards > .card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+}
+
+/* CARD LABEL */
+#loansSection .card-label {
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* CARD VALUE */
+#loansSection .card-value {
+  margin-top: 8px;
+
+  color: #07111f;
+
+  font-size: 24px;
+  font-weight: 900;
+}
+
+/* STATUS COLORS */
+#loansSection #approvedLoanCount {
+  color: #15803d;
+}
+
+#loansSection #pendingLoanCount {
+  color: #d97706;
+}
+
+#loansSection #rejectedLoanCount {
+  color: #dc2626;
+}
+
+#loansSection #activeLoanCount {
+  color: #2563eb;
+}
+
+/* LOAN LIST */
+#loansSection #allLoanList {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+  margin-top: 22px;
+}
+
+/* LOAN RECORD */
+#loansSection #allLoanList .loan-item {
+  position: relative;
+  overflow: hidden;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 20px rgba(7, 17, 31, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* LOAN RECORD HOVER */
+#loansSection #allLoanList .loan-item:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+
+  border-left-color: #07111f;
+}
+
+/* LOAN GRID */
+#loansSection #allLoanList .loan-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 14px;
+}
+
+/* LOAN INFO */
+#loansSection #allLoanList .loan-info {
+  padding: 13px;
+
+  background: #ffffff;
+
+  border: 1px solid #edf1f5;
+  border-radius: 10px;
+}
+
+/* LOAN LABEL */
+#loansSection #allLoanList .loan-info small {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* LOAN VALUE */
+#loansSection #allLoanList .loan-info strong {
+  display: block;
+
+  color: #07111f;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  line-height: 1.4;
+
+  word-break: break-word;
+}
+
+/* LOADING */
+#loansSection #allLoanList .loading {
+  padding: 35px 20px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 13px;
+}
+
+/* MOBILE */
+@media (max-width: 1050px) {
+
+  #loansSection > .section-body > .cards {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 750px) {
+
+  #loansSection > .section-header {
+    align-items: stretch;
+
+    flex-wrap: wrap;
+  }
+
+  #loansSection > .section-header .primary-btn {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  #loansSection > .section-body > .cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  #loansSection #allLoanList .loan-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  #loansSection > .section-header {
+    padding: 17px;
+  }
+
+  #loansSection > .section-body {
+    padding: 17px;
+  }
+
+  #loansSection > .section-body > .cards {
+    grid-template-columns: 1fr;
+  }
+
+  #loansSection > .section-header .primary-btn {
+    width: 100%;
+    flex: none;
+  }
+
+  #loansSection #allLoanList .loan-item {
+    padding: 16px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 25 — TRANSACTIONS
+===================================================== */
+
+#transactionsSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#transactionsSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+/* TITLE */
+#transactionsSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* DESCRIPTION */
+#transactionsSection #transactionSummary {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #cbd5e1 !important;
+
+  font-size: 12px;
+}
+
+/* REFRESH BUTTON */
+#transactionsSection > .section-header .primary-btn {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#transactionsSection > .section-header .primary-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#transactionsSection > .section-body {
+  padding: 22px;
+}
+
+/* BALANCE CARD */
+#transactionsSection > .section-body > .card {
+  position: relative;
+  overflow: hidden;
+
+  margin-bottom: 20px;
+  padding: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border: 1px solid rgba(250, 204, 21, 0.25);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 9px 26px rgba(7, 17, 31, 0.12);
+}
+
+/* BALANCE LABEL */
+#transactionsSection #transactionBalance {
+  margin-top: 8px;
+
+  color: #facc15;
+
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* TABLE WRAPPER */
+#transactionsSection .section-body > div[style*="overflow-x:auto"] {
+  overflow-x: auto;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 20px rgba(7, 17, 31, 0.06);
+}
+
+/* TABLE */
+#transactionsSection table {
+  width: 100%;
+  min-width: 850px;
+
+  background: #ffffff;
+
+  border-collapse: collapse;
+}
+
+/* TABLE HEADER */
+#transactionsSection thead tr {
+  background: #07111f !important;
+
+  border-bottom: 2px solid #facc15 !important;
+}
+
+#transactionsSection th {
+  padding: 14px 12px !important;
+
+  color: #facc15;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+
+  white-space: nowrap;
+}
+
+/* TABLE ROWS */
+#transactionsSection tbody tr {
+  background: #ffffff;
+
+  border-bottom: 1px solid #eef1f5;
+
+  transition:
+    background 0.2s ease;
+}
+
+#transactionsSection tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* TABLE CELLS */
+#transactionsSection td {
+  padding: 14px 12px !important;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  vertical-align: middle;
+}
+
+/* LAST ROW */
+#transactionsSection tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* EMPTY / LOADING */
+#transactionsSection tbody td[colspan="7"] {
+  padding: 30px !important;
+
+  color: #64748b;
+
+  text-align: center;
+
+  background: #f8fafc;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #transactionsSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #transactionsSection > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #transactionsSection > .section-body {
+    padding: 17px;
+  }
+
+  #transactionsSection #transactionBalance {
+    font-size: 24px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 26 — WITHDRAW MONEY
+===================================================== */
+
+#withdrawalSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#withdrawalSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+/* TITLE */
+#withdrawalSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* DESCRIPTION */
+#withdrawalSection #withdrawalSummary {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #cbd5e1 !important;
+
+  font-size: 12px;
+}
+
+/* REFRESH BUTTON */
+#withdrawalSection > .section-header .primary-btn {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#withdrawalSection > .section-header .primary-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#withdrawalSection > .section-body {
+  padding: 22px;
+}
+
+/* ALL CARDS */
+#withdrawalSection .card {
+  position: relative;
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.07);
+}
+
+/* BALANCE CARD */
+#withdrawalSection > .section-body > .card:first-child {
+  padding: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-color:
+    rgba(250, 204, 21, 0.25);
+}
+
+/* BALANCE LABEL */
+#withdrawalSection #withdrawalBalance {
+  margin-top: 8px;
+
+  color: #facc15;
+
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* FORM CARD */
+#withdrawalSection > .section-body > .card:nth-child(2) {
+  padding: 24px;
+
+  margin-bottom: 20px;
+}
+
+/* FORM TITLE */
+#withdrawalSection > .section-body > .card:nth-child(2) h3 {
+  margin: 0 0 20px;
+
+  padding-bottom: 12px;
+
+  color: #07111f;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  border-bottom: 2px solid #facc15;
+}
+
+/* FORM GROUP */
+#withdrawalSection .form-group {
+  margin-bottom: 16px;
+}
+
+/* LABEL */
+#withdrawalSection .form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* INPUTS */
+#withdrawalSection .form-group input,
+#withdrawalSection .form-group select,
+#withdrawalSection .form-group textarea {
+  width: 100%;
+
+  padding: 12px 13px;
+
+  color: #07111f;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ec;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* INPUT FOCUS */
+#withdrawalSection .form-group input:focus,
+#withdrawalSection .form-group select:focus,
+#withdrawalSection .form-group textarea:focus {
+  border-color: #facc15;
+
+  box-shadow:
+    0 0 0 3px rgba(250, 204, 21, 0.13);
+}
+
+/* TEXTAREA */
+#withdrawalSection .form-group textarea {
+  resize: vertical;
+
+  min-height: 90px;
+}
+
+/* SUBMIT BUTTON */
+#withdrawalSection #withdrawalSubmitButton {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 10px;
+
+  padding: 12px 18px;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px rgba(250, 204, 21, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#withdrawalSection #withdrawalSubmitButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 23px rgba(250, 204, 21, 0.25);
+}
+
+/* STATUS MESSAGE */
+#withdrawalSection #withdrawalStatus {
+  padding: 0;
+
+  color: #64748b;
+}
+
+/* HISTORY CARD */
+#withdrawalSection > .section-body > .card:last-child {
+  padding: 22px;
+}
+
+/* HISTORY TITLE */
+#withdrawalSection > .section-body > .card:last-child h3 {
+  margin: 0;
+
+  color: #07111f;
+
+  font-size: 18px;
+  font-weight: 900;
+}
+
+/* TABLE WRAPPER */
+#withdrawalSection .card:last-child > div[style*="overflow-x:auto"] {
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+
+  overflow-x: auto;
+
+  box-shadow:
+    0 5px 16px rgba(7, 17, 31, 0.05);
+}
+
+/* TABLE */
+#withdrawalSection .dashboard-table {
+  width: 100%;
+  min-width: 750px;
+
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+/* TABLE HEADER */
+#withdrawalSection .dashboard-table thead tr {
+  background: #07111f;
+
+  border-bottom: 2px solid #facc15;
+}
+
+#withdrawalSection .dashboard-table th {
+  padding: 13px 12px;
+
+  color: #facc15;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+}
+
+/* TABLE CELLS */
+#withdrawalSection .dashboard-table td {
+  padding: 13px 12px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid #eef1f5;
+}
+
+/* TABLE HOVER */
+#withdrawalSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #withdrawalSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #withdrawalSection > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #withdrawalSection > .section-body {
+    padding: 17px;
+  }
+
+  #withdrawalSection > .section-body > .card:nth-child(2),
+  #withdrawalSection > .section-body > .card:last-child {
+    padding: 18px;
+  }
+
+  #withdrawalSection #withdrawalBalance {
+    font-size: 24px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 27 — SAVINGS
+===================================================== */
+
+#savingsSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#savingsSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+/* TITLE */
+#savingsSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* DESCRIPTION */
+#savingsSection #savingsSummary {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #cbd5e1 !important;
+
+  font-size: 12px;
+}
+
+/* REFRESH BUTTON */
+#savingsSection > .section-header .primary-btn {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#savingsSection > .section-header .primary-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#savingsSection > .section-body {
+  padding: 22px;
+}
+
+/* SUMMARY CARDS */
+#savingsSection > .section-body > .cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+/* CARD */
+#savingsSection > .section-body > .cards > .card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 115px;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-top: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 21px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#savingsSection > .section-body > .cards > .card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+}
+
+/* CARD LABEL */
+#savingsSection .card-label {
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* CARD VALUES */
+#savingsSection .card-value {
+  margin-top: 8px;
+
+  color: #07111f;
+
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* SAVINGS BALANCE */
+#savingsSection #savingsBalance {
+  color: #b8860b;
+}
+
+/* TOTAL DEPOSITS */
+#savingsSection #totalSavingsDeposits {
+  color: #15803d;
+}
+
+/* TOTAL WITHDRAWALS */
+#savingsSection #totalSavingsWithdrawals {
+  color: #dc2626;
+}
+
+/* TRANSACTION COUNT */
+#savingsSection #savingsTransactionCount {
+  color: #2563eb;
+}
+
+/* SAVINGS HISTORY SECTION */
+#savingsSection > .section-body > .section {
+  margin-top: 0;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.06);
+
+  overflow: hidden;
+}
+
+/* HISTORY HEADER */
+#savingsSection > .section-body > .section > .section-header {
+  padding: 17px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#savingsSection > .section-body > .section > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* HISTORY BODY */
+#savingsSection > .section-body > .section > .section-body {
+  padding: 20px;
+}
+
+/* TABLE */
+#savingsSection .dashboard-table {
+  width: 100%;
+  min-width: 800px;
+
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+/* TABLE HEADER */
+#savingsSection .dashboard-table thead tr {
+  background: #07111f;
+
+  border-bottom: 2px solid #facc15;
+}
+
+#savingsSection .dashboard-table th {
+  padding: 13px 12px;
+
+  color: #facc15;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+}
+
+/* TABLE CELLS */
+#savingsSection .dashboard-table td {
+  padding: 13px 12px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid #eef1f5;
+
+  vertical-align: middle;
+}
+
+/* ROW HOVER */
+#savingsSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* LAST ROW */
+#savingsSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* LOADING */
+#savingsSection .dashboard-table .loading {
+  padding: 30px;
+
+  color: #64748b;
+
+  text-align: center;
+
+  background: #f8fafc;
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+
+  #savingsSection > .section-body > .cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #savingsSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #savingsSection > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #savingsSection > .section-body {
+    padding: 17px;
+  }
+
+  #savingsSection > .section-body > .cards {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  #savingsSection > .section-body > .section > .section-body {
+    padding: 15px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 28 — ACCOUNT STATEMENTS
+===================================================== */
+
+#statementsSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#statementsSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+/* TITLE */
+#statementsSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* DESCRIPTION */
+#statementsSection > .section-header p {
+  margin: 7px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* REFRESH BUTTON */
+#statementsSection > .section-header .btn-secondary {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#statementsSection > .section-header .btn-secondary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#statementsSection > .section-body {
+  padding: 22px;
+}
+
+/* SUMMARY CARDS */
+#statementsSection .dashboard-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+/* SUMMARY CARD */
+#statementsSection .dashboard-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 20px;
+
+  min-height: 105px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-top: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 21px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#statementsSection .dashboard-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+}
+
+/* ICON */
+#statementsSection .card-icon {
+  margin-bottom: 8px;
+
+  font-size: 22px;
+}
+
+/* LABEL */
+#statementsSection .dashboard-card span {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* VALUE */
+#statementsSection .dashboard-card-value {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #07111f;
+
+  font-size: 21px;
+  font-weight: 900;
+
+  line-height: 1.3;
+}
+
+/* SPECIFIC VALUES */
+#statementsSection #statementTransactionCount {
+  color: #2563eb;
+}
+
+#statementsSection #statementTotalCredit {
+  color: #15803d;
+}
+
+#statementsSection #statementTotalDebit {
+  color: #dc2626;
+}
+
+#statementsSection #statementCurrentBalance {
+  color: #b8860b;
+}
+
+/* TABLE CONTAINER */
+#statementsSection .dashboard-table-container {
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.06);
+
+  overflow: hidden;
+}
+
+/* TABLE HEADER */
+#statementsSection .table-header {
+  padding: 17px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#statementsSection .table-header h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* STATUS MESSAGE */
+#statementsSection #statementsStatus {
+  margin: 15px 20px 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+/* TABLE RESPONSIVE */
+#statementsSection .table-responsive {
+  width: 100%;
+
+  overflow-x: auto;
+
+  padding: 20px;
+}
+
+/* TABLE */
+#statementsSection .dashboard-table {
+  width: 100%;
+  min-width: 800px;
+
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+/* TABLE HEADER */
+#statementsSection .dashboard-table thead tr {
+  background: #07111f;
+
+  border-bottom: 2px solid #facc15;
+}
+
+#statementsSection .dashboard-table th {
+  padding: 13px 12px;
+
+  color: #facc15;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+}
+
+/* TABLE CELLS */
+#statementsSection .dashboard-table td {
+  padding: 13px 12px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid #eef1f5;
+
+  vertical-align: middle;
+}
+
+/* ROW HOVER */
+#statementsSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* LAST ROW */
+#statementsSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* EMPTY STATE */
+#statementsSection .dashboard-table tbody tr td[colspan="7"] {
+  padding: 30px;
+
+  color: #64748b;
+
+  text-align: center;
+
+  background: #f8fafc;
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+
+  #statementsSection .dashboard-cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #statementsSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #statementsSection > .section-header .btn-secondary {
+    width: 100%;
+  }
+
+  #statementsSection > .section-body {
+    padding: 17px;
+  }
+
+  #statementsSection .dashboard-cards {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  #statementsSection .dashboard-card {
+    padding: 18px;
+  }
+
+  #statementsSection .table-responsive {
+    padding: 15px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 29 — MY PROFILE
+===================================================== */
+
+#profileSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#profileSection > .section-header {
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#profileSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* BODY */
+#profileSection > .section-body {
+  padding: 24px;
+}
+
+/* PROFILE GRID */
+#profileSection .loan-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+/* PROFILE INFORMATION CARD */
+#profileSection .loan-info {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 90px;
+
+  padding: 18px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #facc15;
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 6px 19px rgba(7, 17, 31, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* HOVER */
+#profileSection .loan-info:hover {
+  transform: translateY(-3px);
+
+  border-left-color: #07111f;
+
+  box-shadow:
+    0 11px 25px rgba(7, 17, 31, 0.10);
+}
+
+/* DECORATIVE CIRCLE */
+#profileSection .loan-info::after {
+  content: "";
+
+  position: absolute;
+
+  width: 65px;
+  height: 65px;
+
+  right: -28px;
+  bottom: -28px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(250, 204, 21, 0.07);
+
+  pointer-events: none;
+}
+
+/* LABEL */
+#profileSection .loan-info small {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+/* VALUE */
+#profileSection .loan-info strong {
+  display: block;
+
+  color: #07111f;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  line-height: 1.5;
+
+  word-break: break-word;
+}
+
+/* SPECIFIC PROFILE VALUES */
+#profileSection #profileName {
+  color: #b8860b;
+  font-size: 17px;
+}
+
+#profileSection #profileEmail {
+  color: #2563eb;
+}
+
+#profileSection #profilePhone {
+  color: #15803d;
+}
+
+#profileSection #profileOccupation {
+  color: #07111f;
+}
+
+#profileSection #profileAddress {
+  color: #475569;
+}
+
+#profileSection #profileIdNumber {
+  color: #7c3aed;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #profileSection > .section-header {
+    padding: 18px;
+  }
+
+  #profileSection > .section-header h2 {
+    font-size: 18px;
+  }
+
+  #profileSection > .section-body {
+    padding: 17px;
+  }
+
+  #profileSection .loan-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  #profileSection .loan-info {
+    min-height: 82px;
+
+    padding: 16px 17px;
+  }
+
+}
+
+/* SMALL PHONES */
+@media (max-width: 450px) {
+
+  #profileSection .loan-info strong {
+    font-size: 14px;
+  }
+
+  #profileSection #profileName {
+    font-size: 16px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 30 — KYC DOCUMENTS
+===================================================== */
+
+#kycSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#kycSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#kycSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#kycSection > .section-header p {
+  margin: 7px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* REFRESH BUTTON */
+#kycSection > .section-header .btn-secondary {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#kycSection > .section-header .btn-secondary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#kycSection > .section-body {
+  padding: 22px;
+}
+
+/* SUMMARY CARDS */
+#kycSection .dashboard-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+/* SUMMARY CARD */
+#kycSection .dashboard-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 110px;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-top: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 21px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#kycSection .dashboard-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+}
+
+/* CARD ICON */
+#kycSection .card-icon {
+  margin-bottom: 8px;
+
+  font-size: 22px;
+}
+
+/* CARD LABEL */
+#kycSection .dashboard-card span {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* CARD VALUE */
+#kycSection .dashboard-card-value {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #07111f;
+
+  font-size: 22px;
+  font-weight: 900;
+
+  line-height: 1.3;
+}
+
+/* SPECIFIC COUNTERS */
+#kycSection #kycDocumentCount {
+  color: #2563eb;
+}
+
+#kycSection #kycPendingCount {
+  color: #d97706;
+}
+
+#kycSection #kycVerifiedCount {
+  color: #15803d;
+}
+
+#kycSection #kycRejectedCount {
+  color: #dc2626;
+}
+
+/* TABLE CONTAINER */
+#kycSection .dashboard-table-container {
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.06);
+
+  overflow: hidden;
+}
+
+/* TABLE HEADER */
+#kycSection .table-header {
+  padding: 17px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom:
+    1px solid rgba(250, 204, 21, 0.20);
+}
+
+#kycSection .table-header h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* STATUS MESSAGE */
+#kycSection #kycStatus {
+  margin: 15px 20px 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+/* RESPONSIVE TABLE */
+#kycSection .table-responsive {
+  width: 100%;
+
+  overflow-x: auto;
+
+  padding: 20px;
+}
+
+/* TABLE */
+#kycSection .dashboard-table {
+  width: 100%;
+  min-width: 850px;
+
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+/* TABLE HEAD */
+#kycSection .dashboard-table thead tr {
+  background: #07111f;
+
+  border-bottom: 2px solid #facc15;
+}
+
+#kycSection .dashboard-table th {
+  padding: 13px 12px;
+
+  color: #facc15;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+}
+
+/* TABLE CELLS */
+#kycSection .dashboard-table td {
+  padding: 13px 12px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid #eef1f5;
+
+  vertical-align: middle;
+}
+
+/* ROW HOVER */
+#kycSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* LAST ROW */
+#kycSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* EMPTY STATE */
+#kycSection .dashboard-table tbody tr td[colspan="7"] {
+  padding: 30px;
+
+  color: #64748b;
+
+  text-align: center;
+
+  background: #f8fafc;
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+
+  #kycSection .dashboard-cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #kycSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #kycSection > .section-header .btn-secondary {
+    width: 100%;
+  }
+
+  #kycSection > .section-body {
+    padding: 17px;
+  }
+
+  #kycSection .dashboard-cards {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  #kycSection .dashboard-card {
+    padding: 18px;
+  }
+
+  #kycSection .table-responsive {
+    padding: 15px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 31 — NOTIFICATIONS
+===================================================== */
+
+#notificationsSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+#notificationsSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#notificationsSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#notificationsSection > .section-header p {
+  margin: 7px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* REFRESH BUTTON */
+#notificationsSection > .section-header .btn-secondary {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#notificationsSection > .section-header .btn-secondary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(250, 204, 21, 0.22);
+}
+
+/* BODY */
+#notificationsSection > .section-body {
+  padding: 22px;
+}
+
+/* STATUS MESSAGE */
+#notificationsSection #notificationsStatus {
+  margin-bottom: 16px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+/* NOTIFICATION LIST */
+#notificationsSection #notificationsList {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+}
+
+/* NOTIFICATION CARD */
+#notificationsSection #notificationsList > * {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 18px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #facc15;
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 6px 19px rgba(7, 17, 31, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* HOVER */
+#notificationsSection #notificationsList > *:hover {
+  transform: translateY(-3px);
+
+  border-left-color: #07111f;
+
+  box-shadow:
+    0 11px 25px rgba(7, 17, 31, 0.10);
+}
+
+/* DECORATIVE CIRCLE */
+#notificationsSection #notificationsList > *::after {
+  content: "";
+
+  position: absolute;
+
+  width: 70px;
+  height: 70px;
+
+  right: -30px;
+  bottom: -30px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(250, 204, 21, 0.07);
+
+  pointer-events: none;
+}
+
+/* LINKS INSIDE NOTIFICATIONS */
+#notificationsSection #notificationsList a {
+  color: #2563eb;
+
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+#notificationsSection #notificationsList a:hover {
+  text-decoration: underline;
+}
+
+/* EMPTY / LOADING STATE */
+#notificationsSection #notificationsList .loading,
+#notificationsSection #notificationsList .empty {
+  padding: 35px 20px;
+
+  color: #64748b;
+
+  text-align: center;
+
+  background: #f8fafc;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 13px;
+
+  box-shadow: none;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  #notificationsSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #notificationsSection > .section-header .btn-secondary {
+    width: 100%;
+  }
+
+  #notificationsSection > .section-body {
+    padding: 17px;
+  }
+
+  #notificationsSection #notificationsList {
+    gap: 11px;
+  }
+
+  #notificationsSection #notificationsList > * {
+    padding: 16px 17px;
+  }
+
+}
+
+/* SMALL PHONES */
+@media (max-width: 450px) {
+
+  #notificationsSection > .section-header {
+    padding: 17px;
+  }
+
+  #notificationsSection > .section-header h2 {
+    font-size: 18px;
+  }
+
+  #notificationsSection > .section-header p {
+    font-size: 11px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 32 — SUPPORT TICKETS
+===================================================== */
+
+#supportSection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+#supportSection > .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#supportSection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#supportSection > .section-header p {
+  margin: 7px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* NEW TICKET BUTTON */
+
+#supportSection > .section-header .btn-primary {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+  border-radius: 9px;
+
+  padding: 10px 16px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px rgba(250, 204, 21, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#supportSection > .section-header .btn-primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 23px rgba(250, 204, 21, 0.25);
+}
+
+/* =====================================================
+   BODY
+===================================================== */
+
+#supportSection > .section-body {
+  padding: 22px;
+}
+
+/* =====================================================
+   SUPPORT SUMMARY CARDS
+===================================================== */
+
+#supportSection .dashboard-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+#supportSection .dashboard-card {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 105px;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-top: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 21px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#supportSection .dashboard-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+}
+
+/* CARD HEADINGS */
+
+#supportSection .dashboard-card h4 {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+/* CARD VALUES */
+
+#supportSection .dashboard-card-value {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #07111f;
+
+  font-size: 25px;
+
+  font-weight: 900;
+
+  line-height: 1.3;
+}
+
+/* SPECIFIC COUNTERS */
+
+#supportSection #supportTotalTickets {
+  color: #2563eb;
+}
+
+#supportSection #supportOpenTickets {
+  color: #15803d;
+}
+
+#supportSection #supportPendingTickets {
+  color: #d97706;
+}
+
+#supportSection #supportClosedTickets {
+  color: #64748b;
+}
+
+/* =====================================================
+   SUPPORT TICKET FORM
+===================================================== */
+
+#supportSection #supportTicketForm {
+  margin-top: 20px;
+}
+
+#supportSection #supportTicketForm > .dashboard-card {
+  display: block;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.07);
+}
+
+/* FORM TITLE */
+
+#supportSection #supportTicketForm h3 {
+  margin: 0 0 20px;
+
+  padding-bottom: 12px;
+
+  color: #07111f;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  border-bottom: 2px solid #facc15;
+}
+
+/* FORM GROUP */
+
+#supportSection .form-group {
+  margin-bottom: 16px;
+}
+
+#supportSection .form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+/* INPUTS */
+
+#supportSection .form-group input,
+#supportSection .form-group select,
+#supportSection .form-group textarea {
+  width: 100%;
+
+  padding: 12px 13px;
+
+  color: #07111f;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ec;
+
+  border-radius: 9px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#supportSection .form-group input:focus,
+#supportSection .form-group select:focus,
+#supportSection .form-group textarea:focus {
+  border-color: #facc15;
+
+  box-shadow:
+    0 0 0 3px rgba(250, 204, 21, 0.13);
+}
+
+#supportSection .form-group textarea {
+  resize: vertical;
+
+  min-height: 130px;
+}
+
+/* FORM BUTTONS */
+
+#supportSection #supportSubmitButton {
+  color: #07111f;
+
+  background:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #fde047 100%
+    );
+
+  border: 1px solid #facc15;
+
+  border-radius: 9px;
+
+  padding: 11px 17px;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px rgba(250, 204, 21, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#supportSection #supportSubmitButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(250, 204, 21, 0.25);
+}
+
+/* =====================================================
+   TICKET HISTORY CARD
+===================================================== */
+
+#supportSection > .section-body > .dashboard-card:last-child {
+  display: block;
+
+  margin-top: 20px;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.06);
+}
+
+#supportSection > .section-body > .dashboard-card:last-child h3 {
+  margin: 0;
+
+  color: #07111f;
+
+  font-size: 18px;
+
+  font-weight: 900;
+}
+
+/* TABLE */
+
+#supportSection .table-responsive {
+  width: 100%;
+
+  overflow-x: auto;
+
+  margin-top: 18px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 13px;
+}
+
+#supportSection .dashboard-table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+#supportSection .dashboard-table thead tr {
+  background: #07111f;
+
+  border-bottom: 2px solid #facc15;
+}
+
+#supportSection .dashboard-table th {
+  padding: 13px 12px;
+
+  color: #facc15;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+}
+
+#supportSection .dashboard-table td {
+  padding: 13px 12px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid #eef1f5;
+
+  vertical-align: middle;
+}
+
+#supportSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#supportSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* STATUS */
+
+#supportSection .status-message {
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  #supportSection .dashboard-cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  #supportSection > .section-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  #supportSection > .section-header .btn-primary {
+    width: 100%;
+  }
+
+  #supportSection > .section-body {
+    padding: 17px;
+  }
+
+  #supportSection .dashboard-cards {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  #supportSection .dashboard-card {
+    padding: 18px;
+  }
+
+  #supportSection #supportTicketForm > .dashboard-card {
+    padding: 18px;
+  }
+
+  #supportSection > .section-body > .dashboard-card:last-child {
+    padding: 18px;
+  }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 450px) {
+
+  #supportSection > .section-header {
+    padding: 17px;
+  }
+
+  #supportSection > .section-header h2 {
+    font-size: 18px;
+  }
+
+  #supportSection > .section-header p {
+    font-size: 11px;
+  }
+
+  #supportSection .dashboard-card-value {
+    font-size: 23px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER PORTAL
+   STEP 33 — SECURITY CENTER
+===================================================== */
+
+#securitySection {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+#securitySection > .section-header {
+  padding: 20px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+
+  border-bottom:
+    1px solid rgba(250, 204, 21, 0.20);
+}
+
+#securitySection > .section-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#securitySection > .section-header p {
+  margin: 7px 0 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   SECURITY STATISTICS
+===================================================== */
+
+#securitySection .stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+#securitySection .stat-card {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 115px;
+
+  padding: 21px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-top: 4px solid #facc15;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 21px rgba(7, 17, 31, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#securitySection .stat-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 27px rgba(7, 17, 31, 0.11);
+}
+
+/* STAT TITLE */
+
+#securitySection .stat-title {
+  color: #64748b;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.6px;
+}
+
+/* STAT VALUE */
+
+#securitySection .stat-value {
+  margin-top: 8px;
+
+  color: #07111f;
+
+  font-size: 28px;
+
+  font-weight: 900;
+}
+
+/* FAILED LOGINS */
+
+#securitySection .stat-card:nth-child(1) {
+  border-top-color: #dc2626;
+}
+
+#securitySection .stat-card:nth-child(1) .stat-value {
+  color: #dc2626;
+}
+
+/* SECURITY EVENTS */
+
+#securitySection .stat-card:nth-child(2) {
+  border-top-color: #d97706;
+}
+
+#securitySection .stat-card:nth-child(2) .stat-value {
+  color: #d97706;
+}
+
+/* ACTIVE SESSIONS */
+
+#securitySection .stat-card:nth-child(3) {
+  border-top-color: #15803d;
+}
+
+#securitySection .stat-card:nth-child(3) .stat-value {
+  color: #15803d;
+}
+
+/* =====================================================
+   SECURITY INFORMATION CARDS
+===================================================== */
+
+#securitySection > .card {
+  position: relative;
+
+  overflow: hidden;
+
+  margin-bottom: 20px;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(7, 17, 31, 0.08);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 7px 22px rgba(7, 17, 31, 0.07);
+}
+
+#securitySection > .card:last-child {
+  margin-bottom: 0;
+}
+
+/* CARD TITLE */
+
+#securitySection > .card h3 {
+  margin: 0 0 18px;
+
+  padding-bottom: 12px;
+
+  color: #07111f;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  border-bottom: 2px solid #facc15;
+}
+
+/* =====================================================
+   TABLE CONTAINERS
+===================================================== */
+
+#securitySection .table-container {
+  width: 100%;
+
+  overflow-x: auto;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+}
+
+#securitySection .table-container table {
+  width: 100%;
+
+  min-width: 750px;
+
+  border-collapse: collapse;
+}
+
+/* TABLE HEADER */
+
+#securitySection .table-container th {
+  padding: 13px 12px;
+
+  color: #facc15;
+
+  background: #07111f;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+}
+
+/* TABLE CELLS */
+
+#securitySection .table-container td {
+  padding: 13px 12px;
+
+  color: #334155;
+
+  background: #ffffff;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid #eef1f5;
+
+  vertical-align: middle;
+}
+
+/* ROW HOVER */
+
+#securitySection .table-container tbody tr:hover {
+  background: #f8fafc;
+}
+
+#securitySection .table-container tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* EMPTY STATE */
+
+#securitySection .table-container .empty {
+  padding: 32px 20px;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  text-align: center;
+
+  font-size: 13px;
+}
+
+/* =====================================================
+   SECURITY STATUS ROWS
+===================================================== */
+
+#securitySection .profile-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eef1f5;
+}
+
+#securitySection .profile-row:last-child {
+  border-bottom: none;
+}
+
+#securitySection .profile-row span {
+  color: #475569;
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+#securitySection .profile-row strong {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 105px;
+
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  color: #b45309;
+
+  background: #fef3c7;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+  #securitySection .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  #securitySection > .section-header {
+    padding: 18px;
+  }
+
+  #securitySection > .section-header h2 {
+    font-size: 18px;
+  }
+
+  #securitySection > .section-header p {
+    font-size: 11px;
+  }
+
+  #securitySection .stat-card {
+    padding: 18px;
+  }
+
+  #securitySection .stat-value {
+    font-size: 25px;
+  }
+
+  #securitySection > .card {
+    padding: 18px;
+  }
+
+  #securitySection > .card h3 {
+    font-size: 16px;
+  }
+
+  #securitySection .profile-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  #securitySection .profile-row strong {
+    min-width: 100px;
+  }
+
+}
   
 </style>
 </head>
