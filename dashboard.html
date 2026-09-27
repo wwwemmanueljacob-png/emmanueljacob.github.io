@@ -1230,6 +1230,201 @@ header {
     width: 100%;
   }
 }
+
+  /* =====================================================
+   JAY C O B CUSTOMER LOAN RECORDS
+===================================================== */
+
+.loan-item {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.09);
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.loan-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #facc15;
+}
+
+.loan-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(250, 204, 21, 0.35);
+  box-shadow: 0 14px 32px rgba(7, 17, 31, 0.12);
+}
+
+/* Loan heading */
+.loan-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.loan-type {
+  color: #07111f;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.loan-top small {
+  color: #7a8495 !important;
+}
+
+/* Status badge */
+.loan-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Active / Approved */
+.loan-status.status-active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Pending */
+.loan-status.status-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Rejected */
+.loan-status.status-blocked {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Loan information grid */
+.loan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.loan-info {
+  padding: 13px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #eef1f5;
+}
+
+.loan-info small {
+  display: block;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.loan-info strong {
+  display: block;
+  color: #07111f;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* Repayment progress */
+.loan-item > div[style*="margin-top:16px"] {
+  margin-top: 20px !important;
+}
+
+.loan-item > div[style*="margin-top:16px"] strong {
+  color: #07111f;
+}
+
+.loan-item > div[style*="height:8px"] {
+  background: #e2e8f0 !important;
+}
+
+.loan-item > div[style*="height:8px"] > div {
+  background: #facc15 !important;
+}
+
+/* Active loan information */
+.loan-item > div[style*="background:#eefaf1"] {
+  background: #ecfdf5 !important;
+  color: #15803d !important;
+  border: 1px solid #bbf7d0;
+}
+
+/* Repayment button */
+.loan-item .primary-btn {
+  background: #07111f;
+  color: #facc15;
+  border: 1px solid #07111f;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.loan-item .primary-btn:hover {
+  background: #facc15;
+  color: #07111f;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.20);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .loan-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .loan-item {
+    padding: 18px;
+  }
+
+  .loan-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .loan-status {
+    min-width: 85px;
+  }
+
+  .loan-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .loan-item .primary-btn {
+    width: 100%;
+  }
+}
+
+  
   
 </style>
 </head>
