@@ -15636,6 +15636,339 @@ async function loadSavings() {
 }
 
 
+  /* =====================================================
+   SAVINGS DEPOSIT MODAL
+===================================================== */
+
+function openSavingsDepositModal() {
+
+  const modal =
+    document.getElementById(
+      "savingsDepositModal"
+    );
+
+  if (!modal) {
+    return;
+  }
+
+  modal.style.display = "flex";
+
+}
+
+
+/* =====================================================
+   CLOSE SAVINGS DEPOSIT MODAL
+===================================================== */
+
+function closeSavingsDepositModal() {
+
+  const modal =
+    document.getElementById(
+      "savingsDepositModal"
+    );
+
+  if (!modal) {
+    return;
+  }
+
+  modal.style.display = "none";
+
+  const form =
+    document.getElementById(
+      "savingsDepositForm"
+    );
+
+  if (form) {
+    form.reset();
+  }
+
+  const message =
+    document.getElementById(
+      "savingsDepositMessage"
+    );
+
+  if (message) {
+    message.style.display = "none";
+    message.innerHTML = "";
+  }
+
+}
+
+
+/* =====================================================
+   SUBMIT SAVINGS DEPOSIT
+===================================================== */
+
+async function submitSavingsDeposit(event) {
+
+  event.preventDefault();
+
+  if (
+    !customer ||
+    !customer.id
+  ) {
+
+    alert(
+      "Customer information is not available."
+    );
+
+    return;
+  }
+
+  const amount =
+    Number(
+      document.getElementById(
+        "savingsDepositAmount"
+      )?.value || 0
+    );
+
+  const paymentMethod =
+    document.getElementById(
+      "savingsPaymentMethod"
+    )?.value || "";
+
+  const referenceNumber =
+    document.getElementById(
+      "savingsReferenceNumber"
+    )?.value.trim() || "";
+
+  const description =
+    document.getElementById(
+      "savingsDepositDescription"
+    )?.value.trim() || "";
+
+  const submitButton =
+    document.getElementById(
+      "savingsDepositSubmitBtn"
+    );
+
+  const message =
+    document.getElementById(
+      "savingsDepositMessage"
+    );
+
+
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
+
+    showSavingsDepositMessage(
+      "Please enter a valid deposit amount.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!paymentMethod) {
+
+    showSavingsDepositMessage(
+      "Please select a payment method.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  try {
+
+    if (submitButton) {
+
+      submitButton.disabled = true;
+
+      submitButton.textContent =
+        "Submitting...";
+
+    }
+
+
+    const response =
+      await apiRequest(
+        "/savings/deposit",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            customer_id:
+              customer.id,
+
+            account_id:
+              customer.account_number ||
+              customer.account_id ||
+              null,
+
+            amount:
+              amount,
+
+            payment_method:
+              paymentMethod,
+
+            reference_number:
+              referenceNumber ||
+              null,
+
+            description:
+              description ||
+              "Savings deposit"
+
+          })
+
+        }
+      );
+
+
+    if (
+      !response ||
+      response.success !== true
+    ) {
+
+      throw new Error(
+        response?.message ||
+        "Failed to submit savings deposit."
+      );
+
+    }
+
+
+    showSavingsDepositMessage(
+      "Savings deposit submitted successfully. It is now pending processing.",
+      "success"
+    );
+
+
+    if (submitButton) {
+
+      submitButton.textContent =
+        "Submitted";
+
+    }
+
+
+    /*
+    Refresh Savings history
+    */
+
+    await loadSavings();
+
+
+    /*
+    Close modal after a short delay
+    */
+
+    setTimeout(() => {
+
+      closeSavingsDepositModal();
+
+    }, 1500);
+
+
+  } catch (error) {
+
+    console.error(
+      "Savings deposit submission error:",
+      error
+    );
+
+
+    showSavingsDepositMessage(
+      error.message ||
+      "Unable to submit savings deposit.",
+      "error"
+    );
+
+
+    if (submitButton) {
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        "Submit Deposit";
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVINGS DEPOSIT MESSAGE
+===================================================== */
+
+function showSavingsDepositMessage(
+  messageText,
+  type
+) {
+
+  const message =
+    document.getElementById(
+      "savingsDepositMessage"
+    );
+
+  if (!message) {
+    return;
+  }
+
+
+  message.style.display =
+    "block";
+
+  message.textContent =
+    messageText;
+
+
+  if (type === "success") {
+
+    message.style.color =
+      "#166534";
+
+    message.style.background =
+      "#f0fdf4";
+
+    message.style.border =
+      "1px solid #bbf7d0";
+
+  } else {
+
+    message.style.color =
+      "#991b1b";
+
+    message.style.background =
+      "#fef2f2";
+
+    message.style.border =
+      "1px solid #fecaca";
+
+  }
+
+
+  message.style.padding =
+    "12px";
+
+  message.style.borderRadius =
+    "10px";
+
+  message.style.marginBottom =
+    "15px";
+
+  message.style.fontSize =
+    "12px";
+
+  message.style.fontWeight =
+    "700";
+
+}
+
+
 /* =====================================================
    LOAD ACCOUNT STATEMENTS
 ===================================================== */
