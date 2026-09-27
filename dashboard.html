@@ -1796,6 +1796,1760 @@ header {
     width: 100%;
   }
 }
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   SAVINGS
+===================================================== */
+
+#savingsSection {
+  background: #ffffff;
+}
+
+/* Main header */
+#savingsSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#savingsSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#savingsSection #savingsSummary {
+  display: block;
+  margin-top: 6px;
+  color: #cbd5e1 !important;
+  font-size: 12px;
+}
+
+/* Refresh button */
+#savingsSection > .section-header .primary-btn {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#savingsSection > .section-header .primary-btn:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+}
+
+/* Savings summary cards */
+#savingsSection > .section-body > .cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+#savingsSection > .section-body > .cards .card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 8px 23px rgba(7, 17, 31, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#savingsSection > .section-body > .cards .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.11);
+}
+
+#savingsSection > .section-body > .cards .card-label {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#savingsSection > .section-body > .cards .card-value {
+  margin-top: 9px;
+  color: #07111f;
+  font-size: 23px;
+  font-weight: 900;
+}
+
+/* Current Savings Balance */
+#savingsSection #savingsBalance {
+  color: #facc15;
+}
+
+#savingsSection > .section-body > .cards .card:nth-child(1) {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-color: rgba(250, 204, 21, 0.25);
+}
+
+#savingsSection > .section-body > .cards .card:nth-child(1) .card-label {
+  color: #cbd5e1;
+}
+
+/* Total Deposits */
+#savingsSection #totalSavingsDeposits {
+  color: #16a34a;
+}
+
+/* Total Withdrawals */
+#savingsSection #totalSavingsWithdrawals {
+  color: #dc2626;
+}
+
+/* Transaction count */
+#savingsSection #savingsTransactionCount {
+  color: #2563eb;
+}
+
+/* Savings History */
+#savingsSection .section-body > .section {
+  margin-top: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+  overflow: hidden;
+}
+
+#savingsSection .section-body > .section > .section-header {
+  background: #07111f;
+  border-bottom: 2px solid #facc15;
+}
+
+#savingsSection .section-body > .section > .section-header h2 {
+  margin: 0;
+  color: #facc15;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* Savings table */
+#savingsSection .dashboard-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+#savingsSection .dashboard-table th {
+  padding: 13px 12px;
+  background: #07111f;
+  color: #facc15;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#savingsSection .dashboard-table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid #eef1f5;
+  color: #334155;
+  font-size: 13px;
+}
+
+#savingsSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#savingsSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  #savingsSection > .section-body > .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  #savingsSection > .section-header {
+    align-items: stretch;
+  }
+
+  #savingsSection > .section-header .primary-btn {
+    width: 100%;
+  }
+
+  #savingsSection > .section-body > .cards {
+    grid-template-columns: 1fr;
+  }
+
+  #savingsSection > .section-body > .cards .card {
+    padding: 18px;
+  }
+
+  #savingsSection > .section-body > .cards .card-value {
+    font-size: 21px;
+  }
+}
+
+ /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   ACCOUNT STATEMENTS
+===================================================== */
+
+#statementsSection {
+  background: #ffffff;
+}
+
+/* Main Statements Header */
+#statementsSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#statementsSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#statementsSection > .section-header p {
+  margin: 7px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* Refresh Button */
+#statementsSection > .section-header .btn-secondary {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#statementsSection > .section-header .btn-secondary:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* =====================================================
+   STATEMENT SUMMARY CARDS
+===================================================== */
+
+#statementsSection .dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+#statementsSection .dashboard-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 8px 23px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#statementsSection .dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+/* Card icons */
+#statementsSection .card-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #07111f;
+  font-size: 22px;
+}
+
+/* Card labels */
+#statementsSection .dashboard-card span {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+/* Card values */
+#statementsSection .dashboard-card-value {
+  display: block;
+  color: #07111f;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* Total Transactions */
+#statementsSection
+#statementTransactionCount {
+  color: #2563eb;
+}
+
+/* Total Credit */
+#statementsSection
+#statementTotalCredit {
+  color: #16a34a;
+}
+
+/* Total Debit */
+#statementsSection
+#statementTotalDebit {
+  color: #dc2626;
+}
+
+/* Current Balance */
+#statementsSection
+#statementCurrentBalance {
+  color: #facc15;
+}
+
+#statementsSection
+.dashboard-card:nth-child(4) {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-color: rgba(250, 204, 21, 0.25);
+}
+
+#statementsSection
+.dashboard-card:nth-child(4) span {
+  color: #cbd5e1;
+}
+
+/* =====================================================
+   TRANSACTION HISTORY CONTAINER
+===================================================== */
+
+#statementsSection .dashboard-table-container {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+}
+
+/* Table Header */
+#statementsSection .table-header {
+  padding: 18px 22px;
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 2px solid #facc15;
+}
+
+#statementsSection .table-header h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* Status message */
+#statementsSection .status-message {
+  padding: 0 22px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Responsive table */
+#statementsSection .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Statements table */
+#statementsSection .dashboard-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+#statementsSection .dashboard-table th {
+  padding: 14px 12px;
+  background: #07111f;
+  color: #facc15;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+#statementsSection .dashboard-table td {
+  padding: 14px 12px;
+  color: #334155;
+  font-size: 13px;
+  border-bottom: 1px solid #eef1f5;
+  vertical-align: middle;
+}
+
+#statementsSection .dashboard-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+#statementsSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#statementsSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Empty / loading message */
+#statementsSection .dashboard-table tbody td[colspan="7"] {
+  padding: 30px 15px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 950px) {
+
+  #statementsSection .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  #statementsSection > .section-header {
+    align-items: stretch;
+  }
+
+  #statementsSection > .section-header .btn-secondary {
+    width: 100%;
+  }
+
+  #statementsSection .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  #statementsSection .dashboard-card {
+    padding: 18px;
+  }
+
+  #statementsSection .dashboard-card-value {
+    font-size: 20px;
+  }
+
+  #statementsSection .table-header {
+    padding: 16px;
+  }
+
+  #statementsSection .status-message {
+    padding: 0 16px;
+  }
+
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   MY PROFILE
+===================================================== */
+
+#profileSection {
+  background: #ffffff;
+}
+
+/* Profile Header */
+#profileSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#profileSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* Profile Body */
+#profileSection > .section-body {
+  padding: 24px;
+}
+
+/* Profile Information Grid */
+#profileSection .loan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Individual Profile Cards */
+#profileSection .loan-info {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-left: 4px solid #facc15;
+  border-radius: 14px;
+  box-shadow: 0 7px 22px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+#profileSection .loan-info:hover {
+  transform: translateY(-3px);
+  border-left-color: #07111f;
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+/* Labels */
+#profileSection .loan-info small {
+  display: block;
+  margin-bottom: 8px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Profile Values */
+#profileSection .loan-info strong {
+  display: block;
+  color: #07111f;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Highlight important identity information */
+#profileSection #profileName {
+  color: #07111f;
+  font-size: 17px;
+}
+
+#profileSection #profileEmail {
+  color: #2563eb;
+}
+
+#profileSection #profilePhone {
+  color: #15803d;
+}
+
+#profileSection #profileIdNumber {
+  letter-spacing: 0.8px;
+}
+
+/* Subtle profile accent */
+#profileSection .loan-info::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  right: -35px;
+  bottom: -35px;
+  border-radius: 50%;
+  background: rgba(250, 204, 21, 0.07);
+  pointer-events: none;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  #profileSection > .section-header {
+    align-items: stretch;
+  }
+
+  #profileSection > .section-body {
+    padding: 18px;
+  }
+
+  #profileSection .loan-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  #profileSection .loan-info {
+    padding: 18px;
+  }
+
+  #profileSection .loan-info strong {
+    font-size: 14px;
+  }
+
+}
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   KYC DOCUMENTS
+===================================================== */
+
+#kycSection {
+  background: #ffffff;
+}
+
+/* =====================================================
+   KYC HEADER
+===================================================== */
+
+#kycSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#kycSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#kycSection > .section-header p {
+  margin: 7px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* Refresh button */
+#kycSection > .section-header .btn-secondary {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#kycSection > .section-header .btn-secondary:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* =====================================================
+   KYC SUMMARY CARDS
+===================================================== */
+
+#kycSection .dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+#kycSection .dashboard-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 8px 23px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#kycSection .dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+/* Card icons */
+#kycSection .card-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #07111f;
+  font-size: 21px;
+}
+
+/* Card labels */
+#kycSection .dashboard-card span {
+  display: block;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Card values */
+#kycSection .dashboard-card-value {
+  display: block;
+  color: #07111f;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* Total documents */
+#kycSection #kycDocumentCount {
+  color: #2563eb;
+}
+
+/* Pending */
+#kycSection #kycPendingCount {
+  color: #d97706;
+}
+
+/* Verified */
+#kycSection #kycVerifiedCount {
+  color: #16a34a;
+}
+
+/* Rejected */
+#kycSection #kycRejectedCount {
+  color: #dc2626;
+}
+
+/* =====================================================
+   KYC DOCUMENT TABLE
+===================================================== */
+
+#kycSection .dashboard-table-container {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+}
+
+/* Table header */
+#kycSection .table-header {
+  padding: 18px 22px;
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 2px solid #facc15;
+}
+
+#kycSection .table-header h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* Status message */
+#kycSection .status-message {
+  padding: 0 22px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Responsive table */
+#kycSection .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Table */
+#kycSection .dashboard-table {
+  width: 100%;
+  min-width: 950px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+#kycSection .dashboard-table th {
+  padding: 14px 12px;
+  background: #07111f;
+  color: #facc15;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+#kycSection .dashboard-table td {
+  padding: 14px 12px;
+  color: #334155;
+  font-size: 13px;
+  border-bottom: 1px solid #eef1f5;
+  vertical-align: middle;
+}
+
+#kycSection .dashboard-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+#kycSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#kycSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Empty state */
+#kycSection .dashboard-table tbody td[colspan="7"] {
+  padding: 30px 15px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 950px) {
+
+  #kycSection .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  #kycSection > .section-header {
+    align-items: stretch;
+  }
+
+  #kycSection > .section-header .btn-secondary {
+    width: 100%;
+  }
+
+  #kycSection .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  #kycSection .dashboard-card {
+    padding: 18px;
+  }
+
+  #kycSection .dashboard-card-value {
+    font-size: 20px;
+  }
+
+  #kycSection .table-header {
+    padding: 16px;
+  }
+
+  #kycSection .status-message {
+    padding: 0 16px;
+  }
+
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   NOTIFICATIONS
+===================================================== */
+
+#notificationsSection {
+  background: #ffffff;
+}
+
+/* =====================================================
+   NOTIFICATIONS HEADER
+===================================================== */
+
+#notificationsSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#notificationsSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#notificationsSection > .section-header p {
+  margin: 7px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* Refresh button */
+#notificationsSection > .section-header .btn-secondary {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#notificationsSection > .section-header .btn-secondary:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* =====================================================
+   NOTIFICATION STATUS
+===================================================== */
+
+#notificationsSection .status-message {
+  margin-bottom: 16px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* =====================================================
+   NOTIFICATIONS LIST
+===================================================== */
+
+#notificationsSection #notificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual notification cards */
+#notificationsSection #notificationsList > div {
+  position: relative;
+  overflow: hidden;
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-left: 4px solid #facc15;
+  border-radius: 14px;
+  box-shadow: 0 7px 22px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+#notificationsSection #notificationsList > div:hover {
+  transform: translateY(-2px);
+  border-left-color: #07111f;
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+/* Subtle notification accent */
+#notificationsSection #notificationsList > div::after {
+  content: "";
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  right: -35px;
+  bottom: -35px;
+  border-radius: 50%;
+  background: rgba(250, 204, 21, 0.07);
+  pointer-events: none;
+}
+
+/* =====================================================
+   COMMON NOTIFICATION CONTENT
+===================================================== */
+
+#notificationsSection #notificationsList h3 {
+  margin: 0 0 6px;
+  color: #07111f;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+#notificationsSection #notificationsList h4 {
+  margin: 0 0 6px;
+  color: #07111f;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+#notificationsSection #notificationsList p {
+  margin: 5px 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#notificationsSection #notificationsList small {
+  color: #64748b;
+  font-size: 11px;
+}
+
+/* =====================================================
+   LOADING / EMPTY STATE
+===================================================== */
+
+#notificationsSection #notificationsList .loading {
+  padding: 35px 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  #notificationsSection > .section-header {
+    align-items: stretch;
+  }
+
+  #notificationsSection > .section-header .btn-secondary {
+    width: 100%;
+  }
+
+  #notificationsSection #notificationsList > div {
+    padding: 16px;
+  }
+
+  #notificationsSection #notificationsList h3 {
+    font-size: 15px;
+  }
+
+  #notificationsSection #notificationsList p {
+    font-size: 12px;
+  }
+
+}
+
+ /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   SUPPORT TICKETS
+===================================================== */
+
+#supportSection {
+  background: #ffffff;
+}
+
+/* =====================================================
+   SUPPORT HEADER
+===================================================== */
+
+#supportSection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#supportSection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#supportSection > .section-header p {
+  margin: 7px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* New Ticket button */
+#supportSection > .section-header .btn-primary {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#supportSection > .section-header .btn-primary:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* =====================================================
+   SUPPORT SUMMARY CARDS
+===================================================== */
+
+#supportSection .dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+#supportSection .dashboard-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 8px 23px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#supportSection .dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+/* Card titles */
+#supportSection .dashboard-card h4 {
+  margin: 0 0 8px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Card values */
+#supportSection .dashboard-card-value {
+  color: #07111f;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+/* Total tickets */
+#supportSection #supportTotalTickets {
+  color: #2563eb;
+}
+
+/* Open tickets */
+#supportSection #supportOpenTickets {
+  color: #16a34a;
+}
+
+/* Pending tickets */
+#supportSection #supportPendingTickets {
+  color: #d97706;
+}
+
+/* Closed tickets */
+#supportSection #supportClosedTickets {
+  color: #64748b;
+}
+
+/* =====================================================
+   CREATE SUPPORT TICKET
+===================================================== */
+
+#supportSection #supportTicketForm {
+  margin-top: 20px !important;
+}
+
+#supportSection #supportTicketForm > .dashboard-card {
+  padding: 24px;
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  border-top: 4px solid #facc15;
+  border-radius: 16px;
+  box-shadow: 0 9px 26px rgba(7, 17, 31, 0.09);
+}
+
+#supportSection #supportTicketForm h3 {
+  margin: 0 0 18px;
+  color: #07111f;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+/* Status message */
+#supportSection .status-message {
+  margin: 10px 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Form fields */
+#supportSection .form-group {
+  margin-bottom: 18px;
+}
+
+#supportSection .form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#supportSection .form-group input,
+#supportSection .form-group select,
+#supportSection .form-group textarea {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #d9e0e8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #07111f;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#supportSection .form-group input:focus,
+#supportSection .form-group select:focus,
+#supportSection .form-group textarea:focus {
+  border-color: #facc15;
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.12);
+}
+
+#supportSection .form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* Submit button */
+#supportSection #supportSubmitButton {
+  background: #facc15;
+  color: #07111f;
+  border: 1px solid #facc15;
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#supportSection #supportSubmitButton:hover {
+  background: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(250, 204, 21, 0.18);
+}
+
+/* Cancel button */
+#supportSection #supportTicketForm .btn-secondary {
+  background: #ffffff;
+  color: #07111f;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#supportSection #supportTicketForm .btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+/* =====================================================
+   MY SUPPORT TICKETS
+===================================================== */
+
+#supportSection > .section-body > .dashboard-card:last-child {
+  display: block;
+  margin-top: 20px !important;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+}
+
+#supportSection > .section-body > .dashboard-card:last-child h3 {
+  margin: 0;
+  color: #07111f;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+#supportSection > .section-body > .dashboard-card:last-child p {
+  color: #64748b !important;
+}
+
+/* Refresh button */
+#supportSection > .section-body > .dashboard-card:last-child .btn-secondary {
+  background: #07111f;
+  color: #facc15;
+  border: 1px solid #07111f;
+  border-radius: 9px;
+  padding: 9px 15px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#supportSection > .section-body > .dashboard-card:last-child .btn-secondary:hover {
+  background: #facc15;
+  color: #07111f;
+}
+
+/* =====================================================
+   SUPPORT TABLE
+===================================================== */
+
+#supportSection .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+#supportSection .dashboard-table {
+  width: 100%;
+  min-width: 950px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+#supportSection .dashboard-table th {
+  padding: 14px 12px;
+  background: #07111f;
+  color: #facc15;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+#supportSection .dashboard-table td {
+  padding: 14px 12px;
+  color: #334155;
+  font-size: 13px;
+  border-bottom: 1px solid #eef1f5;
+  vertical-align: middle;
+}
+
+#supportSection .dashboard-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+#supportSection .dashboard-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#supportSection .dashboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Empty state */
+#supportSection .dashboard-table tbody td[colspan="7"] {
+  padding: 30px 15px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 950px) {
+
+  #supportSection .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  #supportSection > .section-header {
+    align-items: stretch;
+  }
+
+  #supportSection > .section-header .btn-primary {
+    width: 100%;
+  }
+
+  #supportSection .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  #supportSection .dashboard-card {
+    padding: 18px;
+  }
+
+  #supportSection .dashboard-card-value {
+    font-size: 23px;
+  }
+
+  #supportSection #supportTicketForm > .dashboard-card,
+  #supportSection > .section-body > .dashboard-card:last-child {
+    padding: 18px;
+  }
+
+  #supportSection > .section-body > .dashboard-card:last-child > div:first-child {
+    align-items: flex-start !important;
+    flex-direction: column;
+  }
+
+  #supportSection > .section-body > .dashboard-card:last-child .btn-secondary {
+    width: 100%;
+  }
+
+  #supportSection #supportSubmitButton,
+  #supportSection #supportTicketForm .btn-secondary {
+    width: 100%;
+  }
+
+  }
+
+  /* =====================================================
+   JAY C O B CUSTOMER DASHBOARD
+   SECURITY
+===================================================== */
+
+#securitySection {
+  background: #ffffff;
+}
+
+/* =====================================================
+   SECURITY HEADER
+===================================================== */
+
+#securitySection > .section-header {
+  background:
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #102a46 100%
+    );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.20);
+}
+
+#securitySection > .section-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#securitySection > .section-header p {
+  margin: 7px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* =====================================================
+   SECURITY STATISTICS
+===================================================== */
+
+#securitySection .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+#securitySection .stat-card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 15px;
+  border-top: 4px solid #facc15;
+  box-shadow: 0 8px 23px rgba(7, 17, 31, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#securitySection .stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.12);
+}
+
+#securitySection .stat-title {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#securitySection .stat-value {
+  margin-top: 9px;
+  color: #07111f;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* Failed logins */
+#securitySection .stat-card:nth-child(1) {
+  border-top-color: #dc2626;
+}
+
+#securitySection .stat-card:nth-child(1) .stat-value {
+  color: #dc2626;
+}
+
+/* Security events */
+#securitySection .stat-card:nth-child(2) {
+  border-top-color: #f59e0b;
+}
+
+#securitySection .stat-card:nth-child(2) .stat-value {
+  color: #d97706;
+}
+
+/* Active sessions */
+#securitySection .stat-card:nth-child(3) {
+  border-top-color: #16a34a;
+}
+
+#securitySection .stat-card:nth-child(3) .stat-value {
+  color: #16a34a;
+}
+
+/* =====================================================
+   SECURITY CARDS
+===================================================== */
+
+#securitySection > .card {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 17, 31, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(7, 17, 31, 0.07);
+}
+
+#securitySection > .card:last-child {
+  margin-bottom: 0;
+}
+
+#securitySection > .card h3 {
+  margin: 0 0 18px;
+  color: #07111f;
+  font-size: 17px;
+  font-weight: 900;
+  padding-bottom: 13px;
+  border-bottom: 2px solid #facc15;
+}
+
+/* =====================================================
+   SECURITY TABLE CONTAINERS
+===================================================== */
+
+#securitySection .table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5eaf0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+#securitySection .table-container table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+}
+
+#securitySection .table-container th {
+  padding: 13px 12px;
+  background: #07111f;
+  color: #facc15;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+#securitySection .table-container td {
+  padding: 13px 12px;
+  color: #334155;
+  font-size: 13px;
+  border-bottom: 1px solid #eef1f5;
+  vertical-align: middle;
+}
+
+#securitySection .table-container tr:last-child td {
+  border-bottom: none;
+}
+
+#securitySection .table-container tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* Empty/loading state */
+#securitySection .table-container .empty {
+  padding: 30px 18px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  background: #f8fafc;
+}
+
+/* =====================================================
+   SECURITY STATUS
+===================================================== */
+
+#securitySection .profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eef1f5;
+}
+
+#securitySection .profile-row:last-child {
+  border-bottom: none;
+}
+
+#securitySection .profile-row span {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#securitySection .profile-row strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 95px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   SECURITY SECTION SPACING
+===================================================== */
+
+#securitySection > .stats-grid + .card {
+  margin-top: 0;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+  #securitySection .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  #securitySection > .section-header {
+    align-items: stretch;
+  }
+
+  #securitySection > .section-header p {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  #securitySection .stat-card {
+    padding: 18px;
+  }
+
+  #securitySection .stat-value {
+    font-size: 25px;
+  }
+
+  #securitySection > .card {
+    padding: 18px;
+  }
+
+  #securitySection > .card h3 {
+    font-size: 16px;
+  }
+
+  #securitySection .profile-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #securitySection .profile-row strong {
+    min-width: 100px;
+  }
+
+}
   
 </style>
 </head>
