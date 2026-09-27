@@ -317,32 +317,23 @@ body{
         rgba(255,255,255,.08);
 }
 
-.brand-logo{
-    width:46px;
-    height:46px;
+.brand-logo-img{
+    width:52px;
+    height:52px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    object-fit:contain;
+
+    display:block;
+    flex-shrink:0;
 
     border-radius:12px;
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--gold),
-            #ffe37b
+    filter:
+        drop-shadow(
+            0 5px 14px
+            rgba(244,197,66,.25)
         );
-
-    color:var(--navy);
-
-    font-size:26px;
-    font-weight:900;
-
-    box-shadow:
-        0 5px 18px
-        rgba(244,197,66,.22);
-}
+      }
 
 .brand-text{
     display:flex;
@@ -500,8 +491,9 @@ body{
    TOPBAR
 ========================================================= */
 
+```css
 .topbar{
-    height:72px;
+    height:76px;
 
     position:sticky;
     top:0;
@@ -516,24 +508,52 @@ body{
         0 28px;
 
     background:
-        rgba(255,255,255,.96);
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.98),
+            rgba(248,250,253,.96)
+        );
 
     border-bottom:
         1px solid
-        var(--border);
+        rgba(226,231,239,.85);
 
     box-shadow:
-        0 3px 18px
-        rgba(6,21,47,.05);
+        0 6px 24px
+        rgba(6,21,47,.07);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(16px);
+
+    transition:
+        box-shadow .25s ease,
+        background .25s ease;
 }
+```
+
 
 .topbar-left{
     display:flex;
     align-items:center;
     gap:15px;
 }
+
+      .topbar-logo{
+    width:42px;
+    height:42px;
+
+    object-fit:contain;
+
+    display:block;
+    flex-shrink:0;
+
+    border-radius:10px;
+
+    filter:
+        drop-shadow(
+            0 4px 10px
+            rgba(244,197,66,.25)
+        );
+      }
 
 .page-title{
     color:var(--navy);
@@ -1512,7 +1532,11 @@ textarea:focus{
 
     <div class="login-card">
 
-        <div class="login-logo">J</div>
+        <img
+    src="assets/jaycob-logo.png"
+    alt="JAY C O B Financial Services"
+    class="brand-logo-img"
+>
 
         <h1>JAY C O B</h1>
 
@@ -1598,7 +1622,11 @@ textarea:focus{
 
         <div class="brand">
 
-            <div class="brand-logo">J</div>
+            <img
+    src="assets/jaycob-logo.png"
+    alt="JAY C O B Financial Services"
+    class="brand-logo-img"
+>
 
             <div class="brand-text">
                 <strong>JAY C O B</strong>
@@ -1808,9 +1836,15 @@ textarea:focus{
                     ☰
                 </button>
 
-                <div class="page-title" id="pageTitle">
-                    Dashboard
-                </div>
+                <img
+    src="assets/jaycob-logo.png"
+    alt="JAY C O B Financial Services"
+    class="topbar-logo"
+>
+
+<div class="page-title" id="pageTitle">
+    Dashboard
+</div>
 
             </div>
 
