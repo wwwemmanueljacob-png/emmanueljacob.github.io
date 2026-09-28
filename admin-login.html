@@ -1952,6 +1952,331 @@ textarea:focus-visible{
     line-height:1.4;
 }
 
+      /* =========================================================
+   STATISTICS FINANCIAL OVERVIEW CHART
+   CUSTOMER DASHBOARD PREMIUM STYLE
+========================================================= */
+
+.statistics-chart-card{
+    margin-top:20px;
+    overflow:hidden;
+}
+
+
+/* ---------------------------------------------------------
+   CHART HEADER
+--------------------------------------------------------- */
+
+.statistics-chart-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    position:relative;
+    overflow:hidden;
+
+    background:linear-gradient(
+        135deg,
+        #07111f,
+        #102a46
+    );
+
+    border:1px solid rgba(250,204,21,.18);
+}
+
+
+.statistics-chart-header::after{
+    content:"";
+
+    position:absolute;
+
+    right:-45px;
+    top:-45px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(250,204,21,.07);
+
+    pointer-events:none;
+}
+
+
+.statistics-chart-header h3{
+    position:relative;
+    z-index:1;
+
+    color:#fff;
+
+    font-size:17px;
+    font-weight:900;
+}
+
+
+.statistics-chart-header p{
+    position:relative;
+    z-index:1;
+
+    margin-top:5px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+}
+
+
+/* ---------------------------------------------------------
+   LIVE BADGE
+--------------------------------------------------------- */
+
+.chart-badge{
+    position:relative;
+    z-index:2;
+
+    padding:6px 10px;
+
+    border-radius:999px;
+
+    background:rgba(250,204,21,.12);
+
+    border:1px solid rgba(250,204,21,.28);
+
+    color:#facc15;
+
+    font-size:10px;
+    font-weight:900;
+
+    letter-spacing:1.2px;
+}
+
+
+/* ---------------------------------------------------------
+   CHART AREA
+--------------------------------------------------------- */
+
+.statistics-chart{
+    min-height:330px;
+
+    padding:20px 10px 8px;
+
+    background:#fff;
+}
+
+
+/* ---------------------------------------------------------
+   BARS CONTAINER
+--------------------------------------------------------- */
+
+.chart-bars{
+    display:flex;
+
+    align-items:flex-end;
+    justify-content:space-around;
+
+    gap:18px;
+
+    height:290px;
+
+    padding:0 12px;
+
+    border-bottom:1px solid #e2e8f0;
+}
+
+
+/* ---------------------------------------------------------
+   INDIVIDUAL COLUMN
+--------------------------------------------------------- */
+
+.chart-column{
+    flex:1;
+
+    max-width:150px;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+
+/* ---------------------------------------------------------
+   VALUE ABOVE BAR
+--------------------------------------------------------- */
+
+.chart-value{
+    width:100%;
+
+    min-height:18px;
+
+    text-align:center;
+
+    color:#07111f;
+
+    font-size:11px;
+    font-weight:900;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+/* ---------------------------------------------------------
+   BAR BACKGROUND
+--------------------------------------------------------- */
+
+.chart-bar-wrap{
+    width:70%;
+
+    height:215px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    background:linear-gradient(
+        180deg,
+        #f8fafc,
+        #eef3f8
+    );
+
+    border-radius:12px 12px 4px 4px;
+
+    overflow:hidden;
+
+    border:1px solid #e2e8f0;
+}
+
+
+/* ---------------------------------------------------------
+   GOLD FINANCIAL BAR
+--------------------------------------------------------- */
+
+.chart-bar{
+    width:100%;
+
+    min-height:0;
+
+    border-radius:10px 10px 3px 3px;
+
+    background:linear-gradient(
+        180deg,
+        #fde047,
+        #facc15,
+        #d4a900
+    );
+
+    box-shadow:
+        0 6px 18px
+        rgba(250,204,21,.20);
+
+    transition:
+        height .7s ease;
+
+    position:relative;
+}
+
+
+/* GOLD HIGHLIGHT */
+
+.chart-bar::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    top:0;
+
+    height:3px;
+
+    background:#fff8c5;
+
+    opacity:.85;
+}
+
+
+/* ---------------------------------------------------------
+   LABEL UNDER BAR
+--------------------------------------------------------- */
+
+.chart-label{
+    color:#172033;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width:600px){
+
+    .statistics-chart{
+        padding:16px 4px 8px;
+
+        min-height:280px;
+    }
+
+
+    .chart-bars{
+        gap:8px;
+
+        height:245px;
+
+        padding:0 2px;
+    }
+
+
+    .chart-bar-wrap{
+        width:82%;
+
+        height:175px;
+    }
+
+
+    .chart-value{
+        font-size:9px;
+    }
+
+
+    .chart-label{
+        font-size:9px;
+    }
+
+
+    .statistics-chart-header{
+        align-items:flex-start;
+    }
+
+
+    .chart-badge{
+        padding:5px 8px;
+
+        font-size:9px;
+    }
+
+}
+
 /* =========================================================
    DASHBOARD GRID
 ========================================================= */
