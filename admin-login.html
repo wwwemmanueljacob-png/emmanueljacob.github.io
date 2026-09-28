@@ -9136,92 +9136,92 @@ async function loadStatistics() {
 
 
         /* =================================================
-           FINANCIAL OVERVIEW CHART
-        ================================================= */
+   FINANCIAL OVERVIEW CHART
+================================================= */
 
-        const chartValues = [
-            portfolio,
-            repayments,
-            deposits,
-            savings
-        ];
-
-
-        const maximumValue =
-            Math.max(
-                ...chartValues,
-                1
-            );
+const chartValues = [
+    portfolio,
+    repayments,
+    deposits,
+    savings
+];
 
 
-        const chartItems = [
-            {
-                barId: "chartPortfolio",
-                valueId: "chartPortfolioValue",
-                value: portfolio
-            },
-
-            {
-                barId: "chartRepayments",
-                valueId: "chartRepaymentsValue",
-                value: repayments
-            },
-
-            {
-                barId: "chartDeposits",
-                valueId: "chartDepositsValue",
-                value: deposits
-            },
-
-            {
-                barId: "chartSavings",
-                valueId: "chartSavingsValue",
-                value: savings
-            }
-        ];
+const maximumValue =
+    Math.max(
+        ...chartValues,
+        1
+    );
 
 
-        chartItems.forEach(item => {
+const chartItems = [
 
-            const bar =
-                document.getElementById(
-                    item.barId
-                );
+    {
+        barId: "chartPortfolioBar",
+        valueId: "chartPortfolioValue",
+        value: portfolio
+    },
 
+    {
+        barId: "chartRepaymentsBar",
+        valueId: "chartRepaymentsValue",
+        value: repayments
+    },
 
-            const valueElement =
-                document.getElementById(
-                    item.valueId
-                );
+    {
+        barId: "chartDepositsBar",
+        valueId: "chartDepositsValue",
+        value: deposits
+    },
 
+    {
+        barId: "chartSavingsBar",
+        valueId: "chartSavingsValue",
+        value: savings
+    }
 
-            /*
-             * Calculate percentage relative
-             * to the largest financial value.
-             */
-            const percentage =
-                item.value > 0
-                    ? (item.value / maximumValue) * 100
-                    : 0;
-
-
-            if (bar) {
-
-                bar.style.height =
-                    `${percentage}%`;
-
-            }
+];
 
 
-            if (valueElement) {
+chartItems.forEach(item => {
 
-                valueElement.textContent =
-                    formatMoney(item.value);
+    const bar =
+        document.getElementById(
+            item.barId
+        );
 
-            }
 
-        });
+    const valueElement =
+        document.getElementById(
+            item.valueId
+        );
 
+
+    /* Calculate bar height */
+    const percentage =
+        item.value > 0
+            ? (item.value / maximumValue) * 100
+            : 0;
+
+
+    /* Animate bar */
+    if (bar) {
+
+        bar.style.height =
+            `${percentage}%`;
+
+    }
+
+
+    /* Display financial value */
+    if (valueElement) {
+
+        valueElement.textContent =
+            formatMoney(item.value);
+
+    }
+
+});
 
         /* -----------------------------------------
            FINANCIAL SUMMARY
