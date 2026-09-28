@@ -8784,7 +8784,6 @@ async function loadAllData() {
 
 }
 
-
 /* =========================================================
    STATISTICS
 ========================================================= */
@@ -9136,6 +9135,94 @@ async function loadStatistics() {
         );
 
 
+        /* =================================================
+           FINANCIAL OVERVIEW CHART
+        ================================================= */
+
+        const chartValues = [
+            portfolio,
+            repayments,
+            deposits,
+            savings
+        ];
+
+
+        const maximumValue =
+            Math.max(
+                ...chartValues,
+                1
+            );
+
+
+        const chartItems = [
+            {
+                barId: "chartPortfolio",
+                valueId: "chartPortfolioValue",
+                value: portfolio
+            },
+
+            {
+                barId: "chartRepayments",
+                valueId: "chartRepaymentsValue",
+                value: repayments
+            },
+
+            {
+                barId: "chartDeposits",
+                valueId: "chartDepositsValue",
+                value: deposits
+            },
+
+            {
+                barId: "chartSavings",
+                valueId: "chartSavingsValue",
+                value: savings
+            }
+        ];
+
+
+        chartItems.forEach(item => {
+
+            const bar =
+                document.getElementById(
+                    item.barId
+                );
+
+
+            const valueElement =
+                document.getElementById(
+                    item.valueId
+                );
+
+
+            /*
+             * Calculate percentage relative
+             * to the largest financial value.
+             */
+            const percentage =
+                item.value > 0
+                    ? (item.value / maximumValue) * 100
+                    : 0;
+
+
+            if (bar) {
+
+                bar.style.height =
+                    `${percentage}%`;
+
+            }
+
+
+            if (valueElement) {
+
+                valueElement.textContent =
+                    formatMoney(item.value);
+
+            }
+
+        });
+
+
         /* -----------------------------------------
            FINANCIAL SUMMARY
         ----------------------------------------- */
@@ -9245,8 +9332,7 @@ async function loadStatistics() {
 
     }
 
-}
-
+ }
 
 /* =========================================================
    CUSTOMERS
