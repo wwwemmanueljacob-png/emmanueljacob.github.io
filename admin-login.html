@@ -6311,6 +6311,7 @@ textarea:focus{
 /* =========================================================
    API CONFIGURATION
 ========================================================= */
+
 const API =
     "https://emmanueljacobgithubio-production.up.railway.app/api";
 
@@ -6330,14 +6331,16 @@ let adminToken =
 
 let adminData = null;
 
-try{
+try {
 
     adminData =
         JSON.parse(
             localStorage.getItem(ADMIN_KEY) || "null"
         );
 
-}catch(error){
+} catch (error) {
+
+    console.error("Unable to restore administrator data:", error);
 
     adminData = null;
 
@@ -6351,7 +6354,7 @@ try{
 let allApplications = [];
 let allCustomers = [];
 let allActiveLoans = [];
-let allKYC = [];      
+let allKYC = [];
 
 let moduleData = {};
 
@@ -6362,43 +6365,45 @@ let currentApplication = null;
    UTILITY
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(value) {
 
-    if(value === null || value === undefined){
+    if (value === null || value === undefined) {
         return "";
     }
 
     return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
 }
 
 
-function formatMoney(value){
+function formatMoney(value) {
 
     const number =
         Number(value || 0);
 
     return "MWK " +
         number.toLocaleString();
+
 }
 
 
-function formatDate(value){
+function formatDate(value) {
 
-    if(!value){
+    if (!value) {
         return "-";
     }
 
-    try{
+    try {
 
         return new Date(value)
             .toLocaleString();
 
-    }catch(error){
+    } catch (error) {
 
         return escapeHTML(value);
 
@@ -6407,25 +6412,25 @@ function formatDate(value){
 }
 
 
-function normalizeArray(result, keys=[]){
+function normalizeArray(result, keys = []) {
 
-    if(Array.isArray(result)){
+    if (Array.isArray(result)) {
         return result;
     }
 
-    for(const key of keys){
+    for (const key of keys) {
 
-        if(Array.isArray(result?.[key])){
+        if (Array.isArray(result?.[key])) {
             return result[key];
         }
 
     }
 
-    if(Array.isArray(result?.data)){
+    if (Array.isArray(result?.data)) {
         return result.data;
     }
 
-    if(Array.isArray(result?.items)){
+    if (Array.isArray(result?.items)) {
         return result.items;
     }
 
@@ -6434,22 +6439,24 @@ function normalizeArray(result, keys=[]){
 }
 
 
-function getValue(obj,...keys){
+function getValue(obj, ...keys) {
 
-    for(const key of keys){
+    for (const key of keys) {
 
-        if(!obj){
+        if (!obj) {
             continue;
         }
 
 
-        // Support nested paths such as:
-        // customers.full_name
+        /* -----------------------------------------
+           Support nested paths such as:
+           customers.full_name
+        ----------------------------------------- */
 
-        if(
+        if (
             typeof key === "string" &&
             key.includes(".")
-        ){
+        ) {
 
             const parts =
                 key.split(".");
@@ -6457,15 +6464,14 @@ function getValue(obj,...keys){
             let value = obj;
 
 
-            for(const part of parts){
+            for (const part of parts) {
 
-                if(
+                if (
                     value === null ||
                     value === undefined
-                ){
+                ) {
 
                     value = undefined;
-
                     break;
 
                 }
@@ -6476,22 +6482,21 @@ function getValue(obj,...keys){
             }
 
 
-            if(
+            if (
                 value !== undefined &&
                 value !== null
-            ){
+            ) {
 
                 return value;
 
             }
 
-        }
-        else{
+        } else {
 
-            if(
+            if (
                 obj[key] !== undefined &&
                 obj[key] !== null
-            ){
+            ) {
 
                 return obj[key];
 
@@ -6502,7 +6507,7 @@ function getValue(obj,...keys){
     }
 
     return "";
-      
+
 }
 
 
@@ -6510,7 +6515,7 @@ function getValue(obj,...keys){
    STATUS BADGE
 ========================================================= */
 
-function statusBadge(status){
+function statusBadge(status) {
 
     const raw =
         String(status || "UNKNOWN")
@@ -6518,43 +6523,57 @@ function statusBadge(status){
 
     let cls = "default";
 
-    if(
+
+    if (
         raw === "PENDING" ||
         raw === "PROCESSING"
-    ){
+    ) {
+
         cls = "pending";
+
     }
 
-    if(
+
+    if (
         raw === "UNDER_REVIEW" ||
         raw === "UNDER REVIEW"
-    ){
+    ) {
+
         cls = "review";
+
     }
 
-    if(
+
+    if (
         raw === "APPROVED" ||
         raw === "ACTIVE" ||
         raw === "VERIFIED" ||
         raw === "COMPLETED" ||
         raw === "SUCCESS"
-    ){
+    ) {
+
         cls = "success";
+
     }
 
-    if(
+
+    if (
         raw === "REJECTED" ||
         raw === "FAILED" ||
         raw === "BLOCKED"
-    ){
+    ) {
+
         cls = "danger";
+
     }
+
 
     return `
         <span class="badge ${cls}">
-            ${escapeHTML(raw.replaceAll("_"," "))}
+            ${escapeHTML(raw.replaceAll("_", " "))}
         </span>
     `;
+
 }
 
 
@@ -6564,10 +6583,15 @@ function statusBadge(status){
 
 let toastTimer;
 
-function showToast(message,type="success"){
+function showToast(message, type = "success") {
 
     const toast =
         document.getElementById("toast");
+
+    if (!toast) {
+        return;
+    }
+
 
     toast.textContent =
         message;
@@ -6575,12 +6599,16 @@ function showToast(message,type="success"){
     toast.className =
         "show " + type;
 
+
     clearTimeout(toastTimer);
+
 
     toastTimer =
         setTimeout(
-            ()=>{
-                toast.className="";
+            () => {
+
+                toast.className = "";
+
             },
             3500
         );
@@ -6592,10 +6620,15 @@ function showToast(message,type="success"){
    LOGIN MESSAGE
 ========================================================= */
 
-function showLoginMessage(message,type="error"){
+function showLoginMessage(message, type = "error") {
 
     const box =
         document.getElementById("loginMessage");
+
+    if (!box) {
+        return;
+    }
+
 
     box.textContent =
         message;
@@ -6612,8 +6645,8 @@ function showLoginMessage(message,type="error"){
 
 async function apiRequest(
     endpoint,
-    options={}
-){
+    options = {}
+) {
 
     const headers = {
 
@@ -6625,7 +6658,7 @@ async function apiRequest(
     };
 
 
-    if(adminToken){
+    if (adminToken) {
 
         headers.Authorization =
             `Bearer ${adminToken}`;
@@ -6645,22 +6678,27 @@ async function apiRequest(
 
     let data = null;
 
-    try{
+
+    try {
 
         data =
             await response.json();
 
-    }catch(error){
+    } catch (error) {
 
         data = null;
 
     }
 
 
-    if(
+    /* -----------------------------------------
+       AUTHENTICATION FAILURE
+    ----------------------------------------- */
+
+    if (
         response.status === 401 ||
         response.status === 403
-    ){
+    ) {
 
         localStorage.removeItem(
             ADMIN_TOKEN_KEY
@@ -6673,18 +6711,28 @@ async function apiRequest(
         adminToken = null;
         adminData = null;
 
-        document
-            .getElementById("adminApp")
-            .classList.add("hidden");
 
-        document
-            .getElementById("loginScreen")
-            .classList.remove("hidden");
+        const adminApp =
+            document.getElementById("adminApp");
+
+        const loginScreen =
+            document.getElementById("loginScreen");
+
+
+        if (adminApp) {
+            adminApp.classList.add("hidden");
+        }
+
+        if (loginScreen) {
+            loginScreen.classList.remove("hidden");
+        }
+
 
         showLoginMessage(
             "Your administrator session has expired. Please login again.",
             "error"
         );
+
 
         throw new Error(
             "Unauthorized"
@@ -6693,7 +6741,11 @@ async function apiRequest(
     }
 
 
-    if(!response.ok){
+    /* -----------------------------------------
+       OTHER API ERRORS
+    ----------------------------------------- */
+
+    if (!response.ok) {
 
         throw new Error(
             data?.message ||
@@ -6713,12 +6765,17 @@ async function apiRequest(
    PASSWORD
 ========================================================= */
 
-function togglePassword(){
+function togglePassword() {
 
     const input =
         document.getElementById(
             "adminPassword"
         );
+
+    if (!input) {
+        return;
+    }
+
 
     input.type =
         input.type === "password"
@@ -6736,23 +6793,24 @@ document
     .getElementById("adminLoginForm")
     .addEventListener(
         "submit",
-        async function(event){
+        async function(event) {
 
             event.preventDefault();
 
+
             const email =
                 document
-                .getElementById("adminEmail")
-                .value
-                .trim();
+                    .getElementById("adminEmail")
+                    .value
+                    .trim();
 
             const password =
                 document
-                .getElementById("adminPassword")
-                .value;
+                    .getElementById("adminPassword")
+                    .value;
 
 
-            if(!email || !password){
+            if (!email || !password) {
 
                 showLoginMessage(
                     "Enter your administrator email and password."
@@ -6768,20 +6826,22 @@ document
                     "adminLoginBtn"
                 );
 
+
             button.disabled = true;
 
             button.textContent =
                 "⏳ Authenticating...";
 
 
-            try{
+            try {
 
                 const result =
                     await apiRequest(
                         "/admin/login",
                         {
-                            method:"POST",
-                            body:JSON.stringify({
+                            method: "POST",
+
+                            body: JSON.stringify({
                                 email,
                                 password
                             })
@@ -6795,7 +6855,7 @@ document
                     result?.session?.token;
 
 
-                if(!token){
+                if (!token) {
 
                     throw new Error(
                         "Login succeeded but no authentication token was returned."
@@ -6811,7 +6871,7 @@ document
                     result?.admin ||
                     result?.user ||
                     result?.data ||
-                    {email};
+                    { email };
 
 
                 localStorage.setItem(
@@ -6836,6 +6896,7 @@ document
 
                 updateAdminName();
 
+
                 showToast(
                     "Administrator login successful."
                 );
@@ -6844,16 +6905,21 @@ document
                 await loadAllData();
 
 
-            }catch(error){
+            } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Administrator login error:",
+                    error
+                );
+
 
                 showLoginMessage(
                     error.message ||
                     "Unable to login."
                 );
 
-            }finally{
+
+            } finally {
 
                 button.disabled = false;
 
@@ -6870,7 +6936,7 @@ document
    ADMIN NAME
 ========================================================= */
 
-function updateAdminName(){
+function updateAdminName() {
 
     const name =
         adminData?.name ||
@@ -6879,18 +6945,29 @@ function updateAdminName(){
         "Administrator";
 
 
-    document
-        .getElementById("adminNameTop")
-        .textContent =
+    const adminNameTop =
+        document.getElementById("adminNameTop");
+
+    const adminAvatar =
+        document.getElementById("adminAvatar");
+
+
+    if (adminNameTop) {
+
+        adminNameTop.textContent =
             name;
 
+    }
 
-    document
-        .getElementById("adminAvatar")
-        .textContent =
+
+    if (adminAvatar) {
+
+        adminAvatar.textContent =
             name
-            .charAt(0)
-            .toUpperCase();
+                .charAt(0)
+                .toUpperCase();
+
+    }
 
 }
 
@@ -6899,9 +6976,9 @@ function updateAdminName(){
    SESSION START
 ========================================================= */
 
-async function startAdminSession(){
+async function startAdminSession() {
 
-    if(!adminToken){
+    if (!adminToken) {
 
         document
             .getElementById("loginScreen")
@@ -6916,9 +6993,10 @@ async function startAdminSession(){
     }
 
 
-    try{
+    try {
 
         await loadAdminProfile();
+
 
         document
             .getElementById("loginScreen")
@@ -6928,13 +7006,20 @@ async function startAdminSession(){
             .getElementById("adminApp")
             .classList.remove("hidden");
 
+
         updateAdminName();
+
 
         await loadAllData();
 
-    }catch(error){
 
-        console.error(error);
+    } catch (error) {
+
+        console.error(
+            "Administrator session error:",
+            error
+        );
+
 
         localStorage.removeItem(
             ADMIN_TOKEN_KEY
@@ -6944,7 +7029,10 @@ async function startAdminSession(){
             ADMIN_KEY
         );
 
+
         adminToken = null;
+        adminData = null;
+
 
         document
             .getElementById("loginScreen")
@@ -6965,92 +7053,102 @@ async function startAdminSession(){
 
 const pageTitles = {
 
-    overview:"Dashboard",
+    overview: "Dashboard",
 
-    customers:"Customers",
+    customers: "Customers",
 
-    applications:"Loan Applications",
+    applications: "Loan Applications",
 
-    activeLoans:"Active Loans",
+    activeLoans: "Active Loans",
 
-    repayments:"Repayments",
+    repayments: "Repayments",
 
-    schedules:"Repayment Schedules",
+    schedules: "Repayment Schedules",
 
-    deposits:"Deposits",
+    deposits: "Deposits",
 
-    depositRequests:"Deposit Requests",
+    depositRequests: "Deposit Requests",
 
-    withdrawals:"Withdrawals",
+    withdrawals: "Withdrawals",
 
-    transfers:"Transfers",
+    transfers: "Transfers",
 
-    savings:"Savings",
+    savings: "Savings",
 
-    statements:"Statements",
+    statements: "Statements",
 
-    fees:"Fees",
+    fees: "Fees",
 
-    loanProducts:"Loan Products",
+    loanProducts: "Loan Products",
 
-    guarantors:"Guarantors",
+    guarantors: "Guarantors",
 
-    loanDocuments:"Loan Documents",
+    loanDocuments: "Loan Documents",
 
-    kyc:"KYC Verification",
+    kyc: "KYC Verification",
 
-    support:"Support Tickets",
+    support: "Support Tickets",
 
-    followups:"Follow-ups",
+    followups: "Follow-ups",
 
-    announcements:"Announcements",
+    announcements: "Announcements",
 
-    notifications:"Notifications",
+    notifications: "Notifications",
 
-    statistics:"Statistics",
+    statistics: "Statistics",
 
-    reports:"Reports Center",
+    reports: "Reports Center",
 
-    audit:"Audit Logs",
+    audit: "Audit Logs",
 
-    securityEvents:"Security Events",
+    securityEvents: "Security Events",
 
-    loginAttempts:"Login Attempts",
+    loginAttempts: "Login Attempts",
 
-    customerSessions:"Customer Sessions",
+    customerSessions: "Customer Sessions",
 
-    adminSessions:"Admin Sessions",
+    adminSessions: "Admin Sessions",
 
-    permissions:"Permissions",
+    permissions: "Permissions",
 
-    settings:"System Settings",
+    settings: "System Settings",
 
-    profile:"Administrator Profile"
+    profile: "Administrator Profile"
 
 };
 
 
+/* =========================================================
+   NAVIGATION EVENTS
+========================================================= */
+
 document
     .querySelectorAll(".nav-btn[data-section]")
-    .forEach(button=>{
+    .forEach(button => {
 
         button.addEventListener(
             "click",
-            ()=>{
+            () => {
+
                 switchSection(
                     button.dataset.section
                 );
+
             }
         );
 
     });
 
 
-function switchSection(section){
+function switchSection(section) {
+
+    /* -----------------------------------------
+       ACTIVE NAVIGATION
+    ----------------------------------------- */
 
     document
         .querySelectorAll(".nav-btn[data-section]")
-        .forEach(button=>{
+        .forEach(button => {
 
             button.classList.toggle(
                 "active",
@@ -7060,9 +7158,13 @@ function switchSection(section){
         });
 
 
+    /* -----------------------------------------
+       ACTIVE CONTENT SECTION
+    ----------------------------------------- */
+
     document
         .querySelectorAll(".section")
-        .forEach(element=>{
+        .forEach(element => {
 
             element.classList.toggle(
                 "active",
@@ -7073,85 +7175,128 @@ function switchSection(section){
         });
 
 
-    document
-        .getElementById("pageTitle")
-        .textContent =
+    /* -----------------------------------------
+       PAGE TITLE
+    ----------------------------------------- */
+
+    const pageTitle =
+        document.getElementById("pageTitle");
+
+    if (pageTitle) {
+
+        pageTitle.textContent =
             pageTitles[section] ||
             "Administration";
 
+    }
+
+
+    /* -----------------------------------------
+       CLOSE MOBILE SIDEBAR
+    ----------------------------------------- */
 
     closeSidebar();
 
 
+    /* -----------------------------------------
+       SECTION LOADERS
+    ----------------------------------------- */
+
     const loaders = {
 
-        overview:loadAllData,
+        overview: loadAllData,
 
-        customers:loadCustomers,
+        customers: loadCustomers,
 
-        applications:loadApplications,
+        applications: loadApplications,
 
-        activeLoans:loadActiveLoans,
+        activeLoans: loadActiveLoans,
 
-        repayments:()=>loadModule("repayments"),
+        repayments: () =>
+            loadModule("repayments"),
 
-        schedules:()=>loadModule("schedules"),
+        schedules: () =>
+            loadModule("schedules"),
 
-        deposits:()=>loadModule("deposits"),
+        deposits: () =>
+            loadModule("deposits"),
 
-        depositRequests:()=>loadModule("depositRequests"),
+        depositRequests: () =>
+            loadModule("depositRequests"),
 
-        withdrawals:()=>loadModule("withdrawals"),
+        withdrawals: () =>
+            loadModule("withdrawals"),
 
-        transfers:()=>loadModule("transfers"),
+        transfers: () =>
+            loadModule("transfers"),
 
-        savings:()=>loadModule("savings"),
+        savings: () =>
+            loadModule("savings"),
 
-        statements:()=>loadModule("statements"),
+        statements: () =>
+            loadModule("statements"),
 
-        fees:()=>loadModule("fees"),
+        fees: () =>
+            loadModule("fees"),
 
-        loanProducts:()=>loadModule("loanProducts"),
+        loanProducts: () =>
+            loadModule("loanProducts"),
 
-        guarantors:()=>loadModule("guarantors"),
+        guarantors: () =>
+            loadModule("guarantors"),
 
-        loanDocuments:()=>loadModule("loanDocuments"),
+        loanDocuments: () =>
+            loadModule("loanDocuments"),
 
-        kyc:()=>loadModule("kyc"),
+        kyc: () =>
+            loadModule("kyc"),
 
-        support:()=>loadModule("support"),
+        support: () =>
+            loadModule("support"),
 
-        followups:()=>loadModule("followups"),
+        followups: () =>
+            loadModule("followups"),
 
-        announcements:()=>loadModule("announcements"),
+        announcements: () =>
+            loadModule("announcements"),
 
-        notifications:()=>loadModule("notifications"),
+        notifications: () =>
+            loadModule("notifications"),
 
-        statistics:loadStatistics,
+        statistics: loadStatistics,
 
-        reports:()=>{},
+        reports: () => {},
 
-        audit:()=>loadModule("audit"),
+        audit: () =>
+            loadModule("audit"),
 
-        securityEvents:()=>loadModule("securityEvents"),
+        securityEvents: () =>
+            loadModule("securityEvents"),
 
-        loginAttempts:()=>loadModule("loginAttempts"),
+        loginAttempts: () =>
+            loadModule("loginAttempts"),
 
-        customerSessions:()=>loadModule("customerSessions"),
+        customerSessions: () =>
+            loadModule("customerSessions"),
 
-        adminSessions:()=>loadModule("adminSessions"),
+        adminSessions: () =>
+            loadModule("adminSessions"),
 
-        permissions:()=>loadModule("permissions"),
+        permissions: () =>
+            loadModule("permissions"),
 
-        settings:()=>loadModule("settings"),
+        settings: () =>
+            loadModule("settings"),
 
-        profile:loadAdminProfile
+        profile: loadAdminProfile
 
     };
 
 
-    if(loaders[section]){
+    if (loaders[section]) {
+
         loaders[section]();
+
     }
 
 }
@@ -7161,28 +7306,52 @@ function switchSection(section){
    MOBILE SIDEBAR
 ========================================================= */
 
-function toggleSidebar(){
+function toggleSidebar() {
 
-    document
-        .getElementById("sidebar")
-        .classList.toggle("open");
+    const sidebar =
+        document.getElementById("sidebar");
 
-    document
-        .getElementById("overlay")
-        .classList.toggle("show");
+    const overlay =
+        document.getElementById("overlay");
+
+
+    if (sidebar) {
+
+        sidebar.classList.toggle("open");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.toggle("show");
+
+    }
 
 }
 
 
-function closeSidebar(){
+function closeSidebar() {
 
-    document
-        .getElementById("sidebar")
-        .classList.remove("open");
+    const sidebar =
+        document.getElementById("sidebar");
 
-    document
-        .getElementById("overlay")
-        .classList.remove("show");
+    const overlay =
+        document.getElementById("overlay");
+
+
+    if (sidebar) {
+
+        sidebar.classList.remove("open");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.remove("show");
+
+    }
 
 }
 
@@ -7199,10 +7368,12 @@ document
    LOAD ALL
 ========================================================= */
 
-async function loadAllData(){
+async function loadAllData() {
 
-    if(!adminToken){
+    if (!adminToken) {
+
         return;
+
     }
 
 
@@ -7227,23 +7398,25 @@ async function loadAllData(){
    STATISTICS
 ========================================================= */
 
-async function loadStatistics(){
-      
-         const refreshButton =
-    document.querySelector(
-        'button[onclick="loadStatistics()"]'
-    );
+async function loadStatistics() {
 
-    if(refreshButton){
+    const refreshButton =
+        document.querySelector(
+            'button[onclick="loadStatistics()"]'
+        );
+
+
+    if (refreshButton) {
 
         refreshButton.disabled = true;
 
         refreshButton.innerHTML =
             `<span class="spinner"></span> Refreshing...`;
 
-      }
+    }
 
-    try{
+
+    try {
 
         const result =
             await apiRequest(
@@ -7257,6 +7430,10 @@ async function loadStatistics(){
             result ||
             {};
 
+
+        /* -----------------------------------------
+           CORE STATISTICS
+        ----------------------------------------- */
 
         const customers =
             getValue(
@@ -7286,13 +7463,13 @@ async function loadStatistics(){
 
 
         const approved =
-    getValue(
-        stats,
-        "approved",
-        "approvedApplications",
-        "approvedLoans",
-        "approved_count"
-    ) || 0;
+            getValue(
+                stats,
+                "approved",
+                "approvedApplications",
+                "approvedLoans",
+                "approved_count"
+            ) || 0;
 
 
         const rejected =
@@ -7313,77 +7490,89 @@ async function loadStatistics(){
             ) || 0;
 
 
+        /* -----------------------------------------
+           FINANCIAL STATISTICS
+        ----------------------------------------- */
+
         const portfolio =
-    getValue(
-        stats,
-        "portfolio",
-        "totalPortfolio",
-        "loanPortfolio",
-        "totalLoanValue"
-    ) || 0;
+            getValue(
+                stats,
+                "portfolio",
+                "totalPortfolio",
+                "loanPortfolio",
+                "totalLoanValue"
+            ) || 0;
 
 
         const repayments =
-    getValue(
-        stats,
-        "totalRepaymentAmount"
-    ) || 0;
+            getValue(
+                stats,
+                "totalRepaymentAmount"
+            ) || 0;
 
-const repaymentCount =
-    getValue(
-        stats,
-        "totalRepayments"
-    ) || 0;
+
+        const repaymentCount =
+            getValue(
+                stats,
+                "totalRepayments"
+            ) || 0;
+
 
         const deposits =
-    getValue(
-        stats,
-        "totalDepositAmount"
-    ) || 0;
+            getValue(
+                stats,
+                "totalDepositAmount"
+            ) || 0;
 
-const depositCount =
-    getValue(
-        stats,
-        "totalDeposits"
-    ) || 0;
+
+        const depositCount =
+            getValue(
+                stats,
+                "totalDeposits"
+            ) || 0;
 
 
         const savings =
-    getValue(
-        stats,
-        "totalSavingsAmount"
-    ) || 0;
-
-const savingsTransactionCount =
-    getValue(
-        stats,
-        "totalSavingsTransactions"
-    ) || 0;
+            getValue(
+                stats,
+                "totalSavingsAmount"
+            ) || 0;
 
 
-       const adminBalance =
+        const savingsTransactionCount =
+            getValue(
+                stats,
+                "totalSavingsTransactions"
+            ) || 0;
+
+
+        const adminBalance =
             getValue(
                 stats,
                 "adminAvailableBalance"
             ) || 0;
 
-        const loanDisbursed =
-    getValue(
-        stats,
-        "totalLoanDisbursed"
-    ) || 0;
 
-const loanDisbursementCount =
-    getValue(
-        stats,
-        "loanDisbursementCount"
-    ) || 0;
+        const loanDisbursed =
+            getValue(
+                stats,
+                "totalLoanDisbursed"
+            ) || 0;
+
+
+        const loanDisbursementCount =
+            getValue(
+                stats,
+                "loanDisbursementCount"
+            ) || 0;
+
 
         const outstandingLoans =
             getValue(
                 stats,
                 "totalOutstandingLoans"
             ) || 0;
+
 
         const interestEarned =
             getValue(
@@ -7392,20 +7581,48 @@ const loanDisbursementCount =
             ) || 0;
 
 
+        const withdrawalAmount =
+            getValue(
+                stats,
+                "totalWithdrawalAmount"
+            ) || 0;
+
+
+        const withdrawalCount =
+            getValue(
+                stats,
+                "totalWithdrawals"
+            ) || 0;
+
+
+        const pendingWithdrawals =
+            getValue(
+                stats,
+                "pendingWithdrawals"
+            ) || 0;
+
+
+        /* -----------------------------------------
+           DASHBOARD STAT CARDS
+        ----------------------------------------- */
+
         setText(
             "statCustomers",
             customers
         );
+
 
         setText(
             "statApplications",
             applications
         );
 
+
         setText(
             "statPending",
             pending
         );
+
 
         setText(
             "statApproved",
@@ -7413,30 +7630,39 @@ const loanDisbursementCount =
         );
 
 
+        /* -----------------------------------------
+           STATISTICS PAGE
+        ----------------------------------------- */
+
         setText(
             "statisticsCustomers",
             customers
         );
+
 
         setText(
             "statisticsApplications",
             applications
         );
 
+
         setText(
             "statisticsPending",
             pending
         );
+
 
         setText(
             "statisticsApproved",
             approved
         );
 
+
         setText(
             "statisticsRejected",
             rejected
         );
+
 
         setText(
             "statisticsActiveLoans",
@@ -7444,30 +7670,46 @@ const loanDisbursementCount =
         );
 
 
-                  setText(
+        /* -----------------------------------------
+           ADMIN BALANCE
+        ----------------------------------------- */
+
+        setText(
             "summaryAdminBalance",
             formatMoney(adminBalance)
         );
 
-        setText(
-    "summaryLoanDisbursed",
-    formatMoney(loanDisbursed)
-);
 
-setText(
-    "summaryLoanDisbursedCount",
-    loanDisbursementCount +
-    (
-        loanDisbursementCount === 1
-            ? " loan disbursed"
-            : " loans disbursed"
-    )
-);
+        /* -----------------------------------------
+           LOAN DISBURSEMENTS
+        ----------------------------------------- */
+
+        setText(
+            "summaryLoanDisbursed",
+            formatMoney(loanDisbursed)
+        );
+
+
+        setText(
+            "summaryLoanDisbursedCount",
+            loanDisbursementCount +
+            (
+                loanDisbursementCount === 1
+                    ? " loan disbursed"
+                    : " loans disbursed"
+            )
+        );
+
+
+        /* -----------------------------------------
+           OUTSTANDING + INTEREST
+        ----------------------------------------- */
 
         setText(
             "summaryOutstandingLoans",
             formatMoney(outstandingLoans)
         );
+
 
         setText(
             "summaryInterestEarned",
@@ -7475,20 +7717,27 @@ setText(
         );
 
 
+        /* -----------------------------------------
+           STATISTICS FINANCIAL CARDS
+        ----------------------------------------- */
+
         setText(
             "statisticsPortfolio",
             formatMoney(portfolio)
         );
+
 
         setText(
             "statisticsRepayments",
             formatMoney(repayments)
         );
 
+
         setText(
             "statisticsDeposits",
             formatMoney(deposits)
         );
+
 
         setText(
             "statisticsSavings",
@@ -7496,102 +7745,105 @@ setText(
         );
 
 
+        /* -----------------------------------------
+           FINANCIAL SUMMARY
+        ----------------------------------------- */
+
         setText(
             "summaryPortfolio",
             formatMoney(portfolio)
         );
 
-        setText(
-    "summaryDeposits",
-    formatMoney(deposits)
-);
-
-setText(
-    "summaryDepositCount",
-    depositCount +
-    (
-        depositCount === 1
-            ? " deposit transaction"
-            : " deposit transactions"
-    )
-);
 
         setText(
-    "summaryRepayments",
-    formatMoney(repayments)
-);
+            "summaryDeposits",
+            formatMoney(deposits)
+        );
 
-setText(
-    "summaryRepaymentCount",
-    repaymentCount +
-    (
-        repaymentCount === 1
-            ? " repayment transaction"
-            : " repayment transactions"
-    )
-);
 
         setText(
-    "summarySavings",
-    formatMoney(savings)
-);
-
-setText(
-    "summarySavingsCount",
-    savingsTransactionCount +
-    (
-        savingsTransactionCount === 1
-            ? " savings transaction"
-            : " savings transactions"
-    )
-);
-
-          const withdrawalAmount =
-    getValue(
-        stats,
-        "totalWithdrawalAmount"
-    ) || 0;
-
-const withdrawalCount =
-    getValue(
-        stats,
-        "totalWithdrawals"
-    ) || 0;
-
-setText(
-    "summaryWithdrawals",
-    formatMoney(withdrawalAmount)
-);
-
-setText(
-    "summaryWithdrawalCount",
-    withdrawalCount +
-    (
-        withdrawalCount === 1
-            ? " withdrawal transaction"
-            : " withdrawal transactions"
-    )
-);
-
-setText(
-    "summaryPendingWithdrawals",
-    getValue(
-        stats,
-        "pendingWithdrawals"
-    ) || 0
-);
+            "summaryDepositCount",
+            depositCount +
+            (
+                depositCount === 1
+                    ? " deposit transaction"
+                    : " deposit transactions"
+            )
+        );
 
 
-        }catch(error){
+        setText(
+            "summaryRepayments",
+            formatMoney(repayments)
+        );
+
+
+        setText(
+            "summaryRepaymentCount",
+            repaymentCount +
+            (
+                repaymentCount === 1
+                    ? " repayment transaction"
+                    : " repayment transactions"
+            )
+        );
+
+
+        setText(
+            "summarySavings",
+            formatMoney(savings)
+        );
+
+
+        setText(
+            "summarySavingsCount",
+            savingsTransactionCount +
+            (
+                savingsTransactionCount === 1
+                    ? " savings transaction"
+                    : " savings transactions"
+            )
+        );
+
+
+        /* -----------------------------------------
+           WITHDRAWALS
+        ----------------------------------------- */
+
+        setText(
+            "summaryWithdrawals",
+            formatMoney(withdrawalAmount)
+        );
+
+
+        setText(
+            "summaryWithdrawalCount",
+            withdrawalCount +
+            (
+                withdrawalCount === 1
+                    ? " withdrawal transaction"
+                    : " withdrawal transactions"
+            )
+        );
+
+
+        setText(
+            "summaryPendingWithdrawals",
+            pendingWithdrawals
+        );
+
+
+    } catch (error) {
 
         console.error(
             "Statistics error:",
             error
         );
 
-    }finally{
 
-        if(refreshButton){
+    } finally {
+
+        if (refreshButton) {
 
             refreshButton.disabled = false;
 
@@ -7602,28 +7854,31 @@ setText(
 
     }
 
- }
+}
 
 
 /* =========================================================
    CUSTOMERS
 ========================================================= */
 
-async function loadCustomers(){
+async function loadCustomers() {
 
     const body =
         document.getElementById(
             "customersBody"
         );
 
+
     body.innerHTML =
-        `<tr><td colspan="6" class="loading">
-            <span class="spinner"></span>
-            Loading customers...
-        </td></tr>`;
+        `<tr>
+            <td colspan="6" class="loading">
+                <span class="spinner"></span>
+                Loading customers...
+            </td>
+        </tr>`;
 
 
-    try{
+    try {
 
         const result =
             await apiRequest(
@@ -7645,7 +7900,7 @@ async function loadCustomers(){
         renderCustomers();
 
 
-    }catch(error){
+    } catch (error) {
 
         body.innerHTML =
             `<tr>
@@ -7659,7 +7914,7 @@ async function loadCustomers(){
 }
 
 
-function renderCustomers(){
+function renderCustomers() {
 
     const body =
         document.getElementById(
@@ -7670,8 +7925,8 @@ function renderCustomers(){
     const search =
         (
             document
-            .getElementById("customerSearch")
-            ?.value ||
+                .getElementById("customerSearch")
+                ?.value ||
             ""
         )
         .toLowerCase();
@@ -7680,15 +7935,15 @@ function renderCustomers(){
     const status =
         (
             document
-            .getElementById("customerStatusFilter")
-            ?.value ||
+                .getElementById("customerStatusFilter")
+                ?.value ||
             ""
         )
         .toUpperCase();
 
 
     const filtered =
-        allCustomers.filter(customer=>{
+        allCustomers.filter(customer => {
 
             const text =
                 [
@@ -7710,11 +7965,11 @@ function renderCustomers(){
 
 
             const customerStatus =
-    String(
-        customer.account_status ||
-        customer.status ||
-        ""
-    ).toUpperCase();
+                String(
+                    customer.account_status ||
+                    customer.status ||
+                    ""
+                ).toUpperCase();
 
 
             const matchesStatus =
@@ -7730,7 +7985,7 @@ function renderCustomers(){
         });
 
 
-    if(!filtered.length){
+    if (!filtered.length) {
 
         body.innerHTML =
             `<tr>
@@ -7745,7 +8000,7 @@ function renderCustomers(){
 
 
     body.innerHTML =
-        filtered.map(customer=>{
+        filtered.map(customer => {
 
             const id =
                 getValue(
@@ -7780,11 +8035,11 @@ function renderCustomers(){
 
 
             const status =
-    getValue(
-        customer,
-        "account_status",
-        "status"
-    ) || "UNKNOWN";
+                getValue(
+                    customer,
+                    "account_status",
+                    "status"
+                ) || "UNKNOWN";
 
 
             const date =
@@ -7805,27 +8060,38 @@ function renderCustomers(){
                         </strong>
                     </td>
 
-                    <td>${escapeHTML(email)}</td>
-
-                    <td>${escapeHTML(phone)}</td>
-
-                    <td>${statusBadge(status)}</td>
-
-                    <td>${formatDate(date)}</td>
+                    <td>
+                        ${escapeHTML(email)}
+                    </td>
 
                     <td>
+                        ${escapeHTML(phone)}
+                    </td>
+
+                    <td>
+                        ${statusBadge(status)}
+                    </td>
+
+                    <td>
+                        ${formatDate(date)}
+                    </td>
+
+                    <td>
+
                         <button
                             class="small-btn"
                             onclick="viewRecord('customers','${encodeURIComponent(id)}')"
                         >
                             View
                         </button>
+
                     </td>
 
                 </tr>
             `;
 
-        }).join("");
+        })
+        .join("");
 
 }
 
@@ -7834,7 +8100,7 @@ function renderCustomers(){
    APPLICATIONS
 ========================================================= */
 
-async function loadApplications(){
+async function loadApplications() {
 
     const body =
         document.getElementById(
@@ -7851,7 +8117,7 @@ async function loadApplications(){
         </tr>`;
 
 
-    try{
+    try {
 
         const result =
             await apiRequest(
@@ -7877,7 +8143,7 @@ async function loadApplications(){
         updateLocalStatistics();
 
 
-    }catch(error){
+    } catch (error) {
 
         body.innerHTML =
             `<tr>
@@ -7891,7 +8157,7 @@ async function loadApplications(){
 }
 
 
-function renderApplications(){
+function renderApplications() {
 
     const body =
         document.getElementById(
@@ -7902,23 +8168,25 @@ function renderApplications(){
     const search =
         (
             document
-            .getElementById("applicationSearch")
-            ?.value ||
+                .getElementById("applicationSearch")
+                ?.value ||
             ""
-        ).toLowerCase();
+        )
+        .toLowerCase();
 
 
     const status =
         (
             document
-            .getElementById("applicationStatusFilter")
-            ?.value ||
+                .getElementById("applicationStatusFilter")
+                ?.value ||
             ""
-        ).toUpperCase();
+        )
+        .toUpperCase();
 
 
     const filtered =
-        allApplications.filter(application=>{
+        allApplications.filter(application => {
 
             const text =
                 [
@@ -7959,7 +8227,7 @@ function renderApplications(){
         });
 
 
-    if(!filtered.length){
+    if (!filtered.length) {
 
         body.innerHTML =
             `<tr>
@@ -7974,7 +8242,7 @@ function renderApplications(){
 
 
     body.innerHTML =
-        filtered.map(application=>{
+        filtered.map(application => {
 
             const id =
                 getValue(
@@ -8046,6 +8314,11 @@ function renderApplications(){
                 );
 
 
+            const normalizedStatus =
+                String(status)
+                    .toUpperCase();
+
+
             return `
                 <tr>
 
@@ -8055,11 +8328,17 @@ function renderApplications(){
                         </strong>
                     </td>
 
-                    <td>${escapeHTML(customer)}</td>
+                    <td>
+                        ${escapeHTML(customer)}
+                    </td>
 
-                    <td>${escapeHTML(loanType)}</td>
+                    <td>
+                        ${escapeHTML(loanType)}
+                    </td>
 
-                    <td>${formatMoney(amount)}</td>
+                    <td>
+                        ${formatMoney(amount)}
+                    </td>
 
                     <td>
                         ${escapeHTML(duration || "-")}
@@ -8085,11 +8364,8 @@ function renderApplications(){
                             </button>
 
                             ${
-                                String(status).toUpperCase()
-                                === "PENDING"
-                                ||
-                                String(status).toUpperCase()
-                                === "UNDER_REVIEW"
+                                normalizedStatus === "PENDING" ||
+                                normalizedStatus === "UNDER_REVIEW"
                                 ?
                                 `
                                 <button
@@ -8117,12 +8393,13 @@ function renderApplications(){
                 </tr>
             `;
 
-        }).join("");
+        })
+        .join("");
 
 }
 
 
-function renderRecentApplications(){
+function renderRecentApplications() {
 
     const body =
         document.getElementById(
@@ -8132,28 +8409,28 @@ function renderRecentApplications(){
 
     const recent =
         [...allApplications]
-        .sort(
-            (a,b)=>
-                new Date(
-                    getValue(
-                        b,
-                        "created_at",
-                        "submitted_at"
-                    ) || 0
-                )
-                -
-                new Date(
-                    getValue(
-                        a,
-                        "created_at",
-                        "submitted_at"
-                    ) || 0
-                )
-        )
-        .slice(0,5);
+            .sort(
+                (a, b) =>
+                    new Date(
+                        getValue(
+                            b,
+                            "created_at",
+                            "submitted_at"
+                        ) || 0
+                    )
+                    -
+                    new Date(
+                        getValue(
+                            a,
+                            "created_at",
+                            "submitted_at"
+                        ) || 0
+                    )
+            )
+            .slice(0, 5);
 
 
-    if(!recent.length){
+    if (!recent.length) {
 
         body.innerHTML =
             `<tr>
@@ -8168,7 +8445,7 @@ function renderRecentApplications(){
 
 
     body.innerHTML =
-        recent.map(application=>{
+        recent.map(application => {
 
             const id =
                 getValue(
@@ -8238,19 +8515,20 @@ function renderRecentApplications(){
                 </tr>
             `;
 
-        }).join("");
+        })
+        .join("");
 
 }
 
 
-function viewApplication(encodedId){
+function viewApplication(encodedId) {
 
     const id =
         decodeURIComponent(encodedId);
 
 
     const application =
-        allApplications.find(item=>
+        allApplications.find(item =>
             String(
                 getValue(
                     item,
@@ -8261,7 +8539,7 @@ function viewApplication(encodedId){
         );
 
 
-    if(!application){
+    if (!application) {
 
         showToast(
             "Application not found.",
@@ -8297,7 +8575,11 @@ function viewApplication(encodedId){
             <div class="detail-grid">
 
                 <div class="detail-item">
-                    <small>Application ID</small>
+
+                    <small>
+                        Application ID
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8307,17 +8589,29 @@ function viewApplication(encodedId){
                             )
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Status</small>
+
+                    <small>
+                        Status
+                    </small>
+
                     <strong>
                         ${statusBadge(status)}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Customer</small>
+
+                    <small>
+                        Customer
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8328,10 +8622,16 @@ function viewApplication(encodedId){
                             ) || "-"
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Email</small>
+
+                    <small>
+                        Email
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8341,10 +8641,16 @@ function viewApplication(encodedId){
                             ) || "-"
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Phone</small>
+
+                    <small>
+                        Phone
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8354,10 +8660,16 @@ function viewApplication(encodedId){
                             ) || "-"
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Loan Type</small>
+
+                    <small>
+                        Loan Type
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8367,10 +8679,16 @@ function viewApplication(encodedId){
                             ) || "-"
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Requested Amount</small>
+
+                    <small>
+                        Requested Amount
+                    </small>
+
                     <strong>
                         ${formatMoney(
                             getValue(
@@ -8381,10 +8699,16 @@ function viewApplication(encodedId){
                             )
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Duration</small>
+
+                    <small>
+                        Duration
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8395,10 +8719,16 @@ function viewApplication(encodedId){
                             ) || "-"
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Purpose</small>
+
+                    <small>
+                        Purpose
+                    </small>
+
                     <strong>
                         ${escapeHTML(
                             getValue(
@@ -8408,10 +8738,16 @@ function viewApplication(encodedId){
                             ) || "-"
                         )}
                     </strong>
+
                 </div>
 
+
                 <div class="detail-item">
-                    <small>Submitted</small>
+
+                    <small>
+                        Submitted
+                    </small>
+
                     <strong>
                         ${formatDate(
                             getValue(
@@ -8421,9 +8757,11 @@ function viewApplication(encodedId){
                             )
                         )}
                     </strong>
+
                 </div>
 
             </div>
+
         `;
 
 
@@ -8447,6 +8785,7 @@ function viewApplication(encodedId){
                 ""
             }
 
+
             ${
                 String(status).toUpperCase()
                 !== "REJECTED"
@@ -8462,6 +8801,7 @@ function viewApplication(encodedId){
                 :
                 ""
             }
+
 
             <button
                 class="small-btn"
