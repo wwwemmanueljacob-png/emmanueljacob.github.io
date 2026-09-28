@@ -5915,7 +5915,7 @@ textarea:focus{
 
 
 <!-- ========================================================
-     REPORTS
+     REPORTS / STATISTICS
 ========================================================= -->
 
 <section id="section-statistics" class="section">
@@ -5936,13 +5936,23 @@ textarea:focus{
 
     </div>
 
+
+    <!-- ====================================================
+         KEY FINANCIAL STATISTICS
+    ===================================================== -->
+
     <div class="stats-grid">
 
         <div class="stat-card">
 
             <div class="stat-top">
-                <span class="stat-label">TOTAL PORTFOLIO</span>
-                <div class="stat-icon">📊</div>
+                <span class="stat-label">
+                    TOTAL PORTFOLIO
+                </span>
+
+                <div class="stat-icon">
+                    📊
+                </div>
             </div>
 
             <div
@@ -5958,8 +5968,13 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
-                <span class="stat-label">TOTAL REPAYMENTS</span>
-                <div class="stat-icon">💵</div>
+                <span class="stat-label">
+                    TOTAL REPAYMENTS
+                </span>
+
+                <div class="stat-icon">
+                    💵
+                </div>
             </div>
 
             <div
@@ -5975,8 +5990,13 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
-                <span class="stat-label">TOTAL DEPOSITS</span>
-                <div class="stat-icon">💰</div>
+                <span class="stat-label">
+                    TOTAL DEPOSITS
+                </span>
+
+                <div class="stat-icon">
+                    💰
+                </div>
             </div>
 
             <div
@@ -5992,8 +6012,13 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
-                <span class="stat-label">TOTAL SAVINGS</span>
-                <div class="stat-icon">🏦</div>
+                <span class="stat-label">
+                    TOTAL SAVINGS
+                </span>
+
+                <div class="stat-icon">
+                    🏦
+                </div>
             </div>
 
             <div
@@ -6008,51 +6033,160 @@ textarea:focus{
     </div>
 
 
-    <div class="card">
+    <!-- ====================================================
+         FINANCIAL OVERVIEW GRAPH
+    ===================================================== -->
 
-        <div class="card-header">
+    <div class="card statistics-chart-card">
 
-            <h3>Detailed Statistics</h3>
+        <div class="card-header statistics-chart-header">
+
+            <div>
+
+                <h3>
+                    Financial Overview
+                </h3>
+
+                <p>
+                    Current financial performance overview.
+                </p>
+
+            </div>
+
+            <div class="chart-badge">
+                LIVE
+            </div>
 
         </div>
 
+
         <div class="card-body">
 
-            <div class="profile-grid">
+            <div class="statistics-chart">
 
-                <div class="detail-item">
-                    <small>Total Customers</small>
-                    <strong id="statisticsCustomers">0</strong>
-                </div>
+                <div class="chart-bars">
 
-                <div class="detail-item">
-                    <small>Total Applications</small>
-                    <strong id="statisticsApplications">0</strong>
-                </div>
 
-                <div class="detail-item">
-                    <small>Pending Applications</small>
-                    <strong id="statisticsPending">0</strong>
-                </div>
+                    <!-- ==================================================
+                         TOTAL PORTFOLIO
+                    =================================================== -->
 
-                <div class="detail-item">
-                    <small>Approved Applications</small>
-                    <strong id="statisticsApproved">0</strong>
-                </div>
+                    <div class="chart-column">
 
-                <div class="detail-item">
-                    <small>Rejected Applications</small>
-                    <strong id="statisticsRejected">0</strong>
-                </div>
+                        <div
+                            class="chart-value"
+                            id="chartPortfolioValue"
+                        >
+                            MWK 0
+                        </div>
 
-                <div class="detail-item">
-                    <small>Active Loans</small>
-                    <strong id="statisticsActiveLoans">0</strong>
-                </div>
+                        <div class="chart-bar-wrap">
 
-                <div class="detail-item">
-                    <small>Total Loan Disbursed</small>
-                    <strong id="summaryLoanDisbursed">MWK 0.00</strong>
+                            <div
+                                class="chart-bar"
+                                id="chartPortfolioBar"
+                                style="height:0%;"
+                            ></div>
+
+                        </div>
+
+                        <div class="chart-label">
+                            Portfolio
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         TOTAL REPAYMENTS
+                    =================================================== -->
+
+                    <div class="chart-column">
+
+                        <div
+                            class="chart-value"
+                            id="chartRepaymentsValue"
+                        >
+                            MWK 0
+                        </div>
+
+                        <div class="chart-bar-wrap">
+
+                            <div
+                                class="chart-bar"
+                                id="chartRepaymentsBar"
+                                style="height:0%;"
+                            ></div>
+
+                        </div>
+
+                        <div class="chart-label">
+                            Repayments
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         TOTAL DEPOSITS
+                    =================================================== -->
+
+                    <div class="chart-column">
+
+                        <div
+                            class="chart-value"
+                            id="chartDepositsValue"
+                        >
+                            MWK 0
+                        </div>
+
+                        <div class="chart-bar-wrap">
+
+                            <div
+                                class="chart-bar"
+                                id="chartDepositsBar"
+                                style="height:0%;"
+                            ></div>
+
+                        </div>
+
+                        <div class="chart-label">
+                            Deposits
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         TOTAL SAVINGS
+                    =================================================== -->
+
+                    <div class="chart-column">
+
+                        <div
+                            class="chart-value"
+                            id="chartSavingsValue"
+                        >
+                            MWK 0
+                        </div>
+
+                        <div class="chart-bar-wrap">
+
+                            <div
+                                class="chart-bar"
+                                id="chartSavingsBar"
+                                style="height:0%;"
+                            ></div>
+
+                        </div>
+
+                        <div class="chart-label">
+                            Savings
+                        </div>
+
+                    </div>
+
+
                 </div>
 
             </div>
@@ -6060,6 +6194,139 @@ textarea:focus{
         </div>
 
     </div>
+
+
+    <!-- ====================================================
+         DETAILED STATISTICS
+    ===================================================== -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>
+                Detailed Statistics
+            </h3>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="profile-grid">
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Total Customers
+                    </small>
+
+                    <strong
+                        id="statisticsCustomers"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Total Applications
+                    </small>
+
+                    <strong
+                        id="statisticsApplications"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Pending Applications
+                    </small>
+
+                    <strong
+                        id="statisticsPending"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Approved Applications
+                    </small>
+
+                    <strong
+                        id="statisticsApproved"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Rejected Applications
+                    </small>
+
+                    <strong
+                        id="statisticsRejected"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Active Loans
+                    </small>
+
+                    <strong
+                        id="statisticsActiveLoans"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <small>
+                        Total Loan Disbursed
+                    </small>
+
+                    <strong
+                        id="summaryLoanDisbursed"
+                    >
+                        MWK 0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 </section>
 
