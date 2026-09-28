@@ -4526,26 +4526,55 @@ textarea:focus{
 ========================================================= -->
 
 <section id="section-loanProducts" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Loan Products</h2>
             <p>Configure available loan products.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('loanProducts')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('loanProducts')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search loan product..." data-module-search="loanProducts">
+
+                    <input
+                        type="search"
+                        placeholder="Search loan product..."
+                        data-module-search="loanProducts"
+                        autocomplete="off"
+                    >
+
                 </div>
-                <button class="small-btn primary" onclick="openCreateModal('loanProducts')">
+
+                <button
+                    class="small-btn btn-primary"
+                    onclick="openCreateModal('loanProducts')"
+                >
                     + Add Product
                 </button>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Product ID</th>
                             <th>Name</th>
@@ -4556,33 +4585,73 @@ textarea:focus{
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="loanProductsBody"></tbody>
+
+                    <tbody id="loanProductsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No loan products loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-guarantors" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Guarantors</h2>
             <p>Manage loan guarantor information.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('guarantors')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('guarantors')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search guarantor or customer..." data-module-search="guarantors">
+
+                    <input
+                        type="search"
+                        placeholder="Search guarantor or customer..."
+                        data-module-search="guarantors"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Guarantor ID</th>
                             <th>Customer</th>
@@ -4593,49 +4662,84 @@ textarea:focus{
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="guarantorsBody"></tbody>
+
+                    <tbody id="guarantorsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No guarantor records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-loanDocuments" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Loan Documents</h2>
             <p>Loan-related customer documents.</p>
         </div>
+
         <div style="display:flex;gap:8px;align-items:center;">
 
-    <button
-        class="small-btn"
-        onclick="openLoanDocumentModal()"
-    >
-        ➕ Add Document
-    </button>
+            <button
+                class="small-btn btn-primary"
+                onclick="openLoanDocumentModal()"
+            >
+                ➕ Add Document
+            </button>
 
-    <button
-        class="small-btn"
-        onclick="loadModule('loanDocuments')"
-    >
-        🔄 Refresh
-    </button>
+            <button
+                class="small-btn btn-primary"
+                onclick="loadModule('loanDocuments')"
+            >
+                🔄 Refresh
+            </button>
 
-</div>
+        </div>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search document, customer or loan..." data-module-search="loanDocuments">
+
+                    <input
+                        type="search"
+                        placeholder="Search document, customer or loan..."
+                        data-module-search="loanDocuments"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Document ID</th>
                             <th>Customer</th>
@@ -4646,12 +4750,27 @@ textarea:focus{
                             <th>Uploaded</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="loanDocumentsBody"></tbody>
+
+                    <tbody id="loanDocumentsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No loan documents loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
@@ -4660,23 +4779,48 @@ textarea:focus{
 ========================================================= -->
 
 <section id="section-support" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Support Tickets</h2>
             <p>Customer support requests and complaints.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('support')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('support')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search customer, subject or message..." data-module-search="support">
+
+                    <input
+                        type="search"
+                        placeholder="Search customer, subject or message..."
+                        data-module-search="support"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Ticket</th>
                             <th>Customer</th>
@@ -4687,36 +4831,84 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="supportBody"></tbody>
+
+                    <tbody id="supportBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No support tickets loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-followups" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Follow-ups</h2>
             <p>Customer and application follow-up activities.</p>
         </div>
+
         <div style="display:flex;gap:8px;align-items:center;">
-    <button class="small-btn" onclick="openFollowupModal()">➕ Add Follow-Up</button>
-    <button class="small-btn" onclick="loadModule('followups')">🔄 Refresh</button>
+
+            <button
+                class="small-btn btn-primary"
+                onclick="openFollowupModal()"
+            >
+                ➕ Add Follow-Up
+            </button>
+
+            <button
+                class="small-btn btn-primary"
+                onclick="loadModule('followups')"
+            >
+                🔄 Refresh
+            </button>
+
         </div>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search follow-up..." data-module-search="followups">
+
+                    <input
+                        type="search"
+                        placeholder="Search follow-up..."
+                        data-module-search="followups"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Follow-up ID</th>
                             <th>Customer</th>
@@ -4727,36 +4919,80 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="followupsBody"></tbody>
+
+                    <tbody id="followupsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No follow-up records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-announcements" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Announcements</h2>
             <p>Manage customer-facing announcements.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('announcements')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('announcements')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search announcement..." data-module-search="announcements">
+
+                    <input
+                        type="search"
+                        placeholder="Search announcement..."
+                        data-module-search="announcements"
+                        autocomplete="off"
+                    >
+
                 </div>
-                <button class="small-btn primary" onclick="openCreateModal('announcements')">
+
+                <button
+                    class="small-btn btn-primary"
+                    onclick="openCreateModal('announcements')"
+                >
                     + New Announcement
                 </button>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Announcement ID</th>
                             <th>Title</th>
@@ -4767,37 +5003,84 @@ textarea:focus{
                             <th>Created</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="announcementsBody"></tbody>
+
+                    <tbody id="announcementsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No announcements loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-notifications" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Notifications</h2>
             <p>System and customer notifications.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('notifications')">🔄 Refresh</button>
 
-<button class="small-btn" onclick="createTestNotification()">
-    🔔 Test Notification
-</button>
+        <div style="display:flex;gap:8px;align-items:center;">
+
+            <button
+                class="small-btn btn-primary"
+                onclick="loadModule('notifications')"
+            >
+                🔄 Refresh
+            </button>
+
+            <button
+                class="small-btn btn-primary"
+                onclick="createTestNotification()"
+            >
+                🔔 Test Notification
+            </button>
+
+        </div>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search notification..." data-module-search="notifications">
+
+                    <input
+                        type="search"
+                        placeholder="Search notification..."
+                        data-module-search="notifications"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Notification ID</th>
                             <th>Customer</th>
@@ -4808,12 +5091,27 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="notificationsBody"></tbody>
+
+                    <tbody id="notificationsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No notifications loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
@@ -4824,41 +5122,99 @@ textarea:focus{
 <section id="section-statistics" class="section">
 
     <div class="section-header">
+
         <div>
             <h2>Statistics</h2>
             <p>Operational and financial statistics.</p>
         </div>
-        <button class="small-btn" onclick="loadStatistics()">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadStatistics()"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
 
     <div class="stats-grid">
 
         <div class="stat-card">
-            <span class="stat-label">TOTAL PORTFOLIO</span>
-            <div class="stat-value" id="statisticsPortfolio">MWK 0</div>
+
+            <div class="stat-top">
+                <span class="stat-label">TOTAL PORTFOLIO</span>
+                <div class="stat-icon">📊</div>
+            </div>
+
+            <div
+                class="stat-value"
+                id="statisticsPortfolio"
+            >
+                MWK 0
+            </div>
+
         </div>
 
-        <div class="stat-card">
-            <span class="stat-label">TOTAL REPAYMENTS</span>
-            <div class="stat-value" id="statisticsRepayments">MWK 0</div>
-        </div>
 
         <div class="stat-card">
-            <span class="stat-label">TOTAL DEPOSITS</span>
-            <div class="stat-value" id="statisticsDeposits">MWK 0</div>
+
+            <div class="stat-top">
+                <span class="stat-label">TOTAL REPAYMENTS</span>
+                <div class="stat-icon">💵</div>
+            </div>
+
+            <div
+                class="stat-value"
+                id="statisticsRepayments"
+            >
+                MWK 0
+            </div>
+
         </div>
 
+
         <div class="stat-card">
-            <span class="stat-label">TOTAL SAVINGS</span>
-            <div class="stat-value" id="statisticsSavings">MWK 0</div>
+
+            <div class="stat-top">
+                <span class="stat-label">TOTAL DEPOSITS</span>
+                <div class="stat-icon">💰</div>
+            </div>
+
+            <div
+                class="stat-value"
+                id="statisticsDeposits"
+            >
+                MWK 0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">TOTAL SAVINGS</span>
+                <div class="stat-icon">🏦</div>
+            </div>
+
+            <div
+                class="stat-value"
+                id="statisticsSavings"
+            >
+                MWK 0
+            </div>
+
         </div>
 
     </div>
 
+
     <div class="card">
 
         <div class="card-header">
+
             <h3>Detailed Statistics</h3>
+
         </div>
 
         <div class="card-body">
@@ -4895,10 +5251,10 @@ textarea:focus{
                     <strong id="statisticsActiveLoans">0</strong>
                 </div>
 
-                  <div class="detail-item">
-    <small>Total Loan Disbursed</small>
-    <strong id="summaryLoanDisbursed">MWK 0.00</strong>
-</div>
+                <div class="detail-item">
+                    <small>Total Loan Disbursed</small>
+                    <strong id="summaryLoanDisbursed">MWK 0.00</strong>
+                </div>
 
             </div>
 
@@ -4922,49 +5278,80 @@ textarea:focus{
 
     <div class="module-grid">
 
-        <div class="module-card" onclick="generateReport('loans')">
+        <div
+            class="module-card"
+            onclick="generateReport('loans')"
+        >
             <div class="module-icon">💳</div>
             <strong>Loan Report</strong>
             <span>Applications, approvals and active loans</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('repayments')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('repayments')"
+        >
             <div class="module-icon">💵</div>
             <strong>Repayment Report</strong>
             <span>Repayment transaction report</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('deposits')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('deposits')"
+        >
             <div class="module-icon">💰</div>
             <strong>Deposit Report</strong>
             <span>Customer deposit activity</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('withdrawals')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('withdrawals')"
+        >
             <div class="module-icon">💸</div>
             <strong>Withdrawal Report</strong>
             <span>Withdrawal activity</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('customers')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('customers')"
+        >
             <div class="module-icon">👥</div>
             <strong>Customer Report</strong>
             <span>Customer registration information</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('financial')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('financial')"
+        >
             <div class="module-icon">📊</div>
             <strong>Financial Report</strong>
             <span>Overall financial activity</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('kyc')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('kyc')"
+        >
             <div class="module-icon">🪪</div>
             <strong>KYC Report</strong>
             <span>Verification and compliance</span>
         </div>
 
-        <div class="module-card" onclick="generateReport('security')">
+
+        <div
+            class="module-card"
+            onclick="generateReport('security')"
+        >
             <div class="module-icon">🛡️</div>
             <strong>Security Report</strong>
             <span>Security and access events</span>
@@ -4988,7 +5375,10 @@ textarea:focus{
             <p>Administrative actions and system history.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('audit')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('audit')"
+        >
             🔄 Refresh
         </button>
 
@@ -5001,7 +5391,14 @@ textarea:focus{
             <div class="toolbar">
 
                 <div class="search-box">
-                    <input placeholder="Search action, admin or application..." data-module-search="audit">
+
+                    <input
+                        type="search"
+                        placeholder="Search action, admin or application..."
+                        data-module-search="audit"
+                        autocomplete="off"
+                    >
+
                 </div>
 
             </div>
@@ -5011,6 +5408,7 @@ textarea:focus{
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Log ID</th>
                             <th>Action</th>
@@ -5020,9 +5418,18 @@ textarea:focus{
                             <th>IP</th>
                             <th>Date</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="auditBody"></tbody>
+                    <tbody id="auditBody">
+
+                        <tr>
+                            <td colspan="7" class="empty">
+                                No audit logs loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -5044,7 +5451,10 @@ textarea:focus{
             <p>Monitor important security events.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('securityEvents')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('securityEvents')"
+        >
             🔄 Refresh
         </button>
 
@@ -5059,6 +5469,7 @@ textarea:focus{
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Event ID</th>
                             <th>Event</th>
@@ -5069,9 +5480,18 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="securityEventsBody"></tbody>
+                    <tbody id="securityEventsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No security events loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -5093,7 +5513,10 @@ textarea:focus{
             <p>Monitor successful and failed authentication attempts.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('loginAttempts')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('loginAttempts')"
+        >
             🔄 Refresh
         </button>
 
@@ -5108,6 +5531,7 @@ textarea:focus{
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Attempt ID</th>
                             <th>Email</th>
@@ -5118,9 +5542,18 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="loginAttemptsBody"></tbody>
+                    <tbody id="loginAttemptsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No login attempts loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -5142,7 +5575,10 @@ textarea:focus{
             <p>Monitor active customer sessions.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('customerSessions')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('customerSessions')"
+        >
             🔄 Refresh
         </button>
 
@@ -5157,6 +5593,7 @@ textarea:focus{
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Session ID</th>
                             <th>Customer</th>
@@ -5167,9 +5604,18 @@ textarea:focus{
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="customerSessionsBody"></tbody>
+                    <tbody id="customerSessionsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No customer sessions loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -5191,7 +5637,10 @@ textarea:focus{
             <p>Monitor administrator sessions.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('adminSessions')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('adminSessions')"
+        >
             🔄 Refresh
         </button>
 
@@ -5206,6 +5655,7 @@ textarea:focus{
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Session ID</th>
                             <th>Administrator</th>
@@ -5216,9 +5666,18 @@ textarea:focus{
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="adminSessionsBody"></tbody>
+                    <tbody id="adminSessionsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No administrator sessions loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -5244,7 +5703,10 @@ textarea:focus{
             <p>Administrator roles and access permissions.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('permissions')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('permissions')"
+        >
             🔄 Refresh
         </button>
 
@@ -5259,6 +5721,7 @@ textarea:focus{
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Permission ID</th>
                             <th>Role</th>
@@ -5270,9 +5733,18 @@ textarea:focus{
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="permissionsBody"></tbody>
+                    <tbody id="permissionsBody">
+
+                        <tr>
+                            <td colspan="9" class="empty">
+                                No permission records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -5294,7 +5766,10 @@ textarea:focus{
             <p>Configure system-wide settings.</p>
         </div>
 
-        <button class="small-btn" onclick="loadModule('settings')">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('settings')"
+        >
             🔄 Refresh
         </button>
 
@@ -5328,7 +5803,10 @@ textarea:focus{
             <p>Current administrator account.</p>
         </div>
 
-        <button class="small-btn" onclick="loadAdminProfile()">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadAdminProfile()"
+        >
             🔄 Refresh
         </button>
 
@@ -5338,26 +5816,41 @@ textarea:focus{
 
         <div class="card-body">
 
-            <div class="profile-grid" id="adminProfile">
+            <div
+                class="profile-grid"
+                id="adminProfile"
+            >
 
                 <div class="detail-item">
+
                     <small>Name</small>
+
                     <strong>Administrator</strong>
+
                 </div>
 
                 <div class="detail-item">
+
                     <small>Email</small>
+
                     <strong>-</strong>
+
                 </div>
 
                 <div class="detail-item">
+
                     <small>Role</small>
+
                     <strong>Administrator</strong>
+
                 </div>
 
                 <div class="detail-item">
+
                     <small>Status</small>
+
                     <strong>Active</strong>
+
                 </div>
 
             </div>
@@ -5370,6 +5863,7 @@ textarea:focus{
 
 
         </div>
+
     </main>
 
 </div>
@@ -5378,23 +5872,20 @@ textarea:focus{
 <!-- ========================================================
      GENERAL MODAL
 ========================================================= -->
-
 <div class="modal" id="applicationModal">
 
     <div class="modal-box">
 
         <div class="modal-header">
 
-            <h3 id="modalTitle">
-                Details
-            </h3>
+            <h3 id="modalTitle">Details</h3>
 
             <button
-    type="button"
-    class="modal-close"
-    onclick="document.getElementById('applicationModal').classList.remove('show')"
->
-    ×
+                type="button"
+                class="modal-close"
+                onclick="document.getElementById('applicationModal').classList.remove('show')"
+            >
+                ×
             </button>
 
         </div>
@@ -5406,6 +5897,7 @@ textarea:focus{
     </div>
 
 </div>
+
 
 <!-- =========================================================
      LOAN APPROVAL MODAL
@@ -5449,7 +5941,6 @@ textarea:focus{
 
                 </div>
 
-
                 <div class="detail-item">
 
                     <small>Loan Amount</small>
@@ -5462,7 +5953,6 @@ textarea:focus{
                     </strong>
 
                 </div>
-
 
                 <div class="detail-item">
 
@@ -5488,9 +5978,7 @@ textarea:focus{
             >
 
                 <label for="approvalInterestRate">
-
                     Interest Rate (% per month)
-
                 </label>
 
                 <input
@@ -5506,7 +5994,9 @@ textarea:focus{
                     style="
                         display:block;
                         margin-top:6px;
-                        color:#666;
+                        color:#6d7b8d;
+                        font-size:11px;
+                        line-height:1.5;
                     "
                 >
                     Flat monthly interest.
@@ -5524,15 +6014,23 @@ textarea:focus{
                     display:none;
                     margin-top:18px;
                     padding:16px;
-                    border:1px solid #ddd;
-                    border-radius:10px;
+                    border:1px solid rgba(244,197,66,.20);
+                    border-radius:12px;
+                    background:linear-gradient(145deg,#fffdf4,#f9fbfe);
+                    box-shadow:0 5px 16px rgba(6,21,47,.05);
                 "
             >
 
-                <h4 style="margin-top:0;">
+                <h4
+                    style="
+                        margin:0 0 14px;
+                        color:var(--navy);
+                        font-size:14px;
+                        font-weight:900;
+                    "
+                >
                     Loan Calculation
                 </h4>
-
 
                 <div class="detail-grid">
 
@@ -5549,7 +6047,6 @@ textarea:focus{
 
                     </div>
 
-
                     <div class="detail-item">
 
                         <small>Total Repayment</small>
@@ -5562,7 +6059,6 @@ textarea:focus{
                         </strong>
 
                     </div>
-
 
                     <div class="detail-item">
 
@@ -5596,9 +6092,8 @@ textarea:focus{
                 Cancel
             </button>
 
-
             <button
-                class="small-btn primary"
+                class="small-btn btn-primary"
                 type="button"
                 id="confirmLoanApprovalButton"
                 onclick="confirmLoanApproval()"
@@ -5611,7 +6106,8 @@ textarea:focus{
         </div>
 
     </div>
-</div>      
+</div>
+
 
 <!-- ========================================================
      RECOVERY MODAL
@@ -5625,19 +6121,26 @@ textarea:focus{
 
             <h3>Account Recovery</h3>
 
-           <button
-    type="button"
-    class="modal-close"
-    onclick="document.getElementById('recoveryModal').classList.remove('show')"
->
-    ×
-</button>
+            <button
+                type="button"
+                class="modal-close"
+                onclick="document.getElementById('recoveryModal').classList.remove('show')"
+            >
+                ×
+            </button>
 
         </div>
 
         <div class="modal-body">
 
-            <p style="font-size:12px;color:#6d7b8d;margin-bottom:15px;">
+            <p
+                style="
+                    font-size:12px;
+                    color:#6d7b8d;
+                    margin:0 0 18px;
+                    line-height:1.6;
+                "
+            >
                 Enter your administrator email address to begin
                 secure account recovery.
             </p>
@@ -5649,12 +6152,15 @@ textarea:focus{
 
             <div class="form-group">
 
-                <label>Email Address</label>
+                <label for="recoveryEmail">
+                    Email Address
+                </label>
 
                 <input
                     id="recoveryEmail"
                     type="email"
                     placeholder="admin@example.com"
+                    autocomplete="email"
                 >
 
             </div>
@@ -5683,7 +6189,9 @@ textarea:focus{
                 style="display:none;margin-top:15px;"
             >
 
-                <label>Recovery OTP</label>
+                <label for="recoveryOtp">
+                    Recovery OTP
+                </label>
 
                 <input
                     id="recoveryOtp"
@@ -5691,6 +6199,7 @@ textarea:focus{
                     inputmode="numeric"
                     maxlength="6"
                     placeholder="Enter 6-digit OTP"
+                    autocomplete="one-time-code"
                 >
 
             </div>
@@ -5720,13 +6229,16 @@ textarea:focus{
                 style="display:none;margin-top:15px;"
             >
 
-                <label>New Password</label>
+                <label for="recoveryNewPassword">
+                    New Password
+                </label>
 
                 <input
                     id="recoveryNewPassword"
                     type="password"
                     minlength="8"
                     placeholder="Enter new password"
+                    autocomplete="new-password"
                 >
 
             </div>
@@ -5742,13 +6254,16 @@ textarea:focus{
                 style="display:none;margin-top:15px;"
             >
 
-                <label>Confirm New Password</label>
+                <label for="recoveryConfirmPassword">
+                    Confirm New Password
+                </label>
 
                 <input
                     id="recoveryConfirmPassword"
                     type="password"
                     minlength="8"
                     placeholder="Confirm new password"
+                    autocomplete="new-password"
                 >
 
             </div>
@@ -5796,7 +6311,6 @@ textarea:focus{
 /* =========================================================
    API CONFIGURATION
 ========================================================= */
-
 const API =
     "https://emmanueljacobgithubio-production.up.railway.app/api";
 
