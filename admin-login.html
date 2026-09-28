@@ -57,14 +57,16 @@ body{
 }
 
 /* =========================================================
-   LOGIN SCREEN
+   LOGIN SCREEN — PREMIUM
 ========================================================= */
 
 .login-screen{
     min-height:100vh;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:20px;
 
     background:
@@ -78,19 +80,50 @@ body{
 
 .login-card{
     width:100%;
+
     max-width:440px;
-    background:#ffffff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f9fbfe
+        );
+
     border-radius:22px;
+
     padding:38px 32px;
+
     box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
-    border:1px solid rgba(244,197,66,.35);
+        0 25px 70px
+        rgba(0,0,0,.35);
+
+    border:
+        1px solid
+        rgba(244,197,66,.35);
+
     text-align:center;
+
+    animation:
+        loginCardIn .4s ease both;
+}
+
+@keyframes loginCardIn{
+    from{
+        opacity:0;
+        transform:translateY(10px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
 .login-logo{
     width:70px;
     height:70px;
+
     margin:0 auto 16px;
 
     display:flex;
@@ -107,73 +140,133 @@ body{
         );
 
     color:var(--navy);
+
     font-size:38px;
     font-weight:900;
 
     box-shadow:
-        0 8px 25px rgba(244,197,66,.35);
+        0 8px 25px
+        rgba(244,197,66,.35);
+
+    border:
+        2px solid
+        rgba(255,255,255,.75);
 }
 
 .login-card h1{
     color:var(--navy);
+
     font-size:28px;
+
+    font-weight:900;
+
     letter-spacing:3px;
-    margin-bottom:4px;
+
+    line-height:1.15;
+
+    margin:0 0 4px;
 }
 
 .login-subtitle{
     color:#68758a;
+
     font-size:13px;
+
     font-weight:700;
+
     letter-spacing:2px;
+
+    line-height:1.4;
 }
 
 .admin-badge{
-    display:inline-block;
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
     margin:18px 0 24px;
+
     padding:8px 13px;
+
     border-radius:30px;
 
-    background:#fff8d9;
+    background:
+        linear-gradient(
+            135deg,
+            #fff8d9,
+            #fffdf0
+        );
+
     color:#8a6800;
 
     font-size:12px;
+
     font-weight:800;
-    border:1px solid #f1d76b;
+
+    border:
+        1px solid
+        rgba(241,215,107,.8);
+
+    box-shadow:
+        0 4px 10px
+        rgba(244,197,66,.08);
 }
 
 .form-group{
     text-align:left;
+
     margin-bottom:18px;
 }
 
 .form-group label{
     display:block;
+
     margin-bottom:7px;
 
     color:#344054;
+
     font-size:13px;
-    font-weight:700;
+
+    font-weight:800;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea{
     width:100%;
+
     padding:13px 14px;
 
     background:#ffffff;
+
     color:var(--text);
 
-    border:1px solid #d5dce7;
+    border:
+        1px solid
+        #d5dce7;
+
     border-radius:10px;
 
     outline:none;
+
     font-size:14px;
 
+    box-shadow:
+        0 2px 8px
+        rgba(6,21,47,.025);
+
     transition:
-        border .2s,
-        box-shadow .2s;
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover{
+    border-color:
+        rgba(244,197,66,.35);
 }
 
 .form-group input:focus,
@@ -181,9 +274,13 @@ body{
 .form-group textarea:focus{
     border-color:var(--gold-dark);
 
+    background:#ffffff;
+
     box-shadow:
         0 0 0 3px
-        rgba(244,197,66,.18);
+        rgba(244,197,66,.18),
+        0 5px 14px
+        rgba(6,21,47,.05);
 }
 
 .password-wrapper{
@@ -196,20 +293,42 @@ body{
 
 .password-toggle{
     position:absolute;
+
     right:8px;
     top:50%;
+
     transform:translateY(-50%);
 
     border:none;
+
     background:transparent;
 
     font-size:18px;
+
     color:#68758a;
+
+    cursor:pointer;
+
+    border-radius:7px;
+
+    padding:5px;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.password-toggle:hover{
+    background:#f1f3f6;
+
+    color:var(--navy);
 }
 
 .primary-btn{
     width:100%;
+
     border:none;
+
     border-radius:10px;
 
     padding:13px 18px;
@@ -224,32 +343,50 @@ body{
     color:var(--navy);
 
     font-weight:900;
+
     font-size:14px;
+
+    cursor:pointer;
 
     box-shadow:
         0 6px 18px
         rgba(244,197,66,.25);
 
-    transition:.2s;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
 }
 
 .primary-btn:hover{
     transform:translateY(-1px);
+
+    filter:brightness(1.03);
 
     box-shadow:
         0 9px 24px
         rgba(244,197,66,.35);
 }
 
+.primary-btn:active{
+    transform:translateY(0);
+}
+
 .forgot-link{
     display:block;
+
     margin-top:18px;
 
     color:#a27b00;
+
     font-size:13px;
+
     font-weight:700;
 
     cursor:pointer;
+
+    transition:
+        color .2s ease;
 }
 
 .forgot-link:hover{
@@ -258,16 +395,26 @@ body{
 
 .login-message{
     margin-top:14px;
+
     font-size:13px;
+
+    line-height:1.5;
 }
 
 /* =========================================================
-   MAIN APPLICATION
+   MAIN APPLICATION — PREMIUM
 ========================================================= */
 
 .app{
     min-height:100vh;
-    background:var(--bg);
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7f9fc 0%,
+            var(--bg) 45%,
+            #f3f6fa 100%
+        );
 }
 
 /* =========================================================
@@ -1023,71 +1170,169 @@ body{
 }
 
 /* =========================================================
-   SECTION HEADER
+   SECTION HEADER — PREMIUM
 ========================================================= */
 
 .section-header{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:15px;
 
     margin-bottom:20px;
+
+    padding-bottom:2px;
 }
 
 .section-header h2{
+    margin:0;
+
     color:var(--navy);
 
     font-size:22px;
     font-weight:900;
+
+    line-height:1.2;
+
+    letter-spacing:-.2px;
 }
 
 .section-header p{
     color:var(--muted);
 
-    margin-top:5px;
+    margin:5px 0 0;
 
     font-size:13px;
-}
 
+    line-height:1.5;
+}
 /* =========================================================
-   BUTTONS
+   BUTTONS — PREMIUM
 ========================================================= */
 
 .small-btn{
-    border:1px solid #d6dee9;
+    display:inline-flex;
 
-    background:#ffffff;
+    align-items:center;
+    justify-content:center;
+
+    gap:7px;
+
+    border:
+        1px solid
+        rgba(7,17,31,.10);
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fafc
+        );
 
     color:var(--navy);
 
-    padding:9px 13px;
+    padding:9px 14px;
 
-    border-radius:8px;
+    border-radius:9px;
 
     font-size:12px;
     font-weight:800;
 
-    transition:.2s;
+    line-height:1.2;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 3px 9px
+        rgba(6,21,47,.04);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
 }
 
 .small-btn:hover{
-    background:#fff8d9;
-    border-color:#e7c84e;
+    transform:translateY(-1px);
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf1,
+            #fff8d9
+        );
+
+    border-color:
+        rgba(244,197,66,.45);
+
     color:#7c5e00;
+
+    box-shadow:
+        0 5px 13px
+        rgba(244,197,66,.12);
+}
+
+.small-btn:active{
+    transform:translateY(0);
+}
+
+.small-btn:focus-visible{
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(244,197,66,.16);
 }
 
 .btn-primary{
-    background:var(--gold);
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold),
+            #e8b900
+        );
+
     color:var(--navy);
-    border:none;
+
+    border:
+        1px solid
+        rgba(180,140,0,.18);
+
+    box-shadow:
+        0 5px 14px
+        rgba(244,197,66,.18);
+}
+
+.btn-primary:hover{
+    background:
+        linear-gradient(
+            135deg,
+            #ffd95a,
+            var(--gold)
+        );
+
+    color:var(--navy);
 }
 
 .btn-secondary{
-    background:#eef2f7;
+    background:
+        linear-gradient(
+            180deg,
+            #f3f6fa,
+            #e9eef5
+        );
+
     color:var(--navy);
-}
+
+    border:
+        1px solid
+        rgba(7,17,31,.08);
+      }
 
 /* =========================================================
    STATISTICS — PREMIUM
