@@ -274,6 +274,7 @@ body{
    SIDEBAR
 ========================================================= */
 
+```css
 .sidebar{
     position:fixed;
     left:0;
@@ -286,8 +287,8 @@ body{
         linear-gradient(
             180deg,
             #06152f 0%,
-            #081d3b 55%,
-            #051329 100%
+            #081d3b 50%,
+            #041127 100%
         );
 
     color:white;
@@ -297,25 +298,54 @@ body{
 
     z-index:1000;
 
+    border-right:
+        1px solid
+        rgba(244,197,66,.12);
+
     box-shadow:
-        8px 0 30px rgba(0,0,0,.12);
+        10px 0 35px
+        rgba(6,21,47,.18);
+
+    overflow:hidden;
+
+    transition:
+        width .3s ease,
+        box-shadow .3s ease;
 }
+```
+
 
 /* =========================================================
    BRAND
 ========================================================= */
 
+```css
 .brand{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:13px;
 
-    padding:23px 20px;
+    padding:20px 20px 19px;
+
+    min-height:88px;
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(244,197,66,.14);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(244,197,66,.06),
+            rgba(255,255,255,.015)
+        );
+
+    box-shadow:
+        0 4px 18px
+        rgba(0,0,0,.08);
 }
+```
+
 
 .brand-logo-img{
     width:52px;
@@ -335,10 +365,17 @@ body{
         );
       }
 
+```css
 .brand-text{
     display:flex;
     flex-direction:column;
+
+    min-width:0;
+
+    line-height:1.15;
 }
+```
+      
 
 .brand-text strong{
     color:white;
