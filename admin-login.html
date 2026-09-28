@@ -2770,10 +2770,10 @@ textarea:focus{
                 Deposits
             </button>
 
-              <button class="nav-btn" data-section="depositRequests">
-    <span class="nav-icon">📥</span>
-    Deposit Requests
-              </button>
+                          <button class="nav-btn" data-section="depositRequests">
+                <span class="nav-icon">📥</span>
+                Deposit Requests
+                          </button>
 
             <button class="nav-btn" data-section="withdrawals">
                 <span class="nav-icon">💸</span>
@@ -2983,10 +2983,10 @@ textarea:focus{
         </div>
 
         <button
-            class="small-btn"
-            onclick="loadAllData()"
-        >
-            🔄 Refresh
+    class="small-btn btn-primary"
+    onclick="loadAllData()"
+>
+    🔄 Refresh
         </button>
 
     </div>
@@ -3098,8 +3098,11 @@ textarea:focus{
 
                       <div class="summary-row">
     <span>Admin Available Balance</span>
-    <strong id="summaryAdminBalance">MWK 0</strong>
-</div>
+
+    <div>
+        <strong id="summaryAdminBalance">MWK 0</strong>
+    </div>
+                      </div>
 
 <div class="summary-row">
     <span>Loans Disbursed</span>
@@ -3187,8 +3190,17 @@ textarea:focus{
                     </div>
 
                     <div class="summary-row">
-                        <span>Pending Withdrawals</span>
-                        <strong id="summaryPendingWithdrawals">0</strong>
+    <span>Pending Withdrawals</span>
+
+    <div>
+        <strong id="summaryPendingWithdrawals">0</strong>
+
+        <small
+            style="display:block; margin-top:4px; opacity:0.7;"
+        >
+            Awaiting processing
+        </small>
+    </div>
                     </div>
 
                 </div>
@@ -3416,9 +3428,9 @@ textarea:focus{
         <span>Manage administrator profile</span>
     </div>
 
-  </div>
+              </div>
 
-      </div>
+        </div>
 
     </div>
 
@@ -3436,7 +3448,9 @@ textarea:focus{
             <h2>Customer Management</h2>
             <p>Manage registered customer accounts.</p>
         </div>
-        <button class="small-btn" onclick="loadCustomers()">🔄 Refresh</button>
+        <button class="small-btn btn-primary" onclick="loadCustomers()">
+    🔄 Refresh
+        </button>
     </div>
 
     <div class="card">
@@ -3445,19 +3459,21 @@ textarea:focus{
 
             <div class="toolbar">
 
-                <div class="search-box">
-                    <input
-                        id="customerSearch"
-                        placeholder="Search name, email, phone..."
-                    >
-                </div>
+    <div class="search-box">
+        <input
+            id="customerSearch"
+            type="search"
+            placeholder="Search name, email, phone..."
+            autocomplete="off"
+        >
+    </div>
 
-                <select id="customerStatusFilter">
-                    <option value="">All statuses</option>
-                    <option value="ACTIVE">Active</option>
-                    <option value="INACTIVE">Inactive</option>
-                    <option value="BLOCKED">Blocked</option>
-                </select>
+    <select id="customerStatusFilter">
+        <option value="">All statuses</option>
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+        <option value="BLOCKED">Blocked</option>
+    </select>
 
             </div>
 
@@ -3476,7 +3492,15 @@ textarea:focus{
                         </tr>
                     </thead>
 
-                    <tbody id="customersBody"></tbody>
+                    <tbody id="customersBody">
+
+    <tr>
+        <td colspan="6" class="empty">
+            No customers loaded.
+        </td>
+    </tr>
+
+      </tbody>
 
                 </table>
 
@@ -3501,10 +3525,9 @@ textarea:focus{
             <p>Review, approve, reject and manage loan applications.</p>
         </div>
 
-        <button class="small-btn" onclick="loadApplications()">
-            🔄 Refresh
+        <button class="small-btn btn-primary" onclick="loadApplications()">
+    🔄 Refresh
         </button>
-    </div>
 
     <div class="card">
 
@@ -3514,9 +3537,11 @@ textarea:focus{
 
                 <div class="search-box">
                     <input
-                        id="applicationSearch"
-                        placeholder="Search application, customer, email..."
-                    >
+    id="applicationSearch"
+    type="search"
+    placeholder="Search application, customer, email..."
+    autocomplete="off"
+>
                 </div>
 
                 <select id="applicationStatusFilter">
@@ -3550,7 +3575,15 @@ textarea:focus{
 
                     </thead>
 
-                    <tbody id="applicationsBody"></tbody>
+                    <tbody id="applicationsBody">
+
+    <tr>
+        <td colspan="8" class="empty">
+            No loan applications loaded.
+        </td>
+    </tr>
+
+                      </tbody>
 
                 </table>
 
@@ -3571,17 +3604,15 @@ textarea:focus{
     <div class="section-header">
 
         <div>
-
             <h2>KYC Verification</h2>
 
             <p>
                 Review and verify customer identification documents.
             </p>
-
         </div>
 
         <button
-            class="small-btn"
+            class="small-btn btn-primary"
             onclick="loadAdminKYC()"
         >
             🔄 Refresh
@@ -3600,7 +3631,9 @@ textarea:focus{
 
                     <input
                         id="kycSearch"
+                        type="search"
                         placeholder="Search customer, document number..."
+                        autocomplete="off"
                     >
 
                 </div>
@@ -3664,9 +3697,9 @@ textarea:focus{
 
                             <td
                                 colspan="8"
-                                class="loading"
+                                class="empty"
                             >
-                                KYC documents will appear here.
+                                No KYC documents loaded.
                             </td>
 
                         </tr>
@@ -3680,7 +3713,7 @@ textarea:focus{
         </div>
 
     </div>
-      
+
 </section>
                         
 <!-- ========================================================
@@ -3696,11 +3729,15 @@ textarea:focus{
             <p>Monitor approved and active customer loans.</p>
         </div>
 
-        <button class="small-btn" onclick="loadActiveLoans()">
+        <button
+            class="small-btn btn-primary"
+            onclick="loadActiveLoans()"
+        >
             🔄 Refresh
         </button>
 
     </div>
+
 
     <div class="card">
 
@@ -3709,19 +3746,25 @@ textarea:focus{
             <div class="toolbar">
 
                 <div class="search-box">
+
                     <input
                         id="loanSearch"
+                        type="search"
                         placeholder="Search loan ID or customer..."
+                        autocomplete="off"
                     >
+
                 </div>
 
             </div>
+
 
             <div class="table-wrap">
 
                 <table>
 
                     <thead>
+
                         <tr>
                             <th>Loan ID</th>
                             <th>Customer</th>
@@ -3732,9 +3775,19 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
 
-                    <tbody id="activeLoansBody"></tbody>
+
+                    <tbody id="activeLoansBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No active loans loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 
@@ -3744,7 +3797,7 @@ textarea:focus{
 
     </div>
 
-</section>
+  </section>
 
 
 <!-- ========================================================
@@ -3752,146 +3805,22 @@ textarea:focus{
 ========================================================= -->
 
 <section id="section-repayments" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Repayments</h2>
             <p>Loan repayment transactions.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('repayments')">🔄 Refresh</button>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="toolbar">
-                <div class="search-box">
-                    <input id="repaymentsSearch" placeholder="Search repayment or customer...">
-                </div>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Repayment ID</th>
-                            <th>Customer</th>
-                            <th>Loan</th>
-                            <th>Amount</th>
-                            <th>Method</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="repaymentsBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section id="section-schedules" class="section">
-    <div class="section-header">
-        <div>
-            <h2>Repayment Schedules</h2>
-            <p>Loan installment schedules and due dates.</p>
-        </div>
-        <button class="small-btn" onclick="loadModule('schedules')">🔄 Refresh</button>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="toolbar">
-                <div class="search-box">
-                    <input placeholder="Search loan or customer..." data-module-search="schedules">
-                </div>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Schedule ID</th>
-                            <th>Loan</th>
-                            <th>Customer</th>
-                            <th>Installment</th>
-                            <th>Due Date</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="schedulesBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section id="section-deposits" class="section">
-    <div class="section-header">
-        <div>
-            <h2>Deposits</h2>
-            <p>Customer deposit transactions.</p>
-        </div>
-        <button class="small-btn" onclick="loadModule('deposits')">🔄 Refresh</button>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="toolbar">
-                <div class="search-box">
-                    <input placeholder="Search deposit, customer or reference..." data-module-search="deposits">
-                </div>
-                <button class="small-btn primary" onclick="openCreateModal('deposits')">
-                    + Record Deposit
-                </button>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Deposit ID</th>
-                            <th>Customer</th>
-                            <th>Amount</th>
-                            <th>Method</th>
-                            <th>Reference</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="depositsBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-
-              <!-- =====================================================
-     CUSTOMER DEPOSIT REQUESTS
-===================================================== -->
-
-<section id="section-depositRequests" class="section">
-
-    <div class="section-header">
-
-        <div>
-
-            <h2>Deposit Requests</h2>
-
-            <p>
-                Customer requests waiting for payment processing.
-            </p>
-
-        </div>
 
         <button
-            class="small-btn"
-            onclick="loadModule('depositRequests')">
-
+            class="small-btn btn-primary"
+            onclick="loadModule('repayments')"
+        >
             🔄 Refresh
-
         </button>
 
     </div>
-
 
     <div class="card">
 
@@ -3902,13 +3831,15 @@ textarea:focus{
                 <div class="search-box">
 
                     <input
-                        placeholder="Search customer, method or reference..."
-                        data-module-search="depositRequests">
+                        id="repaymentsSearch"
+                        type="search"
+                        placeholder="Search repayment or customer..."
+                        autocomplete="off"
+                    >
 
                 </div>
 
             </div>
-
 
             <div class="table-wrap">
 
@@ -3917,30 +3848,271 @@ textarea:focus{
                     <thead>
 
                         <tr>
-
-                            <th>Request ID</th>
-
+                            <th>Repayment ID</th>
                             <th>Customer</th>
-
+                            <th>Loan</th>
                             <th>Amount</th>
-
-                            <th>Payment Method</th>
-
-                            <th>Reference</th>
-
+                            <th>Method</th>
                             <th>Status</th>
-
                             <th>Date</th>
-
                             <th>Actions</th>
-
                         </tr>
 
                     </thead>
 
+                    <tbody id="repaymentsBody">
 
-                    <tbody
-                        id="depositRequestsBody">
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No repayment records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="section-schedules" class="section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Repayment Schedules</h2>
+            <p>Loan installment schedules and due dates.</p>
+        </div>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('schedules')"
+        >
+            🔄 Refresh
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <input
+                        type="search"
+                        placeholder="Search loan or customer..."
+                        data-module-search="schedules"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Schedule ID</th>
+                            <th>Loan</th>
+                            <th>Customer</th>
+                            <th>Installment</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="schedulesBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No repayment schedules loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="section-deposits" class="section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Deposits</h2>
+            <p>Customer deposit transactions.</p>
+        </div>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('deposits')"
+        >
+            🔄 Refresh
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <input
+                        type="search"
+                        placeholder="Search deposit, customer or reference..."
+                        data-module-search="deposits"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+                <button
+                    class="small-btn primary"
+                    onclick="openCreateModal('deposits')"
+                >
+                    + Record Deposit
+                </button>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Deposit ID</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Reference</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="depositsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No deposit records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CUSTOMER DEPOSIT REQUESTS
+===================================================== -->
+
+<section id="section-depositRequests" class="section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Deposit Requests</h2>
+
+            <p>
+                Customer requests waiting for payment processing.
+            </p>
+        </div>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('depositRequests')"
+        >
+            🔄 Refresh
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <input
+                        type="search"
+                        placeholder="Search customer, method or reference..."
+                        data-module-search="depositRequests"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Reference</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="depositRequestsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No deposit requests loaded.
+                            </td>
+                        </tr>
+
                     </tbody>
 
                 </table>
@@ -3955,30 +4127,58 @@ textarea:focus{
 
 
 <section id="section-withdrawals" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Withdrawals</h2>
             <p>Manage customer withdrawal requests.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('withdrawals')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('withdrawals')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search withdrawal or customer..." data-module-search="withdrawals">
+
+                    <input
+                        type="search"
+                        placeholder="Search withdrawal or customer..."
+                        data-module-search="withdrawals"
+                        autocomplete="off"
+                    >
+
                 </div>
+
                 <select data-module-status="withdrawals">
+
                     <option value="">All statuses</option>
                     <option value="PENDING">Pending</option>
                     <option value="APPROVED">Approved</option>
                     <option value="REJECTED">Rejected</option>
                     <option value="COMPLETED">Completed</option>
+
                 </select>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Withdrawal ID</th>
                             <th>Customer</th>
@@ -3989,33 +4189,73 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="withdrawalsBody"></tbody>
+
+                    <tbody id="withdrawalsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No withdrawal records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-transfers" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Transfers</h2>
             <p>Customer-to-customer and account transfer records.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('transfers')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('transfers')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search transfer or reference..." data-module-search="transfers">
+
+                    <input
+                        type="search"
+                        placeholder="Search transfer or reference..."
+                        data-module-search="transfers"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Transfer ID</th>
                             <th>Sender</th>
@@ -4026,33 +4266,73 @@ textarea:focus{
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="transfersBody"></tbody>
+
+                    <tbody id="transfersBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No transfer records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-savings" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Savings</h2>
             <p>Customer savings accounts and balances.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('savings')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('savings')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search savings account or customer..." data-module-search="savings">
+
+                    <input
+                        type="search"
+                        placeholder="Search savings account or customer..."
+                        data-module-search="savings"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Account ID</th>
                             <th>Customer</th>
@@ -4063,33 +4343,73 @@ textarea:focus{
                             <th>Created</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="savingsBody"></tbody>
+
+                    <tbody id="savingsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No savings records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-statements" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Statements</h2>
             <p>Customer financial statements.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('statements')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('statements')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search statement or customer..." data-module-search="statements">
+
+                    <input
+                        type="search"
+                        placeholder="Search statement or customer..."
+                        data-module-search="statements"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Statement ID</th>
                             <th>Customer</th>
@@ -4100,33 +4420,73 @@ textarea:focus{
                             <th>Closing</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="statementsBody"></tbody>
+
+                    <tbody id="statementsBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No statements loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <section id="section-fees" class="section">
+
     <div class="section-header">
+
         <div>
             <h2>Fees</h2>
             <p>Manage financial service fees and charges.</p>
         </div>
-        <button class="small-btn" onclick="loadModule('fees')">🔄 Refresh</button>
+
+        <button
+            class="small-btn btn-primary"
+            onclick="loadModule('fees')"
+        >
+            🔄 Refresh
+        </button>
+
     </div>
+
     <div class="card">
+
         <div class="card-body">
+
             <div class="toolbar">
+
                 <div class="search-box">
-                    <input placeholder="Search fee..." data-module-search="fees">
+
+                    <input
+                        type="search"
+                        placeholder="Search fee..."
+                        data-module-search="fees"
+                        autocomplete="off"
+                    >
+
                 </div>
+
             </div>
+
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Fee ID</th>
                             <th>Name</th>
@@ -4137,12 +4497,27 @@ textarea:focus{
                             <th>Created</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
-                    <tbody id="feesBody"></tbody>
+
+                    <tbody id="feesBody">
+
+                        <tr>
+                            <td colspan="8" class="empty">
+                                No fee records loaded.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
