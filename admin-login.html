@@ -6709,10 +6709,10 @@ textarea:focus{
         </div>
 
         <button
-    class="small-btn btn-primary"
-    onclick="loadStatistics()"
->
-    🔄 Refresh
+            class="small-btn btn-primary"
+            onclick="loadStatistics()"
+        >
+            🔄 Refresh
         </button>
 
     </div>
@@ -6727,6 +6727,7 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
+
                 <span class="stat-label">
                     TOTAL PORTFOLIO
                 </span>
@@ -6734,6 +6735,7 @@ textarea:focus{
                 <div class="stat-icon">
                     📊
                 </div>
+
             </div>
 
             <div
@@ -6749,6 +6751,7 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
+
                 <span class="stat-label">
                     TOTAL REPAYMENTS
                 </span>
@@ -6756,6 +6759,7 @@ textarea:focus{
                 <div class="stat-icon">
                     💵
                 </div>
+
             </div>
 
             <div
@@ -6771,6 +6775,7 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
+
                 <span class="stat-label">
                     TOTAL DEPOSITS
                 </span>
@@ -6778,6 +6783,7 @@ textarea:focus{
                 <div class="stat-icon">
                     💰
                 </div>
+
             </div>
 
             <div
@@ -6793,6 +6799,7 @@ textarea:focus{
         <div class="stat-card">
 
             <div class="stat-top">
+
                 <span class="stat-label">
                     TOTAL SAVINGS
                 </span>
@@ -6800,6 +6807,7 @@ textarea:focus{
                 <div class="stat-icon">
                     🏦
                 </div>
+
             </div>
 
             <div
@@ -6848,9 +6856,7 @@ textarea:focus{
                 <div class="chart-bars">
 
 
-                    <!-- ==================================================
-                         TOTAL PORTFOLIO
-                    =================================================== -->
+                    <!-- TOTAL PORTFOLIO -->
 
                     <div class="chart-column">
 
@@ -6878,9 +6884,7 @@ textarea:focus{
                     </div>
 
 
-                    <!-- ==================================================
-                         TOTAL REPAYMENTS
-                    =================================================== -->
+                    <!-- TOTAL REPAYMENTS -->
 
                     <div class="chart-column">
 
@@ -6908,9 +6912,7 @@ textarea:focus{
                     </div>
 
 
-                    <!-- ==================================================
-                         TOTAL DEPOSITS
-                    =================================================== -->
+                    <!-- TOTAL DEPOSITS -->
 
                     <div class="chart-column">
 
@@ -6938,9 +6940,7 @@ textarea:focus{
                     </div>
 
 
-                    <!-- ==================================================
-                         TOTAL SAVINGS
-                    =================================================== -->
+                    <!-- TOTAL SAVINGS -->
 
                     <div class="chart-column">
 
@@ -6991,11 +6991,9 @@ textarea:focus{
 
         </div>
 
-
         <div class="card-body">
 
             <div class="profile-grid">
-
 
                 <div class="detail-item">
 
@@ -7003,9 +7001,7 @@ textarea:focus{
                         Total Customers
                     </small>
 
-                    <strong
-                        id="statisticsCustomers"
-                    >
+                    <strong id="statisticsCustomers">
                         0
                     </strong>
 
@@ -7018,9 +7014,7 @@ textarea:focus{
                         Total Applications
                     </small>
 
-                    <strong
-                        id="statisticsApplications"
-                    >
+                    <strong id="statisticsApplications">
                         0
                     </strong>
 
@@ -7033,9 +7027,7 @@ textarea:focus{
                         Pending Applications
                     </small>
 
-                    <strong
-                        id="statisticsPending"
-                    >
+                    <strong id="statisticsPending">
                         0
                     </strong>
 
@@ -7048,9 +7040,7 @@ textarea:focus{
                         Approved Applications
                     </small>
 
-                    <strong
-                        id="statisticsApproved"
-                    >
+                    <strong id="statisticsApproved">
                         0
                     </strong>
 
@@ -7063,9 +7053,7 @@ textarea:focus{
                         Rejected Applications
                     </small>
 
-                    <strong
-                        id="statisticsRejected"
-                    >
+                    <strong id="statisticsRejected">
                         0
                     </strong>
 
@@ -7078,9 +7066,7 @@ textarea:focus{
                         Active Loans
                     </small>
 
-                    <strong
-                        id="statisticsActiveLoans"
-                    >
+                    <strong id="statisticsActiveLoans">
                         0
                     </strong>
 
@@ -7093,14 +7079,11 @@ textarea:focus{
                         Total Loan Disbursed
                     </small>
 
-                    <strong
-                        id="summaryLoanDisbursed"
-                    >
+                    <strong id="summaryLoanDisbursed">
                         MWK 0.00
                     </strong>
 
                 </div>
-
 
             </div>
 
@@ -7108,9 +7091,12 @@ textarea:focus{
 
     </div>
 
-
 </section>
 
+
+<!-- ========================================================
+     REPORTS CENTER
+========================================================= -->
 
 <section id="section-reports" class="section">
 
@@ -7122,6 +7108,7 @@ textarea:focus{
         </div>
 
     </div>
+
 
     <div class="module-grid">
 
@@ -7208,6 +7195,7 @@ textarea:focus{
 
 </section>
 
+
 <!-- ========================================================
      LOAN APPLICATIONS ANALYTICS
 ========================================================= -->
@@ -7218,12 +7206,19 @@ textarea:focus{
 
         <div>
             <h2>Loan Applications Analytics</h2>
-            <p>Overview of loan application activity and current loan status.</p>
+            <p>
+                Overview of loan application activity and current loan status.
+            </p>
         </div>
+
+        <!-- IMPORTANT:
+             Uses loadStatistics() so only one
+             statistics request is made.
+        -->
 
         <button
             class="small-btn btn-primary"
-            onclick="loadLoanAnalytics()"
+            onclick="loadStatistics()"
         >
             🔄 Refresh
         </button>
@@ -7236,6 +7231,7 @@ textarea:focus{
     ===================================================== -->
 
     <div class="stats-grid">
+
 
         <!-- PENDING -->
 
@@ -7475,7 +7471,7 @@ textarea:focus{
                 </div>
 
 
-                <!-- ACTIVE -->
+                <!-- ACTIVE LOANS -->
 
                 <div class="analytics-column">
 
@@ -7524,6 +7520,7 @@ textarea:focus{
 
         </div>
 
+
         <div class="card-body">
 
             <div class="table-wrap">
@@ -7540,14 +7537,20 @@ textarea:focus{
 
                     </thead>
 
+
                     <tbody>
+
+
+                        <!-- PENDING -->
 
                         <tr>
 
                             <td>
+
                                 <span class="status-pending">
                                     Pending
                                 </span>
+
                             </td>
 
                             <td id="analyticsTablePending">
@@ -7561,12 +7564,16 @@ textarea:focus{
                         </tr>
 
 
+                        <!-- APPROVED -->
+
                         <tr>
 
                             <td>
+
                                 <span class="status-active">
                                     Approved
                                 </span>
+
                             </td>
 
                             <td id="analyticsTableApproved">
@@ -7580,12 +7587,16 @@ textarea:focus{
                         </tr>
 
 
+                        <!-- REJECTED -->
+
                         <tr>
 
                             <td>
+
                                 <span class="status-blocked">
                                     Rejected
                                 </span>
+
                             </td>
 
                             <td id="analyticsTableRejected">
@@ -7598,6 +7609,7 @@ textarea:focus{
 
                         </tr>
 
+
                     </tbody>
 
                 </table>
@@ -7609,7 +7621,6 @@ textarea:focus{
     </div>
 
 </section>
-
 
 <!-- ========================================================
      SECURITY
