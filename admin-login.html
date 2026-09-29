@@ -10353,6 +10353,423 @@ async function loadStatistics() {
         });
 
 
+          /* =================================================
+   12-MONTH FINANCIAL PERFORMANCE
+================================================= */
+
+const monthlyAnalytics =
+    Array.isArray(stats.monthlyAnalytics)
+        ? stats.monthlyAnalytics
+        : [];
+
+
+/* =================================================
+   MONTHLY CHART CONTAINER
+================================================= */
+
+const monthlyChart =
+    document.getElementById(
+        "monthlyAnalyticsChart"
+    );
+
+
+if (monthlyChart) {
+
+    monthlyChart.innerHTML = "";
+
+
+    /* =============================================
+       FIND MAXIMUM VALUE
+    ============================================= */
+
+    let monthlyMaximum = 1;
+
+
+    monthlyAnalytics.forEach(
+        month => {
+
+            const applications =
+                Number(
+                    month.applications ||
+                    month.applicationCount ||
+                    0
+                );
+
+
+            const disbursements =
+                Number(
+                    month.disbursements ||
+                    month.loanDisbursements ||
+                    month.loanDisbursed ||
+                    0
+                );
+
+
+            const repayments =
+                Number(
+                    month.repayments ||
+                    month.repaymentAmount ||
+                    0
+                );
+
+
+            const deposits =
+                Number(
+                    month.deposits ||
+                    month.depositAmount ||
+                    0
+                );
+
+
+            const withdrawals =
+                Number(
+                    month.withdrawals ||
+                    month.withdrawalAmount ||
+                    0
+                );
+
+
+            monthlyMaximum =
+                Math.max(
+                    monthlyMaximum,
+                    applications,
+                    disbursements,
+                    repayments,
+                    deposits,
+                    withdrawals
+                );
+
+        }
+    );
+
+
+    /* =============================================
+       CREATE MONTHLY COLUMNS
+    ============================================= */
+
+    monthlyAnalytics.forEach(
+        month => {
+
+            const applications =
+                Number(
+                    month.applications ||
+                    month.applicationCount ||
+                    0
+                );
+
+
+            const disbursements =
+                Number(
+                    month.disbursements ||
+                    month.loanDisbursements ||
+                    month.loanDisbursed ||
+                    0
+                );
+
+
+            const repayments =
+                Number(
+                    month.repayments ||
+                    month.repaymentAmount ||
+                    0
+                );
+
+
+            const deposits =
+                Number(
+                    month.deposits ||
+                    month.depositAmount ||
+                    0
+                );
+
+
+            const withdrawals =
+                Number(
+                    month.withdrawals ||
+                    month.withdrawalAmount ||
+                    0
+                );
+
+
+            /* =====================================
+               MONTH NAME
+            ===================================== */
+
+            const monthName =
+                month.month ||
+                month.label ||
+                month.name ||
+                "";
+
+
+            /* =====================================
+               CREATE COLUMN
+            ===================================== */
+
+            const column =
+                document.createElement(
+                    "div"
+                );
+
+            column.className =
+                "monthly-column";
+
+
+            /* =====================================
+               BAR GROUP
+            ===================================== */
+
+            const barGroup =
+                document.createElement(
+                    "div"
+                );
+
+            barGroup.className =
+                "monthly-bar-group";
+
+
+            /* =====================================
+               BAR CREATOR
+            ===================================== */
+
+            const createBar =
+                (
+                    value,
+                    className,
+                    title
+                ) => {
+
+                    const bar =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    bar.className =
+                        `monthly-bar ${className}`;
+
+
+                    const height =
+                        value > 0
+                            ? Math.max(
+                                2,
+                                (
+                                    value /
+                                    monthlyMaximum
+                                ) * 100
+                            )
+                            : 0;
+
+
+                    bar.style.height =
+                        `${height}%`;
+
+
+                    bar.title =
+                        `${title}: ${formatMoney(value)}`;
+
+
+                    return bar;
+
+                };
+
+
+            /* =====================================
+               CREATE FIVE FINANCIAL BARS
+            ===================================== */
+
+            barGroup.appendChild(
+                createBar(
+                    applications,
+                    "monthly-bar-applications",
+                    "Applications"
+                )
+            );
+
+
+            barGroup.appendChild(
+                createBar(
+                    disbursements,
+                    "monthly-bar-disbursements",
+                    "Disbursements"
+                )
+            );
+
+
+            barGroup.appendChild(
+                createBar(
+                    repayments,
+                    "monthly-bar-repayments",
+                    "Repayments"
+                )
+            );
+
+
+            barGroup.appendChild(
+                createBar(
+                    deposits,
+                    "monthly-bar-deposits",
+                    "Deposits"
+                )
+            );
+
+
+            barGroup.appendChild(
+                createBar(
+                    withdrawals,
+                    "monthly-bar-withdrawals",
+                    "Withdrawals"
+                )
+            );
+
+
+            /* =====================================
+               MONTH LABEL
+            ===================================== */
+
+            const label =
+                document.createElement(
+                    "div"
+                );
+
+
+            label.className =
+                "monthly-label";
+
+
+            label.textContent =
+                monthName;
+
+
+            /* =====================================
+               ADD TO COLUMN
+            ===================================== */
+
+            column.appendChild(
+                barGroup
+            );
+
+
+            column.appendChild(
+                label
+            );
+
+
+            monthlyChart.appendChild(
+                column
+            );
+
+        }
+    );
+
+
+    /* =============================================
+       LEGEND
+    ============================================= */
+
+    const legend =
+        document.createElement(
+            "div"
+        );
+
+
+    legend.className =
+        "monthly-legend";
+
+
+    const legendItems = [
+
+        {
+            label: "Applications",
+            className:
+                "monthly-bar-applications"
+        },
+
+        {
+            label: "Disbursements",
+            className:
+                "monthly-bar-disbursements"
+        },
+
+        {
+            label: "Repayments",
+            className:
+                "monthly-bar-repayments"
+        },
+
+        {
+            label: "Deposits",
+            className:
+                "monthly-bar-deposits"
+        },
+
+        {
+            label: "Withdrawals",
+            className:
+                "monthly-bar-withdrawals"
+        }
+
+    ];
+
+
+    legendItems.forEach(
+        item => {
+
+            const legendItem =
+                document.createElement(
+                    "div"
+                );
+
+
+            legendItem.className =
+                "monthly-legend-item";
+
+
+            const dot =
+                document.createElement(
+                    "span"
+                );
+
+
+            dot.className =
+                `monthly-legend-dot ${item.className}`;
+
+
+            const text =
+                document.createElement(
+                    "span"
+                );
+
+
+            text.textContent =
+                item.label;
+
+
+            legendItem.appendChild(
+                dot
+            );
+
+
+            legendItem.appendChild(
+                text
+            );
+
+
+            legend.appendChild(
+                legendItem
+            );
+
+        }
+    );
+
+
+    monthlyChart.parentElement.appendChild(
+        legend
+    );
+
+}
+
+
         /* =================================================
            FINANCIAL SUMMARY
         ================================================= */
