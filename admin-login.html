@@ -4356,6 +4356,426 @@ textarea:focus{
     }
 }
 
+      /* =========================================================
+   ADMIN DASHBOARD
+   FINANCIAL INTELLIGENCE
+   PREMIUM NAVY + GOLD STYLE
+========================================================= */
+
+.financial-intelligence-card{
+    margin-top:20px;
+    overflow:hidden;
+    border:1px solid rgba(7,17,31,.08);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.financial-intelligence-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07111f 0%,
+            #102a46 100%
+        );
+
+    border:1px solid rgba(250,204,21,.18);
+}
+
+.financial-intelligence-header::after{
+    content:"";
+
+    position:absolute;
+    right:-50px;
+    top:-55px;
+
+    width:140px;
+    height:140px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(250,204,21,.14),
+            rgba(250,204,21,0)
+        );
+
+    pointer-events:none;
+}
+
+.financial-intelligence-header h3{
+    position:relative;
+    z-index:1;
+
+    color:#fff;
+
+    font-size:17px;
+    font-weight:900;
+}
+
+.financial-intelligence-header p{
+    position:relative;
+    z-index:1;
+
+    margin-top:5px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   INTELLIGENCE GRID
+========================================================= */
+
+.financial-intelligence-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap:16px;
+
+    margin-bottom:22px;
+}
+
+
+/* =========================================================
+   INTELLIGENCE CARDS
+========================================================= */
+
+.financial-intelligence-item{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+
+    min-height:105px;
+
+    padding:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f8fafc 100%
+        );
+
+    border:1px solid #e2e8f0;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 7px 22px
+        rgba(7,17,31,.07);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+.financial-intelligence-item:hover{
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(250,204,21,.35);
+
+    box-shadow:
+        0 12px 28px
+        rgba(7,17,31,.11);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.financial-intelligence-icon{
+    width:48px;
+    height:48px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(250,204,21,.18),
+            rgba(250,204,21,.05)
+        );
+
+    border:1px solid
+        rgba(250,204,21,.25);
+
+    font-size:22px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(250,204,21,.10);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.financial-intelligence-content{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    line-height:1.2;
+}
+
+.financial-intelligence-content span{
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+}
+
+.financial-intelligence-content strong{
+    margin-top:6px;
+
+    color:#07111f;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.financial-intelligence-content small{
+    margin-top:5px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    line-height:1.3;
+}
+
+
+/* =========================================================
+   FINANCIAL POSITION
+========================================================= */
+
+.financial-position{
+    padding:20px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07111f 0%,
+            #102a46 100%
+        );
+
+    border:1px solid
+        rgba(250,204,21,.18);
+
+    box-shadow:
+        0 8px 24px
+        rgba(7,17,31,.12);
+}
+
+
+/* =========================================================
+   POSITION HEADER
+========================================================= */
+
+.financial-position-title{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:14px;
+}
+
+.financial-position-title > div:first-child{
+    display:flex;
+
+    flex-direction:column;
+}
+
+.financial-position-title strong{
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:900;
+}
+
+.financial-position-title span{
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+}
+
+.financial-position-value{
+    color:#facc15;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 3px 12px
+        rgba(250,204,21,.20);
+}
+
+
+/* =========================================================
+   POSITION PROGRESS
+========================================================= */
+
+.financial-position-track{
+    width:100%;
+
+    height:10px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:1px solid
+        rgba(255,255,255,.08);
+}
+
+.financial-position-progress{
+    height:100%;
+
+    width:0%;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4a900,
+            #facc15,
+            #fde047
+        );
+
+    box-shadow:
+        0 0 14px
+        rgba(250,204,21,.30);
+
+    transition:
+        width .8s ease;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width:900px){
+
+    .financial-intelligence-grid{
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width:600px){
+
+    .financial-intelligence-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .financial-intelligence-item{
+        min-height:92px;
+        padding:15px;
+    }
+
+    .financial-intelligence-icon{
+        width:44px;
+        height:44px;
+
+        font-size:20px;
+
+        border-radius:12px;
+    }
+
+    .financial-intelligence-content strong{
+        font-size:15px;
+    }
+
+    .financial-intelligence-header{
+        align-items:flex-start;
+    }
+
+    .financial-intelligence-header p{
+        font-size:11px;
+    }
+
+    .financial-position{
+        padding:16px;
+    }
+
+    .financial-position-title{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .financial-position-value{
+        font-size:18px;
+    }
+
+  }
+
 </style>
 </head>
 
@@ -7192,6 +7612,242 @@ textarea:focus{
             <div class="monthly-bars" id="monthlyAnalyticsChart">
 
                 <!-- JavaScript will create the bars here -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+      <!-- ========================================================
+     FINANCIAL INTELLIGENCE
+========================================================= -->
+
+<div class="card financial-intelligence-card">
+
+    <div class="card-header financial-intelligence-header">
+
+        <div>
+            <h3>Financial Intelligence</h3>
+
+            <p>
+                Real-time overview of portfolio movement,
+                collections and financial position.
+            </p>
+        </div>
+
+        <div class="chart-badge">
+            LIVE
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="financial-intelligence-grid">
+
+            <!-- TOTAL DISBURSED -->
+
+            <div class="financial-intelligence-item">
+
+                <div class="financial-intelligence-icon">
+                    💳
+                </div>
+
+                <div class="financial-intelligence-content">
+
+                    <span>
+                        TOTAL DISBURSED
+                    </span>
+
+                    <strong id="intelligenceDisbursed">
+                        MWK 0.00
+                    </strong>
+
+                    <small>
+                        Loans currently disbursed
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL COLLECTED -->
+
+            <div class="financial-intelligence-item">
+
+                <div class="financial-intelligence-icon">
+                    💵
+                </div>
+
+                <div class="financial-intelligence-content">
+
+                    <span>
+                        TOTAL COLLECTED
+                    </span>
+
+                    <strong id="intelligenceCollected">
+                        MWK 0.00
+                    </strong>
+
+                    <small>
+                        Completed repayments
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- OUTSTANDING -->
+
+            <div class="financial-intelligence-item">
+
+                <div class="financial-intelligence-icon">
+                    📌
+                </div>
+
+                <div class="financial-intelligence-content">
+
+                    <span>
+                        OUTSTANDING
+                    </span>
+
+                    <strong id="intelligenceOutstanding">
+                        MWK 0.00
+                    </strong>
+
+                    <small>
+                        Remaining loan balance
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- INTEREST -->
+
+            <div class="financial-intelligence-item">
+
+                <div class="financial-intelligence-icon">
+                    📈
+                </div>
+
+                <div class="financial-intelligence-content">
+
+                    <span>
+                        INTEREST EARNED
+                    </span>
+
+                    <strong id="intelligenceInterest">
+                        MWK 0.00
+                    </strong>
+
+                    <small>
+                        Recorded interest
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEPOSITS -->
+
+            <div class="financial-intelligence-item">
+
+                <div class="financial-intelligence-icon">
+                    💰
+                </div>
+
+                <div class="financial-intelligence-content">
+
+                    <span>
+                        DEPOSITS
+                    </span>
+
+                    <strong id="intelligenceDeposits">
+                        MWK 0.00
+                    </strong>
+
+                    <small>
+                        Completed deposits
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- WITHDRAWALS -->
+
+            <div class="financial-intelligence-item">
+
+                <div class="financial-intelligence-icon">
+                    💸
+                </div>
+
+                <div class="financial-intelligence-content">
+
+                    <span>
+                        WITHDRAWALS
+                    </span>
+
+                    <strong id="intelligenceWithdrawals">
+                        MWK 0.00
+                    </strong>
+
+                    <small>
+                        Completed withdrawals
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             FINANCIAL POSITION
+        ========================================== -->
+
+        <div class="financial-position">
+
+            <div class="financial-position-title">
+
+                <div>
+                    <strong>
+                        Financial Position
+                    </strong>
+
+                    <span>
+                        Current calculated position
+                    </span>
+                </div>
+
+                <div
+                    class="financial-position-value"
+                    id="intelligencePosition"
+                >
+                    MWK 0.00
+                </div>
+
+            </div>
+
+
+            <div class="financial-position-track">
+
+                <div
+                    class="financial-position-progress"
+                    id="intelligencePositionProgress"
+                    style="width:0%;"
+                ></div>
 
             </div>
 
@@ -10122,6 +10778,111 @@ async function loadStatistics() {
                     "pendingWithdrawals"
                 )
             ) || 0;
+
+      /* =================================================
+   FINANCIAL INTELLIGENCE
+================================================= */
+
+setText(
+    "intelligenceDisbursed",
+    formatMoney(loanDisbursed)
+);
+
+
+setText(
+    "intelligenceCollected",
+    formatMoney(repayments)
+);
+
+
+setText(
+    "intelligenceOutstanding",
+    formatMoney(outstandingLoans)
+);
+
+
+setText(
+    "intelligenceInterest",
+    formatMoney(interestEarned)
+);
+
+
+setText(
+    "intelligenceDeposits",
+    formatMoney(deposits)
+);
+
+
+setText(
+    "intelligenceWithdrawals",
+    formatMoney(withdrawalAmount)
+);
+
+
+/* =================================================
+   FINANCIAL POSITION
+================================================= */
+
+const financialPosition =
+    (
+        loanDisbursed +
+        deposits +
+        repayments +
+        interestEarned
+    ) -
+    (
+        withdrawalAmount +
+        outstandingLoans
+    );
+
+
+setText(
+    "intelligencePosition",
+    formatMoney(
+        financialPosition
+    )
+);
+
+
+/* =================================================
+   FINANCIAL POSITION PROGRESS
+================================================= */
+
+const positionBase =
+    Math.max(
+        loanDisbursed +
+        deposits +
+        repayments +
+        interestEarned,
+        1
+    );
+
+
+const positionPercentage =
+    Math.min(
+        Math.max(
+            (
+                financialPosition /
+                positionBase
+            ) * 100,
+            0
+        ),
+        100
+    );
+
+
+const positionProgress =
+    document.getElementById(
+        "intelligencePositionProgress"
+    );
+
+
+if (positionProgress) {
+
+    positionProgress.style.width =
+        `${positionPercentage}%`;
+
+}
 
 
         /* =================================================
