@@ -6710,7 +6710,7 @@ textarea:focus{
 
         <button
     class="small-btn btn-primary"
-    onclick="loadStatistics(); loadLoanAnalytics()"
+    onclick="loadStatistics()"
 >
     🔄 Refresh
         </button>
@@ -10187,11 +10187,13 @@ chartItems.forEach(item => {
 
  }
 
-       /* =========================================================
+  /* =========================================================
     LOAN APPLICATIONS ANALYTICS
 ========================================================= */
 
 async function loadLoanAnalytics() {
+
+    console.log("LOAN ANALYTICS FUNCTION STARTED");
 
     const refreshButton =
         document.querySelector(
