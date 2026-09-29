@@ -2733,6 +2733,187 @@ textarea:focus-visible{
 
  }
 
+ /* =========================================================
+   12-MONTH FINANCIAL PERFORMANCE
+========================================================= */
+
+.statistics-monthly-card {
+    margin-top: 24px;
+}
+
+.statistics-monthly-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.statistics-monthly-header h3 {
+    margin: 0;
+}
+
+.statistics-monthly-header p {
+    margin: 6px 0 0;
+    color: #8fa3bd;
+    font-size: 13px;
+}
+
+.monthly-chart {
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 4px 8px;
+}
+
+.monthly-bars {
+    min-width: 720px;
+    height: 300px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    padding: 20px 10px 0;
+}
+
+.monthly-column {
+    flex: 1;
+
+    min-width: 50px;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    position: relative;
+}
+
+.monthly-bar-group {
+    width: 100%;
+
+    height: 230px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    gap: 4px;
+}
+
+.monthly-bar {
+    width: 12px;
+
+    min-height: 2px;
+
+    border-radius: 6px 6px 2px 2px;
+
+    transition:
+        height 0.5s ease,
+        transform 0.2s ease;
+
+    cursor: pointer;
+}
+
+.monthly-bar:hover {
+    transform: scaleY(1.04);
+}
+
+.monthly-bar-applications {
+    background: #60a5fa;
+}
+
+.monthly-bar-disbursements {
+    background: #facc15;
+}
+
+.monthly-bar-repayments {
+    background: #22c55e;
+}
+
+.monthly-bar-deposits {
+    background: #38bdf8;
+}
+
+.monthly-bar-withdrawals {
+    background: #f87171;
+}
+
+.monthly-label {
+    margin-top: 10px;
+
+    font-size: 11px;
+
+    color: #9fb0c5;
+
+    white-space: nowrap;
+}
+
+.monthly-value {
+    position: absolute;
+
+    top: -2px;
+
+    font-size: 10px;
+
+    color: #dbe7f5;
+
+    white-space: nowrap;
+}
+
+.monthly-legend {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 18px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.monthly-legend-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 12px;
+
+    color: #9fb0c5;
+}
+
+.monthly-legend-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+}
+
+@media (max-width: 700px) {
+
+    .statistics-monthly-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .monthly-bars {
+        min-width: 680px;
+    }
+
+  }
+      
 /* =========================================================
    DASHBOARD GRID
 ========================================================= */
@@ -6981,6 +7162,44 @@ textarea:focus{
         </div>
 
     </div>
+
+      <!-- ========================================================
+     12-MONTH FINANCIAL PERFORMANCE
+========================================================= -->
+
+<div class="card statistics-monthly-card">
+
+    <div class="card-header statistics-monthly-header">
+
+        <div>
+            <h3>12-Month Financial Performance</h3>
+
+            <p>
+                Monthly financial activity from real records.
+            </p>
+        </div>
+
+        <div class="chart-badge">
+            12 MONTHS
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="monthly-chart">
+
+            <div class="monthly-bars" id="monthlyAnalyticsChart">
+
+                <!-- JavaScript will create the bars here -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
     <!-- ====================================================
