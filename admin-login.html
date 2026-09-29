@@ -9627,18 +9627,13 @@ async function loadAllData() {
 
 
     await Promise.allSettled([
-
-        loadStatistics(),
-
-        loadApplications(),
-
-        loadCustomers(),
-
-        loadActiveLoans(),
-
-        loadAdminKYC()
-
-    ]);
+    loadStatistics(),
+    loadLoanAnalytics(),
+    loadApplications(),
+    loadCustomers(),
+    loadActiveLoans(),
+    loadAdminKYC()
+]);
 
 }
 
@@ -9993,7 +9988,7 @@ async function loadStatistics() {
         );
 
 
-        /* =================================================
+ /* =================================================
    FINANCIAL OVERVIEW CHART
 ================================================= */
 
@@ -10173,6 +10168,336 @@ chartItems.forEach(item => {
 
         console.error(
             "Statistics error:",
+            error
+        );
+
+
+    } finally {
+
+        if (refreshButton) {
+
+            refreshButton.disabled = false;
+
+            refreshButton.innerHTML =
+                "🔄 Refresh";
+
+        }
+
+    }
+
+ }
+
+       /* =========================================================
+    LOAN APPLICATIONS ANALYTICS
+========================================================= */
+
+async function loadLoanAnalytics() {
+
+    const refreshButton =
+        document.querySelector(
+            'button[onclick="loadLoanAnalytics()"]'
+        );
+
+
+    if (refreshButton) {
+
+        refreshButton.disabled = true;
+
+        refreshButton.innerHTML =
+            `<span class="spinner"></span> Refreshing...`;
+
+    }
+
+
+    try {
+
+        const result =
+            await apiRequest(
+                "/admin/statistics"
+            );
+
+
+        const stats =
+            result?.statistics ||
+            result?.data ||
+            result ||
+            {};
+
+
+        /* =====================================================
+           GET APPLICATION STATISTICS
+        ===================================================== */
+
+        const pending =
+            Number(
+                getValue(
+                    stats,
+                    "pending",
+                    "pendingApplications",
+                    "pending_count"
+                )
+            ) || 0;
+
+
+        const approved =
+            Number(
+                getValue(
+                    stats,
+                    "approved",
+                    "approvedApplications",
+                    "approved_count"
+                )
+            ) || 0;
+
+
+        const rejected =
+            Number(
+                getValue(
+                    stats,
+                    "rejected",
+                    "rejectedApplications",
+                    "rejected_count"
+                )
+            ) || 0;
+
+
+        const activeLoans =
+            Number(
+                getValue(
+                    stats,
+                    "activeLoans",
+                    "active_loans",
+                    "activeLoanCount"
+                )
+            ) || 0;
+
+
+        /* =====================================================
+           UPDATE STAT CARDS
+        ===================================================== */
+
+        setText(
+            "analyticsPending",
+            pending
+        );
+
+
+        setText(
+            "analyticsApproved",
+            approved
+        );
+
+
+        setText(
+            "analyticsRejected",
+            rejected
+        );
+
+
+        setText(
+            "analyticsActiveLoans",
+            activeLoans
+        );
+
+
+        /* =====================================================
+           FIND LARGEST VALUE FOR GRAPH
+        ===================================================== */
+
+        const maximum =
+            Math.max(
+                pending,
+                approved,
+                rejected,
+                activeLoans,
+                1
+            );
+
+
+        /* =====================================================
+           CALCULATE BAR HEIGHTS
+        ===================================================== */
+
+        const pendingHeight =
+            (pending / maximum) * 100;
+
+
+        const approvedHeight =
+            (approved / maximum) * 100;
+
+
+        const rejectedHeight =
+            (rejected / maximum) * 100;
+
+
+        const activeHeight =
+            (activeLoans / maximum) * 100;
+
+
+        /* =====================================================
+           UPDATE GRAPH VALUES
+        ===================================================== */
+
+        setText(
+            "analyticsPendingValue",
+            pending
+        );
+
+
+        setText(
+            "analyticsApprovedValue",
+            approved
+        );
+
+
+        setText(
+            "analyticsRejectedValue",
+            rejected
+        );
+
+
+        setText(
+            "analyticsActiveLoansValue",
+            activeLoans
+        );
+
+
+        /* =====================================================
+           UPDATE GRAPH BARS
+        ===================================================== */
+
+        const pendingBar =
+            document.getElementById(
+                "analyticsPendingBar"
+            );
+
+
+        const approvedBar =
+            document.getElementById(
+                "analyticsApprovedBar"
+            );
+
+
+        const rejectedBar =
+            document.getElementById(
+                "analyticsRejectedBar"
+            );
+
+
+        const activeBar =
+            document.getElementById(
+                "analyticsActiveLoansBar"
+            );
+
+
+        if (pendingBar) {
+
+            pendingBar.style.height =
+                pendingHeight + "%";
+
+        }
+
+
+        if (approvedBar) {
+
+            approvedBar.style.height =
+                approvedHeight + "%";
+
+        }
+
+
+        if (rejectedBar) {
+
+            rejectedBar.style.height =
+                rejectedHeight + "%";
+
+        }
+
+
+        if (activeBar) {
+
+            activeBar.style.height =
+                activeHeight + "%";
+
+        }
+
+
+        /* =====================================================
+           TOTAL APPLICATIONS
+        ===================================================== */
+
+        const totalApplications =
+            pending +
+            approved +
+            rejected;
+
+
+        /* =====================================================
+           CALCULATE PERCENTAGES
+        ===================================================== */
+
+        const pendingPercentage =
+            totalApplications > 0
+                ? (pending / totalApplications) * 100
+                : 0;
+
+
+        const approvedPercentage =
+            totalApplications > 0
+                ? (approved / totalApplications) * 100
+                : 0;
+
+
+        const rejectedPercentage =
+            totalApplications > 0
+                ? (rejected / totalApplications) * 100
+                : 0;
+
+
+        /* =====================================================
+           UPDATE SUMMARY TABLE
+        ===================================================== */
+
+        setText(
+            "analyticsTablePending",
+            pending
+        );
+
+
+        setText(
+            "analyticsTableApproved",
+            approved
+        );
+
+
+        setText(
+            "analyticsTableRejected",
+            rejected
+        );
+
+
+        setText(
+            "analyticsPercentPending",
+            pendingPercentage.toFixed(1) + "%"
+        );
+
+
+        setText(
+            "analyticsPercentApproved",
+            approvedPercentage.toFixed(1) + "%"
+        );
+
+
+        setText(
+            "analyticsPercentRejected",
+            rejectedPercentage.toFixed(1) + "%"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Loan Analytics error:",
             error
         );
 
