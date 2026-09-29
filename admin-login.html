@@ -2277,7 +2277,7 @@ textarea:focus-visible{
 
 }
 
-      /* =========================================================
+ /* =========================================================
    LOAN APPLICATIONS ANALYTICS
    CUSTOMER DASHBOARD PREMIUM STYLE
 ========================================================= */
@@ -9620,22 +9620,19 @@ document
 async function loadAllData() {
 
     if (!adminToken) {
-
         return;
-
     }
 
-
     await Promise.allSettled([
-    loadStatistics(),
-    loadLoanAnalytics(),
-    loadApplications(),
-    loadCustomers(),
-    loadActiveLoans(),
-    loadAdminKYC()
-]);
+        loadStatistics(),
+        loadApplications(),
+        loadCustomers(),
+        loadActiveLoans(),
+        loadAdminKYC()
+    ]);
 
 }
+
 
 /* =========================================================
    STATISTICS
@@ -9643,23 +9640,27 @@ async function loadAllData() {
 
 async function loadStatistics() {
 
-    const refreshButton =
-        document.querySelector(
+    const refreshButtons =
+        document.querySelectorAll(
             'button[onclick="loadStatistics()"]'
         );
 
 
-    if (refreshButton) {
+    refreshButtons.forEach(button => {
 
-        refreshButton.disabled = true;
+        button.disabled = true;
 
-        refreshButton.innerHTML =
+        button.innerHTML =
             `<span class="spinner"></span> Refreshing...`;
 
-    }
+    });
 
 
     try {
+
+        /* =================================================
+           GET STATISTICS
+        ================================================= */
 
         const result =
             await apiRequest(
@@ -9674,180 +9675,222 @@ async function loadStatistics() {
             {};
 
 
-        /* -----------------------------------------
+        /* =================================================
            CORE STATISTICS
-        ----------------------------------------- */
+        ================================================= */
 
         const customers =
-            getValue(
-                stats,
-                "customers",
-                "totalCustomers",
-                "customer_count"
+            Number(
+                getValue(
+                    stats,
+                    "customers",
+                    "totalCustomers",
+                    "customer_count"
+                )
             ) || 0;
 
 
         const applications =
-            getValue(
-                stats,
-                "applications",
-                "totalApplications",
-                "application_count"
+            Number(
+                getValue(
+                    stats,
+                    "applications",
+                    "totalApplications",
+                    "application_count"
+                )
             ) || 0;
 
 
         const pending =
-            getValue(
-                stats,
-                "pending",
-                "pendingApplications",
-                "pending_count"
+            Number(
+                getValue(
+                    stats,
+                    "pending",
+                    "pendingApplications",
+                    "pending_count"
+                )
             ) || 0;
 
 
         const approved =
-            getValue(
-                stats,
-                "approved",
-                "approvedApplications",
-                "approvedLoans",
-                "approved_count"
+            Number(
+                getValue(
+                    stats,
+                    "approved",
+                    "approvedApplications",
+                    "approvedLoans",
+                    "approved_count"
+                )
             ) || 0;
 
 
         const rejected =
-            getValue(
-                stats,
-                "rejected",
-                "rejectedApplications",
-                "rejected_count"
+            Number(
+                getValue(
+                    stats,
+                    "rejected",
+                    "rejectedApplications",
+                    "rejected_count"
+                )
             ) || 0;
 
 
         const activeLoans =
-            getValue(
-                stats,
-                "activeLoans",
-                "active_loans",
-                "activeLoanCount"
+            Number(
+                getValue(
+                    stats,
+                    "activeLoans",
+                    "active_loans",
+                    "activeLoanCount"
+                )
             ) || 0;
 
 
-        /* -----------------------------------------
+        /* =================================================
            FINANCIAL STATISTICS
-        ----------------------------------------- */
+        ================================================= */
 
         const portfolio =
-            getValue(
-                stats,
-                "portfolio",
-                "totalPortfolio",
-                "loanPortfolio",
-                "totalLoanValue"
+            Number(
+                getValue(
+                    stats,
+                    "portfolio",
+                    "totalPortfolio",
+                    "loanPortfolio",
+                    "totalLoanValue"
+                )
             ) || 0;
 
 
         const repayments =
-            getValue(
-                stats,
-                "totalRepaymentAmount"
+            Number(
+                getValue(
+                    stats,
+                    "totalRepaymentAmount"
+                )
             ) || 0;
 
 
         const repaymentCount =
-            getValue(
-                stats,
-                "totalRepayments"
+            Number(
+                getValue(
+                    stats,
+                    "totalRepayments"
+                )
             ) || 0;
 
 
         const deposits =
-            getValue(
-                stats,
-                "totalDepositAmount"
+            Number(
+                getValue(
+                    stats,
+                    "totalDepositAmount"
+                )
             ) || 0;
 
 
         const depositCount =
-            getValue(
-                stats,
-                "totalDeposits"
+            Number(
+                getValue(
+                    stats,
+                    "totalDeposits"
+                )
             ) || 0;
 
 
         const savings =
-            getValue(
-                stats,
-                "totalSavingsAmount"
+            Number(
+                getValue(
+                    stats,
+                    "totalSavingsAmount"
+                )
             ) || 0;
 
 
         const savingsTransactionCount =
-            getValue(
-                stats,
-                "totalSavingsTransactions"
+            Number(
+                getValue(
+                    stats,
+                    "totalSavingsTransactions"
+                )
             ) || 0;
 
 
         const adminBalance =
-            getValue(
-                stats,
-                "adminAvailableBalance"
+            Number(
+                getValue(
+                    stats,
+                    "adminAvailableBalance"
+                )
             ) || 0;
 
 
         const loanDisbursed =
-            getValue(
-                stats,
-                "totalLoanDisbursed"
+            Number(
+                getValue(
+                    stats,
+                    "totalLoanDisbursed"
+                )
             ) || 0;
 
 
         const loanDisbursementCount =
-            getValue(
-                stats,
-                "loanDisbursementCount"
+            Number(
+                getValue(
+                    stats,
+                    "loanDisbursementCount"
+                )
             ) || 0;
 
 
         const outstandingLoans =
-            getValue(
-                stats,
-                "totalOutstandingLoans"
+            Number(
+                getValue(
+                    stats,
+                    "totalOutstandingLoans"
+                )
             ) || 0;
 
 
         const interestEarned =
-            getValue(
-                stats,
-                "totalInterestEarned"
+            Number(
+                getValue(
+                    stats,
+                    "totalInterestEarned"
+                )
             ) || 0;
 
 
         const withdrawalAmount =
-            getValue(
-                stats,
-                "totalWithdrawalAmount"
+            Number(
+                getValue(
+                    stats,
+                    "totalWithdrawalAmount"
+                )
             ) || 0;
 
 
         const withdrawalCount =
-            getValue(
-                stats,
-                "totalWithdrawals"
+            Number(
+                getValue(
+                    stats,
+                    "totalWithdrawals"
+                )
             ) || 0;
 
 
         const pendingWithdrawals =
-            getValue(
-                stats,
-                "pendingWithdrawals"
+            Number(
+                getValue(
+                    stats,
+                    "pendingWithdrawals"
+                )
             ) || 0;
 
 
-        /* -----------------------------------------
+        /* =================================================
            DASHBOARD STAT CARDS
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "statCustomers",
@@ -9873,9 +9916,9 @@ async function loadStatistics() {
         );
 
 
-        /* -----------------------------------------
+        /* =================================================
            STATISTICS PAGE
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "statisticsCustomers",
@@ -9913,9 +9956,9 @@ async function loadStatistics() {
         );
 
 
-        /* -----------------------------------------
+        /* =================================================
            ADMIN BALANCE
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "summaryAdminBalance",
@@ -9923,9 +9966,9 @@ async function loadStatistics() {
         );
 
 
-        /* -----------------------------------------
+        /* =================================================
            LOAN DISBURSEMENTS
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "summaryLoanDisbursed",
@@ -9944,9 +9987,9 @@ async function loadStatistics() {
         );
 
 
-        /* -----------------------------------------
+        /* =================================================
            OUTSTANDING + INTEREST
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "summaryOutstandingLoans",
@@ -9960,9 +10003,9 @@ async function loadStatistics() {
         );
 
 
-        /* -----------------------------------------
-           STATISTICS FINANCIAL CARDS
-        ----------------------------------------- */
+        /* =================================================
+           FINANCIAL STATISTICS CARDS
+        ================================================= */
 
         setText(
             "statisticsPortfolio",
@@ -9988,97 +10031,95 @@ async function loadStatistics() {
         );
 
 
- /* =================================================
-   FINANCIAL OVERVIEW CHART
-================================================= */
+        /* =================================================
+           FINANCIAL OVERVIEW GRAPH
+        ================================================= */
 
-const chartValues = [
-    portfolio,
-    repayments,
-    deposits,
-    savings
-];
-
-
-const maximumValue =
-    Math.max(
-        ...chartValues,
-        1
-    );
+        const chartValues = [
+            portfolio,
+            repayments,
+            deposits,
+            savings
+        ];
 
 
-const chartItems = [
-
-    {
-        barId: "chartPortfolioBar",
-        valueId: "chartPortfolioValue",
-        value: portfolio
-    },
-
-    {
-        barId: "chartRepaymentsBar",
-        valueId: "chartRepaymentsValue",
-        value: repayments
-    },
-
-    {
-        barId: "chartDepositsBar",
-        valueId: "chartDepositsValue",
-        value: deposits
-    },
-
-    {
-        barId: "chartSavingsBar",
-        valueId: "chartSavingsValue",
-        value: savings
-    }
-
-];
+        const maximumValue =
+            Math.max(
+                ...chartValues,
+                1
+            );
 
 
-chartItems.forEach(item => {
+        const chartItems = [
 
-    const bar =
-        document.getElementById(
-            item.barId
-        );
+            {
+                barId: "chartPortfolioBar",
+                valueId: "chartPortfolioValue",
+                value: portfolio
+            },
+
+            {
+                barId: "chartRepaymentsBar",
+                valueId: "chartRepaymentsValue",
+                value: repayments
+            },
+
+            {
+                barId: "chartDepositsBar",
+                valueId: "chartDepositsValue",
+                value: deposits
+            },
+
+            {
+                barId: "chartSavingsBar",
+                valueId: "chartSavingsValue",
+                value: savings
+            }
+
+        ];
 
 
-    const valueElement =
-        document.getElementById(
-            item.valueId
-        );
+        chartItems.forEach(item => {
+
+            const bar =
+                document.getElementById(
+                    item.barId
+                );
 
 
-    /* Calculate bar height */
-    const percentage =
-        item.value > 0
-            ? (item.value / maximumValue) * 100
-            : 0;
+            const valueElement =
+                document.getElementById(
+                    item.valueId
+                );
 
 
-    /* Animate bar */
-    if (bar) {
-
-        bar.style.height =
-            `${percentage}%`;
-
-    }
+            const percentage =
+                item.value > 0
+                    ? (item.value / maximumValue) * 100
+                    : 0;
 
 
-    /* Display financial value */
-    if (valueElement) {
+            if (bar) {
 
-        valueElement.textContent =
-            formatMoney(item.value);
+                bar.style.height =
+                    `${percentage}%`;
 
-    }
+            }
 
-});
 
-        /* -----------------------------------------
+            if (valueElement) {
+
+                valueElement.textContent =
+                    formatMoney(item.value);
+
+            }
+
+        });
+
+
+        /* =================================================
            FINANCIAL SUMMARY
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "summaryPortfolio",
@@ -10137,9 +10178,9 @@ chartItems.forEach(item => {
         );
 
 
-        /* -----------------------------------------
+        /* =================================================
            WITHDRAWALS
-        ----------------------------------------- */
+        ================================================= */
 
         setText(
             "summaryWithdrawals",
@@ -10164,119 +10205,9 @@ chartItems.forEach(item => {
         );
 
 
-    } catch (error) {
-
-        console.error(
-            "Statistics error:",
-            error
-        );
-
-
-    } finally {
-
-        if (refreshButton) {
-
-            refreshButton.disabled = false;
-
-            refreshButton.innerHTML =
-                "🔄 Refresh";
-
-        }
-
-    }
-
- }
-
-  /* =========================================================
-    LOAN APPLICATIONS ANALYTICS
-========================================================= */
-
-async function loadLoanAnalytics() {
-
-    console.log("LOAN ANALYTICS FUNCTION STARTED");
-
-    const refreshButton =
-        document.querySelector(
-            'button[onclick="loadLoanAnalytics()"]'
-        );
-
-
-    if (refreshButton) {
-
-        refreshButton.disabled = true;
-
-        refreshButton.innerHTML =
-            `<span class="spinner"></span> Refreshing...`;
-
-    }
-
-
-    try {
-
-        const result =
-            await apiRequest(
-                "/admin/statistics"
-            );
-
-
-        const stats =
-            result?.statistics ||
-            result?.data ||
-            result ||
-            {};
-
-
-        /* =====================================================
-           GET APPLICATION STATISTICS
-        ===================================================== */
-
-        const pending =
-            Number(
-                getValue(
-                    stats,
-                    "pending",
-                    "pendingApplications",
-                    "pending_count"
-                )
-            ) || 0;
-
-
-        const approved =
-            Number(
-                getValue(
-                    stats,
-                    "approved",
-                    "approvedApplications",
-                    "approved_count"
-                )
-            ) || 0;
-
-
-        const rejected =
-            Number(
-                getValue(
-                    stats,
-                    "rejected",
-                    "rejectedApplications",
-                    "rejected_count"
-                )
-            ) || 0;
-
-
-        const activeLoans =
-            Number(
-                getValue(
-                    stats,
-                    "activeLoans",
-                    "active_loans",
-                    "activeLoanCount"
-                )
-            ) || 0;
-
-
-        /* =====================================================
-           UPDATE STAT CARDS
-        ===================================================== */
+        /* =================================================
+           LOAN APPLICATIONS ANALYTICS
+        ================================================= */
 
         setText(
             "analyticsPending",
@@ -10302,11 +10233,11 @@ async function loadLoanAnalytics() {
         );
 
 
-        /* =====================================================
-           FIND LARGEST VALUE FOR GRAPH
-        ===================================================== */
+        /* =================================================
+           ANALYTICS GRAPH
+        ================================================= */
 
-        const maximum =
+        const analyticsMaximum =
             Math.max(
                 pending,
                 approved,
@@ -10316,29 +10247,21 @@ async function loadLoanAnalytics() {
             );
 
 
-        /* =====================================================
-           CALCULATE BAR HEIGHTS
-        ===================================================== */
-
         const pendingHeight =
-            (pending / maximum) * 100;
+            (pending / analyticsMaximum) * 100;
 
 
         const approvedHeight =
-            (approved / maximum) * 100;
+            (approved / analyticsMaximum) * 100;
 
 
         const rejectedHeight =
-            (rejected / maximum) * 100;
+            (rejected / analyticsMaximum) * 100;
 
 
-        const activeHeight =
-            (activeLoans / maximum) * 100;
+        const activeLoansHeight =
+            (activeLoans / analyticsMaximum) * 100;
 
-
-        /* =====================================================
-           UPDATE GRAPH VALUES
-        ===================================================== */
 
         setText(
             "analyticsPendingValue",
@@ -10364,10 +10287,6 @@ async function loadLoanAnalytics() {
         );
 
 
-        /* =====================================================
-           UPDATE GRAPH BARS
-        ===================================================== */
-
         const pendingBar =
             document.getElementById(
                 "analyticsPendingBar"
@@ -10386,7 +10305,7 @@ async function loadLoanAnalytics() {
             );
 
 
-        const activeBar =
+        const activeLoansBar =
             document.getElementById(
                 "analyticsActiveLoansBar"
             );
@@ -10395,7 +10314,7 @@ async function loadLoanAnalytics() {
         if (pendingBar) {
 
             pendingBar.style.height =
-                pendingHeight + "%";
+                `${pendingHeight}%`;
 
         }
 
@@ -10403,7 +10322,7 @@ async function loadLoanAnalytics() {
         if (approvedBar) {
 
             approvedBar.style.height =
-                approvedHeight + "%";
+                `${approvedHeight}%`;
 
         }
 
@@ -10411,32 +10330,28 @@ async function loadLoanAnalytics() {
         if (rejectedBar) {
 
             rejectedBar.style.height =
-                rejectedHeight + "%";
+                `${rejectedHeight}%`;
 
         }
 
 
-        if (activeBar) {
+        if (activeLoansBar) {
 
-            activeBar.style.height =
-                activeHeight + "%";
+            activeLoansBar.style.height =
+                `${activeLoansHeight}%`;
 
         }
 
 
-        /* =====================================================
-           TOTAL APPLICATIONS
-        ===================================================== */
+        /* =================================================
+           ANALYTICS SUMMARY TABLE
+        ================================================= */
 
         const totalApplications =
             pending +
             approved +
             rejected;
 
-
-        /* =====================================================
-           CALCULATE PERCENTAGES
-        ===================================================== */
 
         const pendingPercentage =
             totalApplications > 0
@@ -10455,10 +10370,6 @@ async function loadLoanAnalytics() {
                 ? (rejected / totalApplications) * 100
                 : 0;
 
-
-        /* =====================================================
-           UPDATE SUMMARY TABLE
-        ===================================================== */
 
         setText(
             "analyticsTablePending",
@@ -10499,25 +10410,25 @@ async function loadLoanAnalytics() {
     } catch (error) {
 
         console.error(
-            "Loan Analytics error:",
+            "Statistics error:",
             error
         );
 
 
     } finally {
 
-        if (refreshButton) {
+        refreshButtons.forEach(button => {
 
-            refreshButton.disabled = false;
+            button.disabled = false;
 
-            refreshButton.innerHTML =
+            button.innerHTML =
                 "🔄 Refresh";
 
-        }
+        });
 
     }
 
- }
+}
 
 /* =========================================================
    CUSTOMERS
@@ -15520,7 +15431,7 @@ async function rejectDepositRequest(requestId){
 
   }
 
-      /* =========================================================
+ /* =========================================================
    APPROVE SAVINGS DEPOSIT
 ========================================================= */
 
