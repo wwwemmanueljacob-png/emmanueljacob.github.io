@@ -4806,6 +4806,339 @@ textarea:focus{
     opacity:1 !important;
 }
 
+      /* =========================================================
+   ADMIN DASHBOARD
+   MANAGEMENT PERFORMANCE
+   PREMIUM NAVY + GOLD STYLE
+========================================================= */
+
+.management-performance-card{
+    margin-top:20px;
+    overflow:hidden;
+    border:1px solid rgba(7,17,31,.08);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.management-performance-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07111f 0%,
+            #102a46 100%
+        );
+
+    border:1px solid rgba(250,204,21,.18);
+}
+
+.management-performance-header::after{
+    content:"";
+
+    position:absolute;
+    right:-45px;
+    top:-45px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(250,204,21,.14),
+            rgba(250,204,21,0)
+        );
+
+    pointer-events:none;
+}
+
+.management-performance-header h3{
+    position:relative;
+    z-index:1;
+
+    color:#fff;
+
+    font-size:17px;
+    font-weight:900;
+}
+
+.management-performance-header p{
+    position:relative;
+    z-index:1;
+
+    margin-top:5px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   PERFORMANCE GRID
+========================================================= */
+
+.management-performance-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap:16px;
+}
+
+
+/* =========================================================
+   PERFORMANCE CARD
+========================================================= */
+
+.management-performance-item{
+    position:relative;
+
+    padding:18px;
+
+    min-height:165px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f8fafc 100%
+        );
+
+    border:1px solid #e2e8f0;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 7px 22px
+        rgba(7,17,31,.07);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+.management-performance-item:hover{
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(250,204,21,.35);
+
+    box-shadow:
+        0 12px 28px
+        rgba(7,17,31,.11);
+}
+
+
+/* =========================================================
+   TOP ROW
+========================================================= */
+
+.management-performance-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:12px;
+}
+
+.management-performance-top span{
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.management-performance-icon{
+    width:38px;
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(250,204,21,.18),
+            rgba(250,204,21,.05)
+        );
+
+    border:1px solid
+        rgba(250,204,21,.25);
+
+    font-size:18px;
+}
+
+
+/* =========================================================
+   VALUE
+========================================================= */
+
+.management-performance-item > strong{
+    display:block;
+
+    color:#07111f;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    line-height:1.2;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.management-performance-item > small{
+    display:block;
+
+    margin-top:7px;
+
+    min-height:27px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    line-height:1.35;
+}
+
+
+/* =========================================================
+   PROGRESS TRACK
+========================================================= */
+
+.performance-progress{
+    width:100%;
+
+    height:8px;
+
+    margin-top:15px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#e8edf3;
+
+    border:1px solid #e2e8f0;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.performance-progress-bar{
+    width:0%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4a900,
+            #facc15,
+            #fde047
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(250,204,21,.28);
+
+    transition:
+        width .8s ease;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width:1100px){
+
+    .management-performance-grid{
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width:600px){
+
+    .management-performance-grid{
+        grid-template-columns:1fr;
+
+        gap:12px;
+    }
+
+    .management-performance-item{
+        min-height:150px;
+
+        padding:15px;
+    }
+
+    .management-performance-item > strong{
+        font-size:20px;
+    }
+
+    .management-performance-header{
+        align-items:flex-start;
+    }
+
+    .management-performance-header p{
+        font-size:11px;
+    }
+
+}
+
 </style>
 </head>
 
@@ -7887,6 +8220,200 @@ textarea:focus{
 
 </div>
 
+      <!-- ========================================================
+     MANAGEMENT PERFORMANCE
+========================================================= -->
+
+<div class="card management-performance-card">
+
+    <div class="card-header management-performance-header">
+
+        <div>
+
+            <h3>
+                Management Performance
+            </h3>
+
+            <p>
+                Live indicators calculated from real financial records.
+            </p>
+
+        </div>
+
+        <div class="chart-badge">
+            LIVE
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="management-performance-grid">
+
+
+            <!-- COLLECTION RATE -->
+
+            <div class="management-performance-item">
+
+                <div class="management-performance-top">
+
+                    <span>
+                        COLLECTION RATE
+                    </span>
+
+                    <div class="management-performance-icon">
+                        💵
+                    </div>
+
+                </div>
+
+                <strong
+                    id="performanceCollectionRate"
+                >
+                    0.0%
+                </strong>
+
+                <small>
+                    Repayments compared with disbursements
+                </small>
+
+                <div class="performance-progress">
+
+                    <div
+                        class="performance-progress-bar"
+                        id="collectionRateProgress"
+                        style="width:0%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- OUTSTANDING RATE -->
+
+            <div class="management-performance-item">
+
+                <div class="management-performance-top">
+
+                    <span>
+                        OUTSTANDING RATE
+                    </span>
+
+                    <div class="management-performance-icon">
+                        📌
+                    </div>
+
+                </div>
+
+                <strong
+                    id="performanceOutstandingRate"
+                >
+                    0.0%
+                </strong>
+
+                <small>
+                    Outstanding balance against disbursements
+                </small>
+
+                <div class="performance-progress">
+
+                    <div
+                        class="performance-progress-bar"
+                        id="outstandingRateProgress"
+                        style="width:0%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CASH FLOW -->
+
+            <div class="management-performance-item">
+
+                <div class="management-performance-top">
+
+                    <span>
+                        NET CASH FLOW
+                    </span>
+
+                    <div class="management-performance-icon">
+                        💰
+                    </div>
+
+                </div>
+
+                <strong
+                    id="performanceCashFlow"
+                >
+                    MWK 0.00
+                </strong>
+
+                <small>
+                    Deposits minus withdrawals
+                </small>
+
+                <div class="performance-progress">
+
+                    <div
+                        class="performance-progress-bar"
+                        id="cashFlowProgress"
+                        style="width:0%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PORTFOLIO UTILIZATION -->
+
+            <div class="management-performance-item">
+
+                <div class="management-performance-top">
+
+                    <span>
+                        PORTFOLIO UTILIZATION
+                    </span>
+
+                    <div class="management-performance-icon">
+                        📊
+                    </div>
+
+                </div>
+
+                <strong
+                    id="performancePortfolioUtilization"
+                >
+                    0.0%
+                </strong>
+
+                <small>
+                    Active portfolio against total disbursed
+                </small>
+
+                <div class="performance-progress">
+
+                    <div
+                        class="performance-progress-bar"
+                        id="portfolioUtilizationProgress"
+                        style="width:0%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
 
     <!-- ====================================================
          DETAILED STATISTICS
@@ -10913,6 +11440,168 @@ if (positionProgress) {
         `${positionPercentage}%`;
 
 }
+
+      /* =================================================
+   MANAGEMENT PERFORMANCE
+================================================= */
+
+
+/* =================================================
+   COLLECTION RATE
+================================================= */
+
+const collectionRate =
+    loanDisbursed > 0
+        ? (
+            repayments /
+            loanDisbursed
+        ) * 100
+        : 0;
+
+
+setText(
+    "performanceCollectionRate",
+    collectionRate.toFixed(1) + "%"
+);
+
+
+const collectionRateProgress =
+    document.getElementById(
+        "collectionRateProgress"
+    );
+
+
+if (collectionRateProgress) {
+
+    collectionRateProgress.style.width =
+        `${Math.min(collectionRate,100)}%`;
+
+}
+
+
+/* =================================================
+   OUTSTANDING RATE
+================================================= */
+
+const outstandingRate =
+    loanDisbursed > 0
+        ? (
+            outstandingLoans /
+            loanDisbursed
+        ) * 100
+        : 0;
+
+
+setText(
+    "performanceOutstandingRate",
+    outstandingRate.toFixed(1) + "%"
+);
+
+
+const outstandingRateProgress =
+    document.getElementById(
+        "outstandingRateProgress"
+    );
+
+
+if (outstandingRateProgress) {
+
+    outstandingRateProgress.style.width =
+        `${Math.min(outstandingRate,100)}%`;
+
+}
+
+
+/* =================================================
+   NET CASH FLOW
+================================================= */
+
+const netCashFlow =
+    deposits -
+    withdrawalAmount;
+
+
+setText(
+    "performanceCashFlow",
+    formatMoney(
+        netCashFlow
+    )
+);
+
+
+const cashFlowProgress =
+    document.getElementById(
+        "cashFlowProgress"
+    );
+
+
+const cashFlowBase =
+    Math.max(
+        deposits,
+        withdrawalAmount,
+        1
+    );
+
+
+const cashFlowPercentage =
+    Math.min(
+        Math.abs(
+            netCashFlow
+        ) /
+        cashFlowBase *
+        100,
+        100
+    );
+
+
+if (cashFlowProgress) {
+
+    cashFlowProgress.style.width =
+        `${cashFlowPercentage}%`;
+
+}
+
+
+/* =================================================
+   PORTFOLIO UTILIZATION
+================================================= */
+
+const portfolioUtilization =
+    loanDisbursed > 0
+        ? (
+            (
+                loanDisbursed -
+                outstandingLoans
+            ) /
+            loanDisbursed
+        ) * 100
+        : 0;
+
+
+setText(
+    "performancePortfolioUtilization",
+    portfolioUtilization.toFixed(1) + "%"
+);
+
+
+const portfolioUtilizationProgress =
+    document.getElementById(
+        "portfolioUtilizationProgress"
+    );
+
+
+if (portfolioUtilizationProgress) {
+
+    portfolioUtilizationProgress.style.width =
+        `${Math.min(
+            Math.max(
+                portfolioUtilization,
+                0
+            ),
+            100
+        )}%`;
+
+      }
 
 
         /* =================================================
