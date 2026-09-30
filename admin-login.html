@@ -11837,9 +11837,16 @@ updatePerformanceBarColor(
         ================================================= */
 
         setText(
-            "summaryLoanDisbursed",
-            formatMoney(loanDisbursed)
-        );
+    "summaryLoanDisbursed",
+    formatMoney(
+        Number(
+            getValue(
+                stats,
+                "totalLoanDisbursed"
+            )
+        ) || 0
+    )
+);
 
 
         setText(
