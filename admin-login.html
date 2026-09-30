@@ -11283,31 +11283,29 @@ async function loadStatistics() {
     ) || 0;
 
 
-alert(
-    "FORMAT TEST\n\n" +
-    "loanDisbursed: " +
-    loanDisbursed +
-    "\n\nformatMoney result: " +
-    formatMoney(loanDisbursed) +
-    "\n\nElement text BEFORE setText: " +
-    (
-        document.getElementById("summaryLoanDisbursed")?.textContent
-        || "Element not found"
-    )
-);
-
-
 /* =========================================
    DETAILED STATISTICS
    TOTAL LOAN DISBURSED
 ========================================= */
 
-setText(
-    "summaryLoanDisbursed",
-    formatMoney(
-        loanDisbursed
-    )
-);
+/* =================================================
+   TOTAL LOAN DISBURSED
+   DIRECT DISPLAY UPDATE
+================================================= */
+
+const summaryLoanDisbursed =
+    document.getElementById(
+        "summaryLoanDisbursed"
+    );
+
+if (summaryLoanDisbursed) {
+
+    summaryLoanDisbursed.textContent =
+        formatMoney(
+            loanDisbursed
+        );
+
+      }
 
 
         const loanDisbursementCount =
