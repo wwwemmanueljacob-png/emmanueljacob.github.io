@@ -11283,6 +11283,19 @@ async function loadStatistics() {
             ) || 0;
 
 
+/* =========================================
+   DETAILED STATISTICS
+   TOTAL LOAN DISBURSED
+========================================= */
+
+setText(
+    "summaryLoanDisbursed",
+    formatMoney(
+        loanDisbursed
+    )
+);
+
+
         const loanDisbursementCount =
             Number(
                 getValue(
