@@ -12007,12 +12007,13 @@ if (monthlyChart) {
 
 
             const disbursements =
-                Number(
-                    month.disbursements ||
-                    month.loanDisbursements ||
-                    month.loanDisbursed ||
-                    0
-                );
+               Number(
+                   month.disbursements ||
+                   month.disbursedAmount ||
+                   month.loanDisbursements ||
+                   month.loanDisbursed ||
+                   0
+              );
 
 
             const repayments =
@@ -12069,12 +12070,13 @@ if (monthlyChart) {
 
 
             const disbursements =
-                Number(
-                    month.disbursements ||
-                    month.loanDisbursements ||
-                    month.loanDisbursed ||
-                    0
-                );
+    Number(
+        month.disbursements ||
+        month.disbursedAmount ||
+        month.loanDisbursements ||
+        month.loanDisbursed ||
+        0
+    );
 
 
             const repayments =
@@ -12106,10 +12108,11 @@ if (monthlyChart) {
             ===================================== */
 
             const monthName =
-                month.month ||
-                month.label ||
-                month.name ||
-                "";
+    month.monthName ||
+    month.label ||
+    month.name ||
+    month.month ||
+    "";
 
 
             /* =====================================
