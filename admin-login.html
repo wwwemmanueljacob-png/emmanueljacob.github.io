@@ -8517,8 +8517,8 @@ textarea:focus{
                         Total Loan Disbursed
                     </small>
 
-                    <strong id="summaryLoanDisbursed">
-                        MWK 0.00
+                    <strong id="statisticsLoanDisbursed">
+    MWK 0.00
                     </strong>
 
                 </div>
@@ -11283,30 +11283,24 @@ async function loadStatistics() {
     ) || 0;
 
 
-/* =========================================
+/* =================================================
    DETAILED STATISTICS
    TOTAL LOAN DISBURSED
-========================================= */
-
-/* =================================================
-   TOTAL LOAN DISBURSED
-   DIRECT DISPLAY UPDATE
 ================================================= */
 
-const summaryLoanDisbursed =
+const statisticsLoanDisbursed =
     document.getElementById(
-        "summaryLoanDisbursed"
+        "statisticsLoanDisbursed"
     );
 
-if (summaryLoanDisbursed) {
+if (statisticsLoanDisbursed) {
 
-    summaryLoanDisbursed.textContent =
+    statisticsLoanDisbursed.textContent =
         formatMoney(
             loanDisbursed
         );
 
-      }
-
+}
 
         const loanDisbursementCount =
             Number(
