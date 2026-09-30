@@ -11284,11 +11284,16 @@ async function loadStatistics() {
 
 
 alert(
-    "JAY C O B DISBURSEMENT DEBUG\n\n" +
-    "API totalLoanDisbursed: " +
-    stats.totalLoanDisbursed +
-    "\n\nloanDisbursed variable: " +
-    loanDisbursed
+    "FORMAT TEST\n\n" +
+    "loanDisbursed: " +
+    loanDisbursed +
+    "\n\nformatMoney result: " +
+    formatMoney(loanDisbursed) +
+    "\n\nElement text BEFORE setText: " +
+    (
+        document.getElementById("summaryLoanDisbursed")?.textContent
+        || "Element not found"
+    )
 );
 
 
