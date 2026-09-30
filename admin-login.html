@@ -11275,17 +11275,19 @@ async function loadStatistics() {
 
 
         const loanDisbursed =
-            Number(
-                getValue(
-                    stats,
-                    "totalLoanDisbursed"
-                )
-            ) || 0;
+    Number(
+        getValue(
+            stats,
+            "totalLoanDisbursed"
+        )
+    ) || 0;
 
-      console.log(
-    "DEBUG totalLoanDisbursed:",
-    stats.totalLoanDisbursed,
-    "loanDisbursed:",
+
+alert(
+    "JAY C O B DISBURSEMENT DEBUG\n\n" +
+    "API totalLoanDisbursed: " +
+    stats.totalLoanDisbursed +
+    "\n\nloanDisbursed variable: " +
     loanDisbursed
 );
 
